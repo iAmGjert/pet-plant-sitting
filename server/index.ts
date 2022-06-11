@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
+
 const express = require('express');
 const path = require('path');
 
@@ -11,6 +11,6 @@ app.use(express.json());
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`
-    Server is listening at http://localhost:${port}
+    🚀 Server is listening at http://localhost:${port}
   `);
 });
