@@ -3,15 +3,8 @@ module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('users', {
       id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-      name: Sequelize.STRING,
-      image: Sequelize.STRING,
-      location: Sequelize.STRING,
-      sitter_rating: Sequelize.FLOAT,
-      total_sitter_ratings: Sequelize.INTEGER,
-      bio: Sequelize.STRING,
-      rating: { type: Sequelize.FLOAT, defaultValue: 5 },
-      total_ratings: Sequelize.INTEGER,
-      gallery_id: Sequelize.INTEGER,
+      descriptor: Sequelize.STRING,
+      pet_plant_id: Sequelize.INTEGER,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
