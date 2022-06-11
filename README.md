@@ -13,3 +13,10 @@ sudo -u postgres psql
 sequelize db:create
 npm start
 ```
+## mac users
+```
+psql postgres
+ALTER USER postgres CREATEDB
+\du # check new permission
+sequelize db:create
+```
