@@ -4,8 +4,8 @@ const {DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST, DB_DIALECT, DB_PORT } = p
 module.exports = {
   development: {
     username: 'postgres',
-    password: null,
-    database: 'database_development',
+    password: 'postgres',
+    database: 'fern-herm',
     host: '127.0.0.1',
     dialect: 'postgres'
   },
