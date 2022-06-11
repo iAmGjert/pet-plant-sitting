@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const Sequelize = require('sequelize');
 require('dotenv').config();
 const {DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST, DB_DIALECT, DB_PORT } = process.env;
@@ -7,7 +6,6 @@ const sequelize = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
   dialect: DB_DIALECT,
   logging: false,
 });
-=======
 const { db } = require('./models/index.js');
 //const Sequelize = require('sequelize');
 require('dotenv').config();
@@ -17,7 +15,6 @@ const { DB_USERNAME, DB_PASSWORD, DB_DATABASE, DB_HOST, DB_DIALECT } = process.e
 //   dialect: DB_DIALECT,
 //   logging: false,
 // });
->>>>>>> dd82fec46994456336dca691c4a083984a2bf3ec
 
 db.sequelize.authenticate()
   .then(() => console.log(' 💫 Database Connected!'))
