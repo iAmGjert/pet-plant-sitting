@@ -19,7 +19,7 @@ const User = db.define('user', {
   sitter_rating: DataTypes.FLOAT,
   total_sitter_ratings: DataTypes.INTEGER,
   bio: DataTypes.STRING,
-  rating: { type: DataTypes.FLOAT, defaultValue: 5 },
+  average_rating: { type: DataTypes.FLOAT, defaultValue: 5 },
   total_ratings: DataTypes.INTEGER,
   gallery_id: DataTypes.INTEGER
 });
@@ -50,10 +50,10 @@ const Job = db.define('job', {
 const Events = db.define('event', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
   name: DataTypes.STRING,
-  host: DataTypes.STRING,
+  host: DataTypes.INTEGER,
   location: DataTypes.STRING,
   description: DataTypes.STRING,
-  users_signed_up: DataTypes.INTEGER
+  participants: DataTypes.ARRAY(DataTypes.INTEGER)
 });
 
 const Conversation = db.define('conversation', {
@@ -115,16 +115,99 @@ const GalleryEntry = db.define('gallery_entry', {
 });
 
 
-//************************************************** */
+/************************************************/
 
-                
-//*associations
+PetPlant.belongsTo(User, {
+  foreignKey: 'owner_id'
+});
 
-//********************************************** */
+Job.belongsTo(User, {
+  foreignKey: 'employer_id'
+});
+
+Job.belongsTo(User, {
+  foreignKey: 'sitter_id'
+});
+
+Job.hasMany(JobApplicant, {
+  foreignKey: 'job_id'
+});
+
+JobApplicant.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+Rating.belongsTo(User, {
+  foreignKey: 'subject_id'
+});
+
+Rating.belongsTo(PetPlant, {
+  foreignKey: 'subject_id'
+});
+
+// User.hasMany(Rating, {
+//   foreignKey: 'average_rating'
+// });
+
+Conversation.belongsTo(User, {
+  foreignKey: 'participant1_id'
+});
+
+Conversation.belongsTo(User, {
+  foreignKey: 'participant2_id'
+});
+
+Message.belongsTo(Conversation, {
+  foreignKey: 'conversation_id'
+});
+
+Message.belongsTo(User, {
+  foreignKey: 'sender_id'
+});
+
+Message.belongsTo(User, {
+  foreignKey: 'receiver_id'
+});
+
+Events.belongsTo(User, {
+  foreignKey: 'host'
+});
+
+EventParticipant.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+EventParticipant.belongsTo(Events, {
+  foreignKey: 'event_id'
+});
+
+EventComment.belongsTo(User, {
+  foreignKey: 'user_id'
+});
+
+EventComment.belongsTo(Events, {
+  foreignKey: 'event_id'
+});
+
+PetPlantDescriptor.belongsTo(PetPlant, {
+  foreignKey: 'pet_plant_id'
+});
+
+Gallery.hasOne(User, {
+  foreignKey: 'gallery_id'
+});
+
+Gallery.hasMany(GalleryEntry, {
+  foreignKey: 'gallery_id'
+});
+
+/************************************************/
 
 
 db
-  .sync() //insert {alter: true}(alters tables if necessary) or {force: true}(drops all tables and recreates them every save) if you need to change the db structure
+  .sync({
+    alter: true
+  }) //insert {alter: true}(alters tables if necessary) or {force: true}(drops all tables and recreates them every save) if you need to change the db structure
   .then(() => console.log('Models synced!', 'ln125'))
   .catch((err: string) => console.error(err));
 
