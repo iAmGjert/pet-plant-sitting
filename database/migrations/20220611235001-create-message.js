@@ -1,10 +1,13 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('rating', {
+    await queryInterface.createTable('message', {
       id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true}, 
-      subject_id: Sequelize.INTEGER,
-      value: Sequelize.INTEGER,
+      name: Sequelize.STRING,
+      sender_id: Sequelize.INTEGER,
+      receiver_id: Sequelize.INTEGER,
+      text: Sequelize.STRING,
+      conversation_id: Sequelize.INTEGER,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -16,6 +19,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('rating');
+    await queryInterface.dropTable('message');
   }
 };

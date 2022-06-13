@@ -1,4 +1,3 @@
-
 const db = require('./models/index.js');
 
 db.sequelize.authenticate()

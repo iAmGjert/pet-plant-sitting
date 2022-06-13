@@ -1,10 +1,10 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('rating', {
-      id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true}, 
-      subject_id: Sequelize.INTEGER,
-      value: Sequelize.INTEGER,
+    await queryInterface.createTable('pet_plant_descriptor', {
+      id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+      descriptor: Sequelize.STRING,
+      pet_plant_id: Sequelize.INTEGER,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -16,6 +16,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('rating');
+    await queryInterface.dropTable('pet_plant_descriptor');
   }
 };
