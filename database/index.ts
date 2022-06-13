@@ -177,7 +177,7 @@ EventParticipant.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-EventParticipant.belongsTo(Events, {
+Events.hasMany(EventParticipant, {
   foreignKey: 'event_id'
 });
 
