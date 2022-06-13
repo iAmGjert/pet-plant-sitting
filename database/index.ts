@@ -1,10 +1,11 @@
 /* eslint-disable eslint-comments/disable-enable-pair */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 const { Sequelize, DataTypes } = require('sequelize');
-
-const db = new Sequelize('fern-herm', 'postgres', 'postgres', {
-  host: 'localhost',
-  dialect: 'postgres',
+require('dotenv').config();
+const {DB_DATABASE, DB_DIALECT, DB_HOST, DB_PASSWORD, DB_USERNAME} = process.env;
+const db = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
+  host: DB_HOST,
+  dialect: DB_DIALECT,
   logging: false,
 });
 
@@ -145,10 +146,6 @@ Rating.belongsTo(PetPlant, {
   foreignKey: 'subject_id'
 });
 
-// User.hasMany(Rating, {
-//   foreignKey: 'average_rating'
-// });
-
 Conversation.belongsTo(User, {
   foreignKey: 'participant1_id'
 });
@@ -177,7 +174,7 @@ EventParticipant.belongsTo(User, {
   foreignKey: 'user_id'
 });
 
-EventParticipant.belongsTo(Events, {
+Events.hasMany(EventParticipant, {
   foreignKey: 'event_id'
 });
 
@@ -208,7 +205,7 @@ db
   .sync({
     alter: true
   }) //insert {alter: true}(alters tables if necessary) or {force: true}(drops all tables and recreates them every save) if you need to change the db structure
-  .then(() => console.log('Models synced!', 'ln125'))
+  .then(() => console.log('🐘 Models synced!'))
   .catch((err: string) => console.error(err));
 
 export { db, User, Conversation, Gallery, GalleryEntry, Message, EventComment, EventParticipant, JobApplicant, PetPlantDescriptor, Rating, Events, Job, PetPlant };
