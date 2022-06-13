@@ -4,7 +4,7 @@ module.exports = {
     await queryInterface.createTable('event', {
       id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true}, 
       subject_id: Sequelize.INTEGER,
-      value: Sequelize.INTEGER
+      value: Sequelize.INTEGER,
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
