@@ -9,17 +9,15 @@ const passport2 = require('passport');
 require('dotenv').config();
 require('./auth/passport.ts');
 
-
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 app.use(passport2.initialize());
 app.use(passport2.session());
-
-
-
 
 const CLIENT_PATH = path.resolve(__dirname, '../client/build');
 app.use(express.static(CLIENT_PATH));
@@ -28,9 +26,7 @@ app.use(morgan('tiny'));
 
 app.use('/auth', authRouter);
 
-
-  
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 2000;
 app.listen(port, () => {
   console.log(`🚀 Server is listening at http://localhost:${port}`);
 });
