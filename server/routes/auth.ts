@@ -13,21 +13,21 @@ router.get('/login/success', (req: any, res: any) => {
     })
       .then((user: object) => {
         res.status(200).json({
-            message: 'success',
-            success: true,
-            user: user
-          })
+          message: 'success',
+          success: true,
+          user: user
+        });
       })
       .catch((error: string) => {
         res.sendStatus(400);
         console.log(error);
-      })
+      });
   }
-})
+});
 
 router.get('/login/fail', (req: any, res: any) => {
   res.sendStatus(400).redirect('/login');
-})
+});
 
 router.get('/google', passport.authenticate('google', {
   scope: ['email', 'profile']

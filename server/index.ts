@@ -11,10 +11,13 @@ require('./auth/passport.ts');
 
 
 app.use(session({
-  secret: process.env.SESSION_SECRET
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true
 }));
 app.use(passport2.initialize());
 app.use(passport2.session());
+
 
 
 
