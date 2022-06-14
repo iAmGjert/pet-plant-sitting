@@ -17,12 +17,9 @@ passport.use(new GoogleStrategy({
   User.findOrCreate({ where: {name: profile.displayName}, defaults: {
     name: profile.displayName,
     image: profile.picture
-  } },
-  (err: any, user: any) => {
-    return cb(err, user);
-  })
-    .then((obj: any) => {
-      console.log(obj);
+  } })
+    .then((user: any, err: any) => {
+      return cb(user, err);
     })
     .catch((err: any) => {
       console.log(err);
