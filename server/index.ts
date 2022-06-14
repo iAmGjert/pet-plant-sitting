@@ -5,7 +5,7 @@ const morgan = require('morgan');
 const { db } = require('../database/index');
 const app = express();
 const authRouter = require('./routes/auth.ts');
-const passport2 = require('passport');
+const passport = require('passport');
 require('dotenv').config();
 require('./auth/passport.ts');
 
@@ -16,8 +16,8 @@ app.use(
     saveUninitialized: true,
   })
 );
-app.use(passport2.initialize());
-app.use(passport2.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
 const CLIENT_PATH = path.resolve(__dirname, '../client/build');
 app.use(express.static(CLIENT_PATH));
@@ -34,3 +34,5 @@ app.listen(port, () => {
 db.authenticate()
   .then(() => console.log('🥂 Connected to database'))
   .catch((err: string) => console.error(err));
+
+export {};
