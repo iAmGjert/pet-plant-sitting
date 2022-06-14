@@ -26,9 +26,14 @@ app.use(
     saveUninitialized: true,
   })
 );
+<<<<<<< HEAD
 app.use(passport2.initialize());
 app.use(passport2.session());
 >>>>>>> ed2272dd312c4c6c1196f8dbdec3886d6fd15204
+=======
+app.use(passport.initialize());
+app.use(passport.session());
+>>>>>>> 9b4bc7e9403066aa7cc8755fbe3fcda2b71ef41e
 
 const CLIENT_PATH = path.resolve(__dirname, '../client/build');
 app.use(express.static(CLIENT_PATH));
