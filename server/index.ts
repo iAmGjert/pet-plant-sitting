@@ -9,14 +9,6 @@ const passport = require('passport');
 require('dotenv').config();
 require('./auth/passport.ts');
 
-<<<<<<< HEAD
-
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true
-}));
-=======
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
@@ -24,7 +16,6 @@ app.use(
     saveUninitialized: true,
   })
 );
->>>>>>> 9b4bc7e9403066aa7cc8755fbe3fcda2b71ef41e
 app.use(passport.initialize());
 app.use(passport.session());
 
