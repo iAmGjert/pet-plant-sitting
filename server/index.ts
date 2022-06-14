@@ -1,8 +1,22 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const morgan = require('morgan');
 const { db } = require('../database/index');
 const app = express();
+const authRouter = require('./routes/auth.ts');
+const passport2 = require('passport');
+require('dotenv').config();
+require('./auth/passport.ts');
+
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true
+}));
+app.use(passport2.initialize());
+app.use(passport2.session());
 
 
 
@@ -11,7 +25,7 @@ app.use(express.static(CLIENT_PATH));
 app.use(express.json());
 app.use(morgan('tiny'));
 
-
+app.use('/auth', authRouter);
 
 
   
