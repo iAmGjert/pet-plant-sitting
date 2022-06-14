@@ -7,6 +7,7 @@ const app = express();
 const authRouter = require('./routes/auth.ts');
 const passport2 = require('passport');
 require('dotenv').config();
+require('./auth/passport.ts');
 
 
 app.use(session({
