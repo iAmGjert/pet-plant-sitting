@@ -39,5 +39,15 @@ jobs.get('/allJobs', async (req: Request, res: Response) => {
   }
 });
 
+jobs.get('/:id', async (req: Request, res: Response) => {
+
+  const job = await Job.findOne({
+    where: {
+      id: req.params.id,
+    }
+  });
+  return res.status(200).send(job);
+});
+
 
 module.exports = jobs;
