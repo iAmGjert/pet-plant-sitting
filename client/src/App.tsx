@@ -21,7 +21,7 @@ const App: FC<Props> = () => {
               element={<Home />}
             />
             <Route
-              path='map'
+              path='/map'
               element={<MapMain />}
             />
           </Routes>
