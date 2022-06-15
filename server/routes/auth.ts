@@ -8,11 +8,11 @@ const CLIENT_URL: string | undefined =
     ? `${process.env.CLIENT_URL}:${process.env.PORT}`
     : process.env.CLIENT_URL;
 
-auth.get('/login/success', (req: any, res: any) => {
+auth.get('/login/success', (req: Request, res: Response) => {
   if (req.user) {
     User.findOne({
       where: {
-        id: req.user.id,
+        id: req.params.id,
       },
     })
       .then((user: object) => {
@@ -48,7 +48,7 @@ auth.get(
   })
 );
 
-auth.get('/logout', (req: Request, res: any) => {
+auth.get('/logout', (req: any, res: any) => {
   req.logOut(() => {
     res.redirect(CLIENT_URL);
   });
