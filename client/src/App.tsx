@@ -11,18 +11,14 @@ interface Props {}
 
 const App: FC<Props> = () => {
   return (
-    <div>
-      <BrowserRouter>
-        <div>
-          <Routes>
-            <Route path='/' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/map' element={<MapMain />} />
-            <Route path='/calendar' element={<CalendarMain />} />
-          </Routes>
-        </div>
-      </BrowserRouter>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login />} />
+        <Route path='/map' element={<MapMain />} />
+        <Route path='/calendar' element={<CalendarMain />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
