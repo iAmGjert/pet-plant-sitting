@@ -18,6 +18,9 @@ const TopNavBar = () => {
                 <NavDropdown.Item href='/community'>
                   Community
                 </NavDropdown.Item>
+                <NavDropdown.Item href='/calendar'>
+                  Calendar
+                </NavDropdown.Item>
                 <NavDropdown.Item href='/profile'>
                   Profile
                 </NavDropdown.Item>
