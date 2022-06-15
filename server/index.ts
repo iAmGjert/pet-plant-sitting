@@ -26,6 +26,17 @@ app.use(morgan('tiny'));
 
 app.use('/auth', authRouter);
 
+app.get('/*', function (req: any, res: any) {
+  res.sendFile(
+    path.join(__dirname, '../client/build/index.html'),
+    function (err: any) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
+});
+
 const port = process.env.PORT || 2000;
 app.listen(port, () => {
   console.log(`🚀 Server is listening at http://localhost:${port}`);
