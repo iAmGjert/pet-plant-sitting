@@ -1,4 +1,5 @@
-import express, { Request, Response } from 'express';
+const express = require('express');
+import { Request, Response } from 'express';
 const session = require('express-session');
 const path = require('path');
 const morgan = require('morgan');

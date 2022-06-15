@@ -12,7 +12,7 @@ const Home: FC<Props> = () => {
   const handleClick = () => {
     console.log('You clicked me!');
     dispatch(changeName('Iben O\'Neal'));
-  };
+  }
 
   return (
     <div>
