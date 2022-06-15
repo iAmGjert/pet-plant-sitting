@@ -1,7 +1,15 @@
 import React from 'react';
+import Create from '../Components/JobListings/Create';
+import List from '../Components/JobListings/List';
+import Search from '../Components/JobListings/Search';
 
-export default function Jobs() {
+const JobsMain = () => {
   return (
-    <div>Jobs</div>
+    <div className='welcome'>
+      <h1>Available Jobs:</h1>
+      <List />
+    </div>
   );
-}
+};
+
+export default JobsMain;

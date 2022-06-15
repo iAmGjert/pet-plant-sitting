@@ -1,7 +1,11 @@
 import React from 'react';
+import Search from '../Components/InfoLookup/Search';
 
-export default function Jobs() {
+export default function InfoMain() {
   return (
-    <div>Plant/Animal Information Search</div>
+    <div>
+      <h1>Plant/Animal Information</h1>
+      <Search />
+    </div>
   );
 }

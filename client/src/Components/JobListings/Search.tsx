@@ -1,10 +1,10 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-const Search = () =>{
+const Search = () => {
   
   return (
-    <div>Search Job</div>
+    <div>Search Jobs</div>
   );
 };
 

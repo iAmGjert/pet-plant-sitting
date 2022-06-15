@@ -1,10 +1,10 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 
-const Create = () =>{
+const Create = () => {
   
   return (
-    <div>Create Job</div>
+    <div>Create Jobs</div>
   );
 };
 
