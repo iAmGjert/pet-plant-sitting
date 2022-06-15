@@ -1,4 +1,5 @@
 const express = require('express');
+import { Request, Response } from 'express';
 const session = require('express-session');
 const path = require('path');
 const morgan = require('morgan');
@@ -26,10 +27,10 @@ app.use(morgan('tiny'));
 
 app.use('/auth', authRouter);
 
-app.get('/*', function (req: any, res: any) {
+app.get('/*', function (req: Request, res: Response) {
   res.sendFile(
     path.join(__dirname, '../client/build/index.html'),
-    function (err: any) {
+    function (err: Error) {
       if (err) {
         res.status(500).send(err);
       }
