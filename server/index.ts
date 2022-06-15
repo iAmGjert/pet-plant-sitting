@@ -29,7 +29,7 @@ app.use('/auth', authRouter);
 app.get('/*', function (req: Request, res: Response) {
   res.sendFile(
     path.join(__dirname, '../client/build/index.html'),
-    function (err: any) {
+    function (err: Error) {
       if (err) {
         res.status(500).send(err);
       }
