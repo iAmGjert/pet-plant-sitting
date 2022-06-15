@@ -17,7 +17,7 @@ const JobCreation = () => {
   };
   
   return (
-    <div className='welcome'>pet_plant
+    <div className='welcome'>
       <h1>New Job Form:</h1>
       <Create />
       <button onClick={()=>{ handleClick(); }}>Submit Job</button>
