@@ -1,13 +1,14 @@
 const passport = require('passport');
-const router = require('express').Router();
+import express, { Request, Response } from 'express';
+const auth = express();
 require('dotenv').config();
 const { User } = require('../../database/index.ts');
-const CLIENT_URL =
+const CLIENT_URL: string | undefined =
   process.env.CLIENT_URL === 'http://localhost'
     ? `${process.env.CLIENT_URL}:${process.env.PORT}`
     : process.env.CLIENT_URL;
 
-router.get('/login/success', (req: any, res: any) => {
+auth.get('/login/success', (req: any, res: any) => {
   if (req.user) {
     User.findOne({
       where: {
@@ -28,18 +29,18 @@ router.get('/login/success', (req: any, res: any) => {
   }
 });
 
-router.get('/login/fail', (req: any, res: any) => {
+auth.get('/login/fail', (req: Request, res: Response) => {
   res.sendStatus(400).redirect('/login');
 });
 
-router.get(
+auth.get(
   '/google',
   passport.authenticate('google', {
     scope: ['email', 'profile'],
   })
 );
 
-router.get(
+auth.get(
   '/google/callback',
   passport.authenticate('google', {
     successRedirect: CLIENT_URL,
@@ -47,10 +48,10 @@ router.get(
   })
 );
 
-router.get('/logout', (req: any, res: any) => {
+auth.get('/logout', (req: Request, res: any) => {
   req.logOut(() => {
     res.redirect(CLIENT_URL);
   });
 });
 
-module.exports = router;
+module.exports = auth;
