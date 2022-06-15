@@ -40,12 +40,10 @@ const PetPlant = db.define('pet_plant', {
 
 const Job = db.define('job', {
   id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-  name: DataTypes.STRING,
   location: DataTypes.STRING,
   pet_plant: DataTypes.ARRAY(DataTypes.INTEGER),
   employer_id: DataTypes.INTEGER,
   sitter_id: DataTypes.INTEGER,
-  applicants: DataTypes.ARRAY(DataTypes.INTEGER),
 });
 
 const Events = db.define('event', {
