@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
