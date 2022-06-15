@@ -5,7 +5,7 @@ const initState = {
   value: 'shiny piece of garbage'
 };
 
-export const userProfileSlice = createSlice({
+export const mapSlice = createSlice({
   name: 'userProile',
   initialState: initState,
   reducers: {
@@ -16,8 +16,6 @@ export const userProfileSlice = createSlice({
   }
 });
 
-export const { 
-  changeName 
-} = userProfileSlice.actions;
+export const { changeName } = mapSlice.actions;
 
-export default userProfileSlice.reducer;
+export default mapSlice.reducer;
