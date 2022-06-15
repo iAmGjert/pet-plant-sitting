@@ -25,6 +25,7 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 app.use('/auth', authRouter);
+app.use('/api/events', require('./routes/communityEvents.ts'));
 
 const port = process.env.PORT || 2000;
 app.listen(port, () => {
