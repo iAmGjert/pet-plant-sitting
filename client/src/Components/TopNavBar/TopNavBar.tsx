@@ -1,14 +1,18 @@
 import React from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
+import { useAppSelector, useAppDispatch } from '../../state/hooks';
 
 // type Props = {};
 
 const TopNavBar = () => {
+  const user = useAppSelector((state) => state.userProfile.value);
   return (
     <div>
-      <Navbar bg='light' expand='lg'>
+      <Navbar bg='primary' variant='dark' expand='lg'>
         <Container>
-          <Navbar.Brand href='#home'>Fern-Herm</Navbar.Brand>
+          <Navbar.Brand href='#home'>
+            {user.name ? user.name : 'Fern Herm'}
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'>
