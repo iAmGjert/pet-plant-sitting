@@ -4,10 +4,10 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export const mapSlice = createSlice({
   name: 'map',
-  initialState: { value: 'HELOOOO' },
+  initialState: { location: '' },
   reducers: {
     getUserLocation: (state, action: PayloadAction<string>) => {
-      state.value = action.payload;
+      state.location = action.payload;
       return state;
     },
   }

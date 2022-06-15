@@ -10,8 +10,7 @@ interface Props {}
 
 const MapMain: FC<Props> = () => {
 
-  const mapState: string = useAppSelector((state) => state.map.value);
-  console.log(mapState);
+  const userLocation: string = useAppSelector((state) => state.map.location);
   const dispatch = useAppDispatch();
 
 
@@ -33,17 +32,15 @@ const MapMain: FC<Props> = () => {
         }
       })
       .then((resObj) => {
-        // console.log(resObj.data.user.id, 'RESOBJ');
         const id = resObj.data.user.id;
         return id;
       })
       .then((id) => {
         // console.log(id, 'ID');
         axios
-          .get(`http://localhost:5000/api/map/${id}`)
+          .get(`/api/users/${id}`)
           .then((results) => {
-            dispatch(mapActions.getUserLocation(results.data));
-            // console.log(results.data, 'RESULTS');
+            dispatch(mapActions.getUserLocation(results.data.location));
           });
       })
       .catch((err) => {
@@ -55,7 +52,7 @@ const MapMain: FC<Props> = () => {
 
   return (
     <div>
-      <h1>{mapState}</h1>
+      <h1>{userLocation}</h1>
     </div>
   );
 };
