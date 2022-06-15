@@ -8,7 +8,6 @@ interface Props {}
 const Home: FC<Props> = () => {
   const userName = useAppSelector(state => state.userProfile.value);
   const dispatch = useAppDispatch();
- 
   const handleClick = () => {
     console.log('You clicked me!');
     dispatch(changeName('Iben O\'Neal'));
