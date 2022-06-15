@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import MapMain from './Pages/MapMain';
+import CalendarMain from './Pages/CalendarMain';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Profile from './Pages/Profile';
@@ -12,6 +13,8 @@ import {
   changeName,
 } from './state/features/userProfile/userProfileSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
+import JobsMain from './Pages/JobsMain';
+import JobCreation from './Pages/JobCreation';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
@@ -33,6 +36,9 @@ const App: FC<Props> = () => {
         <Route path='/profile/:id' element={<Profile />} />
         <Route path='/login' element={<Login />} />
         <Route path='/map' element={<MapMain />} />
+        <Route path='/calendar' element={<CalendarMain />} />
+        <Route path='/jobs' element={<JobsMain />} />
+        <Route path='/createjob' element={<JobCreation />} />
       </Routes>
     </BrowserRouter>
   );

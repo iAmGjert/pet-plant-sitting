@@ -48,7 +48,7 @@ auth.get(
   })
 );
 
-auth.get('/logout', (req: Request, res: any) => {
+auth.get('/logout', (req: any, res: any) => {
   req.logOut(() => {
     res.redirect(CLIENT_URL);
   });
