@@ -9,6 +9,19 @@ const passport = require('passport');
 require('dotenv').config();
 require('./auth/passport.ts');
 
+const { createServer } = require('http');
+const cors = require('cors');
+const { Server } = require('socket.io');
+const config = require('config');
+
+const httpServer = createServer(app);
+
+const io = new Server(httpServer, {
+  cors: {
+    origin: 'http://localhost:5000',
+    credentials: true,
+  },
+});
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
