@@ -1,4 +1,4 @@
-const express = require('express');
+import express, { Request, Response } from 'express';
 const session = require('express-session');
 const path = require('path');
 const morgan = require('morgan');
@@ -27,7 +27,18 @@ app.use(morgan('tiny'));
 app.use('/auth', authRouter);
 app.use('/api/events', require('./routes/communityEvents.ts'));
 
-const port = process.env.PORT || 2000;
+app.get('/*', function (req: Request, res: Response) {
+  res.sendFile(
+    path.join(__dirname, '../client/build/index.html'),
+    function (err: Error) {
+      if (err) {
+        res.status(500).send(err);
+      }
+    }
+  );
+});
+
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`🚀 Server is listening at http://localhost:${port}`);
 });
