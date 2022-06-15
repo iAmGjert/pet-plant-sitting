@@ -2,14 +2,14 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 
 import express, { Request, Response } from 'express';
-const router = express();
+const events = express();
 
 const { Events } = require('../../database/index');
 // const { User } = require('../../database/index');
 // const { EventComment } = require('../../database/index');
 // const { EventParticipant } = require('../../database/index');
 
-router.post('/create', async (req: Request, res: Response) => {
+events.post('/create', async (req: Request, res: Response) => {
   const { name, host, location, description, participants } = req.body;
   const event = await Events.create({
     name,
@@ -20,4 +20,4 @@ router.post('/create', async (req: Request, res: Response) => {
   return res.json(event);
 });
 
-module.exports = router;
+module.exports = events;
