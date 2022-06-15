@@ -1,7 +1,8 @@
-import React, { useState }from 'react';
+import React, { useState } from 'react';
 import CalendarMain from '../../Pages/CalendarMain';
+
 // import PropTypes from 'prop-types';
-import Calendario from 'react-calendar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Calendar = () =>{
   const [date, setDate] = useState(new Date());
@@ -11,7 +12,8 @@ const Calendar = () =>{
   };
   return (
     <div>
-      <CalendarMain onChange={onChange} date={date}/>
+      {/* <CalendarMain onChange={onChange} date={date}/> */}
+      <h1>Calendar</h1>
     </div>
   );
 };

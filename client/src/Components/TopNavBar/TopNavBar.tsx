@@ -26,6 +26,7 @@ const TopNavBar = () => {
                 <NavDropdown.Item href='#action/3.4'>
                   Separated link
                 </NavDropdown.Item>
+                <NavDropdown.Item href='calendar'>Calendar</NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
