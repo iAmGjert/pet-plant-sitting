@@ -2,10 +2,12 @@ import React, { FC } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
+import MapMain from './Pages/MapMain';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-interface Props {}
+interface Props {
+}
 
 const App: FC<Props> = () => {
   return (
@@ -14,9 +16,12 @@ const App: FC<Props> = () => {
         <Routes>
           <Route path='/' element={<Home />} />
           <Route path='/login' element={<Login />} />
-        </Routes>
-      </BrowserRouter>
+          <Route path='/map' element={<MapMain />}
+            />
+          </Routes>
+        </BrowserRouter>
     </div>
+
   );
 };
 
