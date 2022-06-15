@@ -1,4 +1,5 @@
-import express, { Request, Response } from 'express';
+const express = require('express');
+import { Request, Response } from 'express';
 const session = require('express-session');
 const path = require('path');
 const morgan = require('morgan');
@@ -38,7 +39,7 @@ app.get('/*', function (req: Request, res: Response) {
   );
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 2000;
 app.listen(port, () => {
   console.log(`🚀 Server is listening at http://localhost:${port}`);
 });
