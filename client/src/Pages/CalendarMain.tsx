@@ -5,7 +5,7 @@ export default function Calendario() {
   return (
     <Calendar />
   );
-};
+}
 
 
 
