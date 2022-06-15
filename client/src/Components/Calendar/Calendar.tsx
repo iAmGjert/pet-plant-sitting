@@ -9,7 +9,10 @@ const CalendarApp = () =>{
   
   return (
     <div>
-      <Calendar onChange={onChange} value={value} />
+      <Calendar onChange={onChange} 
+        value={value}
+      />
+      {value.toString()}
   
     </div>
   );
