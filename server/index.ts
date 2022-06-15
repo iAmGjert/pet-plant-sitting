@@ -26,7 +26,7 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 app.use('/auth', authRouter);
-app.use('/api/events', require('./routes/communityEvents.ts'));
+app.use('/api/events', require('./routes/events.ts'));
 
 app.get('/*', function (req: Request, res: Response) {
   res.sendFile(
