@@ -4,19 +4,16 @@
 import express, { Request, Response } from 'express';
 const map = express();
 
-const { User, Job } = require('../../database/index');
-// const { User } = require('../../database/index');
-// const { EventComment } = require('../../database/index');
-// const { EventParticipant } = require('../../database/index');
+const { User } = require('../../database/index');
 
-map.get('/userlocation/:id', async (req: Request, res: Response) => {
-  console.log(req.params);
+
+map.get('/:id', async (req: Request, res: Response) => {
+
   const user = await User.findOne({
     where: {
       id: req.params.id,
     }
   });
-  // console.log(user, 'USER');
   return res.json(user.location);
 });
 
