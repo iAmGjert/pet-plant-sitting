@@ -10,7 +10,7 @@ const Home: FC = () => {
 
   const handleClick = () => {
     console.log('You clicked me!');
-    dispatch(changeName("Iben O'Neal"));
+    dispatch(changeName('Iben ONeal'));
   };
   return (
     <div>
