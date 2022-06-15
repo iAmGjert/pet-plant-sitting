@@ -42,7 +42,7 @@ router.get(
 router.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: 'http://localhost:5000',
+    successRedirect: CLIENT_URL,
     failureRedirect: '/login/fail',
   })
 );
