@@ -26,8 +26,8 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 app.use('/auth', authRouter);
-app.use('/api/events', require('./routes/communityEvents.ts'));
 app.use('/api/map', require('./routes/map.ts'));
+app.use('/api/events', require('./routes/events.ts'));
 app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/users', require('./routes/users'));
 

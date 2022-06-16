@@ -12,10 +12,11 @@ const TopNavBar = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'>
+              <Nav.Link href='/'>Home</Nav.Link>
               <Nav.Link href='/jobs'>Job Listings</Nav.Link>
               <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
                 <NavDropdown.Item href='/createjob'>Create Job</NavDropdown.Item>
-                <NavDropdown.Item href='/community'>
+                <NavDropdown.Item href='/events'>
                   Community
                 </NavDropdown.Item>
                 <NavDropdown.Item href='/calendar'>
