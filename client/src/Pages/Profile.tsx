@@ -13,7 +13,7 @@ const Profile = () => {
     if (currUser.id && Number(id) == currUser?.id) {
       setEditable(true);
     }
-  }, [currUser]);
+  }, [currUser, id]);
   console.log(currUser);
   return (
     <Container>

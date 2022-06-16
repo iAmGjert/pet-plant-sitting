@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from 'react';
-import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import MapMain from './Pages/MapMain';
@@ -9,10 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Profile from './Pages/Profile';
 import axios from 'axios';
-import {
-  setUser,
-  changeName,
-} from './state/features/userProfile/userProfileSlice';
+import { setUser } from './state/features/userProfile/userProfileSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import JobsMain from './Pages/JobsMain';
 import JobCreation from './Pages/JobCreation';

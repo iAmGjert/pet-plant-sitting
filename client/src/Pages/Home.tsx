@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { changeName } from '../state/features/userProfile/userProfileSlice';
-import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
@@ -12,7 +11,7 @@ const Home: FC<Props> = () => {
   const handleClick = () => {
     console.log(user);
     console.log('You clicked me!');
-    dispatch(changeName("Iben O'Neal"));
+    dispatch(changeName('Iben ONeal'));
   };
   return (
     <div>

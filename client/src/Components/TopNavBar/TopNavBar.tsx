@@ -35,7 +35,8 @@ const TopNavBar = () => {
                 <NavDropdown.Item href='/chat'>Chat</NavDropdown.Item>
                 <NavDropdown.Divider />
                 <NavDropdown.Item href='/info'>Info Lookup</NavDropdown.Item>
-
+                <NavDropdown.Divider />
+                <NavDropdown.Item href='/map'>Map</NavDropdown.Item>
                 {user.name && (
                   <>
                     <NavDropdown.Divider />

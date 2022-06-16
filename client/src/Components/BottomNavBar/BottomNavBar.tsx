@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navbar, Container, Nav, Collapse } from 'react-bootstrap';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 
 // type Props = {}
 
