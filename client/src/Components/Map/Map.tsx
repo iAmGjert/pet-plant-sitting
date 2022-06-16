@@ -5,7 +5,6 @@ import Map from 'react-map-gl';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
- 
 
 const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
@@ -23,10 +22,10 @@ const MapComponent: FC<Props> = () => {
       initialViewState={{
         longitude: -90.0715,
         latitude: 29.9511,
-        zoom: 13
+        zoom: 13,
       }}
-      style={{minHeight: '100vh'}}
-      mapStyle="mapbox://styles/mapbox/streets-v9"
+      style={{ minHeight: '100vh' }}
+      mapStyle='mapbox://styles/mapbox/streets-v9'
       mapboxAccessToken={TOKEN}
     />
   );

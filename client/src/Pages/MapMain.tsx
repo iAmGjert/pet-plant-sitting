@@ -6,7 +6,6 @@ import { mapActions } from '../state/features/map/mapSlice';
 
 import MapComponent from '../Components/Map/Map';
 
-
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
@@ -18,10 +17,9 @@ const MapMain: FC<Props> = () => {
   const jobLocation: string = useAppSelector((state) => state.map.jobLocation);
   const dispatch = useAppDispatch();
 
-
   const getUserLocation = async () => {
     const options = {
-      url: 'http://localhost:5000/auth/login/success',
+      url: `${process.env.CLIENT_URL}:${process.env.PORT}/auth/login/success`,
       method: 'GET',
       withCredentials: true,
       headers: {
@@ -41,11 +39,9 @@ const MapMain: FC<Props> = () => {
         return id;
       })
       .then((id) => {
-        axios
-          .get(`/api/users/${id}`)
-          .then((results) => {
-            dispatch(mapActions.getUserLocation(results.data.location));
-          });
+        axios.get(`/api/users/${id}`).then((results) => {
+          dispatch(mapActions.getUserLocation(results.data.location));
+        });
       })
       .catch((err) => {
         console.error(err, 'something went wrong');
@@ -62,7 +58,5 @@ const MapMain: FC<Props> = () => {
     </div>
   );
 };
-
-
 
 export default MapMain;

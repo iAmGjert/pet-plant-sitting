@@ -1,21 +1,25 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //import type { RootState } from '../../store';
 
-const initState = {
-  value: 'shiny piece of garbage'
+const initialState = {
+  value: { name: '', id: 0 },
 };
 
 export const userProfileSlice = createSlice({
   name: 'userProile',
-  initialState: initState,
+  initialState,
   reducers: {
-    changeName: (state, action:PayloadAction<string>)=>{
+    changeName: (state, action: PayloadAction<string>) => {
+      state.value.name = action.payload;
+      return state;
+    },
+    setUser: (state, action: PayloadAction<any>) => {
       state.value = action.payload;
       return state;
     },
-  }
+  },
 });
 
-export const { changeName } = userProfileSlice.actions;
+export const { changeName, setUser } = userProfileSlice.actions;
 
 export default userProfileSlice.reducer;
