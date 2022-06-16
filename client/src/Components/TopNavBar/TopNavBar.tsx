@@ -36,6 +36,10 @@ const TopNavBar = () => {
                 <NavDropdown.Item href='/auth/logout'>
                   Logout
                 </NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item href='/map'>
+                  Map
+                </NavDropdown.Item>
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>
