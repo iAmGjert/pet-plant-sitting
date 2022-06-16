@@ -1,21 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //import type { RootState } from '../../store';
 
-const initState = {
-  value: 'shiny piece of garbage'
-};
 
 export const mapSlice = createSlice({
-  name: 'userProile',
-  initialState: initState,
+  name: 'map',
+  initialState: { location: '' },
   reducers: {
-    changeName: (state, action: PayloadAction<string>)=>{
-      state.value = action.payload;
+    getUserLocation: (state, action: PayloadAction<string>) => {
+      state.location = action.payload;
       return state;
     },
   }
 });
 
-export const { changeName } = mapSlice.actions;
+const { actions: mapActions, reducer: mapReducer } = mapSlice;
 
-export default mapSlice.reducer;
+export { mapActions, mapReducer };

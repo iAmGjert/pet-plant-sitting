@@ -12,8 +12,8 @@ auth.get('/login/success', (req: any, res: any) => {
   if (req.user) {
     User.findOne({
       where: {
-        id: req.user.id,
-      },
+        id: req.user[0].id,
+      }
     })
       .then((user: object) => {
         res.status(200).json({
