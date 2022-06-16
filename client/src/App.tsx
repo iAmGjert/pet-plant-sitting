@@ -4,6 +4,7 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import MapMain from './Pages/MapMain';
 import CalendarMain from './Pages/CalendarMain';
+import CommunityEvents from './Pages/CommunityEventsMain';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import JobsMain from './Pages/JobsMain';
 import JobCreation from './Pages/JobCreation';
@@ -18,6 +19,7 @@ const App: FC<Props> = () => {
         <Route path='/' element={<Home />} />
         <Route path='/login' element={<Login />} />
         <Route path='/map' element={<MapMain />} />
+        <Route path='/events' element={<CommunityEvents />} />
         <Route path='/calendar' element={<CalendarMain />} />
         <Route path='/jobs' element={<JobsMain />} />
         <Route path='/createjob' element={<JobCreation />} />
