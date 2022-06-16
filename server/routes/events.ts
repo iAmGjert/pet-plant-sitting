@@ -5,18 +5,20 @@ const events = express();
 
 const { Events } = require('../../database/index');
 const { User } = require('../../database/index');
-// const { EventComment } = require('../../database/index');
-// const { EventParticipant } = require('../../database/index');
+const { EventComment } = require('../../database/index');
+const { EventParticipant } = require('../../database/index');
 
-  interface UserInfo {
+
+interface UserInfo {
     id: number;
-  }
+}
 
 interface EventInfo {
     name: string;
     location: string;
     description: string;
   }
+//* POST Routes *//
 
 events.post('/create', (req: Request, res: Response) => {
   User.findByPk(1)
@@ -39,6 +41,8 @@ events.post('/create', (req: Request, res: Response) => {
 });
 
 
+//* GET Routes *//
+
 events.get('/all', async (req: Request, res: Response) => {
   const events = await Events.findAll();
   return res.json(events);
@@ -49,6 +53,11 @@ events.get('/:id', async (req: Request, res: Response) => {
   const event = await Events.findByPk(id);
   return res.json(event);
 });
+// //get all event comments
+// events.get('/comments/all', (req: Request, res: Response) => {
+// )
+
+//* UPDATE Routes *//
 
 events.put('/update/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -65,6 +74,8 @@ events.put('/update/:id', async (req: Request, res: Response) => {
   });
   return res.json(event);
 });
+
+//* DELETE Routes *//
 
 events.delete('/delete/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
