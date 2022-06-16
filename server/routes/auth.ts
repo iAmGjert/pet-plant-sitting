@@ -8,13 +8,17 @@ const CLIENT_URL: string | undefined =
     ? `${process.env.CLIENT_URL}:${process.env.PORT}`
     : process.env.CLIENT_URL;
 
+<<<<<<< HEAD
 
 auth.get('/login/success', (req: any, res: any) => {
+=======
+auth.get('/login/success', (req: Request | any, res: any) => {
+>>>>>>> 610198732cb9356630adb2012974d93471f53b25
   if (req.user) {
     User.findOne({
       where: {
         id: req.user[0].id,
-      }
+      },
     })
       .then((user: object) => {
         res.status(200).json({

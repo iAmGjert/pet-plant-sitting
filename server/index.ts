@@ -2,6 +2,7 @@ const express = require('express');
 import { Request, Response } from 'express';
 const session = require('express-session');
 const path = require('path');
+const cors = require('cors');
 const morgan = require('morgan');
 const { db } = require('../database/index');
 const app = express();
@@ -9,6 +10,14 @@ const authRouter = require('./routes/auth.ts');
 const passport = require('passport');
 require('dotenv').config();
 require('./auth/passport.ts');
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    methods: 'GET, PUT, POST, PATCH, DELETE',
+    credentials: true,
+  })
+);
 
 app.use(
   session({
