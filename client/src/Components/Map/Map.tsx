@@ -1,30 +1,27 @@
 import React, { useEffect, useState, useRef } from 'react';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
-import ReactMapGL from 'react-map-gl';
+import Map from 'react-map-gl';
  
 
+const TOKEN = 'pk.eyJ1IjoiYmZvcmQwMDIiLCJhIjoiY2w0Zzk2ZG10MDJvNjNpcXNtYjNlcmt2ciJ9.t8WjEpB8YAxJYqTGdClffQ';
 
+const MapComponent = () => {
 
-const Map = () => {
-
-  const API = 'sk.eyJ1IjoiYmZvcmQwMDIiLCJhIjoiY2w0Zzlma3RoMDEzMjNobnhoMDRlMmI5NiJ9.2hbTzPUj1vY_uApj0WpSkA';
-
-  const [viewport, setViewport] = useState({
-    width: 400,
-    height: 400,
-    latitude: 38.958630,
-    longitude: -77.357002,
-    zoom: 10
-  });
 
 
   return (
-    <div>
-      <ReactMapGL { ...viewport }
-        mapboxAccessToken={API}></ReactMapGL>
-    </div>
+    <Map
+      initialViewState={{
+        longitude: -90.0715,
+        latitude: 29.9511,
+        zoom: 13
+      }}
+      style={{minHeight: '100vh'}}
+      mapStyle="mapbox://styles/mapbox/streets-v9"
+      mapboxAccessToken={TOKEN}
+    />
   );
 };
 
-export default Map;
+export default MapComponent;
