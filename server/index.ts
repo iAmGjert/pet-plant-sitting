@@ -27,6 +27,8 @@ app.use(morgan('tiny'));
 
 app.use('/auth', authRouter);
 app.use('/api/events', require('./routes/events.ts'));
+app.use('/api/jobs', require('./routes/jobs'));
+app.use('/api/users', require('./routes/users'));
 
 app.get('/*', function (req: Request, res: Response) {
   res.sendFile(
