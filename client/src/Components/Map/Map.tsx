@@ -1,14 +1,16 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { FC } from 'react';
+import { connect } from 'react-redux';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map from 'react-map-gl';
+
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+interface Props {}
  
 
-const TOKEN = 'pk.eyJ1IjoiYmZvcmQwMDIiLCJhIjoiY2w0Zzk2ZG10MDJvNjNpcXNtYjNlcmt2ciJ9.t8WjEpB8YAxJYqTGdClffQ';
+const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
-const MapComponent = () => {
-
-
+const MapComponent: FC<Props> = (props) => {
 
   return (
     <Map
@@ -24,4 +26,11 @@ const MapComponent = () => {
   );
 };
 
-export default MapComponent;
+const mapStateToProps = (state: any, ownProps: { location: any; }) => {
+
+  return {
+    location: ownProps.location
+  };
+};
+
+export default connect(mapStateToProps)(MapComponent);

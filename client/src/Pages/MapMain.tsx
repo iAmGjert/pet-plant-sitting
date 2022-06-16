@@ -38,7 +38,6 @@ const MapMain: FC<Props> = () => {
         return id;
       })
       .then((id) => {
-        // console.log(id, 'ID');
         axios
           .get(`/api/users/${id}`)
           .then((results) => {
@@ -55,10 +54,12 @@ const MapMain: FC<Props> = () => {
   return (
     <div>
       <div>
-        <MapComponent />
+        <MapComponent location />
       </div>
     </div>
   );
 };
+
+
 
 export default MapMain;
