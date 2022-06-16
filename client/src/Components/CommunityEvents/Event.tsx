@@ -3,7 +3,7 @@ import React from 'react';
 
 const CommunityEvents = () =>{
   return (
-    <div>Single-Event</div>
+    <div>Event</div>
   );
 };
 
