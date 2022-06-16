@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
-//import Calendar from 'react-calendar';
+import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import Calendar = require('react-calendar-mobile');
+import {BrowserRouter as Router, Link} from 'react-router-dom';
+// import Calendar = require('react-calendar-mobile');
+import Button from 'react-bootstrap/Button';
+
 
 import { useSelector } from 'react-redux';
 //import { bindActionCreators } from 'redux'; this is what we will import when we have our actions created
@@ -16,19 +19,16 @@ const CalendarApp = () =>{
   
   return (
     <div>
-      {/* <Calendar onChange={onChange} 
+      <Link to="/mobileView">
+        <Button variant="primary">Mobile View</Button>{' '}
+      </Link>
+      <Calendar onChange={onChange} 
         value={value}
       />
       {value.toString()}
   
-    </div> */}
-    <Datepicker
-    controls={['calendar']}
-    inputComponent="input"
-    inputProps={{
-        placeholder: 'Please Select...'
-    }}
-/>
+    </div> 
+
   );
 };
 
