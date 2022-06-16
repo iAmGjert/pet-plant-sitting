@@ -9,17 +9,21 @@ interface jobInfo {
   pet_plant: Array<number>;
   employer_id: number;
   sitter_id: number;
+  startDate: Date,
+  endDate: Date
 }
 
 jobs.post('/create', async (req: Request, res: Response) => {
-  const { name, location, pet_plant, employer_id, sitter_id } = req.body;
+  const { name, location, pet_plant, employer_id, sitter_id, startDate, endDate } = req.body;
   try {
-    const job = await Job.create({
+    const job = await Job.create(<jobInfo>{
       name,
       location,
       pet_plant,
       employer_id,
       sitter_id,
+      startDate,
+      endDate
     });
     res.status(201).send(job);
     return job;

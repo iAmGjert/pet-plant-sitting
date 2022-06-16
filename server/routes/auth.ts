@@ -8,6 +8,7 @@ const CLIENT_URL: string | undefined =
     ? `${process.env.CLIENT_URL}:${process.env.PORT}`
     : process.env.CLIENT_URL;
 
+
 auth.get('/login/success', (req: any, res: any) => {
   if (req.user) {
     User.findOne({

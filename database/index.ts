@@ -44,6 +44,8 @@ const Job = db.define('job', {
   pet_plant: DataTypes.ARRAY(DataTypes.INTEGER),
   employer_id: DataTypes.INTEGER,
   sitter_id: DataTypes.INTEGER,
+  startDate: DataTypes.DATEONLY,
+  endDate: DataTypes.DATEONLY
 });
 
 const Events = db.define('event', {
@@ -52,7 +54,10 @@ const Events = db.define('event', {
   host: DataTypes.INTEGER,
   location: DataTypes.STRING,
   description: DataTypes.STRING,
-  participants: DataTypes.ARRAY(DataTypes.INTEGER)
+  participants: DataTypes.ARRAY(DataTypes.INTEGER),
+  startDate: DataTypes.DATEONLY,
+  endDate: DataTypes.DATEONLY,
+  startTime: DataTypes.TIME
 });
 
 const Conversation = db.define('conversation', {
