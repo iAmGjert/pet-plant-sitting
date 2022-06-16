@@ -1,10 +1,6 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
-import {
-  changeName,
-  setUser,
-} from '../state/features/userProfile/userProfileSlice';
-import axios from 'axios';
+import { changeName } from '../state/features/userProfile/userProfileSlice';
 import { Link } from 'react-router-dom';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -20,15 +16,13 @@ const Home: FC<Props> = () => {
   return (
     <div>
       <h1>Hello world {user.name}</h1>
-      <Link to={'/profile/1'}>
-        <button
-          onClick={() => {
-            handleClick();
-          }}
-        >
-          Go to Profile
-        </button>
-      </Link>
+      <button
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        Click
+      </button>
     </div>
   );
 };
