@@ -10,7 +10,7 @@ const Home: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const handleClick = () => {
     console.log('You clicked me!');
-    dispatch(changeName("Iben O'Neal"));
+    dispatch(changeName('Iben O\'Neal'));
   };
 
   return (
