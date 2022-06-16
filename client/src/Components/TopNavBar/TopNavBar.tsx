@@ -16,6 +16,7 @@ const TopNavBar = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'>
+              <Nav.Link href='/'>Home</Nav.Link>
               <Nav.Link href='/jobs'>Job Listings</Nav.Link>
               <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
                 {!user.name && (
@@ -24,6 +25,7 @@ const TopNavBar = () => {
                 <NavDropdown.Item href='/createjob'>
                   Create Job
                 </NavDropdown.Item>
+                <NavDropdown.Item href='/events'>Community</NavDropdown.Item>
                 <NavDropdown.Item href='/community'>Community</NavDropdown.Item>
                 <NavDropdown.Item href='/calendar'>Calendar</NavDropdown.Item>
                 <NavDropdown.Item href={`/profile/${user?.id}`}>

@@ -1,22 +1,30 @@
-import React, { useState }from 'react';
-import CalendarMain from '../../Pages/CalendarMain';
+import React, { useState } from 'react';
 // import PropTypes from 'prop-types';
-import Calendario from 'react-calendar';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
-const Calendar = () =>{
-  const [date, setDate] = useState(new Date());
+import { useSelector } from 'react-redux';
+//import { bindActionCreators } from 'redux'; this is what we will import when we have our actions created
+
+const CalendarApp = () =>{
+  //eventually, when set up your section in the store, you can return the key value pair necessary to your feature 
+  const state = useSelector((state) => state);
+  console.log(state);
+  const [value, onChange] = useState(new Date());
   
-  const onChange = (date: React.SetStateAction<Date>) => {
-    setDate(date);
-  };
   return (
     <div>
-      <CalendarMain onChange={onChange} date={date}/>
+      <Calendar onChange={onChange} 
+        value={value}
+      />
+      {value.toString()}
+  
     </div>
   );
 };
 
-Calendar.propTypes = {};
+CalendarApp.propTypes = {};
 
-export default Calendar;
+export default CalendarApp;
 

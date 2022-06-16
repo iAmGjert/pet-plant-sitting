@@ -11,7 +11,8 @@ const Home: FC<Props> = () => {
   const user = useAppSelector((state) => state.userProfile.value);
   const handleClick = () => {
     console.log(user);
-    dispatch(changeName('steve'));
+    console.log('You clicked me!');
+    dispatch(changeName("Iben O'Neal"));
   };
   return (
     <div>
