@@ -5,6 +5,7 @@ import jobsReducer from './features/jobs/jobSlice';
 import calendarReducer from './features/calendar/calendarSlice';
 import communityEventsReducer from './features/communityEvents/communityEventsSlice';
 
+
 export const store = configureStore({
   reducer: {
     events: communityEventsReducer,
