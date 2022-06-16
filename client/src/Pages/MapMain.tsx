@@ -12,7 +12,10 @@ interface Props {}
 
 const MapMain: FC<Props> = () => {
 
-  const userLocation: string = useAppSelector((state) => state.map.location);
+  const userLocation: string = useAppSelector((state) => state.map.userLocation);
+  const user: object = useAppSelector((state) => state.map.user);
+  const job: object = useAppSelector((state) => state.map.job);
+  const jobLocation: string = useAppSelector((state) => state.map.jobLocation);
   const dispatch = useAppDispatch();
 
 
@@ -54,7 +57,7 @@ const MapMain: FC<Props> = () => {
   return (
     <div>
       <div>
-        <MapComponent location />
+        <MapComponent />
       </div>
     </div>
   );

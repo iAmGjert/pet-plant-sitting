@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
-import { connect } from 'react-redux';
-
+import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map from 'react-map-gl';
 
@@ -10,7 +9,14 @@ interface Props {}
 
 const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
-const MapComponent: FC<Props> = (props) => {
+const MapComponent: FC<Props> = () => {
+
+  const location = useAppSelector((state) => state.map.userLocation);
+  const user: object = useAppSelector((state) => state.map.user);
+  const job: object = useAppSelector((state) => state.map.job);
+  const jobLocation: string = useAppSelector((state) => state.map.jobLocation);
+  const dispatch = useAppDispatch();
+
 
   return (
     <Map
@@ -26,11 +32,5 @@ const MapComponent: FC<Props> = (props) => {
   );
 };
 
-const mapStateToProps = (state: any, ownProps: { location: any; }) => {
 
-  return {
-    location: ownProps.location
-  };
-};
-
-export default connect(mapStateToProps)(MapComponent);
+export default MapComponent;
