@@ -4,6 +4,8 @@ import axios from 'axios';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { mapActions } from '../state/features/map/mapSlice';
 
+import Map from '../Components/Map/Map';
+
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
@@ -52,7 +54,9 @@ const MapMain: FC<Props> = () => {
 
   return (
     <div>
-      <h1>{userLocation}</h1>
+      <div>
+        <Map />
+      </div>
     </div>
   );
 };
