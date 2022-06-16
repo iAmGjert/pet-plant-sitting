@@ -1,6 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Calendar from 'react-calendar';
+let Calendar = require('react-calendar-mobile');
 
 import { useSelector } from 'react-redux';
 
@@ -13,7 +13,7 @@ const CalendarMobile = () => {
   
   return (
 
-  )
+  );
 
 };
 
