@@ -9,7 +9,7 @@ export const calendar = createSlice({
   name: 'calendar',
   initialState,
   reducers: {
-    //action is changeValue
+    //action is changeValue. payload is 
     changeValue: (state, action: PayloadAction<string>) => {
       state.value = action.payload;
       return state;
