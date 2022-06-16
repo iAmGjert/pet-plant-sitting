@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
-import { useAppSelector, useAppDispatch } from '../../state/hooks';
+import { useAppSelector } from '../../state/hooks';
 
 // type Props = {};
 
@@ -16,7 +16,6 @@ const TopNavBar = () => {
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'>
-              <Nav.Link href='/'>Home</Nav.Link>
               <Nav.Link href='/jobs'>Job Listings</Nav.Link>
               <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
                 {!user.name && (
