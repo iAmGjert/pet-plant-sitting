@@ -6,22 +6,22 @@ import { changeName } from '../state/features/userProfile/userProfileSlice';
 interface Props {}
 
 const Home: FC<Props> = () => {
-  const userName = useAppSelector((state) => state.userProfile.value);
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.userProfile.value);
   const handleClick = () => {
+    console.log(user);
     console.log('You clicked me!');
-    dispatch(changeName("Iben O'Neal"));
+    dispatch(changeName('Iben ONeal'));
   };
-
   return (
     <div>
-      <h1>Hello world {userName}</h1>
+      <h1>Hello world {user.name}</h1>
       <button
         onClick={() => {
           handleClick();
         }}
       >
-        Click Me!
+        Click
       </button>
     </div>
   );

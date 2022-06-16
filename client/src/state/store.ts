@@ -2,12 +2,19 @@ import { configureStore } from '@reduxjs/toolkit';
 import userProfileReducer from './features/userProfile/userProfileSlice';
 import infoReducer from './features/info/infoSlice';
 import jobsReducer from './features/jobs/jobSlice';
+import { mapReducer } from './features/map/mapSlice';
+import calendarReducer from './features/calendar/calendarSlice';
+import communityEventsReducer from './features/communityEvents/communityEventsSlice';
+
 
 export const store = configureStore({
   reducer: {
+    events: communityEventsReducer,
     userProfile: userProfileReducer,
     info: infoReducer,
-    job: jobsReducer
+    job: jobsReducer,
+    map: mapReducer,
+    calendar: calendarReducer
   },
 });
 
