@@ -12,8 +12,7 @@ const db = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
 //IF YOU NEED TO UPDATE THE DB, insert {alter: true} into .sync() on line 198
 
 const User = db.define('user', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-
+  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   name: DataTypes.STRING,
   image: DataTypes.STRING,
   location: DataTypes.STRING,
@@ -214,7 +213,7 @@ db
         {
           'name': 'Lib Phin',
           'image': 'http://dummyimage.com/233x100.png/dddddd/000000',
-          'location': '978 Utah Street',
+          'location': '2221 Judith St, Metairie, LA 70003',
           'sitter_rating': 10,
           'total_sitter_ratings': 24,
           'bio': 'Other specified injury of unspecified blood vessel at ankle and foot level, right leg',
@@ -225,7 +224,7 @@ db
         {
           'name': 'Beverley Ailward',
           'image': 'http://dummyimage.com/138x100.png/dddddd/000000',
-          'location': '828 Acker Road',
+          'location': '6838 Louisville St, New Orleans, LA 70124',
           'sitter_rating': 8,
           'total_sitter_ratings': 93,
           'bio': 'Fall on same level from slipping, tripping and stumbling without subsequent striking against object',
@@ -235,7 +234,7 @@ db
         {
           'name': 'Nevil Sutcliffe',
           'image': 'http://dummyimage.com/142x100.png/cc0000/ffffff',
-          'location': '2407 Hazelcrest Avenue',
+          'location': '2705 A P Tureaud Ave, New Orleans, LA 70119',
           'sitter_rating': 8,
           'total_sitter_ratings': 88,
           'bio': 'Laceration without foreign body, left knee, sequela',
@@ -245,7 +244,8 @@ db
         {
           'name': 'Bradley Wilkison',
           'image': 'http://dummyimage.com/249x100.png/5fa2dd/ffffff',
-          'location': '02 Carpenter Park', 'sitter_rating': 4,
+          'location': '4609 Banks St, New Orleans, LA 70119',
+          'sitter_rating': 4,
           'total_sitter_ratings': 38,
           'bio': 'Nondisplaced bicondylar fracture of left tibia',
           'rating': 7,
@@ -254,7 +254,7 @@ db
         {
           'name': 'Ramonda Sheavills',
           'image': 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
-          'location': '5337 Melody Junction',
+          'location': '1213 Gaudet Dr, Marrero, LA 70072',
           'sitter_rating': 3,
           'total_sitter_ratings': 86,
           'bio': 'Major laceration of right vertebral artery, initial encounter',
@@ -321,37 +321,37 @@ db
         })
         .then(()=>{
           Job.bulkCreate([{
-            'location': '64 Leroy Lane',
+            'location': '2221 Judith St, Metairie, LA 70003',
             'pet_plant': [2, 2],
             'employer_id': 1,
             'startDate': new Date('July 11, 2022 01:15:00'),
             'endDate': new Date('July 15, 2022 01:15:00')
           },
           {
-            'location': '6107 Green Ridge Avenue',
+            'location': '6838 Louisville St, New Orleans, LA 70124',
             'pet_plant': [5, 2],
-            'employer_id': 1,
+            'employer_id': 2,
             'startDate': new Date('July 22, 2022 01:15:00'),
             'endDate': new Date('July 27, 2022 01:15:00')
           },
           {
-            'location': '9 Tomscot Park',
+            'location': '2705 A P Tureaud Ave, New Orleans, LA 70119',
             'pet_plant': [5, 1],
-            'employer_id': 1,
+            'employer_id': 3,
             'startDate': new Date('July 20, 2022 01:15:00'),
             'endDate': new Date('July 25, 2022 01:15:00')
           },
           {
-            'location': '4780 Fair Oaks Park',
+            'location': '4609 Banks St, New Orleans, LA 70119',
             'pet_plant': [3, 1],
-            'employer_id': 1,
+            'employer_id': 4,
             'startDate': new Date('July 21, 2022 01:15:00'),
             'endDate': new Date('July 25, 2022 01:15:00')
           },
           {
-            'location': '43 Fairview Crossing',
+            'location': '1213 Gaudet Dr, Marrero, LA 70072',
             'pet_plant': [3, 1],
-            'employer_id': 1,
+            'employer_id': 5,
             'startDate': new Date('July 1, 2022 01:15:00'),
             'endDate': new Date('July 5, 2022 01:15:00')
           }]);
