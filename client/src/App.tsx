@@ -20,7 +20,9 @@ interface Props {}
 const App: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const getUser = async () => {
-    const user = await axios.get('http://localhost:5000/auth/login/success');
+    const user = await axios.get(
+      `${process.env.CLIENT_URL}:${process.env.PORT}/auth/login/success`
+    );
     dispatch(setUser(user.data.user));
   };
   useEffect(() => {

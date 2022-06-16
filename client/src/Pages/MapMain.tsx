@@ -15,7 +15,7 @@ const MapMain: FC<Props> = () => {
 
   const getUserLocation = async () => {
     const options = {
-      url: 'http://localhost:5000/auth/login/success',
+      url: `${process.env.CLIENT_URL}:${process.env.PORT}/auth/login/success`,
       method: 'GET',
       withCredentials: true,
       headers: {

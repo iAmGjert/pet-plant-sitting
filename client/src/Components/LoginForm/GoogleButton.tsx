@@ -7,7 +7,7 @@ const GoogleButton = () => {
       <Button
         variant='primary'
         size='lg'
-        href='http://localhost:5000/auth/google'
+        href={`${process.env.CLIENT_URL}:${process.env.PORT}/auth/google`}
       >
         Login with Google
       </Button>
