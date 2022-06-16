@@ -26,7 +26,6 @@ const TopNavBar = () => {
                   Create Job
                 </NavDropdown.Item>
                 <NavDropdown.Item href='/events'>Community</NavDropdown.Item>
-                <NavDropdown.Item href='/community'>Community</NavDropdown.Item>
                 <NavDropdown.Item href='/calendar'>Calendar</NavDropdown.Item>
                 <NavDropdown.Item href={`/profile/${user?.id}`}>
                   Profile
