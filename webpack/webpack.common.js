@@ -37,10 +37,13 @@ module.exports = {
     filename: 'bundle.js',
   },
   plugins: [
-    new HtmlWebpackPlugin({template: './client/src/index.html'}),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '..', './client/src/index.html'),
+      inject: false,
+    }),
     new dotenvWebpackPlugin({
       path: './.env', // Path to .env file (this is the default)
       safe: true, // load .env.example (defaults to "false" which does not use dotenv-safe)
-    })
-  ]
+    }),
+  ],
 };
