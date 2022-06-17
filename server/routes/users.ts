@@ -1,16 +1,26 @@
 import express, { Request, Response } from 'express';
 const users = express();
 
-import { PetPlant, User } from '../../database/index';
+import { PetPlant, User, Rating } from '../../database/index';
 
 interface userInfo {
+  id: number;
   name: string;
+  image: string;
   location: string;
+  sitter_rating: number;
+  total_sitter_ratings: number;
+  bio: string;
+  average_rating: number;
+  total_ratings: number;
+  gallery_id: number;
 }
 
 users.get('/all', async (req: Request, res: Response) => {
   try {
-    const users = await User.findAll({ include: PetPlant });
+    const users = await User.findAll({
+      include: [{ model: PetPlant, include: Rating }, { model: Rating }],
+    });
     return res.status(200).send(users);
   } catch {
     return res.sendStatus(418);
@@ -39,7 +49,7 @@ users.post('/create', async (req: Request, res: Response) => {
     total_ratings,
   } = req.body;
   try {
-    const user = await User.create({
+    const user = await User.create(<userInfo>{
       name,
       image,
       location,

@@ -8,7 +8,7 @@ const CLIENT_URL: string | undefined =
     ? `${process.env.CLIENT_URL}:${process.env.PORT}`
     : process.env.CLIENT_URL;
 
-auth.get('/login/success', (req: Request | any, res: any) => {
+auth.get('/login/success', (req: Request | any, res: Response) => {
   if (req.user) {
     User.findOne({
       where: {
@@ -48,9 +48,9 @@ auth.get(
   })
 );
 
-auth.get('/logout', (req: any, res: any) => {
+auth.get('/logout', (req: Request, res: Response) => {
   req.logOut(() => {
-    res.redirect(CLIENT_URL);
+    res.redirect('/');
   });
 });
 

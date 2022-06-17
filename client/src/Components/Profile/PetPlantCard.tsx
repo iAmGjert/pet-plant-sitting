@@ -12,13 +12,16 @@ export interface PetPlant {
   tags: string[];
   species: string;
   total_ratings: number;
+  age: number;
+  gender: string;
 }
 
 type Props = {
   PetPlant: PetPlant;
+  getStars: (num: number) => string;
 };
 
-const PetPlantCard = ({ PetPlant }: Props) => {
+const PetPlantCard = ({ PetPlant, getStars }: Props) => {
   const [showDetails, setShowDetails] = useState(false);
   const scrollRef = useRef();
   //make function to get the proper stars for rating
@@ -50,8 +53,16 @@ const PetPlantCard = ({ PetPlant }: Props) => {
             </Card.Text>
           </Card.Body>
           <ListGroup className='list-group-flush'>
-            <ListGroupItem>Add Age to Pet Plants</ListGroupItem>
-            <ListGroupItem>Rating: ⭐⭐⭐⭐⭐({PetPlant.rating})</ListGroupItem>
+            <ListGroupItem>
+              {getStars(PetPlant.rating)}({PetPlant.total_ratings})
+            </ListGroupItem>
+            {PetPlant.gender && (
+              <ListGroupItem>
+                {PetPlant.gender === 'Male'
+                  ? `He is ${PetPlant.age} years old`
+                  : `She is ${PetPlant.age} years old`}
+              </ListGroupItem>
+            )}
             {PetPlant.breed && <ListGroupItem>{PetPlant.breed}</ListGroupItem>}
           </ListGroup>
           <Card.Body>

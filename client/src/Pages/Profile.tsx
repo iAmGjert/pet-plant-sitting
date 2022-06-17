@@ -22,15 +22,37 @@ interface Profile {
 
 const Profile = () => {
   const [editable, setEditable] = useState(false);
+  const [readMore, setReadMore] = useState(false);
   const [completeProfile, setCompleteProfile] = useState(0);
   const [profileUser, setProfileUser] = useState<Profile | null>(null);
   const { id } = useParams();
   // get a user based on the id in the url
   // offscreen modal for editing profile
+  // Change tabs to Nav with style tab https://stackoverflow.com/questions/36342220/tabs-in-react-bootstrap-navbar
+  // Nav will be sticky top and will scroll with the page
   const getProfile = async () => {
     const user = await axios.get('/api/users/' + id);
     setProfileUser(user.data);
     console.log(user);
+  };
+
+  const formatBio = (bio: string) => {
+    if (bio?.length > 100) {
+      return bio.substring(0, 200) + '...';
+    } else {
+      return bio;
+    }
+  };
+
+  const getStars = (rating: number) => {
+    let stars = '';
+    for (let i = 0; i < rating; i++) {
+      stars += '⭐';
+    }
+    while (stars.length < 5) {
+      stars += '☆';
+    }
+    return stars;
   };
 
   const currUser = useAppSelector((state) => state.userProfile.value);
@@ -56,7 +78,10 @@ const Profile = () => {
               {console.log(currUser)}
             </h1>
             <h5>{profileUser?.location}</h5>
-            <h5>{'Rating: ' + profileUser?.average_rating}</h5>
+            <h5>
+              {getStars(profileUser?.average_rating)}(
+              {profileUser?.total_ratings})
+            </h5>
             <h5>Member Since: {format(profileUser?.createdAt)}</h5>
             <h3>
               <Badge pill bg='success'>
@@ -66,22 +91,52 @@ const Profile = () => {
             <br />
             {editable && <button>Edit</button>}
             <Tabs
-              defaultActiveKey='profile'
+              defaultActiveKey='overview'
               id='uncontrolled-tab-example'
-              className='mb-3'
+              className='mb-3 '
               fill
               justify
+              onSelect={() => {
+                if (readMore) {
+                  setReadMore(!readMore);
+                }
+              }}
             >
               {/* when we click tab scroll to that section of the site */}
-              <Tab eventKey='home' title='Overview'>
-                words
+              <Tab
+                eventKey='overview'
+                title='Overview'
+                style={{ textAlign: 'left' }}
+              >
+                {!readMore ? (
+                  <>
+                    {formatBio(profileUser?.bio)}
+                    <br />
+                    <button
+                      className='button-as-link my-2'
+                      onClick={() => {
+                        setReadMore(!readMore);
+                      }}
+                    >
+                      (Read More)
+                    </button>
+                  </>
+                ) : (
+                  <>{profileUser?.bio}</>
+                )}
               </Tab>
               <Tab eventKey='profile' title='Reviews'>
                 words
               </Tab>
               <Tab eventKey='pets' title='Pets'>
                 {profileUser?.pet_plants.map((pet) => {
-                  return <PetPlantCard PetPlant={pet} key={pet.id} />;
+                  return (
+                    <PetPlantCard
+                      PetPlant={pet}
+                      key={pet.id}
+                      getStars={getStars}
+                    />
+                  );
                 })}
               </Tab>
               <Tab eventKey='contact' title='Contact' disabled>
