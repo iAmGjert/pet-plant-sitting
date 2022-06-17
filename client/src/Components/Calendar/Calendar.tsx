@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 // import PropTypes from 'prop-types';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
-// import Calendar = require('react-calendar-mobile');
 import Button from 'react-bootstrap/Button';
+import CalendarMobile from './CalendarMobile';
+
 
 
 import { useSelector } from 'react-redux';
@@ -16,17 +17,30 @@ const CalendarApp = () =>{
   const state = useSelector((state) => state);
   console.log(state);
   const [value, onChange] = useState(new Date());
+  const [revealMobileView, setRevealMobileView] = useState(false);
+  //const [revealCalendarView, setRevealCalendarView] = useState(true);
+
+
+  const revealMobile = () => {
+    setRevealMobileView(!revealMobileView);
+  };
+
+  useEffect(() => {
+    console.log('changed');
+    setRevealMobileView(true);
+  }, [revealMobileView]);
   
   return (
     <div>
-      <Link to="/mobileView">
-        <Button variant="primary">Mobile View</Button>{' '}
-      </Link>
+      <Button variant="primary" onClick={() => setRevealMobileView(true)}>Standard Calendar</Button>{' '}
+      <Button variant="primary" onClick={() => 
+        revealMobile()}>Mobile View</Button>{' '}
+
       <Calendar onChange={onChange} 
         value={value}
       />
       {value.toString()}
-  
+      
     </div> 
 
   );
