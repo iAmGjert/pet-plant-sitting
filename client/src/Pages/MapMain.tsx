@@ -20,8 +20,10 @@ const MapMain: FC<Props> = () => {
   // const dispatch = useAppDispatch();
 
   // const [user, setUser] = useState(null);
-  const [lng, setLng] = useState(null);
-  const [lat, setLat] = useState(null);
+  const [userLng, setUserLng] = useState(null);
+  const [userLat, setUserLat] = useState(null);
+  const [jobLng, setJobLng] = useState(null);
+  const [jobLat, setJobLat] = useState(null);
 
 
   // const getUserInfo = () => {
@@ -38,12 +40,12 @@ const MapMain: FC<Props> = () => {
   // };
   
 
-  const geoCode = () => {
+  const geoCodeUser = () => {
     axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${user?.location}.json?access_token=${TOKEN}`)
       .then((results) => {
         console.log(results, 'HERE');
-        setLng(results.data.features[0].center[0]);
-        setLat(results.data.features[0].center[1]);
+        setUserLng(results.data.features[0].center[0]);
+        setUserLat(results.data.features[0].center[1]);
         // setInitUser(user);
         // dispatch(mapActions.getUserLocationGeoLng(results.data.features[0].center[0]));
         // dispatch(mapActions.getUserLocationGeoLat(results.data.features[0].center[1]));
@@ -53,7 +55,7 @@ const MapMain: FC<Props> = () => {
   useEffect(() => {
     console.log('render1');
     if (user && user.location) {
-      geoCode();
+      geoCodeUser();
     }
   }, [user]);
 
@@ -63,7 +65,9 @@ const MapMain: FC<Props> = () => {
   return (
     <div>
       {
-        user && user.location && lng ? <MapComponent user={user} lng={lng} lat={lat} /> : 'Loading...'
+        user && user.location && userLng
+          ? <MapComponent user={user} userLng={userLng} userLat={userLat} jobLng={jobLng} jobLat={jobLat} />
+          : 'Loading...'
       }
     </div>
   );
