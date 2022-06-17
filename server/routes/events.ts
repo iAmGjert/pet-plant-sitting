@@ -1,5 +1,3 @@
-
-
 import express, { Request, Response } from 'express';
 const events = express();
 
@@ -8,16 +6,28 @@ const { User } = require('../../database/index');
 const { EventComment } = require('../../database/index');
 const { EventParticipant } = require('../../database/index');
 
-
 interface UserInfo {
-    id: number;
+  id: number;
 }
 
 interface EventInfo {
-    name: string;
-    location: string;
-    description: string;
-  }
+  name: string;
+  location: string;
+  description: string;
+}
+
+interface EventCommentInfo {
+  id: number;
+  event_id: number;
+  comment: string;
+  user_id: number;
+}
+interface EventParticipantInfo {
+  id: number;
+  event_id: number;
+  user_id: number;
+}
+
 //* POST Routes *//
 
 events.post('/create', (req: Request, res: Response) => {
@@ -27,9 +37,9 @@ events.post('/create', (req: Request, res: Response) => {
       return user?.dataValues.id;
     })
     .then((userId: number) => {
-      const { name, location, description /*participants */} = req.body;
+      const { name, location, description /*participants */ } = req.body;
       console.log(userId, 'data');
-      Events.create({ name, host: userId, location, description/*, participants*/ })
+      Events.create({ name, host: userId, location, description /*, participants*/ })
         .then((event: Record<string, EventInfo> | null) => {
           res.status(201).send(event?.dataValues);
         })
@@ -40,38 +50,85 @@ events.post('/create', (req: Request, res: Response) => {
     });
 });
 
-
 //* GET Routes *//
 
 events.get('/all', async (req: Request, res: Response) => {
-  const events = await Events.findAll();
-  return res.json(events);
+  try {
+    const events = await Events.findAll({
+      include: [{ model: EventComment,
+        include: [{
+          model: User,
+          attributes: ['name', 'image'],
+        }],
+      },
+      { model: EventParticipant,
+        include: [{
+          model: User,
+          attributes: ['name', 'image'],
+        }],
+      },
+      { model: User,
+        attributes: ['name', 'image'],
+      }],
+    });
+    return res.status(200).send(events);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
 });
+//     });
+//     console.log('hello');
+//     return res.status(200).send(events);
+
+//   } catch {
+//     return res.sendStatus(418);
+//   }
+// });
 
 events.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const event = await Events.findByPk(id);
   return res.json(event);
 });
-// //get all event comments
-// events.get('/comments/all', (req: Request, res: Response) => {
-// )
+
+//get all event comments
+events.get('/comments/all', (req: Request, res: Response) => {
+  EventComment.findAll()
+    .then((comments: Record<string, EventCommentInfo> | null) => {
+      res.status(200).send(comments);
+    })
+    .catch((err: Error) => {
+      res.status(500).send(err);
+    });
+});
+
+events.get('/participants/all', (req: Request, res: Response) => {
+  EventParticipant.findAll()
+    .then((participants: Record<string, EventParticipantInfo> | null) => {
+      res.status(200).send(participants);
+    })
+    .catch((err: Error) => {
+      res.status(500).send(err);
+    });
+});
 
 //* UPDATE Routes *//
 
 events.put('/update/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, host, location, description, participants } = req.body;
-  const event = await Events.update({
-    name,
-    host,
-    location,
-    description,
-    participants,
-  },
-  {
-    where: { id },
-  });
+  const event = await Events.update(
+    {
+      name,
+      host,
+      location,
+      description,
+      participants,
+    },
+    {
+      where: { id },
+    }
+  );
   return res.json(event);
 });
 
@@ -84,8 +141,5 @@ events.delete('/delete/:id', async (req: Request, res: Response) => {
   });
   return res.json(event);
 });
-
-
-
 
 module.exports = events;
