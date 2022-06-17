@@ -21,7 +21,7 @@ const TopNavBar = () => {
                 {!user.name && (
                   <NavDropdown.Item href='/login'>Login</NavDropdown.Item>
                 )}
-                <NavDropdown.Item href='/createjob'>
+                <NavDropdown.Item href='/jobs'>
                   Create Job
                 </NavDropdown.Item>
                 <NavDropdown.Item href='/events'>Community</NavDropdown.Item>

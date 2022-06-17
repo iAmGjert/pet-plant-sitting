@@ -33,7 +33,6 @@ jobs.post('/create', async (req: Request, res: Response) => {
 jobs.get('/all', async (req: Request, res: Response) => {
   try {
     const jobs = await Job.findAll();
-    console.log('hello');
     return res.status(200).send(jobs);
 
   } catch {

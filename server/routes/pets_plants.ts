@@ -18,7 +18,6 @@ interface petPlantInfo {
 pets_plants.get('/all', async (req: Request, res: Response) => {
   try {
     const pets_plants = await PetPlant.findAll();
-    console.log('hello');
     return res.status(200).send(pets_plants);
 
   } catch {

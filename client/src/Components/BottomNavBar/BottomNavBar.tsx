@@ -14,7 +14,7 @@ const BottomNavBar = () => {
       >
         <Container>
           <Nav className='me-auto'>
-            <Nav.Link href='/createjob'>Create Job</Nav.Link>
+            <Nav.Link href='/jobs'>Create Job</Nav.Link>
             <Nav.Link href='/'>Home</Nav.Link>
             <Nav.Link href='/calendar'>Calendar</Nav.Link>
           </Nav>

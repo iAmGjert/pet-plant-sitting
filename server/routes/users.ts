@@ -21,7 +21,6 @@ users.get('/all', async (req: Request, res: Response) => {
     const users = await User.findAll({
       include: PetPlant
     });
-    console.log('hello');
     return res.status(200).send(users);
 
   } catch {
