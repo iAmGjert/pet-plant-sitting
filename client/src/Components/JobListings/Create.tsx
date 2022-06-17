@@ -20,7 +20,7 @@ const Create = () => {
           <Button onClick={()=>{ setSubmit(false); }}>Submit Form</Button> :
           <div>
             Are you sure?
-            <Button onClick={()=>{ handleClick(); }}>Yes</Button><Button onClick={ ()=>{ setSubmit(true); console.log('Form not submitted.'); } }>No</Button></div>
+            <Button variant='secondary' onClick={()=>{ handleClick(); }}>No</Button><Button  onClick={ ()=>{ setSubmit(true); console.log('Form not submitted.'); } }>Yes</Button></div>
 
       }
     </div>
