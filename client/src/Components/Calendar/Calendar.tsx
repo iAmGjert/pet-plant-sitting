@@ -7,33 +7,35 @@ import {BrowserRouter as Router, Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 //import CalendarMobile from './CalendarMobile';
 import axios from 'axios';
-import { useAppSelector } from '../../state/hooks';
+import { useAppSelector, useAppDispatch } from '../../state/hooks';
 
 import { useSelector } from 'react-redux';
+import { getEventListeners } from 'events';
 //import { bindActionCreators } from 'redux'; this is what we will import when we have our actions created
 
 const CalendarApp = () =>{
   //eventually, when set up your section in the store, you can return the key value pair necessary to your feature 
-  const state = useSelector((state) => state);
-  console.log(state);
   const [value, onChange] = useState(new Date());
   //const [selectedDate, setSelectedDate] = useState(null);
   const [date, setDate] = useState(new Date());
-  const user = useAppSelector(state => state.userProfile.value);
-  console.log(user);
+  const [job, setJobs] = useState([]);
   
-  //use useEffect to connect job listings and community events from backend to calendar
-  // useEffect(() => {
-  //   axios.get('localhost:5000/api/jobs/all')
-  //   })
-  //     .then((res) => {
-  //     console.log(res);
+  //redux hooks
+  const user = useAppSelector(state => state.userProfile.value);
+  const dispatch = useAppDispatch();
+  const state = useSelector((state) => state);
 
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
+  
+  //use useEffect to connect job listings and community events from backend to calendar   
+  useEffect(() => {
+    const getAllEvents = async() => {
+      const res = await axios.get('/api/jobs/all');
+      console.log(res, 'res on 40');
+      return dispatch(setJobs(res.data));
+    };
+    getAllEvents();
+  }, []);
+
 
   return (
     <div className='app'>
