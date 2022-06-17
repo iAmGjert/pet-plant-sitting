@@ -5,7 +5,9 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-import CalendarMobile from './CalendarMobile';
+//import CalendarMobile from './CalendarMobile';
+import axios from 'axios';
+
 
 
 
@@ -17,31 +19,41 @@ const CalendarApp = () =>{
   const state = useSelector((state) => state);
   console.log(state);
   const [value, onChange] = useState(new Date());
-  const [revealMobileView, setRevealMobileView] = useState(false);
-  //const [revealCalendarView, setRevealCalendarView] = useState(true);
-
-
-  const revealMobile = () => {
-    setRevealMobileView(!revealMobileView);
-  };
-
-  useEffect(() => {
-    console.log('changed');
-    setRevealMobileView(true);
-  }, [revealMobileView]);
+  //const [selectedDate, setSelectedDate] = useState(null);
+  const [date, setDate] = useState(new Date());
   
-  return (
-    <div>
-      <Button variant="primary" onClick={() => setRevealMobileView(true)}>Standard Calendar</Button>{' '}
-      <Button variant="primary" onClick={() => 
-        revealMobile()}>Mobile View</Button>{' '}
+  //use useEffect to connect job listings and community events from backend to calendar
+  // axios.get(() => {
 
-      <Calendar onChange={onChange} 
-        value={value}
-      />
-      {value.toString()}
-      
-    </div> 
+  // });
+
+  return (
+    <div className='app'>
+      <Button variant="primary">Standard Calendar</Button>{' '}
+      <Button variant="primary">Mobile View</Button>{' '}
+      <h1 className='text-center'>Upcoming Jobs and Events</h1>
+      <div className='calendar-container'>
+        <Calendar
+          onChange={setDate}
+          value={date}
+          selectRange={true}
+        />
+      </div>
+      {date.length > 0 ? (
+        <p className='text-center'>
+          <span className='bold'>Start:</span>{' '}
+          {date[0].toDateString()}
+          &nbsp;|&nbsp;
+          <span className='bold'>End:</span> {date[1].toDateString()}
+        </p>
+      ) : (
+        <p className='text-center'>
+          <span className='bold'>Default selected date:</span>{' '}
+          {date.toDateString()}
+        </p>
+      )}
+    </div>
+
 
   );
 };
@@ -49,4 +61,3 @@ const CalendarApp = () =>{
 CalendarApp.propTypes = {};
 
 export default CalendarApp;
-

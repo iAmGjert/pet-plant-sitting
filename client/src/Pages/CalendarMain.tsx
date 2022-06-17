@@ -6,7 +6,7 @@ export default function CalendarMain() {
   return (
     <div>
       <CalendarApp />
-      <CalendarMobile />
+      {/* <CalendarMobile /> */}
     </div>
   );
 }
