@@ -15,7 +15,7 @@ const Search = () => {
     <div>
       <h1>Search Jobs</h1>
       <form>
-        <input onChange={ (e)=>{ onChange(e); } } id='jobSearch' placeholder='Search jobs...'/>
+        <input value={searchTarget} onChange={ (e)=>{ onChange(e); } } id='jobSearch' placeholder='Search jobs...'/>
         <input type='button' value='Submit' onClick={ ()=>{ handleClick(); } } />
       </form>
       

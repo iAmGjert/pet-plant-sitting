@@ -21,13 +21,13 @@ const App: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const getUser = async () => {
     const user = await axios.get(
-      `${process.env.CLIENT_URL}:${process.env.PORT}/auth/login/success`
+      '/auth/login/success'
     );
     dispatch(setUser(user.data.user));
   };
   const getJobs = async () => {
     const jobs = await axios.get(
-      `${process.env.CLIENT_URL}:${process.env.PORT}/api/jobs/all`
+      '/api/jobs/all'
     );
     dispatch(setJobs(jobs.data));
   };
