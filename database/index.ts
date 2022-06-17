@@ -130,7 +130,7 @@ db.sync(
     if (process.env.CLIENT_URL === 'http://localhost') {
       User.bulkCreate([
         {
-          name: 'Lib Phin',
+          name: 'Braeden Ford',
           image: 'http://dummyimage.com/233x100.png/dddddd/000000',
           location: '2221 Judith St, Metairie, LA 70003',
           sitter_rating: 10,
@@ -140,7 +140,7 @@ db.sync(
           total_ratings: 95,
         },
         {
-          name: 'Beverley Ailward',
+          name: 'Royce Reed',
           image: 'http://dummyimage.com/138x100.png/dddddd/000000',
           location: '6838 Louisville St, New Orleans, LA 70124',
           sitter_rating: 8,
@@ -150,7 +150,7 @@ db.sync(
           total_ratings: 83,
         },
         {
-          name: 'Nevil Sutcliffe',
+          name: 'Eric Gjertsen',
           image: 'http://dummyimage.com/142x100.png/cc0000/ffffff',
           location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
           sitter_rating: 8,
@@ -160,7 +160,7 @@ db.sync(
           total_ratings: 18,
         },
         {
-          name: 'Bradley Wilkison',
+          name: 'Iben Oneal',
           image: 'http://dummyimage.com/249x100.png/5fa2dd/ffffff',
           location: '4609 Banks St, New Orleans, LA 70119',
           sitter_rating: 4,
@@ -170,7 +170,17 @@ db.sync(
           total_ratings: 93,
         },
         {
-          name: 'Ramonda Sheavills',
+          name: 'Raymond Jeong',
+          image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
+          location: '1213 Gaudet Dr, Marrero, LA 70072',
+          sitter_rating: 3,
+          total_sitter_ratings: 86,
+          bio: 'Major laceration of right vertebral artery, initial encounter',
+          rating: 4,
+          total_ratings: 70,
+        },
+        {
+          name: 'Sam Cabrera',
           image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Gaudet Dr, Marrero, LA 70072',
           sitter_rating: 3,
