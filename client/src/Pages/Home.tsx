@@ -10,7 +10,7 @@ const Home: FC<Props> = () => {
   const user = useAppSelector((state) => state.userProfile.value);
   const handleClick = () => {
     console.log(user);
-    dispatch(changeName(user.name));
+    dispatch(changeName('Caity'));
   };
   return (
     <div>
