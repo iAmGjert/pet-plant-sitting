@@ -2,3 +2,6 @@ html,
 body {
   min-height: 100%;
 }
+.testDiv {
+  border: solid 5px red;
+}

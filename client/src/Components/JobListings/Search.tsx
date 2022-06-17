@@ -1,10 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 // import PropTypes from 'prop-types';
 
 const Search = () => {
   
+  const handleClick = ()=>{
+    console.log(searchTarget);
+  };
+  const [searchTarget, setSearchTarget] = useState('');
+  const onChange = (e:any) => {
+    setSearchTarget(e.target.value);
+  };
+
   return (
-    <div>Search Jobs</div>
+    <div>
+      <h1>Search Jobs</h1>
+      <form>
+        <input onChange={ (e)=>{ onChange(e); } } id='jobSearch' placeholder='Search jobs...'/>
+        <input type='button' value='Submit' onClick={ ()=>{ handleClick(); } } />
+      </form>
+      
+    </div>
   );
 };
 

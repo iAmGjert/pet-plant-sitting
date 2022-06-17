@@ -7,7 +7,7 @@ const Create = () => {
   const dispatch = useAppDispatch();
   const [submit, setSubmit] = useState(true);
   const handleClick = () => {
-    console.log('Form submitted.');
+    //console.log('Form submitted.');
     dispatch(changeView('list'));
     return;
   };

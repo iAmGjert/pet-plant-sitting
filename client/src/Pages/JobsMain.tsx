@@ -7,9 +7,13 @@ import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { changeView, } from '../state/features/jobs/jobSlice';
 
 const JobsMain = () => {
+
   const dispatch = useAppDispatch();
+
   const view = useAppSelector((state)=>state.job.view);
+
   const jobs = useAppSelector((state)=>state.job.jobs);
+
   const handleClick = () => {
     if (view !== 'create') {
       dispatch(changeView('create'));
@@ -17,11 +21,10 @@ const JobsMain = () => {
     }
     dispatch(changeView('list'));
   };
-  const handleTest = ()=>{
-    console.log(jobs);
-  };
+
   return (
     <div className='welcome'>
+      <Search />
       <h1>
         {
           view === 'create' ?
@@ -33,7 +36,6 @@ const JobsMain = () => {
         }
       </h1>
       <Button onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : 'Create New Job'}</Button>
-      <button onClick={()=>{ handleTest(); }}>Test Button</button>
     </div>
   );
 };

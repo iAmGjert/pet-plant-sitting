@@ -24,10 +24,8 @@ export const jobsSlice = createSlice({
       //state.value = action.payload;
       return state;
     },
-    changeView: (state, action:PayloadAction<string>)=>{
-      const prevView = state.view;
+    changeView: (state, action:PayloadAction<string>)=>{;
       state.view = action.payload;
-      console.log(`View changed from ${prevView} to ${state.view}.`);
       return state;
     },
     setJobs: (state, action:PayloadAction<Array<jobStuff>>)=>{
