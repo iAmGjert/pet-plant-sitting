@@ -39,7 +39,8 @@ const CalendarApp = () =>{
 
   return (
     <div className='app'>
-      <Button variant="primary">Standard Calendar</Button>{' '}
+      <Button variant="primary">Plants</Button>{' '}
+      <Button variant="primary">Pets</Button>{' '}
       <Button variant="primary">Mobile View</Button>{' '}
       <h1 className='text-center'>Upcoming Jobs and Events</h1>
       <div className='calendar-container'>
