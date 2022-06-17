@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //import type { RootState } from '../../store';
 
 const initialState = {
-  value: { name: '', id: 0 },
+  value: { name: '', id: 0, location: '' },
 };
 
 export const userProfileSlice = createSlice({

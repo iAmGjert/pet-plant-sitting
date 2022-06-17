@@ -24,6 +24,7 @@ const App: FC<Props> = () => {
       `${process.env.CLIENT_URL}:${process.env.PORT}/auth/login/success`
     );
     dispatch(setUser(user.data.user));
+    // console.log(user, 'LOGIN USER/userProfile state is set');
   };
   useEffect(() => {
     getUser();
