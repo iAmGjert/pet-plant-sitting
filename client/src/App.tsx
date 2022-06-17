@@ -10,9 +10,9 @@ import './App.css';
 import Profile from './Pages/Profile';
 import axios from 'axios';
 import { setUser } from './state/features/userProfile/userProfileSlice';
+import { setJobs } from './state/features/jobs/jobSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import JobsMain from './Pages/JobsMain';
-import JobCreation from './Pages/JobCreation';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
@@ -25,8 +25,15 @@ const App: FC<Props> = () => {
     );
     dispatch(setUser(user.data.user));
   };
+  const getJobs = async () => {
+    const jobs = await axios.get(
+      `${process.env.CLIENT_URL}:${process.env.PORT}/api/jobs/all`
+    );
+    dispatch(setJobs(jobs.data));
+  };
   useEffect(() => {
     getUser();
+    getJobs();
   }, []);
 
   return (
@@ -39,7 +46,6 @@ const App: FC<Props> = () => {
         <Route path='/events' element={<CommunityEvents />} />
         <Route path='/calendar' element={<CalendarMain />} />
         <Route path='/jobs' element={<JobsMain />} />
-        <Route path='/createjob' element={<JobCreation />} />
       </Routes>
     </BrowserRouter>
   );
