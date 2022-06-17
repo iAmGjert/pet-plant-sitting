@@ -1,74 +1,85 @@
-
-
-
 import React, { /*FC,*/ useEffect, useState } from 'react';
-// import { useAppSelector, useAppDispatch } from '../state/hooks';
-// import { addEvent } from '../state/features/communityEvents/communityEventsSlice';
-// import Event from '../Components/CommunityEvents/Event';
 import axios from 'axios';
-// import { type } from 'os';
-type Event = {
-  host: number | string;
-}
-type User = {
+import { useAppSelector, useAppDispatch } from '../state/hooks';
+
+import { getEvents, getView, setView, setEvents } from '../state/features/events/eventsSlice';
+import Event from '../Components/CommunityEvents/Event';
+
+interface EventTYPE {
   id: number;
   name: string;
+  host: number;
+  location: string;
+  description: string;
+  event_comments: /*string[];*/ Array<{ 
+    id: number; 
+    comment: string; 
+    user: {
+      name: string;
+      image: string;
+    }}>;
+    event_participants: Array<{ 
+    id: number; 
+    user: {
+      name: string;
+      image: string;
+    }}>;
+  startDate: Date;
+  endDate: Date;
+  startTime: Date;
+  user: {
+    name: string;
+    image: string;
+  }
 }
 
-// interface EventsProps {
-//   // children?: React.ReactNode;
-// }
-
 const CommunityEventsMain = () => {
-  const [events, setEvents] = useState([]);
-  const [users, setUsers] = useState([]);  
+  const dispatch = useAppDispatch();
+  const view = useAppSelector(state => state.events.view);
+  const events = useAppSelector(state => state.events.events);
 
-  const getEvents = () => {
-    axios.get('/api/events/all')
-      .then(res => {
-        console.log(res.data);
-        setEvents(res.data);
-      })
-      .catch(err => console.log(err));
-  };
 
-  const getUsers = () => {
-    axios.get('/api/users/all')
-      .then(res => {
-        console.log(res.data);
-        setUsers(res.data);
-      })
-      .catch(err => console.log(err));  
-  };
-   
-  const handleClick = () => {
+  console.log(events);
+  useEffect(() => {
+    const getEvents = async () => {
+      const res = await axios.get('/api/events/all');
+      return dispatch(setEvents(res.data)); // set events to state
+    };
     getEvents();
-    getUsers();
-  };
+  }, [dispatch]);
+
+   
+  // const handleClick = () => {
+  //   if (view !== 'create') {
+  //     dispatch(setView('create'));
+  //     return;
+  //   }
+  //   dispatch(setView('list'));
+  // };
   
   return (
     <div>
       <h1>Community Events</h1>
-      <button onClick={() => handleClick()}>
-      Load Events
-      </button>
-      {
-        events.map((event) =>{
-          return (
-            <div key={event.id}>
-              <h3>Event Name: {event.name}</h3>
-              <h4>Host: 
-                {users.map((user) => user.id === event.host ? ` ${user.name}` : ' unknown')}
-              </h4>
-              <p>Location: {event.location}</p>
-              <p>Description: {event.description}</p>
-              <p>Date: {event.date}</p>
-              <p>Time: {event.time}</p>
-              
-            </div>
-          );
-        })
-      }
+      {/* <button onClick={() => getEvents()}>
+      Log Events
+      </button> */}
+      { view === 'list' && Array.isArray(events) ? events.map((event: EventTYPE) => (
+        <Event key={event.id} 
+          name={event.name}
+          host={event.host}
+          location={event.location}
+          description={event.description}
+          comments={event.event_comments}
+          participants={event.event_participants}
+          startDate={event.startDate}
+          endDate={event.endDate}
+          startTime={event.startTime}
+          user={event.user}
+        />
+      )) : <div> </div> }
+       
+      
+      
       
     </div>
   );
