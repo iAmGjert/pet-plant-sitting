@@ -1,4 +1,5 @@
-const { DataTypes } = require('sequelize');
+const DataTypes = require('sequelize').DataTypes;
+
 
 export const UserModel = {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
@@ -12,3 +13,4 @@ export const UserModel = {
   total_ratings: DataTypes.INTEGER,
   gallery_id: DataTypes.INTEGER,
 };
+

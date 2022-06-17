@@ -1,3 +1,4 @@
+import { GalleryEntryModel } from './models/GalleryEntryModel';
 import { UserModel } from './models/UserModel';
 import { PetPlantModel } from './models/PetPlantModel';
 import { JobModel } from './models/JobModel';
@@ -13,6 +14,7 @@ import { MessageModel } from './models/MessageModel';
 
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
+
 
 const { DB_DATABASE, DB_DIALECT, DB_HOST, DB_PASSWORD, DB_USERNAME } = process.env;
 const db = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
@@ -33,7 +35,7 @@ const JobApplicant = db.define('job_applicant', JobApplicantModel);
 const EventParticipant = db.define('event_participant', EventParticipantModel);
 const EventComment = db.define('event_comment', EventCommentModel);
 const Message = db.define('message', MessageModel);
-const GalleryEntry = db.define('gallery_entry', );
+const GalleryEntry = db.define('gallery_entry', GalleryEntryModel);
 
 /************************************************/
 
@@ -137,7 +139,6 @@ db.sync(
           rating: 6,
           total_ratings: 95,
         },
-
         {
           name: 'Beverley Ailward',
           image: 'http://dummyimage.com/138x100.png/dddddd/000000',
@@ -280,7 +281,7 @@ db.sync(
           Events.bulkCreate([
             {
               id: 1,
-              name: 'elit proin interdum mauris',
+              name: 'Dog Park Meetup',
               host: 1,
               location: '810 Euterpe St New Orleans, Louisiana, 70130',
               description: 'maecenas ut massa quis augue luctus tincidunt nulla mollis',
@@ -289,7 +290,7 @@ db.sync(
             },
             {
               id: 2,
-              name: 'amet lobortis sapien sapien non',
+              name: 'Annual Animal Rescue Drive',
               host: 2,
               location: '8639 Plum St New Orleans, Louisiana, 70118',
               description: 'ante ipsum primis in faucibus',
@@ -298,7 +299,7 @@ db.sync(
             },
             {
               id: 3,
-              name: 'maecenas pulvinar lobortis',
+              name: 'Barkus Parade',
               host: 3,
               location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
               description: 'non ligula pellentesque ultrices phasellus id sapien in sapien iaculis',
@@ -307,7 +308,7 @@ db.sync(
             },
             {
               id: 4,
-              name: 'ante ipsum primis',
+              name: 'Post Disaster Food Drive for our Furry Friends',
               host: 4,
               location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
               description: 'integer ac leo pellentesque ultrices',
