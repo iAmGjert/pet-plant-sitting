@@ -180,7 +180,7 @@ db.sync(
           total_ratings: 70,
         },
         {
-          name: 'Sam Cabrera',
+          name: 'velouriagreen',
           image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Gaudet Dr, Marrero, LA 70072',
           sitter_rating: 3,
