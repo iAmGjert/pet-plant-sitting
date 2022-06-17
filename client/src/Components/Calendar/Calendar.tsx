@@ -7,9 +7,7 @@ import {BrowserRouter as Router, Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 //import CalendarMobile from './CalendarMobile';
 import axios from 'axios';
-
-
-
+import { useAppSelector } from '../../state/hooks';
 
 import { useSelector } from 'react-redux';
 //import { bindActionCreators } from 'redux'; this is what we will import when we have our actions created
@@ -21,10 +19,22 @@ const CalendarApp = () =>{
   const [value, onChange] = useState(new Date());
   //const [selectedDate, setSelectedDate] = useState(null);
   const [date, setDate] = useState(new Date());
+  const user = useAppSelector(state => state.userProfile.value);
+  console.log(user);
   
   //use useEffect to connect job listings and community events from backend to calendar
-  // axios.get(() => {
+  // useEffect(() => {
+  //   axios.get('localhost:5000/api/jobs/all', {
+  //     params: {
 
+  //     }
+  //   })
+  //   .then(() => {
+      
+  //   })
+  //   .catch(() => {
+
+  //   });
   // });
 
   return (
