@@ -2,7 +2,7 @@ import React from 'react';
 import Create from '../Components/JobListings/Create';
 import List from '../Components/JobListings/List';
 import Search from '../Components/JobListings/Search';
-import { Button } from 'react-bootstrap';
+import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { changeView, } from '../state/features/jobs/jobSlice';
 
@@ -23,20 +23,17 @@ const JobsMain = () => {
   };
 
   return (
-    <div className='welcome'>
+    <Container fluid>
       <Search />
-      <h1>
-        {
-          view === 'create' ?
-            <Create /> :
-            view === 'search' ?
-              <Search /> :
-              <List />
-            
-        }
-      </h1>
+      {
+        view === 'create' ?
+          <Create /> :
+          view === 'job' ?
+            <Search /> :
+            <List />
+      }
       <Button onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : 'Create New Job'}</Button>
-    </div>
+    </Container>
   );
 };
 

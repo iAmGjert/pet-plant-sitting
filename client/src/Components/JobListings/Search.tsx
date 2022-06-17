@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 
 const Search = () => {
@@ -13,12 +14,24 @@ const Search = () => {
 
   return (
     <div>
-      <h1>Search Jobs</h1>
-      <form>
-        <input value={searchTarget} onChange={ (e)=>{ onChange(e); } } id='jobSearch' placeholder='Search jobs...'/>
-        <input type='button' value='Submit' onClick={ ()=>{ handleClick(); } } />
-      </form>
-      
+      <div> </div>
+      <Container>
+        <Form>
+          <Row>
+            <Col>
+              <Form.Group controlId='formSearch'>
+                <Form.Control type='search' placeholder='Search Jobs...' onChange={ (e)=>{ onChange(e); }}/>
+                <Form.Text className='text-muted'>
+          Filter your job search by keywords!
+                </Form.Text>
+              </Form.Group>
+            </Col>
+            <Col xs lg={2}>
+              <Button onClick={ ()=>{ handleClick(); } } type='button'>Submit</Button>
+            </Col>
+          </Row>
+        </Form>
+      </Container>  
     </div>
   );
 };
