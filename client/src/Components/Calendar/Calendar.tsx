@@ -24,18 +24,16 @@ const CalendarApp = () =>{
   
   //use useEffect to connect job listings and community events from backend to calendar
   // useEffect(() => {
-  //   axios.get('localhost:5000/api/jobs/all', {
-  //     params: {
-
-  //     }
+  //   axios.get('localhost:5000/api/jobs/all')
   //   })
-  //   .then(() => {
-      
-  //   })
-  //   .catch(() => {
+  //     .then((res) => {
+  //     console.log(res);
 
-  //   });
-  // });
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
   return (
     <div className='app'>
