@@ -6,6 +6,7 @@ import { Provider } from 'react-redux';
 import TopNavBar from './Components/TopNavBar/TopNavBar';
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
 import './App.css';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

@@ -11,12 +11,17 @@ interface jobStuff {
   pet_plant: Array<number>
 }
 const Job = ({ job }) => {
+  const [users, setUsers] = useState(useAppSelector((state)=>state.userProfile.users));
+  const [petPlants, setPetPlants] = useState(useAppSelector((state)=>state.petPlant.petPlants));
   const {id, location, pet_plant, employer_id, sitter_id, startDate, endDate}: jobStuff = job;
-  const users = useAppSelector((state)=>state.userProfile.users);
-  const petPlants = useAppSelector((state)=>state.petPlant.petPlants);
   const handleClick = ()=>{
     console.log(`Clicked more info for job#${id}`);
-  }
+  };
+  const [load, setLoad] = useState(false);
+  useEffect(()=>{
+    
+    setLoad(true);
+  }, []);
   return (
     <Container>
       <Card>

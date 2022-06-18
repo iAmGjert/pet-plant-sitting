@@ -26,6 +26,7 @@ const App: FC<Props> = () => {
       '/auth/login/success'
     );
     dispatch(setUser(user.data.user));
+    // console.log(user, 'LOGIN USER/userProfile state is set');
   };
   const getJobs = async () => {
     const jobs = await axios.get(
