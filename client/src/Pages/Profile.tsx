@@ -107,8 +107,10 @@ const Profile = () => {
         <Col>
           <span>
             <h1 style={{ fontSize: '30px', paddingTop: '10px' }}>
-              {profileUser?.name}
-              {console.log(currUser)}
+              <>
+                {profileUser?.name}
+                {console.log(currUser)}
+              </>
             </h1>
             <h5>{profileUser?.location}</h5>
             <h5>
@@ -134,8 +136,8 @@ const Profile = () => {
               defaultActiveKey='overview'
               id='uncontrolled-tab-example'
               className='mb-3 '
-              fill
-              justify
+              fill={true}
+              justify={true}
               onSelect={() => {
                 if (readMore) {
                   setReadMore(!readMore);
@@ -183,6 +185,7 @@ const Profile = () => {
                       PetPlant={pet}
                       key={pet.id}
                       getStars={getStars}
+                      edit={null}
                     />
                   );
                 })}

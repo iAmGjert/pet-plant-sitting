@@ -1,6 +1,5 @@
 import React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
 import EditField from './EditField';
 import { PetPlant } from './PetPlantCard';
 
@@ -11,7 +10,6 @@ type Props = {
 };
 
 const EditPetModal = ({ PetPlant, showModal, setShowModal }: Props) => {
-  const navigate = useNavigate();
   const petPlantFields = [];
   for (const field in PetPlant) {
     if (
@@ -39,7 +37,7 @@ const EditPetModal = ({ PetPlant, showModal, setShowModal }: Props) => {
       fullscreen={true}
       show={showModal}
       onHide={() => handleOnHide()}
-      onClick={(e) => {
+      onClick={(e: Event) => {
         e.stopPropagation();
       }}
     >
@@ -56,6 +54,7 @@ const EditPetModal = ({ PetPlant, showModal, setShowModal }: Props) => {
                 fieldName={fieldName}
                 value={value}
                 Pet_Plant={PetPlant}
+                user={null}
               />
             );
           })}

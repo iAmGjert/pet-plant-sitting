@@ -55,6 +55,7 @@ const EditAccountModal = ({ user, showModal, setShowModal }: Props) => {
                 fieldName={fieldName}
                 value={value}
                 user={user}
+                Pet_Plant={null}
               />
             );
           })}

@@ -4,17 +4,18 @@ import { Form } from 'react-bootstrap';
 import PetPlantCard, { PetPlant } from './PetPlantCard';
 import { RatingInfo, Profile } from '../../Pages/Profile';
 import axios from 'axios';
+
 type Props = {
   user: Profile | null;
   Pet_Plant: PetPlant | null;
   fieldName: string;
-  value: string | number | boolean | PetPlant[] | RatingInfo[];
+  value: string | number | boolean | RatingInfo[] | string[] | PetPlant[];
 };
 
 const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
-  const [editible, setEditable] = useState(false);
-  const [editField, setEditField] = useState(
-    fieldName === 'pet_plants' ? '' : value
+  const [editable, setEditable] = useState(false);
+  const [editField, setEditField] = useState<string>(
+    fieldName === 'pet_plants' ? '' : String(value)
   );
   // const [fieldName, setFieldName] = useState(field);
   // console.log(typeof field);
@@ -28,20 +29,12 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
     e.preventDefault();
     setEditable(false);
     if (Pet_Plant) {
-      axios
-        .put(`/api/pets_plants/${Pet_Plant.id}`, {
-          ...Pet_Plant,
-          [fieldName]: editField,
-        })
-        .then((res) => {
-          // console.log(res);
-        });
+      axios.put(`/api/pets_plants/${Pet_Plant.id}`, {
+        ...Pet_Plant,
+        [fieldName]: editField,
+      });
     } else {
-      axios
-        .put(`/api/users/${user.id}`, { ...user, [fieldName]: editField })
-        .then((res) => {
-          // console.log(res);
-        });
+      axios.put(`/api/users/${user.id}`, { ...user, [fieldName]: editField });
     }
   };
 
@@ -51,14 +44,14 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
       {fieldName !== 'pet_plants' ? (
         <>
           <span>
-            {editible ? (
+            {editable ? (
               <input value={editField} onChange={(e) => handleChange(e)} />
             ) : (
               <p>{editField}</p>
             )}
-            {editible ? (
+            {editable ? (
               <button
-                onClick={(e) => {
+                onClick={(e: any) => {
                   handleSubmit(e);
                 }}
               >
@@ -69,7 +62,7 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
                 onClick={(e) => {
                   // console.log('what');
                   e.preventDefault();
-                  setEditable(!editible);
+                  setEditable(!editable);
                 }}
               >
                 Edit
