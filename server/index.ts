@@ -54,7 +54,7 @@ app.get('/*', function (req: Request, res: Response) {
 
 const port = process.env.PORT || 2000;
 app.listen(port, () => {
-  console.log('🚀 Server is listening at http://localhost:5000');
+  console.log(`🚀 Server is listening at http://localhost:${port}`);
 });
 
 db.authenticate()
