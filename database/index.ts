@@ -215,8 +215,8 @@ Gallery.hasMany(GalleryEntry, {
 db.sync(
   process.env.CLIENT_URL === 'http://localhost'
     ? {
-        force: true,
-      }
+      force: true,
+    }
     : { alter: true }
 ) //insert {alter: true}(alters tables if necessary) or {force: true}(drops all tables and recreates them every save) if you need to change the db structure
   .then(() => {

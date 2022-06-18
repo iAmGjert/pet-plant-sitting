@@ -36,7 +36,7 @@ export interface Profile {
   total_ratings: number;
   total_sitter_ratings: number;
   pet_plants: PetPlant[];
-  ratings: Rating[];
+  ratings: RatingInfo[];
 }
 
 const Profile = () => {

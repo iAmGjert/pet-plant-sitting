@@ -28,7 +28,7 @@ const PetPlantCard = ({ PetPlant, getStars }: Props) => {
   console.log(PetPlant);
 
   useEffect(() => {
-    scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, []);
 
   return (
@@ -36,7 +36,7 @@ const PetPlantCard = ({ PetPlant, getStars }: Props) => {
       onClick={() => {
         setShowDetails(!showDetails);
         console.log(scrollRef);
-        scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+        // scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
       }}
     >
       <Card.Img variant='top' src={PetPlant.image} />
