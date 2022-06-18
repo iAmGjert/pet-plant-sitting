@@ -1,4 +1,4 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import userProfileReducer from './features/userProfile/userProfileSlice';
 import infoReducer from './features/info/infoSlice';
 import jobsReducer from './features/jobs/jobSlice';
@@ -16,6 +16,9 @@ export const store = configureStore({
     map: mapReducer,
     calendar: calendarReducer
   },
+  // middleware: getDefaultMiddleware({
+  //   serializableCheck: false,
+  // })
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
