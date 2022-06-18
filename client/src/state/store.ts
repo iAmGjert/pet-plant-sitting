@@ -4,7 +4,7 @@ import infoReducer from './features/info/infoSlice';
 import jobsReducer from './features/jobs/jobSlice';
 import { mapReducer } from './features/map/mapSlice';
 import calendarReducer from './features/calendar/calendarSlice';
-import communityEventsReducer from './features/communityEvents/communityEventsSlice';
+import communityEventsReducer from './features/events/eventsSlice';
 
 
 export const store = configureStore({

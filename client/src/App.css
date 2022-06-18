@@ -23,3 +23,6 @@ body {
   object-fit: cover;
   margin-right: 10px;
 }
+.testDiv {
+  border: solid 5px red;
+}
