@@ -32,7 +32,25 @@ users.get('/:id', async (req: Request, res: Response) => {
     where: {
       id: req.params.id,
     },
-    include: PetPlant,
+    include: [
+      {
+        model: PetPlant,
+        include: [
+          {
+            model: Rating,
+            include: [
+              { model: User, attributes: ['name', 'image'], as: 'submitter' },
+            ],
+          },
+        ],
+      },
+      {
+        model: Rating,
+        include: [
+          { model: User, attributes: ['name', 'image'], as: 'submitter' },
+        ],
+      },
+    ],
   });
   return res.status(200).send(user);
 });

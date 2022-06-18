@@ -76,9 +76,11 @@ const Gallery = db.define('gallery', {
 
 const Rating = db.define('rating', {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
+  text: DataTypes.STRING,
   user_id: DataTypes.INTEGER,
   petplant_id: DataTypes.INTEGER,
   value: DataTypes.INTEGER,
+  submitter_id: DataTypes.INTEGER,
 });
 
 const PetPlantDescriptor = db.define('pet_plant_descriptor', {
@@ -149,6 +151,11 @@ User.hasMany(Rating, {
 
 PetPlant.hasMany(Rating, {
   foreignKey: 'petplant_id',
+});
+
+Rating.belongsTo(User, {
+  foreignKey: 'submitter_id',
+  as: 'submitter',
 });
 
 Conversation.belongsTo(User, {
@@ -381,26 +388,37 @@ db.sync(
             {
               user_id: 1,
               value: 5,
+              text: 'What a beautiful choclate man!',
+              submitter_id: 3,
             },
             {
               petplant_id: 1,
               value: 4,
+              submitter_id: 4,
             },
             {
-              subject_id: 1,
+              user_id: 1,
               value: 2,
+              text: 'My dogs said he was too cool 👎🏾',
+              submitter_id: 5,
             },
             {
-              subject_id: 4,
-              value: 2,
+              user_id: 4,
+              value: 4,
+              text: 'Wurd to my momma',
+              submitter_id: 4,
             },
             {
-              subject_id: 2,
+              petplant_id: 1,
               value: 5,
+              text: 'I love this dog',
+              submitter_id: 3,
             },
             {
-              subject_id: 1,
+              petplant_id: 1,
               value: 5,
+              text: 'Best Pupper',
+              submitter_id: 2,
             },
           ]);
         });

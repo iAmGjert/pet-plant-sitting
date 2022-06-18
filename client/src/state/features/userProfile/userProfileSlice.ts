@@ -6,7 +6,7 @@ const initialState = {
 };
 
 export const userProfileSlice = createSlice({
-  name: 'userProile',
+  name: 'userProfile',
   initialState,
   reducers: {
     changeName: (state, action: PayloadAction<string>) => {

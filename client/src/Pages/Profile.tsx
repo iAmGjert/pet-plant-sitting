@@ -5,7 +5,25 @@ import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { format } from 'timeago.js';
 import PetPlantCard, { PetPlant } from '../Components/Profile/PetPlantCard';
-interface Profile {
+import EditAccountModal from '../Components/Profile/EditAccountModal';
+import Rating from '../Components/Profile/Rating';
+
+export interface RatingInfo {
+  id: number;
+  text: string | null;
+  user_id: number | null;
+  petplant_id: number | null;
+  value: number;
+  submitter_id: number;
+  createdAt: string;
+  updatedAt: string;
+  submitter: {
+    name: string;
+    image: string;
+  };
+}
+
+export interface Profile {
   id: number;
   name: string;
   image: string;
@@ -18,13 +36,16 @@ interface Profile {
   total_ratings: number;
   total_sitter_ratings: number;
   pet_plants: PetPlant[];
+  ratings: Rating[];
 }
 
 const Profile = () => {
   const [editable, setEditable] = useState(false);
   const [readMore, setReadMore] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const [completeProfile, setCompleteProfile] = useState(0);
   const [profileUser, setProfileUser] = useState<Profile | null>(null);
+
   const { id } = useParams();
   // get a user based on the id in the url
   // offscreen modal for editing profile
@@ -33,7 +54,7 @@ const Profile = () => {
   const getProfile = async () => {
     const user = await axios.get('/api/users/' + id);
     setProfileUser(user.data);
-    console.log(user);
+    console.log(user.data);
   };
 
   const formatBio = (bio: string) => {
@@ -67,6 +88,11 @@ const Profile = () => {
   }, [currUser, id]);
   return (
     <Container>
+      <EditAccountModal
+        user={profileUser}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
       <Row className='d-flex justify-content-center text-center' xs={1} md={1}>
         <Col>
           <Image roundedCircle fluid thumbnail src={profileUser?.image} />
@@ -80,7 +106,7 @@ const Profile = () => {
             <h5>{profileUser?.location}</h5>
             <h5>
               {getStars(profileUser?.average_rating)}(
-              {profileUser?.total_ratings})
+              {profileUser?.ratings.length})
             </h5>
             <h5>Member Since: {format(profileUser?.createdAt)}</h5>
             <h3>
@@ -89,7 +115,15 @@ const Profile = () => {
               </Badge>
             </h3>
             <br />
-            {editable && <button>Edit</button>}
+            {editable && (
+              <button
+                onClick={() => {
+                  setShowModal(true);
+                }}
+              >
+                Edit
+              </button>
+            )}
             <Tabs
               defaultActiveKey='overview'
               id='uncontrolled-tab-example'
@@ -126,7 +160,15 @@ const Profile = () => {
                 )}
               </Tab>
               <Tab eventKey='profile' title='Reviews'>
-                words
+                {profileUser?.ratings.map((rating, i) => {
+                  return (
+                    <Rating
+                      rating={rating}
+                      key={'rating' + i}
+                      getStars={getStars}
+                    />
+                  );
+                })}
               </Tab>
               <Tab eventKey='pets' title='Pets'>
                 {profileUser?.pet_plants.map((pet) => {
