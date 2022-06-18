@@ -202,6 +202,7 @@ db.sync(
               rating: 9,
               total_ratings: 33,
               is_plant: false,
+              bio: 'I\'m very shy, but if you give me food I wil be your best friend',
             },
             {
               owner_id: 2,
@@ -213,6 +214,7 @@ db.sync(
               rating: 8,
               total_ratings: 96,
               is_plant: false,
+              bio: 'I am the world\'s worst demon child',
             },
             {
               owner_id: 3,
@@ -224,6 +226,7 @@ db.sync(
               rating: 5,
               total_ratings: 71,
               is_plant: true,
+              bio: 'Forget the water! I feed on eat human blood.'
             },
             {
               owner_id: 4,
@@ -235,6 +238,7 @@ db.sync(
               rating: 4,
               total_ratings: 92,
               is_plant: true,
+              bio: 'Thrives on neglect! Just like Sam',
             },
             {
               owner_id: 5,
@@ -246,6 +250,7 @@ db.sync(
               rating: 9,
               total_ratings: 60,
               is_plant: false,
+              bio: 'I used to belong to the streets. Now I sleep at my human\'s feet!',
             },
           ]);
         })
@@ -257,8 +262,7 @@ db.sync(
               employer_id: 1,
               sitter_id: 6,
               startDate: new Date('July 11, 2022 01:15:00'),
-              endDate: new Date('July 15, 2022 01:15:00'),
-              sitter_id: 6
+              endDate: new Date('July 15, 2022 01:15:00')
             },
             {
               location: '6838 Louisville St, New Orleans, LA 70124',
@@ -267,7 +271,6 @@ db.sync(
               sitter_id: 6,
               startDate: new Date('July 22, 2022 01:15:00'),
               endDate: new Date('July 27, 2022 01:15:00'),
-              sitter_id: 6
             },
             {
               location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
@@ -276,7 +279,6 @@ db.sync(
               sitter_id: 6,
               startDate: new Date('July 20, 2022 01:15:00'),
               endDate: new Date('July 25, 2022 01:15:00'),
-              sitter_id: 6
             },
             {
               location: '4609 Banks St, New Orleans, LA 70119',
@@ -285,7 +287,6 @@ db.sync(
               sitter_id: 6,
               startDate: new Date('July 21, 2022 01:15:00'),
               endDate: new Date('July 25, 2022 01:15:00'),
-              sitter_id: 6
             },
             {
               location: '1213 Gaudet Dr, Marrero, LA 70072',
@@ -294,7 +295,6 @@ db.sync(
               sitter_id: 6,
               startDate: new Date('July 1, 2022 01:15:00'),
               endDate: new Date('July 5, 2022 01:15:00'),
-              sitter_id: 6
             },
           ]);
         }).then(() => {

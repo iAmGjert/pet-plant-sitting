@@ -7,6 +7,7 @@ export const PetPlantModel = {
   image: DataTypes.STRING,
   breed: DataTypes.STRING,
   species: DataTypes.STRING,
+  bio: DataTypes.STRING,
   tags: DataTypes.ARRAY(DataTypes.STRING),
   rating: DataTypes.FLOAT,
   total_ratings: DataTypes.INTEGER,
