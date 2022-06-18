@@ -54,11 +54,11 @@ app.get('/*', function (req: Request, res: Response) {
 
 const port = process.env.PORT || 2000;
 app.listen(port, () => {
-  console.log(`🚀 Server is listening at http://localhost:${port}`);
+  console.log('🚀 Server is listening at http://localhost:5000');
 });
 
 db.authenticate()
-  .then(() => console.log('🥂 Connected to database'))
+  .then(() => console.log('✨ Connected to database'))
   .catch((err: string) => console.error(err));
 
 export {};
