@@ -5,6 +5,24 @@ body {
 body {
   padding-bottom: 60px;
 }
+.button-as-link {
+  background-color: transparent;
+  border: none;
+  color: #2e67d1;
+  cursor: pointer;
+  display: inline;
+  text-decoration: underline;
+  padding: 0;
+  margin: 0;
+}
+
+.reviewAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 10px;
+}
 .testDiv {
   border: solid 5px red;
 }

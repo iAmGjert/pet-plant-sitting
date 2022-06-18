@@ -15,8 +15,8 @@ import { MessageModel } from './models/MessageModel';
 const { Sequelize } = require('sequelize');
 require('dotenv').config();
 
-
-const { DB_DATABASE, DB_DIALECT, DB_HOST, DB_PASSWORD, DB_USERNAME } = process.env;
+const { DB_DATABASE, DB_DIALECT, DB_HOST, DB_PASSWORD, DB_USERNAME } =
+  process.env;
 const db = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
   host: DB_HOST,
   dialect: DB_DIALECT,
@@ -30,7 +30,10 @@ const Events = db.define('event', EventModel);
 const Conversation = db.define('conversation', ConversationModel);
 const Gallery = db.define('gallery', GalleryModel);
 const Rating = db.define('rating', RatingModel);
-const PetPlantDescriptor = db.define('pet_plant_descriptor', PetPlantDescriptorModel);
+const PetPlantDescriptor = db.define(
+  'pet_plant_descriptor',
+  PetPlantDescriptorModel
+);
 const JobApplicant = db.define('job_applicant', JobApplicantModel);
 const EventParticipant = db.define('event_participant', EventParticipantModel);
 const EventComment = db.define('event_comment', EventCommentModel);
@@ -59,12 +62,17 @@ JobApplicant.belongsTo(User, {
   foreignKey: 'user_id',
 });
 
-Rating.belongsTo(User, {
-  foreignKey: 'subject_id',
+User.hasMany(Rating, {
+  foreignKey: 'user_id',
 });
 
-Rating.belongsTo(PetPlant, {
-  foreignKey: 'subject_id',
+PetPlant.hasMany(Rating, {
+  foreignKey: 'petplant_id',
+});
+
+Rating.belongsTo(User, {
+  foreignKey: 'submitter_id',
+  as: 'submitter',
 });
 
 Conversation.belongsTo(User, {
@@ -123,12 +131,28 @@ Gallery.hasMany(GalleryEntry, {
 
 db.sync(
   process.env.CLIENT_URL === 'http://localhost'
-    ? {force: true}
-    : {alter: true}
+    ? { force: true }
+    : { alter: true }
 ) //insert {alter: true}(alters tables if necessary) or {force: true}(drops all tables and recreates them every save) if you need to change the db structure
   .then(() => {
     if (process.env.CLIENT_URL === 'http://localhost') {
       User.bulkCreate([
+        {
+          name: 'Iben Oneal',
+          image:
+            'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2021%2F09%2F04%2FBeyonce-1.jpg',
+          location: 'New Orleans, LA',
+          sitter_rating: 10,
+          total_sitter_ratings: 24,
+          bio: `I’ve had dogs for the past 27 years. I was my neighbors’ dog sitter off and on for 3 years. Her dog was very comfortable at my home. She had the run of the house. She was allowed on the sofa and in the bed. She got along with my lab so well that they slept together. I have a special place in my heart for strays. I ‘ve found 3 strays wandering around the school where I worked. I took all 3 home (not all at the same time) and each one lived a long life with me.
+
+          I’m a retired teacher of 33 years. My passion then was teaching, now I’d like to care for your baby . I have a very nice spacious home with lots of room to move around. I’m home all day except for when I run errands. Otherwise I will be with your loving pet to give it the attention and love that it needs and deserves.
+          
+          I have a nice fenced yard for your baby to enjoy. Potty breaks will be every hour or more if needed. I have my own dog who will help keep your baby company. As of October 26, 2021 My puppy Stella is 3 months old .I promise to give your dog all the love it deserves.`,
+          average_rating: 5,
+          total_ratings: 95,
+        },
+
         {
           name: 'Braeden Ford',
           image: 'http://dummyimage.com/233x100.png/dddddd/000000',
@@ -160,7 +184,7 @@ db.sync(
           total_ratings: 18,
         },
         {
-          name: 'Iben Oneal',
+          name: 'Caity',
           image: 'http://dummyimage.com/249x100.png/5fa2dd/ffffff',
           location: '4609 Banks St, New Orleans, LA 70119',
           sitter_rating: 4,
@@ -189,216 +213,262 @@ db.sync(
           rating: 4,
           total_ratings: 70,
         },
-      ])
-        .then(() => {
-          PetPlant.bulkCreate([
+      ]).then(() => {
+        PetPlant.bulkCreate([
+          {
+            owner_id: 1,
+            name: 'Loïc',
+            image:
+              'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
+            breed: 'Madagascar hawk owl',
+            age: 2,
+            gender: 'Male',
+            species: 'Ninox superciliaris',
+            tags: ['Khaki', 'Violet', 'Speed', 'Cute'],
+            rating: 4,
+            total_ratings: 33,
+            is_plant: false,
+          },
+          {
+            owner_id: 1,
+            name: 'Laïla',
+            image:
+              'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=1.00xw:0.669xh;0,0.190xh&resize=1200:*',
+            breed: 'Skink, blue-tongued',
+            species: 'Tiliqua scincoides',
+            age: 5,
+            gender: 'Female',
+            tags: ['Khaki', 'Goldenrod', 'Puppy', 'Cute'],
+            rating: 5,
+            total_ratings: 96,
+            is_plant: false,
+          },
+          {
+            owner_id: 3,
+            name: 'Angélique',
+            image: 'http://dummyimage.com/210x100.png/ff4444/ffffff',
+            breed: 'Small-clawed otter',
+            species: 'Aonyx cinerea',
+            tags: ['Crimson', 'Violet'],
+            rating: 5,
+            total_ratings: 71,
+            is_plant: true,
+          },
+          {
+            owner_id: 4,
+            name: 'Bénédicte',
+            image: 'http://dummyimage.com/135x100.png/5fa2dd/ffffff',
+            breed: 'Prairie falcon',
+            species: 'Falco mexicanus',
+            tags: ['Maroon', 'Khaki'],
+            rating: 4,
+            total_ratings: 92,
+            is_plant: true,
+          },
+          {
+            owner_id: 5,
+            name: 'Dù',
+            image: 'http://dummyimage.com/244x100.png/5fa2dd/ffffff',
+            breed: 'Long-tailed skua',
+            species: 'Stercorarius longicausus',
+            tags: ['Turquoise', 'Khaki'],
+            rating: 9,
+            total_ratings: 60,
+            is_plant: false,
+          },
+        ]).then(() => {
+          Rating.bulkCreate([
             {
-              owner_id: 1,
-              name: 'Loïc',
-              image: 'http://dummyimage.com/153x100.png/5fa2dd/ffffff',
-              breed: 'Madagascar hawk owl',
-              species: 'Ninox superciliaris',
-              tags: ['Khaki', 'Violet'],
-              rating: 9,
-              total_ratings: 33,
-              is_plant: false,
+              user_id: 1,
+              value: 5,
+              text: 'What a beautiful choclate man!',
+              submitter_id: 3,
             },
             {
-              owner_id: 2,
-              name: 'Laïla',
-              image: 'http://dummyimage.com/213x100.png/5fa2dd/ffffff',
-              breed: 'Skink, blue-tongued',
-              species: 'Tiliqua scincoides',
-              tags: ['Khaki', 'Goldenrod'],
-              rating: 8,
-              total_ratings: 96,
-              is_plant: false,
+              petplant_id: 1,
+              value: 4,
+              submitter_id: 4,
             },
             {
-              owner_id: 3,
-              name: 'Angélique',
-              image: 'http://dummyimage.com/210x100.png/ff4444/ffffff',
-              breed: 'Small-clawed otter',
-              species: 'Aonyx cinerea',
-              tags: ['Crimson', 'Violet'],
-              rating: 5,
-              total_ratings: 71,
-              is_plant: true,
+              user_id: 1,
+              value: 2,
+              text: 'My dogs said he was too cool 👎🏾',
+              submitter_id: 5,
             },
             {
-              owner_id: 4,
-              name: 'Bénédicte',
-              image: 'http://dummyimage.com/135x100.png/5fa2dd/ffffff',
-              breed: 'Prairie falcon',
-              species: 'Falco mexicanus',
-              tags: ['Maroon', 'Khaki'],
-              rating: 4,
-              total_ratings: 92,
-              is_plant: true,
+              user_id: 4,
+              value: 4,
+              text: 'Wurd to my momma',
+              submitter_id: 4,
             },
             {
-              owner_id: 5,
-              name: 'Dù',
-              image: 'http://dummyimage.com/244x100.png/5fa2dd/ffffff',
-              breed: 'Long-tailed skua',
-              species: 'Stercorarius longicausus',
-              tags: ['Turquoise', 'Khaki'],
-              rating: 9,
-              total_ratings: 60,
-              is_plant: false,
-            },
-          ]);
-        })
-        .then(() => {
-          Job.bulkCreate([
-            {
-              location: '2221 Judith St, Metairie, LA 70003',
-              pet_plant: [2, 2],
-              employer_id: 1,
-              sitter_id: 6,
-              startDate: new Date('July 11, 2022 01:15:00'),
-              endDate: new Date('July 15, 2022 01:15:00'),
+              petplant_id: 1,
+              value: 5,
+              text: 'I love this dog',
+              submitter_id: 3,
             },
             {
-              location: '6838 Louisville St, New Orleans, LA 70124',
-              pet_plant: [5, 2],
-              employer_id: 2,
-              sitter_id: 6,
-              startDate: new Date('July 22, 2022 01:15:00'),
-              endDate: new Date('July 27, 2022 01:15:00'),
-            },
-            {
-              location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
-              pet_plant: [5, 1],
-              employer_id: 3,
-              sitter_id: 6,
-              startDate: new Date('July 20, 2022 01:15:00'),
-              endDate: new Date('July 25, 2022 01:15:00'),
-            },
-            {
-              location: '4609 Banks St, New Orleans, LA 70119',
-              pet_plant: [3, 1],
-              employer_id: 4,
-              sitter_id: 6,
-              startDate: new Date('July 21, 2022 01:15:00'),
-              endDate: new Date('July 25, 2022 01:15:00'),
-            },
-            {
-              location: '1213 Gaudet Dr, Marrero, LA 70072',
-              pet_plant: [3, 1],
-              employer_id: 5,
-              sitter_id: 6,
-              startDate: new Date('July 1, 2022 01:15:00'),
-              endDate: new Date('July 5, 2022 01:15:00'),
-            },
-          ]);
-        }).then(() => {
-          Events.bulkCreate([
-            {
-              name: 'Dog Park Meetup',
-              host: 1,
-              location: '810 Euterpe St New Orleans, Louisiana, 70130',
-              description: 'maecenas ut massa quis augue luctus tincidunt nulla mollis',
-              startDate: new Date('July 5, 2022 01:15:00'),
-              startTime: '3:19 AM',
-            },
-            {
-              name: 'Annual Animal Rescue Drive',
-              host: 2,
-              location: '8639 Plum St New Orleans, Louisiana, 70118',
-              description: 'ante ipsum primis in faucibus',
-              startDate: new Date('July 5, 2022 01:15:00'),
-              startTime: '4:48 AM',
-            },
-            {
-              name: 'Barkus Parade',
-              host: 3,
-              location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
-              description: 'non ligula pellentesque ultrices phasellus id sapien in sapien iaculis',
-              startDate: new Date('July 5, 2022 01:15:00'),
-              startTime: '5:59 PM',
-            },
-            {
-              name: 'Post Disaster Food Drive for our Furry Friends',
-              host: 4,
-              location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
-              description: 'integer ac leo pellentesque ultrices',
-              startDate: new Date('July 5, 2022 01:15:00'),
-              startTime: '12:20 AM',
-            },
-            {
-              name: 'blandit lacinia erat vestibulum sed',
-              host: 5,
-              location: '8912 Bunker Hill Rd New Orleans, Louisiana, 70127',
-              description: 'consequat varius integer ac leo pellentesque ultrices mattis odio donec',
-              startDate: new Date('July 5, 2022 01:15:00'),
-              startTime: '4:33 PM',
+              petplant_id: 1,
+              value: 5,
+              text: 'Best Pupper',
+              submitter_id: 2,
             },
           ]).then(() => {
-            EventComment.bulkCreate([
+            Job.bulkCreate([
               {
-                id: 1,
-                event_id: 1,
-                comment:
-                  'nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante',
-                user_id: 1,
+                location: '2221 Judith St, Metairie, LA 70003',
+                pet_plant: [2, 2],
+                employer_id: 1,
+                sitter_id: 6,
+                startDate: new Date('July 11, 2022 01:15:00'),
+                endDate: new Date('July 15, 2022 01:15:00'),
               },
               {
-                id: 2,
-                event_id: 2,
-                comment: 'orci vehicula',
-                user_id: 2,
+                location: '6838 Louisville St, New Orleans, LA 70124',
+                pet_plant: [5, 2],
+                employer_id: 2,
+                sitter_id: 6,
+                startDate: new Date('July 22, 2022 01:15:00'),
+                endDate: new Date('July 27, 2022 01:15:00'),
               },
               {
-                id: 3,
-                event_id: 3,
-                comment: 'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
-                user_id: 3,
+                location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
+                pet_plant: [5, 1],
+                employer_id: 3,
+                sitter_id: 6,
+                startDate: new Date('July 20, 2022 01:15:00'),
+                endDate: new Date('July 25, 2022 01:15:00'),
               },
               {
-                id: 4,
-                event_id: 4,
-                comment:
-                  'non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu',
-                user_id: 4,
+                location: '4609 Banks St, New Orleans, LA 70119',
+                pet_plant: [3, 1],
+                employer_id: 4,
+                sitter_id: 6,
+                startDate: new Date('July 21, 2022 01:15:00'),
+                endDate: new Date('July 25, 2022 01:15:00'),
               },
               {
-                id: 5,
-                event_id: 5,
-                comment: 'fusce consequat nulla nisl nunc nisl duis',
-                user_id: 5,
+                location: '1213 Gaudet Dr, Marrero, LA 70072',
+                pet_plant: [3, 1],
+                employer_id: 5,
+                sitter_id: 6,
+                startDate: new Date('July 1, 2022 01:15:00'),
+                endDate: new Date('July 5, 2022 01:15:00'),
               },
-            ]);
-          })
-            .then(() => {
-              EventParticipant.bulkCreate([
+            ]).then(() => {
+              Events.bulkCreate([
                 {
-                  id: 1,
-                  event_id: 1,
-                  user_id: 1,
+                  name: 'Dog Park Meetup',
+                  host: 1,
+                  location: '810 Euterpe St New Orleans, Louisiana, 70130',
+                  description:
+                    'maecenas ut massa quis augue luctus tincidunt nulla mollis',
+                  startDate: new Date('July 5, 2022 01:15:00'),
+                  startTime: '3:19 AM',
                 },
                 {
-                  id: 2,
-                  event_id: 2,
-                  user_id: 2,
+                  name: 'Annual Animal Rescue Drive',
+                  host: 2,
+                  location: '8639 Plum St New Orleans, Louisiana, 70118',
+                  description: 'ante ipsum primis in faucibus',
+                  startDate: new Date('July 5, 2022 01:15:00'),
+                  startTime: '4:48 AM',
                 },
                 {
-                  id: 3,
-                  event_id: 3,
-                  user_id: 3,
+                  name: 'Barkus Parade',
+                  host: 3,
+                  location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
+                  description:
+                    'non ligula pellentesque ultrices phasellus id sapien in sapien iaculis',
+                  startDate: new Date('July 5, 2022 01:15:00'),
+                  startTime: '5:59 PM',
                 },
                 {
-                  id: 4,
-                  event_id: 4,
-                  user_id: 4,
+                  name: 'Post Disaster Food Drive for our Furry Friends',
+                  host: 4,
+                  location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
+                  description: 'integer ac leo pellentesque ultrices',
+                  startDate: new Date('July 5, 2022 01:15:00'),
+                  startTime: '12:20 AM',
                 },
-              ]);
+                {
+                  name: 'blandit lacinia erat vestibulum sed',
+                  host: 5,
+                  location: '8912 Bunker Hill Rd New Orleans, Louisiana, 70127',
+                  description:
+                    'consequat varius integer ac leo pellentesque ultrices mattis odio donec',
+                  startDate: new Date('July 5, 2022 01:15:00'),
+                  startTime: '4:33 PM',
+                },
+              ])
+                .then(() => {
+                  EventComment.bulkCreate([
+                    {
+                      id: 1,
+                      event_id: 1,
+                      comment:
+                        'nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante',
+                      user_id: 1,
+                    },
+                    {
+                      id: 2,
+                      event_id: 2,
+                      comment: 'orci vehicula',
+                      user_id: 2,
+                    },
+                    {
+                      id: 3,
+                      event_id: 3,
+                      comment:
+                        'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
+                      user_id: 3,
+                    },
+                    {
+                      id: 4,
+                      event_id: 4,
+                      comment:
+                        'non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu',
+                      user_id: 4,
+                    },
+                    {
+                      id: 5,
+                      event_id: 5,
+                      comment: 'fusce consequat nulla nisl nunc nisl duis',
+                      user_id: 5,
+                    },
+                  ]);
+                })
+                .then(() => {
+                  EventParticipant.bulkCreate([
+                    {
+                      id: 1,
+                      event_id: 1,
+                      user_id: 1,
+                    },
+                    {
+                      id: 2,
+                      event_id: 2,
+                      user_id: 2,
+                    },
+                    {
+                      id: 3,
+                      event_id: 3,
+                      user_id: 3,
+                    },
+                    {
+                      id: 4,
+                      event_id: 4,
+                      user_id: 4,
+                    },
+                  ]);
+                });
             });
+          });
         });
-
+      });
     }
   })
-  
+
   .then(() =>
     console.log(
       process.env.CLIENT_URL === 'http://localhost'
