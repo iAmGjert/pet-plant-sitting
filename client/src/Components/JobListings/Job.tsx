@@ -28,14 +28,14 @@ const Job = ({ job }) => {
               </Card.Title>
             </Col>
             <Col>        
-              <Card.Text>
+              <div>
                 Employer: {<div>{users[employer_id].name}</div>}
-              </Card.Text>
+              </div>
             </Col>
             <Col>        
-              <Card.Text>
+              <div>
                 Pet/Plants: { pet_plant.map((p, i)=>{ return <div key={`p${i}`}>{petPlants[p - 1].name}</div>; }) }
-              </Card.Text>
+              </div>
             </Col>
           </Row>
           <Row>
