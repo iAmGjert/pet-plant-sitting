@@ -257,6 +257,7 @@ db.sync(
               employer_id: 1,
               startDate: new Date('July 11, 2022 01:15:00'),
               endDate: new Date('July 15, 2022 01:15:00'),
+              sitter_id: 6
             },
             {
               location: '6838 Louisville St, New Orleans, LA 70124',
@@ -264,6 +265,7 @@ db.sync(
               employer_id: 2,
               startDate: new Date('July 22, 2022 01:15:00'),
               endDate: new Date('July 27, 2022 01:15:00'),
+              sitter_id: 6
             },
             {
               location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
@@ -271,6 +273,7 @@ db.sync(
               employer_id: 3,
               startDate: new Date('July 20, 2022 01:15:00'),
               endDate: new Date('July 25, 2022 01:15:00'),
+              sitter_id: 6
             },
             {
               location: '4609 Banks St, New Orleans, LA 70119',
@@ -278,6 +281,7 @@ db.sync(
               employer_id: 4,
               startDate: new Date('July 21, 2022 01:15:00'),
               endDate: new Date('July 25, 2022 01:15:00'),
+              sitter_id: 6
             },
             {
               location: '1213 Gaudet Dr, Marrero, LA 70072',
@@ -285,6 +289,7 @@ db.sync(
               employer_id: 5,
               startDate: new Date('July 1, 2022 01:15:00'),
               endDate: new Date('July 5, 2022 01:15:00'),
+              sitter_id: 6
             },
           ]);
         }).then(() => {
@@ -296,7 +301,7 @@ db.sync(
               location: '810 Euterpe St New Orleans, Louisiana, 70130',
               description: 'maecenas ut massa quis augue luctus tincidunt nulla mollis',
               startDate: new Date('July 5, 2022 01:15:00'),
-              startTime: '3:19 AM',
+              startTime: '3:19 AM'
             },
             {
               id: 2,
