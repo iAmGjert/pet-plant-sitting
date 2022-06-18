@@ -9,12 +9,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Profile from './Pages/Profile';
 import axios from 'axios';
-import { setUser } from './state/features/userProfile/userProfileSlice';
+import { setUser, setUsers } from './state/features/userProfile/userProfileSlice';
 import { setJobs } from './state/features/jobs/jobSlice';
+import { setPetPlants } from './state/features/petPlant/petPlantSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import JobsMain from './Pages/JobsMain';
-
-
+import TopNavBar from './Components/TopNavBar/TopNavBar';
+import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
@@ -25,6 +26,7 @@ const App: FC<Props> = () => {
       '/auth/login/success'
     );
     dispatch(setUser(user.data.user));
+    // console.log(user, 'LOGIN USER/userProfile state is set');
   };
   const getJobs = async () => {
     const jobs = await axios.get(
@@ -32,23 +34,37 @@ const App: FC<Props> = () => {
     );
     dispatch(setJobs(jobs.data));
   };
+  const getUsers = async () =>{
+    const users = await axios.get('api/users/all');
+    dispatch(setUsers(users.data));
+  };
+  const getPetPlants = async () =>{
+    const petPlants = await axios.get('api/pets_plants/all');
+    dispatch(setPetPlants(petPlants.data));
+  };
   useEffect(() => {
     getUser();
     getJobs();
+    getUsers();
+    getPetPlants();
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/profile/:id' element={<Profile />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/map' element={<MapMain />} />
-        <Route path='/events' element={<CommunityEvents />} />
-        <Route path='/calendar' element={<CalendarMain />} />
-        <Route path='/jobs' element={<JobsMain />} />
-      </Routes>
-    </BrowserRouter>
+    <div>      
+      <BrowserRouter>
+        <TopNavBar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/profile/:id' element={<Profile />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/map' element={<MapMain />} />
+          <Route path='/events' element={<CommunityEvents />} />
+          <Route path='/calendar' element={<CalendarMain />} />
+          <Route path='/jobs' element={<JobsMain />} />
+        </Routes>
+        <BottomNavBar />
+      </BrowserRouter>
+    </div>
   );
 };
 

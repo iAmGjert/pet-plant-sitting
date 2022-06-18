@@ -1,12 +1,62 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //import type { RootState } from '../../store';
 
-const initialState = {
-  value: { name: '', id: 0, job: [] }
-};
+interface userStuff {
+  name: string,
+  image: string,
+  location: string,
+  sitter_rating: number,
+  total_sitter_ratings: number,
+  bio: string,
+  average_rating: number,
+  total_ratings: number,
+  gallery_id: number,
+}
 
+interface jobStuff {
+  id: number,
+  location: string,
+  employer_id: number,
+  sitter_id: number | null,
+  startDate: Date,
+  endDate: Date,
+  pet_plant: Array<number>
+}
+interface state {
+  value: { 
+    name: string,
+    id: number,
+    job: Array<jobStuff>,
+    image: string,
+    location: string,
+    sitter_rating: number,
+    total_sitter_ratings: number,
+    bio: string,
+    average_rating: number,
+    total_ratings: number,
+    gallery_id: number
+  }
+  users: Array<userStuff>
+}
+
+const initialState = {
+  value: { 
+    name: '',
+    id: 1,
+    job: [],
+    image: '',
+    location: '',
+    sitter_rating: 0,
+    total_sitter_ratings: 0,
+    bio: '',
+    average_rating: 0,
+    total_ratings: 0,
+    gallery_id: 0 
+  },
+  users: []
+};
 export const userProfileSlice = createSlice({
-  name: 'userProile',
+  name: 'userProfile',
   initialState,
   reducers: {
     changeName: (state, action: PayloadAction<string>) => {
@@ -17,9 +67,13 @@ export const userProfileSlice = createSlice({
       state.value = action.payload;
       return state;
     },
+    setUsers: (state, action:PayloadAction<any>)=>{
+      state.users = action.payload;
+      return state;
+    },
   },
 });
 
-export const { changeName, setUser } = userProfileSlice.actions;
+export const { changeName, setUser, setUsers } = userProfileSlice.actions;
 
 export default userProfileSlice.reducer;
