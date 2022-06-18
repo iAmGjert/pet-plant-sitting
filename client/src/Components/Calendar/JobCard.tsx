@@ -35,15 +35,17 @@ const JobCard = () => {
       });
   };
 
+  
+
   //use useEffect to connect job listings and community events from backend to calendar   
-  useEffect(() => {
-    const getAllEvents = async() => {
-      const res = await axios.get('/api/jobs/all');
-      console.log(res, 'res on 53');
-      return dispatch(setJobs(res.data));
-    };
-    getAllEvents();
-  }, []);
+  // useEffect(() => {
+  //   const getAllEvents = async() => {
+  //     const res = await axios.get('/api/jobs/all');
+  //     console.log(res, 'res on 53');
+  //     return dispatch(setJobs(res.data));
+  //   };
+  //   getAllEvents();
+  // }, []);
 
 
   return (
@@ -64,7 +66,6 @@ const JobCard = () => {
         <InputGroup.Text id="inputGroup-sizing-sm">Add Note</InputGroup.Text>
         <FormControl aria-label="Small" aria-describedby="inputGroup-sizing-sm" />
       </InputGroup>
-      
       <Button variant="primary">Exit</Button>
     </Card>
   );

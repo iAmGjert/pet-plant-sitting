@@ -14,7 +14,7 @@ const EventCard () => {
 
   const [event, setEvent] = useState({});
 
-  const getSingleeEvent = (id) => {
+  const getSingleEvent = (id) => {
     return axios.get(`/api/events/${id}`).then((res) => {
       console.log(res);
      // setEvent(res.id)
@@ -24,7 +24,7 @@ const EventCard () => {
     });
   }
 
-  
+
 
   return (
     <Card className="mb-3" style={{ color: '#000'}}>

@@ -202,7 +202,7 @@ db.sync(
               rating: 9,
               total_ratings: 33,
               is_plant: false,
-              bio: 'I\'m very shy, but if you give me food I wil be your best friend',
+              bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
             },
             {
               owner_id: 2,
@@ -218,10 +218,10 @@ db.sync(
             },
             {
               owner_id: 3,
-              name: 'Angélique',
-              image: 'http://dummyimage.com/210x100.png/ff4444/ffffff',
-              breed: 'Small-clawed otter',
-              species: 'Aonyx cinerea',
+              name: 'Audrey II',
+              image: 'https://static.wikia.nocookie.net/villains/images/5/58/Audreyiifeedme.jpg/revision/latest?cb=20200717203832',
+              breed: 'Venus Fly Trap Mix',
+              species: 'Butterwort',
               tags: ['Crimson', 'Violet'],
               rating: 5,
               total_ratings: 71,
@@ -231,7 +231,7 @@ db.sync(
             {
               owner_id: 4,
               name: 'Bénédicte',
-              image: 'http://dummyimage.com/135x100.png/5fa2dd/ffffff',
+              image: '',
               breed: 'Prairie falcon',
               species: 'Falco mexicanus',
               tags: ['Maroon', 'Khaki'],
