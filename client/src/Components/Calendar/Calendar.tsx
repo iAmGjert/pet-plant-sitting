@@ -5,19 +5,17 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import {BrowserRouter as Router, Link} from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
-//import CalendarMobile from './CalendarMobile';
 import axios from 'axios';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 
 import { useSelector } from 'react-redux';
 import { getEventListeners } from 'events';
+import moment from 'moment';
 //import { bindActionCreators } from 'redux'; this is what we will import when we have our actions created
 
 const CalendarApp = () =>{
-  //eventually, when set up your section in the store, you can return the key value pair necessary to your feature 
-  const [value, onChange] = useState(new Date());
-  //const [selectedDate, setSelectedDate] = useState(null);
-  const [date, setDate] = useState(new Date());
+
+  const [dateState, setDateState] = useState(new Date());
   const [job, setJobs] = useState([]);
   
   //redux hooks
@@ -25,6 +23,9 @@ const CalendarApp = () =>{
   const dispatch = useAppDispatch();
   const state = useSelector((state) => state);
 
+  const changeDate = (e) => {
+    setDateState(e);
+  };
   
   //use useEffect to connect job listings and community events from backend to calendar   
   useEffect(() => {
@@ -45,30 +46,37 @@ const CalendarApp = () =>{
       <h1 className='text-center'>Upcoming Jobs and Events</h1>
       <div className='calendar-container'>
         <Calendar
-          onChange={setDate}
-          value={date}
-          selectRange={true}
+          value={dateState}
+          onChange={changeDate}
         />
+        <p>Current selected date is <b>{moment(dateState).format('MMMM Do YYYY')}</b></p>
       </div>
-      {date.length > 0 ? (
-        <p className='text-center'>
-          <span className='bold'>Start:</span>{' '}
-          {date[0].toDateString()}
-          &nbsp;|&nbsp;
-          <span className='bold'>End:</span> {date[1].toDateString()}
-        </p>
-      ) : (
-        <p className='text-center'>
-          <span className='bold'>Default selected date:</span>{' '}
-          {date.toDateString()}
-        </p>
-      )}
     </div>
-
-
   );
 };
 
 CalendarApp.propTypes = {};
 
 export default CalendarApp;
+
+{/* {date.length > 0 ? (
+  <p className='text-center'>
+    <span className='bold'>Start:</span>{' '}
+    {date[0].toDateString()}
+    &nbsp;|&nbsp;
+    <span className='bold'>End:</span> {date[1].toDateString()}
+  </p>
+) : (
+  <p className='text-center'>
+    <span className='bold'>Default selected date:</span>{' '}
+    {date.toDateString()}
+  </p>
+)} */}
+
+
+
+
+  //eventually, when set up your section in the store, you can return the key value pair necessary to your feature 
+  //const [value, onChange] = useState(new Date());
+  //const [selectedDate, setSelectedDate] = useState(null);
+  //const [date, setDate] = useState(new Date());
