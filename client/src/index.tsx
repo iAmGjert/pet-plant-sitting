@@ -14,9 +14,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <TopNavBar />
       <App />
-      <BottomNavBar />
     </Provider>
   </React.StrictMode>
 );
