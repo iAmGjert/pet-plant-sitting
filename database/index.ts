@@ -255,6 +255,7 @@ db.sync(
               location: '2221 Judith St, Metairie, LA 70003',
               pet_plant: [2, 2],
               employer_id: 1,
+              sitter_id: 6,
               startDate: new Date('July 11, 2022 01:15:00'),
               endDate: new Date('July 15, 2022 01:15:00'),
               sitter_id: 6
@@ -263,6 +264,7 @@ db.sync(
               location: '6838 Louisville St, New Orleans, LA 70124',
               pet_plant: [5, 2],
               employer_id: 2,
+              sitter_id: 6,
               startDate: new Date('July 22, 2022 01:15:00'),
               endDate: new Date('July 27, 2022 01:15:00'),
               sitter_id: 6
@@ -271,6 +273,7 @@ db.sync(
               location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
               pet_plant: [5, 1],
               employer_id: 3,
+              sitter_id: 6,
               startDate: new Date('July 20, 2022 01:15:00'),
               endDate: new Date('July 25, 2022 01:15:00'),
               sitter_id: 6
@@ -279,6 +282,7 @@ db.sync(
               location: '4609 Banks St, New Orleans, LA 70119',
               pet_plant: [3, 1],
               employer_id: 4,
+              sitter_id: 6,
               startDate: new Date('July 21, 2022 01:15:00'),
               endDate: new Date('July 25, 2022 01:15:00'),
               sitter_id: 6
@@ -287,6 +291,7 @@ db.sync(
               location: '1213 Gaudet Dr, Marrero, LA 70072',
               pet_plant: [3, 1],
               employer_id: 5,
+              sitter_id: 6,
               startDate: new Date('July 1, 2022 01:15:00'),
               endDate: new Date('July 5, 2022 01:15:00'),
               sitter_id: 6
@@ -295,7 +300,6 @@ db.sync(
         }).then(() => {
           Events.bulkCreate([
             {
-              id: 1,
               name: 'Dog Park Meetup',
               host: 1,
               location: '810 Euterpe St New Orleans, Louisiana, 70130',
@@ -304,7 +308,6 @@ db.sync(
               startTime: '3:19 AM'
             },
             {
-              id: 2,
               name: 'Annual Animal Rescue Drive',
               host: 2,
               location: '8639 Plum St New Orleans, Louisiana, 70118',
@@ -313,7 +316,6 @@ db.sync(
               startTime: '4:48 AM',
             },
             {
-              id: 3,
               name: 'Barkus Parade',
               host: 3,
               location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
@@ -322,7 +324,6 @@ db.sync(
               startTime: '5:59 PM',
             },
             {
-              id: 4,
               name: 'Post Disaster Food Drive for our Furry Friends',
               host: 4,
               location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
@@ -331,7 +332,6 @@ db.sync(
               startTime: '12:20 AM',
             },
             {
-              id: 5,
               name: 'blandit lacinia erat vestibulum sed',
               host: 5,
               location: '8912 Bunker Hill Rd New Orleans, Louisiana, 70127',
@@ -339,68 +339,68 @@ db.sync(
               startDate: new Date('July 5, 2022 01:15:00'),
               startTime: '4:33 PM',
             },
-          ]);
-        })
-        .then(() => {
-          EventComment.bulkCreate([
-            {
-              id: 1,
-              event_id: 1,
-              comment:
-                'nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante',
-              user_id: 1,
-            },
-            {
-              id: 2,
-              event_id: 2,
-              comment: 'orci vehicula',
-              user_id: 2,
-            },
-            {
-              id: 3,
-              event_id: 3,
-              comment: 'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
-              user_id: 3,
-            },
-            {
-              id: 4,
-              event_id: 4,
-              comment:
-                'non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu',
-              user_id: 4,
-            },
-            {
-              id: 5,
-              event_id: 5,
-              comment: 'fusce consequat nulla nisl nunc nisl duis',
-              user_id: 5,
-            },
-          ]);
-        })
-        .then(() => {
-          EventParticipant.bulkCreate([
-            {
-              id: 1,
-              event_id: 1,
-              user_id: 1,
-            },
-            {
-              id: 2,
-              event_id: 2,
-              user_id: 2,
-            },
-            {
-              id: 3,
-              event_id: 3,
-              user_id: 3,
-            },
-            {
-              id: 4,
-              event_id: 4,
-              user_id: 4,
-            },
-          ]);
+          ]).then(() => {
+            EventComment.bulkCreate([
+              {
+                id: 1,
+                event_id: 1,
+                comment:
+                  'nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante',
+                user_id: 1,
+              },
+              {
+                id: 2,
+                event_id: 2,
+                comment: 'orci vehicula',
+                user_id: 2,
+              },
+              {
+                id: 3,
+                event_id: 3,
+                comment: 'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
+                user_id: 3,
+              },
+              {
+                id: 4,
+                event_id: 4,
+                comment:
+                  'non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu',
+                user_id: 4,
+              },
+              {
+                id: 5,
+                event_id: 5,
+                comment: 'fusce consequat nulla nisl nunc nisl duis',
+                user_id: 5,
+              },
+            ]);
+          })
+            .then(() => {
+              EventParticipant.bulkCreate([
+                {
+                  id: 1,
+                  event_id: 1,
+                  user_id: 1,
+                },
+                {
+                  id: 2,
+                  event_id: 2,
+                  user_id: 2,
+                },
+                {
+                  id: 3,
+                  event_id: 3,
+                  user_id: 3,
+                },
+                {
+                  id: 4,
+                  event_id: 4,
+                  user_id: 4,
+                },
+              ]);
+            });
         });
+
     }
   })
   
