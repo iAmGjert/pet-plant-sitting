@@ -14,14 +14,11 @@ import { setJobs } from './state/features/jobs/jobSlice';
 import { setPetPlants } from './state/features/petPlant/petPlantSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import JobsMain from './Pages/JobsMain';
-<<<<<<< HEAD
-import JobCreation from './Pages/JobCreation';
+// import JobCreation from './Pages/JobCreation';
 import ChatMain from './Pages/ChatMain';
 
-=======
 import TopNavBar from './Components/TopNavBar/TopNavBar';
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
->>>>>>> e62bd2b9d08195e2d77691f6b47e0d7615d006b3
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
@@ -56,8 +53,8 @@ const App: FC<Props> = () => {
   }, []);
 
   return (
-<<<<<<< HEAD
     <BrowserRouter>
+      <TopNavBar />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/profile/:id' element={<Profile />} />
@@ -66,27 +63,11 @@ const App: FC<Props> = () => {
         <Route path='/events' element={<CommunityEvents />} />
         <Route path='/calendar' element={<CalendarMain />} />
         <Route path='/jobs' element={<JobsMain />} />
-        <Route path='/createjob' element={<JobCreation />} />
+        {/* <Route path='/createjob' element={<JobCreation />} /> */}
         <Route path='/chat' element={<ChatMain />} />
       </Routes>
+      <BottomNavBar />
     </BrowserRouter>
-=======
-    <div>      
-      <BrowserRouter>
-        <TopNavBar />
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/profile/:id' element={<Profile />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/map' element={<MapMain />} />
-          <Route path='/events' element={<CommunityEvents />} />
-          <Route path='/calendar' element={<CalendarMain />} />
-          <Route path='/jobs' element={<JobsMain />} />
-        </Routes>
-        <BottomNavBar />
-      </BrowserRouter>
-    </div>
->>>>>>> e62bd2b9d08195e2d77691f6b47e0d7615d006b3
   );
 };
 

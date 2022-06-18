@@ -3,7 +3,7 @@ import moment from 'moment';
 import ScrollToBottom from 'react-scroll-to-bottom';
 // import SocketsProvider from '../Chat/context/socket.context';
 
-const Chat = ({ socket, username, room }) => {
+const Chat = ({ socket, currUser }) => {
 
   const [currentMessage, setCurrentMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
@@ -11,8 +11,8 @@ const Chat = ({ socket, username, room }) => {
   const sendMessage = async () => {
     if (currentMessage !== '') {
       const messageData = {
-        room: room,
-        username: username,
+        room: 'chat',
+        username: currUser,
         message: currentMessage,
         time: new Date(Date.now())
       };
@@ -30,25 +30,31 @@ const Chat = ({ socket, username, room }) => {
   }, [socket]);
 
   return (
-    <div>
+    <div className="chat-window">
       <div className="chat-header">
         <p>Live Chat</p>
       </div>
       <div className="chat-body">
-        {messageList.map((messageContent: any, index: number) => {
-          return (
-            <div key={index}>
-              <div>
+        <ScrollToBottom className="message-container">
+          {messageList.map((messageContent: any, index: number) => {
+            return (
+              <div 
+                className="message"
+                id={currUser === messageContent.username ? 'you' : 'other'}
+                key={index}
+              >
                 <div>
-                  <p>{messageContent.message}</p>
+                  <div className="message-content">
+                    <p>{messageContent.message}</p>
+                  </div>
+                  <div className="message-meta">
+                    <p id="time">{moment(messageContent.time).fromNow()}</p>
+                    <p id="author">{messageContent.username}</p>
+                  </div>
                 </div>
-                <div>
-                  <p>{moment(messageContent.time).fromNow()}</p>
-                  <p>{messageContent.username}</p>
-                </div>
-              </div>
-            </div>);
-        })}
+              </div>);
+          })}
+        </ScrollToBottom>
       </div>
       <div className="chat-footer">
         <input 
