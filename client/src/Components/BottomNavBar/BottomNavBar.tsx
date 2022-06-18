@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import { changeView } from '../../state/features/jobs/jobSlice';
+import { changeView, getView } from '../../state/features/jobs/jobSlice';
 import { useAppDispatch } from '../../state/hooks';
 import { useNavigate } from 'react-router-dom';
 
@@ -8,10 +8,10 @@ import { useNavigate } from 'react-router-dom';
 
 const BottomNavBar = () => {
   const dispatch = useAppDispatch();
-  const navi = useNavigate();
+  const navigate = useNavigate();
   const handleClick = ()=>{
     dispatch(changeView('create'));
-    navi('/jobs');
+    navigate('/jobs');
   };
   return (
     <div>
@@ -24,8 +24,8 @@ const BottomNavBar = () => {
         <Container>
           <Nav className='me-auto'>
             <Nav.Link onClick={()=>{ handleClick(); }} >Create Job</Nav.Link>
-            <Nav.Link href='/'>Home</Nav.Link>
-            <Nav.Link href='/calendar'>Calendar</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate('/'); }}>Home</Nav.Link>
+            <Nav.Link onClick={()=>{ navigate('/calendar'); }}>Calendar</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

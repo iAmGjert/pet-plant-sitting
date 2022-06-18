@@ -9,40 +9,40 @@ import { useNavigate } from 'react-router-dom';
 const TopNavBar = () => {
   const user = useAppSelector((state) => state.userProfile.value);
   const dispatch = useAppDispatch();
-  const navi = useNavigate();
+  const navigate = useNavigate();
   const handleClick = ()=>{
     dispatch(changeView('create'));
-    navi('/jobs');
+    navigate('/jobs');
   };
   return (
     <div>
       <Navbar bg='primary' variant='dark' expand='lg'>
         <Container>
-          <Navbar.Brand href='/'>
+          <Navbar.Brand onClick={()=>{ navigate('/'); }}>
             {user.name ? user.name : 'Fern Herm'}
           </Navbar.Brand>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav className='me-auto'>
-              <Nav.Link href='/jobs'>Job Listings</Nav.Link>
+              <Nav.Link onClick={()=>{ dispatch(changeView('list')); navigate('/jobs'); }}>Job Listings</Nav.Link>
               <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
                 {!user.name && (
-                  <NavDropdown.Item href='/login'>Login</NavDropdown.Item>
+                  <NavDropdown.Item onClick={()=>{ navigate('/login'); }}>Login</NavDropdown.Item>
                 )}
                 <NavDropdown.Item onClick={()=>{ handleClick(); }}>
                   Create Job
                 </NavDropdown.Item>
-                <NavDropdown.Item href='/events'>Community</NavDropdown.Item>
-                <NavDropdown.Item href='/calendar'>Calendar</NavDropdown.Item>
-                <NavDropdown.Item href={`/profile/${user?.id}`}>
+                <NavDropdown.Item onClick={()=>{ navigate('/events'); }}>Community</NavDropdown.Item>
+                <NavDropdown.Item onClick={()=>{ navigate('/calendar'); }}>Calendar</NavDropdown.Item>
+                <NavDropdown.Item onClick={()=>{ navigate(`/profile/${user?.id}`); }}>
                   Profile
                 </NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href='/chat'>Chat</NavDropdown.Item>
+                <NavDropdown.Item onClick={()=>{ navigate('/chat'); }}>Chat</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href='/info'>Info Lookup</NavDropdown.Item>
+                <NavDropdown.Item onClick={()=>{ navigate('/info'); }}>Info Lookup</NavDropdown.Item>
                 <NavDropdown.Divider />
-                <NavDropdown.Item href='/map'>Map</NavDropdown.Item>
+                <NavDropdown.Item onClick={()=>{ navigate('/map'); }}>Map</NavDropdown.Item>
                 {user.name && (
                   <>
                     <NavDropdown.Divider />

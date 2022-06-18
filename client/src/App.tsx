@@ -9,8 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Profile from './Pages/Profile';
 import axios from 'axios';
-import { setUser } from './state/features/userProfile/userProfileSlice';
+import { setUser, setUsers } from './state/features/userProfile/userProfileSlice';
 import { setJobs } from './state/features/jobs/jobSlice';
+import { setPetPlants } from './state/features/petPlant/petPlantSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import JobsMain from './Pages/JobsMain';
 import TopNavBar from './Components/TopNavBar/TopNavBar';
@@ -32,9 +33,19 @@ const App: FC<Props> = () => {
     );
     dispatch(setJobs(jobs.data));
   };
+  const getUsers = async () =>{
+    const users = await axios.get('api/users/all');
+    dispatch(setUsers(users.data));
+  };
+  const getPetPlants = async () =>{
+    const petPlants = await axios.get('api/pets_plants/all');
+    dispatch(setPetPlants(petPlants.data));
+  };
   useEffect(() => {
     getUser();
     getJobs();
+    getUsers();
+    getPetPlants();
   }, []);
 
   return (
