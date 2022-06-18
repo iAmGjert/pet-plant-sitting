@@ -1,32 +1,30 @@
-import { Server, Socket } from 'socket.io';
-import { nanoid } from 'nanoid';
+// import { Server, Socket } from 'socket.io';
 
-const rooms: Record<string, { name: string }> = {};
+// const rooms: Record<string, { name: string }> = {};
 
-const socket = ({ io }: { io: Server }) => {
-  console.log('Sockets enabled');
+// const socket = ({ io }: { io: Server }) => {
+//   console.log('Sockets enabled');
 
-  io.on('connection', (socket: Socket) => {
-    console.log(`User connected ${socket.id}`);
+//   io.on('connection', (socket: Socket) => {
+//     console.log(`User connected ${socket.id}`);
 
-    socket.on('CREATE_ROOM', ({roomName}) => {
-      const roomId = nanoid();
+//     socket.on('CREATE_ROOM', ({roomName}) => {
       
-      rooms[roomId] = {
-        name: roomName
-      };
+//       rooms[roomName] = {
+//         name: roomName
+//       };
   
-      socket.join(roomId);
+//       socket.join(roomName);
   
-      socket.broadcast.emit('ROOMS', rooms);
+//       socket.broadcast.emit('ROOMS', rooms);
 
-      socket.emit('ROOMS', rooms);
+//       socket.emit('ROOMS', rooms);
 
-      socket.emit('JOINED_ROOM', roomId);
-    });
+//       socket.emit('JOINED_ROOM', roomName);
+//     });
 
 
-  });
-};
+//   });
+// };
 
-export default socket;
+// export default socket;

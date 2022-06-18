@@ -11,7 +11,7 @@ interface Context {
 
 }
 
-const socket = io('http://localhost:5000/chat');
+const socket = io('http://localhost:4000');
 
 const SocketContext = createContext<Context>({ 
   socket, 
@@ -30,7 +30,7 @@ const SocketsProvider = (props: any) => {
   });
 
   return (
-    <SocketContext.Provider value={{ socket, username, setUsername, rooms, roomId }}>{...props}</SocketContext.Provider>
+    <SocketContext.Provider value={{ socket, username, setUsername, rooms, roomId }} {...props} />
   );
 };
 

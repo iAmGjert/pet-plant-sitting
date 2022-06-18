@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { useSockets } from './context/socket.context';
-const 
+
 
 
 const Rooms = () => {
@@ -28,7 +28,7 @@ const Rooms = () => {
       </div>
 
       {Object.keys(rooms).map((key) => {
-        return <div key={key}>{rooms[key as keyof typeof rooms]['name']}</div>; 
+        return <div key={key}>{rooms[key].name}</div>; 
       })}
     </nav>
   );

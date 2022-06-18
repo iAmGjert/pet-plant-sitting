@@ -13,6 +13,7 @@ import { setUser } from './state/features/userProfile/userProfileSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import JobsMain from './Pages/JobsMain';
 import JobCreation from './Pages/JobCreation';
+import ChatMain from './Pages/ChatMain';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
@@ -40,6 +41,7 @@ const App: FC<Props> = () => {
         <Route path='/calendar' element={<CalendarMain />} />
         <Route path='/jobs' element={<JobsMain />} />
         <Route path='/createjob' element={<JobCreation />} />
+        <Route path='/chat' element={<ChatMain />} />
       </Routes>
     </BrowserRouter>
   );

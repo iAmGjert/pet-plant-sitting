@@ -10,21 +10,32 @@ const passport = require('passport');
 require('dotenv').config();
 require('./auth/passport.ts');
 
-<<<<<<< HEAD
-const { createServer } = require('http');
-const cors = require('cors');
-const { Server } = require('socket.io');
-const config = require('config');
+const { Server, Socket } = require('socket.io');
 
 const { socket } = require('./socket');
 
-const httpServer = createServer(app);
-
-const io = new Server(httpServer, {
+const io = new Server(4000, {
   cors: {
-    origin: 'http://localhost:5000/chat',
+    origin: 'http://localhost:5000',
     credentials: true,
   },
+});
+
+io.on('connection', (socket: typeof Socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on('join_room', (data: string) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room ${data}`);
+  });
+
+  socket.on('send_message', (data: any) => {
+    socket.to(data.room).emit('receive_message', data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User Disconnected', socket.id);
+  });
 });
 
 app.use(session({
@@ -32,7 +43,6 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 }));
-=======
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -48,7 +58,6 @@ app.use(
     saveUninitialized: true,
   })
 );
->>>>>>> 610198732cb9356630adb2012974d93471f53b25
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -58,14 +67,12 @@ app.use(express.json());
 app.use(morgan('tiny'));
 
 app.use('/auth', authRouter);
-<<<<<<< HEAD
-=======
 app.use('/api/map', require('./routes/map.ts'));
 app.use('/api/events', require('./routes/events.ts'));
 app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/users', require('./routes/users'));
 
-app.get('/*', function (req: Request, res: Response) {
+app.get('/*', function (req: Request, res: Response | any) {
   res.sendFile(
     path.join(__dirname, '../client/build/index.html'),
     function (err: Error) {
@@ -75,13 +82,10 @@ app.get('/*', function (req: Request, res: Response) {
     }
   );
 });
->>>>>>> 610198732cb9356630adb2012974d93471f53b25
 
 const port = process.env.PORT || 2000;
 app.listen(port, () => {
   console.log(`🚀 Server is listening at http://localhost:${port}`);
-
-  socket({ io });
 });
 
 db.authenticate()
