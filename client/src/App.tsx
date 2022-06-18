@@ -13,7 +13,8 @@ import { setUser } from './state/features/userProfile/userProfileSlice';
 import { setJobs } from './state/features/jobs/jobSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import JobsMain from './Pages/JobsMain';
-
+import TopNavBar from './Components/TopNavBar/TopNavBar';
+import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
@@ -37,17 +38,21 @@ const App: FC<Props> = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/profile/:id' element={<Profile />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/map' element={<MapMain />} />
-        <Route path='/events' element={<CommunityEvents />} />
-        <Route path='/calendar' element={<CalendarMain />} />
-        <Route path='/jobs' element={<JobsMain />} />
-      </Routes>
-    </BrowserRouter>
+    <div>      
+      <BrowserRouter>
+        <TopNavBar />
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/profile/:id' element={<Profile />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/map' element={<MapMain />} />
+          <Route path='/events' element={<CommunityEvents />} />
+          <Route path='/calendar' element={<CalendarMain />} />
+          <Route path='/jobs' element={<JobsMain />} />
+        </Routes>
+        <BottomNavBar />
+      </BrowserRouter>
+    </div>
   );
 };
 

@@ -13,7 +13,7 @@ interface jobStuff {
 
 const initState = <any>{
   view: 'list',
-  jobs: Array<jobStuff>
+  jobs: []
 };
 
 export const jobsSlice = createSlice({
@@ -26,6 +26,7 @@ export const jobsSlice = createSlice({
     },
     changeView: (state, action:PayloadAction<string>)=>{;
       state.view = action.payload;
+      console.log('Called changeView');
       return state;
     },
     setJobs: (state, action:PayloadAction<Array<jobStuff>>)=>{

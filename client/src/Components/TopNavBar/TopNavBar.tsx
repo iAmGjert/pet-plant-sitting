@@ -1,11 +1,19 @@
 import React from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
-import { useAppSelector } from '../../state/hooks';
+import { useAppSelector, useAppDispatch } from '../../state/hooks';
+import { changeView } from '../../state/features/jobs/jobSlice';
+import { useNavigate } from 'react-router-dom';
 
 // type Props = {};
 
 const TopNavBar = () => {
   const user = useAppSelector((state) => state.userProfile.value);
+  const dispatch = useAppDispatch();
+  const navi = useNavigate();
+  const handleClick = ()=>{
+    dispatch(changeView('create'));
+    navi('/jobs');
+  };
   return (
     <div>
       <Navbar bg='primary' variant='dark' expand='lg'>
@@ -21,7 +29,7 @@ const TopNavBar = () => {
                 {!user.name && (
                   <NavDropdown.Item href='/login'>Login</NavDropdown.Item>
                 )}
-                <NavDropdown.Item href='/jobs'>
+                <NavDropdown.Item onClick={()=>{ handleClick(); }}>
                   Create Job
                 </NavDropdown.Item>
                 <NavDropdown.Item href='/events'>Community</NavDropdown.Item>
