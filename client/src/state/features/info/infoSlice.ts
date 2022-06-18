@@ -11,7 +11,6 @@ export const infoSlice = createSlice({
   reducers: {
     getInfo: (state, action:PayloadAction<string>)=>{
       //state.value = action.payload;
-      console.log(state, action);
       return state;
     },
   }
