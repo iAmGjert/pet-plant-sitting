@@ -16,9 +16,9 @@ export const store = configureStore({
     map: mapReducer,
     calendar: calendarReducer
   },
-  // middleware: getDefaultMiddleware({
-  //   serializableCheck: false,
-  // })
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  })
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
