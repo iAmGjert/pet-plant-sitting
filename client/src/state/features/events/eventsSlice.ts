@@ -13,7 +13,7 @@ interface Event {
   user: {
     name: string;
     image: string;
-  }
+  };
 }
 
 interface EventsSliceState {
@@ -22,7 +22,7 @@ interface EventsSliceState {
 
 const initialState: any = {
   view: 'list',
-  events: Array<Event>,
+  events: [],
 };
 
 export const communityEventsSlice = createSlice({
@@ -42,10 +42,11 @@ export const communityEventsSlice = createSlice({
     },
     setEvents: (state, action: PayloadAction<Event[]>) => {
       state.events = action.payload;
-    }
+    },
   },
 });
 
-export const { getView, setView, getEvents, setEvents } = communityEventsSlice.actions;
+export const { getView, setView, getEvents, setEvents } =
+  communityEventsSlice.actions;
 
 export default communityEventsSlice.reducer;

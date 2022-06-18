@@ -1,5 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Badge, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import EditPetModal from './EditPetModal';
+import { RatingInfo } from '../../Pages/Profile';
 
 export interface PetPlant {
   id: number;
@@ -10,6 +12,7 @@ export interface PetPlant {
   image: string;
   rating: number;
   tags: string[];
+  ratings: RatingInfo[];
   species: string;
   total_ratings: number;
   age: number;
@@ -19,13 +22,23 @@ export interface PetPlant {
 type Props = {
   PetPlant: PetPlant;
   getStars: (num: number) => string;
+  edit: boolean;
 };
 
-const PetPlantCard = ({ PetPlant, getStars }: Props) => {
+const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
   const [showDetails, setShowDetails] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const scrollRef = useRef();
   //make function to get the proper stars for rating
-  console.log(PetPlant);
+  // console.log(PetPlant);
+
+  const getRating = () => {
+    let sum = 0;
+    for (let i = 0; i < PetPlant.ratings.length; i++) {
+      sum += PetPlant.ratings[i].value;
+    }
+    return sum / PetPlant.ratings.length;
+  };
 
   useEffect(() => {
     // scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -34,28 +47,46 @@ const PetPlantCard = ({ PetPlant, getStars }: Props) => {
   return (
     <Card
       onClick={() => {
-        setShowDetails(!showDetails);
-        console.log(scrollRef);
+        if (edit) {
+          setShowModal(!showModal);
+        } else {
+          setShowDetails(!showDetails);
+        }
+
+        // console.log(scrollRef);
         // scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
       }}
     >
+      <EditPetModal
+        PetPlant={PetPlant}
+        showModal={showModal}
+        setShowModal={setShowModal}
+      />
       <Card.Img variant='top' src={PetPlant.image} />
       <Card.Body>
         <Card.Title>{PetPlant.name}</Card.Title>
-        {!showDetails && <Card.Text>Click for details</Card.Text>}
+        {edit ? (
+          <Card.Text>Click to edit</Card.Text>
+        ) : (
+          !showDetails && <Card.Text>Click for details</Card.Text>
+        )}
       </Card.Body>
       {showDetails && (
         <>
           <Card.Body>
-            <Card.Text>
-              Description about you pet plant and other cool information that is
-              cool and fun all at the same time, believe dat
-            </Card.Text>
+            {
+              <Card.Text>
+                Description about you pet plant and other cool information that
+                is cool and fun all at the same time, believe dat
+              </Card.Text>
+            }
           </Card.Body>
           <ListGroup className='list-group-flush'>
-            <ListGroupItem>
-              {getStars(PetPlant.rating)}({PetPlant.total_ratings})
-            </ListGroupItem>
+            {!edit && (
+              <ListGroupItem>
+                {getStars(getRating())}({PetPlant.ratings.length})
+              </ListGroupItem>
+            )}
             {PetPlant.gender && (
               <ListGroupItem>
                 {PetPlant.gender === 'Male'

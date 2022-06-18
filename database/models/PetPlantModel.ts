@@ -1,5 +1,4 @@
 const { DataTypes } = require('sequelize');
-
 export const PetPlantModel = {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   owner_id: DataTypes.INTEGER,

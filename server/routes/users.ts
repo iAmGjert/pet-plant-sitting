@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 const users = express();
-
 import { PetPlant, User, Rating } from '../../database/index';
 
 interface userInfo {
@@ -25,6 +24,17 @@ users.get('/all', async (req: Request, res: Response) => {
   } catch {
     return res.sendStatus(418);
   }
+});
+
+users.put('/:id', async (req: Request, res: Response) => {
+  User.update(req.body, { where: { id: req.body.id } })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err: Error) => {
+      console.error(err, 'put user error');
+      res.sendStatus(404);
+    });
 });
 
 users.get('/:id', async (req: Request, res: Response) => {

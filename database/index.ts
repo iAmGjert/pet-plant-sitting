@@ -286,7 +286,7 @@ db.sync(
             },
             {
               petplant_id: 1,
-              value: 4,
+              value: 2,
               submitter_id: 4,
             },
             {
@@ -303,13 +303,13 @@ db.sync(
             },
             {
               petplant_id: 1,
-              value: 5,
+              value: 1,
               text: 'I love this dog',
               submitter_id: 3,
             },
             {
               petplant_id: 1,
-              value: 5,
+              value: 2,
               text: 'Best Pupper',
               submitter_id: 2,
             },

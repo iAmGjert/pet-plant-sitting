@@ -54,7 +54,14 @@ const Profile = () => {
   const getProfile = async () => {
     const user = await axios.get('/api/users/' + id);
     setProfileUser(user.data);
-    console.log(user.data);
+    // console.log(user.data);
+  };
+  const getRating = () => {
+    let sum = 0;
+    for (let i = 0; i < profileUser?.ratings.length; i++) {
+      sum += profileUser?.ratings[i].value;
+    }
+    return sum / profileUser?.ratings.length;
   };
 
   const formatBio = (bio: string) => {
@@ -105,8 +112,7 @@ const Profile = () => {
             </h1>
             <h5>{profileUser?.location}</h5>
             <h5>
-              {getStars(profileUser?.average_rating)}(
-              {profileUser?.ratings.length})
+              {getStars(getRating())}({profileUser?.ratings.length})
             </h5>
             <h5>Member Since: {format(profileUser?.createdAt)}</h5>
             <h3>

@@ -1,68 +1,65 @@
 import React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import { Profile } from '../../Pages/Profile';
 import EditField from './EditField';
+import { PetPlant } from './PetPlantCard';
 
 type Props = {
-  user: Profile;
+  PetPlant: PetPlant;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
 };
 
-const EditAccountModal = ({ user, showModal, setShowModal }: Props) => {
-  // loop through fields on a user and create a form field for each
+const EditPetModal = ({ PetPlant, showModal, setShowModal }: Props) => {
   const navigate = useNavigate();
-  const userFields = [];
-  for (const field in user) {
+  const petPlantFields = [];
+  for (const field in PetPlant) {
     if (
       field !== 'id' &&
       field !== 'createdAt' &&
       field !== 'updatedAt' &&
       field !== 'average_rating' &&
-      field !== 'gallery_id' &&
-      field !== 'sitter_rating' &&
+      field !== 'is_plant' &&
       field !== 'total_ratings' &&
-      field !== 'total_sitter_ratings' &&
-      field !== 'ratings'
+      field !== 'ratings' &&
+      field !== 'rating' &&
+      field !== 'owner_id'
     ) {
-      userFields.push([field, user[field as keyof typeof user]]);
+      petPlantFields.push([field, PetPlant[field as keyof typeof PetPlant]]);
     }
   }
-
   const handleOnHide = () => {
     setShowModal(false);
-    navigate(`/profile/${user.id}`);
+    // navigate(`/profile/${PetPlant.owner_id}`);
   };
 
   return (
     <Modal
-      // backdrop='static'
-      show={showModal}
+      backdrop='static'
       fullscreen={true}
+      show={showModal}
       onHide={() => handleOnHide()}
+      onClick={(e) => {
+        e.stopPropagation();
+      }}
     >
-      <Modal.Header>
-        <Modal.Title>Update Profile</Modal.Title>
+      <Modal.Header closeButton>
+        <Modal.Title>Edit {PetPlant.name}</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
-          {userFields.map(([field, value], i) => {
+          {petPlantFields.map(([field, value], i) => {
             const fieldName = String(field);
             return (
               <EditField
                 key={'field' + i}
                 fieldName={fieldName}
                 value={value}
-                user={user}
+                Pet_Plant={PetPlant}
               />
             );
           })}
-          <Button
-            variant='success'
-            type='submit'
-            onClick={() => handleOnHide()}
-          >
+          <Button variant='success' onClick={() => handleOnHide()}>
             Finished
           </Button>
         </Form>
@@ -71,4 +68,4 @@ const EditAccountModal = ({ user, showModal, setShowModal }: Props) => {
   );
 };
 
-export default EditAccountModal;
+export default EditPetModal;
