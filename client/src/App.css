@@ -2,6 +2,22 @@ html,
 body {
   min-height: 100%;
 }
+.mapMarker {
+  line-height: 14px;
+  padding: 6px;
+  border-radius: 100px;
+  background-color: lightgreen;
+  box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
+  border: 2px solid rgb(28, 110, 164);
+  display: inline-block;
+}
+.markerPic {
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  object-fit: cover;
+}
+
 body {
   padding-bottom: 60px;
 }
@@ -25,4 +41,7 @@ body {
 }
 .testDiv {
   border: solid 5px red;
+}
+.navBars {
+  color: Black
 }

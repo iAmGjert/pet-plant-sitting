@@ -17,7 +17,7 @@ const LoginPrompt = () => {
   };
   const handleOtherRoute = () => {
     handleClose();
-    window.open('https://medium.com/@m.opthoog/why-i-hate-puppies-and-you-should-too-2fff78c5904d', '_blank');
+    navigate('/');
   };
 
   useEffect(() => {
