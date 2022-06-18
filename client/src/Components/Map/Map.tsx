@@ -9,26 +9,14 @@ interface Props {
   user: object
   userLng: number
   userLat: number
-  jobLng: number
-  jobLat: number
+  jobsLocations: Array<number>
 }
  
 
 const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
-const MapComponent: FC<Props> = ({ user, userLng, userLat }) => {
-
-  // const location = useAppSelector((state) => state.map.userLocation);
-  // const userGeoLng = useAppSelector((state) => state.map.userLocationGeoLng);
-  // const userGeoLat = useAppSelector((state) => state.map.userLocationGeoLat);
-  // const user = useAppSelector((state) => state.userProfile.value);
-  // const job: object = useAppSelector((state) => state.map.job);
-  // const jobLocation: string = useAppSelector((state) => state.map.jobLocation);
-  // const dispatch = useAppDispatch();
-  // const [userLng, setLng] = useState(0);
-  // const [userLat, setLat] = useState(0);
-
-
+const MapComponent: FC<Props> = ({ user, userLng, userLat, jobsLocations }) => {
+  
   return (
     <div>
       <Map
@@ -45,8 +33,21 @@ const MapComponent: FC<Props> = ({ user, userLng, userLat }) => {
           longitude={userLng}
           latitude={userLat}
         >
-          <button className='mapMarker' ></button>
+          <button className='mapMarker' >
+            <img src={user.image} alt='X' className='markerPic' />
+          </button>
         </Marker>
+        {
+          jobsLocations.map((job, index) => {
+            return <Marker
+              longitude={job[0]}
+              latitude={job[1]}
+              key={`${job}${index}`}
+            >
+              <button className='mapMarker'></button>
+            </Marker>;
+          })
+        }
       </Map>
     </div>
   );

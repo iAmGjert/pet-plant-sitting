@@ -2,11 +2,11 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //import type { RootState } from '../../store';
 
 const initialState = {
-  value: { name: '', id: 0, location: '' },
+  value: { name: '', id: 0, location: '', job: [], image: '' },
 };
 
 export const userProfileSlice = createSlice({
-  name: 'userProile',
+  name: 'userProfile',
   initialState,
   reducers: {
     changeName: (state, action: PayloadAction<string>) => {

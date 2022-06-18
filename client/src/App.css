@@ -11,4 +11,16 @@ body {
   border: 2px solid rgb(28, 110, 164);
   display: inline-block;
 }
+.markerPic {
+  border-radius: 50%;
+  height: 32px;
+  width: 32px;
+  object-fit: cover;
+}
 
+body {
+  padding-bottom: 60px;
+}
+.testDiv {
+  border: solid 5px red;
+}

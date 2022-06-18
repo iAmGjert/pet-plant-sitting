@@ -12,8 +12,7 @@ const db = new Sequelize(DB_DATABASE, DB_USERNAME, DB_PASSWORD, {
 //IF YOU NEED TO UPDATE THE DB, insert {alter: true} into .sync() on line 198
 
 const User = db.define('user', {
-  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true}, 
-
+  id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
   name: DataTypes.STRING,
   image: DataTypes.STRING,
   location: DataTypes.STRING,
@@ -44,6 +43,8 @@ const Job = db.define('job', {
   pet_plant: DataTypes.ARRAY(DataTypes.INTEGER),
   employer_id: DataTypes.INTEGER,
   sitter_id: DataTypes.INTEGER,
+  startDate: DataTypes.DATEONLY,
+  endDate: DataTypes.DATEONLY
 });
 
 const Events = db.define('event', {
@@ -52,7 +53,10 @@ const Events = db.define('event', {
   host: DataTypes.INTEGER,
   location: DataTypes.STRING,
   description: DataTypes.STRING,
-  participants: DataTypes.ARRAY(DataTypes.INTEGER)
+  participants: DataTypes.ARRAY(DataTypes.INTEGER),
+  startDate: DataTypes.DATEONLY,
+  endDate: DataTypes.DATEONLY,
+  startTime: DataTypes.TIME
 });
 
 const Conversation = db.define('conversation', {
@@ -116,7 +120,7 @@ const GalleryEntry = db.define('gallery_entry', {
 
 /************************************************/
 
-PetPlant.belongsTo(User, {
+User.hasMany(PetPlant, {
   foreignKey: 'owner_id'
 });
 
@@ -200,10 +204,161 @@ Gallery.hasMany(GalleryEntry, {
 
 
 db
-  .sync({
-    alter: true
-  }) //insert {alter: true}(alters tables if necessary) or {force: true}(drops all tables and recreates them every save) if you need to change the db structure
-  .then(() => console.log('🐘 Models synced!'))
+  .sync(process.env.CLIENT_URL === 'http://localhost' ? {
+    force: true
+  } : { alter: true }) //insert {alter: true}(alters tables if necessary) or {force: true}(drops all tables and recreates them every save) if you need to change the db structure
+  .then(()=>{
+    if (process.env.CLIENT_URL === 'http://localhost') {
+      User.bulkCreate([
+        {
+          'name': 'Braeden Ford',
+          'image': 'http://dummyimage.com/233x100.png/dddddd/000000',
+          'location': '2221 Judith St, Metairie, LA 70003',
+          'sitter_rating': 10,
+          'total_sitter_ratings': 24,
+          'bio': 'Other specified injury of unspecified blood vessel at ankle and foot level, right leg',
+          'rating': 6,
+          'total_ratings': 95
+        },
+        
+        {
+          'name': 'Beverley Ailward',
+          'image': 'http://dummyimage.com/138x100.png/dddddd/000000',
+          'location': '6838 Louisville St, New Orleans, LA 70124',
+          'sitter_rating': 8,
+          'total_sitter_ratings': 93,
+          'bio': 'Fall on same level from slipping, tripping and stumbling without subsequent striking against object',
+          'rating': 7,
+          'total_ratings': 83
+        },
+        {
+          'name': 'Nevil Sutcliffe',
+          'image': 'http://dummyimage.com/142x100.png/cc0000/ffffff',
+          'location': '2705 A P Tureaud Ave, New Orleans, LA 70119',
+          'sitter_rating': 8,
+          'total_sitter_ratings': 88,
+          'bio': 'Laceration without foreign body, left knee, sequela',
+          'rating': 1,
+          'total_ratings': 18
+        },
+        {
+          'name': 'Bradley Wilkison',
+          'image': 'http://dummyimage.com/249x100.png/5fa2dd/ffffff',
+          'location': '4609 Banks St, New Orleans, LA 70119',
+          'sitter_rating': 4,
+          'total_sitter_ratings': 38,
+          'bio': 'Nondisplaced bicondylar fracture of left tibia',
+          'rating': 7,
+          'total_ratings': 93
+        },
+        {
+          'name': 'Ramonda Sheavills',
+          'image': 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
+          'location': '1213 Gaudet Dr, Marrero, LA 70072',
+          'sitter_rating': 3,
+          'total_sitter_ratings': 86,
+          'bio': 'Major laceration of right vertebral artery, initial encounter',
+          'rating': 4,
+          'total_ratings': 70
+        }
+      ])
+        .then(()=>{
+          PetPlant.bulkCreate([{
+            'owner_id': 1,
+            'name': 'Loïc',
+            'image': 'http://dummyimage.com/153x100.png/5fa2dd/ffffff',
+            'breed': 'Madagascar hawk owl',
+            'species': 'Ninox superciliaris',
+            'tags': ['Khaki', 'Violet'],
+            'rating': 9,
+            'total_ratings': 33,
+            'is_plant': false
+          },
+          {
+            'owner_id': 2,
+            'name': 'Laïla',
+            'image': 'http://dummyimage.com/213x100.png/5fa2dd/ffffff',
+            'breed': 'Skink, blue-tongued',
+            'species': 'Tiliqua scincoides',
+            'tags': ['Khaki', 'Goldenrod'],
+            'rating': 8,
+            'total_ratings': 96,
+            'is_plant': false
+          },
+          {
+            'owner_id': 3,
+            'name': 'Angélique',
+            'image': 'http://dummyimage.com/210x100.png/ff4444/ffffff',
+            'breed': 'Small-clawed otter',
+            'species': 'Aonyx cinerea',
+            'tags': ['Crimson', 'Violet'],
+            'rating': 5,
+            'total_ratings': 71,
+            'is_plant': true
+          },
+          {
+            'owner_id': 4,
+            'name': 'Bénédicte',
+            'image': 'http://dummyimage.com/135x100.png/5fa2dd/ffffff',
+            'breed': 'Prairie falcon',
+            'species': 'Falco mexicanus',
+            'tags': ['Maroon', 'Khaki'],
+            'rating': 4,
+            'total_ratings': 92,
+            'is_plant': true
+          },
+          {
+            'owner_id': 5,
+            'name': 'Dù',
+            'image': 'http://dummyimage.com/244x100.png/5fa2dd/ffffff',
+            'breed': 'Long-tailed skua',
+            'species': 'Stercorarius longicausus',
+            'tags': ['Turquoise', 'Khaki'],
+            'rating': 9,
+            'total_ratings': 60,
+            'is_plant': false
+          }]);
+        })
+        .then(()=>{
+          Job.bulkCreate([{
+            'location': '2221 Judith St, Metairie, LA 70003',
+            'pet_plant': [2, 2],
+            'employer_id': 1,
+            'startDate': new Date('July 11, 2022 01:15:00'),
+            'endDate': new Date('July 15, 2022 01:15:00')
+          },
+          {
+            'location': '6838 Louisville St, New Orleans, LA 70124',
+            'pet_plant': [5, 2],
+            'employer_id': 2,
+            'startDate': new Date('July 22, 2022 01:15:00'),
+            'endDate': new Date('July 27, 2022 01:15:00')
+          },
+          {
+            'location': '2705 A P Tureaud Ave, New Orleans, LA 70119',
+            'pet_plant': [5, 1],
+            'employer_id': 3,
+            'startDate': new Date('July 20, 2022 01:15:00'),
+            'endDate': new Date('July 25, 2022 01:15:00')
+          },
+          {
+            'location': '4609 Banks St, New Orleans, LA 70119',
+            'pet_plant': [3, 1],
+            'employer_id': 4,
+            'startDate': new Date('July 21, 2022 01:15:00'),
+            'endDate': new Date('July 25, 2022 01:15:00')
+          },
+          {
+            'location': '1213 Gaudet Dr, Marrero, LA 70072',
+            'pet_plant': [3, 1],
+            'employer_id': 5,
+            'startDate': new Date('July 1, 2022 01:15:00'),
+            'endDate': new Date('July 5, 2022 01:15:00')
+          }]);
+        });
+    }
+  })
+  .then(() => console.log(process.env.CLIENT_URL === 'http://localhost' ? '🐘 Models synced and seeded!' : '🐘 Models synced!'))
   .catch((err: string) => console.error(err));
 
 export { db, User, Conversation, Gallery, GalleryEntry, Message, EventComment, EventParticipant, JobApplicant, PetPlantDescriptor, Rating, Events, Job, PetPlant };

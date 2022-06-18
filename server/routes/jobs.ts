@@ -1,25 +1,27 @@
 import express, { Request, Response } from 'express';
 const jobs = express();
 
-import { User, Job } from '../../database/index';
+import { Job } from '../../database/index';
 
-interface jobInfo {
-  name: string;
-  location: string;
-  pet_plant: Array<number>;
-  employer_id: number;
-  sitter_id: number;
+interface jobInfo { 
+  location: string,
+  pet_plant: Array<number>,
+  employer_id: number,
+  sitter_id: number,
+  startDate: Date,
+  endDate: Date
 }
 
 jobs.post('/create', async (req: Request, res: Response) => {
-  const { name, location, pet_plant, employer_id, sitter_id } = req.body;
+  const { location, pet_plant, employer_id, sitter_id, startDate, endDate } = req.body;
   try {
-    const job = await Job.create({
-      name,
+    const job = await Job.create(<jobInfo>{
       location,
       pet_plant,
       employer_id,
       sitter_id,
+      startDate,
+      endDate
     });
     res.status(201).send(job);
     return job;
@@ -28,10 +30,9 @@ jobs.post('/create', async (req: Request, res: Response) => {
   }
 });
 
-jobs.get('/allJobs', async (req: Request, res: Response) => {
+jobs.get('/all', async (req: Request, res: Response) => {
   try {
     const jobs = await Job.findAll();
-    console.log('hello');
     return res.status(200).send(jobs);
 
   } catch {
