@@ -6,7 +6,6 @@ const initialState = {
     date: new Date(),
     selectedDate: new Date()
   },
-  happenings: [],
   value: ''
 };
 
@@ -18,16 +17,12 @@ export const calendar = createSlice({
     changeValue: (state, action: PayloadAction<string>) => {
       state.value = action.payload;
       return state;
-    },
-    addText: (state, action:PayloadAction<string>) => {
-      state.value = action.payload;
-      return state;
     }
   },
 });
 
 //when you add actions, put another action in destructured object below
-export const { changeValue, addText } = calendar.actions;
+export const { changeValue } = calendar.actions;
 
 
 export default calendar.reducer;
