@@ -4,6 +4,7 @@ import { Form } from 'react-bootstrap';
 import PetPlantCard, { PetPlant } from './PetPlantCard';
 import { RatingInfo, Profile } from '../../Pages/Profile';
 import axios from 'axios';
+import { isPropertyAccessChain } from 'typescript';
 
 type Props = {
   user: Profile | null;
@@ -36,8 +37,8 @@ const EditField = ({
   };
   const widget = window?.cloudinary.createUploadWidget(
     {
-      cloudName: 'ibeno',
-      uploadPreset: 'trivia',
+      cloudName: process.env.CLOUDINARY_NAME,
+      uploadPreset: process.env.CLOUDINARY_PRESET,
     },
     (error: Error, result: any) => {
       if (result.event === 'success') {
@@ -68,7 +69,7 @@ const EditField = ({
         });
       }
     }
-  }, [newImgCloud, Pet_Plant, user, fieldName]);
+  }, [newImgCloud, Pet_Plant, user, fieldName, add, newPetId]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
