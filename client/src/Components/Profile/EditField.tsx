@@ -30,7 +30,7 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
       cloudName: 'ibeno',
       uploadPreset: 'trivia',
     },
-    (error: Error, result) => {
+    (error: Error, result: any) => {
       if (result.event === 'success') {
         setNewImgCloud(result.info.url);
       }
