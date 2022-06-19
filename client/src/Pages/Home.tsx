@@ -9,8 +9,9 @@ const Home: FC<Props> = () => {
   const user = useAppSelector((state) => state.userProfile.value);
   const users = useAppSelector((state) => state.userProfile.users);
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
+  const jobs = useAppSelector((state) => state.job.jobs);
   const handleClick = () => {
-    console.log(petPlants);
+    console.log(jobs);
     setDisplay(!display);
   };
   return (

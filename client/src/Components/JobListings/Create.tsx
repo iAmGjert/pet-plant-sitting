@@ -15,16 +15,34 @@ const Create = () => {
   return (
     <div className='welcome'>
       <h1>Job Creation Form:</h1>
-      {
-        submit ? 
-          <Button onClick={()=>{ setSubmit(false); }}>Submit Form</Button> :
-          <div>
+      <Form>
+        <Row>
+          <Col md>
+            <Form.Group controlId='formEmail'>
+              <Form.Label>Email Address</Form.Label>
+              <Form.Control type='email' placeholder='example@email.com'/>
+              <Form.Text className='text-muted'>
+                    We'll never share your email address, trust us!
+              </Form.Text>
+            </Form.Group>
+          </Col>
+          <Col md>
+            <Form.Group controlId='formPassword'>
+              <Form.Label>Pasword</Form.Label>
+              <Form.Control type='password' placeholder='password'/>
+            </Form.Group>
+          </Col>
+        </Row>
+        {
+          submit ? 
+            <Button onClick={()=>{ setSubmit(false); }}>Submit Form</Button> :
+            <div>
             Are you sure?
-            <Button variant='secondary' onClick={()=>{ setSubmit(true); console.log('Form not submitted.'); }}>No</Button>
-            <Button onClick={ ()=>{ handleClick(); }}>Yes</Button>
-          </div>
-
-      }
+              <Button variant='secondary' onClick={()=>{ setSubmit(true); console.log('Form not submitted.'); }}>No</Button>
+              <Button onClick={ ()=>{ handleClick(); }}>Yes</Button>
+            </div>
+        }
+      </Form>
     </div>
   );
 };
