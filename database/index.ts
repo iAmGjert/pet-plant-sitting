@@ -228,6 +228,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
+            bio: 'the coolest words in the world , i swear!',
           },
           {
             owner_id: 1,
@@ -242,6 +243,7 @@ db.sync(
             rating: 5,
             total_ratings: 96,
             is_plant: false,
+            bio: 'the coolest words in the world , i swear!',
           },
           {
             owner_id: 3,
@@ -253,6 +255,7 @@ db.sync(
             rating: 5,
             total_ratings: 71,
             is_plant: true,
+            bio: 'the coolest words in the world , i swear!',
           },
           {
             owner_id: 4,
@@ -264,6 +267,7 @@ db.sync(
             rating: 4,
             total_ratings: 92,
             is_plant: true,
+            bio: 'the coolest words in the world , i swear!',
           },
           {
             owner_id: 5,
@@ -275,6 +279,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
+            bio: 'the coolest words in the world , i swear!',
           },
         ]).then(() => {
           Rating.bulkCreate([

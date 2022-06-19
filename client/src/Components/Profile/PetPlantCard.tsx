@@ -17,6 +17,7 @@ export interface PetPlant {
   total_ratings: number;
   age: number;
   gender: string;
+  bio: string;
 }
 
 type Props = {
@@ -73,14 +74,7 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
       </Card.Body>
       {showDetails && (
         <>
-          <Card.Body>
-            {
-              <Card.Text>
-                Description about you pet plant and other cool information that
-                is cool and fun all at the same time, believe dat
-              </Card.Text>
-            }
-          </Card.Body>
+          <Card.Body>{<Card.Text>{PetPlant.bio}</Card.Text>}</Card.Body>
           <ListGroup className='list-group-flush'>
             {!edit && (
               <ListGroupItem>
