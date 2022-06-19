@@ -47,6 +47,28 @@ events.post('/create', (req: Request, res: Response) => {
     });
 });
 
+events.post('/comment/add', (req: Request, res: Response) => {
+  const { event_id, comment, user_id } = req.body;
+  EventComment.create({ event_id, comment, user_id })
+    .then((eventComment: Record<string, EventCommentInfo> | null) => {
+      res.status(201).send(eventComment?.dataValues);
+    })
+    .catch((err: Error) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+events.post('/participant/add', (req: Request, res: Response) => {
+  const { event_id, user_id } = req.body;
+  EventParticipant.create({ event_id, user_id })
+    .then((eventParticipant: Record<string, EventParticipantInfo> | null) => {
+      res.status(201).send(eventParticipant?.dataValues);
+    })
+    .catch((err: Error) => {
+      res.status(500).send(err);
+    });
+});
 
 //* GET Routes *//
 
@@ -55,8 +77,7 @@ events.get('/all', async (req: Request, res: Response) => {
     const events = await Events.findAll({
       include: [
         { model: EventComment, include: [{ model: User, attributes: ['name', 'image'] }] },
-        { model: EventParticipant, include: [{ model: User, attributes: ['name', 'image']}],
-        },
+        { model: EventParticipant, include: [{ model: User, attributes: ['name', 'image']}] },
         { model: User, attributes: ['name', 'image'] },
       ],
     });
@@ -65,14 +86,7 @@ events.get('/all', async (req: Request, res: Response) => {
     return res.status(500).send(err);
   }
 });
-//     });
-//     console.log('hello');
-//     return res.status(200).send(events);
 
-//   } catch {
-//     return res.sendStatus(418);
-//   }
-// });
 
 events.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -103,7 +117,7 @@ events.get('/participants/all', (req: Request, res: Response) => {
 
 //* UPDATE Routes *//
 
-events.put('/update/:id', async (req: Request, res: Response) => {
+events.patch('/update/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, host, location, description, participants } = req.body;
   const event = await Events.update(
