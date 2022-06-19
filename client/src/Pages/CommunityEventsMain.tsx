@@ -38,10 +38,10 @@ interface EventTYPE {
 
 const CommunityEventsMain = () => {
   const dispatch = useAppDispatch();
-  // const state = useAppSelector((state) => state);
+  const state = useAppSelector((state) => state);
   const view = useAppSelector(state => state.events.view);
   const events = useAppSelector(state => state.events.events);
-  const event = useAppSelector(state => state.events);
+
   
   useEffect(() => {
     const getEvents = async () => {
@@ -64,18 +64,7 @@ const CommunityEventsMain = () => {
     dispatch(setView('create-event'));
   };
   
-  const createEvent = async (user_id: any, event: EventTYPE) => {
-    return await axios.post('/api/events/create', { user_id, event }).then((res: any) => {
-      console.log(res);
-      return res;
-    }
-    ).catch(err => {
-      console.log(err);
-      return err;
-    });
-    
-  };
-
+  
   const renderView = (): any => {
     if (view === 'list') {
       return events.map((event: EventTYPE) => (
@@ -94,13 +83,12 @@ const CommunityEventsMain = () => {
             switchToDetailsView={switchToDetailsView}
             eventObj={event}
           />
-          {/* <button onClick={() => switchToDetailsView(event)}>Details</button> */}
         </div>
       ));
     } else if (view === 'details') {
       return <Details /*events={events} event={event}*/ />;
     } else if (view === 'create-event') {
-      return <CreateEvent changeView={changeView} createEvent={createEvent}/>;
+      return <CreateEvent /*changeView={changeView} createEvent={createEvent}*//>;
     }
   };
   
@@ -110,7 +98,7 @@ const CommunityEventsMain = () => {
         <h1>Community Events</h1>
       </div>
       <div className="events-create-btn">
-        <Button onClick={() => switchToCreateView()} size='sm'>Create Event</Button>
+        <Button onClick={switchToCreateView} size='sm'>Create Event</Button>
       </div>
       <div className='container'>{renderView()}</div>
     </div>

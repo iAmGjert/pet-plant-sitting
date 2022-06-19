@@ -12,8 +12,11 @@ interface UserInfo {
 
 interface EventInfo {
   name: string;
+  host: number;
   location: string;
   description: string;
+  startDate: Date;
+  startTime: Date;
 }
 
 interface EventCommentInfo {
@@ -31,24 +34,19 @@ interface EventParticipantInfo {
 //* POST Routes *//
 
 events.post('/create', (req: Request, res: Response) => {
-  User.findByPk(1)
-    .then((user: Record<string, UserInfo> | null) => {
-      // console.log(user?.dataValues.id, 'ln51');
-      return user?.dataValues.id;
+ 
+  const { name, host, location, description, participants, startDate, startTime } = req.body;
+ 
+  Events.create({ name, host, location, description, participants, startDate, startTime })
+    .then((event: Record<string, EventInfo> | null) => {
+      res.status(201).send(event?.dataValues);
     })
-    .then((userId: number) => {
-      const { name, location, description /*participants */ } = req.body;
-      console.log(userId, 'data');
-      Events.create({ name, host: userId, location, description /*, participants*/ })
-        .then((event: Record<string, EventInfo> | null) => {
-          res.status(201).send(event?.dataValues);
-        })
-        .catch((err: Error) => {
-          console.log(err);
-          res.status(500).send(err);
-        });
+    .catch((err: Error) => {
+      console.log(err);
+      res.status(500).send(err);
     });
 });
+
 
 //* GET Routes *//
 
