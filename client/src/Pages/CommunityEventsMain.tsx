@@ -63,9 +63,7 @@ const CommunityEventsMain = () => {
     changeView('create-event');
     dispatch(setView('create-event'));
   };
-  // console.log(events);
-  // console.log(event);
-  // use the current logged in user to create a new event using the user's id as the host with axios.post
+  
   const createEvent = async (user_id: any, event: EventTYPE) => {
     return await axios.post('/api/events/create', { user_id, event }).then((res: any) => {
       console.log(res);
@@ -77,15 +75,9 @@ const CommunityEventsMain = () => {
     });
     
   };
-  
 
-  // console.log(view);
   const renderView = (): any => {
-
     if (view === 'list') {
-      // console.log(events);
-      // console.log(view);
-      // console.log(event.event);
       return events.map((event: EventTYPE) => (
         <div key={event.id} /*style={{border: '1px solid red'}}*/>
           <Event className='events-list'
@@ -111,12 +103,6 @@ const CommunityEventsMain = () => {
       return <CreateEvent changeView={changeView} createEvent={createEvent}/>;
     }
   };
-
-  // console.log(event);
-
-
-
-  
   
   return (
     <div>

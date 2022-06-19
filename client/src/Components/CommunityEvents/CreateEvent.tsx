@@ -4,14 +4,14 @@ import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setEventObj } from '../../state/features/events/eventsSlice';
 import axios from 'axios';
 import LoginPrompt from './LoginPrompt';
-import { createEvent } from '@testing-library/react';
+// import { createEvent } from '@testing-library/react';
 
 const CreateEvent = (props: any) => {
   // const { changeView } = props;
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(state => state.userProfile.value);
   const eventObj = useAppSelector(state => state.events.event);
-  console.log(currentUser);
+  // console.log(currentUser);
 
   const postEvent = async (eventObjParam: any) => {
     return await axios.post('/api/events/create', eventObjParam)
@@ -73,7 +73,7 @@ const CreateEvent = (props: any) => {
   // const { id } = currentUser;
   const handleSubmit = () => {
     // createEvent(id, eventObj);
-    // postEvent(eventObj);
+    postEvent(eventObj);
     console.log('Form submitted.');
     return;
   };
