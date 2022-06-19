@@ -10,7 +10,8 @@ import InputGroup from 'react-bootstrap/InputGroup';
 
 const EventCard = ({ name, description, location }) => {
   return (
-    <Card className='mb-3' style={{ color: '#000' }}>
+    <Card className='mb-3' border='primary' style={{ color: '#000' }}>
+      <Card border='secondary' style={{ width: '18rem' }}></Card>
       <Card.Header>Community Event for the Day</Card.Header>
       <Card.Body>
         <Card.Title>

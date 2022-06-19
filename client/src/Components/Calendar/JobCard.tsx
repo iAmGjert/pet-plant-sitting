@@ -25,11 +25,7 @@ const JobCard = ({ startDate, location }) => {
   return (
     <Card className='mb-3' style={{ color: '#000' }}>
       <Card.Header>You have a Sitting!</Card.Header>
-      <Card.Img
-        src='https://64.media.tumblr.com/ac3f2698510ef384fdb04620750b228e/25d400665ce53341-ef/s500x750/58c0307cb0fed6a450b04ec559e8a67d99984fbf.jpg'
-        height='300'
-        width='150'
-      />
+      <Card.Img src='' height='300' width='150' />
       <Card.Body>
         <Card.Title>
           Title of Pet/Plant
