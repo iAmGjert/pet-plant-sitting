@@ -136,8 +136,8 @@ const Profile = () => {
               defaultActiveKey='overview'
               id='uncontrolled-tab-example'
               className='mb-3 '
-              fill={true}
-              justify={true}
+              fill
+              justify
               onSelect={() => {
                 if (readMore) {
                   setReadMore(!readMore);

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Form } from 'react-bootstrap';
 
 import PetPlantCard, { PetPlant } from './PetPlantCard';
@@ -14,6 +14,7 @@ type Props = {
 
 const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
   const [editable, setEditable] = useState(false);
+  const [newImgCloud, setNewImgCloud] = useState('');
   const [editField, setEditField] = useState<string>(
     fieldName === 'pet_plants' ? '' : String(value)
   );
@@ -24,6 +25,35 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
     setEditField(e.target.value);
     // console.log(editField);
   };
+  const widget = window?.cloudinary.createUploadWidget(
+    {
+      cloudName: 'ibeno',
+      uploadPreset: 'trivia',
+    },
+    (error: Error, result) => {
+      if (result.event === 'success') {
+        setNewImgCloud(result.info.url);
+      }
+    }
+  );
+  const showWidget = () => {
+    widget.open();
+  };
+  useEffect(() => {
+    if (newImgCloud) {
+      if (Pet_Plant) {
+        axios.put(`/api/pets_plants/${Pet_Plant.id}`, {
+          ...Pet_Plant,
+          [fieldName]: newImgCloud,
+        });
+      } else {
+        axios.put(`/api/users/${user.id}`, {
+          ...user,
+          [fieldName]: newImgCloud,
+        });
+      }
+    }
+  }, [newImgCloud, Pet_Plant, user, fieldName]);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -46,6 +76,8 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
           <span>
             {editable ? (
               <input value={editField} onChange={(e) => handleChange(e)} />
+            ) : fieldName === 'image' ? (
+              <div></div>
             ) : (
               <p>{editField}</p>
             )}
@@ -62,10 +94,18 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
                 onClick={(e) => {
                   // console.log('what');
                   e.preventDefault();
-                  setEditable(!editable);
+                  if (fieldName === 'image') {
+                    showWidget();
+                  } else {
+                    setEditable(!editable);
+                  }
                 }}
               >
-                Edit
+                {newImgCloud
+                  ? 'Image Uploaded!'
+                  : fieldName === 'image'
+                  ? 'Upload New Image'
+                  : 'Edit'}
               </button>
             )}
           </span>
@@ -77,6 +117,7 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
               key={'petPlant' + i}
               PetPlant={petPlant}
               edit={true}
+              getStars={null}
             />
           );
         })
