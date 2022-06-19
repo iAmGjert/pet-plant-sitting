@@ -18,10 +18,6 @@ const JobsMain = () => {
 
   const handleClick = () => {
     if (view !== 'create') {
-      if (user.name === '') {
-        setLoginPrompt(true);
-        return;
-      }
       dispatch(changeView('create'));
       return;
     }

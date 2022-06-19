@@ -276,6 +276,20 @@ db.sync(
             total_ratings: 60,
             is_plant: false,
           },
+          {
+            owner_id: 4,
+            name: 'Loïc',
+            image:
+              'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
+            breed: 'Madagascar hawk owl',
+            age: 2,
+            gender: 'Male',
+            species: 'Ninox superciliaris',
+            tags: ['Khaki', 'Violet', 'Speed', 'Cute'],
+            rating: 4,
+            total_ratings: 33,
+            is_plant: false,
+          },
         ]).then(() => {
           Rating.bulkCreate([
             {

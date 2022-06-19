@@ -12,10 +12,10 @@ const BottomNavBar = () => {
   const navigate = useNavigate();
   const user = useAppSelector(state=>state.userProfile.value);
   const handleClick = ()=>{
-    if (user.name === '') {
-      setLoginPrompt(true);
-      return;
-    }
+    // if (user.name === '') {
+    //   setLoginPrompt(true);
+    //   return;
+    // }
     dispatch(changeView('create'));
     navigate('/jobs');
   };

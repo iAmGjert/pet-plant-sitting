@@ -11,7 +11,7 @@ const Home: FC<Props> = () => {
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
   const jobs = useAppSelector((state) => state.job.jobs);
   const handleClick = () => {
-    console.log(jobs);
+    console.log(petPlants.filter((pet)=>{ return pet.owner_id === user.id; }));
     setDisplay(!display);
   };
   return (

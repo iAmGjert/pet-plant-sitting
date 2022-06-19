@@ -1,5 +1,4 @@
 const express = require('express');
-import { Request, Response } from 'express';
 const session = require('express-session');
 const path = require('path');
 const cors = require('cors');
@@ -11,6 +10,39 @@ const passport = require('passport');
 require('dotenv').config();
 require('./auth/passport.ts');
 
+const { Server, Socket } = require('socket.io');
+
+const { socket } = require('./socket');
+
+const io = new Server(4000, {
+  cors: {
+    origin: 'http://localhost:5000',
+    credentials: true,
+  },
+});
+
+io.on('connection', (socket: typeof Socket) => {
+  console.log(`User Connected: ${socket.id}`);
+
+  socket.on('join_room', (data: string) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room ${data}`);
+  });
+
+  socket.on('send_message', (data: any) => {
+    socket.to(data.room).emit('receive_message', data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User Disconnected', socket.id);
+  });
+});
+
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: true,
+  saveUninitialized: true
+}));
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -41,7 +73,7 @@ app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/pets_plants', require('./routes/pets_plants'));
 
-app.get('/*', function (req: Request, res: Response) {
+app.get('/*', function (req: Request, res: Response | any) {
   res.sendFile(
     path.join(__dirname, '../client/build/index.html'),
     function (err: Error) {
