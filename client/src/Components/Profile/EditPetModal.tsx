@@ -7,9 +7,17 @@ type Props = {
   PetPlant: PetPlant;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
+  add: boolean;
+  newPetId: number;
 };
 
-const EditPetModal = ({ PetPlant, showModal, setShowModal }: Props) => {
+const EditPetModal = ({
+  PetPlant,
+  showModal,
+  setShowModal,
+  add,
+  newPetId,
+}: Props) => {
   const petPlantFields = [];
   for (const field in PetPlant) {
     if (
@@ -42,7 +50,11 @@ const EditPetModal = ({ PetPlant, showModal, setShowModal }: Props) => {
       }}
     >
       <Modal.Header closeButton>
-        <Modal.Title>Edit {PetPlant.name}</Modal.Title>
+        {add ? (
+          <Modal.Title>Add Pet</Modal.Title>
+        ) : (
+          <Modal.Title>Edit {PetPlant.name}</Modal.Title>
+        )}
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -55,6 +67,8 @@ const EditPetModal = ({ PetPlant, showModal, setShowModal }: Props) => {
                 value={value}
                 Pet_Plant={PetPlant}
                 user={null}
+                add={add}
+                newPetId={newPetId}
               />
             );
           })}

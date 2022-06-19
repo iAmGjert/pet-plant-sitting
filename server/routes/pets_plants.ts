@@ -41,6 +41,8 @@ pets_plants.post('/create', async (req: Request, res: Response) => {
     breed,
     species,
     tags,
+    age,
+    bio,
     rating,
     total_ratings,
     is_plant,
@@ -65,12 +67,14 @@ pets_plants.post('/create', async (req: Request, res: Response) => {
 });
 
 pets_plants.put('/:id', async (req: Request, res: Response) => {
+  console.log(req.body);
   PetPlant.update(req.body, {
     where: {
-      id: req.body.id,
+      id: req.params.id,
     },
   })
-    .then(() => {
+    .then((results: any) => {
+      console.log(results);
       res.sendStatus(200);
     })
     .catch((err: Error) => {

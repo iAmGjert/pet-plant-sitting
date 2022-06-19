@@ -10,9 +10,18 @@ type Props = {
   Pet_Plant: PetPlant | null;
   fieldName: string;
   value: string | number | boolean | RatingInfo[] | string[] | PetPlant[];
+  add: boolean;
+  newPetId: number;
 };
 
-const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
+const EditField = ({
+  fieldName,
+  value,
+  user,
+  Pet_Plant,
+  add,
+  newPetId,
+}: Props) => {
   const [editable, setEditable] = useState(false);
   const [newImgCloud, setNewImgCloud] = useState('');
   const [editField, setEditField] = useState<string>(
@@ -41,7 +50,13 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
   };
   useEffect(() => {
     if (newImgCloud) {
-      if (Pet_Plant) {
+      if (add) {
+        console.log('in add');
+        axios.put(`/api/pets_plants/${newPetId}`, {
+          [fieldName]: newImgCloud,
+          id: newPetId,
+        });
+      } else if (Pet_Plant) {
         axios.put(`/api/pets_plants/${Pet_Plant.id}`, {
           ...Pet_Plant,
           [fieldName]: newImgCloud,
@@ -58,7 +73,12 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setEditable(false);
-    if (Pet_Plant) {
+    if (add) {
+      axios.put(`/api/pets_plants/${newPetId}`, {
+        [fieldName]: editField,
+        id: newPetId,
+      });
+    } else if (Pet_Plant) {
       axios.put(`/api/pets_plants/${Pet_Plant.id}`, {
         ...Pet_Plant,
         [fieldName]: editField,
@@ -84,6 +104,7 @@ const EditField = ({ fieldName, value, user, Pet_Plant }: Props) => {
             {editable ? (
               <button
                 onClick={(e: any) => {
+                  e.preventDefault();
                   handleSubmit(e);
                 }}
               >
