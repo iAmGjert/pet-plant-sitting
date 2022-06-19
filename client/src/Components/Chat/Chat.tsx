@@ -11,6 +11,7 @@ const Chat = ({ socket, currUser }) => {
   const sendMessage = async () => {
     if (currentMessage !== '') {
       const messageData = {
+        socketId: socket.id,
         room: 'chat',
         username: currUser,
         message: currentMessage,
@@ -40,7 +41,7 @@ const Chat = ({ socket, currUser }) => {
             return (
               <div 
                 className="message"
-                id={currUser === messageContent.username ? 'you' : 'other'}
+                id={socket.id === messageContent.socketId ? 'you' : 'other'}
                 key={index}
               >
                 <div>
