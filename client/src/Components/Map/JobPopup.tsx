@@ -7,7 +7,6 @@ interface Props {
   children: any
 }
 
-
 const JobPopup: FC <Props> = ({ trigger, setTrigger, children }) => {
 
   return (trigger) ? (

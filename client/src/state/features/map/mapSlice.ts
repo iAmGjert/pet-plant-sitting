@@ -1,19 +1,13 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-//import type { RootState } from '../../store';
-
 
 export const mapSlice = createSlice({
   name: 'map',
-  initialState: { userLocation: '', user: {}, job: {}, jobLocation: '', userLocationGeoLng: 0, userLocationGeoLat: 0 },
+  initialState: { userLocation: '', user: {}, job: {}, jobLocation: '', userLocationGeoLng: 0, userLocationGeoLat: 0, users: [], petsPlants: [] },
   reducers: {
     getUserLocation: (state, action: PayloadAction<string>) => {
       state.userLocation = action.payload;
       return state;
     },
-    // getUser: (state, action: PayloadAction<object>) => {
-    //   state.user = action.payload;
-    //   return state;
-    // },
     getJob: (state, action: PayloadAction<object>) => {
       state.job = action.payload;
       return state;
@@ -28,6 +22,14 @@ export const mapSlice = createSlice({
     },
     getUserLocationGeoLat: (state, action: PayloadAction<number>) => {
       state.userLocationGeoLat = action.payload;
+      return state;
+    },
+    setUsers: (state, action: PayloadAction<any>) => {
+      state.users = action.payload;
+      return state;
+    },
+    setPetsPlants: (state, action: PayloadAction<any>) => {
+      state.petsPlants = action.payload;
       return state;
     }
   }
