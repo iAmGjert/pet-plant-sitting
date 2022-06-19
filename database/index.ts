@@ -273,8 +273,23 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
+          },
+          {
+            owner_id: 4,
+            name: 'Loïc',
+            image:
+              'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
+            breed: 'Madagascar hawk owl',
+            age: 2,
+            gender: 'Male',
+            species: 'Ninox superciliaris',
+            tags: ['Khaki', 'Violet', 'Speed', 'Cute'],
+            rating: 4,
+            total_ratings: 33,
+            is_plant: false,
             bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           }  
+
         ]).then(() => {
           Rating.bulkCreate([
             {
@@ -333,8 +348,8 @@ db.sync(
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
                 pet_plant: [5, 1],
-                employer_id: 4,
-                sitter_id: 7,
+                employer_id: 3,
+                sitter_id: 5,
                 startDate: new Date('July 20, 2022 01:15:00'),
                 endDate: new Date('July 25, 2022 01:15:00'),
               },
