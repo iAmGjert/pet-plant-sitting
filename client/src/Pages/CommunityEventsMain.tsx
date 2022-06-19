@@ -63,6 +63,21 @@ const CommunityEventsMain = () => {
     changeView('create-event');
     dispatch(setView('create-event'));
   };
+  // console.log(events);
+  // console.log(event);
+  // use the current logged in user to create a new event using the user's id as the host with axios.post
+  const createEvent = async (user_id: any, event: EventTYPE) => {
+    return await axios.post('/api/events/create', { user_id, event }).then((res: any) => {
+      console.log(res);
+      return res;
+    }
+    ).catch(err => {
+      console.log(err);
+      return err;
+    });
+    
+  };
+  
 
   // console.log(view);
   const renderView = (): any => {
@@ -91,9 +106,9 @@ const CommunityEventsMain = () => {
         </div>
       ));
     } else if (view === 'details') {
-      return <Details events={events} event={event}/>;
+      return <Details /*events={events} event={event}*/ />;
     } else if (view === 'create-event') {
-      return <CreateEvent changeView={changeView}/>;
+      return <CreateEvent changeView={changeView} createEvent={createEvent}/>;
     }
   };
 
@@ -108,15 +123,10 @@ const CommunityEventsMain = () => {
       <div className="main-text">
         <h1>Community Events</h1>
       </div>
-      
-      <Button onClick={() => switchToCreateView()}>Create Event</Button>
-
+      <div className="events-create-btn">
+        <Button onClick={() => switchToCreateView()} size='sm'>Create Event</Button>
+      </div>
       <div className='container'>{renderView()}</div>
-      
-       
-      
-      
-      
     </div>
   );
 };

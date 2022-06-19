@@ -374,10 +374,9 @@ db.sync(
                 {
                   name: 'Dog Park Meetup',
                   host: 1,
-                  location: '810 Euterpe St New Orleans, Louisiana, 70130',
-                  description:
-                    'A gathering for dogs to sniff each other\'s butts and feel good about themselves',
-                  startDate: new Date('June 21, 2022 01:15:00'),
+                  location: '10 Magnolia Dr, New Orleans, LA 70124',
+                  description: 'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
+                  startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '3:19 AM',
                 },
                 {
@@ -449,6 +448,13 @@ db.sync(
                       comment: 'fusce consequat nulla nisl nunc nisl duis',
                       user_id: 5,
                     },
+                    {
+                      id: 6,
+                      event_id: 1,
+                      comment:
+                        'nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante',
+                      user_id: 1,
+                    },
                   ]);
                 })
                 .then(() => {
@@ -474,7 +480,7 @@ db.sync(
                       user_id: 4,
                     },
                   ]);
-                });
+                }).catch((err: Error) => console.log(err));
             });
           });
         });

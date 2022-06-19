@@ -17,7 +17,7 @@ const LoginPrompt = () => {
   };
   const handleOtherRoute = () => {
     handleClose();
-    navigate('/');
+    navigate('/events');
   };
 
   useEffect(() => {
