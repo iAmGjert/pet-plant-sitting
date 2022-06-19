@@ -11,9 +11,14 @@ interface jobStuff {
   pet_plant: Array<number>
 }
 
-const initState = <any>{
-  view: 'list',
+interface state {
+  view: string,
   jobs: Array<jobStuff>
+}
+
+const initState = <state>{
+  view: 'list',
+  jobs: []
 };
 
 export const jobsSlice = createSlice({
@@ -24,8 +29,9 @@ export const jobsSlice = createSlice({
       //state.value = action.payload;
       return state;
     },
-    changeView: (state, action:PayloadAction<string>)=>{;
+    changeView: (state, action:PayloadAction<string>)=>{
       state.view = action.payload;
+      //console.log('Called changeView');
       return state;
     },
     setJobs: (state, action:PayloadAction<Array<jobStuff>>)=>{

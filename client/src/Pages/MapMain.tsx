@@ -1,56 +1,66 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { useAppSelector, useAppDispatch } from '../state/hooks';
-import { mapActions } from '../state/features/map/mapSlice';
+import { useAppSelector } from '../state/hooks';
+// import { mapActions } from '../state/features/map/mapSlice';
 
 import MapComponent from '../Components/Map/Map';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
-const MapMain: FC<Props> = () => {
-  const userLocation: string = useAppSelector((state) => state.map.location);
-  const dispatch = useAppDispatch();
+const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
-  const getUserLocation = async () => {
-    const options = {
-      url: `${process.env.CLIENT_URL}:${process.env.PORT}/auth/login/success`,
-      method: 'GET',
-      withCredentials: true,
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Credentials': true,
-      },
-    };
-    await axios(options)
-      .then((res) => {
-        if (res.status === 200) {
-          return res;
-        }
-      })
-      .then((resObj) => {
-        const id = resObj.data.user.id;
-        return id;
-      })
-      .then((id) => {
-        axios.get(`/api/users/${id}`).then((results) => {
-          dispatch(mapActions.getUserLocation(results.data.location));
-        });
-      })
-      .catch((err) => {
-        console.error(err, 'something went wrong');
+const MapMain: FC<Props> = () => {
+
+  const user = useAppSelector((state) => state.userProfile.value);
+  const jobs = useAppSelector((state) => state.job.jobs);
+
+  const [userGeoLoc, setUserGeoLoc] = useState(null);
+  const [jobsLocations, setJobsLocations] = useState([]);
+  
+
+  const geoCodeUser = () => {
+    axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${user?.location}.json?access_token=${TOKEN}`)
+      .then((results) => {
+        setUserGeoLoc(results.data.features[0].center);
       });
   };
 
-  getUserLocation();
+
+  const geoCodeJobs = () => {
+    const mapped = jobs.map(async (job, id) => {
+      const promises = await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${job.location}.json?access_token=${TOKEN}`);
+      return [promises.data.features[0].center, job.id];
+    });
+    return Promise.all(mapped);
+  };
+
+
+  useEffect(() => {
+    if (user && user.location) {
+      geoCodeUser();
+      geoCodeJobs().then((jobs) => {
+        setJobsLocations(jobs);
+      });
+    }
+  }, [user]);
+
+  
 
   return (
     <div>
-      <div>
-        <MapComponent location />
-      </div>
+      {
+        user && user.location && userGeoLoc
+          ? <MapComponent 
+            user={user} 
+            userGeoLoc={userGeoLoc}
+            jobs={jobs}
+            jobsLocations={jobsLocations}
+          />
+          : 'Loading...'
+      }
     </div>
   );
 };

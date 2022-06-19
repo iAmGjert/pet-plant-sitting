@@ -12,7 +12,7 @@ const List = () => {
           jobs.map((job, index)=>{
             return (<div key={`job#${index}`}>
               <Job job={job}/>
-            </div>)
+            </div>);
           }) :
           <div>NotArray</div>
       }

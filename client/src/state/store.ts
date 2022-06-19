@@ -1,10 +1,11 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, getDefaultMiddleware } from '@reduxjs/toolkit';
 import userProfileReducer from './features/userProfile/userProfileSlice';
 import infoReducer from './features/info/infoSlice';
 import jobsReducer from './features/jobs/jobSlice';
 import { mapReducer } from './features/map/mapSlice';
 import calendarReducer from './features/calendar/calendarSlice';
 import communityEventsReducer from './features/events/eventsSlice';
+import petPlantReducer from './features/petPlant/petPlantSlice';
 
 
 export const store = configureStore({
@@ -14,8 +15,12 @@ export const store = configureStore({
     info: infoReducer,
     job: jobsReducer,
     map: mapReducer,
-    calendar: calendarReducer
+    calendar: calendarReducer,
+    petPlant: petPlantReducer,
   },
+  middleware: getDefaultMiddleware({
+    serializableCheck: false,
+  })
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

@@ -1,9 +1,12 @@
-import React, { /*FC,*/ useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
-
-import { getEvents, getView, setView, setEvents } from '../state/features/events/eventsSlice';
+import Button from 'react-bootstrap/Button';
+import { /*getEvents, getView,*/ setView, setEvents, setEventObj } from '../state/features/events/eventsSlice';
 import Event from '../Components/CommunityEvents/Event';
+import Details from '../Components/CommunityEvents/Details';
+import CreateEvent from '../Components/CommunityEvents/CreateEvent';
+import '../Components/CommunityEvents/style/EventsMain.css';
 
 interface EventTYPE {
   id: number;
@@ -11,7 +14,7 @@ interface EventTYPE {
   host: number;
   location: string;
   description: string;
-  event_comments: /*string[];*/ Array<{ 
+  event_comments: Array<{ 
     id: number; 
     comment: string; 
     user: {
@@ -35,48 +38,81 @@ interface EventTYPE {
 
 const CommunityEventsMain = () => {
   const dispatch = useAppDispatch();
+  // const state = useAppSelector((state) => state);
   const view = useAppSelector(state => state.events.view);
   const events = useAppSelector(state => state.events.events);
-
-
-  console.log(events);
+  const event = useAppSelector(state => state.events);
+  
   useEffect(() => {
     const getEvents = async () => {
       const res = await axios.get('/api/events/all');
-      return dispatch(setEvents(res.data)); // set events to state
+      return dispatch(setEvents(res.data));
     };
     getEvents();
   }, [dispatch]);
+  
+  const changeView = (option: string) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    dispatch(setView(option));
+  };
+  const switchToDetailsView = (eventObj: EventTYPE) => {
+    changeView('details');
+    dispatch(setEventObj(eventObj));
+  };
+  const switchToCreateView = () => {
+    changeView('create-event');
+    dispatch(setView('create-event'));
+  };
 
-   
-  // const handleClick = () => {
-  //   if (view !== 'create') {
-  //     dispatch(setView('create'));
-  //     return;
-  //   }
-  //   dispatch(setView('list'));
-  // };
+  // console.log(view);
+  const renderView = (): any => {
+
+    if (view === 'list') {
+      // console.log(events);
+      // console.log(view);
+      // console.log(event.event);
+      return events.map((event: EventTYPE) => (
+        <div key={event.id} /*style={{border: '1px solid red'}}*/>
+          <Event className='events-list'
+            name={event.name}
+            host={event.host}
+            location={event.location}
+            description={event.description}
+            comments={event.event_comments}
+            participants={event.event_participants}
+            startDate={event.startDate}
+            endDate={event.endDate}
+            startTime={event.startTime}
+            user={event.user}
+            switchToDetailsView={switchToDetailsView}
+            eventObj={event}
+          />
+          {/* <button onClick={() => switchToDetailsView(event)}>Details</button> */}
+        </div>
+      ));
+    } else if (view === 'details') {
+      return <Details events={events} event={event}/>;
+    } else if (view === 'create-event') {
+      return <CreateEvent changeView={changeView}/>;
+    }
+  };
+
+  // console.log(event);
+
+
+
+  
   
   return (
     <div>
-      <h1>Community Events</h1>
-      {/* <button onClick={() => getEvents()}>
-      Log Events
-      </button> */}
-      { view === 'list' && Array.isArray(events) ? events.map((event: EventTYPE) => (
-        <Event key={event.id} 
-          name={event.name}
-          host={event.host}
-          location={event.location}
-          description={event.description}
-          comments={event.event_comments}
-          participants={event.event_participants}
-          startDate={event.startDate}
-          endDate={event.endDate}
-          startTime={event.startTime}
-          user={event.user}
-        />
-      )) : <div> </div> }
+      <div className="main-text">
+        <h1>Community Events</h1>
+      </div>
+      
+      <Button onClick={() => switchToCreateView()}>Create Event</Button>
+
+      <div className='container'>{renderView()}</div>
+      
        
       
       

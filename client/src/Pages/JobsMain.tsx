@@ -12,8 +12,6 @@ const JobsMain = () => {
 
   const view = useAppSelector((state)=>state.job.view);
 
-  const jobs = useAppSelector((state)=>state.job.jobs);
-
   const handleClick = () => {
     if (view !== 'create') {
       dispatch(changeView('create'));
@@ -24,13 +22,13 @@ const JobsMain = () => {
 
   return (
     <Container fluid>
-      <Search />
       {
         view === 'create' ?
           <Create /> :
-          view === 'job' ?
-            <Search /> :
+          <div>
+            <Search />
             <List />
+          </div>
       }
       <Button onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : 'Create New Job'}</Button>
     </Container>
