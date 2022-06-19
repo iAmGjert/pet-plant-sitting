@@ -58,7 +58,7 @@ app.listen(port, () => {
 });
 
 db.authenticate()
-  .then(() => console.log('🥂 Connected to database'))
+  .then(() => console.log('✨ Connected to database'))
   .catch((err: string) => console.error(err));
 
 export {};
