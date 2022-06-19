@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setEventObj } from '../../state/features/events/eventsSlice';
 import axios from 'axios';
 import LoginPrompt from './LoginPrompt';
+import { createEvent } from '@testing-library/react';
 
 const CreateEvent = (props: any) => {
-  const { changeView } = props;
+  // const { changeView } = props;
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(state => state.userProfile.value);
   const eventObj = useAppSelector(state => state.events.event);
@@ -33,6 +34,8 @@ const CreateEvent = (props: any) => {
   const handleLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const eventObjParam = { ...eventObj };
     eventObjParam.location = e.target.value;
+    console.log(eventObjParam);
+    console.log(eventObj);
     dispatch(setEventObj(eventObjParam));
   };
   const handleDescriptionChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,11 +54,26 @@ const CreateEvent = (props: any) => {
     dispatch(setEventObj(eventObjParam));
   };
   
+  useEffect(() => {
+    const setUserIdToHost = async () => {
+      const eventObjParam = { ...eventObj };
+      eventObjParam.host = currentUser.id;
+      dispatch(setEventObj(eventObjParam));
+    };
+    setUserIdToHost();
+  }, [currentUser, dispatch, eventObj]);
 
 
 
+ 
+  
+
+  // console.log(props);
+
+  // const { id } = currentUser;
   const handleSubmit = () => {
-    postEvent(eventObj);
+    // createEvent(id, eventObj);
+    // postEvent(eventObj);
     console.log('Form submitted.');
     return;
   };

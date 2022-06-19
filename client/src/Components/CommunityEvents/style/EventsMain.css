@@ -27,13 +27,19 @@ h1 {
   font-size: 28px;
 }
 
-.main-text {
+.main-text  {
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   width: 100%;
-  
-  /* You need to define an explicit height! */
   height: 10vh;
+}
+.events-create-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 6vh;
 }
