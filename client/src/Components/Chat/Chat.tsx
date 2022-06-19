@@ -36,7 +36,7 @@ const Chat = ({ socket, currUser }) => {
         <p>Live Chat</p>
       </div>
       <div className="chat-body">
-        <ScrollToBottom className="message-container">
+        <ScrollToBottom className="message-container">   
           {messageList.map((messageContent: any, index: number) => {
             return (
               <div 
