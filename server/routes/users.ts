@@ -18,7 +18,9 @@ interface userInfo {
 users.get('/all', async (req: Request, res: Response) => {
   try {
     const users = await User.findAll({
-      include: [{ model: PetPlant, include: Rating }, { model: Rating }],
+      include: [
+        { model: PetPlant, include: Rating },
+        { model: Rating }],
     });
     return res.status(200).send(users);
   } catch {

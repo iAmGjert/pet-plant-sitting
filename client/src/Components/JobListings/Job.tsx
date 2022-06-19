@@ -19,7 +19,6 @@ const Job = ({ job }) => {
   };
   const [load, setLoad] = useState(false);
   useEffect(()=>{
-    
     setLoad(true);
   }, []);
   return (
@@ -32,15 +31,23 @@ const Job = ({ job }) => {
                 Job#{id}
               </Card.Title>
             </Col>
-            <Col>        
-              <div>
-                Employer: {<div>{users[employer_id].name}</div>}
-              </div>
+            <Col>
+              {
+                users[employer_id] ? 
+                  <div>
+                    Employer: {<div>{users[employer_id].name}</div>}
+                  </div> :
+                  <div />
+              }
             </Col>
             <Col>        
-              <div>
-                Pet/Plants: { pet_plant.map((p, i)=>{ return <div key={`p${i}`}>{petPlants[p - 1].name}</div>; }) }
-              </div>
+              {
+                petPlants[pet_plant[0]] ?
+                  <div>
+                    Pet/Plants: { pet_plant.map((p, i)=>{ return <div key={`p${i}`}>{petPlants[p - 1].name}</div>; }) }
+                  </div> :
+                  <div />
+              }
             </Col>
           </Row>
           <Row>

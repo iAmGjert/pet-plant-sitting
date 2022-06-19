@@ -2,8 +2,11 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
+import { useAppSelector, useAppDispatch } from '../../state/hooks';
+import { changeView, } from '../../state/features/jobs/jobSlice';
 
 const LoginPrompt = () => {
+  const dispatch = useAppDispatch();
   const [show, setShow] = useState(false);
 
   const navigate = useNavigate();
@@ -17,7 +20,7 @@ const LoginPrompt = () => {
   };
   const handleOtherRoute = () => {
     handleClose();
-    navigate('/events');
+    dispatch(changeView('list'));
   };
 
   useEffect(() => {
@@ -39,7 +42,7 @@ const LoginPrompt = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleOtherRoute}>
-          No, Thnaks
+          No, Thanks
           </Button>
           <Button variant="primary" onClick={handleLoginRoute}>Take Me There</Button>
         </Modal.Footer>

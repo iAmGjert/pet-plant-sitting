@@ -1,7 +1,9 @@
+const { User, PetPlant, Job } = require('../../database/index');
+
+
 import express, { Request, Response } from 'express';
 const jobs = express();
 
-import { Job } from '../../database/index';
 
 interface jobInfo {
   location: string;
