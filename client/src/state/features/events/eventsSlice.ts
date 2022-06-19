@@ -22,7 +22,7 @@ interface EventsSliceState {
 
 const initialState: any = {
   view: 'list',
-  events: Array<Event>,
+  events: [],
 };
 
 export const communityEventsSlice = createSlice({
