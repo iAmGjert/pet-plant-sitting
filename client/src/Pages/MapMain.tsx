@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import axios from 'axios';
 
-import { useAppSelector } from '../state/hooks';
-// import { mapActions } from '../state/features/map/mapSlice';
+import { useAppSelector, useAppDispatch } from '../state/hooks';
+import { mapActions } from '../state/features/map/mapSlice';
 
 import MapComponent from '../Components/Map/Map';
 
@@ -12,13 +12,15 @@ interface Props {}
 const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
 const MapMain: FC<Props> = () => {
+  const dispatch = useAppDispatch();
 
   const user = useAppSelector((state) => state.userProfile.value);
   const jobs = useAppSelector((state) => state.job.jobs);
+  const users = useAppSelector((state) => state.map.users);
+  const petsPlants = useAppSelector((state) => state.map.petsPlants);
 
   const [userGeoLoc, setUserGeoLoc] = useState(null);
   const [jobsLocations, setJobsLocations] = useState([]);
-  
 
   const geoCodeUser = () => {
     axios.get(`https://api.mapbox.com/geocoding/v5/mapbox.places/${user?.location}.json?access_token=${TOKEN}`)
@@ -26,7 +28,6 @@ const MapMain: FC<Props> = () => {
         setUserGeoLoc(results.data.features[0].center);
       });
   };
-
 
   const geoCodeJobs = () => {
     const mapped = jobs.map(async (job, id) => {
@@ -37,6 +38,15 @@ const MapMain: FC<Props> = () => {
     return Promise.all(mapped);
   };
 
+  const getUsers = async () => {
+    const users = await axios.get('/api/users/all');
+    dispatch(mapActions.setUsers(users.data));
+  };
+
+  const getPetsPlants = async () => {
+    const petsPlants = await axios.get('/api/pets_plants/all');
+    dispatch(mapActions.setPetsPlants(petsPlants.data));
+  };
 
   useEffect(() => {
     if (user && user.location) {
@@ -45,16 +55,18 @@ const MapMain: FC<Props> = () => {
         setJobsLocations(jobs);
       });
     }
+    getUsers();
+    getPetsPlants();
   }, [user]);
-
-  
 
   return (
     <div>
       {
         user && user.location && userGeoLoc
           ? <MapComponent 
-            user={user} 
+            user={user}
+            users={users}
+            petsPlants={petsPlants}
             userGeoLoc={userGeoLoc}
             jobs={jobs}
             jobsLocations={jobsLocations}

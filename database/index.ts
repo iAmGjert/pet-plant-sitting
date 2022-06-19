@@ -332,7 +332,7 @@ db.sync(
               {
                 location: '2221 Judith St, Metairie, LA 70003',
                 pet_plant: [2, 2],
-                employer_id: 1,
+                employer_id: 2,
                 sitter_id: 7,
                 startDate: new Date('July 11, 2022 01:15:00'),
                 endDate: new Date('July 15, 2022 01:15:00'),
@@ -340,7 +340,7 @@ db.sync(
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
                 pet_plant: [5, 2],
-                employer_id: 2,
+                employer_id: 3,
                 sitter_id: 7,
                 startDate: new Date('July 22, 2022 01:15:00'),
                 endDate: new Date('July 27, 2022 01:15:00'),
@@ -356,16 +356,16 @@ db.sync(
               {
                 location: '4609 Banks St, New Orleans, LA 70119',
                 pet_plant: [3, 1],
-                employer_id: 4,
-                sitter_id: 3,
+                employer_id: 5,
+                sitter_id: 7,
                 startDate: new Date('July 21, 2022 01:15:00'),
                 endDate: new Date('July 25, 2022 01:15:00'),
               },
               {
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
                 pet_plant: [3, 1],
-                employer_id: 5,
-                sitter_id: 1,
+                employer_id: 6,
+                sitter_id: 7,
                 startDate: new Date('July 1, 2022 01:15:00'),
                 endDate: new Date('July 5, 2022 01:15:00'),
               },
