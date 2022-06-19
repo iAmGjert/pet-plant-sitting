@@ -190,9 +190,6 @@ const Profile = () => {
                   );
                 })}
               </Tab>
-              <Tab eventKey='contact' title='Contact' disabled>
-                words
-              </Tab>
             </Tabs>
           </span>
         </Col>
