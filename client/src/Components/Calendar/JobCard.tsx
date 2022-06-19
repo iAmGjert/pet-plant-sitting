@@ -15,7 +15,7 @@ import { useSelector } from 'react-redux';
 import { getEventListeners } from 'events';
 //import { bindActionCreators } from 'redux'; this is what we will import when we have our actions created
 
-const JobCard = ({ startDate, location }) => {
+const JobCard = ({ startDate, location, bio, image, name, breed }) => {
   //redux hooks
   //const user = useAppSelector(state => state.userProfile.value);
   // const dispatch = useAppDispatch();
@@ -25,15 +25,14 @@ const JobCard = ({ startDate, location }) => {
   return (
     <Card className='mb-3' style={{ color: '#000' }}>
       <Card.Header>You have a Sitting!</Card.Header>
-      <Card.Img src='' height='300' width='150' />
+      <Card.Img src={image} height='300' width='150' />
       <Card.Body>
         <Card.Title>
-          Title of Pet/Plant
-          <Card.Text></Card.Text>
-          <Card.Subtitle className='mb-2 text-bold'>Bio here</Card.Subtitle>
-          <Card.Subtitle className='mb-4 text-muted'>
-            Location here
-          </Card.Subtitle>
+          <Card.Text>
+            Job for {name}, {breed}
+          </Card.Text>
+          <Card.Subtitle className='mb-2 text-bold'>{bio}</Card.Subtitle>
+          <Card.Subtitle className='mb-4 text-muted'>{location}</Card.Subtitle>
         </Card.Title>
         <Button variant='primary'>Exit</Button>
       </Card.Body>

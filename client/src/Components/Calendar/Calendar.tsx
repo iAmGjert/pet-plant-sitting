@@ -22,6 +22,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
+import { ifError } from 'assert';
 
 // interface jobStuff {
 //   id: number,
@@ -95,6 +96,10 @@ const CalendarApp = () => {
         });
         console.log('filteredDate', filteredDate);
         setTrabajos(filteredDate);
+        return filteredDate;
+      })
+      .then((resp) => {
+        console.log('resp on 102', resp);
       })
       .catch((err) => {
         console.error(err);
@@ -113,18 +118,22 @@ const CalendarApp = () => {
         console.log('113', response);
         const petPlant = response.filter((element) => {
           console.log('e', element);
-          trabajos.filter((trabajo) => {
-            console.log('trabajo pet ids', trabajo.pet_plant);
-            trabajo.pet_plant.map((x) => {
-              x === trabajo.id;
-              console.log('hello', x);
-            });
-            return true;
-          });
-          return false;
-        });
+          let hasId = false;
 
-        console.log('petPlant', petPlant);
+          for (const trabajo of trabajos) {
+            console.log('119', trabajo.pet_plant[0]);
+            if (trabajo.pet_plant[0] === element.id) {
+              hasId = true;
+              //break;
+            } else {
+              return 0;
+            }
+            return hasId;
+          }
+
+          console.log('petplant', petPlant);
+          setPetPlants(petPlant);
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -136,8 +145,13 @@ const CalendarApp = () => {
   useEffect(() => {
     getAllEvents();
     getAllJobs();
+
     //console.log('filteredDate here', filteredDate);
   }, [dateState]);
+
+  // useEffect(() => {
+  //   getPetPlants();
+  // }, []);
 
   // use useEffect to connect job listings and community events from backend to calendar
   // useEffect(() => {
@@ -175,10 +189,25 @@ const CalendarApp = () => {
           trabajos.map((element) => {
             return (
               <>
-                <EventCard
+                <JobCard
                   key={element.id}
                   startDate={element.startDate}
                   location={element.location}
+                />
+              </>
+            );
+          })}
+
+        {petPlants?.length > 0 &&
+          petPlants.map((element) => {
+            return (
+              <>
+                <JobCard
+                  key={element.id}
+                  image={element.image}
+                  bio={element.bio}
+                  name={element.name}
+                  breed={element.breed}
                 />
               </>
             );
@@ -188,6 +217,13 @@ const CalendarApp = () => {
           <b>{moment(dateState).format('MMMM Do YYYY')}</b>
         </p>
         <Button onClick={getPetPlants}>1</Button>
+        <Button
+          onClick={() => {
+            console.log(petPlants);
+          }}
+        >
+          2
+        </Button>
       </div>
     </div>
   );
@@ -196,22 +232,6 @@ const CalendarApp = () => {
 CalendarApp.propTypes = {};
 
 export default CalendarApp;
-
-{
-  /* {date.length > 0 ? (
-  <p className='text-center'>
-    <span className='bold'>Start:</span>{' '}
-    {date[0].toDateString()}
-    &nbsp;|&nbsp;
-    <span className='bold'>End:</span> {date[1].toDateString()}
-  </p>
-) : (
-  <p className='text-center'>
-    <span className='bold'>Default selected date:</span>{' '}
-    {date.toDateString()}
-  </p>
-)} */
-}
 
 //eventually, when set up your section in the store, you can return the key value pair necessary to your feature
 //const [value, onChange] = useState(new Date());

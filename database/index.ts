@@ -316,7 +316,7 @@ db.sync(
             Job.bulkCreate([
               {
                 location: '2221 Judith St, Metairie, LA 70003',
-                pet_plant: [2, 2],
+                pet_plant: [1],
                 employer_id: 1,
                 sitter_id: 7,
                 startDate: new Date('July 11, 2022 01:15:00'),
@@ -324,7 +324,7 @@ db.sync(
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
-                pet_plant: [5, 2],
+                pet_plant: [2],
                 employer_id: 2,
                 sitter_id: 7,
                 startDate: new Date('July 22, 2022 01:15:00'),
@@ -332,7 +332,7 @@ db.sync(
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
-                pet_plant: [5, 1],
+                pet_plant: [3],
                 employer_id: 3,
                 sitter_id: 7,
                 startDate: new Date('July 20, 2022 01:15:00'),
@@ -340,7 +340,7 @@ db.sync(
               },
               {
                 location: '4609 Banks St, New Orleans, LA 70119',
-                pet_plant: [3, 1],
+                pet_plant: [4],
                 employer_id: 4,
                 sitter_id: 7,
                 startDate: new Date('July 21, 2022 01:15:00'),
@@ -348,7 +348,7 @@ db.sync(
               },
               {
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
-                pet_plant: [3, 1],
+                pet_plant: [5],
                 employer_id: 5,
                 sitter_id: 7,
                 startDate: new Date('July 1, 2022 01:15:00'),
@@ -369,7 +369,7 @@ db.sync(
                   name: 'Annual Animal Rescue Drive',
                   host: 2,
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
-                  description: 'A gathering for pet-less humans to find their furrever friend and be rescued by their pets',
+                  description: 'A gathering for pet-less humans to find and be rescued by their furrever friends',
                   startDate: new Date('June 29, 2022 01:15:00'),
                   startTime: '4:48 AM',
                 },
