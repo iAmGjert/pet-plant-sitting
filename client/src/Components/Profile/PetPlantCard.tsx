@@ -62,6 +62,8 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
         PetPlant={PetPlant}
         showModal={showModal}
         setShowModal={setShowModal}
+        add={false}
+        newPetId={null}
       />
       <Card.Img variant='top' src={PetPlant.image} />
       <Card.Body>

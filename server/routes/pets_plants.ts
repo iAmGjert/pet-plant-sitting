@@ -33,6 +33,20 @@ pets_plants.get('/:id', async (req: Request, res: Response) => {
   return res.status(200).send(user);
 });
 
+pets_plants.delete('/:id', async (req: Request, res: Response) => {
+  PetPlant.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((err: Error) => {
+      console.log(err, 'delete petplant err');
+    });
+});
+
 pets_plants.post('/create', async (req: Request, res: Response) => {
   const {
     owner_id,

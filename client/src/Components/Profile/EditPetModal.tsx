@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import EditField from './EditField';
@@ -39,6 +40,11 @@ const EditPetModal = ({
     // navigate(`/profile/${PetPlant.owner_id}`);
   };
 
+  const handleDelete = () => {
+    axios.delete(`/api/pets_plants/${PetPlant.id}`);
+    setShowModal(false);
+  };
+
   return (
     <Modal
       backdrop='static'
@@ -72,6 +78,11 @@ const EditPetModal = ({
               />
             );
           })}
+          {!add && (
+            <Button variant='danger' onClick={() => handleDelete()}>
+              Delete
+            </Button>
+          )}
           <Button variant='success' onClick={() => handleOnHide()}>
             Finished
           </Button>
