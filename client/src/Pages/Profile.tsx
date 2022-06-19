@@ -84,6 +84,7 @@ const Profile = () => {
   };
 
   const currUser = useAppSelector((state) => state.userProfile.value);
+
   useEffect(() => {
     getProfile();
   }, []);
