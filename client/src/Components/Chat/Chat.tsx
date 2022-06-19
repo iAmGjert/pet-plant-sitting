@@ -11,6 +11,7 @@ const Chat = ({ socket, currUser }) => {
   const sendMessage = async () => {
     if (currentMessage !== '') {
       const messageData = {
+        socketId: socket.id,
         room: 'chat',
         username: currUser,
         message: currentMessage,
@@ -35,12 +36,12 @@ const Chat = ({ socket, currUser }) => {
         <p>Live Chat</p>
       </div>
       <div className="chat-body">
-        <ScrollToBottom className="message-container">
+        <ScrollToBottom className="message-container">   
           {messageList.map((messageContent: any, index: number) => {
             return (
               <div 
                 className="message"
-                id={currUser === messageContent.username ? 'you' : 'other'}
+                id={socket.id === messageContent.socketId ? 'you' : 'other'}
                 key={index}
               >
                 <div>
