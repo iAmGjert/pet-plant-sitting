@@ -5,17 +5,32 @@ import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, ToggleButto
 import LoginPrompt from './LoginPrompt';
 import moment from 'moment';
 import axios from 'axios';
+import { Link } from 'react-bootstrap/lib/Navbar';
 
 const Create = () => {
   const jobObj = useAppSelector(state => state.job.job);
   const user = useAppSelector(state => state.userProfile.value);
   const myPets = useAppSelector(state => state.petPlant.petPlants.filter(pet=>pet.owner_id === user.id));
+  const petPlants = useAppSelector(state => state.petPlant.petPlants).reduce( (ans, pet, ind)=>{
+    if (pet.owner_id === user.id) {
+      ans.push(ind + 1);
+    }
+    return ans;
+  }, []);
   const dispatch = useAppDispatch();
   const [startDate, setStartDate] = useState(moment().add(1, 'days').format('YYYY-MM-DD'));
   const [endDate, setEndDate] = useState(moment().add(2, 'days').format('YYYY-MM-DD'));
   const [description, setDescription] = useState('Describe the job in one or two sentences.');
   const [feed, setFeed] = useState(myPets.reduce(arr=>{ arr.push(false); return arr; }, []));
-  
+  const [obj, setObj] = useState(
+    {
+      location: user.location, 
+      employer_id: user.id, 
+      pet_plant: petPlants,
+      startDate: startDate,
+      endDate: endDate,
+
+    });
   const postJob = async (newJob: any) => {
     return await axios.post('/api/jobs/create', newJob)
       .then((res: any) => {
@@ -45,7 +60,7 @@ const Create = () => {
     setFeed(newFeed);
   };
   const handleSubmit = () => {
-    postJob(jobObj);
+    postJob(obj);
     console.log('Form submitted.');
     dispatch(changeView('list'));
     return;
