@@ -72,6 +72,8 @@ pets_plants.post('/create', async (req: Request, res: Response) => {
       rating,
       total_ratings,
       is_plant,
+      age,
+      bio,
     });
     res.status(201).send(user);
     return user;
