@@ -4,7 +4,6 @@ import { Form } from 'react-bootstrap';
 import PetPlantCard, { PetPlant } from './PetPlantCard';
 import { RatingInfo, Profile } from '../../Pages/Profile';
 import axios from 'axios';
-import { isPropertyAccessChain } from 'typescript';
 
 type Props = {
   user: Profile | null;
