@@ -11,7 +11,7 @@ interface Context {
 
 }
 
-const socket = io('http://localhost:4000');
+const socket = io(`${process.env.CLIENT_URL}:4000`);
 
 const SocketContext = createContext<Context>({ 
   socket, 

@@ -58,7 +58,6 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     for (let i = 0; i < events.length; i++ ) {
       if (id === events[i].id) {
         setEventPopup(events[i]);
-        console.log(eventPopup);
       }
     }
     setEventButtonPopup(!eventButtonPopup);
