@@ -4,6 +4,8 @@ import { useAppSelector, useAppDispatch } from '../state/hooks';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
-const Landing: FC<props> = () => {};
+const LandingPage: FC<props> = () => {
+  return <h1>Hello</h1>;
+};
 
 export default LandingPage;
