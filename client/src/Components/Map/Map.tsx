@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map, { Marker } from 'react-map-gl';
 import JobPopup from './JobPopup';
+import EventPopup from './EventPopup';
 
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -12,17 +13,21 @@ interface Props {
   userGeoLoc: Array<number>
   jobs: Array<object>
   jobsLocations: any
+  eventsLocations: any
+  events: Array<object>
 }
  
 
 const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
-const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jobsLocations }) => {
+const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jobsLocations, eventsLocations, events }) => {
 
   const [buttonPopup, setButtonPopup] = useState(false);
+  const [eventButtonPopup, setEventButtonPopup] = useState(false);
   const [jobPopup, setJobPopup] = useState({});
   const [userPopup, setUserPopup] = useState({});
   const [petsPlantsPopup, setPetsPlantsPopup] = useState([]);
+  const [eventPopup, setEventPopup] = useState({});
 
   const showJobInfo = (id) => {
     const storage = [];
@@ -47,6 +52,15 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
       }
     }
     setButtonPopup(!buttonPopup);
+  };
+
+  const showEventInfo = (id) => {
+    for (let i = 0; i < events.length; i++ ) {
+      if (id === events[i].id) {
+        setEventPopup(events[i]);
+      }
+    }
+    setEventButtonPopup(!eventButtonPopup);
   };
 
   return (
@@ -76,7 +90,18 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
               latitude={job[0][1]}
               key={`${job}${index}`}
             >
-              <button className='mapMarker' onClick={() => showJobInfo(job[1])}></button>
+              <button className='mapJobMarker' onClick={() => showJobInfo(job[1])}></button>
+            </Marker>;
+          })
+        }
+        {
+          eventsLocations.map((event, index) => {
+            return <Marker
+              longitude={event[0][0]}
+              latitude={event[0][1]}
+              key={`${event}${index}`}
+            >
+              <button className='mapEventMarker' onClick={() => showEventInfo(event[1])}></button>
             </Marker>;
           })
         }
@@ -95,6 +120,15 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
               <h4>{`End: ${new Date(jobPopup.endDate).toLocaleDateString()}`}</h4>
               <h5>{`Address: ${jobPopup.location}`}</h5>
             </JobPopup> : ''
+        }
+        {
+          eventPopup ?
+            <EventPopup trigger={eventButtonPopup} setTrigger={showEventInfo}>
+              <h2>{eventPopup.name}</h2>
+              <h4>{eventPopup.location}</h4>
+              <h6>Host: {eventPopup.user?.name} <img src={eventPopup.user?.image} alt='' className='popupEventProfilePic' /></h6>
+              <p>{eventPopup.description}</p>
+            </EventPopup> : ''
         }
       </Map> 
     </div>
