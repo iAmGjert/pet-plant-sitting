@@ -62,7 +62,7 @@ auth.get(
 auth.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: CLIENT_URL,
+    successRedirect: '/loading',
     failureRedirect: '/login/fail',
   })
 );

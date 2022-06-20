@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
+
 interface jobStuff {
   id: number,
   location: string,
@@ -11,8 +12,8 @@ interface jobStuff {
   pet_plant: Array<number>
 }
 const Job = ({ job }) => {
-  const [users, setUsers] = useState(useAppSelector((state)=>state.userProfile.users));
-  const [petPlants, setPetPlants] = useState(useAppSelector((state)=>state.petPlant.petPlants));
+  const user = useAppSelector((state)=>state.userProfile.users);
+  const petPlants = useAppSelector((state)=>state.petPlant.petPlants);
   const {id, location, pet_plant, employer_id, sitter_id, startDate, endDate}: jobStuff = job;
   const handleClick = ()=>{
     console.log(`Clicked more info for job#${id}`);
@@ -33,11 +34,14 @@ const Job = ({ job }) => {
             </Col>
             <Col>
               {
-                users[employer_id] ? 
-                  <div>
-                    Employer: {<div>{users[employer_id].name}</div>}
-                  </div> :
-                  <div />
+                <div>
+                  Employer: {<div>{ user.reduce((employer, user)=>{
+                    if (user.id === employer_id) {
+                      employer = user.name;
+                    }
+                    return employer;
+                  }, '') }</div>}
+                </div>
               }
             </Col>
             <Col>        

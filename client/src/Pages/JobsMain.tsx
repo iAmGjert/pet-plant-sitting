@@ -4,8 +4,9 @@ import List from '../Components/JobListings/List';
 import Search from '../Components/JobListings/Search';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
-import { changeView, } from '../state/features/jobs/jobSlice';
+import { changeView, setJobs } from '../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const JobsMain = () => {
 
@@ -23,6 +24,15 @@ const JobsMain = () => {
     }
     dispatch(changeView('list'));
   };
+  const getJobs = async () => {
+    const jobs = await axios.get(
+      '/api/jobs/all'
+    );
+    dispatch(setJobs(jobs.data));
+  };
+  useEffect(()=>{
+    getJobs();
+  }, []);
 
   return (
     <Container fluid>

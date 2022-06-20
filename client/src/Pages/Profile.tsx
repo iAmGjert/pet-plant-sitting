@@ -45,6 +45,7 @@ const Profile = () => {
   const [showModal, setShowModal] = useState(false);
   const [completeProfile, setCompleteProfile] = useState(0);
   const [profileUser, setProfileUser] = useState<Profile | null>(null);
+  const currUser = useAppSelector((state) => state.userProfile.value);
 
   const { id } = useParams();
   // get a user based on the id in the url
@@ -83,8 +84,6 @@ const Profile = () => {
     return stars;
   };
 
-  const currUser = useAppSelector((state) => state.userProfile.value);
-
   useEffect(() => {
     getProfile();
   }, []);
@@ -100,6 +99,7 @@ const Profile = () => {
         user={profileUser}
         showModal={showModal}
         setShowModal={setShowModal}
+        setProfileUser={setProfileUser}
       />
       <Row className='d-flex justify-content-center text-center' xs={1} md={1}>
         <Col>
