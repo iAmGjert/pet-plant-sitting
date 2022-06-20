@@ -16,7 +16,7 @@ const { socket } = require('./socket');
 
 const io = new Server(4000, {
   cors: {
-    origin: 'http://localhost:5000',
+    origin: `${process.env.CLIENT_URL}:5000`,
     credentials: true,
   },
 });
@@ -86,7 +86,7 @@ app.get('/*', function (req: Request, res: Response | any) {
 
 const port = process.env.PORT || 2000;
 app.listen(port, () => {
-  console.log(`🚀 Server is listening at http://localhost:${port}`);
+  console.log(`🚀 Server is listening at ${process.env.CLIENT_URL}:${port}`);
 });
 
 db.authenticate()
