@@ -84,7 +84,7 @@ const Details = /*React.forwardRef(ref)*/ () => {
                   <small>{numOfParticipants} people interested</small>
                   : <small>0 people interested</small>}
               </Col>
-              {/* <Col>
+              <Col>
                 <Button variant="link" onClick={handleComments}>
                   {
                     numOfComments === 1 ?
@@ -94,13 +94,13 @@ const Details = /*React.forwardRef(ref)*/ () => {
                         : <small>No comments</small>
                   }
                 </Button>
-              </Col> */}
+              </Col>
             </Row>
           </Container>
         </Card.Footer>
       </Card>
       { showComments ? <Comments /*ref={commentRef}*//> : <></> }
-      {/* <Card>
+      <Card>
         <Card.Body>
           <Form>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
@@ -115,7 +115,7 @@ const Details = /*React.forwardRef(ref)*/ () => {
           <Button variant="primary" size="sm"onClick={handleSubmit}>
         Add Comment</Button> 
         </Card.Footer>
-      </Card> */}
+      </Card>
     </>
   );
 };

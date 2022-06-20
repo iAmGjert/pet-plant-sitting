@@ -427,32 +427,32 @@ db.sync(
                       id: 1,
                       event_id: 1,
                       comment:
-                        'nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante',
+                        'Spicy jalapeno bacon ipsum dolor amet ball tip ham hock burgdoggen, chislic porchetta ribeye cupim boudin drumstick shoulder chuck biltong.',
                       user_id: 1,
                     },
                     {
                       id: 2,
-                      event_id: 2,
-                      comment: 'orci vehicula',
+                      event_id: 1,
+                      comment: 'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
                       user_id: 2,
                     },
                     {
                       id: 3,
-                      event_id: 3,
+                      event_id: 1,
                       comment:
                         'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
                       user_id: 3,
                     },
                     {
                       id: 4,
-                      event_id: 4,
+                      event_id: 1,
                       comment:
-                        'non lectus aliquam sit amet diam in magna bibendum imperdiet nullam orci pede venenatis non sodales sed tincidunt eu',
+                        'non lectus aliquam sit amet diam in mGround round tongue pancetta frankfurter drumstick, bresaola chicken boudin cupim burgdoggen.',
                       user_id: 4,
                     },
                     {
                       id: 5,
-                      event_id: 5,
+                      event_id: 1,
                       comment: 'fusce consequat nulla nisl nunc nisl duis',
                       user_id: 5,
                     },
@@ -460,7 +460,7 @@ db.sync(
                       id: 6,
                       event_id: 1,
                       comment:
-                        'nulla justo aliquam quis turpis eget elit sodales scelerisque mauris sit amet eros suspendisse accumsan tortor quis turpis sed ante',
+                        'Ham hock tenderloin turkey hamburger',
                       user_id: 1,
                     },
                   ]);
