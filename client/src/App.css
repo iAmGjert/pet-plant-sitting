@@ -2,7 +2,7 @@ html,
 body {
   min-height: 100%;
 }
-.mapMarker {
+.mapJobMarker {
   line-height: 14px;
   padding: 6px;
   border-radius: 100px;
@@ -17,6 +17,15 @@ body {
   width: 32px;
   object-fit: cover;
 }
+.mapEventMarker {
+  line-height: 14px;
+  padding: 6px;
+  border-radius: 100px;
+  background-color: blue;
+  box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
+  border: 2px solid rgb(28, 110, 164);
+  display: inline-block;
+}
 .popupUserPic {
   border-radius: 100%;
   height: 65px;
@@ -27,6 +36,12 @@ body {
   border-radius: 50%;
   height: 45px;
   width: 45px;
+  object-fit: cover;
+}
+.popupEventProfilePic {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
   object-fit: cover;
 }
 

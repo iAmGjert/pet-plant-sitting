@@ -155,8 +155,8 @@ db.sync(
 
         {
           name: 'Braeden Ford',
-          image: 'http://dummyimage.com/233x100.png/dddddd/000000',
-          location: '2221 Judith St, Metairie, LA 70003',
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKs06QLIdwr5m5iIjxvDitADflWB1gjJCWg&usqp=CAU',
+          location: 'Superdome, New Orleans',
           sitter_rating: 10,
           total_sitter_ratings: 24,
           bio: 'Other specified injury of unspecified blood vessel at ankle and foot level, right leg',
@@ -206,7 +206,7 @@ db.sync(
         {
           name: 'velouriagreen',
           image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
-          location: '1213 Gaudet Dr, Marrero, LA 70072',
+          location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: 3,
           total_sitter_ratings: 86,
           bio: 'Major laceration of right vertebral artery, initial encounter',
@@ -230,8 +230,8 @@ db.sync(
           },
           {
             owner_id: 2,
-            name: 'Laïla',
-            image: 'https://i.ytimg.com/vi/YSHDBB6id4A/maxresdefault.jpg',
+            name: 'Nova',
+            image: 'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
             breed: 'Skink, blue-tongued',
             species: 'Tiliqua scincoides',
             tags: ['Khaki', 'Goldenrod'],
@@ -334,7 +334,7 @@ db.sync(
           ]).then(() => {
             Job.bulkCreate([
               {
-                location: '2221 Judith St, Metairie, LA 70003',
+                location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
                 pet_plant: [2, 2],
                 employer_id: 2,
                 sitter_id: 7,
