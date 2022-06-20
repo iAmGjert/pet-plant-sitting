@@ -2,10 +2,14 @@ import React, { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { setView } from '../../state/features/events/eventsSlice';
 
 const LoginPrompt = () => {
   const [show, setShow] = useState(false);
-
+  const view = useAppSelector((state) => state.events.view);
+  console.log(view);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -15,7 +19,12 @@ const LoginPrompt = () => {
     navigate('/login');
     // window.location.href = '/login';
   };
+  const changeView = (option: string) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    dispatch(setView(option));
+  };
   const handleOtherRoute = () => {
+    changeView('list');
     handleClose();
     navigate('/events');
   };

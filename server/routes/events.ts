@@ -12,8 +12,11 @@ interface UserInfo {
 
 interface EventInfo {
   name: string;
+  host: number;
   location: string;
   description: string;
+  startDate: Date;
+  startTime: Date;
 }
 
 interface EventCommentInfo {
@@ -31,22 +34,39 @@ interface EventParticipantInfo {
 //* POST Routes *//
 
 events.post('/create', (req: Request, res: Response) => {
-  User.findByPk(1)
-    .then((user: Record<string, UserInfo> | null) => {
-      // console.log(user?.dataValues.id, 'ln51');
-      return user?.dataValues.id;
+ 
+  const { name, host, location, description, participants, startDate, startTime } = req.body;
+ 
+  Events.create({ name, host, location, description, participants, startDate, startTime })
+    .then((event: Record<string, EventInfo> | null) => {
+      res.status(201).send(event?.dataValues);
     })
-    .then((userId: number) => {
-      const { name, location, description /*participants */ } = req.body;
-      console.log(userId, 'data');
-      Events.create({ name, host: userId, location, description /*, participants*/ })
-        .then((event: Record<string, EventInfo> | null) => {
-          res.status(201).send(event?.dataValues);
-        })
-        .catch((err: Error) => {
-          console.log(err);
-          res.status(500).send(err);
-        });
+    .catch((err: Error) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+events.post('/comment/add', (req: Request, res: Response) => {
+  const { event_id, comment, user_id } = req.body;
+  EventComment.create({ event_id, comment, user_id })
+    .then((eventComment: Record<string, EventCommentInfo> | null) => {
+      res.status(201).send(eventComment?.dataValues);
+    })
+    .catch((err: Error) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+events.post('/participant/add', (req: Request, res: Response) => {
+  const { event_id, user_id } = req.body;
+  EventParticipant.create({ event_id, user_id })
+    .then((eventParticipant: Record<string, EventParticipantInfo> | null) => {
+      res.status(201).send(eventParticipant?.dataValues);
+    })
+    .catch((err: Error) => {
+      res.status(500).send(err);
     });
 });
 
@@ -57,8 +77,7 @@ events.get('/all', async (req: Request, res: Response) => {
     const events = await Events.findAll({
       include: [
         { model: EventComment, include: [{ model: User, attributes: ['name', 'image'] }] },
-        { model: EventParticipant, include: [{ model: User, attributes: ['name', 'image']}],
-        },
+        { model: EventParticipant, include: [{ model: User, attributes: ['name', 'image']}] },
         { model: User, attributes: ['name', 'image'] },
       ],
     });
@@ -67,14 +86,7 @@ events.get('/all', async (req: Request, res: Response) => {
     return res.status(500).send(err);
   }
 });
-//     });
-//     console.log('hello');
-//     return res.status(200).send(events);
 
-//   } catch {
-//     return res.sendStatus(418);
-//   }
-// });
 
 events.get('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -105,7 +117,7 @@ events.get('/participants/all', (req: Request, res: Response) => {
 
 //* UPDATE Routes *//
 
-events.put('/update/:id', async (req: Request, res: Response) => {
+events.patch('/update/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, host, location, description, participants } = req.body;
   const event = await Events.update(

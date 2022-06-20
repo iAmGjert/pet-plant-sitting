@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import moment from 'moment';
+
 interface Comment {
   id: number;
   event_id: number;
@@ -16,6 +17,10 @@ interface Comment {
   createdAt: string;
   updatedAt: string;
 }
+
+
+
+
 
 
 const Comments = () => {

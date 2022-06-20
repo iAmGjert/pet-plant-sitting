@@ -4,7 +4,7 @@ import { useAppSelector } from '../state/hooks';
 import Chat from '../Components/Chat/Chat';
 import '../App.css';
 
-const socket = io('http://localhost:4000');
+const socket = io(`${process.env.CLIENT_URL}:4000`);
 
 const ChatMain = () => {
   const [showChat, setShowChat] = useState(false);
