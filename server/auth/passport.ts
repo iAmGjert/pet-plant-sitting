@@ -12,7 +12,7 @@ passport.use(
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
       callbackURL: `${CLIENT_URL}:${PORT}/auth/google/callback`,
-    },
+    }, 
     (
       accessToken: any,
       refreshToken: any,
