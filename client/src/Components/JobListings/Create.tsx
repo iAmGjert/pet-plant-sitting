@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
-import { changeView } from '../../state/features/jobs/jobSlice';
+import { changeView, setJobs } from '../../state/features/jobs/jobSlice';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, ToggleButton, ButtonGroup, ToggleButtonGroup } from 'react-bootstrap';
 import LoginPrompt from './LoginPrompt';
 import moment from 'moment';
 import axios from 'axios';
-import { Link } from 'react-bootstrap/lib/Navbar';
+
 
 const Create = () => {
-  const jobObj = useAppSelector(state => state.job.job);
   const user = useAppSelector(state => state.userProfile.value);
   const myPets = useAppSelector(state => state.petPlant.petPlants.filter(pet=>pet.owner_id === user.id));
   const petPlants = useAppSelector(state => state.petPlant.petPlants).reduce( (ans, pet, ind)=>{
@@ -31,17 +30,25 @@ const Create = () => {
       endDate: endDate,
 
     });
+  const getJobs = async () => {
+    const jobs = await axios.get(
+      '/api/jobs/all'
+    );
+    dispatch(setJobs(jobs.data));
+  };
   const postJob = async (newJob: any) => {
     return await axios.post('/api/jobs/create', newJob)
       .then((res: any) => {
         console.log(res);
         return res;
-      }
-      ).catch(err => {
-        console.log(err);
+      })
+      .then(()=>{
+        getJobs();
+      })
+      .catch(err => {
+        console.error(err);
         return err;
       });
-    
   };
   
   const handleChangeStartDate = (e: Event) => {
@@ -60,8 +67,11 @@ const Create = () => {
     setFeed(newFeed);
   };
   const handleSubmit = () => {
+    console.log(user);
     postJob(obj);
+
     console.log('Form submitted.');
+
     dispatch(changeView('list'));
     return;
   };

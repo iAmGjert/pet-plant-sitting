@@ -3,16 +3,19 @@ import React, { useState } from 'react';
 import { Button, Form, Modal, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Profile } from '../../Pages/Profile';
+import { setUser } from '../../state/features/userProfile/userProfileSlice';
 import EditField from './EditField';
 import EditPetModal from './EditPetModal';
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
 
 type Props = {
   user: Profile;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
+  setProfileUser: (showModal: boolean) => void;
 };
 
-const EditAccountModal = ({ user, showModal, setShowModal }: Props) => {
+const EditAccountModal = ({ user, showModal, setShowModal, setProfileUser }: Props) => {
   // loop through fields on a user and create a form field for each
   const [newPet, setNewPet] = useState(false);
   const [newPetId, setNewPetID] = useState(0);
@@ -33,9 +36,18 @@ const EditAccountModal = ({ user, showModal, setShowModal }: Props) => {
       userFields.push([field, user[field as keyof typeof user]]);
     }
   }
-
+  const dispatch = useAppDispatch();
+  const getUser = async () => {
+    const user = await axios.get(
+      '/auth/login/success'
+    );
+    dispatch(setUser(user.data.user));
+    // console.log(user, 'LOGIN USER/userProfile state is set');
+    setProfileUser(user.data.user);
+  };
   const handleOnHide = () => {
     setShowModal(false);
+    getUser();
     navigate(`/profile/${user.id}`);
   };
 
@@ -122,7 +134,7 @@ const EditAccountModal = ({ user, showModal, setShowModal }: Props) => {
 
           <Button
             variant='success'
-            type='submit'
+            type='button'
             onClick={() => handleOnHide()}
             className='mt-3 '
           >

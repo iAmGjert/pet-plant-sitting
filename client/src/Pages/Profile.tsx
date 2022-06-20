@@ -99,6 +99,7 @@ const Profile = () => {
         user={profileUser}
         showModal={showModal}
         setShowModal={setShowModal}
+        setProfileUser={setProfileUser}
       />
       <Row className='d-flex justify-content-center text-center' xs={1} md={1}>
         <Col>

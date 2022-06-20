@@ -15,8 +15,8 @@ interface jobInfo {
 }
 
 jobs.post('/create', async (req: Request, res: Response) => {
-  const { location, pet_plant, employer_id, sitter_id, startDate, endDate } =
-    req.body;
+  const { location, pet_plant, employer_id, sitter_id, startDate, endDate } = req.body;
+  console.log(req.body);
   try {
     const job = await Job.create(<jobInfo>{
       location,
