@@ -116,6 +116,7 @@ const CalendarApp = () => {
         }
         console.log(pets);
         setPetPlants(pets);
+        return pets;
         // console.log('hola', trabajos);
         // console.log('110', response);
         // const petPlant = response.filter((element) => {
@@ -144,6 +145,9 @@ const CalendarApp = () => {
         // });
         // console.log('hi', petPlant);
         // return petPlant;
+      })
+      .then((res) => {
+        console.log('150', res);
       })
       .catch((err) => {
         console.error(err);
