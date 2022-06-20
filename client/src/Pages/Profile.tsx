@@ -54,7 +54,14 @@ const Profile = () => {
   const getProfile = async () => {
     const user = await axios.get('/api/users/' + id);
     setProfileUser(user.data);
-    console.log(user.data);
+    // console.log(user.data);
+  };
+  const getRating = () => {
+    let sum = 0;
+    for (let i = 0; i < profileUser?.ratings.length; i++) {
+      sum += profileUser?.ratings[i].value;
+    }
+    return sum / profileUser?.ratings.length;
   };
 
   const formatBio = (bio: string) => {
@@ -77,6 +84,7 @@ const Profile = () => {
   };
 
   const currUser = useAppSelector((state) => state.userProfile.value);
+
   useEffect(() => {
     getProfile();
   }, []);
@@ -100,13 +108,14 @@ const Profile = () => {
         <Col>
           <span>
             <h1 style={{ fontSize: '30px', paddingTop: '10px' }}>
-              {profileUser?.name}
-              {console.log(currUser)}
+              <>
+                {profileUser?.name}
+                {console.log(currUser)}
+              </>
             </h1>
             <h5>{profileUser?.location}</h5>
             <h5>
-              {getStars(profileUser?.average_rating)}(
-              {profileUser?.ratings.length})
+              {getStars(getRating())}({profileUser?.ratings.length})
             </h5>
             <h5>Member Since: {format(profileUser?.createdAt)}</h5>
             <h3>
@@ -177,12 +186,10 @@ const Profile = () => {
                       PetPlant={pet}
                       key={pet.id}
                       getStars={getStars}
+                      edit={null}
                     />
                   );
                 })}
-              </Tab>
-              <Tab eventKey='contact' title='Contact' disabled>
-                words
               </Tab>
             </Tabs>
           </span>

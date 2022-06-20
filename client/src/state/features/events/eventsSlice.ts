@@ -7,26 +7,28 @@ interface Event {
   host: number;
   location: string;
   description: string;
-  event_comments: Array<{ 
-    id: number; 
-    comment: string; 
+  event_comments: Array<{
+    id: number;
+    comment: string;
     user: {
       name: string;
       image: string;
-    }}>;
-    event_participants: Array<{ 
-    id: number; 
+    };
+  }>;
+  event_participants: Array<{
+    id: number;
     user: {
       name: string;
       image: string;
-    }}>;
+    };
+  }>;
   startDate: Date;
   endDate: Date;
   startTime: Date;
   user: {
     name: string;
     image: string;
-  }
+  };
 }
 
 // interface EventsSliceState {
@@ -45,7 +47,7 @@ const initialState: any = {
     event_participants: [],
     startDate: new Date(),
     startTime: new Date(),
-  }
+  },
 };
 
 export const communityEventsSlice = createSlice({
@@ -66,7 +68,7 @@ export const communityEventsSlice = createSlice({
     setEvents: (state, action: PayloadAction<Event[]>) => {
       state.events = action.payload;
       return state;
-    }, 
+    },
     // setEvent: (state, action: PayloadAction<Event>) => {
     //   state.event = action.payload;
     //   return state;
@@ -74,10 +76,11 @@ export const communityEventsSlice = createSlice({
     setEventObj: (state, action: PayloadAction<Event>) => {
       state.event = action.payload;
       return state;
-    }
+    },
   },
 });
 
-export const { /*getView, getEvents,*/ setView, setEvents, setEventObj } = communityEventsSlice.actions;
+export const { /*getView, getEvents,*/ setView, setEvents, setEventObj } =
+  communityEventsSlice.actions;
 
 export default communityEventsSlice.reducer;
