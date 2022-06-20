@@ -15,7 +15,7 @@ import {
 } from './state/features/userProfile/userProfileSlice';
 import { setJobs } from './state/features/jobs/jobSlice';
 import { setPetPlants } from './state/features/petPlant/petPlantSlice';
-import { useAppDispatch, useAppSelector } from './state/hooks';
+import { useAppDispatch } from './state/hooks';
 import JobsMain from './Pages/JobsMain';
 // import JobCreation from './Pages/JobCreation';
 import ChatMain from './Pages/ChatMain';

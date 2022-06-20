@@ -119,9 +119,21 @@ const Profile = () => {
             </h5>
             <h5>Member Since: {format(profileUser?.createdAt)}</h5>
             <h3>
-              <Badge pill bg='success'>
-                Trusted Sitter
-              </Badge>
+              {getRating() >= 4 && (
+                <Badge pill bg='success'>
+                  Trusted Sitter
+                </Badge>
+              )}
+              {getRating() >= 4 && (
+                <Badge pill bg='info'>
+                  New Sitter
+                </Badge>
+              )}
+              {getRating() === 5 && (
+                <Badge pill bg='primary'>
+                  Top Rated!
+                </Badge>
+              )}
             </h3>
             <br />
             {editable && (
