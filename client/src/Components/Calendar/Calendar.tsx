@@ -228,6 +228,7 @@ const CalendarApp = () => {
                   name={element.name}
                   location={element.location}
                   description={element.description}
+                  startTime={element.startTime}
                 />
               </>
             );

@@ -58,7 +58,9 @@ const JobCard = ({ startDate, location, bio, image, name, breed }) => {
           <Card.Subtitle className='mb-2 text-bold'>{location}</Card.Subtitle>
           <Card.Img variant='top' src={image} />
           <Card.Subtitle className='mb-4 text-muted'></Card.Subtitle>
-          <Card.Subtitle className='mb-5 text-muted'>Notes: </Card.Subtitle>
+          <Card.Subtitle className='mb-5 text-muted'>
+            Notes: {breed}
+          </Card.Subtitle>
         </Card.Title>
         <InputGroup size='sm' className='mb-3'>
           <InputGroup.Text id='inputGroup-sizing-sm'>Add Note</InputGroup.Text>

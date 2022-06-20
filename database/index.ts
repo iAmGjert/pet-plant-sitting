@@ -237,12 +237,12 @@ db.sync(
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: 'I am the world\'s worst demon child',
+            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
           },
           {
             owner_id: 3,
             name: 'Audrey II',
-            image: 'https://static.wikia.nocookie.net/villains/images/5/58/Audreyiifeedme.jpg/revision/latest?cb=20200717203832',
+            image: 'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
             breed: 'Venus Fly Trap Mix',
             species: 'Butterwort',
             tags: ['Crimson', 'Violet'],
@@ -316,7 +316,7 @@ db.sync(
             Job.bulkCreate([
               {
                 location: '2221 Judith St, Metairie, LA 70003',
-                pet_plant: [1, 2],
+                pet_plant: [1],
                 employer_id: 1,
                 sitter_id: 7,
                 startDate: new Date('July 11, 2022 01:15:00'),
@@ -324,7 +324,7 @@ db.sync(
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
-                pet_plant: [2, 3],
+                pet_plant: [2],
                 employer_id: 2,
                 sitter_id: 7,
                 startDate: new Date('July 22, 2022 01:15:00'),
@@ -332,7 +332,7 @@ db.sync(
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
-                pet_plant: [3, 4],
+                pet_plant: [3],
                 employer_id: 3,
                 sitter_id: 7,
                 startDate: new Date('July 20, 2022 01:15:00'),
