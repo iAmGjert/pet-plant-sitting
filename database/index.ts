@@ -218,14 +218,15 @@ db.sync(
           {
             owner_id: 1,
             name: 'Santi',
-            image: 'https://64.media.tumblr.com/ac3f2698510ef384fdb04620750b228e/25d400665ce53341-ef/s500x750/58c0307cb0fed6a450b04ec559e8a67d99984fbf.jpg',
+            image:
+              'https://64.media.tumblr.com/ac3f2698510ef384fdb04620750b228e/25d400665ce53341-ef/s500x750/58c0307cb0fed6a450b04ec559e8a67d99984fbf.jpg',
             breed: 'canine',
             species: 'snorkie',
             tags: ['Khaki', 'Violet'],
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
+            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
           },
           {
             owner_id: 2,
@@ -237,24 +238,26 @@ db.sync(
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: 'I am the world\'s worst demon child',
+            bio: "I am the world's worst demon child",
           },
           {
             owner_id: 3,
             name: 'Audrey II',
-            image: 'https://static.wikia.nocookie.net/villains/images/5/58/Audreyiifeedme.jpg/revision/latest?cb=20200717203832',
+            image:
+              'https://static.wikia.nocookie.net/villains/images/5/58/Audreyiifeedme.jpg/revision/latest?cb=20200717203832',
             breed: 'Venus Fly Trap Mix',
             species: 'Butterwort',
             tags: ['Crimson', 'Violet'],
             rating: 5,
             total_ratings: 71,
             is_plant: true,
-            bio: 'Forget the water! I feed human blood.'
+            bio: 'Forget the water! I feed human blood.',
           },
           {
             owner_id: 4,
             name: 'Bénédicte',
-            image: 'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/plant-names-1650565348.jpg?resize=480:*',
+            image:
+              'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/plant-names-1650565348.jpg?resize=480:*',
             breed: 'Shy Cacti',
             species: 'Succulent',
             tags: ['Maroon', 'Khaki'],
@@ -266,13 +269,15 @@ db.sync(
           {
             owner_id: 5,
             name: 'Benito',
-            image: 'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
+            image:
+              'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
             breed: 'Long-tailed feline',
             species: 'feline',
             tags: ['Turquoise', 'Khaki'],
             rating: 9,
             total_ratings: 60,
             is_plant: false,
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
           {
             owner_id: 4,
@@ -287,9 +292,8 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
-          }  
-
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+          },
         ]).then(() => {
           Rating.bulkCreate([
             {
@@ -300,7 +304,7 @@ db.sync(
             },
             {
               petplant_id: 1,
-              value: 4,
+              value: 2,
               submitter_id: 4,
             },
             {
@@ -317,13 +321,13 @@ db.sync(
             },
             {
               petplant_id: 1,
-              value: 5,
+              value: 1,
               text: 'I love this dog',
               submitter_id: 3,
             },
             {
               petplant_id: 1,
-              value: 5,
+              value: 2,
               text: 'Best Pupper',
               submitter_id: 2,
             },
@@ -375,7 +379,8 @@ db.sync(
                   name: 'Dog Park Meetup',
                   host: 1,
                   location: '10 Magnolia Dr, New Orleans, LA 70124',
-                  description: 'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
+                  description:
+                    'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '3:19 AM',
                 },
@@ -383,7 +388,8 @@ db.sync(
                   name: 'Annual Animal Rescue Drive',
                   host: 2,
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
-                  description: 'A gathering for pet-less humans to find their furrever friend and be rescued by their pets',
+                  description:
+                    'A gathering for pet-less humans to find their furrever friend and be rescued by their pets',
                   startDate: new Date('June 29, 2022 01:15:00'),
                   startTime: '4:48 AM',
                 },
@@ -391,7 +397,8 @@ db.sync(
                   name: 'Barkus Parade',
                   host: 3,
                   location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
-                  description: 'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
+                  description:
+                    'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
                   startDate: new Date('June 30, 2022 01:15:00'),
                   startTime: '5:59 PM',
                 },
@@ -399,7 +406,8 @@ db.sync(
                   name: 'Post Disaster Food Drive for our Reptile Friends',
                   host: 4,
                   location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
-                  description: 'Reptiles are our friends, not overlords! Please join in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
+                  description:
+                    'Reptiles are our friends, not overlords! Please join in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '12:20 AM',
                 },
@@ -480,7 +488,8 @@ db.sync(
                       user_id: 4,
                     },
                   ]);
-                }).catch((err: Error) => console.log(err));
+                })
+                .catch((err: Error) => console.log(err));
             });
           });
         });
