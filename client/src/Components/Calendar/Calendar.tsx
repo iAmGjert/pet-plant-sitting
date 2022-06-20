@@ -81,15 +81,15 @@ const CalendarApp = () => {
       .get('/api/jobs/all')
       .then((res) => {
         //console.log(dateState);
-        //console.log(res, 'res on 49');
+        console.log(res, 'res on 49');
         // dispatch(setEvents(res.data));
         setJobs(res.data); //array of objects
         return res.data;
       })
       .then((response) => {
-        console.log('response for jobs', response);
+        console.log('response for jobs', jobs);
         const newDate = format(dateState, 'yyyy-MM-dd');
-        //console.log('newDate', newDate);
+        console.log('newDate', newDate);
         const filteredDate = response.filter((job) => {
           //console.log('event startDate here', event.startDate);
           return job.startDate === newDate;
@@ -100,45 +100,89 @@ const CalendarApp = () => {
       })
       .then((resp) => {
         console.log('resp on 102', resp);
+        console.log(102, trabajos);
+        return axios.get('/api/pets_plants/all');
       })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
-
-  const getPetPlants = () => {
-    axios
-      .get('/api/pets_plants/all')
       .then((res) => {
-        //console.log('p;ant res', res.data);
-        setPetPlants(res.data);
+        console.log('hello hello', res);
         return res.data;
       })
       .then((response) => {
-        console.log('113', response);
-        const petPlant = response.filter((element) => {
-          console.log('e', element);
-          let hasId = false;
+        const pets = [];
+        for (let trabajo of trabajos) {
+          trabajo.pet_plant.forEach((petId) => {
+            pets.push(response[petId - 1]);
+          });
+        }
+        console.log(pets);
+        setPetPlants(pets);
+        // console.log('hola', trabajos);
+        // console.log('110', response);
+        // const petPlant = response.filter((element) => {
+        //   console.log('e', element);
+        //   let hasId = false;
+        //   console.log(114, trabajos);
+        //   for (const trabajo of trabajos) {
+        //     // console.log(trabajo);
+        //     // console.log('119', trabajo.pet_plant[0]);
+        //     // if (trabajo.pet_plant[0] === element.id) {
+        //     //   hasId = true;
+        //     //   //break;
+        //     // } else {
+        //     //   return 0;
+        //     // }
+        //     // return hasId;
+        //   }
 
-          for (const trabajo of trabajos) {
-            console.log('119', trabajo.pet_plant[0]);
-            if (trabajo.pet_plant[0] === element.id) {
-              hasId = true;
-              //break;
-            } else {
-              return 0;
-            }
-            return hasId;
-          }
-
-          console.log('petplant', petPlant);
-          setPetPlants(petPlant);
-        });
+        //   let test = trabajo.pet_plant.map((num) => {
+        //     //num is their id that is listed in the trabajo array
+        //     return response[num - 1];
+        //   });
+        //   console.log('test', test);
+        //   console.log('128 petplant', petPlant);
+        //   setPetPlants(petPlant);
+        // });
+        // console.log('hi', petPlant);
+        // return petPlant;
       })
       .catch((err) => {
         console.error(err);
       });
   };
+
+  // const getPetPlants = () => {
+  //   return axios
+  //     .get('/api/pets_plants/all')
+  //     .then((res) => {
+  //       //console.log('p;ant res', res.data);
+  //       setPetPlants(res.data);
+  //       return res.data;
+  //     })
+  //     .then((response) => {
+  //       console.log('113', response);
+  //       const petPlant = response.filter((element) => {
+  //         console.log('e', element);
+  //         let hasId = false;
+
+  //         for (const trabajo of trabajos) {
+  //           console.log('119', trabajo.pet_plant[0]);
+  //           if (trabajo.pet_plant[0] === element.id) {
+  //             hasId = true;
+  //             //break;
+  //           } else {
+  //             return 0;
+  //           }
+  //           return hasId;
+  //         }
+
+  //         console.log('petplant', petPlant);
+  //         setPetPlants(petPlant);
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
   //format(new Date(2014, 1, 11), 'yyyy-MM-dd')
   //=> '2014-02-11'
@@ -184,7 +228,6 @@ const CalendarApp = () => {
               </>
             );
           })}
-
         {trabajos.length > 0 &&
           trabajos.map((element) => {
             return (
@@ -197,8 +240,8 @@ const CalendarApp = () => {
               </>
             );
           })}
-
-        {petPlants?.length > 0 &&
+        {petPlants &&
+          petPlants?.length > 0 &&
           petPlants.map((element) => {
             return (
               <>
@@ -216,14 +259,6 @@ const CalendarApp = () => {
           Current selected date is{' '}
           <b>{moment(dateState).format('MMMM Do YYYY')}</b>
         </p>
-        <Button onClick={getPetPlants}>1</Button>
-        <Button
-          onClick={() => {
-            console.log(petPlants);
-          }}
-        >
-          2
-        </Button>
       </div>
     </div>
   );

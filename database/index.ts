@@ -316,7 +316,7 @@ db.sync(
             Job.bulkCreate([
               {
                 location: '2221 Judith St, Metairie, LA 70003',
-                pet_plant: [1],
+                pet_plant: [1, 2],
                 employer_id: 1,
                 sitter_id: 7,
                 startDate: new Date('July 11, 2022 01:15:00'),
@@ -324,7 +324,7 @@ db.sync(
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
-                pet_plant: [2],
+                pet_plant: [2, 3],
                 employer_id: 2,
                 sitter_id: 7,
                 startDate: new Date('July 22, 2022 01:15:00'),
@@ -332,7 +332,7 @@ db.sync(
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
-                pet_plant: [3],
+                pet_plant: [3, 4],
                 employer_id: 3,
                 sitter_id: 7,
                 startDate: new Date('July 20, 2022 01:15:00'),
