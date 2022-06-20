@@ -17,6 +17,18 @@ body {
   width: 32px;
   object-fit: cover;
 }
+.popupUserPic {
+  border-radius: 100%;
+  height: 65px;
+  width: 65px;
+  object-fit: cover;
+}
+.popupPetPlantPic {
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+}
 
 body {
   padding-bottom: 60px;

@@ -2,7 +2,7 @@ const passport = require('passport');
 import express, { Request, Response } from 'express';
 const auth = express();
 require('dotenv').config();
-const { User, PetPlant } = require('../../database/index.ts');
+const { User, PetPlant, Rating } = require('../../database/index.ts');
 const CLIENT_URL: string | undefined =
   process.env.CLIENT_URL === 'http://localhost'
     ? `${process.env.CLIENT_URL}:${process.env.PORT}`
@@ -14,6 +14,25 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
       where: {
         id: req.user[0].id,
       },
+      include: [
+        {
+          model: PetPlant,
+          include: [
+            {
+              model: Rating,
+              include: [
+                { model: User, attributes: ['name', 'image'], as: 'submitter' },
+              ],
+            },
+          ],
+        },
+        {
+          model: Rating,
+          include: [
+            { model: User, attributes: ['name', 'image'], as: 'submitter' },
+          ],
+        },
+      ],
     })
       .then((user: object) => {
         res.status(200).json({
@@ -43,7 +62,7 @@ auth.get(
 auth.get(
   '/google/callback',
   passport.authenticate('google', {
-    successRedirect: CLIENT_URL,
+    successRedirect: '/loading',
     failureRedirect: '/login/fail',
   })
 );

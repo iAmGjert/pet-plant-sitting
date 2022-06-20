@@ -1,0 +1,21 @@
+LIST IN ORDER OF IMPORTANCE
+
+typescript
+react redux
+nodeJS
+express
+postgresSQL
+
+sequelize
+bootstrap 
+aws
+socket.io
+
+axios JAVASCRIPT LOGO 
+passport
+mapbox
+cloudinary 
+
+eslint
+webpack
+babel

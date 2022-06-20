@@ -18,7 +18,17 @@ interface state {
 
 const initState = <state>{
   view: 'list',
-  jobs: []
+  jobs: [],
+  job: {
+    name: '',
+    host: 0,
+    pet_plant: [],
+    location: '',
+    description: '',
+    applicants: [],
+    startDate: new Date(),
+    endDate: new Date(),
+  }
 };
 
 export const jobsSlice = createSlice({
@@ -37,10 +47,14 @@ export const jobsSlice = createSlice({
     setJobs: (state, action:PayloadAction<Array<jobStuff>>)=>{
       state.jobs = action.payload;
       return state;
+    },
+    setJobObj: (state, action: PayloadAction<Event>) => {
+      state.job = action.payload;
+      return state;
     }
   }
 });
 
-export const { getView, changeView, setJobs } = jobsSlice.actions;
+export const { getView, changeView, setJobs, setJobObj } = jobsSlice.actions;
 
 export default jobsSlice.reducer;

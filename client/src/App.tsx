@@ -9,7 +9,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Profile from './Pages/Profile';
 import axios from 'axios';
-import { setUser, setUsers } from './state/features/userProfile/userProfileSlice';
+import {
+  setUser,
+  setUsers,
+} from './state/features/userProfile/userProfileSlice';
 import { setJobs } from './state/features/jobs/jobSlice';
 import { setPetPlants } from './state/features/petPlant/petPlantSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
@@ -19,29 +22,26 @@ import ChatMain from './Pages/ChatMain';
 
 import TopNavBar from './Components/TopNavBar/TopNavBar';
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
+import Loading from './Pages/Loading';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
 const App: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const getUser = async () => {
-    const user = await axios.get(
-      '/auth/login/success'
-    );
+    const user = await axios.get('/auth/login/success');
     dispatch(setUser(user.data.user));
     // console.log(user, 'LOGIN USER/userProfile state is set');
   };
   const getJobs = async () => {
-    const jobs = await axios.get(
-      '/api/jobs/all'
-    );
+    const jobs = await axios.get('/api/jobs/all');
     dispatch(setJobs(jobs.data));
   };
-  const getUsers = async () =>{
+  const getUsers = async () => {
     const users = await axios.get('api/users/all');
     dispatch(setUsers(users.data));
   };
-  const getPetPlants = async () =>{
+  const getPetPlants = async () => {
     const petPlants = await axios.get('api/pets_plants/all');
     dispatch(setPetPlants(petPlants.data));
   };
@@ -57,6 +57,7 @@ const App: FC<Props> = () => {
       <TopNavBar />
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/loading' element={<Loading />} />
         <Route path='/profile/:id' element={<Profile />} />
         <Route path='/login' element={<Login />} />
         <Route path='/map' element={<MapMain />} />
