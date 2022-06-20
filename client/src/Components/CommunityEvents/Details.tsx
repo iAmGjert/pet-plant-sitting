@@ -8,52 +8,62 @@ import Col from 'react-bootstrap/Col';
 import Comments from './Comments';
 import moment from 'moment';
 import axios from 'axios';
-import { Form } from 'react-bootstrap';
+import Form from 'react-bootstrap/Form';
+import { setView } from '../../state/features/events/eventsSlice';
+
 
 const Details = /*React.forwardRef(ref)*/ () => {
   const dispatch = useAppDispatch();
   const eventObj = useAppSelector((state) => state.events.event);
   const {event_comments, event_participants, user} = eventObj;
   const [showComments, setShowComments] = useState(false);
-  const [comment, setComment] = useState('');
+  const [commentInput, setCommentInput] = useState('');
   const currentUser = useAppSelector(state => state.userProfile.value);
-  console.log(currentUser);
-  // const commentRef = useRef<null | HTMLDivElement>(null);
-  // const pageTopRef = useRef<null | HTMLButtonElement>(null);
+  const view = useAppSelector(state => state.events.view);
 
-  // const showComments = true;
-  // useEffect(() => {
-  //   commentRef.current?.scrollIntoView({ behavior: 'smooth' });
-  // }, [showComments]);
-  
-  // const handleScroll = () => {
-  //   setShowComments(true);
-  // };
+  // const [commentsListLength, setCommentsListLength] = useState(event_comments.length);
+
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setComment(e.target.value);
+    setCommentInput(e.target.value);
+    // setCommentsList([...commentsList, {
+    //   user: currentUser.id,
+    //   comment: commentInput,
+    //   createdAt: new Date().toISOString(),
+    // }]);
   };
+  
+
+
 
   const postComment = async (comment: any) => {
-    const newComment = await axios.post('/api/events/comment/add', comment);
-    return newComment;
+    return await axios.post('/api/events/comment/add', comment).then((res: any) => {
+     
+      console.log(event_comments.length);
+      return res;
+    }).catch(err => { console.log(err); });
+    // return newComment;
   };
-  const handleSubmit = async () => {
-    console.log('handleSubmit');
-    const newComment = {
+  
+  const handleSubmit = () => {
+    postComment({
       event_id: eventObj.id,
       user_id: currentUser.id,
-      comment: comment
-    };
-    const res = await postComment(newComment);
-    console.log(res);
-    setComment('');
+      comment: commentInput
+    });
     // handleComments();
+    // console.log(res);
+    console.log(commentInput);
+    setCommentInput('');
+    console.log(commentInput);
+    dispatch(setView('details'));
   };
+  
+  console.log(event_comments.length);
 
   const handleComments = () => {
-    setShowComments(true);
+    setShowComments(!showComments);
   };
-  // console.dir(eventObj);
+  // console.log(showComments);
   const numOfComments = event_comments.length;
   const numOfParticipants = event_participants.length;
   return (
@@ -72,7 +82,7 @@ const Details = /*React.forwardRef(ref)*/ () => {
             <small><i>🗓️ {eventObj.startDate}</i></small>
           </div>
           <div>
-            <small><i>🕰️ {eventObj.startTime}</i></small>
+            <small><i>🕰️ {eventObj.startTime.slice(0, -3)} PM</i></small>
           </div>
         </Card.Body>
         <Card.Footer>
@@ -86,6 +96,12 @@ const Details = /*React.forwardRef(ref)*/ () => {
               </Col>
               <Col>
                 <Button variant="link" onClick={handleComments}>
+                 
+                  {/* <small>{commentsList.length} comments</small> */}
+                      
+                        
+
+                  
                   {
                     numOfComments === 1 ?
                       <small>{numOfComments} comment</small>
@@ -121,3 +137,17 @@ const Details = /*React.forwardRef(ref)*/ () => {
 };
 
 export default Details;
+
+
+// console.log(c
+// const commentRef = useRef<null | HTMLDivElement>(null);
+// const pageTopRef = useRef<null | HTMLButtonElement>(null);
+
+// const showComments = true;
+// useEffect(() => {
+//   commentRef.current?.scrollIntoView({ behavior: 'smooth' });
+// }, [showComments]);
+
+// const handleScroll = () => {
+//   setShowComments(true);
+// };
