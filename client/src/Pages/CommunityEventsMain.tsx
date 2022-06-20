@@ -38,10 +38,10 @@ interface EventTYPE {
 
 const CommunityEventsMain = () => {
   const dispatch = useAppDispatch();
-  // const state = useAppSelector((state) => state);
+  const state = useAppSelector((state) => state);
   const view = useAppSelector(state => state.events.view);
   const events = useAppSelector(state => state.events.events);
-  const event = useAppSelector(state => state.events);
+
   
   useEffect(() => {
     const getEvents = async () => {
@@ -63,29 +63,10 @@ const CommunityEventsMain = () => {
     changeView('create-event');
     dispatch(setView('create-event'));
   };
-  // console.log(events);
-  // console.log(event);
-  // use the current logged in user to create a new event using the user's id as the host with axios.post
-  const createEvent = async (user_id: any, event: EventTYPE) => {
-    return await axios.post('/api/events/create', { user_id, event }).then((res: any) => {
-      console.log(res);
-      return res;
-    }
-    ).catch(err => {
-      console.log(err);
-      return err;
-    });
-    
-  };
   
-
-  // console.log(view);
+  
   const renderView = (): any => {
-
     if (view === 'list') {
-      // console.log(events);
-      // console.log(view);
-      // console.log(event.event);
       return events.map((event: EventTYPE) => (
         <div key={event.id} /*style={{border: '1px solid red'}}*/>
           <Event className='events-list'
@@ -102,21 +83,14 @@ const CommunityEventsMain = () => {
             switchToDetailsView={switchToDetailsView}
             eventObj={event}
           />
-          {/* <button onClick={() => switchToDetailsView(event)}>Details</button> */}
         </div>
       ));
     } else if (view === 'details') {
       return <Details /*events={events} event={event}*/ />;
     } else if (view === 'create-event') {
-      return <CreateEvent changeView={changeView} createEvent={createEvent}/>;
+      return <CreateEvent /*changeView={changeView} createEvent={createEvent}*//>;
     }
   };
-
-  // console.log(event);
-
-
-
-  
   
   return (
     <div>
@@ -124,7 +98,7 @@ const CommunityEventsMain = () => {
         <h1>Community Events</h1>
       </div>
       <div className="events-create-btn">
-        <Button onClick={() => switchToCreateView()} size='sm'>Create Event</Button>
+        <Button onClick={switchToCreateView} size='sm'>Create Event</Button>
       </div>
       <div className='container'>{renderView()}</div>
     </div>

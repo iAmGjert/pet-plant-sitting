@@ -12,9 +12,9 @@ const Event = (props: any) =>{
     <Container>
 
       <Card border="primary" style={{ width: '95%' }}>
-        <Card.Header>{name}</Card.Header>
+        <Card.Header>Host: {user.name}</Card.Header>
         <Card.Body>
-          <Card.Title>Host: {user.name}</Card.Title>
+          <Card.Title>{name}</Card.Title>
           <Card.Text>
             <b>Location: </b> {location}
           </Card.Text>
