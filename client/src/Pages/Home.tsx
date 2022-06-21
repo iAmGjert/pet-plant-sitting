@@ -18,7 +18,12 @@ const Home: FC<Props> = () => {
   return (
     <div>
       <h1>Welcome to Fern Herm{user.name ? `, ${user.name}!` : '!'}</h1>
-      <p> Fern-Herm is your one stop shop to find a sitter for your lovely plants and animals while you are too busy to manage! Fern-Herm will help you connect with locals who are willing to help!</p>
+      <p>
+        {' '}
+        Fern-Herm is your one stop shop to find a sitter for your lovely plants
+        and animals while you are too busy to manage! Fern-Herm will help you
+        connect with locals who are willing to help!
+      </p>
       <p>Click the button below for me!</p>
       <button
         onClick={() => {
@@ -27,11 +32,17 @@ const Home: FC<Props> = () => {
       >
         Click
       </button>
-      {
-        display ? 
-          <p>The button just <strong>flop flips</strong> these words and console logs the current user. It can be removed for production.</p> :
-          <p>The button just <strong>flip flops</strong> these words and console logs the current user. It can be removed for production.</p>
-      }
+      {display ? (
+        <p>
+          The button just <strong>flop flips</strong> these words and console
+          logs the current user. It can be removed for production.
+        </p>
+      ) : (
+        <p>
+          The button just <strong>flip flops</strong> these words and console
+          logs the current user. It can be removed for production.
+        </p>
+      )}
     </div>
   );
 };
