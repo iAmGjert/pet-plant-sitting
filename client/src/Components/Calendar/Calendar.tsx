@@ -197,20 +197,6 @@ const CalendarApp = () => {
     //console.log('filteredDate here', filteredDate);
   }, [dateState]);
 
-  // useEffect(() => {
-  //   getPetPlants();
-  // }, []);
-
-  // use useEffect to connect job listings and community events from backend to calendar
-  // useEffect(() => {
-  //   const getAllEvents = async() => {
-  //     const res = await axios.get('/api/jobs/all');
-  //     console.log(res, 'res on 53');
-  //     return dispatch(setJobs(res.data));
-  //   };
-  //   getAllEvents();
-  // }, []);
-
   return (
     <div className='app'>
       {/* <Button variant="primary">Plants</Button>{' '}
