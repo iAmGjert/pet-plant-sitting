@@ -78,8 +78,11 @@ const Home: FC<Props> = () => {
           <Button variant='primary' size='lg' className='button-center'>
             Sign Up
           </Button>
+          <Card.Subtitle className='mb-2 text-muted'>
+            Already have an account?
+          </Card.Subtitle>
           <Card.Link href='#'>Login</Card.Link>
-          <Card.Link href='#'>Another Link</Card.Link>
+          <Card.Link href='#'>Community Events</Card.Link>
         </Card.Body>
       </Card>
     </Container>
