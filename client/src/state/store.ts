@@ -8,6 +8,7 @@ import communityEventsReducer from './features/events/eventsSlice';
 import petPlantReducer from './features/petPlant/petPlantSlice';
 
 
+
 export const store = configureStore({
   reducer: {
     events: communityEventsReducer,
