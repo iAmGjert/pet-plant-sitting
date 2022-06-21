@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
+import LandingPage from './Pages/LandingPage';
 import Login from './Pages/Login';
 import MapMain from './Pages/MapMain';
 import CalendarMain from './Pages/CalendarMain';
@@ -67,6 +68,7 @@ const App: FC<Props> = () => {
         <Route path='/loading' element={<Loading />} />
         <Route path='/profile/:id' element={<Profile />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/landingpage' element={<LandingPage />} />
         <Route path='/map' element={<MapMain />} />
         <Route path='/events' element={<CommunityEvents />} />
         <Route path='/calendar' element={<CalendarMain />} />
