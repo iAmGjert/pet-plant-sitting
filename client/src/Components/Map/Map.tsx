@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map, { Marker } from 'react-map-gl';
 import JobPopup from './JobPopup';
@@ -15,12 +15,13 @@ interface Props {
   jobsLocations: any
   eventsLocations: any
   events: Array<object>
+  navigate: any
 }
  
 
 const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
-const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jobsLocations, eventsLocations, events }) => {
+const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jobsLocations, eventsLocations, events, navigate }) => {
 
   const [buttonPopup, setButtonPopup] = useState(false);
   const [eventButtonPopup, setEventButtonPopup] = useState(false);
@@ -63,6 +64,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     setEventButtonPopup(!eventButtonPopup);
   };
 
+
   return (
     <div>
       <Map
@@ -79,7 +81,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           longitude={userGeoLoc[0]}
           latitude={userGeoLoc[1]}
         >
-          <button >
+          <button onClick={()=>{ navigate(`/profile/${user?.id}`); }} >
             <img src={user.image} alt='X' className='markerPic' />
           </button>
         </Marker>
@@ -109,7 +111,14 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           jobPopup ?
             <JobPopup trigger={buttonPopup} setTrigger={showJobInfo}>
               <img src={userPopup.image} alt='' className='popupUserPic'/>
-              <h2>{userPopup.name}</h2>
+              <div 
+                onClick={()=>{ navigate(`/profile/${userPopup.id}`); }} 
+                onKeyPress={()=>{ navigate(`/profile/${userPopup.id}`); }}
+                role='button' 
+                tabIndex={0} 
+              >
+                <h2>{userPopup.name}</h2>
+              </div>
               <h6>Pets/Plants:</h6>
               {
                 petsPlantsPopup.length > 0 ? petsPlantsPopup.map((petPlant, index) => {
@@ -126,7 +135,14 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
             <EventPopup trigger={eventButtonPopup} setTrigger={showEventInfo}>
               <h2>{eventPopup.name}</h2>
               <h4>{eventPopup.location}</h4>
-              <h6>Host: {eventPopup.user?.name} <img src={eventPopup.user?.image} alt='' className='popupEventProfilePic' /></h6>
+              <div
+                onClick={()=>{ navigate(`/profile/${eventPopup.host}`); }} 
+                onKeyPress={()=>{ navigate(`/profile/${eventPopup.host}`); }}
+                role='button' 
+                tabIndex={0}
+              >
+                <h6>Host: {eventPopup.user?.name} <img src={eventPopup.user?.image} alt='' className='popupEventProfilePic' /></h6>
+              </div>
               <p>{eventPopup.description}</p>
             </EventPopup> : ''
         }

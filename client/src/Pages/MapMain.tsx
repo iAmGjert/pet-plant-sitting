@@ -20,6 +20,7 @@ const MapMain: FC<Props> = () => {
   const users = useAppSelector((state) => state.map.users);
   const petsPlants = useAppSelector((state) => state.map.petsPlants);
   const events = useAppSelector((state) => state.map.events);
+  const navigate = useNavigate();
 
   const [userGeoLoc, setUserGeoLoc] = useState(null);
   const [jobsLocations, setJobsLocations] = useState([]);
@@ -60,12 +61,6 @@ const MapMain: FC<Props> = () => {
     dispatch(mapActions.setPetsPlants(petsPlants.data));
   };
 
-  const navigate = useNavigate();
-  // const handleClick = ()=>{
-  //   dispatch(changeView('create'));
-  //   navigate('/jobs');
-  // };
-
   useEffect(() => {
     if (user && user.location) {
       geoCodeUser();
@@ -93,6 +88,7 @@ const MapMain: FC<Props> = () => {
             jobsLocations={jobsLocations}
             events={events}
             eventsLocations={eventsLocations}
+            navigate={navigate}
           />
           : <div>Please log in <button onClick={()=>{ navigate('/login'); }}>Login</button></div>
       }
