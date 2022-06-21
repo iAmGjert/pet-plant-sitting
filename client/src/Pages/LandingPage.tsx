@@ -39,7 +39,6 @@ const LandingPage: FC<Props> = () => {
     <div>
       <h1>Welcome {user.name ? `, ${user.name}!` : '!'}</h1>
       <p> Fern Herm is happy to have you!</p>
-
       <Card>
         <Card.Header as='h5'>Job 1</Card.Header>
         <Card.Body>
