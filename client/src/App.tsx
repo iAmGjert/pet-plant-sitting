@@ -15,7 +15,8 @@ import {
 } from './state/features/userProfile/userProfileSlice';
 import { setJobs } from './state/features/jobs/jobSlice';
 import { setPetPlants } from './state/features/petPlant/petPlantSlice';
-import { useAppDispatch } from './state/hooks';
+import { useAppDispatch, useAppSelector } from './state/hooks';
+import { mapActions } from './state/features/map/mapSlice';
 import JobsMain from './Pages/JobsMain';
 // import JobCreation from './Pages/JobCreation';
 import ChatMain from './Pages/ChatMain';
@@ -45,11 +46,17 @@ const App: FC<Props> = () => {
     const petPlants = await axios.get('api/pets_plants/all');
     dispatch(setPetPlants(petPlants.data));
   };
+  const getEvents = async () => {
+    const events = await axios.get('/api/events/all');
+    dispatch(mapActions.setEvents(events.data));
+  };
+
   useEffect(() => {
     getUser();
     getJobs();
     getUsers();
     getPetPlants();
+    getEvents();
   }, []);
 
   return (
