@@ -62,7 +62,8 @@ const Profile = () => {
     for (let i = 0; i < profileUser?.ratings.length; i++) {
       sum += profileUser?.ratings[i].value;
     }
-    return sum / profileUser?.ratings.length;
+    console.log(Math.floor(sum / profileUser?.ratings.length));
+    return Math.floor(sum / profileUser?.ratings.length);
   };
 
   const formatBio = (bio: string) => {
@@ -119,19 +120,29 @@ const Profile = () => {
             </h5>
             <h5>Member Since: {format(profileUser?.createdAt)}</h5>
             <h3>
-              {getRating() >= 4 && (
+              {getRating() >= 2 && (
                 <Badge pill bg='success'>
+                  {/* if sitter has repeated customers */}
                   Trusted Sitter
                 </Badge>
               )}
-              {getRating() >= 4 && (
-                <Badge pill bg='info'>
-                  New Sitter
-                </Badge>
-              )}
+              {profileUser.ratings.length > 1 &&
+                profileUser.ratings.length < 5 && (
+                  <Badge pill bg='info'>
+                    {/* if sitter < 2 jobs completed > */}
+                    New Sitter
+                  </Badge>
+                )}
               {getRating() === 5 && (
                 <Badge pill bg='primary'>
+                  {/* 5 star rating */}
                   Top Rated!
+                </Badge>
+              )}
+              {profileUser.ratings.length >= 5 && (
+                <Badge pill bg='info'>
+                  {/* 5 jobs completed */}
+                  Experienced Sitter
                 </Badge>
               )}
             </h3>
@@ -202,6 +213,9 @@ const Profile = () => {
                     />
                   );
                 })}
+              </Tab>
+              <Tab eventKey='gallery' title='Gallery'>
+                {/* <Gallery /> */}
               </Tab>
             </Tabs>
           </span>
