@@ -20,6 +20,7 @@ export interface RatingInfo {
   submitter: {
     name: string;
     image: string;
+    id: number;
   };
 }
 
@@ -48,6 +49,7 @@ const Profile = () => {
   const currUser = useAppSelector((state) => state.userProfile.value);
 
   const { id } = useParams();
+
   // get a user based on the id in the url
   // offscreen modal for editing profile
   // Change tabs to Nav with style tab https://stackoverflow.com/questions/36342220/tabs-in-react-bootstrap-navbar
@@ -57,12 +59,13 @@ const Profile = () => {
     setProfileUser(user.data);
     // console.log(user.data);
   };
+
   const getRating = () => {
     let sum = 0;
     for (let i = 0; i < profileUser?.ratings.length; i++) {
       sum += profileUser?.ratings[i].value;
     }
-    console.log(Math.floor(sum / profileUser?.ratings.length));
+    // console.log(Math.floor(sum / profileUser?.ratings.length));
     return Math.floor(sum / profileUser?.ratings.length);
   };
 
@@ -86,8 +89,10 @@ const Profile = () => {
   };
 
   useEffect(() => {
-    getProfile();
-  }, []);
+    if (id) {
+      getProfile();
+    }
+  }, [id]);
 
   useEffect(() => {
     if (currUser.id && Number(id) == currUser?.id) {
@@ -126,8 +131,8 @@ const Profile = () => {
                   Trusted Sitter
                 </Badge>
               )}
-              {profileUser.ratings.length > 1 &&
-                profileUser.ratings.length < 5 && (
+              {profileUser?.ratings.length > 1 &&
+                profileUser?.ratings.length < 5 && (
                   <Badge pill bg='info'>
                     {/* if sitter < 2 jobs completed > */}
                     New Sitter
@@ -139,7 +144,7 @@ const Profile = () => {
                   Top Rated!
                 </Badge>
               )}
-              {profileUser.ratings.length >= 5 && (
+              {profileUser?.ratings.length >= 5 && (
                 <Badge pill bg='info'>
                   {/* 5 jobs completed */}
                   Experienced Sitter

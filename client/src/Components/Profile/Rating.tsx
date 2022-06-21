@@ -2,7 +2,8 @@ import React from 'react';
 import { Card } from 'react-bootstrap';
 import { RatingInfo } from '../../Pages/Profile';
 import moment from 'moment';
-moment().format();
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 type Props = {
   rating: RatingInfo;
@@ -10,10 +11,19 @@ type Props = {
 };
 
 const Rating = ({ rating, getStars }: Props) => {
+  const navigate = useNavigate();
+  const navigateToUser = async (id: number) => {
+    navigate(`/profile/${id}`);
+  };
+  console.log(rating.submitter);
   return (
     <Card>
       <Card.Body>
-        <Card.Title>
+        <Card.Title
+          onClick={() => {
+            navigateToUser(rating.submitter.id);
+          }}
+        >
           <img
             src={rating.submitter.image}
             alt=''
