@@ -1,6 +1,15 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Image, Container, Row, Col, Badge, Tabs, Tab } from 'react-bootstrap';
+import {
+  Image,
+  Container,
+  Row,
+  Col,
+  Badge,
+  Tabs,
+  Tab,
+  Card,
+} from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { format } from 'timeago.js';
@@ -97,6 +106,8 @@ const Profile = () => {
   useEffect(() => {
     if (currUser.id && Number(id) == currUser?.id) {
       setEditable(true);
+    } else {
+      setEditable(false);
     }
   }, [currUser, id]);
   return (
@@ -220,7 +231,38 @@ const Profile = () => {
                 })}
               </Tab>
               <Tab eventKey='gallery' title='Gallery'>
-                {/* <Gallery /> */}
+                <Card
+                  className='text-center'
+                  onClick={() => {
+                    // check if this user has a gallery, if it dosent make one. Then do some cloudinary to upload a pic to said gallery. then for each pic in the gallery, make a card with the pic and a delete button.
+                    // axios
+                    //   .post('/api/pets_plants/create', {
+                    //     name: '',
+                    //     owner_id: user.id,
+                    //     image:
+                    //       'https://i.pinimg.com/736x/4a/21/33/4a2133dd4dad968c3218fec61d97db55.jpg',
+                    //     breed: 'N/A',
+                    //     species: 'N/A',
+                    //     age: 0,
+                    //     bio: 'No bio yet',
+                    //     is_plant: false,
+                    //     tags: [],
+                    //     rating: 0,
+                    //     total_ratings: 0,
+                    //   })
+                    //   .then((res) => {
+                    //     console.log(res.data.id);
+                    //     setNewPetID(res.data.id);
+                    //   });
+                    // setNewPet(true);
+                  }}
+                >
+                  <Card.Img
+                    variant='top'
+                    src='https://static.thenounproject.com/png/3322766-200.png'
+                  />
+                  <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
+                </Card>
               </Tab>
             </Tabs>
           </span>

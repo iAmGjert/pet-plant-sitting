@@ -3,7 +3,6 @@ import { Card } from 'react-bootstrap';
 import { RatingInfo } from '../../Pages/Profile';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 
 type Props = {
   rating: RatingInfo;
