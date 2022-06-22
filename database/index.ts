@@ -144,7 +144,7 @@ Gallery.hasMany(GalleryEntry, {
 
 /************************************************/
 
-db.sync(
+db.sync( 
   process.env.CLIENT_URL === 'http://localhost'
     ? { force: true }
     : { alter: true }
@@ -242,7 +242,7 @@ db.sync(
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
+            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
           },
           {
             owner_id: 2,
@@ -255,7 +255,7 @@ db.sync(
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: "I am the world's worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this",
+            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
           },
           {
             owner_id: 3,
@@ -294,7 +294,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 4,
@@ -309,7 +309,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
         ]).then(() => {
           Rating.bulkCreate([
@@ -447,143 +447,139 @@ db.sync(
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '4:33 PM',
                 },
-              ])
-                .then(() => {
-                  EventComment.bulkCreate([
-                    {
-                      id: 1,
-                      event_id: 1,
-                      comment:
+              ]).then(() => {
+                EventComment.bulkCreate([
+                  {
+                    // id: 1,
+                    event_id: 1,
+                    comment:
                         'Spicy jalapeno bacon ipsum dolor amet ball tip ham hock burgdoggen, chislic porchetta ribeye cupim boudin drumstick shoulder chuck biltong.',
-                      user_id: 1,
-                    },
-                    {
-                      id: 2,
-                      event_id: 1,
-                      comment:
-                        'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
-                      user_id: 2,
-                    },
-                    {
-                      id: 3,
-                      event_id: 1,
-                      comment:
+                    user_id: 1,
+                  },
+                  {
+                    // id: 2,
+                    event_id: 1,
+                    comment: 'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
+                    user_id: 2,
+                  },
+                  {
+                    // id: 3,
+                    event_id: 1,
+                    comment:
                         'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
-                      user_id: 3,
-                    },
-                    {
-                      id: 4,
-                      event_id: 1,
-                      comment:
+                    user_id: 3,
+                  },
+                  {
+                    // id: 4,
+                    event_id: 1,
+                    comment:
                         'non lectus aliquam sit amet diam in mGround round tongue pancetta frankfurter drumstick, bresaola chicken boudin cupim burgdoggen.',
-                      user_id: 4,
-                    },
-                    {
-                      id: 5,
-                      event_id: 1,
-                      comment: 'fusce consequat nulla nisl nunc nisl duis',
-                      user_id: 5,
-                    },
-                    {
-                      id: 6,
-                      event_id: 1,
-                      comment: 'Ham hock tenderloin turkey hamburger',
-                      user_id: 1,
-                    },
-                  ]);
-                })
-                .then(() => {
-                  EventParticipant.bulkCreate([
-                    {
-                      id: 1,
-                      event_id: 1,
-                      user_id: 1,
-                    },
-                    {
-                      id: 2,
-                      event_id: 2,
-                      user_id: 2,
-                    },
-                    {
-                      id: 3,
-                      event_id: 3,
-                      user_id: 3,
-                    },
-                    {
-                      id: 4,
-                      event_id: 4,
-                      user_id: 4,
-                    },
-                  ]);
-                })
-                .then(()=>{
-                  JobApplicant.bulkCreate([
-                    {
-                      user_id: 1,
-                      job_id: 1,
-                    },
-                    {
-                      user_id: 7,
-                      job_id: 1,
-                    },
-                    {
-                      user_id: 7,
-                      job_id: 3,
-                    },
-                    {
-                      user_id: 7,
-                      job_id: 4,
-                    },
-                    {
-                      user_id: 7,
-                      job_id: 5,
-                    },
-                  ]);
-                })
-                .then(()=>{
-                  JobPetsPlants.bulkCreate([
-                    {
-                      job_id: 1,
-                      pet_plant_id: 2
-                    },
-                    {
-                      job_id: 1,
-                      pet_plant_id: 3
-                    },
-                    {
-                      job_id: 2,
-                      pet_plant_id: 1
-                    },
-                    {
-                      job_id: 2,
-                      pet_plant_id: 4
-                    },
-                    {
-                      job_id: 3,
-                      pet_plant_id: 1
-                    },
-                    {
-                      job_id: 3,
-                      pet_plant_id: 2
-                    },
-                    {
-                      job_id: 4,
-                      pet_plant_id: 3
-                    },
-                    {
-                      job_id: 4,
-                      pet_plant_id: 5
-                    },
-                    {
-                      job_id: 5,
-                      pet_plant_id: 5
-                    },
-                    {
-                      job_id: 5,
-                      pet_plant_id: 4
-                    },
-                  ]);
-                })
+                    user_id: 4,
+                  },
+                  {
+                    // id: 5,
+                    event_id: 1,
+                    comment: 'fusce consequat nulla nisl nunc nisl duis',
+                    user_id: 5,
+                  },
+                  {
+                    // id: 6,
+                    event_id: 1,
+                    comment:
+                        'Ham hock tenderloin turkey hamburger',
+                    user_id: 1,
+                  },
+                ]);
+              }).then(() => {
+                EventParticipant.bulkCreate([
+                  {
+                    // id: 1,
+                    event_id: 1,
+                    user_id: 1,
+                  },
+                  {
+                    // id: 2,
+                    event_id: 2,
+                    user_id: 2,
+                  },
+                  {
+                    // id: 3,
+                    event_id: 3,
+                    user_id: 3,
+                  },
+                  {
+                    // id: 4,
+                    event_id: 4,
+                    user_id: 4,
+                  },
+                ]);
+              }).then(()=>{
+                JobApplicant.bulkCreate([
+                  {
+                    user_id: 1,
+                    job_id: 1,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 1,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 3,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 4,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 5,
+                  },
+                ]);
+              }).then(()=>{
+                JobPetsPlants.bulkCreate([
+                  {
+                    job_id: 1,
+                    pet_plant_id: 2
+                  },
+                  {
+                    job_id: 1,
+                    pet_plant_id: 3
+                  },
+                  {
+                    job_id: 2,
+                    pet_plant_id: 1
+                  },
+                  {
+                    job_id: 2,
+                    pet_plant_id: 4
+                  },
+                  {
+                    job_id: 3,
+                    pet_plant_id: 1
+                  },
+                  {
+                    job_id: 3,
+                    pet_plant_id: 2
+                  },
+                  {
+                    job_id: 4,
+                    pet_plant_id: 3
+                  },
+                  {
+                    job_id: 4,
+                    pet_plant_id: 5
+                  },
+                  {
+                    job_id: 5,
+                    pet_plant_id: 5
+                  },
+                  {
+                    job_id: 5,
+                    pet_plant_id: 4
+                  },
+                ]);
+              })
                 .catch((err: Error) => console.log(err));
             });
           });

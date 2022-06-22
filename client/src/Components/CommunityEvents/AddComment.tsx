@@ -9,26 +9,33 @@ type Props = {
   showAddModal: boolean;
   setShowAddModal: (showAddModal: boolean) => void;
   handleSubmit: () => void;
+  handleCommentChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
 }
 
-const AddComment = ({showAddModal, setShowAddModal, handleSubmit}: Props) => {
+const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentChange}: Props) => {
   const [show, setShow] = useState(false);
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => {
+    setShowAddModal(!showAddModal);
+    setShow(false);
+  };
+  const handleShow = () => {
+    setShowAddModal(!showAddModal);
+    setShow(true);
+  };
 
   const handleSendComemnt = () => {
     handleSubmit();
-    setShow(false);
+    setShowAddModal(!showAddModal);
   };
 
   useEffect(() => {
-    handleShow();
+    // handleShow();
   }, []);
   return (
     
     <Modal
-      show={show}
+      show={showAddModal}
       onHide={handleClose}
       backdrop="static"
       keyboard={false}
@@ -40,7 +47,9 @@ const AddComment = ({showAddModal, setShowAddModal, handleSubmit}: Props) => {
         <Form>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             {/* <Form.Label>Example textarea</Form.Label> */}
-            <Form.Control as="textarea" rows={3} />
+            <Form.Control as="textarea" rows={3} 
+              onChange={handleCommentChange}
+            />
           </Form.Group>
         </Form>
       </Modal.Body>
