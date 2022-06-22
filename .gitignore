@@ -4,5 +4,9 @@ package-lock.json
 #check
 client/build
 .vscode
+
+
 notes.md
 test-db-index.txt
+test-db-index.ts
+future-passport.ts
