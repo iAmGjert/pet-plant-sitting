@@ -28,7 +28,6 @@ const Create = () => {
       pet_plant: petPlants,
       startDate: startDate,
       endDate: endDate,
-
     });
   const getJobs = async () => {
     const jobs = await axios.get(
@@ -41,6 +40,11 @@ const Create = () => {
       .then((res: any) => {
         console.log(res);
         return res;
+      })
+      .then(()=>{
+        petPlants.forEach((pet)=>{
+          console.log(pet);
+        });
       })
       .then(()=>{
         getJobs();
@@ -75,7 +79,7 @@ const Create = () => {
     dispatch(changeView('list'));
     return;
   };
-  return user.name.length ?
+  return user.name !== '' ?
     (
       <Form>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">

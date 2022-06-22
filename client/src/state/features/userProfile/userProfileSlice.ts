@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { isNull } from 'util';
 //import type { RootState } from '../../store';
 
 interface userStuff {
@@ -25,7 +26,7 @@ interface jobStuff {
 interface state {
   value: { 
     name: string,
-    id: number,
+    id: number | null,
     job: Array<jobStuff>,
     image: string,
     location: string,
@@ -40,9 +41,9 @@ interface state {
 }
 
 const initialState = {
-  value: { 
+  value: {
+    id: 1, 
     name: '',
-    id: 1,
     job: [],
     image: '',
     location: '',
