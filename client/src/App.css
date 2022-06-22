@@ -223,6 +223,10 @@ body {
   font-size: 25px;
   color: lightgray;
 }
+.map-container {
+  width: 100vw;
+  height: 100vh;
+}
 
 .chat-window .chat-footer button:hover {
   color: #43a047;

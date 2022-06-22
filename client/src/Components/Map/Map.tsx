@@ -1,8 +1,13 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useEffect, useState, useRef, useCallback } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Map, { Marker } from 'react-map-gl';
+import Map, { Marker, NavigationControl, GeolocateControl } from 'react-map-gl';
+import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
+import mapboxgl from 'mapbox-gl';
+// import MapViewDirections from 'react-native-maps-directions';
+import axios from 'axios';
 import JobPopup from './JobPopup';
 import EventPopup from './EventPopup';
+// import MapDirections from './MapDirections';
 
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -29,6 +34,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const [userPopup, setUserPopup] = useState({});
   const [petsPlantsPopup, setPetsPlantsPopup] = useState([]);
   const [eventPopup, setEventPopup] = useState({});
+  const [dirCoordinates, setDirCoordinates] = useState([]);
 
   const showJobInfo = (id) => {
     const storage = [];
@@ -64,10 +70,77 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     setEventButtonPopup(!eventButtonPopup);
   };
 
+  const geolocateControlRef = useCallback((ref) => {
+    if (ref) {
+      // Activate as soon as the control is loaded
+      ref.trigger();
+    }
+  }, []);
+
+  const mapRef = useRef();
+  const nav = new mapboxgl.NavigationControl();
+  const directions = new MapboxDirections({
+    accessToken: TOKEN
+  });
+
+  const getDirections = () => {
+    for (let i = 0; i < eventsLocations.length; i++) {
+      if (eventsLocations[i][1] === eventPopup.id) {
+        axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${eventsLocations[i][0][0]},${eventsLocations[i][0][1]}?geometries=geojson&access_token=${TOKEN}`)
+          .then((results) => {
+            console.log(results.data, 'RESULTS');
+            // setDirCoordinates(results.data.routes[0].geometry.coordinates);
+            mapRef?.current.addLayer({
+              id: 'route',
+              type: 'line',
+              source: {
+                type: 'geojson',
+                data: results.data.routes[0].geometry.coordinates
+              },
+              layout: {
+                'line-join': 'round',
+                'line-cap': 'round'
+              },
+              paint: {
+                'line-color': '#3887be',
+                'line-width': 5,
+                'line-opacity': 0.75
+              }
+            });
+          });
+      }
+      setEventButtonPopup(!eventButtonPopup);
+    }
+  };
+
+
+  // useEffect(() => {
+  //   if (mapRef) {
+  //     mapRef?.current.addLayer({
+  //       id: 'route',
+  //       type: 'line',
+  //       source: {
+  //         type: 'geojson',
+  //         data: dirCoordinates
+  //       },
+  //       layout: {
+  //         'line-join': 'round',
+  //         'line-cap': 'round'
+  //       },
+  //       paint: {
+  //         'line-color': '#3887be',
+  //         'line-width': 5,
+  //         'line-opacity': 0.75
+  //       }
+  //     });
+  //   }
+  // }, []);
+
 
   return (
     <div>
       <Map
+        ref={mapRef}
         initialViewState={{
           longitude: userGeoLoc[0],
           latitude: userGeoLoc[1],
@@ -115,7 +188,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
                 onClick={()=>{ navigate(`/profile/${userPopup.id}`); }} 
                 onKeyPress={()=>{ navigate(`/profile/${userPopup.id}`); }}
                 role='button' 
-                tabIndex={0} 
+                tabIndex={0}
               >
                 <h2>{userPopup.name}</h2>
               </div>
@@ -134,7 +207,14 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           eventPopup ?
             <EventPopup trigger={eventButtonPopup} setTrigger={showEventInfo}>
               <h2>{eventPopup.name}</h2>
-              <h4>{eventPopup.location}</h4>
+              <div
+                onClick={getDirections} 
+                onKeyPress={getDirections}
+                role='button'
+                tabIndex={0}
+              >
+                <h4>{eventPopup.location}</h4>
+              </div>
               <div
                 onClick={()=>{ navigate(`/profile/${eventPopup.host}`); }} 
                 onKeyPress={()=>{ navigate(`/profile/${eventPopup.host}`); }}
@@ -146,6 +226,8 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
               <p>{eventPopup.description}</p>
             </EventPopup> : ''
         }
+        <GeolocateControl ref={geolocateControlRef} />
+        <NavigationControl />
       </Map> 
     </div>
   );
