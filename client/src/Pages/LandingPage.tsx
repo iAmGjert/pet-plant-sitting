@@ -37,13 +37,21 @@ const LandingPage: FC<Props> = () => {
 
   return (
     <div>
-      <h1>Welcome {user.name ? `, ${user.name}!` : '!'}</h1>
-      <p> Fern Herm is happy to have you!</p>
       <Card>
-        <Card.Header as='h5'>Job 1</Card.Header>
+        <Card.Header as='h5'>
+          Welcome {user.name ? `, ${user.name}!` : '!'}
+        </Card.Header>
+        <Card.Title>Fern Herm is happy to have you!</Card.Title>
+        <Card.Img
+          variant='top'
+          src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
+        />
+      </Card>
+
+      <Card>
         <Card.Body>
-          <Card.Title>Sitting for pet_plant name!</Card.Title>
-          <Card.Text>Date of Sitting.</Card.Text>
+          <Card.Title>Your Next Job:</Card.Title>
+          <Card.Text>Name of Pet/Plant</Card.Text>
           <Button variant='primary'>More Info</Button>
         </Card.Body>
       </Card>

@@ -55,7 +55,7 @@ const CalendarApp = () => {
       .get('/api/events/all')
       .then((res) => {
         //console.log(dateState);
-        console.log(res, 'res on 49');
+        //console.log(res, 'res on 49');
         // dispatch(setEvents(res.data));
         setEvents(res.data); //array of objects
         return res.data;
@@ -68,7 +68,7 @@ const CalendarApp = () => {
           //console.log('event startDate here', event.startDate);
           return event.startDate === newDate;
         });
-        console.log('filteredDate', filteredDate);
+        //console.log('filteredDate', filteredDate);
         setDatos(filteredDate);
       })
       .catch((err) => {
@@ -81,30 +81,30 @@ const CalendarApp = () => {
       .get('/api/jobs/all')
       .then((res) => {
         //console.log(dateState);
-        console.log(res, 'res on 49');
+        //console.log(res, 'res on 49');
         // dispatch(setEvents(res.data));
         setJobs(res.data); //array of objects
         return res.data;
       })
       .then((response) => {
-        console.log('response for jobs', jobs);
+        //console.log('response for jobs', jobs);
         const newDate = format(dateState, 'yyyy-MM-dd');
-        console.log('newDate', newDate);
+        //console.log('newDate', newDate);
         const filteredDate = response.filter((job) => {
           //console.log('event startDate here', event.startDate);
           return job.startDate === newDate;
         });
-        console.log('filteredDate', filteredDate);
+        //console.log('filteredDate', filteredDate);
         setTrabajos(filteredDate);
         return filteredDate;
       })
       .then((resp) => {
-        console.log('resp on 102', resp);
-        console.log(102, trabajos);
+        //console.log('resp on 102', resp);
+        //console.log(102, trabajos);
         return axios.get('/api/pets_plants/all');
       })
       .then((res) => {
-        console.log('hello hello', res);
+        //console.log('hello hello', res);
         return res.data;
       })
       .then((response) => {
@@ -114,7 +114,7 @@ const CalendarApp = () => {
             pets.push(response[petId - 1]);
           });
         }
-        console.log(pets);
+        //console.log(pets);
         setPetPlants(pets);
         return pets;
         // console.log('hola', trabajos);
