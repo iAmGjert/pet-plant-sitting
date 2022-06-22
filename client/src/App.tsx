@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
+import LandingPage from './Pages/LandingPage';
 import Login from './Pages/Login';
 import MapMain from './Pages/MapMain';
 import CalendarMain from './Pages/CalendarMain';
@@ -16,6 +17,7 @@ import {
 import { setJobs } from './state/features/jobs/jobSlice';
 import { setPetPlants } from './state/features/petPlant/petPlantSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
+import { mapActions } from './state/features/map/mapSlice';
 import JobsMain from './Pages/JobsMain';
 // import JobCreation from './Pages/JobCreation';
 import ChatMain from './Pages/ChatMain';
@@ -45,11 +47,17 @@ const App: FC<Props> = () => {
     const petPlants = await axios.get('api/pets_plants/all');
     dispatch(setPetPlants(petPlants.data));
   };
+  const getEvents = async () => {
+    const events = await axios.get('/api/events/all');
+    dispatch(mapActions.setEvents(events.data));
+  };
+
   useEffect(() => {
     getUser();
     getJobs();
     getUsers();
     getPetPlants();
+    getEvents();
   }, []);
 
   return (
@@ -60,6 +68,7 @@ const App: FC<Props> = () => {
         <Route path='/loading' element={<Loading />} />
         <Route path='/profile/:id' element={<Profile />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/landingpage' element={<LandingPage />} />
         <Route path='/map' element={<MapMain />} />
         <Route path='/events' element={<CommunityEvents />} />
         <Route path='/calendar' element={<CalendarMain />} />
