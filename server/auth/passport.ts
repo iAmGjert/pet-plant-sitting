@@ -16,10 +16,10 @@ passport.use(
     (
       accessToken: any,
       refreshToken: any,
-      profile: { displayName: any },
+      profile: { displayName: any, emails: [{value: string}] },
       cb: (arg0: null, arg1: any) => any
     ) => {
-      User.findOrCreate({ where: { name: profile.displayName } })
+      User.findOrCreate({ where: { name: profile.displayName }, defaults: { email: profile.emails[0].value } })
         .then((user: any) => {
           return cb(null, user);
         })

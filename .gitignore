@@ -7,6 +7,5 @@ client/build
 
 
 notes.md
-test-db-index.txt
-test-db-index.ts
-future-passport.ts
+database/temp
+server/auth/temp

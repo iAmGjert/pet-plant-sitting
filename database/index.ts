@@ -129,7 +129,7 @@ Gallery.hasMany(GalleryEntry, {
 
 /************************************************/
 
-db.sync(
+db.sync( 
   process.env.CLIENT_URL === 'http://localhost'
     ? { force: true }
     : { alter: true }
@@ -418,91 +418,84 @@ db.sync(
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '4:33 PM',
                 },
-              ])
-                .then(() => {
-                  EventComment.bulkCreate([
-                    {
-                      id: 1,
-                      event_id: 1,
-                      comment:
+              ]).then(() => {
+                EventComment.bulkCreate([
+                  {
+                    // id: 1,
+                    event_id: 1,
+                    comment:
                         'Spicy jalapeno bacon ipsum dolor amet ball tip ham hock burgdoggen, chislic porchetta ribeye cupim boudin drumstick shoulder chuck biltong.',
-                      user_id: 1,
-                    },
-                    {
-                      id: 2,
-                      event_id: 1,
-                      comment: 'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
-                      user_id: 2,
-                    },
-                    {
-                      id: 3,
-                      event_id: 1,
-                      comment:
+                    user_id: 1,
+                  },
+                  {
+                    // id: 2,
+                    event_id: 1,
+                    comment: 'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
+                    user_id: 2,
+                  },
+                  {
+                    // id: 3,
+                    event_id: 1,
+                    comment:
                         'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
-                      user_id: 3,
-                    },
-                    {
-                      id: 4,
-                      event_id: 1,
-                      comment:
+                    user_id: 3,
+                  },
+                  {
+                    // id: 4,
+                    event_id: 1,
+                    comment:
                         'non lectus aliquam sit amet diam in mGround round tongue pancetta frankfurter drumstick, bresaola chicken boudin cupim burgdoggen.',
-                      user_id: 4,
-                    },
-                    {
-                      id: 5,
-                      event_id: 1,
-                      comment: 'fusce consequat nulla nisl nunc nisl duis',
-                      user_id: 5,
-                    },
-                    {
-                      id: 6,
-                      event_id: 1,
-                      comment:
+                    user_id: 4,
+                  },
+                  {
+                    // id: 5,
+                    event_id: 1,
+                    comment: 'fusce consequat nulla nisl nunc nisl duis',
+                    user_id: 5,
+                  },
+                  {
+                    // id: 6,
+                    event_id: 1,
+                    comment:
                         'Ham hock tenderloin turkey hamburger',
-                      user_id: 1,
-                    },
-                  ]);
-                })
-                .then(() => {
-                  EventParticipant.bulkCreate([
-                    {
-                      id: 1,
-                      event_id: 1,
-                      user_id: 1,
-                    },
-                    {
-                      id: 2,
-                      event_id: 2,
-                      user_id: 2,
-                    },
-                    {
-                      id: 3,
-                      event_id: 3,
-                      user_id: 3,
-                    },
-                    {
-                      id: 4,
-                      event_id: 4,
-                      user_id: 4,
-                    },
-                  ]);
-                })
-                .catch((err: Error) => console.log(err));
+                    user_id: 1,
+                  },
+                ]);
+              }).then(() => {
+                EventParticipant.bulkCreate([
+                  {
+                    // id: 1,
+                    event_id: 1,
+                    user_id: 1,
+                  },
+                  {
+                    // id: 2,
+                    event_id: 2,
+                    user_id: 2,
+                  },
+                  {
+                    // id: 3,
+                    event_id: 3,
+                    user_id: 3,
+                  },
+                  {
+                    // id: 4,
+                    event_id: 4,
+                    user_id: 4,
+                  },
+                ]);
+              }).catch((err: Error) => console.log(err));
             });
           });
         });
       });
     }
-  })
-
-  .then(() =>
+  }).then(() =>
     console.log(
       process.env.CLIENT_URL === 'http://localhost'
         ? '🐘 Models synced and 🌱 seeded!'
         : '🐘 Models synced!'
-    )
-  )
-  .catch((err: string) => console.error(err));
+    )).catch((err: string) => console.error(err));
 
 export {
   db,
