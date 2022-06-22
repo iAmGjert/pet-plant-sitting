@@ -308,9 +308,7 @@ const Profile = () => {
                     className='text-center'
                     onClick={() => {
                       // check if this user has a gallery, if it dosent make one. Then do some cloudinary to upload a pic to said gallery. then for each pic in the gallery, make a card with the pic and a delete button.
-                      axios.post(`/api/gallery/${currUser.id}`).then(() => {
-                        showWidget();
-                      });
+                      showWidget();
                     }}
                   >
                     <Card.Img
