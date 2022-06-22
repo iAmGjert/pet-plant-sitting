@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
@@ -8,6 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
@@ -19,8 +21,10 @@ const Home: FC<Props> = () => {
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
   const jobs = useAppSelector((state) => state.job.jobs);
   const handleClick = () => {
+
     // console.log(user);
     // setDisplay(!display);
+
   };
   return (
     <Container>

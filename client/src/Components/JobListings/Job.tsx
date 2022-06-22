@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
-
+import MoreInfo from './MoreInfo';
+import { setPrompt } from '../../state/features/jobs/jobSlice';
+ 
 interface jobStuff {
   id: number,
   location: string,
@@ -12,11 +14,18 @@ interface jobStuff {
   pet_plant: Array<number>
 }
 const Job = ({ job }) => {
-  const user = useAppSelector((state)=>state.userProfile.users);
+  const [modalShow, setModalShow] = useState(false);
+  const users = useAppSelector((state)=>state.userProfile.users);
+  const user = useAppSelector((state)=>state.userProfile.value);
   const petPlants = useAppSelector((state)=>state.petPlant.petPlants);
-  const {id, location, pet_plant, employer_id, sitter_id, startDate, endDate}: jobStuff = job;
+  const { id, location, pet_plant, employer_id, sitter_id, startDate, endDate}: jobStuff = job;
+  const dispatch = useAppDispatch();
   const handleClick = ()=>{
-    console.log(`Clicked more info for job#${id}`);
+    
+    if (user.name === '') {
+      dispatch(setPrompt(true));      
+    }
+    setModalShow(true);
   };
   const [load, setLoad] = useState(false);
   useEffect(()=>{
@@ -35,9 +44,9 @@ const Job = ({ job }) => {
             <Col>
               {
                 <div>
-                  Employer: {<div>{ user.reduce((employer, user)=>{
-                    if (user.id === employer_id) {
-                      employer = user.name;
+                  Employer: {<div>{ users.reduce((employer, users)=>{
+                    if (users.id === employer_id) {
+                      employer = users.name;
                     }
                     return employer;
                   }, '') }</div>}
@@ -59,7 +68,15 @@ const Job = ({ job }) => {
             Job Location: {location}
             </Col>
           </Row>
-          <Button onClick={()=>{ handleClick(); }} variant='primary'>More Info</Button>
+          <Button onClick={handleClick} variant='primary'>More Info</Button>
+          <>
+            <MoreInfo user={user} show={modalShow} onHide={() => setModalShow(false)} job={job} employer={ users.reduce((employer, users)=>{
+              if (users.id === employer_id) {
+                employer = users.name;
+              }
+              return employer;
+            }, '') } />
+          </>
         </Card.Body>
       </Card>
     </Container>

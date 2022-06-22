@@ -2,7 +2,13 @@ const passport = require('passport');
 import express, { Request, Response } from 'express';
 const auth = express();
 require('dotenv').config();
-const { User, PetPlant, Rating } = require('../../database/index.ts');
+const {
+  User,
+  PetPlant,
+  Rating,
+  Gallery,
+  GalleryEntry,
+} = require('../../database/index.ts');
 const CLIENT_URL: string | undefined =
   process.env.CLIENT_URL === 'http://localhost'
     ? `${process.env.CLIENT_URL}:${process.env.PORT}`
@@ -31,6 +37,10 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
           include: [
             { model: User, attributes: ['name', 'image'], as: 'submitter' },
           ],
+        },
+        {
+          model: Gallery,
+          include: [{ model: GalleryEntry }],
         },
       ],
     })

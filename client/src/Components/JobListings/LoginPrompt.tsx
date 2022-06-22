@@ -30,7 +30,7 @@ const LoginPrompt = () => {
     <>
       <Modal
         show={show}
-        onHide={handleClose}
+        onHide={handleOtherRoute}
         backdrop="static"
         keyboard={false}
       >
@@ -38,7 +38,7 @@ const LoginPrompt = () => {
           <Modal.Title>Login Redirect</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Please Login or Signup to create an event. 
+          Please Login or Signup to create an job. 
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleOtherRoute}>

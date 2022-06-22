@@ -12,10 +12,15 @@ type Props = {
   user: Profile;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
-  setProfileUser: (showModal: boolean) => void;
+  setProfileUser: (user: any) => void;
 };
 
-const EditAccountModal = ({ user, showModal, setShowModal, setProfileUser }: Props) => {
+const EditAccountModal = ({
+  user,
+  showModal,
+  setShowModal,
+  setProfileUser,
+}: Props) => {
   // loop through fields on a user and create a form field for each
   const [newPet, setNewPet] = useState(false);
   const [newPetId, setNewPetID] = useState(0);
@@ -38,9 +43,7 @@ const EditAccountModal = ({ user, showModal, setShowModal, setProfileUser }: Pro
   }
   const dispatch = useAppDispatch();
   const getUser = async () => {
-    const user = await axios.get(
-      '/auth/login/success'
-    );
+    const user = await axios.get('/auth/login/success');
     dispatch(setUser(user.data.user));
     // console.log(user, 'LOGIN USER/userProfile state is set');
     setProfileUser(user.data.user);
