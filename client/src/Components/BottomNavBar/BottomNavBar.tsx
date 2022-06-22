@@ -12,7 +12,7 @@ const BottomNavBar = () => {
   const navigate = useNavigate();
   const user = useAppSelector(state=>state.userProfile.value);
   const handleClick = ()=>{
-    // if (user.name === '') {
+    // if (user.name.length < 1) {
     //   setLoginPrompt(true);
     //   return;
     // }

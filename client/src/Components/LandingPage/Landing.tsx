@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import UpcomingJobs from './UpcomingJobs';
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -73,6 +74,7 @@ const Landing: FC<Props> = () => {
           <Button variant='primary'>More Info</Button>
         </Card.Body>
       </Card>
+      <UpcomingJobs />
     </div>
   );
 };

@@ -1,6 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { Image, Container, Row, Col, Badge, Tabs, Tab } from 'react-bootstrap';
+import {
+  Image,
+  Container,
+  Row,
+  Col,
+  Badge,
+  Tabs,
+  Tab,
+  Card,
+  Button,
+} from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { format } from 'timeago.js';
@@ -20,6 +30,7 @@ export interface RatingInfo {
   submitter: {
     name: string;
     image: string;
+    id: number;
   };
 }
 
@@ -37,17 +48,26 @@ export interface Profile {
   total_sitter_ratings: number;
   pet_plants: PetPlant[];
   ratings: RatingInfo[];
+  gallery: {
+    id: number;
+    user_id: number;
+    gallery_entries: [];
+  };
 }
 
 const Profile = () => {
   const [editable, setEditable] = useState(false);
   const [readMore, setReadMore] = useState(false);
+  const [showGalleryFooter, setShowGalleryFooter] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [newImgCloud, setNewImgCloud] = useState('');
+
   const [completeProfile, setCompleteProfile] = useState(0);
   const [profileUser, setProfileUser] = useState<Profile | null>(null);
   const currUser = useAppSelector((state) => state.userProfile.value);
 
   const { id } = useParams();
+
   // get a user based on the id in the url
   // offscreen modal for editing profile
   // Change tabs to Nav with style tab https://stackoverflow.com/questions/36342220/tabs-in-react-bootstrap-navbar
@@ -57,12 +77,14 @@ const Profile = () => {
     setProfileUser(user.data);
     // console.log(user.data);
   };
+
   const getRating = () => {
     let sum = 0;
     for (let i = 0; i < profileUser?.ratings.length; i++) {
       sum += profileUser?.ratings[i].value;
     }
-    return sum / profileUser?.ratings.length;
+    // console.log(Math.floor(sum / profileUser?.ratings.length));
+    return Math.floor(sum / profileUser?.ratings.length);
   };
 
   const formatBio = (bio: string) => {
@@ -83,14 +105,57 @@ const Profile = () => {
     }
     return stars;
   };
+  const widget = window?.cloudinary.createUploadWidget(
+    {
+      cloudName: process.env.CLOUDINARY_NAME,
+      uploadPreset: process.env.CLOUDINARY_PRESET,
+    },
+    (error: Error, result: any) => {
+      if (result.event === 'success') {
+        setNewImgCloud(result.info.url);
+      }
+    }
+  );
+  const showWidget = () => {
+    widget.open();
+  };
+  useEffect(() => {
+    if (newImgCloud) {
+      if (!profileUser.gallery?.id) {
+        axios.post(`/api/gallery/${currUser.id}`).then((results: any) => {
+          axios
+            .post(`/api/gallery/entry/${results.data[0].id}`, {
+              url: newImgCloud,
+              gallery_id: results.data[0].id,
+            })
+            .then(() => {
+              getProfile();
+            });
+        });
+      } else {
+        axios
+          .post(`/api/gallery/entry/${profileUser.gallery.id}`, {
+            url: newImgCloud,
+            gallery_id: profileUser.gallery.id,
+          })
+          .then(() => {
+            getProfile();
+          });
+      }
+    }
+  }, [newImgCloud]);
 
   useEffect(() => {
-    getProfile();
-  }, []);
+    if (id) {
+      getProfile();
+    }
+  }, [id]);
 
   useEffect(() => {
     if (currUser.id && Number(id) == currUser?.id) {
       setEditable(true);
+    } else {
+      setEditable(false);
     }
   }, [currUser, id]);
   return (
@@ -119,9 +184,31 @@ const Profile = () => {
             </h5>
             <h5>Member Since: {format(profileUser?.createdAt)}</h5>
             <h3>
-              <Badge pill bg='success'>
-                Trusted Sitter
-              </Badge>
+              {getRating() >= 2 && (
+                <Badge pill bg='success'>
+                  {/* if sitter has repeated customers */}
+                  Trusted Sitter
+                </Badge>
+              )}
+              {profileUser?.ratings.length > 1 &&
+                profileUser?.ratings.length < 5 && (
+                  <Badge pill bg='info'>
+                    {/* if sitter < 2 jobs completed > */}
+                    New Sitter
+                  </Badge>
+                )}
+              {getRating() === 5 && (
+                <Badge pill bg='primary'>
+                  {/* 5 star rating */}
+                  Top Rated!
+                </Badge>
+              )}
+              {profileUser?.ratings.length >= 5 && (
+                <Badge pill bg='info'>
+                  {/* 5 jobs completed */}
+                  Experienced Sitter
+                </Badge>
+              )}
             </h3>
             <br />
             {editable && (
@@ -190,6 +277,47 @@ const Profile = () => {
                     />
                   );
                 })}
+              </Tab>
+              <Tab eventKey='gallery' title='Gallery'>
+                {/* for each gallery entry create a card */}
+                {profileUser?.gallery?.gallery_entries.length >= 1 &&
+                  profileUser.gallery.gallery_entries.map((entry: any, i) => {
+                    return (
+                      <>
+                        <Card
+                          onClick={() => {
+                            setShowGalleryFooter(!showGalleryFooter);
+                          }}
+                        >
+                          <Card.Img
+                            variant='top'
+                            src={entry.url}
+                            key={'entry' + i}
+                          />
+                          {editable && showGalleryFooter && (
+                            <Card.Footer>
+                              <Button variant='danger'>Delete</Button>
+                            </Card.Footer>
+                          )}
+                        </Card>
+                      </>
+                    );
+                  })}
+                {editable && (
+                  <Card
+                    className='text-center'
+                    onClick={() => {
+                      // check if this user has a gallery, if it dosent make one. Then do some cloudinary to upload a pic to said gallery. then for each pic in the gallery, make a card with the pic and a delete button.
+                      showWidget();
+                    }}
+                  >
+                    <Card.Img
+                      variant='top'
+                      src='https://static.thenounproject.com/png/3322766-200.png'
+                    />
+                    <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
+                  </Card>
+                )}
               </Tab>
             </Tabs>
           </span>

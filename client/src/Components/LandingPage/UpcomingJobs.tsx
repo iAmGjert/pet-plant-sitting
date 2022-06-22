@@ -20,4 +20,14 @@ interface Props {}
 
 const upcomingJobs: FC<Props> = () => {
   const jobs = useAppSelector((state) => state.job.jobs);
+
+  const [upcomingWork, setUpcomingWork] = useState({});
+
+  return (
+    <div>
+      <h1>hello</h1>
+    </div>
+  );
 };
+
+export default upcomingJobs;

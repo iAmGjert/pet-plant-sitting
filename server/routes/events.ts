@@ -76,9 +76,9 @@ events.get('/all', async (req: Request, res: Response) => {
   try {
     const events = await Events.findAll({
       include: [
-        { model: EventComment, include: [{ model: User, attributes: ['name', 'image'] }] },
-        { model: EventParticipant, include: [{ model: User, attributes: ['name', 'image']}] },
-        { model: User, attributes: ['name', 'image'] },
+        { model: EventComment, include: [{ model: User, attributes: ['id', 'name', 'image'] }] },
+        { model: EventParticipant, include: [{ model: User, attributes: ['id', 'name', 'image']}] },
+        { model: User, attributes: ['id', 'name', 'image'] },
       ],
     });
     return res.status(200).send(events);

@@ -38,11 +38,13 @@ io.on('connection', (socket: typeof Socket) => {
   });
 });
 
-app.use(session({
-  secret: process.env.SESSION_SECRET,
-  resave: true,
-  saveUninitialized: true
-}));
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: true,
+    saveUninitialized: true,
+  })
+);
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
@@ -71,6 +73,7 @@ app.use('/api/map', require('./routes/map.ts'));
 app.use('/api/events', require('./routes/events.ts'));
 app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/pets_plants', require('./routes/pets_plants'));
 
 app.get('/*', function (req: Request, res: Response | any) {
