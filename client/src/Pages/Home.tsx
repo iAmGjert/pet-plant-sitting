@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 
+
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
@@ -11,7 +12,7 @@ const Home: FC<Props> = () => {
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
   const jobs = useAppSelector((state) => state.job.jobs);
   const handleClick = () => {
-    console.log(user);
+    console.log(jobs);
     setDisplay(!display);
   };
   return (
