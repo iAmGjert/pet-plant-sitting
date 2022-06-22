@@ -1,9 +1,7 @@
-import React, { FC, useEffect, useState, useRef, useCallback } from 'react';
+import React, { FC, useState, useCallback } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Map, { Marker, NavigationControl, GeolocateControl } from 'react-map-gl';
+import Map, { Marker, GeolocateControl, Layer, Source } from 'react-map-gl';
 import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
-import mapboxgl from 'mapbox-gl';
-// import MapViewDirections from 'react-native-maps-directions';
 import axios from 'axios';
 import JobPopup from './JobPopup';
 import EventPopup from './EventPopup';
@@ -75,72 +73,32 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
       // Activate as soon as the control is loaded
       ref.trigger();
     }
-  }, []);
-
-  const mapRef = useRef();
-  const nav = new mapboxgl.NavigationControl();
-  const directions = new MapboxDirections({
-    accessToken: TOKEN
-  });
+  }, []); 
 
   const getDirections = () => {
     for (let i = 0; i < eventsLocations.length; i++) {
       if (eventsLocations[i][1] === eventPopup.id) {
         axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${eventsLocations[i][0][0]},${eventsLocations[i][0][1]}?geometries=geojson&access_token=${TOKEN}`)
           .then((results) => {
-            console.log(results.data, 'RESULTS');
-            // setDirCoordinates(results.data.routes[0].geometry.coordinates);
-            mapRef?.current.addLayer({
-              id: 'route',
-              type: 'line',
-              source: {
-                type: 'geojson',
-                data: results.data.routes[0].geometry.coordinates
-              },
-              layout: {
-                'line-join': 'round',
-                'line-cap': 'round'
-              },
-              paint: {
-                'line-color': '#3887be',
-                'line-width': 5,
-                'line-opacity': 0.75
-              }
-            });
+            setDirCoordinates(results.data.routes[0].geometry.coordinates);
           });
       }
       setEventButtonPopup(!eventButtonPopup);
     }
   };
 
-
-  // useEffect(() => {
-  //   if (mapRef) {
-  //     mapRef?.current.addLayer({
-  //       id: 'route',
-  //       type: 'line',
-  //       source: {
-  //         type: 'geojson',
-  //         data: dirCoordinates
-  //       },
-  //       layout: {
-  //         'line-join': 'round',
-  //         'line-cap': 'round'
-  //       },
-  //       paint: {
-  //         'line-color': '#3887be',
-  //         'line-width': 5,
-  //         'line-opacity': 0.75
-  //       }
-  //     });
-  //   }
-  // }, []);
-
+  const directions = {
+    type: 'Feature',
+    properties: {},
+    geometry: {
+      type: 'LineString',
+      coordinates: dirCoordinates
+    }
+  };
 
   return (
     <div>
       <Map
-        ref={mapRef}
         initialViewState={{
           longitude: userGeoLoc[0],
           latitude: userGeoLoc[1],
@@ -227,8 +185,25 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
             </EventPopup> : ''
         }
         <GeolocateControl ref={geolocateControlRef} />
-        <NavigationControl />
-      </Map> 
+        {
+          dirCoordinates.length > 0 &&
+        <Source id="polylineLayer" type="geojson" data={directions}>
+          <Layer
+            id="lineLayer"
+            type="line"
+            source="my-data"
+            layout={{
+              'line-join': 'round',
+              'line-cap': 'round'
+            }}
+            paint={{
+              'line-color': 'darkblue',
+              'line-width': 7
+            }}
+          />
+        </Source>
+        }
+      </Map>
     </div>
   );
 };
