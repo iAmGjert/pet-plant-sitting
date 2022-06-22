@@ -132,7 +132,10 @@ PetPlantDescriptor.belongsTo(PetPlant, {
 });
 
 User.hasOne(Gallery, {
-  foreignKey: 'gallery_id',
+  foreignKey: 'id',
+});
+Gallery.hasOne(User, {
+  foreignKey: 'user_id',
 });
 
 Gallery.hasMany(GalleryEntry, {
@@ -167,7 +170,8 @@ db.sync(
 
         {
           name: 'Braeden Ford',
-          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKs06QLIdwr5m5iIjxvDitADflWB1gjJCWg&usqp=CAU',
+          image:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKs06QLIdwr5m5iIjxvDitADflWB1gjJCWg&usqp=CAU',
           location: 'Superdome, New Orleans',
           sitter_rating: 10,
           total_sitter_ratings: 24,
@@ -238,24 +242,26 @@ db.sync(
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
+            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
           },
           {
             owner_id: 2,
             name: 'Nova',
-            image: 'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
+            image:
+              'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
             breed: 'Skink, blue-tongued',
             species: 'Tiliqua scincoides',
             tags: ['Khaki', 'Goldenrod'],
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
+            bio: "I am the world's worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this",
           },
           {
             owner_id: 3,
             name: 'Audrey II',
-            image: 'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
+            image:
+              'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
             breed: 'Venus Fly Trap Mix',
             species: 'Butterwort',
             tags: ['Crimson', 'Violet'],
@@ -288,7 +294,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
           {
             owner_id: 4,
@@ -303,7 +309,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
         ]).then(() => {
           Rating.bulkCreate([
@@ -409,7 +415,8 @@ db.sync(
                   name: 'Annual Animal Rescue Drive',
                   host: 2,
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
-                  description: 'A gathering for pet-less humans to find and be rescued by their furrever friends',
+                  description:
+                    'A gathering for pet-less humans to find and be rescued by their furrever friends',
                   startDate: new Date('June 29, 2022 01:15:00'),
                   startTime: '4:48 AM',
                 },
@@ -453,7 +460,8 @@ db.sync(
                     {
                       id: 2,
                       event_id: 1,
-                      comment: 'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
+                      comment:
+                        'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
                       user_id: 2,
                     },
                     {
@@ -479,8 +487,7 @@ db.sync(
                     {
                       id: 6,
                       event_id: 1,
-                      comment:
-                        'Ham hock tenderloin turkey hamburger',
+                      comment: 'Ham hock tenderloin turkey hamburger',
                       user_id: 1,
                     },
                   ]);

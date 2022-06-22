@@ -1,6 +1,12 @@
 import express, { Request, Response } from 'express';
 const users = express();
-import { PetPlant, User, Rating } from '../../database/index';
+import {
+  PetPlant,
+  User,
+  Rating,
+  Gallery,
+  GalleryEntry,
+} from '../../database/index';
 
 interface userInfo {
   id: number;
@@ -63,6 +69,10 @@ users.get('/:id', async (req: Request, res: Response) => {
         include: [
           { model: User, attributes: ['name', 'image', 'id'], as: 'submitter' },
         ],
+      },
+      {
+        model: Gallery,
+        include: [{ model: GalleryEntry }],
       },
     ],
   });
