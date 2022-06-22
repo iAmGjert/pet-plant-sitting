@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Landing from '../Components/LandingPage/Landing';
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -25,7 +26,7 @@ interface jobStuff {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
-const LandingPage: FC<Props> = () => {
+const LandingPageMain: FC<Props> = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
@@ -37,26 +38,9 @@ const LandingPage: FC<Props> = () => {
 
   return (
     <div>
-      <Card>
-        <Card.Header as='h5'>
-          Welcome {user.name ? `, ${user.name}!` : '!'}
-        </Card.Header>
-        <Card.Title>Fern Herm is happy to have you!</Card.Title>
-        <Card.Img
-          variant='top'
-          src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
-        />
-      </Card>
-
-      <Card>
-        <Card.Body>
-          <Card.Title>Your Next Job:</Card.Title>
-          <Card.Text>Name of Pet/Plant</Card.Text>
-          <Button variant='primary'>More Info</Button>
-        </Card.Body>
-      </Card>
+      <Landing />
     </div>
   );
 };
 
-export default LandingPage;
+export default LandingPageMain;
