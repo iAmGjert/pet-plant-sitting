@@ -18,12 +18,14 @@ interface EventTYPE {
     id: number; 
     comment: string; 
     user: {
+      id: number;
       name: string;
       image: string;
     }}>;
     event_participants: Array<{ 
     id: number; 
     user: {
+      id: number;
       name: string;
       image: string;
     }}>;
@@ -31,6 +33,7 @@ interface EventTYPE {
   endDate: Date;
   startTime: Date;
   user: {
+    id: number;
     name: string;
     image: string;
   }
@@ -68,6 +71,9 @@ const CommunityEventsMain = () => {
   
   const renderView = (): any => {
     if (view === 'list') {
+
+
+   
       return events.map((event: EventTYPE) => (
         <div key={event.id} /*style={{border: '1px solid red'}}*/>
           <Event className='events-list'
