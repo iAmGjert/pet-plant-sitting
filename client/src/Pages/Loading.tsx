@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector, useAppDispatch } from '../state/hooks';
+import { useAppSelector } from '../state/hooks';
 import { useNavigate } from 'react-router-dom';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import { Oval } from 'react-loader-spinner';

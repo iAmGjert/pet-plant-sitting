@@ -119,7 +119,7 @@ PetPlantDescriptor.belongsTo(PetPlant, {
   foreignKey: 'pet_plant_id',
 });
 
-Gallery.hasOne(User, {
+User.hasOne(Gallery, {
   foreignKey: 'gallery_id',
 });
 
