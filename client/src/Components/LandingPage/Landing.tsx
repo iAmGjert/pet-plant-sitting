@@ -54,6 +54,20 @@ const Landing: FC<Props> = () => {
   const jobs = useAppSelector((state) => state.job.jobs);
   const events = useAppSelector((state) => state.events.events);
 
+  const [upcomingWork, setUpcomingWork] = useState([]);
+
+  const getJobs = () => {
+    axios
+      .get('/api/jobs/all')
+      .then((response) => {
+        console.log(response);
+        //setUpcomingWork(response);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <div>
       <Card>
@@ -72,6 +86,13 @@ const Landing: FC<Props> = () => {
           <Card.Title>Your Next Job:</Card.Title>
           <Card.Text>Name of Pet/Plant</Card.Text>
           <Button variant='primary'>More Info</Button>
+          <Button
+            onClick={() => {
+              getJobs();
+            }}
+          >
+            test
+          </Button>
         </Card.Body>
       </Card>
       <UpcomingJobs />
