@@ -34,6 +34,7 @@ const MoreInfo = (props) => {
       return;
     }
     postApplicant(obj);
+    onHide();
   };
   return (
 
