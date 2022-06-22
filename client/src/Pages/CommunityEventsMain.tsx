@@ -41,11 +41,11 @@ interface EventTYPE {
 
 const CommunityEventsMain = () => {
   const dispatch: any = useAppDispatch();
-  const state = useAppSelector((state) => state);
+  const state = useAppSelector((state) => state.events);
   const view = useAppSelector(state => state.events.view);
   const events = useAppSelector(state => state.events.events);
-
-  console.log(events); // with user and comment data included 
+  console.log(state);
+  // console.log(events); // with user and comment data included 
   
   useEffect(() => {
     const getEvents = async () => {

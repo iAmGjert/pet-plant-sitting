@@ -242,7 +242,7 @@ db.sync(
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
+            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
           },
           {
             owner_id: 2,
@@ -255,7 +255,7 @@ db.sync(
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: "I am the world's worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this",
+            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
           },
           {
             owner_id: 3,
@@ -294,7 +294,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 4,
@@ -309,7 +309,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
         ]).then(() => {
           Rating.bulkCreate([
@@ -513,18 +513,89 @@ db.sync(
                     user_id: 4,
                   },
                 ]);
-              }).catch((err: Error) => console.log(err));
+              }).then(()=>{
+                JobApplicant.bulkCreate([
+                  {
+                    user_id: 1,
+                    job_id: 1,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 1,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 3,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 4,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 5,
+                  },
+                ]);
+              }).then(()=>{
+                JobPetsPlants.bulkCreate([
+                  {
+                    job_id: 1,
+                    pet_plant_id: 2
+                  },
+                  {
+                    job_id: 1,
+                    pet_plant_id: 3
+                  },
+                  {
+                    job_id: 2,
+                    pet_plant_id: 1
+                  },
+                  {
+                    job_id: 2,
+                    pet_plant_id: 4
+                  },
+                  {
+                    job_id: 3,
+                    pet_plant_id: 1
+                  },
+                  {
+                    job_id: 3,
+                    pet_plant_id: 2
+                  },
+                  {
+                    job_id: 4,
+                    pet_plant_id: 3
+                  },
+                  {
+                    job_id: 4,
+                    pet_plant_id: 5
+                  },
+                  {
+                    job_id: 5,
+                    pet_plant_id: 5
+                  },
+                  {
+                    job_id: 5,
+                    pet_plant_id: 4
+                  },
+                ]);
+              })
+                .catch((err: Error) => console.log(err));
             });
           });
         });
       });
     }
-  }).then(() =>
+  })
+
+  .then(() =>
     console.log(
       process.env.CLIENT_URL === 'http://localhost'
         ? '🐘 Models synced and 🌱 seeded!'
         : '🐘 Models synced!'
-    )).catch((err: string) => console.error(err));
+    )
+  )
+  .catch((err: string) => console.error(err));
 
 export {
   db,

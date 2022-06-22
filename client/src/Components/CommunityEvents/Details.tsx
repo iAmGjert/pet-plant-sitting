@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { useNavigate } from 'react-router-dom';
-import { setView } from '../../state/features/events/eventsSlice';
+import { setView, setEventObj } from '../../state/features/events/eventsSlice';
 import AddComment from './AddComment';
 
 import { ArrowLeft } from 'react-bootstrap-icons';
@@ -23,7 +23,7 @@ const Details = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const currentUser = useAppSelector(state => state.userProfile.value);
-  const view = useAppSelector(state => state.events.view);
+  const events = useAppSelector(state => state.events.events);
   const eventObj = useAppSelector((state) => state.events.event);
   const {event_comments, event_participants, user} = eventObj;
 
@@ -41,7 +41,8 @@ const Details = () => {
   const getComments = async () => {
     const res = await axios.get('/api/events/comments/all');
     console.log(res.data);
-    return setComments(res.data);
+    setComments(res.data);
+    return res.data;
   };
 
   const postComment = async (comment: any) => {
@@ -49,7 +50,10 @@ const Details = () => {
       const res = await axios.post('/api/events/comment/add', comment);
       console.log(res.data, '\n', res.status);
       const fetchComments = await getComments();
-      return fetchComments;
+      console.log(fetchComments);
+      dispatch(setEventObj({...eventObj, event_comments: fetchComments}));
+      // dispatch(setEvents({...events, eventObj.event_comments: fetchComments}));
+      // return fetchComments;
      
     } catch (error) {
       console.error(error);
@@ -75,7 +79,7 @@ const Details = () => {
     setShowComments(!showComments);
   };
 
-  const numOfComments = comments.length;
+  const numOfComments = event_comments.length;
   const numOfParticipants = event_participants.length;
 
   const parseTime = (time: string) => {
