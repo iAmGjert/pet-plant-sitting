@@ -136,7 +136,7 @@ PetPlantDescriptor.belongsTo(PetPlant, {
   foreignKey: 'pet_plant_id',
 });
 
-Gallery.hasOne(User, {
+User.hasOne(Gallery, {
   foreignKey: 'gallery_id',
 });
 
@@ -172,8 +172,8 @@ db.sync(
 
         {
           name: 'Braeden Ford',
-          image: 'http://dummyimage.com/233x100.png/dddddd/000000',
-          location: '2221 Judith St, Metairie, LA 70003',
+          image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKs06QLIdwr5m5iIjxvDitADflWB1gjJCWg&usqp=CAU',
+          location: 'Superdome, New Orleans',
           sitter_rating: 10,
           total_sitter_ratings: 24,
           bio: 'Other specified injury of unspecified blood vessel at ankle and foot level, right leg',
@@ -223,7 +223,7 @@ db.sync(
         {
           name: 'velouriagreen',
           image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
-          location: '1213 Gaudet Dr, Marrero, LA 70072',
+          location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: 3,
           total_sitter_ratings: 86,
           bio: 'Major laceration of right vertebral artery, initial encounter',
@@ -247,21 +247,20 @@ db.sync(
           },
           {
             owner_id: 2,
-            name: 'Laïla',
-            image: 'https://i.ytimg.com/vi/YSHDBB6id4A/maxresdefault.jpg',
+            name: 'Nova',
+            image: 'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
             breed: 'Skink, blue-tongued',
             species: 'Tiliqua scincoides',
             tags: ['Khaki', 'Goldenrod'],
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: 'I am the world\'s worst demon child',
+            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
           },
           {
             owner_id: 3,
             name: 'Audrey II',
-            image:
-              'https://static.wikia.nocookie.net/villains/images/5/58/Audreyiifeedme.jpg/revision/latest?cb=20200717203832',
+            image: 'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
             breed: 'Venus Fly Trap Mix',
             species: 'Butterwort',
             tags: ['Crimson', 'Violet'],
@@ -351,7 +350,7 @@ db.sync(
           ]).then(() => {
             Job.bulkCreate([
               {
-                location: '2221 Judith St, Metairie, LA 70003',
+                location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
                 pet_plant: [2, 2],
                 employer_id: 2,
                 description: 'Come watch my child!',
@@ -372,7 +371,7 @@ db.sync(
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
-                pet_plant: [5, 1],
+                pet_plant: [3],
                 employer_id: 3,
                 sitter_id: 5,
                 description: 'Come watch this things',
@@ -415,8 +414,7 @@ db.sync(
                   name: 'Annual Animal Rescue Drive',
                   host: 2,
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
-                  description:
-                    'A gathering for pet-less humans to find their furrever friend and be rescued by their pets',
+                  description: 'A gathering for pet-less humans to find and be rescued by their furrever friends',
                   startDate: new Date('June 29, 2022 01:15:00'),
                   startTime: '4:48 AM',
                 },
