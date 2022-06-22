@@ -11,19 +11,10 @@ import Card from 'react-bootstrap/Card';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 
 import axios from 'axios';
+import { Z_FILTERED } from 'zlib';
 
 //typescript
 interface upcomingJobs {
-  id: number;
-  location: string;
-  employer_id: number;
-  sitter_id: number | null;
-  startDate: Date;
-  endDate: Date;
-  pet_plant: Array<number>;
-}
-
-interface pastJobs {
   id: number;
   location: string;
   employer_id: number;
@@ -56,12 +47,21 @@ const Landing: FC<Props> = () => {
 
   const [upcomingWork, setUpcomingWork] = useState([]);
 
-  const getJobs = () => {
+  const getUpcomingJobs = () => {
     axios
       .get('/api/jobs/all')
       .then((response) => {
-        console.log(response);
-        //setUpcomingWork(response);
+        console.log(64, response.data);
+        setUpcomingWork(response.data);
+        return response.data;
+      })
+      .then((res) => {
+        console.log('res on 78', res);
+        const upcomingLabor = res.filter((job) => {
+          console.log('job on 75', job);
+          return job.isCompleted === false;
+        });
+        console.log(79, upcomingLabor);
       })
       .catch((err) => {
         console.error(err);
@@ -88,7 +88,7 @@ const Landing: FC<Props> = () => {
           <Button variant='primary'>More Info</Button>
           <Button
             onClick={() => {
-              getJobs();
+              getUpcomingJobs();
             }}
           >
             test
