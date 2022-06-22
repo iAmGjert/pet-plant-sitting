@@ -21,7 +21,6 @@ const MoreInfo = (props) => {
   const postApplicant = async (newApplicant: any) => {
     return await axios.post('/api/jobs/applicant/create', newApplicant)
       .then((res: any) => {
-        console.log(res);
         return res;
       })
       .catch(err => {
@@ -35,6 +34,7 @@ const MoreInfo = (props) => {
       return;
     }
     postApplicant(obj);
+    onHide();
   };
   return (
 
