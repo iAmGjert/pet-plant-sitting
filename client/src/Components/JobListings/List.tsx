@@ -3,6 +3,7 @@ import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import Job from './Job';
 
 const List = () => {
+
   const jobs = useAppSelector((state)=>state.job.jobs);
   return (
     <div>
@@ -11,7 +12,7 @@ const List = () => {
         Array.isArray(jobs) ?
           jobs.map((job, index)=>{
             return (<div key={`job#${index}`}>
-              <Job job={job}/>
+              <Job job={job} />
             </div>);
           }) :
           <div>NotArray</div>
