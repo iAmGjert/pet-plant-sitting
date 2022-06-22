@@ -24,10 +24,17 @@ interface upcomingJobs {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
-const upcomingJobs: FC<Props> = () => {
+const upcomingJobs: FC<Props> = ({ startDate, endDate, employer_id }) => {
   const jobs = useAppSelector((state) => state.job.jobs);
 
-  return <div>hello</div>;
+  return (
+    <Card>
+      <Card.Body>
+        <Card.Title>Your Next Job: {startDate} </Card.Title>
+        <Card.Text>Name of Pet/Plant</Card.Text>
+      </Card.Body>
+    </Card>
+  );
 };
 
 export default upcomingJobs;

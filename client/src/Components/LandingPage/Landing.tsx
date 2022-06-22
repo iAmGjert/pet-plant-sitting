@@ -1,4 +1,5 @@
 import React, { FC, useState, useEffect } from 'react';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import UpcomingJobs from './UpcomingJobs';
 
@@ -9,9 +10,6 @@ import Card from 'react-bootstrap/Card';
 
 //Redux
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
-
-import axios from 'axios';
-import { Z_FILTERED } from 'zlib';
 
 //typescript
 interface upcomingJobs {
@@ -51,22 +49,28 @@ const Landing: FC<Props> = () => {
     axios
       .get('/api/jobs/all')
       .then((response) => {
-        console.log(64, response.data);
-        setUpcomingWork(response.data);
+        //console.log(64, response.data);
         return response.data;
       })
       .then((res) => {
-        console.log('res on 78', res);
-        const upcomingLabor = res.filter((job) => {
-          console.log('job on 75', job);
+        //in this then block, I am filtering out work that is upcoming/incomplete
+        //console.log('res on 78', res);
+        const upcomingLabor = res.filter((job: { isCompleted: boolean }) => {
+          //console.log('job on 75', job);
           return job.isCompleted === false;
         });
         console.log(79, upcomingLabor);
+        setUpcomingWork(upcomingLabor);
+        return upcomingLabor;
       })
       .catch((err) => {
         console.error(err);
       });
   };
+
+  useEffect(() => {
+    getUpcomingJobs();
+  }, []);
 
   return (
     <div>
@@ -80,22 +84,27 @@ const Landing: FC<Props> = () => {
           src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
         />
       </Card>
-
-      <Card>
-        <Card.Body>
-          <Card.Title>Your Next Job:</Card.Title>
-          <Card.Text>Name of Pet/Plant</Card.Text>
-          <Button variant='primary'>More Info</Button>
-          <Button
-            onClick={() => {
-              getUpcomingJobs();
-            }}
-          >
-            test
-          </Button>
-        </Card.Body>
-      </Card>
-      <UpcomingJobs />
+      <Button variant='primary'>More Info</Button>
+      <Button
+        onClick={() => {
+          getUpcomingJobs();
+        }}
+      >
+        test
+      </Button>
+      {upcomingWork.length &&
+        upcomingWork.map((element) => {
+          return (
+            <>
+              <UpcomingJobs
+                key={element.id}
+                startDate={element.startDate}
+                endDate={element.endDate}
+                employer_id={element.employer_id}
+              />
+            </>
+          );
+        })}
     </div>
   );
 };
