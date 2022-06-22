@@ -1,60 +1,65 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //import type { RootState } from '../../store';
 
-interface jobStuff {
-  id: number,
-  location: string,
-  employer_id: number,
-  sitter_id: number | null,
-  startDate: Date,
-  endDate: Date,
-  pet_plant: Array<number>
+interface newJob {
+  id: number;
+  pet_plant: Array<number>,
+  sitter_id: number;
+  employer_id: number;
+  location: string;
+  description: string;
+  job_applicant: Array<{
+    id: number;
+    user: {
+      name: string;
+      image: string;
+    };
+  }>;
+  startDate: Date;
+  endDate: Date;
+  isCompleted: boolean;
 }
-
-interface state {
-  view: string,
-  jobs: Array<jobStuff>
-}
-
-const initState = <state>{
+const newInitialState: any = {
   view: 'list',
   jobs: [],
   job: {
-    name: '',
-    host: 0,
-    pet_plant: [],
+    sitter_id: 0,
+    employer_id: 0,
     location: '',
     description: '',
-    applicants: [],
+    job_applicant: [],
     startDate: new Date(),
-    endDate: new Date(),
-  }
+    isCompleted: false,
+  },
+  prompt: false,
 };
+
 
 export const jobsSlice = createSlice({
   name: 'jobs',
-  initialState: initState,
+  initialState: newInitialState,
   reducers: {
-    getView: (state, action:PayloadAction<string>)=>{
-      //state.value = action.payload;
+    getView: (state)=>{
       return state;
     },
     changeView: (state, action:PayloadAction<string>)=>{
       state.view = action.payload;
-      //console.log('Called changeView');
       return state;
     },
-    setJobs: (state, action:PayloadAction<Array<jobStuff>>)=>{
+    setJobs: (state, action:PayloadAction<newJob[]>)=>{
       state.jobs = action.payload;
       return state;
     },
-    setJobObj: (state, action: PayloadAction<Event>) => {
-      state.job = action.payload;
+    setPrompt: (state, action:PayloadAction<boolean>)=>{
+      state.prompt = action.payload;
       return state;
-    }
+    },
+    getPrompt: (state, action:PayloadAction<string>)=>{
+      return state.prompt;
+    },
   }
 });
 
-export const { getView, changeView, setJobs, setJobObj } = jobsSlice.actions;
+export const { getView, changeView, setJobs, setPrompt, getPrompt } = jobsSlice.actions;
 
 export default jobsSlice.reducer;

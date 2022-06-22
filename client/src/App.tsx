@@ -52,7 +52,6 @@ const App: FC<Props> = () => {
     dispatch(mapActions.setEvents(events.data));
   };
 
-
   useEffect(() => {
     getUser();
     getJobs();
