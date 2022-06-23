@@ -10,6 +10,7 @@ import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Modal from 'react-bootstrap/Modal';
 
 //typescript
 interface upcomingJobs {
@@ -40,23 +41,21 @@ const upcomingJobs: FC<Props> = ({
       return pet.pet_plant.name;
     })
   );
-  let currentDate = moment().format('L');
-  console.log(44, currentDate);
 
-  //console.log(moment(endDate).format('L').isBefore(currentDate));
+  //date checking
+  const currentDate = moment().format('L');
+  console.log(44, currentDate);
   // console.log(44, moment().format('YYYY MM dd'));
   endDate = moment(endDate).format('L');
   console.log(49, endDate);
   console.log(moment(currentDate).isBefore(moment(endDate)));
-  // console.log(45, moment(endDate).format('L'));
-  // console.log(currentDate.isBefore(endDate));
 
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   //moment(eventObj.startDate).format('dddd, MMMM Do YYYY')
   //new Date(jobPopup.endDate).toLocaleDateString()
-
-  //First I need to sort whether the current job matches today's date. If so, then ensure that it gets added to the Your Next Job card
-
-  //Then I need to grab the petPlant array and filter out the name and image of the petPlant
 
   return (
     <Card>
@@ -70,7 +69,36 @@ const upcomingJobs: FC<Props> = ({
           }{' '}
         </Card.Title>
         <Card.Text>{moment(startDate).format('dddd MMMM Do, YYYY')}</Card.Text>
-        <Card.Text>{location}</Card.Text>
+        <Card.Link href='#'>More Info</Card.Link>
+        <>
+          <Button variant='primary' onClick={handleShow}>
+            Launch demo modal
+          </Button>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>
+                {' '}
+                {
+                  petPlant.map((pet) => {
+                    return pet.pet_plant.name;
+                  })[0]
+                }{' '}
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Woohoo, you're reading this text in a modal!
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant='secondary' onClick={handleClose}>
+                Close
+              </Button>
+              <Button variant='primary' onClick={handleClose}>
+                Save Changes
+              </Button>
+            </Modal.Footer>
+          </Modal>
+        </>
       </Card.Body>
     </Card>
   );

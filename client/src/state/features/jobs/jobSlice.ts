@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
+import moment from 'moment';
 //import type { RootState } from '../../store';
 
 interface newJob {
@@ -30,11 +31,28 @@ const newInitialState: any = {
     description: '',
     job_applicant: [],
     startDate: new Date(),
+    endDate: new Date(), 
     isCompleted: false,
   },
   prompt: false,
   upcomingJobs: [],
+  pastJobs: [],
 };
+
+const fetchPastJobs = createAsyncThunk(
+  'jobs/fetchPastJobs',
+  async() => {
+    const response = await axios.get('/api/jobs/all');
+    console.log('fetchPastJobs response', response);
+    const currentDate = moment().format('L');
+    console.log('currentDate on 47 backend', currentDate);
+    const pastLabor = response.data.filter((event: {endDate: Date}) => {
+      return moment(event.endDate).isBefore(moment(currentDate)) === false;
+    });
+    //console.log('pastLabor on 52', pastEvents);
+    return pastLabor;
+  }
+);
 
 // Thunk Action creator
 export const fetchUpcomingJobs = createAsyncThunk(
@@ -49,7 +67,7 @@ export const fetchUpcomingJobs = createAsyncThunk(
     console.log('data coming from backend', upcomingLabor);
     return upcomingLabor;
   }
-)
+);
 
 
 export const jobsSlice = createSlice({

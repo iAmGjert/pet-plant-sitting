@@ -63,7 +63,7 @@ export const fetchUpcomingEvents = createAsyncThunk(
     const upcomingEvents = response.data.filter((event : {endDate: Date}) => {
       let currentDate = moment().format('L');//'06/23/2022'
       //returning endDates that have not yet surpassed the currentDate
-      return moment(event.endDate).format('L').isBefore(moment(currentDate)) === false;
+      return moment(event.startDate).format('L').isBefore(moment(currentDate)) === false;
 
     });
     console.log('backend', upcomingEvents);

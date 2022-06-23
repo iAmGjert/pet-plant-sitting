@@ -98,7 +98,6 @@ const Landing: FC<Props> = () => {
           src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
         />
       </Card>
-      <Button variant='primary'>More Info</Button>
       {upcomingJobs.length &&
         upcomingJobs.map((element) => {
           return (
