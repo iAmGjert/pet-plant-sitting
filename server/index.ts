@@ -9,23 +9,27 @@ const cookieParser = require('cookie-parser');
 const bcrypt = require('bcryptjs');
 const LocalStrategy = require('passport-local').Strategy;
 const { User } = require('../database/index');
-
+const color = require('cli-color');
 require('dotenv').config();
 require('./auth/passport.ts');
 
 const app = express();
 
-/*
-//!▀█▀ █░█ █▀▀   █▀█ █▀█ █▀▄ █▀▀ █▀█   █▀█ █▀▀   █▀█ █▀█ █▀▀ █▀█ ▄▀█ ▀█▀ █ █▀█ █▄░█ █▀   █ █▄░█   ▀█▀ █░█ █ █▀
-//!░█░ █▀█ ██▄   █▄█ █▀▄ █▄▀ ██▄ █▀▄   █▄█ █▀░   █▄█ █▀▀ ██▄ █▀▄ █▀█ ░█░ █ █▄█ █░▀█ ▄█   █ █░▀█   ░█░ █▀█ █ ▄█
 
-//!█▀▀ █ █░░ █▀▀   █ █▀   █░█ █▀▀ █▀█ █▄█   █ █▀▄▀█ █▀█ █▀█ █▀█ ▀█▀ ▄▀█ █▄░█ ▀█▀
-//!█▀░ █ █▄▄ ██▄   █ ▄█   ▀▄▀ ██▄ █▀▄ ░█░   █ █░▀░█ █▀▀ █▄█ █▀▄ ░█░ █▀█ █░▀█ ░█░
+/* 
+█▀█ █░░ █▀▀ ▄▀█ █▀ █▀▀   █▀▄▀█ ▄▀█ █ █▄░█ ▀█▀ ▄▀█ █ █▄░█   ▀█▀ █░█ █▀▀   █▀█ █▀█ █▀▄ █▀▀ █▀█   
+█▀▀ █▄▄ ██▄ █▀█ ▄█ ██▄   █░▀░█ █▀█ █ █░▀█ ░█░ █▀█ █ █░▀█   ░█░ █▀█ ██▄   █▄█ █▀▄ █▄▀ ██▄ █▀▄   
 
-//!█▀█ █░░ █▀▀ ▄▀█ █▀ █▀▀   █▀▄ █▀█ █▄░█ ▀█▀   █▀▄▀█ █▀█ █░█ █▀▀   █▀ ▀█▀ █░█ █▀▀ █▀▀   ▄▀█ █▀█ █▀█ █░█ █▄░█ █▀▄
-//!█▀▀ █▄▄ ██▄ █▀█ ▄█ ██▄   █▄▀ █▄█ █░▀█ ░█░   █░▀░█ █▄█ ▀▄▀ ██▄   ▄█ ░█░ █▄█ █▀░ █▀░   █▀█ █▀▄ █▄█ █▄█ █░▀█ █▄▀
+█▀█ █▀▀   ▀█▀ █░█ █▀▀
+█▄█ █▀░   ░█░ █▀█ ██▄
+
+█▀▄▀█ █ █▀▄ █▀▄ █░░ █▀▀ █░█░█ ▄▀█ █▀█ █▀▀
+█░▀░█ █ █▄▀ █▄▀ █▄▄ ██▄ ▀▄▀▄▀ █▀█ █▀▄ ██▄
 */
-
+//──────▄▀▄─────▄▀▄
+//─────▄█░░▀▀▀▀▀░░█▄
+//─▄▄──█░░░░░░░░░░░█──▄▄
+//█▄▄█─█░░▀░░┬░░▀░░█─█▄▄█            
 //**************************SOCKET SERVER****************************/
 
 const { Server, Socket } = require('socket.io');
@@ -87,40 +91,31 @@ app.use(passport.session());
 
 //************************** PASSPORT-LOCAL CONFIGURATION ********************************/
 
-passport.use( new LocalStrategy(
-//   {
-//   usernameField: 'email',
-//   passwordField: 'password',
-// }, 
-  (username: string, password: string, done: any) => {
-    console.log('username', username, );
-    User.findOne({ where: { email: username } })
-      .then((user : any | unknown) => {
-        console.log('user', user);
-        if (!user) {
-          return done(null, false, { message: 'Incorrect username.' });
-        }
-        bcrypt.compare(password, user.password, (err: Error, isMatch: boolean) => { 
-          if (err) { throw err; }
-          if (isMatch) {
-            return done(null, user);
-          } else {
-            return done(null, false, { message: 'Incorrect password.' });
-          }
-        });
-      }).catch((err: Error) => {
-        console.error(err);
-        return done(err);
+passport.use( new LocalStrategy(/*{ usernameField: 'email', passwordField: 'password' },*/ (username: string, password: string, done: any) => {
+  User.findOne({ where: { username: username } })
+    .then((user : any | unknown) => {
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username.' }); 
+      }
+      bcrypt.compare(password, user.password, (err: Error, isMatch: boolean) => { 
+        if (err) { throw err; }
+        return isMatch ? done(null, user) : done(null, false, { message: 'Incorrect password.' });
       });
-  }));
+    }).catch((err: Error) => {
+      console.error(err);
+      return done(err);
+    });
+}));
 
 passport.serializeUser((user: any, done: any) => {
+  console.log('serialized User: ', user);
   done(null, user.id);
 });
 
-passport.deserializeUser((userId: any, done: any) => {
-  User.findById(userId)
+passport.deserializeUser((userId: number, done: any) => {
+  User.findOne({ where: { id: userId } })
     .then((user: any) => {
+      console.log('deserialize User: ', user);
       done(null, user);
     }).catch((err: Error) => {
       console.error(err);
@@ -141,14 +136,14 @@ app.post('/auth/local/register', async (req: any, res: any) => {
       return;
     }
     // Check if user already exists
-    const returningUser = await User.findOne({ where: { email: username } });
+    const returningUser = await User.findOne({ where: { username } });
     if (returningUser) {
       res.send('User already exists');
       return;
     } else { 
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.create({
-        email: username,
+        username,
         password: hashedPassword,
       });
       res.status(200).json({
@@ -163,14 +158,28 @@ app.post('/auth/local/register', async (req: any, res: any) => {
   }
 });
 
+
 app.post('/auth/local/login', (req: any, res: any, next: any) => {
-  passport.authenticate('local', (err: any, user: any, info: any) => {
+  passport.authenticate('local', {
+    successRedirect: '/loading',
+    failureRedirect: '/login/fail',
+    failureMessage: true,
+    successMessage: true,
+    session: false
+  }, (err: any, user: boolean, info: any, status: any) => {
+    console.log(info, status);
     if (err) { throw err; }
-    if (!user) { res.send('No User Exists'); } else {
+    if (!user) {
+      console.log(user);
+      console.log(req.body, 'req.body');
+      res.send('No User Exists'); 
+    } else {
       req.logIn(user, (err: any) => {
         if (err) { throw err; }
         res.send('Successfully Authenticated');
-        console.log(req.user);
+        // console.log(req.user, 'logged in');
+        console.log(color.xterm(11).bold(`\n[ ${req.session.passport.user.username} is logged in ]\n`));
+
       });
     }
   })(req, res, next);
