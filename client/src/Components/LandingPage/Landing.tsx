@@ -49,7 +49,7 @@ const Landing: FC<Props> = () => {
     axios
       .get('/api/jobs/all')
       .then((response) => {
-        //console.log(64, response.data);
+        console.log(64, response.data);
         return response.data;
       })
       .then((res) => {
@@ -59,9 +59,18 @@ const Landing: FC<Props> = () => {
           //console.log('job on 75', job);
           return job.isCompleted === false;
         });
-        console.log(79, upcomingLabor);
+        console.log(62, upcomingLabor);
         setUpcomingWork(upcomingLabor);
         return upcomingLabor;
+      })
+      .then((newArr) => {
+        console.log(67, newArr);
+        // return newArr.map((trabajos) => {
+        //   return trabajos.pet_plant
+        // })
+        return newArr.map((job) => {
+          return;
+        });
       })
       .catch((err) => {
         console.error(err);
@@ -101,6 +110,8 @@ const Landing: FC<Props> = () => {
                 startDate={element.startDate}
                 endDate={element.endDate}
                 employer_id={element.employer_id}
+                location={element.location}
+                petPlant={element.job_pets_plants}
               />
             </>
           );
