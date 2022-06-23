@@ -9,3 +9,5 @@ client/build
 notes.md
 database/temp
 server/auth/temp
+server/auth/passport_local.ts
+server/routes/auth_local.ts
