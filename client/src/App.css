@@ -13,8 +13,8 @@ body {
 }
 .markerPic {
   line-height: 14px;
-  height: 40px;
-  width: 40px;
+  height: 35px;
+  width: 35px;
   border-radius: 50px;
   border: 2px solid rgb(28, 110, 164);
 }
@@ -47,6 +47,7 @@ body {
 }
 .popup {
   position: fixed;
+  z-index: 1;
   top: 0;
   left: 0;
   width: 100%;
@@ -226,6 +227,19 @@ body {
 .map-container {
   width: 100vw;
   height: 100vh;
+}
+.step-instructions {
+  font-size: 11px;
+  position: absolute;
+  margin: 3px;
+  width: 40%;
+  height: 30vh;
+  top: 0;
+  bottom: 20%;
+  padding: 10px;
+  background-color: #fff;
+  overflow-y: scroll;
+  font-family: sans-serif;
 }
 
 .chat-window .chat-footer button:hover {

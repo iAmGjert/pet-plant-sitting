@@ -1,11 +1,10 @@
 import React, { FC, useState, useCallback } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map, { Marker, GeolocateControl, Layer, Source } from 'react-map-gl';
-import MapboxDirections from '@mapbox/mapbox-gl-directions/dist/mapbox-gl-directions';
 import axios from 'axios';
 import JobPopup from './JobPopup';
 import EventPopup from './EventPopup';
-// import MapDirections from './MapDirections';
+import { ListGroup } from 'react-bootstrap';
 
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -33,6 +32,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const [petsPlantsPopup, setPetsPlantsPopup] = useState([]);
   const [eventPopup, setEventPopup] = useState({});
   const [dirCoordinates, setDirCoordinates] = useState([]);
+  const [steps, setSteps] = useState([]);
 
   const showJobInfo = (id) => {
     const storage = [];
@@ -78,9 +78,10 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const getDirections = () => {
     for (let i = 0; i < eventsLocations.length; i++) {
       if (eventsLocations[i][1] === eventPopup.id) {
-        axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${eventsLocations[i][0][0]},${eventsLocations[i][0][1]}?geometries=geojson&access_token=${TOKEN}`)
+        axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${eventsLocations[i][0][0]},${eventsLocations[i][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
           .then((results) => {
             setDirCoordinates(results.data.routes[0].geometry.coordinates);
+            setSteps(results.data.routes[0].legs[0].steps);
           });
       }
       setEventButtonPopup(!eventButtonPopup);
@@ -102,7 +103,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
         initialViewState={{
           longitude: userGeoLoc[0],
           latitude: userGeoLoc[1],
-          zoom: 15
+          zoom: 13
         }}
         style={{minHeight: '100vh'}}
         mapStyle="mapbox://styles/mapbox/streets-v9"
@@ -203,10 +204,23 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           />
         </Source>
         }
+        {
+          steps.length > 0 &&
+          <ListGroup variant='flush' as='ol' className='step-instructions' numbered>
+            {
+              steps.map((step, i) => {
+                return <ListGroup.Item as='li'
+                  key={`${step}${i}`}
+                >
+                  {step.maneuver.instruction}
+                </ListGroup.Item>;
+              })
+            }
+          </ListGroup>
+        }
       </Map>
     </div>
   );
 };
-
 
 export default MapComponent;
