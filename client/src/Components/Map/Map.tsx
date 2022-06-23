@@ -1,6 +1,6 @@
-import React, { FC, useState, useCallback } from 'react';
+import React, { FC, useState, useCallback, useEffect } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Map, { Marker, GeolocateControl, Layer, Source } from 'react-map-gl';
+import Map, { Marker, GeolocateControl, Layer, Source, Popup } from 'react-map-gl';
 import axios from 'axios';
 import JobPopup from './JobPopup';
 import EventPopup from './EventPopup';
@@ -25,14 +25,20 @@ const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
 const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jobsLocations, eventsLocations, events, navigate }) => {
 
-  const [buttonPopup, setButtonPopup] = useState(false);
+  const [jobButtonPopup, setJobButtonPopup] = useState(false);
   const [eventButtonPopup, setEventButtonPopup] = useState(false);
+  // const [smallJobPopup, setSmallJobPopup] = useState(false);
+  const [geoLocateActive, setGeoLocateActive] = useState(false);
+  const [userActiveGeoLon, setUserActiveGeoLon] = useState(null);
+  const [userActiveGeoLat, setUserActiveGeoLat] = useState(null);
   const [jobPopup, setJobPopup] = useState({});
   const [userPopup, setUserPopup] = useState({});
+  const [distanceFromJob, setDistanceFromJob] = useState(null);
   const [petsPlantsPopup, setPetsPlantsPopup] = useState([]);
   const [eventPopup, setEventPopup] = useState({});
   const [dirCoordinates, setDirCoordinates] = useState([]);
   const [steps, setSteps] = useState([]);
+  
 
   const showJobInfo = (id) => {
     const storage = [];
@@ -53,10 +59,20 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
             setUserPopup(users[j]);
           }
         }
+        if (geoLocateActive) {
+          axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userActiveGeoLon},${userActiveGeoLat};${jobsLocations[jobs[i].id - 1][0][0]},${jobsLocations[jobs[i].id - 1][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
+            .then((results) => {
+              setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
+            });
+        }
+        axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${jobsLocations[jobs[i].id - 1][0][0]},${jobsLocations[jobs[i].id - 1][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
+          .then((results) => {
+            setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
+          });
         setJobPopup(jobs[i]);
       }
+      setJobButtonPopup(!jobButtonPopup);
     }
-    setButtonPopup(!buttonPopup);
   };
 
   const showEventInfo = (id) => {
@@ -68,21 +84,41 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     setEventButtonPopup(!eventButtonPopup);
   };
 
+  const setUserCurrentCoords = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      console.log(position.coords);
+      setUserActiveGeoLon(position.coords.longitude);
+      setUserActiveGeoLat(position.coords.latitude);
+    });
+  };
+
+  const userClicksLocateButton = () => {
+    setGeoLocateActive(!geoLocateActive);
+  };
+
   const geolocateControlRef = useCallback((ref) => {
     if (ref) {
       // Activate as soon as the control is loaded
       ref.trigger();
     }
-  }, []); 
+  }, []);
 
-  const getDirections = () => {
+  const getEventDirections = () => {
     for (let i = 0; i < eventsLocations.length; i++) {
       if (eventsLocations[i][1] === eventPopup.id) {
-        axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${eventsLocations[i][0][0]},${eventsLocations[i][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
-          .then((results) => {
-            setDirCoordinates(results.data.routes[0].geometry.coordinates);
-            setSteps(results.data.routes[0].legs[0].steps);
-          });
+        if (geoLocateActive) {
+          axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userActiveGeoLon},${userActiveGeoLat};${eventsLocations[i][0][0]},${eventsLocations[i][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
+            .then((results) => {
+              setDirCoordinates(results.data.routes[0].geometry.coordinates);
+              setSteps(results.data.routes[0].legs[0].steps);
+            });
+        } else {
+          axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${eventsLocations[i][0][0]},${eventsLocations[i][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
+            .then((results) => {
+              setDirCoordinates(results.data.routes[0].geometry.coordinates);
+              setSteps(results.data.routes[0].legs[0].steps);
+            });
+        }
       }
       setEventButtonPopup(!eventButtonPopup);
     }
@@ -96,6 +132,10 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
       coordinates: dirCoordinates
     }
   };
+
+  useEffect(() => {
+    setUserCurrentCoords();
+  }, []);
 
   return (
     <div>
@@ -139,9 +179,18 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
             </Marker>;
           })
         }
+        {/* {
+          smallJobPopup &&
+          <Popup
+            longitude={}
+            latitude={}
+          >
+
+          </Popup>
+        } */}
         {
           jobPopup ?
-            <JobPopup trigger={buttonPopup} setTrigger={showJobInfo}>
+            <JobPopup trigger={jobButtonPopup} setTrigger={showJobInfo}>
               <img src={userPopup.image} alt='' className='popupUserPic'/>
               <div 
                 onClick={()=>{ navigate(`/profile/${userPopup.id}`); }} 
@@ -159,7 +208,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
               }
               <h4>{`Start: ${new Date(jobPopup.startDate).toLocaleDateString()}`}</h4>
               <h4>{`End: ${new Date(jobPopup.endDate).toLocaleDateString()}`}</h4>
-              <h5>{`Address: ${jobPopup.location}`}</h5>
+              <p>{distanceFromJob} miles from you</p>
             </JobPopup> : ''
         }
         {
@@ -167,8 +216,8 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
             <EventPopup trigger={eventButtonPopup} setTrigger={showEventInfo}>
               <h2>{eventPopup.name}</h2>
               <div
-                onClick={getDirections} 
-                onKeyPress={getDirections}
+                onClick={getEventDirections} 
+                onKeyPress={getEventDirections}
                 role='button'
                 tabIndex={0}
               >
@@ -185,7 +234,10 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
               <p>{eventPopup.description}</p>
             </EventPopup> : ''
         }
-        <GeolocateControl ref={geolocateControlRef} />
+        <GeolocateControl 
+          ref={geolocateControlRef}
+          onGeolocate={userClicksLocateButton}
+        />
         {
           dirCoordinates.length > 0 &&
         <Source id="polylineLayer" type="geojson" data={directions}>
