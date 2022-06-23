@@ -10,6 +10,8 @@ import Card from 'react-bootstrap/Card';
 
 //Redux
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
+// Import fetchUpcomingJobs action-creator in order to make that axios call
+import { fetchUpcomingJobs } from '../../state/features/jobs/jobSlice';
 
 //typescript
 interface upcomingJobs {
@@ -36,49 +38,51 @@ interface Props {}
 const Landing: FC<Props> = () => {
   //const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const user = useAppSelector((state) => state.userProfile.value);
   const users = useAppSelector((state) => state.userProfile.users);
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
-  const jobs = useAppSelector((state) => state.job.jobs);
+  const upcomingJobs = useAppSelector((state) => state.job.upcomingJobs);
+  console.log('upcoming jobs', upcomingJobs);
   const events = useAppSelector((state) => state.events.events);
 
-  const [upcomingWork, setUpcomingWork] = useState([]);
+  // const [upcomingWork, setUpcomingWork] = useState([]);
 
-  const getUpcomingJobs = () => {
-    axios
-      .get('/api/jobs/all')
-      .then((response) => {
-        console.log(64, response.data);
-        return response.data;
-      })
-      .then((res) => {
-        //in this then block, I am filtering out work that is upcoming/incomplete
-        //console.log('res on 78', res);
-        const upcomingLabor = res.filter((job: { isCompleted: boolean }) => {
-          //console.log('job on 75', job);
-          return job.isCompleted === false;
-        });
-        console.log(62, upcomingLabor);
-        setUpcomingWork(upcomingLabor);
-        return upcomingLabor;
-      })
-      .then((newArr) => {
-        console.log(67, newArr);
-        // return newArr.map((trabajos) => {
-        //   return trabajos.pet_plant
-        // })
-        return newArr.map((job) => {
-          return;
-        });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  };
+  // const getUpcomingJobs = () => {
+  //   axios
+  //     .get('/api/jobs/all')
+  //     .then((response) => {
+  //       console.log(64, response.data);
+  //       return response.data;
+  //     })
+  //     .then((res) => {
+  //       //in this then block, I am filtering out work that is upcoming/incomplete
+  //       //console.log('res on 78', res);
+  //       const upcomingLabor = res.filter((job: { isCompleted: boolean }) => {
+  //         //console.log('job on 75', job);
+  //         return job.isCompleted === false;
+  //       });
+  //       console.log(62, upcomingLabor);
+  //       setUpcomingWork(upcomingLabor);
+  //       return upcomingLabor;
+  //     })
+  //     .then((newArr) => {
+  //       console.log(67, newArr);
+  //       // return newArr.map((trabajos) => {
+  //       //   return trabajos.pet_plant
+  //       // })
+  //       return newArr.map((job) => {
+  //         return;
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.error(err);
+  //     });
+  // };
 
   useEffect(() => {
-    getUpcomingJobs();
+    dispatch(fetchUpcomingJobs());
   }, []);
 
   return (
@@ -94,15 +98,8 @@ const Landing: FC<Props> = () => {
         />
       </Card>
       <Button variant='primary'>More Info</Button>
-      <Button
-        onClick={() => {
-          getUpcomingJobs();
-        }}
-      >
-        test
-      </Button>
-      {upcomingWork.length &&
-        upcomingWork.map((element) => {
+      {upcomingJobs.length &&
+        upcomingJobs.map((element) => {
           return (
             <>
               <UpcomingJobs
