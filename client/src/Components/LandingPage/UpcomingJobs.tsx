@@ -1,7 +1,8 @@
 import React, { FC, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
+import * as moment from 'moment';
+import { compareAsc, format } from 'date-fns';
 //Redux
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 
@@ -40,6 +41,12 @@ const upcomingJobs: FC<Props> = ({
     })
   );
 
+  console.log(moment().format('YYYY MM dd'));
+  console.log(moment().format('L'));
+
+  //moment(eventObj.startDate).format('dddd, MMMM Do YYYY')
+  //new Date(jobPopup.endDate).toLocaleDateString()
+
   //First I need to sort whether the current job matches today's date. If so, then ensure that it gets added to the Your Next Job card
 
   //Then I need to grab the petPlant array and filter out the name and image of the petPlant
@@ -47,8 +54,15 @@ const upcomingJobs: FC<Props> = ({
   return (
     <Card>
       <Card.Body>
-        <Card.Title>Your Next Job: {petPlant[0].name} </Card.Title>
-        <Card.Text>{startDate}</Card.Text>
+        <Card.Title>
+          Your Next Job:{' '}
+          {
+            petPlant.map((pet) => {
+              return pet.pet_plant.name;
+            })[0]
+          }{' '}
+        </Card.Title>
+        <Card.Text>{moment(startDate).format('dddd MMMM Do, YYYY')}</Card.Text>
         <Card.Text>{location}</Card.Text>
       </Card.Body>
     </Card>
