@@ -1,6 +1,12 @@
 import express, { Request, Response } from 'express';
 const users = express();
-import { PetPlant, User, Rating } from '../../database/index';
+import {
+  PetPlant,
+  User,
+  Rating,
+  Gallery,
+  GalleryEntry,
+} from '../../database/index';
 
 interface userInfo {
   id: number;
@@ -18,9 +24,7 @@ interface userInfo {
 users.get('/all', async (req: Request, res: Response) => {
   try {
     const users = await User.findAll({
-      include: [
-        { model: PetPlant, include: Rating },
-        { model: Rating }],
+      include: [{ model: PetPlant, include: Rating }, { model: Rating }],
     });
     return res.status(200).send(users);
   } catch {
@@ -51,7 +55,11 @@ users.get('/:id', async (req: Request, res: Response) => {
           {
             model: Rating,
             include: [
-              { model: User, attributes: ['name', 'image'], as: 'submitter' },
+              {
+                model: User,
+                attributes: ['name', 'image', 'id'],
+                as: 'submitter',
+              },
             ],
           },
         ],
@@ -59,8 +67,12 @@ users.get('/:id', async (req: Request, res: Response) => {
       {
         model: Rating,
         include: [
-          { model: User, attributes: ['name', 'image'], as: 'submitter' },
+          { model: User, attributes: ['name', 'image', 'id'], as: 'submitter' },
         ],
+      },
+      {
+        model: Gallery,
+        include: [{ model: GalleryEntry }],
       },
     ],
   });

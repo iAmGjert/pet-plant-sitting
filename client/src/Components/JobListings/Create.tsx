@@ -19,17 +19,8 @@ const Create = () => {
   const dispatch = useAppDispatch();
   const [startDate, setStartDate] = useState(moment().add(1, 'days').format('YYYY-MM-DD'));
   const [endDate, setEndDate] = useState(moment().add(2, 'days').format('YYYY-MM-DD'));
-  const [description, setDescription] = useState('Describe the job in one or two sentences.');
+  const [description, setDescription] = useState('');
   const [feed, setFeed] = useState(myPets.reduce(arr=>{ arr.push(false); return arr; }, []));
-  const [obj, setObj] = useState(
-    {
-      location: user.location, 
-      employer_id: user.id, 
-      pet_plant: petPlants,
-      startDate: startDate,
-      endDate: endDate,
-
-    });
   const getJobs = async () => {
     const jobs = await axios.get(
       '/api/jobs/all'
@@ -39,8 +30,15 @@ const Create = () => {
   const postJob = async (newJob: any) => {
     return await axios.post('/api/jobs/create', newJob)
       .then((res: any) => {
-        console.log(res);
         return res;
+      })
+      .then((newJob)=>{
+        newJob.data.pet_plant.forEach((pet)=>{
+          axios.post('/api/jobs/jobPetsPlants/create', {
+            job_id: newJob.data.id,
+            pet_plant_id: pet
+          });
+        });
       })
       .then(()=>{
         getJobs();
@@ -67,15 +65,21 @@ const Create = () => {
     setFeed(newFeed);
   };
   const handleSubmit = () => {
-    console.log(user);
+    const obj = {
+      location: user.location, 
+      employer_id: user.id, 
+      pet_plant: petPlants,
+      startDate: startDate,
+      endDate: endDate,
+      isCompleted: false,
+      description: description
+    };
     postJob(obj);
-
-    console.log('Form submitted.');
 
     dispatch(changeView('list'));
     return;
   };
-  return user.name.length ?
+  return user.name !== '' ?
     (
       <Form>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
@@ -103,7 +107,7 @@ const Create = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="createEventForm.ControlTextarea1">
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" placeholder={description} rows={3} onChange={(e)=>{ handleChangeDescription(e); }}/>
+          <Form.Control as="textarea" placeholder={'Describe the job in one or two sentenses.'} rows={3} onChange={(e)=>{ handleChangeDescription(e); }}/>
         </Form.Group>
         <Row>
           <Col>
