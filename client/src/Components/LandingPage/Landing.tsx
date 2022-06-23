@@ -2,6 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import UpcomingJobs from './UpcomingJobs';
+import LandingEventCard from './LandingEventCard';
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -113,6 +114,7 @@ const Landing: FC<Props> = () => {
             </>
           );
         })}
+      <LandingEventCard />
     </div>
   );
 };

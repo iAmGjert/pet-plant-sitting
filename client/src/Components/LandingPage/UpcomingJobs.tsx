@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as moment from 'moment';
-import { compareAsc, format } from 'date-fns';
+import { compareAsc, format, isBefore } from 'date-fns';
 //Redux
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 
@@ -40,9 +40,16 @@ const upcomingJobs: FC<Props> = ({
       return pet.pet_plant.name;
     })
   );
+  let currentDate = moment().format('L');
+  console.log(44, currentDate);
 
-  console.log(moment().format('YYYY MM dd'));
-  console.log(moment().format('L'));
+  //console.log(moment(endDate).format('L').isBefore(currentDate));
+  // console.log(44, moment().format('YYYY MM dd'));
+  endDate = moment(endDate).format('L');
+  console.log(49, endDate);
+  console.log(moment(currentDate).isBefore(moment(endDate)));
+  // console.log(45, moment(endDate).format('L'));
+  // console.log(currentDate.isBefore(endDate));
 
   //moment(eventObj.startDate).format('dddd, MMMM Do YYYY')
   //new Date(jobPopup.endDate).toLocaleDateString()
