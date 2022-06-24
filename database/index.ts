@@ -42,7 +42,6 @@ const Message = db.define('message', MessageModel);
 const GalleryEntry = db.define('gallery_entry', GalleryEntryModel);
 const JobPetsPlants = db.define('job_pets_plants', JobPetsPlantsModel);
 
-
 /************************************************/
 
 User.hasMany(PetPlant, {
@@ -55,7 +54,7 @@ Job.belongsTo(User, {
 
 Job.belongsTo(User, {
   foreignKey: 'sitter_id',
-  as: 'sitter'
+  as: 'sitter',
 });
 
 Job.hasMany(JobApplicant, {
@@ -71,7 +70,7 @@ Job.hasMany(JobPetsPlants, {
 });
 
 JobPetsPlants.belongsTo(PetPlant, {
-  foreignKey: 'pet_plant_id'
+  foreignKey: 'pet_plant_id',
 });
 
 User.hasMany(Rating, {
@@ -134,8 +133,8 @@ PetPlantDescriptor.belongsTo(PetPlant, {
 User.hasOne(Gallery, {
   foreignKey: 'id',
 });
-Gallery.hasOne(User, {
-  foreignKey: 'user_id',
+User.belongsTo(Gallery, {
+  foreignKey: 'id',
 });
 
 Gallery.hasMany(GalleryEntry, {
@@ -358,7 +357,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('July 11, 2022 01:15:00'),
                 endDate: new Date('July 15, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
@@ -368,7 +367,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('July 22, 2022 01:15:00'),
                 endDate: new Date('July 27, 2022 01:15:00'),
-                isCompleted: true
+                isCompleted: true,
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
@@ -378,7 +377,7 @@ db.sync(
                 description: 'Come watch this things',
                 startDate: new Date('July 20, 2022 01:15:00'),
                 endDate: new Date('July 25, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '4609 Banks St, New Orleans, LA 70119',
@@ -388,7 +387,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('July 21, 2022 01:15:00'),
                 endDate: new Date('July 25, 2022 01:15:00'),
-                isCompleted: true
+                isCompleted: true,
               },
               {
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
@@ -398,7 +397,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('July 1, 2022 01:15:00'),
                 endDate: new Date('July 5, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
             ]).then(() => {
               Events.bulkCreate([
@@ -516,7 +515,7 @@ db.sync(
                     },
                   ]);
                 })
-                .then(()=>{
+                .then(() => {
                   JobApplicant.bulkCreate([
                     {
                       user_id: 1,
@@ -540,47 +539,47 @@ db.sync(
                     },
                   ]);
                 })
-                .then(()=>{
+                .then(() => {
                   JobPetsPlants.bulkCreate([
                     {
                       job_id: 1,
-                      pet_plant_id: 2
+                      pet_plant_id: 2,
                     },
                     {
                       job_id: 1,
-                      pet_plant_id: 3
+                      pet_plant_id: 3,
                     },
                     {
                       job_id: 2,
-                      pet_plant_id: 1
+                      pet_plant_id: 1,
                     },
                     {
                       job_id: 2,
-                      pet_plant_id: 4
+                      pet_plant_id: 4,
                     },
                     {
                       job_id: 3,
-                      pet_plant_id: 1
+                      pet_plant_id: 1,
                     },
                     {
                       job_id: 3,
-                      pet_plant_id: 2
+                      pet_plant_id: 2,
                     },
                     {
                       job_id: 4,
-                      pet_plant_id: 3
+                      pet_plant_id: 3,
                     },
                     {
                       job_id: 4,
-                      pet_plant_id: 5
+                      pet_plant_id: 5,
                     },
                     {
                       job_id: 5,
-                      pet_plant_id: 5
+                      pet_plant_id: 5,
                     },
                     {
                       job_id: 5,
-                      pet_plant_id: 4
+                      pet_plant_id: 4,
                     },
                   ]);
                 })
