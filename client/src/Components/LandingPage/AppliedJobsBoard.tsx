@@ -1,0 +1,31 @@
+import React from 'react';
+
+//Bootstrap
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
+
+const AppliedJobsBoard = ({
+  location,
+  petPlant,
+  startDate,
+  endDate,
+  employerId,
+}) => {
+  console.log('applied', petPlant);
+  return (
+    <Card style={{ width: '18rem' }}>
+      <Card.Img variant='top' src='holder.js/100px180' />
+      <Card.Body>
+        <Card.Title>{location}</Card.Title>
+        <Card.Text>
+          Some quick example text to build on the card title and make up the
+          bulk of the card's content.
+        </Card.Text>
+        <Button variant='primary'>Go somewhere</Button>
+      </Card.Body>
+    </Card>
+  );
+};
+
+export default AppliedJobsBoard;
