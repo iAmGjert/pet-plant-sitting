@@ -58,13 +58,13 @@ const initialState: any = {
 export const fetchUpcomingEvents = createAsyncThunk(
   'events/upcomingEvents',
   async () => {
-    const response = await axios.get('/api,events/all');
+    const response = await axios.get('/api/events/all');
     console.log('42 response from backend', response);
-    const upcomingEvents = response.data.filter((event : {endDate: Date}) => {
-      let currentDate = moment().format('L');//'06/23/2022'
+    const upcomingEvents = response.data.filter((event : {startDate: Date}) => {
+      let currentDate = moment();//'2022-06-03'
+      console.log('current date', currentDate);
       //returning endDates that have not yet surpassed the currentDate
-      return moment(event.startDate).format('L').isBefore(moment(currentDate)) === false;
-
+      return moment(event.startDate).isAfter(currentDate);
     });
     console.log('backend', upcomingEvents);
     return upcomingEvents;
@@ -102,7 +102,7 @@ export const communityEventsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUpcomingEvents.fulfilled, (state, action) => {
-      console.log('event action 104', action);
+      //console.log('event action 104', action);
       state.upcomingEvents = action.payload;
     });
   }

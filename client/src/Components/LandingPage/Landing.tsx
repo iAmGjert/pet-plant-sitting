@@ -13,7 +13,7 @@ import Card from 'react-bootstrap/Card';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 // Import fetchUpcomingJobs action-creator in order to make that axios call
 import { fetchUpcomingJobs } from '../../state/features/jobs/jobSlice';
-
+import { fetchUpcomingEvents } from '../../state/features/events/eventsSlice';
 //typescript
 interface upcomingJobs {
   id: number;
@@ -45,45 +45,18 @@ const Landing: FC<Props> = () => {
   const users = useAppSelector((state) => state.userProfile.users);
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
   const upcomingJobs = useAppSelector((state) => state.job.upcomingJobs);
-  console.log('upcoming jobs', upcomingJobs);
+  const upcomingEvents = useAppSelector((state) => state.events.upcomingEvents);
+
+  // console.log('upcomingEvents', upcomingEvents);
+  // console.log('upcoming jobs', upcomingJobs);
   const events = useAppSelector((state) => state.events.events);
 
-  // const [upcomingWork, setUpcomingWork] = useState([]);
-
-  // const getUpcomingJobs = () => {
-  //   axios
-  //     .get('/api/jobs/all')
-  //     .then((response) => {
-  //       console.log(64, response.data);
-  //       return response.data;
-  //     })
-  //     .then((res) => {
-  //       //in this then block, I am filtering out work that is upcoming/incomplete
-  //       //console.log('res on 78', res);
-  //       const upcomingLabor = res.filter((job: { isCompleted: boolean }) => {
-  //         //console.log('job on 75', job);
-  //         return job.isCompleted === false;
-  //       });
-  //       console.log(62, upcomingLabor);
-  //       setUpcomingWork(upcomingLabor);
-  //       return upcomingLabor;
-  //     })
-  //     .then((newArr) => {
-  //       console.log(67, newArr);
-  //       // return newArr.map((trabajos) => {
-  //       //   return trabajos.pet_plant
-  //       // })
-  //       return newArr.map((job) => {
-  //         return;
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
+  const trimmedUpcommingJobs = upcomingJobs.slice(1);
+  const trimmedUpcomingEvents = upcomingEvents.slice(4);
 
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
+    dispatch(fetchUpcomingEvents());
   }, []);
 
   return (
@@ -98,8 +71,8 @@ const Landing: FC<Props> = () => {
           src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
         />
       </Card>
-      {upcomingJobs.length &&
-        upcomingJobs.map((element) => {
+      {trimmedUpcommingJobs.length &&
+        trimmedUpcommingJobs.map((element) => {
           return (
             <>
               <UpcomingJobs
@@ -113,7 +86,21 @@ const Landing: FC<Props> = () => {
             </>
           );
         })}
-      <LandingEventCard />
+
+      {trimmedUpcomingEvents.length &&
+        trimmedUpcomingEvents.map((element) => {
+          return (
+            <>
+              <LandingEventCard
+                key={element.id}
+                startDate={element.startDate}
+                description={element.description}
+                location={element.location}
+                name={element.name}
+              />
+            </>
+          );
+        })}
     </div>
   );
 };

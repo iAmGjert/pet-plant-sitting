@@ -35,6 +35,8 @@ const upcomingJobs: FC<Props> = ({
 }) => {
   const jobs = useAppSelector((state) => state.job.jobs);
 
+  console.log(38, petPlant);
+
   console.log(
     35,
     petPlant.map((pet) => {
@@ -42,13 +44,19 @@ const upcomingJobs: FC<Props> = ({
     })
   );
 
+  // console.log(45,
+  //   petPlant.map((pet) => {
+  //     return pet.pet_plant.image;
+  //   })
+  //   );
+
   //date checking
-  const currentDate = moment().format('L');
-  console.log(44, currentDate);
-  // console.log(44, moment().format('YYYY MM dd'));
-  endDate = moment(endDate).format('L');
-  console.log(49, endDate);
-  console.log(moment(currentDate).isBefore(moment(endDate)));
+  // const currentDate = moment().format('L');
+  // console.log(44, currentDate);
+  // // console.log(44, moment().format('YYYY MM dd'));
+  // endDate = moment(endDate).format('L');
+  // console.log(49, endDate);
+  // console.log(moment(currentDate).isBefore(moment(endDate)));
 
   const [show, setShow] = useState(false);
 
@@ -62,17 +70,26 @@ const upcomingJobs: FC<Props> = ({
       <Card.Body>
         <Card.Title>
           Your Next Job:{' '}
-          {
-            petPlant.map((pet) => {
-              return pet.pet_plant.name;
-            })[0]
-          }{' '}
+          {petPlant.map((pet) => {
+            //return pet.pet_plant.name;
+            return `${pet.pet_plant.name} | `;
+          })}{' '}
         </Card.Title>
-        <Card.Text>{moment(startDate).format('dddd MMMM Do, YYYY')}</Card.Text>
-        <Card.Link href='#'>More Info</Card.Link>
+        {/* <Card.Img
+          src={petPlant.map((pet) => {
+            return pet.pet_plant.image;
+          })}
+        /> */}
+        {petPlant.map((pet) => {
+          return <Card.Img src={pet.pet_plant.image} key={pet.id} />;
+        })}
+        <Card.Text>{`${moment(startDate).format(
+          'dddd MMMM Do, YYYY'
+        )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}</Card.Text>
+        <Card.Link href='#'>Visit Profile</Card.Link>
         <>
           <Button variant='primary' onClick={handleShow}>
-            Launch demo modal
+            More Info
           </Button>
 
           <Modal show={show} onHide={handleClose}>
@@ -86,16 +103,14 @@ const upcomingJobs: FC<Props> = ({
                 }{' '}
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>
-              Woohoo, you're reading this text in a modal!
-            </Modal.Body>
+            <Modal.Body>{location}</Modal.Body>
             <Modal.Footer>
               <Button variant='secondary' onClick={handleClose}>
                 Close
               </Button>
-              <Button variant='primary' onClick={handleClose}>
+              {/* <Button variant='primary' onClick={handleClose}>
                 Save Changes
-              </Button>
+              </Button> */}
             </Modal.Footer>
           </Modal>
         </>

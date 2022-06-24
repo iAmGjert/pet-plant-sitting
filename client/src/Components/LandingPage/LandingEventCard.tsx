@@ -9,9 +9,22 @@ import React from 'react';
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
+import moment from 'moment';
 
-const LandingEventCard = () => {
-  return <h1> hello </h1>;
+const LandingEventCard = ({ startDate, location, description, name }) => {
+  return (
+    <Card style={{ width: '18rem' }}>
+      <Card.Body>
+        <Card.Title>{name}</Card.Title>
+        <Card.Subtitle className='mb-2 text-muted'>
+          {moment(startDate).format('dddd, MMMM Do YYYY')}
+        </Card.Subtitle>
+        <Card.Text>{description}</Card.Text>
+        <Card.Text>Meets at {location}</Card.Text>
+        <Card.Link href='#'>More Upcoming Events</Card.Link>
+      </Card.Body>
+    </Card>
+  );
 };
 
 export default LandingEventCard;

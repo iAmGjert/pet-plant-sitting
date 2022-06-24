@@ -43,11 +43,11 @@ const fetchPastJobs = createAsyncThunk(
   'jobs/fetchPastJobs',
   async() => {
     const response = await axios.get('/api/jobs/all');
-    console.log('fetchPastJobs response', response);
-    const currentDate = moment().format('L');
-    console.log('currentDate on 47 backend', currentDate);
-    const pastLabor = response.data.filter((event: {endDate: Date}) => {
-      return moment(event.endDate).isBefore(moment(currentDate)) === false;
+    //console.log('fetchPastJobs response', response);
+    const currentDate = moment();
+    //console.log('currentDate on 47 backend', currentDate);
+    const pastLabor = response.data.filter((event: {startDate: Date, endDate: Date}) => {
+      return moment(event.startDate).isAfter(currentDate);
     });
     //console.log('pastLabor on 52', pastEvents);
     return pastLabor;
