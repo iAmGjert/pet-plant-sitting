@@ -14,6 +14,13 @@ passport.use(new GoogleStrategy({
   callbackURL: `${CLIENT_URL}:${PORT}/auth/google/callback`,
 }, (accessToken: any, refreshToken: any, profile: { displayName: any/*, emails: [{value: string}]*/ },
   cb: (arg0: null, arg1: any) => any) => {
+  // console.log(`USER INFO: 
+  //   ${JSON.stringify({
+  //   id: profile.id,
+  //   name: profile.displayName,
+  // }, null, 2)}`);
+  //? User.findOrCreate({ where: { id: +profile.id % 10e8 }, 
+  //? defaults: { name: profile.displayName, email: profile.emails[0].value } }) 
 
   User.findOrCreate({ where: { name: profile.displayName }, /*defaults: { username: profile.emails[0].value }*/ }).then((user: any) => cb(null, user))
     .catch((err: any) => console.log(err));
@@ -21,7 +28,6 @@ passport.use(new GoogleStrategy({
 
 
 passport.use(new LocalStrategy(/*{ usernameField: 'email', passwordField: 'password' },*/ (username: string, password: string, done: any) => {
-  
   User.findOne({ where: { username: username } })
     .then((user : any | unknown) => {
       if (!user) {
@@ -29,31 +35,38 @@ passport.use(new LocalStrategy(/*{ usernameField: 'email', passwordField: 'passw
       }
       bcrypt.compare(password, user.password, (err: Error, isMatch: boolean) => { 
         if (err) { throw err; }
-        return isMatch ? done(null, user) : done(null, false, { message: 'Incorrect password.' });
+
+        if (isMatch) {
+          console.log('Passport Local Config ln34');
+          return done(null, user, { message: 'Credentials match' });
+        } else {
+          return done(null, false, { message: 'Incorrect password.' });
+        }
       });
     }).catch((err: Error) => {
       console.error(err);
       return done(err);
     });
 }));
-  
-// passport.deserializeUser((id: any, callback: any) => {
-//   User.findById(id)
-//     .then((user: any) => {
-//       callback(null, user);
-//     })
-//     .catch(callback);
-// });
-passport.serializeUser((user: any, callback: any) => {
-  console.log('serialized User (google): ', user);
-      
-  callback(null, user);
-});
 
-passport.deserializeUser((user: any, done: any) => {
-  console.log('deserialize User (google): ', user);
-
+passport.serializeUser((user: any, done: any) => {
+  console.log('serialized User: ', user.id);      
   done(null, user);
 });
 
+passport.deserializeUser((user: any, done: any) => {
+  console.log('deserialize User');
+  if (user.id) {
+    User.findByPk(user.id)
+      .then((user: any) => {
+        done(null, user);
+      })
+      .catch(done);
+  } else {
+    done(null, user);
+  }
+  
+});
+
+  
 export {};

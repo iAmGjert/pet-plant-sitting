@@ -6,10 +6,6 @@ const morgan = require('morgan');
 const { db } = require('../database/index');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
-const bcrypt = require('bcryptjs');
-const LocalStrategy = require('passport-local').Strategy;
-const { User } = require('../database/index');
-// const color = require('cli-color');
 require('dotenv').config();
 require('./auth/passport.ts');
 
@@ -71,7 +67,6 @@ app.use(cors({
   credentials: true,
 }));
 app.use(express.static(CLIENT_PATH));
-app.use(cookieParser(process.env.SESSION_SECRET));
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -79,118 +74,11 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+app.use(cookieParser(process.env.SESSION_SECRET));
 //**************************** PASSPORT INIT *********************************** */
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-// require('./auth/passport_local.ts');
-// app.use('/auth/local', require('./routes/auth_local.ts'));
-
-//************************** PASSPORT - LOCAL - CONFIGURATION ********************************/
-
-// passport.use( new LocalStrategy(/*{ usernameField: 'email', passwordField: 'password' },*/ (username: string, password: string, done: any) => {
-//   User.findOne({ where: { username: username } })
-//     .then((user : any | unknown) => {
-//       if (!user) {
-//         return done(null, false, { message: 'Incorrect username.' }); 
-//       }
-//       bcrypt.compare(password, user.password, (err: Error, isMatch: boolean) => { 
-//         if (err) { throw err; }
-//         return isMatch ? done(null, user) : done(null, false, { message: 'Incorrect password.' });
-//       });
-//     }).catch((err: Error) => {
-//       console.error(err);
-//       return done(err);
-//     });
-// }));
-
-// passport.serializeUser((user: any, done: any) => {
-//   console.log('serialized User: ', user);
-//   done(null, user.id);
-// });
-
-// passport.deserializeUser((userId: number, done: any) => {
-//   User.findOne({ where: { id: userId } })
-//     .then((user: any) => {
-//       console.log('deserialize User: ', user);
-//       done(null, user);
-//     }).catch((err: Error) => {
-//       console.error(err);
-//       done(err);
-//     });
-// });
-
-
-
-//*************************** PASSPORT - LOCAL - ROUTES *************************** */
-
-// app.post('/auth/local/register', async (req: any, res: any) => {
-//   console.log(req.body);
-//   const { username, password } = req?.body;
-//   try {
-//     if (!username || !password || typeof username !== 'string' || typeof password !== 'string') {
-//       res.send('Improper Values');
-//       return;
-//     }
-//     // Check if user already exists
-//     const returningUser = await User.findOne({ where: { username } });
-//     if (returningUser) {
-//       res.send('User already exists');
-//       return;
-//     } else { 
-//       const hashedPassword = await bcrypt.hash(password, 10);
-//       const user = await User.create({
-//         username,
-//         password: hashedPassword,
-//       });
-//       res.status(200).json({
-//         message: 'success',
-//         success: true,
-//         user: user,
-//       });
-//     }    
-//   } catch (error) {
-//     res.sendStatus(400);
-//     console.log(error);  
-//   }
-// });
-
-// app.post('/auth/local/login', (req: any, res: any, next: any) => {
-//   passport.authenticate('local', {
-//     successRedirect: '/loading',
-//     failureRedirect: '/login/fail',
-//     failureMessage: true,
-//     successMessage: true,
-//     session: false
-//   }, (err: any, user: boolean, info: any, status: any) => {
-//     console.log(info, status, 'info and status');
-//     if (err) { throw err; }
-//     if (!user) {
-//       console.log(user);
-//       console.log(req.body, 'req.body');
-//       res.send('No User Exists'); 
-//     } else {
-//       req.logIn(user, (err: any) => {
-//         if (err) { throw err; }
-//         res.send('Successfully Authenticated');
-//         // console.log(req.user, 'logged in');
-//         console.log(color.xterm(11).bold(`\n[ ${req.session.passport.user.username} is logged in ]\n`));
-
-//       });
-//     }
-//   })(req, res, next);
-// });
-
-// app.get('/auth/local/user', (req: any, res: any) => {
-//   res.send(req.user);
-// });
-
-
-
-
-
-
 
 
 //****************************** OTHER - ROUTES ******************************************* */
