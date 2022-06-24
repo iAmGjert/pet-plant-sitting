@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 //import type { RootState } from '../../store';
 
 interface petPlantStuff {
+  id: number,
   owner_id: number,
   name: string,
   image: string,

@@ -23,12 +23,9 @@ const Job = ({ job }) => {
   const handleClick = ()=>{
     
     if (user.name === '') {
-      //console.log('Yer not logged in!');
       dispatch(setPrompt(true));      
     }
     setModalShow(true);
-    //onsole.log(`Clicked more info for job#${id}`);
-    //console.log(job);
   };
   const [load, setLoad] = useState(false);
   useEffect(()=>{

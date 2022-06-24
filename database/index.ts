@@ -55,6 +55,7 @@ Job.belongsTo(User, {
 
 Job.belongsTo(User, {
   foreignKey: 'sitter_id',
+  as: 'sitter'
 });
 
 Job.hasMany(JobApplicant, {
@@ -72,12 +73,6 @@ Job.hasMany(JobPetsPlants, {
 JobPetsPlants.belongsTo(PetPlant, {
   foreignKey: 'pet_plant_id'
 });
-// PetPlant.hasMany(JobPetsPlants, {
-//   foreignKey: 'pet_plant_id'
-// });
-// JobPetsPlants.hasMany(PetPlant, {
-//   foreignKey: 'pet_plant_id'
-// });
 
 User.hasMany(Rating, {
   foreignKey: 'user_id',
