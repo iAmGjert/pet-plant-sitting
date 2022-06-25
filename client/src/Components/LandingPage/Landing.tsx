@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import UpcomingJobs from './UpcomingJobs';
 import LandingEventCard from './LandingEventCard';
 import AppliedJobsBoard from './AppliedJobsBoard';
+import * as moment from 'moment';
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,7 +15,11 @@ import Card from 'react-bootstrap/Card';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 // Import fetchUpcomingJobs action-creator in order to make that axios call
 //import { jobs } from '../../state/features/jobs/jobSlice';
-import { jobs, fetchUpcomingJobs } from '../../state/features/jobs/jobSlice';
+import {
+  jobs,
+  fetchUpcomingJobs,
+  fetchApplications,
+} from '../../state/features/jobs/jobSlice';
 import { fetchUpcomingEvents } from '../../state/features/events/eventsSlice';
 
 //typescript;
@@ -50,32 +55,53 @@ const Landing: FC<Props> = () => {
   const upcomingJobs = useAppSelector((state) => state.job.upcomingJobs);
   const upcomingEvents = useAppSelector((state) => state.events.upcomingEvents);
   const jobs = useAppSelector((state) => state.job.jobs);
+  const applications = useAppSelector((state) => state.job.applications);
+  console.log('applications', applications);
   //see if applicant id matches with sitter id
 
   //console.log(50, jobs);
-  // console.log('upcomingEvents', upcomingEvents);
-  // console.log('upcoming jobs', upcomingJobs);
+  //console.log('upcomingEvents', upcomingEvents);
+  console.log('upcoming jobs', upcomingJobs);
   const events = useAppSelector((state) => state.events.events);
 
   const trimmedUpcommingJobs = upcomingJobs.slice(1);
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
+  //console.log(63, trimmedUpcommingJobs);
 
-  console.log('array of jobs', jobs);
+  //console.log('array of jobs', jobs);
   //go to jobs. See if sitter exists in the sitter key and if that sitter is you.
   //display the interactions(whatever that is) for the jobs I have applied for.
 
-  console.log('user', user); //sets to userObj assigned to me;
+  // const sitterMatchedJobs = jobs.filter((job) => {
+  //   //console.log('each job', job);
+  //   return job.sitter_id === user.id;
+  // });
 
-  const sitterMatchedJobs = jobs.filter((job) => {
-    //console.log('each job', job);
-    return job.sitter_id === user.id;
-  });
-  //console.log(70, sitterMatchedJobs);
+  // const currentDate = moment().format('YYYY-MM-DD');
+  // console.log('currentDate', currentDate);
+  // console.log(moment(currentDate).isBefore('2022-07-22'));
+
+  // const pastLabor = jobs.filter((job) => {
+  //   console.log('startDate', job.startDate);
+  //   return moment(job.startDate).isBefore(currentDate);
+  // });
+  // console.log('pastLabor', pastLabor);
 
   //id is job application id/ user_id is obviously is the user's id
+
+  console.log('jobs array', jobs);
+  console.log('user id', user.id);
+  // const sitterUpcomingJobs = jobs.filter((job) => {
+  //   console.log('x', job.sitter_id);
+  //   return job.sitter_id === user.id;
+  // });
+  // console.log('sitterUpcomingJobs', sitterUpcomingJobs);
+
   const sitterAppliedJobs = jobs.filter((job) => {
+    //looping over jobs array first
     return job.job_applicants.filter((sitter) => {
-      return sitter.user_id === user.id;
+      //looping over job_applicants array
+      return sitter.user_id === user.id; //returning only jobs that I as user have applied for
     });
   });
   //console.log('sitterAppliedJobs', sitterAppliedJobs);
@@ -83,6 +109,7 @@ const Landing: FC<Props> = () => {
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
+    dispatch(fetchApplications());
   }, []);
 
   return (
@@ -97,7 +124,7 @@ const Landing: FC<Props> = () => {
           src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
         />
       </Card>
-      <Button>Past Jobs</Button>
+
       {trimmedUpcommingJobs.length &&
         trimmedUpcommingJobs.map((element) => {
           return (
@@ -145,18 +172,11 @@ const Landing: FC<Props> = () => {
           );
         })} */}
 
-      {AppliedJobsBoard.length &&
-        sitterAppliedJobs.map((element) => {
+      {applications.length &&
+        applications.map((element) => {
           return (
             <>
-              <AppliedJobsBoard
-                key={element.id}
-                location={element.location}
-                petPlant={element.pet_plant}
-                startDate={element.startDate}
-                endDate={element.endDate}
-                employerId={element.employer_id}
-              />
+              <AppliedJobsBoard key={element.id} {...element} />
             </>
           );
         })}

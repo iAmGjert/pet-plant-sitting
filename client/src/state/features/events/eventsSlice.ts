@@ -59,10 +59,10 @@ export const fetchUpcomingEvents = createAsyncThunk(
   'events/upcomingEvents',
   async () => {
     const response = await axios.get('/api/events/all');
-    console.log('42 response from backend', response);
+    //console.log('42 response from backend', response);
     const upcomingEvents = response.data.filter((event : {startDate: Date}) => {
       let currentDate = moment();//'2022-06-03'
-      console.log('current date', currentDate);
+      //console.log('current date backend', currentDate);
       //returning endDates that have not yet surpassed the currentDate
       return moment(event.startDate).isAfter(currentDate);
     });

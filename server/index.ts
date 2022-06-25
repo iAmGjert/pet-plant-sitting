@@ -75,6 +75,7 @@ app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/pets_plants', require('./routes/pets_plants'));
+app.use('/api/jobapplicants', require('./routes/jobApplicants'));
 
 app.get('/*', function (req: Request, res: Response | any) {
   res.sendFile(

@@ -36,6 +36,7 @@ const newInitialState: any = {
   },
   prompt: false,
   upcomingJobs: [],
+  applications: []
   //pastJobs: []
 };
 
@@ -44,7 +45,7 @@ const newInitialState: any = {
 //   async() => {
 //     const response = await axios.get('/api/jobs/all');
 //     //console.log('fetchPastJobs response', response);
-//     const currentDate = moment();
+//     const currentDate = moment().format('YYYY-MM-DD');
 //     //console.log('currentDate on 47 backend', currentDate);
 //     const pastLabor = response.data.filter((event: {startDate: Date, endDate: Date}) => {
 //       return moment(event.startDate).isAfter(currentDate);
@@ -59,16 +60,31 @@ export const fetchUpcomingJobs = createAsyncThunk(
   'jobs/fetchUpcomingJobs',
   async () => {
     const response = await axios.get('/api/jobs/all');
-    console.log('data coming from backend', response);
+    //console.log('data coming from backend', response);
     const upcomingLabor = response.data.filter((job: { isCompleted: boolean }) => {
       //console.log('job on 75', job);
       return job.isCompleted === false;
     });
-    console.log('data coming from backend', upcomingLabor);
+    //console.log('data coming from backend', upcomingLabor);
     return upcomingLabor;
   }
 );
 
+export const fetchApplications = createAsyncThunk(
+  'jobs/fetchApplications',
+  async() => {
+    const response = await axios.get('/api/jobapplicants/byuser');
+    return response.data;
+  }
+);
+
+export const deleteApplication = createAsyncThunk(
+  'jobs/deleteApplicaiton',
+  async(id) => {
+    const response = await axios.delete(`/api/jobapplicants/delete/${id}`);
+    return id;
+  }
+)
 
 export const jobsSlice = createSlice({
   name: 'jobs',
@@ -99,7 +115,17 @@ export const jobsSlice = createSlice({
       state.upcomingJobs = action.payload;
       return state;
     });
-  },
+    builder.addCase(fetchApplications.fulfilled, (state, action) => {
+      console.log('application', action.payload);
+      state.applications = action.payload;
+      return state;
+    });
+    builder.addCase(deleteApplication.fulfilled, (state, action) => {
+      state.applications = state.applications.filter((application) => {
+        return application.id !== action.payload;
+      });
+    });
+  }
 });
 
 export const { getView, changeView, setJobs, setPrompt, getPrompt } = jobsSlice.actions;

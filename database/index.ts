@@ -62,6 +62,10 @@ Job.hasMany(JobApplicant, {
   foreignKey: 'job_id',
 });
 
+JobApplicant.belongsTo(Job, {
+  foreignKey: 'job_id',
+});
+
 JobApplicant.belongsTo(User, {
   foreignKey: 'user_id',
 });
@@ -365,7 +369,7 @@ db.sync(
                 pet_plant: [5, 2],
                 employer_id: 3,
                 description: 'Come watch this little devil',
-                sitter_id: 7,
+                sitter_id: null,
                 startDate: new Date('July 22, 2022 01:15:00'),
                 endDate: new Date('July 27, 2022 01:15:00'),
                 isCompleted: true
@@ -385,14 +389,14 @@ db.sync(
                 pet_plant: [3, 1],
                 employer_id: 5,
                 description: 'Come watch my child!',
-                sitter_id: 7,
+                sitter_id: 6,
                 startDate: new Date('July 21, 2022 01:15:00'),
                 endDate: new Date('July 25, 2022 01:15:00'),
                 isCompleted: true
               },
               {
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
-                description: 'Your a bio!',
+                description: 'You\'re a bio!',
                 pet_plant: [3, 1],
                 employer_id: 6,
                 sitter_id: 7,
@@ -521,22 +525,27 @@ db.sync(
                     {
                       user_id: 1,
                       job_id: 1,
+                      status: 'approved'
                     },
                     {
                       user_id: 7,
                       job_id: 1,
+                      status: 'rejected'
                     },
                     {
                       user_id: 7,
                       job_id: 3,
+                      status: 'pending'
                     },
                     {
                       user_id: 7,
                       job_id: 4,
+                      status: 'approved'
                     },
                     {
                       user_id: 7,
                       job_id: 5,
+                      status: 'pending'
                     },
                   ]);
                 })
