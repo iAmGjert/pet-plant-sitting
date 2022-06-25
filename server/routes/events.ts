@@ -31,46 +31,8 @@ interface EventParticipantInfo {
   user_id: number;
 }
 
-//* POST Routes *//
 
-events.post('/create', (req: Request, res: Response) => {
- 
-  const { name, host, location, description, participants, startDate, startTime } = req.body;
- 
-  Events.create({ name, host, location, description, participants, startDate, startTime })
-    .then((event: Record<string, EventInfo> | null) => {
-      res.status(201).send(event?.dataValues);
-    })
-    .catch((err: Error) => {
-      console.log(err);
-      res.status(500).send(err);
-    });
-});
 
-events.post('/comment/add', (req: Request, res: Response) => {
-  const { event_id, comment, user_id } = req.body;
-  EventComment.create({ event_id, comment, user_id })
-    .then((eventComment: Record<string, EventCommentInfo> | null) => {
-      res.status(201).send(eventComment?.dataValues);
-    })
-    .catch((err: Error) => {
-      console.log(err);
-      res.status(500).send(err);
-    });
-});
-
-events.post('/participant/add', (req: Request, res: Response) => {
-  const { event_id, user_id } = req.body;
-  EventParticipant.create({ event_id, user_id })
-    .then((eventParticipant: Record<string, EventParticipantInfo> | null) => {
-      res.status(201).send(eventParticipant?.dataValues);
-    })
-    .catch((err: Error) => {
-      res.status(500).send(err);
-    });
-});
-
-//* GET Routes *//
 //* Events
 events.get('/all', (req: Request, res: Response) => {
   Events.findAll({
@@ -88,6 +50,19 @@ events.get('/all', (req: Request, res: Response) => {
   });
 });
  
+events.post('/create', (req: Request, res: Response) => {
+ 
+  const { name, host, location, description, participants, startDate, startTime } = req.body;
+ 
+  Events.create({ name, host, location, description, participants, startDate, startTime })
+    .then((event: Record<string, EventInfo> | null) => {
+      res.status(201).send(event?.dataValues);
+    })
+    .catch((err: Error) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
 
 
 events.get('/:id', async (req: Request, res: Response) => {
@@ -96,30 +71,6 @@ events.get('/:id', async (req: Request, res: Response) => {
   return res.json(event);
 });
 
-//* comments
-events.get('/comments/all', (req: Request, res: Response) => {
-  EventComment.findAll()
-    .then((comments: Record<string, EventCommentInfo> | null) => {
-      res.status(200).send(comments);
-    })
-    .catch((err: Error) => {
-      res.status(500).send(err);
-    });
-});
-
-//* participants
-events.get('/participants/all', (req: Request, res: Response) => {
-  EventParticipant.findAll()
-    .then((participants: Record<string, EventParticipantInfo> | null) => {
-      res.status(200).send(participants);
-    })
-    .catch((err: Error) => {
-      res.status(500).send(err);
-    });
-});
-
-//* UPDATE Routes *//
-//* Events
 events.put('/update/:id', (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, host, location, description, participants } = req.body;
@@ -131,21 +82,6 @@ events.put('/update/:id', (req: Request, res: Response) => {
       // res.status(500).send(err);
     });
 });
-
-// update comment
-events.put('/comment/update/:id', (req: Request, res: Response) => {
-  const { id } = req.params;
-  const { comment } = req.body;
-  EventComment.update({ comment }, { where: { id } })
-    .then((comment: any) => {
-      // res.status(200).send(res);
-    }).catch((err: Error) => {   
-      console.error(err);
-      res.status(500).send(err);  
-    });
-});
- 
-//* DELETE Routes *//
 
 events.delete('/delete/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -159,9 +95,44 @@ events.delete('/delete/:id', async (req: Request, res: Response) => {
     res.status(500).send(err);
   });
 });
-  
 
-// delete comment
+
+
+
+//* Comments
+events.get('/comments/all', (req: Request, res: Response) => {
+  EventComment.findAll()
+    .then((comments: Record<string, EventCommentInfo> | null) => {
+      res.status(200).send(comments);
+    })
+    .catch((err: Error) => {
+      res.status(500).send(err);
+    });
+});
+
+events.post('/comment/add', (req: Request, res: Response) => {
+  const { event_id, comment, user_id } = req.body;
+  EventComment.create({ event_id, comment, user_id })
+    .then((eventComment: Record<string, EventCommentInfo> | null) => {
+      res.status(201).send(eventComment?.dataValues);
+    })
+    .catch((err: Error) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+events.put('/comment/update/:id', (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { comment } = req.body;
+  EventComment.update({ comment }, { where: { id } })
+    .then((comment: any) => {
+      // res.status(200).send(res);
+    }).catch((err: Error) => {   
+      console.error(err);
+      res.status(500).send(err);  
+    });
+});
 
 events.delete('/comment/delete/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -174,6 +145,38 @@ events.delete('/comment/delete/:id', async (req: Request, res: Response) => {
     res.status(500).send(err);
   });
 });
+
+
+
+
+
+
+//* Participants
+events.get('/participants/all', (req: Request, res: Response) => {
+  EventParticipant.findAll()
+    .then((participants: Record<string, EventParticipantInfo> | null) => {
+      res.status(200).send(participants);
+    })
+    .catch((err: Error) => {
+      res.status(500).send(err);
+    });
+});
+
+events.post('/participant/add', (req: Request, res: Response) => {
+  const { event_id, user_id } = req.body;
+  EventParticipant.create({ event_id, user_id })
+    .then((eventParticipant: Record<string, EventParticipantInfo> | null) => {
+      res.status(201).send(eventParticipant?.dataValues);
+    })
+    .catch((err: Error) => {
+      res.status(500).send(err);
+    });
+});
+
+
+
+
+
 
 
 module.exports = events;
