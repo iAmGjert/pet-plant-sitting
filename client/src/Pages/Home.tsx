@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
+import { useNavigate } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
@@ -13,6 +14,7 @@ import Card from 'react-bootstrap/Card';
 interface Props {}
 
 const Home: FC<Props> = () => {
+  const navigate = useNavigate();
   const [display, setDisplay] = useState(false);
   const user = useAppSelector((state) => state.userProfile.value);
   const users = useAppSelector((state) => state.userProfile.users);
@@ -75,8 +77,13 @@ const Home: FC<Props> = () => {
             plants and animals while you are too busy to manage! Fern-Herm will
             help you connect with locals who are willing to help!
           </Card.Text>
-          <Button variant='primary' size='lg' className='button-center'>
-            Sign Up
+          <Button
+            variant='primary'
+            size='lg'
+            className='button-center'
+            onClick={() => navigate('/login')}
+          >
+            Sign Up With Google
           </Button>
           <Card.Subtitle className='mb-2 text-muted'>
             Already have an account?
