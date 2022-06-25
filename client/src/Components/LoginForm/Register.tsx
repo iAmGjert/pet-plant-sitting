@@ -87,7 +87,7 @@ const Register = () => {
         <Form.Control type='text' placeholder='optional' 
           onChange={(e) => setLocation(e.target.value)} required/>
       </Form.Group>
-      <Button variant='primary' /*href='/loading'*/ onClick={registerUser}>
+      <Button variant='primary' href='/login' onClick={registerUser}>
         Submit
       </Button>
     </Form> 
