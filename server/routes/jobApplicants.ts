@@ -20,7 +20,7 @@ interface applicantInfo {
 
 
 jobApplicants.get('/byuser', async (req: Request, res: Response) => {
-  //console.log(req.user);
+  //console.log(req.user);//array of user object with id
   const applications = await JobApplicant.findAll({
     include: [
       { model: Job }
@@ -29,6 +29,8 @@ jobApplicants.get('/byuser', async (req: Request, res: Response) => {
       user_id: req.user[0].id
     }
   });
+
+
   //return res.sendStatus(200).send(applications);
 //  } catch (err) {
 //     return res.status(418).send(err);

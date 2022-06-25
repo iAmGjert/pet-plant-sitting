@@ -8,7 +8,7 @@ const Loading = () => {
   const navigate = useNavigate();
   const currUser = useAppSelector((state) => state.userProfile.value);
   if (currUser.name) {
-    navigate('/');
+    navigate('/landingPage');
   }
   return (
     <div>
