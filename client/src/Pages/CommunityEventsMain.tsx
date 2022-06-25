@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container'
 import { /*getEvents, getView,*/ setView, setEvents, setEventObj } from '../state/features/events/eventsSlice';
 import Event from '../Components/CommunityEvents/Event';
 import Details from '../Components/CommunityEvents/Details';
@@ -94,7 +95,7 @@ const CommunityEventsMain = () => {
   };
   
   return (
-    <div>
+    <Container fluid>
       <div className="main-text">
         <h1>Community Events</h1>
       </div>
@@ -102,7 +103,7 @@ const CommunityEventsMain = () => {
         <Button onClick={switchToCreateView} size='sm'>Create Event</Button>
       </div>
       <div className='container'>{renderView()}</div>
-    </div>
+    </Container>
   );
 };
 

@@ -27,7 +27,7 @@ const Search = () => {
               </Form.Group>
             </Col>
             <Col xs lg={2}>
-              <Button onClick={ ()=>{ handleClick(); } } type='button'>Submit</Button>
+              <Button className='bootstrapt-button' onClick={ ()=>{ handleClick(); } } type='button'>Submit</Button>
             </Col>
           </Row>
         </Form>

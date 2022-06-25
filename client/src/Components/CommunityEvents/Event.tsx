@@ -11,7 +11,7 @@ const Event = (props: any) =>{
   return (
     <Container>
 
-      <Card border="primary" style={{ width: '95%' }}>
+      <Card style={{ width: '95%' }} className='bootstrap-card'>
         <Card.Header>Host: {user.name}</Card.Header>
         <Card.Body>
           <Card.Title>{name}</Card.Title>

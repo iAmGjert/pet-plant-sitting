@@ -2,9 +2,6 @@ html,
 body {
   min-height: 100%;
 }
-body > #root > div {
-  height: 100vh;
-}
 .mapJobMarker {
   line-height: 14px;
   padding: 6px;
@@ -90,9 +87,9 @@ body > #root > div {
   font-family: sans-serif;
 }
 
-body {
+/* body {
   padding-bottom: 60px;
-}
+} */
 .button-as-link {
   background-color: transparent;
   border: none;
@@ -116,20 +113,45 @@ body {
 .navBars {
   color: Black
 }
-
-#light {
-  background-color: #f3ebf6;
-  height: 100vh
-}
 #dark {
   background-color: #46045e;
   height: 100vh;
-  color: white
+  color: lightgray
 }
-.theme-switch {
-  display: flex;
-  justify-content: left;
-  align-items: left
+#dark .popup-inner {
+  background-color: #46045e;
+  color: lightgray
+}
+#dark .topNavBar {
+  background-color: #46045e;
+  color: lightgray
+}
+#dark .container-fluid {
+  background-color: #46045e;
+  color: lightgray
+}
+#dark .col {
+  background-color: #46045e;
+  color: lightgray
+}
+#dark .react-calendar__month-view__days {
+  background-color: #46045e;
+  color: lightgray
+}
+#dark .bootstrap-card {
+  background-color: #46045e;
+  color: lightgrey;
+  border-color: lightgrey
+}
+#dark .bootstrap-button {
+  background-color: lightseagreen;
+  color: lightgrey;
+  border-color: lightgrey
+}
+#dark .react-calendar {
+  background-color: #46045e;
+  color: lightgrey;
+  border-color: lightgrey
 }
 
 /* .chat-main {

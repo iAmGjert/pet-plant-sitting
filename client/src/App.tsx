@@ -28,11 +28,11 @@ import Loading from './Pages/Loading';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
-const ThemeContext = createContext(null);
+export const ThemeContext = createContext(null);
 
 const App: FC<Props> = () => {
   const currUser = useAppSelector((state) => state.userProfile.value);
-  const [theme, setTheme] = useState(currUser && currUser.theme !== null ? `${currUser.theme}` : 'light');
+  const [theme, setTheme] = useState(currUser && currUser.theme !== null ? `${currUser.theme}` : null);
 
   const dispatch = useAppDispatch();
   const getUser = async () => {
@@ -57,12 +57,9 @@ const App: FC<Props> = () => {
     dispatch(mapActions.setEvents(events.data));
   };
   const toggleTheme = () => {
-    setTheme((curr: string) => (curr === 'light' ? 'dark' : 'light'));
+    setTheme((curr: string) => (curr === null ? 'dark' : null));
     axios.patch(`/api/users/${currUser.id}`, {
-      theme: currUser.theme === null ? 'dark' 
-        : currUser.theme === 'dark' ? 'light' 
-          : currUser.theme === 'light' ? 'dark' 
-            : null
+      theme: currUser.theme === null ? 'dark' : null
     });
   };
 

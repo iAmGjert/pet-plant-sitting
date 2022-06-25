@@ -159,7 +159,7 @@ const Profile = () => {
     }
   }, [currUser, id]);
   return (
-    <Container>
+    <Container fluid>
       <EditAccountModal
         user={profileUser}
         showModal={showModal}
