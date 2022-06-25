@@ -36,6 +36,18 @@ users.put('/:id', async (req: Request, res: Response) => {
   User.update(req.body, { where: { id: req.body.id } })
     .then(() => {
       res.sendStatus(200);
+      console.log('HERE');
+    })
+    .catch((err: Error) => {
+      console.error(err, 'put user error');
+      res.sendStatus(404);
+    });
+});
+
+users.patch('/:id', async (req: Request, res: Response) => {
+  User.update(req.body, { where: { id: req.params.id } })
+    .then(() => {
+      res.sendStatus(200);
     })
     .catch((err: Error) => {
       console.error(err, 'put user error');

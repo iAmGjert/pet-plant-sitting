@@ -38,7 +38,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const [eventPopup, setEventPopup] = useState({});
   const [dirCoordinates, setDirCoordinates] = useState([]);
   const [steps, setSteps] = useState([]);
- 
+
 
   const showJobInfo = (id) => {
     const storage = [];
@@ -57,11 +57,12 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
                             .then((results) => {
                               setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
                             });
+                        } else {
+                          axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${jobsLocations[m][0][0]},${jobsLocations[m][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
+                            .then((results) => {
+                              setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
+                            });
                         }
-                        axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${jobsLocations[m][0][0]},${jobsLocations[m][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
-                          .then((results) => {
-                            setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
-                          });
                       }
                     }
                     storage.push(petsPlants[k]);
@@ -103,6 +104,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     if (ref) {
       // Activate as soon as the control is loaded
       ref.trigger();
+      console.log(ref);
     }
   }, []);
 

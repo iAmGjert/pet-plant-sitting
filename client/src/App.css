@@ -2,6 +2,9 @@ html,
 body {
   min-height: 100%;
 }
+body > #root > div {
+  height: 100vh;
+}
 .mapJobMarker {
   line-height: 14px;
   padding: 6px;
@@ -100,7 +103,6 @@ body {
   padding: 0;
   margin: 0;
 }
-
 .reviewAvatar {
   width: 48px;
   height: 48px;
@@ -113,6 +115,21 @@ body {
 }
 .navBars {
   color: Black
+}
+
+#light {
+  background-color: #f3ebf6;
+  height: 100vh
+}
+#dark {
+  background-color: #46045e;
+  height: 100vh;
+  color: white
+}
+.theme-switch {
+  display: flex;
+  justify-content: left;
+  align-items: left
 }
 
 /* .chat-main {

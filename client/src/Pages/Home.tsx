@@ -8,6 +8,7 @@ interface Props {}
 const Home: FC<Props> = () => {
   const [display, setDisplay] = useState(false);
   const user = useAppSelector((state) => state.userProfile.value);
+  console.log(user, 'USER');
   const users = useAppSelector((state) => state.userProfile.users);
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
   const jobs = useAppSelector((state) => state.job.jobs);
