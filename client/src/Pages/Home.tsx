@@ -89,7 +89,7 @@ const Home: FC<Props> = () => {
             Already have an account?
           </Card.Subtitle>
           <Card.Link href='#'>Login</Card.Link>
-          <Card.Link href='#'>Community Events</Card.Link>
+          <Card.Link href='/events'>Free Community Events</Card.Link>
         </Card.Body>
       </Card>
     </Container>
