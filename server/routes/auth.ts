@@ -1,3 +1,4 @@
+
 import express, { Request, Response } from 'express';
 const passport = require('passport');
 const bcrypt = require('bcryptjs');
@@ -21,7 +22,7 @@ const CLIENT_URL: string | undefined =
 
 auth.post('/local/register', async (req: any, res: any) => {
   console.log(req.body);
-  const { username, password } = req?.body;
+  const { name, username, password, location } = req?.body;
   try {
     if (!username || !password || typeof username !== 'string' || typeof password !== 'string') {
       res.send('Improper Values');
@@ -35,8 +36,10 @@ auth.post('/local/register', async (req: any, res: any) => {
     } else { 
       const hashedPassword = await bcrypt.hash(password, 10);
       const user = await User.create({
+        name,
         username,
         password: hashedPassword,
+        location,
       });
       res.status(200).json({
         message: 'success',
@@ -64,7 +67,13 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
     } else {
       req.logIn(user, (err: any) => {
         if (err) { throw err; }
-        console.log(color.xterm(11).bold(`\n[ ${JSON.stringify(req.session, null, 2)}  \n ^^req.session.passport.user^^ ]\n`));
+        const { user } = req.session.passport;
+        console.log(color.xterm(11).bold(`\n[ ${JSON.stringify({
+          id: user.id,
+          name: user.name,
+          email: user.username,
+
+        }, null, 2)}  \n ^^req.session.passport.user^^ ]\n`));
         res.send(user);
       });
     }

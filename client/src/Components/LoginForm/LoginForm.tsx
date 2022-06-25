@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
-  const [name , setName] = useState('');
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const navigate = useNavigate();
 
   const login = () => {
     axios.post('/auth/local/login', {
@@ -14,30 +15,18 @@ const LoginForm = () => {
     }, {
       withCredentials: true,
     }).then((res) => {
-      console.log(email);
       console.log(res);
     }).catch((err) => {
       console.log(err);
     });
   };
 
-  const getUser = () => {
-    axios.get('/auth/local/user', {
-      withCredentials: true,
-    }).then((res) => {
-      console.log(res.data);
-    }).catch((err) => {
-      console.log(err);
-    });
+  const navigateRegister = () => {
+    navigate('/register');
   };
 
   return (
     <Form>
-      {/* <Form.Group controlId='formBasicName'>
-        <Form.Label>Name</Form.Label>
-        <Form.Control type='text' placeholder='Enter name' 
-          onChange={(e) => setName(e.target.value)} />
-      </Form.Group> */}
       <Form.Group className='mb-3' controlId='formBasicEmail'>
         <Form.Label>Email address</Form.Label>
         <Form.Control type='email' placeholder='Enter email' 
@@ -52,13 +41,12 @@ const LoginForm = () => {
           onChange={(e) => setPassword(e.target.value)} required/>
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicCheckbox'>
-        <Form.Check type='checkbox' label='Check me out' />
       </Form.Group>
-      <Button variant='primary' onClick={login}>
+      <Button variant='primary' href='/loading' onClick={login}>
         Submit
       </Button>
-      <Button variant='primary' onClick={getUser}>
-        Get Current User
+      <Button variant='primary' onClick={navigateRegister}>
+        Sign Up
       </Button>
     </Form>
   );
