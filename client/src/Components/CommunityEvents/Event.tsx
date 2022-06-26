@@ -8,11 +8,11 @@ import Container from 'react-bootstrap/Container';
 
 const Event = (props: any) =>{
   const { name, location, user, eventObj, switchToDetailsView } = props;
+
   return (
     <Container>
-
       <Card border="primary" style={{ width: '95%' }}>
-        <Card.Header>Host: {user.name}</Card.Header>
+        <Card.Header>Host: {user?.name}</Card.Header>
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text>
@@ -25,35 +25,9 @@ const Event = (props: any) =>{
             onClick={() => switchToDetailsView(eventObj)}>Interact</Button>
         </Card.Footer>
       </Card>
-    </Container>
-
-          
-
-    
+    </Container> 
   );
 };
-
-
-
-
-
-
-// <h3>Event Name: {name}</h3>
-// <h4>Host: </h4>
-// <p>Location: {location}</p>
-{ /* <p>Description: {description}</p> */ }
-{ /* <span>Date: {startDate} </span> */ }
-{ /* <span>Time: {startTime} </span> */ }
-{ /* <div>Comments: {comments.map((comment: Comment) => {
-        return (
-          <div key={comment.id}>
-            <p>{comment.user.name}</p>
-            <p>{comment.comment}</p>
-          </div>
-        );
-      })}</div>  */ }
-// <p>People interested: {participants.length}</p> 
-{ /* <button onClick={() => switchToDetailsView()}>Details</button> */ }
 
 
 // CommunityEvents.propTypes = {};

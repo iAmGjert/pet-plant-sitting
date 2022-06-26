@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 
 import Container from 'react-bootstrap/Container';
@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
+import axios from 'axios';
 
 interface Comment {
   id: number;
@@ -20,16 +21,17 @@ interface Comment {
   updatedAt: string;
 }
 
-const Comments = () => {
+const Comments = (props: any) => {
   const dispatch = useAppDispatch();
-  const comments = useAppSelector((state) => state.events.event.event_comments);
-
-  console.log(comments);
-  const numComments = comments.length;
+  // const comments = useAppSelector((state) => state.events.event.event_comments);
+  console.log(props.comments);
+ 
+  // console.log(comments);
+  const numComments = props.comments.length;
   return (
     <>
       { 
-        numComments ? comments.map((comment: Comment, index: number) => {
+        numComments ? props.comments.map((comment: Comment, index: number) => {
           return (
             <React.Fragment key={index}>
               <Card>
@@ -39,7 +41,7 @@ const Comments = () => {
                       <Card.Header >
                         {/* <img src={comment.user.image} alt="user" className="rounded-circle" />   */}
                         {/* <Button variant="link" href={'/profile/' + comment.user.user_id} > */}
-                        {comment.user.name}
+                        {comment.user?.name}
                         {/* </Button> */}
                         
                       </Card.Header>
