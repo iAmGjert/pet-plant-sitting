@@ -1,11 +1,11 @@
-import React from 'react';
+import React, {useState, useEffect } from 'react';
 import Search from '../Components/InfoLookup/Search';
+import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 
 export default function InfoMain() {
   return (
-    <div>
-      <h1>Plant/Animal Information</h1>
+    <Container fluid>
       <Search />
-    </div>
+    </Container>
   );
 }

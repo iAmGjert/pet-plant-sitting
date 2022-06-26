@@ -69,7 +69,7 @@ const MoreInfo = (props) => {
       </Modal.Footer>
       {
         showLog ?
-          <Alert dismissible onClose={ ()=>{ setShowLog(false); } } variant='warning'>You must {' '}<Alert.Link onClick={()=>{ navigate('/login'); }}>Login</Alert.Link> to create a job.</Alert> :
+          <Alert dismissible onClose={ ()=>{ setShowLog(false); } } variant='warning'>You must {' '}<Alert.Link onClick={()=>{ navigate('/login'); }}>Login</Alert.Link> to apply for a job.</Alert> :
           <div />
       }
       

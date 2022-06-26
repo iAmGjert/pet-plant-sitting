@@ -25,6 +25,7 @@ import Register from './Components/LoginForm/Register';
 import TopNavBar from './Components/TopNavBar/TopNavBar';
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
 import Loading from './Pages/Loading';
+import InfoMain from './Pages/InfoMain';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
@@ -92,6 +93,7 @@ const App: FC<Props> = () => {
             <Route path='/jobs' element={<JobsMain />} />
             {/* <Route path='/createjob' element={<JobCreation />} /> */}
             <Route path='/chat' element={<ChatMain />} />
+            <Route path='/info' element={<InfoMain />} />
           </Routes>
           <BottomNavBar />
         </BrowserRouter>
