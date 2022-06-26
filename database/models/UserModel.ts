@@ -3,7 +3,11 @@ const DataTypes = require('sequelize').DataTypes;
 export const UserModel = {
   id: { type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true },
   name: DataTypes.STRING,
-  email: DataTypes.STRING,
+  username: { // <-- may also be referered to as 'email'
+    type: DataTypes.STRING,
+    unique: true,
+  },
+  password: DataTypes.STRING,
   image: DataTypes.STRING,
   location: DataTypes.STRING,
   sitter_rating: DataTypes.FLOAT,
