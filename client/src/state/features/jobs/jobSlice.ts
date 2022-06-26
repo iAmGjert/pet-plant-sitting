@@ -45,7 +45,7 @@ export const fetchPastJobs = createAsyncThunk(
     const response = await axios.get('/api/jobs/all');
     console.log('fetchPastJobs response', response);
     const currentDate = moment().format('YYYY-MM-DD');
-    console.log('currentDate from the backend',currentDate)
+    console.log('currentDate from the backend',currentDate);
     //console.log('currentDate on 47 backend', currentDate);
     const pastLabor = response.data.filter((event: {startDate: Date, endDate: Date}) => {
       return moment(event.startDate).isAfter(currentDate);
