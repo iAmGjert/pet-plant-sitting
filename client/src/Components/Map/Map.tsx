@@ -1,10 +1,11 @@
-import React, { FC, useState, useCallback, useEffect } from 'react';
+import React, { FC, useState, useCallback, useEffect, useContext } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import Map, { Marker, GeolocateControl, Layer, Source, Popup } from 'react-map-gl';
 import axios from 'axios';
 import JobPopup from './JobPopup';
 import EventPopup from './EventPopup';
-import { ListGroup } from 'react-bootstrap';
+import { ListGroup, Button } from 'react-bootstrap';
+import { ThemeContext } from '../../App';
 
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -25,6 +26,7 @@ const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
 const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jobsLocations, eventsLocations, events, navigate }) => {
 
+  const theme = useContext(ThemeContext);
   const [jobButtonPopup, setJobButtonPopup] = useState(false);
   const [eventButtonPopup, setEventButtonPopup] = useState(false);
   // const [smallJobPopup, setSmallJobPopup] = useState(false);
@@ -38,7 +40,8 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const [eventPopup, setEventPopup] = useState({});
   const [dirCoordinates, setDirCoordinates] = useState([]);
   const [steps, setSteps] = useState([]);
- 
+  const [cancelNav, setCancelNav] = useState(false);
+
 
   const showJobInfo = (id) => {
     const storage = [];
@@ -57,11 +60,12 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
                             .then((results) => {
                               setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
                             });
+                        } else {
+                          axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${jobsLocations[m][0][0]},${jobsLocations[m][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
+                            .then((results) => {
+                              setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
+                            });
                         }
-                        axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${jobsLocations[m][0][0]},${jobsLocations[m][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
-                          .then((results) => {
-                            setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
-                          });
                       }
                     }
                     storage.push(petsPlants[k]);
@@ -124,6 +128,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
         }
       }
       setEventButtonPopup(!eventButtonPopup);
+      setCancelNav(!cancelNav);
     }
   };
 
@@ -140,6 +145,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     setUserCurrentCoords();
   }, []);
 
+
   return (
     <div>
       <Map
@@ -149,7 +155,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           zoom: 13
         }}
         style={{minHeight: '100vh'}}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
+        mapStyle={theme === 'dark' ? 'mapbox://styles/mapbox/dark-v10' : 'mapbox://styles/mapbox/streets-v9'}
         mapboxAccessToken={TOKEN}
       >
         <Marker 
@@ -198,7 +204,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
               <div 
                 onClick={()=>{ navigate(`/profile/${userPopup.id}`); }} 
                 onKeyPress={()=>{ navigate(`/profile/${userPopup.id}`); }}
-                role='button' 
+                role='button'
                 tabIndex={0}
               >
                 <h2>{userPopup.name}</h2>
@@ -246,7 +252,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           }}
         />
         {
-          dirCoordinates.length > 0 &&
+          dirCoordinates.length > 0 && cancelNav &&
         <Source id="polylineLayer" type="geojson" data={directions}>
           <Layer
             id="lineLayer"
@@ -264,12 +270,14 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
         </Source>
         }
         {
-          steps.length > 0 &&
+          steps.length > 0 && cancelNav &&
           <ListGroup variant='flush' as='ol' className='step-instructions' numbered>
+            <Button className='bootstrap-button' onClick={() => setCancelNav(!cancelNav)}>End Route</Button>
             {
               steps.map((step, i) => {
                 return <ListGroup.Item as='li'
                   key={`${step}${i}`}
+                  className='step-instructions-card'
                 >
                   {step.maneuver.instruction}
                 </ListGroup.Item>;
