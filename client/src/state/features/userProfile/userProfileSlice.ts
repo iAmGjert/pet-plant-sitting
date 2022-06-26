@@ -27,6 +27,7 @@ interface state {
   value: {
     name: string;
     id: number | null;
+    username: string,
     job: Array<jobStuff>;
     image: string;
     location: string;
@@ -44,6 +45,7 @@ const initialState = {
   value: {
     name: '',
     id: 1,
+    username: '',
     job: [],
     image: '',
     location: '',

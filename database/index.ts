@@ -133,6 +133,11 @@ PetPlantDescriptor.belongsTo(PetPlant, {
 User.hasOne(Gallery, {
   foreignKey: 'id',
 });
+
+// Gallery.hasOne(User, {
+//   foreignKey: 'user_id',
+// });
+
 User.belongsTo(Gallery, {
   foreignKey: 'id',
 });
@@ -160,9 +165,9 @@ db.sync(
           total_sitter_ratings: 24,
           bio: `I’ve had dogs for the past 27 years. I was my neighbors’ dog sitter off and on for 3 years. Her dog was very comfortable at my home. She had the run of the house. She was allowed on the sofa and in the bed. She got along with my lab so well that they slept together. I have a special place in my heart for strays. I ‘ve found 3 strays wandering around the school where I worked. I took all 3 home (not all at the same time) and each one lived a long life with me.
 
-          I’m a retired teacher of 33 years. My passion then was teaching, now I’d like to care for your baby . I have a very nice spacious home with lots of room to move around. I’m home all day except for when I run errands. Otherwise I will be with your loving pet to give it the attention and love that it needs and deserves.
+        I’m a retired teacher of 33 years. My passion then was teaching, now I’d like to care for your baby . I have a very nice spacious home with lots of room to move around. I’m home all day except for when I run errands. Otherwise I will be with your loving pet to give it the attention and love that it needs and deserves.
           
-          I have a nice fenced yard for your baby to enjoy. Potty breaks will be every hour or more if needed. I have my own dog who will help keep your baby company. As of October 26, 2021 My puppy Stella is 3 months old .I promise to give your dog all the love it deserves.`,
+        I have a nice fenced yard for your baby to enjoy. Potty breaks will be every hour or more if needed. I have my own dog who will help keep your baby company. As of October 26, 2021 My puppy Stella is 3 months old .I promise to give your dog all the love it deserves.`,
           average_rating: 5,
           total_ratings: 95,
         },
@@ -450,41 +455,41 @@ db.sync(
                 .then(() => {
                   EventComment.bulkCreate([
                     {
-                      id: 1,
+                      // id: 1,
                       event_id: 1,
                       comment:
                         'Spicy jalapeno bacon ipsum dolor amet ball tip ham hock burgdoggen, chislic porchetta ribeye cupim boudin drumstick shoulder chuck biltong.',
                       user_id: 1,
                     },
                     {
-                      id: 2,
+                      // id: 2,
                       event_id: 1,
                       comment:
                         'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
                       user_id: 2,
                     },
                     {
-                      id: 3,
+                      // id: 3,
                       event_id: 1,
                       comment:
                         'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
                       user_id: 3,
                     },
                     {
-                      id: 4,
+                      // id: 4,
                       event_id: 1,
                       comment:
                         'non lectus aliquam sit amet diam in mGround round tongue pancetta frankfurter drumstick, bresaola chicken boudin cupim burgdoggen.',
                       user_id: 4,
                     },
                     {
-                      id: 5,
+                      // id: 5,
                       event_id: 1,
                       comment: 'fusce consequat nulla nisl nunc nisl duis',
                       user_id: 5,
                     },
                     {
-                      id: 6,
+                      // id: 6,
                       event_id: 1,
                       comment: 'Ham hock tenderloin turkey hamburger',
                       user_id: 1,
@@ -494,22 +499,22 @@ db.sync(
                 .then(() => {
                   EventParticipant.bulkCreate([
                     {
-                      id: 1,
+                      // id: 1,
                       event_id: 1,
                       user_id: 1,
                     },
                     {
-                      id: 2,
+                      // id: 2,
                       event_id: 2,
                       user_id: 2,
                     },
                     {
-                      id: 3,
+                      // id: 3,
                       event_id: 3,
                       user_id: 3,
                     },
                     {
-                      id: 4,
+                      // id: 4,
                       event_id: 4,
                       user_id: 4,
                     },
