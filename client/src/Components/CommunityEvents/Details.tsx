@@ -25,62 +25,64 @@ const Details = () => {
   const currentUser = useAppSelector(state => state.userProfile.value);
   const events = useAppSelector(state => state.events.events);
   const eventObj = useAppSelector((state) => state.events.event);
+
   const {event_comments, event_participants, user} = eventObj;
 
   const [showComments, setShowComments] = useState(false);
-  
   const [commentInput, setCommentInput] = useState('');
-  const [comments, setComments] = useState(event_comments);
   const [showAddModal, setShowAddModal] = useState(false);
-
   
+  
+
+  const [comments, setComments] = useState(event_comments);
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    // console.log(e.target.value);
     setCommentInput(e.target.value);
   };
-  const getComments = async () => {
-    const res = await axios.get('/api/events/comments/all');
-    console.log(res.data);
-    setComments(res.data);
-    return res.data;
+
+  const getComments = () => {
+    axios.get('/api/events/comments/all').then(res => {
+      setComments(res.data);
+    }).catch(err => console.error(err));
   };
 
-  const postComment = async (comment: any) => {
-    try {
-      const res = await axios.post('/api/events/comment/add', comment);
-      console.log(res.data, '\n', res.status);
-      const fetchComments = await getComments();
-      console.log(fetchComments);
-      dispatch(setEventObj({...eventObj, event_comments: fetchComments}));
-      // dispatch(setEvents({...events, eventObj.event_comments: fetchComments}));
-      // return fetchComments;
-     
-    } catch (error) {
-      console.error(error);
-    }
+  const postComment = (comment: any) => {
+    axios.post('/api/events/comment/add', comment).then(() => {
+      getComments();
+    }).then(()=> {
+      setCommentInput('');
+    }).catch(err => console.error(err));
   };
-  // console.log(currentUser);
+
+
   const handleSubmit = () => {
     postComment({
       event_id: eventObj.id,
       user_id: currentUser.id,
-      comment: commentInput
+      comment: commentInput,
+      user: {
+        id: currentUser.id,
+        name: currentUser.name,
+        image: currentUser.image
+      }
     });
     setComments([...comments, {
       event_id: eventObj.id,
       user_id: currentUser.id,
-      comment: commentInput
+      comment: commentInput,
+      user: {
+        id: currentUser.id,
+        name: currentUser.name,
+        image: currentUser.image
+      }
     }]);
-    // setCommentInput('');
-    // dispatch(setView('details'));
   };
   
   const handleComments = () => {
     setShowComments(!showComments);
   };
 
-  const numOfComments = event_comments.length;
-  const numOfParticipants = event_participants.length;
+  const numOfComments = comments.length;
+  // const numOfParticipants = event_participants.length;
 
   const parseTime = (time: string) => {
     const [hour, minute] = time.split(':');
@@ -124,12 +126,12 @@ const Details = () => {
         <Card.Footer>
           <Container fluid="sm">
             <Row>
-              <Col>{numOfParticipants === 1 ? 
+              {/* <Col>{numOfParticipants === 1 ? 
                 <small>{numOfParticipants} person interested</small>
                 : numOfParticipants > 1 ?
                   <small>{numOfParticipants} people interested</small>
                   : <small>0 people interested</small>}
-              </Col>
+              </Col> */}
               <Col>
                 <Button variant="link" onClick={handleComments}>
                   {
@@ -145,7 +147,9 @@ const Details = () => {
           </Container>
         </Card.Footer>
       </Card>
-      { showComments ? <Comments comments={comments} /*ref={commentRef}*//> : <></> }
+      { showComments ? <Comments 
+        comments={comments} 
+        getComments={getComments} /> : <></> }
       <Card>
         <Card.Footer>
           {
