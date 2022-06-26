@@ -61,19 +61,14 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
     successMessage: true,
   }, (err: any, user: boolean, info: any, status: any) => {
     console.log(color.xterm(11).bold('authenticate function'));
+    // console.log(req.body, req.user, user);
     if (err) { throw err; }
     if (!user) {
       res.send('Invalid Credentials'); 
     } else {
       req.logIn(user, (err: any) => {
         if (err) { throw err; }
-        const { user } = req.session.passport;
-        console.log(color.xterm(11).bold(`\n[ ${JSON.stringify({
-          id: user.id,
-          name: user.name,
-          email: user.username,
-
-        }, null, 2)}  \n ^^req.session.passport.user^^ ]\n`));
+        console.log(req.session.passport.user.id, '< - user on session cookie');
         res.send(user);
       });
     }
@@ -81,6 +76,7 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
 });
 
 auth.get('/login/success', (req: Request | any, res: Response) => {
+  console.log('login/success');
   if (req.user) {
     User.findOne({ where: { id: req.user.id || req.user[0].id }, 
       include: [{ model: PetPlant,
@@ -95,15 +91,19 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
         include: [{ model: GalleryEntry }],
       }],
     }).then((user: object) => {
+      console.log( 'login/success.then()');
       res.status(200).json({
         message: 'success',
         success: true,
         user: user,
       });
     }).catch((error: string) => {
-      res.sendStatus(400);
       console.log(error);
+      res.sendStatus(400);
     });
+  } else {
+    console.log('req.user return as undefined');
+    res.sendStatus(400);
   }
 });
 
