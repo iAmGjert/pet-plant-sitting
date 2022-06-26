@@ -18,7 +18,7 @@ import {
   jobs,
   fetchUpcomingJobs,
   fetchApplications,
-  //fetchPastJobs,
+  fetchPastJobs,
 } from '../../state/features/jobs/jobSlice';
 import { fetchUpcomingEvents } from '../../state/features/events/eventsSlice';
 
@@ -56,7 +56,7 @@ const Landing: FC<Props> = () => {
   const upcomingEvents = useAppSelector((state) => state.events.upcomingEvents);
   const jobs = useAppSelector((state) => state.job.jobs);
   const applications = useAppSelector((state) => state.job.applications);
-  //const pastJobs = useAppSelector((state) => state.job.pastJobs);
+  const pastJobs = useAppSelector((state) => state.job.pastJobs);
   console.log('applications', applications);
   //see if applicant id matches with sitter id
 
@@ -69,36 +69,24 @@ const Landing: FC<Props> = () => {
   // console.log('currentDate', currentDate);
   // console.log(moment(currentDate).isBefore('2022-07-22'));
 
-  // const pastLabor = jobs.filter((job) => {
-  //   console.log('startDate', job.startDate);
-  //   return moment(job.startDate).isBefore(currentDate);
-  // });
-  // console.log('pastLabor', pastLabor);
-
-  //id is job application id/ user_id is obviously is the user's id
-
   // const sitterUpcomingJobs = jobs.filter((job) => {
   //   console.log('x', job.sitter_id);
   //   return job.sitter_id === user.id;
   // });
   // console.log('sitterUpcomingJobs', sitterUpcomingJobs);
 
-  // const sitterAppliedJobs = jobs.filter((job) => {
-  //   //looping over jobs array first
-  //   return job.job_applicants.filter((sitter) => {
-  //     //looping over job_applicants array
-  //     return sitter.user_id === user.id; //returning only jobs that I as user have applied for
-  //   });
-  // });
+  console.log('pastJobs', pastJobs);
+  const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
+    return job.sitter_id === user.id;
+  });
 
-  //console.log('sitterAppliedJobs', sitterAppliedJobs);
-  console.log('SQUIREEEEEEEEELLLL');
-  console.log(user);
+  console.log('sitterWorkHistory', sitterWorkHistory);
+
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
     dispatch(fetchApplications());
-    //dispatch(fetchPastJobs());
+    dispatch(fetchPastJobs());
   }, []);
 
   return (
@@ -144,22 +132,6 @@ const Landing: FC<Props> = () => {
             </>
           );
         })}
-
-      {/* {sitterMatchedJobs.length &&
-        sitterMatchedJobs.map((element) => {
-          return (
-            <>
-              <SitterJobBoard
-                key={element.id}
-                petPlants={element.job_pet_plants}
-                location={element.location}
-                startDate={element.startDate}
-                endDate={element.endDate}
-                employer_id={elment.employer_id}
-              />
-            </>
-          );
-        })} */}
 
       {applications.length &&
         applications.map((element) => {
