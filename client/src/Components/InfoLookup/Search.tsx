@@ -147,20 +147,23 @@ const Search = () => {
                 </Row>
               </Card.Body>
              
-              <Button onClick={()=>{ viewArticleButton(article); }}>View Article</Button>
+              <Button onClick={()=>{ viewArticleButton(article); }}>View Summary</Button>
             </Card>; 
           }) :
           <div/>
       }
       <Modal show={wikiView} fullscreen='md-down' onHide={() => setWikiView(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>{articleInfo.title} id:{articleInfo.pageid}</Modal.Title>
+          <Modal.Title>{articleInfo.title}</Modal.Title>
         </Modal.Header>
         {
           <Modal.Body>
             {articleInfo.extract}
           </Modal.Body>
         }
+        <Modal.Footer>
+          Click <a href={`http://en.wikipedia.org/wiki?curid=${articleInfo.pageid}`} target="_blank" rel="noopener noreferrer">here</a> to open the full Wikipedia article.
+        </Modal.Footer>
       </Modal>
       
     </Container>  
