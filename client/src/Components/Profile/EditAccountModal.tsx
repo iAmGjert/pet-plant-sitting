@@ -36,6 +36,8 @@ const EditAccountModal = ({
       field !== 'sitter_rating' &&
       field !== 'total_ratings' &&
       field !== 'total_sitter_ratings' &&
+      field !== 'gallery' &&
+      field !== 'password' &&
       field !== 'ratings'
     ) {
       userFields.push([field, user[field as keyof typeof user]]);
