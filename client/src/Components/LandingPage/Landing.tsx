@@ -5,6 +5,7 @@ import UpcomingJobs from './UpcomingJobs';
 import LandingEventCard from './LandingEventCard';
 import AppliedJobsBoard from './AppliedJobsBoard';
 import * as moment from 'moment';
+import JobHistory from './JobHistory';
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -61,8 +62,8 @@ const Landing: FC<Props> = () => {
   //see if applicant id matches with sitter id
 
   const events = useAppSelector((state) => state.events.events);
-
-  const trimmedUpcommingJobs = upcomingJobs.slice(1);
+  console.log('upcomingJobs', upcomingJobs);
+  const trimmedUpcommingJobs = upcomingJobs.slice(2);
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
 
   // const currentDate = moment().format('YYYY-MM-DD');
@@ -138,6 +139,19 @@ const Landing: FC<Props> = () => {
           return (
             <>
               <AppliedJobsBoard key={element.id} {...element} />
+            </>
+          );
+        })}
+
+      {sitterWorkHistory.length &&
+        sitterWorkHistory.map((element) => {
+          return (
+            <>
+              <JobHistory
+                key={element.id}
+                startDate={element.startDate}
+                endDate={element.endDate}
+              />
             </>
           );
         })}
