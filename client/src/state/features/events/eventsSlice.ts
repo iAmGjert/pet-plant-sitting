@@ -75,6 +75,7 @@ export const communityEventsSlice = createSlice({
     // },
     setEventObj: (state, action: PayloadAction<Event>) => {
       state.event = action.payload;
+      console.log(state.event);
       return state;
     },
   },

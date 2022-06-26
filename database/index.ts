@@ -134,9 +134,15 @@ PetPlantDescriptor.belongsTo(PetPlant, {
 User.hasOne(Gallery, {
   foreignKey: 'id',
 });
-Gallery.hasOne(User, {
-  foreignKey: 'user_id',
+
+// Gallery.hasOne(User, {
+//   foreignKey: 'user_id',
+// });
+
+User.belongsTo(Gallery, {
+  foreignKey: 'id',
 });
+
 
 Gallery.hasMany(GalleryEntry, {
   foreignKey: 'gallery_id',
@@ -155,15 +161,15 @@ db.sync(
         {
           name: 'Iben Oneal',
           image:
-            'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2021%2F09%2F04%2FBeyonce-1.jpg',
+          'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2021%2F09%2F04%2FBeyonce-1.jpg',
           location: 'New Orleans, LA',
           sitter_rating: 10,
           total_sitter_ratings: 24,
           bio: `I’ve had dogs for the past 27 years. I was my neighbors’ dog sitter off and on for 3 years. Her dog was very comfortable at my home. She had the run of the house. She was allowed on the sofa and in the bed. She got along with my lab so well that they slept together. I have a special place in my heart for strays. I ‘ve found 3 strays wandering around the school where I worked. I took all 3 home (not all at the same time) and each one lived a long life with me.
 
-          I’m a retired teacher of 33 years. My passion then was teaching, now I’d like to care for your baby . I have a very nice spacious home with lots of room to move around. I’m home all day except for when I run errands. Otherwise I will be with your loving pet to give it the attention and love that it needs and deserves.
+        I’m a retired teacher of 33 years. My passion then was teaching, now I’d like to care for your baby . I have a very nice spacious home with lots of room to move around. I’m home all day except for when I run errands. Otherwise I will be with your loving pet to give it the attention and love that it needs and deserves.
           
-          I have a nice fenced yard for your baby to enjoy. Potty breaks will be every hour or more if needed. I have my own dog who will help keep your baby company. As of October 26, 2021 My puppy Stella is 3 months old .I promise to give your dog all the love it deserves.`,
+        I have a nice fenced yard for your baby to enjoy. Potty breaks will be every hour or more if needed. I have my own dog who will help keep your baby company. As of October 26, 2021 My puppy Stella is 3 months old .I promise to give your dog all the love it deserves.`,
           average_rating: 5,
           total_ratings: 95,
         },
@@ -171,7 +177,7 @@ db.sync(
         {
           name: 'Braeden Ford',
           image:
-            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKs06QLIdwr5m5iIjxvDitADflWB1gjJCWg&usqp=CAU',
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKs06QLIdwr5m5iIjxvDitADflWB1gjJCWg&usqp=CAU',
           location: 'Superdome, New Orleans',
           sitter_rating: 10,
           total_sitter_ratings: 24,
@@ -235,33 +241,33 @@ db.sync(
             owner_id: 1,
             name: 'Santi',
             image:
-              'https://64.media.tumblr.com/ac3f2698510ef384fdb04620750b228e/25d400665ce53341-ef/s500x750/58c0307cb0fed6a450b04ec559e8a67d99984fbf.jpg',
+            'https://64.media.tumblr.com/ac3f2698510ef384fdb04620750b228e/25d400665ce53341-ef/s500x750/58c0307cb0fed6a450b04ec559e8a67d99984fbf.jpg',
             breed: 'canine',
             species: 'snorkie',
             tags: ['Khaki', 'Violet'],
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
+            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
           },
           {
             owner_id: 2,
             name: 'Nova',
             image:
-              'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
+            'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
             breed: 'Skink, blue-tongued',
             species: 'Tiliqua scincoides',
             tags: ['Khaki', 'Goldenrod'],
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: "I am the world's worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this",
+            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
           },
           {
             owner_id: 3,
             name: 'Audrey II',
             image:
-              'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
+            'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
             breed: 'Venus Fly Trap Mix',
             species: 'Butterwort',
             tags: ['Crimson', 'Violet'],
@@ -274,7 +280,7 @@ db.sync(
             owner_id: 4,
             name: 'Bénédicte',
             image:
-              'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/plant-names-1650565348.jpg?resize=480:*',
+            'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/plant-names-1650565348.jpg?resize=480:*',
             breed: 'Shy Cacti',
             species: 'Succulent',
             tags: ['Maroon', 'Khaki'],
@@ -287,20 +293,20 @@ db.sync(
             owner_id: 5,
             name: 'Benito',
             image:
-              'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
+            'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
             breed: 'Long-tailed feline',
             species: 'feline',
             tags: ['Turquoise', 'Khaki'],
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 4,
             name: 'Loïc',
             image:
-              'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
+            'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
             breed: 'Madagascar hawk owl',
             age: 2,
             gender: 'Male',
@@ -309,7 +315,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
         ]).then(() => {
           Rating.bulkCreate([
@@ -407,7 +413,7 @@ db.sync(
                   host: 1,
                   location: '10 Magnolia Dr, New Orleans, LA 70124',
                   description:
-                    'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
+                  'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '3:19 AM',
                 },
@@ -416,7 +422,7 @@ db.sync(
                   host: 2,
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
                   description:
-                    'A gathering for pet-less humans to find and be rescued by their furrever friends',
+                  'A gathering for pet-less humans to find and be rescued by their furrever friends',
                   startDate: new Date('June 29, 2022 01:15:00'),
                   startTime: '4:48 AM',
                 },
@@ -425,7 +431,7 @@ db.sync(
                   host: 3,
                   location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
                   description:
-                    'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
+                  'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
                   startDate: new Date('June 30, 2022 01:15:00'),
                   startTime: '5:59 PM',
                 },
@@ -434,7 +440,7 @@ db.sync(
                   host: 4,
                   location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
                   description:
-                    'Reptiles are our friends, not overlords! Please join in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
+                  'Reptiles are our friends, not overlords! Please join in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '12:20 AM',
                 },
@@ -443,148 +449,143 @@ db.sync(
                   host: 5,
                   location: '8912 Bunker Hill Rd New Orleans, Louisiana, 70127',
                   description:
-                    'A gathering for green-thumbed humans to impart their plant-care wisdom for those high-maintentance plants you just had to buy, Linda',
+                  'A gathering for green-thumbed humans to impart their plant-care wisdom for those high-maintentance plants you just had to buy, Linda',
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '4:33 PM',
                 },
-              ])
-                .then(() => {
-                  EventComment.bulkCreate([
-                    {
-                      id: 1,
-                      event_id: 1,
-                      comment:
-                        'Spicy jalapeno bacon ipsum dolor amet ball tip ham hock burgdoggen, chislic porchetta ribeye cupim boudin drumstick shoulder chuck biltong.',
-                      user_id: 1,
-                    },
-                    {
-                      id: 2,
-                      event_id: 1,
-                      comment:
-                        'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
-                      user_id: 2,
-                    },
-                    {
-                      id: 3,
-                      event_id: 1,
-                      comment:
-                        'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
-                      user_id: 3,
-                    },
-                    {
-                      id: 4,
-                      event_id: 1,
-                      comment:
-                        'non lectus aliquam sit amet diam in mGround round tongue pancetta frankfurter drumstick, bresaola chicken boudin cupim burgdoggen.',
-                      user_id: 4,
-                    },
-                    {
-                      id: 5,
-                      event_id: 1,
-                      comment: 'fusce consequat nulla nisl nunc nisl duis',
-                      user_id: 5,
-                    },
-                    {
-                      id: 6,
-                      event_id: 1,
-                      comment: 'Ham hock tenderloin turkey hamburger',
-                      user_id: 1,
-                    },
-                  ]);
-                })
-                .then(() => {
-                  EventParticipant.bulkCreate([
-                    {
-                      id: 1,
-                      event_id: 1,
-                      user_id: 1,
-                    },
-                    {
-                      id: 2,
-                      event_id: 2,
-                      user_id: 2,
-                    },
-                    {
-                      id: 3,
-                      event_id: 3,
-                      user_id: 3,
-                    },
-                    {
-                      id: 4,
-                      event_id: 4,
-                      user_id: 4,
-                    },
-                  ]);
-                })
-                .then(()=>{
-                  JobApplicant.bulkCreate([
-                    {
-                      user_id: 1,
-                      job_id: 1,
-                    },
-                    {
-                      user_id: 7,
-                      job_id: 1,
-                    },
-                    {
-                      user_id: 7,
-                      job_id: 3,
-                    },
-                    {
-                      user_id: 7,
-                      job_id: 4,
-                    },
-                    {
-                      user_id: 7,
-                      job_id: 5,
-                    },
-                  ]);
-                })
-                .then(()=>{
-                  JobPetsPlants.bulkCreate([
-                    {
-                      job_id: 1,
-                      pet_plant_id: 2
-                    },
-                    {
-                      job_id: 1,
-                      pet_plant_id: 3
-                    },
-                    {
-                      job_id: 2,
-                      pet_plant_id: 1
-                    },
-                    {
-                      job_id: 2,
-                      pet_plant_id: 4
-                    },
-                    {
-                      job_id: 3,
-                      pet_plant_id: 1
-                    },
-                    {
-                      job_id: 3,
-                      pet_plant_id: 2
-                    },
-                    {
-                      job_id: 4,
-                      pet_plant_id: 3
-                    },
-                    {
-                      job_id: 4,
-                      pet_plant_id: 5
-                    },
-                    {
-                      job_id: 5,
-                      pet_plant_id: 5
-                    },
-                    {
-                      job_id: 5,
-                      pet_plant_id: 4
-                    },
-                  ]);
-                })
-                .catch((err: Error) => console.log(err));
+              ]).then(() => {
+                EventComment.bulkCreate([
+                  {
+                  // id: 1,
+                    event_id: 1,
+                    comment:
+                      'Spicy jalapeno bacon ipsum dolor amet ball tip ham hock burgdoggen, chislic porchetta ribeye cupim boudin drumstick shoulder chuck biltong.',
+                    user_id: 1,
+                  },
+                  {
+                  // id: 2,
+                    event_id: 1,
+                    comment: 'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
+                    user_id: 2,
+                  },
+                  {
+                  // id: 3,
+                    event_id: 1,
+                    comment:
+                      'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
+                    user_id: 3,
+                  },
+                  {
+                  // id: 4,
+                    event_id: 1,
+                    comment:
+                      'non lectus aliquam sit amet diam in mGround round tongue pancetta frankfurter drumstick, bresaola chicken boudin cupim burgdoggen.',
+                    user_id: 4,
+                  },
+                  {
+                  // id: 5,
+                    event_id: 1,
+                    comment: 'fusce consequat nulla nisl nunc nisl duis',
+                    user_id: 5,
+                  },
+                  {
+                  // id: 6,
+                    event_id: 1,
+                    comment:
+                      'Ham hock tenderloin turkey hamburger',
+                    user_id: 1,
+                  },
+                ]);
+              }).then(() => {
+                EventParticipant.bulkCreate([
+                  {
+                  // id: 1,
+                    event_id: 1,
+                    user_id: 1,
+                  },
+                  {
+                  // id: 2,
+                    event_id: 2,
+                    user_id: 2,
+                  },
+                  {
+                  // id: 3,
+                    event_id: 3,
+                    user_id: 3,
+                  },
+                  {
+                  // id: 4,
+                    event_id: 4,
+                    user_id: 4,
+                  },
+                ]);
+              }).then(()=>{
+                JobApplicant.bulkCreate([
+                  {
+                    user_id: 1,
+                    job_id: 1,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 1,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 3,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 4,
+                  },
+                  {
+                    user_id: 7,
+                    job_id: 5,
+                  },
+                ]);
+              }).then(()=>{
+                JobPetsPlants.bulkCreate([
+                  {
+                    job_id: 1,
+                    pet_plant_id: 2
+                  },
+                  {
+                    job_id: 1,
+                    pet_plant_id: 3
+                  },
+                  {
+                    job_id: 2,
+                    pet_plant_id: 1
+                  },
+                  {
+                    job_id: 2,
+                    pet_plant_id: 4
+                  },
+                  {
+                    job_id: 3,
+                    pet_plant_id: 1
+                  },
+                  {
+                    job_id: 3,
+                    pet_plant_id: 2
+                  },
+                  {
+                    job_id: 4,
+                    pet_plant_id: 3
+                  },
+                  {
+                    job_id: 4,
+                    pet_plant_id: 5
+                  },
+                  {
+                    job_id: 5,
+                    pet_plant_id: 5
+                  },
+                  {
+                    job_id: 5,
+                    pet_plant_id: 4
+                  },
+                ]);
+              }).catch((err: Error) => console.log(err));
             });
           });
         });
@@ -597,9 +598,7 @@ db.sync(
       process.env.CLIENT_URL === 'http://localhost'
         ? '🐘 Models synced and 🌱 seeded!'
         : '🐘 Models synced!'
-    )
-  )
-  .catch((err: string) => console.error(err));
+    )).catch((err: string) => console.error(err));
 
 export {
   db,

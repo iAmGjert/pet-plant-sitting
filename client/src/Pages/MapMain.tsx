@@ -20,6 +20,7 @@ const MapMain: FC<Props> = () => {
   const users = useAppSelector((state) => state.map.users);
   const petsPlants = useAppSelector((state) => state.map.petsPlants);
   const events = useAppSelector((state) => state.map.events);
+  const navigate = useNavigate();
 
   const [userGeoLoc, setUserGeoLoc] = useState(null);
   const [jobsLocations, setJobsLocations] = useState([]);
@@ -33,7 +34,7 @@ const MapMain: FC<Props> = () => {
   };
 
   const geoCodeJobs = () => {
-    const mapped = jobs.map(async (job, id) => {
+    const mapped = jobs.map(async (job) => {
       const promises = await axios.get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${job.location}.json?access_token=${TOKEN}`);
       return [promises.data.features[0].center, job.id];
@@ -42,7 +43,7 @@ const MapMain: FC<Props> = () => {
   };
 
   const geoCodeEvents = () => {
-    const mapped = events.map(async (event, id) => {
+    const mapped = events.map(async (event) => {
       const promises = await axios.get(
         `https://api.mapbox.com/geocoding/v5/mapbox.places/${event.location}.json?access_token=${TOKEN}`);
       return [promises.data.features[0].center, event.id];
@@ -59,12 +60,6 @@ const MapMain: FC<Props> = () => {
     const petsPlants = await axios.get('/api/pets_plants/all');
     dispatch(mapActions.setPetsPlants(petsPlants.data));
   };
-
-  const navigate = useNavigate();
-  // const handleClick = ()=>{
-  //   dispatch(changeView('create'));
-  //   navigate('/jobs');
-  // };
 
   useEffect(() => {
     if (user && user.location) {
@@ -93,6 +88,7 @@ const MapMain: FC<Props> = () => {
             jobsLocations={jobsLocations}
             events={events}
             eventsLocations={eventsLocations}
+            navigate={navigate}
           />
           : <div>Please log in <button onClick={()=>{ navigate('/login'); }}>Login</button></div>
       }

@@ -26,11 +26,10 @@ info.get('/wiki/article/:title', async (req: Request, res: Response) => {
   const params: any = {
     action: 'query',
     format: 'json',
-    prop: 'revisions',
     titles: req.params.title,
-    formatversion: '2',
-    rvprop: 'content',
-    rvslots: '*'
+    prop: 'extracts',
+    exintro: true,
+    explaintext: true,
   };
   
   url = url + '?origin=*';

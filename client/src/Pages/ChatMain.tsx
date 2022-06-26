@@ -2,30 +2,44 @@ import { io } from 'socket.io-client';
 import React, { useEffect, useState } from 'react';
 import { useAppSelector } from '../state/hooks';
 import Chat from '../Components/Chat/Chat';
+import UsersOnline from '../Components/Chat/UsersOnline';
 import '../App.css';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { changeView, getReceivedMessages, getSentMessages, getUserOnline } from '../state/features/chat/chatSlice';
 
-const socket = io(`${process.env.CLIENT_URL}:4000`);
+
 
 const ChatMain = () => {
-  const [showChat, setShowChat] = useState(false);
+  const socket = io(`${process.env.CLIENT_URL}:4000`);
+  // const [showChat, setShowChat] = useState(false);
   const currUser = useAppSelector((state) => state.userProfile.value);
+  const view = useAppSelector((state) => state.chat.view);
+  const dispatch = useDispatch();
   console.log(currUser);
+
+  useEffect(() => {
+    if (socket !== undefined) {
+      dispatch(getUserOnline({
+        name: currUser.name,
+        socketId: socket.id,
+      }));
+    }
+  }, [dispatch, currUser.name, socket]);
 
   const joinRoom = () => {
     if (currUser.name !== '') {
       socket.emit('join_room', 'chat');
-      setShowChat(true);
+      // setShowChat(true);
     }
   };
   return (
     <div className="chat-main">
-      {!showChat ? (
-        <div>
-          <button onClick={joinRoom}>Join the Chat</button>
-        </div>
-      ) : (  
-        <Chat socket={socket} currUser={currUser.name}/>
-      )}
+      {
+        view === 'usersOnline' ?
+          <UsersOnline /> :
+          <Chat />
+      }
     </div>
   );
 };

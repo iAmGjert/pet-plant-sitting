@@ -60,19 +60,25 @@ const Search = () => {
   };
   useEffect(()=>{
     if (clickedArticle.title === undefined) {
-      console.log('no title in clicked article.');
+      console.log('no title in clicked article or first render');
       return;
     }
-    const data = axios.get(`/api/info/wiki/article/${clickedArticle.title}`)
+    axios.get(`/api/info/wiki/article/${clickedArticle.title}`)
       .then((data)=>{
-        console.log(data.query);
-        setArticleInfo(data.query);
+        //console.log(data.data.query.pages[0].revisions[0].slots.main.content);
+        setArticleInfo(data.data.query.pages[0]);
         return data;
       })
       .catch((err)=>{ console.error(err); });
     //setArticleInfo(data.parse);
     //console.log(data.data.parse);
   }, [clickedArticle]);
+
+  const viewArticleButton = (article)=>{
+    console.log('http://en.wikipedia.org/wiki?curid=' + article.pageid);
+    setWikiView(!wikiView);
+    setClickedArticle(article);
+  };
   
   return (
     <Container>
@@ -141,16 +147,21 @@ const Search = () => {
                 </Row>
               </Card.Body>
              
-              <Button onClick={()=>{ console.log('http://en.wikipedia.org/wiki?curid=' + article.pageid); setWikiView(!wikiView); setClickedArticle(article); getArticle(); }}>View Article</Button>
+              <Button onClick={()=>{ viewArticleButton(article); }}>View Article</Button>
             </Card>; 
           }) :
           <div/>
       }
       <Modal show={wikiView} fullscreen='md-down' onHide={() => setWikiView(false)}>
         <Modal.Header closeButton>
-          <Modal.Title>{clickedArticle.title} id:{clickedArticle.pageid}</Modal.Title>
+          <Modal.Title>{articleInfo.title} id:{articleInfo.pageid}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{}</Modal.Body>
+        {
+          articleInfo && articleInfo.revisions && articleInfo.revisions.length > 0 &&
+          <Modal.Body>
+            //{articleInfo.revisions[0].slots.main.content.replace(/<[^>]*>?/gm, '')}
+          </Modal.Body>
+        }
       </Modal>
       
     </Container>  
