@@ -36,24 +36,24 @@ const newInitialState: any = {
   },
   prompt: false,
   upcomingJobs: [],
-  applications: []
-  //pastJobs: []
+  applications: [],
 };
 
-// export const fetchPastJobs = createAsyncThunk(
-//   'jobs/fetchPastJobs',
-//   async() => {
-//     const response = await axios.get('/api/jobs/all');
-//     //console.log('fetchPastJobs response', response);
-//     const currentDate = moment().format('YYYY-MM-DD');
-//     //console.log('currentDate on 47 backend', currentDate);
-//     const pastLabor = response.data.filter((event: {startDate: Date, endDate: Date}) => {
-//       return moment(event.startDate).isAfter(currentDate);
-//     });
-//     //console.log('pastLabor on 52', pastEvents);
-//     return pastLabor;
-//   }
-// );
+export const fetchPastJobs = createAsyncThunk(
+  'jobs/fetchPastJobs',
+  async() => {
+    const response = await axios.get('/api/jobs/all');
+    console.log('fetchPastJobs response', response);
+    const currentDate = moment().format('YYYY-MM-DD');
+    console.log('currentDate from the backend',currentDate)
+    //console.log('currentDate on 47 backend', currentDate);
+    const pastLabor = response.data.filter((event: {startDate: Date, endDate: Date}) => {
+      return moment(event.startDate).isAfter(currentDate);
+    });
+    console.log('pastLabor on 52', pastLabor);
+    return pastLabor;
+  }
+);
 
 // Thunk Action creator
 export const fetchUpcomingJobs = createAsyncThunk(
@@ -70,10 +70,24 @@ export const fetchUpcomingJobs = createAsyncThunk(
   }
 );
 
+// export const fetchApplications = (id) => (createAsyncThunk(
+//   'jobs/fetchApplications',
+//   async() => {
+//     //const response = await axios.get('/api/jobapplicants/byuser');
+//     console.log('HIII!!!');
+//     console.log(id);
+//     const response = await axios.get(`/api/jobapplicants/byuser/${id}`);
+//     return response.data;
+//   }
+//   ))
+
+
+
 export const fetchApplications = createAsyncThunk(
   'jobs/fetchApplications',
   async() => {
     const response = await axios.get('/api/jobapplicants/byuser');
+    //const response = await axios.get(`/api/jobapplicants/byuser/${id}`);
     return response.data;
   }
 );
@@ -84,7 +98,7 @@ export const deleteApplication = createAsyncThunk(
     const response = await axios.delete(`/api/jobapplicants/delete/${id}`);
     return id;
   }
-)
+);
 
 export const jobsSlice = createSlice({
   name: 'jobs',
@@ -125,6 +139,11 @@ export const jobsSlice = createSlice({
         return application.id !== action.payload;
       });
     });
+    // builder.addCase(fetchPastJobs.fulfilled, (state, action) => {
+    //   state.pastJobs = state.pastJobs.filter((job) => {
+    //     state.pastJobs = action.payload;
+    //   });
+    // });
   }
 });
 

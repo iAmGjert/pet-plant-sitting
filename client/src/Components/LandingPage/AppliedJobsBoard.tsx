@@ -8,6 +8,7 @@ import { deleteApplication } from '../../state/features/jobs/jobSlice';
 
 const AppliedJobsBoard = ({ status, job, id }) => {
   const dispatch = useAppDispatch();
+
   const cancelApplication = (id) => {
     dispatch(deleteApplication(id));
   };

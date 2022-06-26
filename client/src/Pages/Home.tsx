@@ -37,8 +37,8 @@ const Home: FC<Props> = () => {
             alt='First slide'
           />
           <Carousel.Caption>
-            <h3>Name of Pet</h3>
-            <p>Sitter Rating of Pet</p>
+            <h3>Mr. Whiskers</h3>
+            <p>This cat is all smiles</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
@@ -49,19 +49,19 @@ const Home: FC<Props> = () => {
           />
 
           <Carousel.Caption>
-            <h3>Name of Pet</h3>
-            <p>Sitter Rating of Pet</p>
+            <h3>Felix</h3>
+            <p>Loves to cuddle!</p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img
             className='d-block w-100'
-            src='https://i.ytimg.com/vi/YSHDBB6id4A/maxresdefault.jpg'
+            src='https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/plant-names-1650565348.jpg?resize=768:*'
             alt='Third slide'
           />
           <Carousel.Caption>
-            <h3>Name of Pet</h3>
-            <p>Sitter Rating of Pet</p>
+            <h3>Benedict the Cactus</h3>
+            <p>Thrives on neglect</p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
@@ -83,12 +83,8 @@ const Home: FC<Props> = () => {
             className='button-center'
             onClick={() => navigate('/login')}
           >
-            Sign Up With Google
+            Login
           </Button>
-          <Card.Subtitle className='mb-2 text-muted'>
-            Already have an account?
-          </Card.Subtitle>
-          <Card.Link href='#'>Login</Card.Link>
           <Card.Link href='/events'>Free Community Events</Card.Link>
         </Card.Body>
       </Card>

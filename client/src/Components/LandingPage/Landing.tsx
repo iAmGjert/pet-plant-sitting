@@ -14,11 +14,11 @@ import Card from 'react-bootstrap/Card';
 //Redux
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 // Import fetchUpcomingJobs action-creator in order to make that axios call
-//import { jobs } from '../../state/features/jobs/jobSlice';
 import {
   jobs,
   fetchUpcomingJobs,
   fetchApplications,
+  //fetchPastJobs,
 } from '../../state/features/jobs/jobSlice';
 import { fetchUpcomingEvents } from '../../state/features/events/eventsSlice';
 
@@ -56,26 +56,14 @@ const Landing: FC<Props> = () => {
   const upcomingEvents = useAppSelector((state) => state.events.upcomingEvents);
   const jobs = useAppSelector((state) => state.job.jobs);
   const applications = useAppSelector((state) => state.job.applications);
+  //const pastJobs = useAppSelector((state) => state.job.pastJobs);
   console.log('applications', applications);
   //see if applicant id matches with sitter id
 
-  //console.log(50, jobs);
-  //console.log('upcomingEvents', upcomingEvents);
-  console.log('upcoming jobs', upcomingJobs);
   const events = useAppSelector((state) => state.events.events);
 
   const trimmedUpcommingJobs = upcomingJobs.slice(1);
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
-  //console.log(63, trimmedUpcommingJobs);
-
-  //console.log('array of jobs', jobs);
-  //go to jobs. See if sitter exists in the sitter key and if that sitter is you.
-  //display the interactions(whatever that is) for the jobs I have applied for.
-
-  // const sitterMatchedJobs = jobs.filter((job) => {
-  //   //console.log('each job', job);
-  //   return job.sitter_id === user.id;
-  // });
 
   // const currentDate = moment().format('YYYY-MM-DD');
   // console.log('currentDate', currentDate);
@@ -89,27 +77,28 @@ const Landing: FC<Props> = () => {
 
   //id is job application id/ user_id is obviously is the user's id
 
-  console.log('jobs array', jobs);
-  console.log('user id', user.id);
   // const sitterUpcomingJobs = jobs.filter((job) => {
   //   console.log('x', job.sitter_id);
   //   return job.sitter_id === user.id;
   // });
   // console.log('sitterUpcomingJobs', sitterUpcomingJobs);
 
-  const sitterAppliedJobs = jobs.filter((job) => {
-    //looping over jobs array first
-    return job.job_applicants.filter((sitter) => {
-      //looping over job_applicants array
-      return sitter.user_id === user.id; //returning only jobs that I as user have applied for
-    });
-  });
-  //console.log('sitterAppliedJobs', sitterAppliedJobs);
+  // const sitterAppliedJobs = jobs.filter((job) => {
+  //   //looping over jobs array first
+  //   return job.job_applicants.filter((sitter) => {
+  //     //looping over job_applicants array
+  //     return sitter.user_id === user.id; //returning only jobs that I as user have applied for
+  //   });
+  // });
 
+  //console.log('sitterAppliedJobs', sitterAppliedJobs);
+  console.log('SQUIREEEEEEEEELLLL');
+  console.log(user);
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
     dispatch(fetchApplications());
+    //dispatch(fetchPastJobs());
   }, []);
 
   return (
