@@ -12,7 +12,7 @@ const Event = (props: any) =>{
   return (
     <Container>
       <Card border="primary" style={{ width: '95%' }}>
-        <Card.Header>Host: {user?.name}</Card.Header>
+        <Card.Header>Hosted by {user?.name}</Card.Header>
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text>
@@ -22,7 +22,7 @@ const Event = (props: any) =>{
         <Card.Footer>
           <Button className="btn btn-sm ml-auto" 
             variant="link"
-            onClick={() => switchToDetailsView(eventObj)}>Interact</Button>
+            onClick={() => switchToDetailsView(eventObj)}>More Info</Button>
         </Card.Footer>
       </Card>
     </Container> 
