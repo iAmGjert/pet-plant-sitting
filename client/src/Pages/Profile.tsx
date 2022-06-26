@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   Image,
   Container,
@@ -159,7 +159,7 @@ const Profile = () => {
     }
   }, [currUser, id]);
   return (
-    <Container>
+    <Container fluid>
       <EditAccountModal
         user={profileUser}
         showModal={showModal}
@@ -192,11 +192,11 @@ const Profile = () => {
               )}
               {profileUser?.ratings.length > 1 &&
                 profileUser?.ratings.length < 5 && (
-                  <Badge pill bg='info'>
-                    {/* if sitter < 2 jobs completed > */}
+                <Badge pill bg='info'>
+                  {/* if sitter < 2 jobs completed > */}
                     New Sitter
-                  </Badge>
-                )}
+                </Badge>
+              )}
               {getRating() === 5 && (
                 <Badge pill bg='primary'>
                   {/* 5 star rating */}
