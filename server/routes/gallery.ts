@@ -37,4 +37,18 @@ gallery.post('/entry/:gallery_id', async (req: Request, res: Response) => {
   }
 });
 
+gallery.delete('/entry/:gallery_id', async (req: Request, res: Response) => {
+  try {
+    GalleryEntry.destroy({
+      where: {
+        id: req.params.gallery_id,
+      },
+    });
+    res.sendStatus(200);
+  } catch (err) {
+    console.log(err, 'delete petplant err');
+    res.sendStatus(404);
+  }
+});
+
 module.exports = gallery;
