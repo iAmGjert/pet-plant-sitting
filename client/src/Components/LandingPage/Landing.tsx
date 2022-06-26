@@ -152,6 +152,7 @@ const Landing: FC<Props> = () => {
                 startDate={element.startDate}
                 endDate={element.endDate}
                 description={element.description}
+                petPlants={element.job_pets_plants}
               />
             </>
           );
