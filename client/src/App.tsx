@@ -64,7 +64,7 @@ const App: FC<Props> = () => {
     <BrowserRouter>
       <TopNavBar />
       <Routes>
-        <Route path='/home' element={<Home />} />
+        <Route path='/' element={<Home />} />
         <Route path='/loading' element={<Loading />} />
         <Route path='/profile/:id' element={<Profile />} />
         <Route path='/login' element={<Login />} />
