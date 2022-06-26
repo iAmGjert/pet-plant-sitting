@@ -151,6 +151,7 @@ const Landing: FC<Props> = () => {
                 key={element.id}
                 startDate={element.startDate}
                 endDate={element.endDate}
+                description={element.description}
               />
             </>
           );
