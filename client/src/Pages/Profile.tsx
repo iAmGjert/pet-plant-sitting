@@ -119,6 +119,18 @@ const Profile = () => {
   const showWidget = () => {
     widget.open();
   };
+
+  const deleteGallery = (id: number) => {
+    axios
+      .delete('/api/gallery/entry/' + id)
+      .then(() => {
+        getProfile();
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+  };
+
   useEffect(() => {
     if (newImgCloud) {
       if (!profileUser.gallery?.id) {
@@ -296,7 +308,15 @@ const Profile = () => {
                           />
                           {editable && showGalleryFooter && (
                             <Card.Footer>
-                              <Button variant='danger'>Delete</Button>
+                              <Button
+                                variant='danger'
+                                onClick={() => {
+                                  console.log(entry.id);
+                                  deleteGallery(entry.id);
+                                }}
+                              >
+                                Delete
+                              </Button>
                             </Card.Footer>
                           )}
                         </Card>
