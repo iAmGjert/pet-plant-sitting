@@ -65,8 +65,8 @@ const Search = () => {
     }
     axios.get(`/api/info/wiki/article/${clickedArticle.title}`)
       .then((data)=>{
-        //console.log(data.data.query.pages[0].revisions[0].slots.main.content);
-        setArticleInfo(data.data.query.pages[0]);
+        console.log(data.data.query.pages[clickedArticle.pageid]);
+        setArticleInfo(data.data.query.pages[clickedArticle.pageid]);
         return data;
       })
       .catch((err)=>{ console.error(err); });
@@ -157,9 +157,8 @@ const Search = () => {
           <Modal.Title>{articleInfo.title} id:{articleInfo.pageid}</Modal.Title>
         </Modal.Header>
         {
-          articleInfo && articleInfo.revisions && articleInfo.revisions.length > 0 &&
           <Modal.Body>
-            //{articleInfo.revisions[0].slots.main.content.replace(/<[^>]*>?/gm, '')}
+            {articleInfo.extract}
           </Modal.Body>
         }
       </Modal>
