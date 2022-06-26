@@ -128,10 +128,7 @@ body {
   object-fit: cover;
   margin-right: 10px;
 }
-.testDiv {
-  border: solid 5px red;
-}
-}
+
 #dark {
   background-color: #1f1b24;
   height: 100vh;
