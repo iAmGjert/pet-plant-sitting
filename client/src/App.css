@@ -168,7 +168,7 @@ body {
   border-color: lightgrey
 }
 #dark .bootstrap-button {
-  background-color: darkgray;
+  background-color: #1f1f1f;
   color: lightgrey;
   border-color: lightgrey
 }
