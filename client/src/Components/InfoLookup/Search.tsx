@@ -108,7 +108,7 @@ const Search = () => {
           </Card.Title>
         </Row>
         {
-          info.searchinfo && info.searchinfo.suggestion && info.searchinfo.suggestion.length > 1 && info.search[0].title !== 'Fern' ?
+          info.searchinfo && info.searchinfo.suggestion && info.searchinfo.suggestion.length > 1 ?
             <Row>
               <Card.Body>
                   Did you mean {<Button variant='outline-secondary' onClick={(e)=>{ didYouMean(e); }}>{info.searchinfo.suggestion}</Button>}?
