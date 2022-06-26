@@ -21,7 +21,7 @@ import { mapActions } from './state/features/map/mapSlice';
 import JobsMain from './Pages/JobsMain';
 // import JobCreation from './Pages/JobCreation';
 import ChatMain from './Pages/ChatMain';
-
+import Register from './Components/LoginForm/Register';
 import TopNavBar from './Components/TopNavBar/TopNavBar';
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
 import Loading from './Pages/Loading';
@@ -75,6 +75,7 @@ const App: FC<Props> = () => {
         <Route path='/jobs' element={<JobsMain />} />
         {/* <Route path='/createjob' element={<JobCreation />} /> */}
         <Route path='/chat' element={<ChatMain />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
       <BottomNavBar />
     </BrowserRouter>
