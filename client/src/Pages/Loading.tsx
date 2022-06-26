@@ -7,7 +7,7 @@ import { Oval } from 'react-loader-spinner';
 const Loading = () => {
   const navigate = useNavigate();
   const currUser = useAppSelector((state) => state.userProfile.value);
-  if (currUser.name) {
+  if (currUser.name || currUser.username) {
     navigate('/');
   }
   return (

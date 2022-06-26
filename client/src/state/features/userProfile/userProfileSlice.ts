@@ -12,6 +12,7 @@ interface userStuff {
   average_rating: number;
   total_ratings: number;
   gallery_id: number;
+  theme: string
 }
 
 interface jobStuff {
@@ -27,6 +28,7 @@ interface state {
   value: {
     name: string;
     id: number | null;
+    username: string,
     job: Array<jobStuff>;
     image: string;
     location: string;
@@ -36,6 +38,7 @@ interface state {
     average_rating: number;
     total_ratings: number;
     gallery_id: number;
+    theme: string
   };
   users: Array<userStuff>;
 }
@@ -44,6 +47,7 @@ const initialState = {
   value: {
     name: '',
     id: 1,
+    username: '',
     job: [],
     image: '',
     location: '',
@@ -53,6 +57,7 @@ const initialState = {
     average_rating: 0,
     total_ratings: 0,
     gallery_id: 0,
+    theme: ''
   },
   users: [],
 };

@@ -42,7 +42,6 @@ const Message = db.define('message', MessageModel);
 const GalleryEntry = db.define('gallery_entry', GalleryEntryModel);
 const JobPetsPlants = db.define('job_pets_plants', JobPetsPlantsModel);
 
-
 /************************************************/
 
 User.hasMany(PetPlant, {
@@ -55,7 +54,7 @@ Job.belongsTo(User, {
 
 Job.belongsTo(User, {
   foreignKey: 'sitter_id',
-  as: 'sitter'
+  as: 'sitter',
 });
 
 Job.hasMany(JobApplicant, {
@@ -71,7 +70,7 @@ Job.hasMany(JobPetsPlants, {
 });
 
 JobPetsPlants.belongsTo(PetPlant, {
-  foreignKey: 'pet_plant_id'
+  foreignKey: 'pet_plant_id',
 });
 
 User.hasMany(Rating, {
@@ -134,8 +133,13 @@ PetPlantDescriptor.belongsTo(PetPlant, {
 User.hasOne(Gallery, {
   foreignKey: 'id',
 });
-Gallery.hasOne(User, {
-  foreignKey: 'user_id',
+
+// Gallery.hasOne(User, {
+//   foreignKey: 'user_id',
+// });
+
+User.belongsTo(Gallery, {
+  foreignKey: 'id',
 });
 
 Gallery.hasMany(GalleryEntry, {
@@ -161,9 +165,9 @@ db.sync(
           total_sitter_ratings: 24,
           bio: `I’ve had dogs for the past 27 years. I was my neighbors’ dog sitter off and on for 3 years. Her dog was very comfortable at my home. She had the run of the house. She was allowed on the sofa and in the bed. She got along with my lab so well that they slept together. I have a special place in my heart for strays. I ‘ve found 3 strays wandering around the school where I worked. I took all 3 home (not all at the same time) and each one lived a long life with me.
 
-          I’m a retired teacher of 33 years. My passion then was teaching, now I’d like to care for your baby . I have a very nice spacious home with lots of room to move around. I’m home all day except for when I run errands. Otherwise I will be with your loving pet to give it the attention and love that it needs and deserves.
+        I’m a retired teacher of 33 years. My passion then was teaching, now I’d like to care for your baby . I have a very nice spacious home with lots of room to move around. I’m home all day except for when I run errands. Otherwise I will be with your loving pet to give it the attention and love that it needs and deserves.
           
-          I have a nice fenced yard for your baby to enjoy. Potty breaks will be every hour or more if needed. I have my own dog who will help keep your baby company. As of October 26, 2021 My puppy Stella is 3 months old .I promise to give your dog all the love it deserves.`,
+        I have a nice fenced yard for your baby to enjoy. Potty breaks will be every hour or more if needed. I have my own dog who will help keep your baby company. As of October 26, 2021 My puppy Stella is 3 months old .I promise to give your dog all the love it deserves.`,
           average_rating: 5,
           total_ratings: 95,
         },
@@ -358,7 +362,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('July 11, 2022 01:15:00'),
                 endDate: new Date('July 15, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
@@ -368,7 +372,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('July 22, 2022 01:15:00'),
                 endDate: new Date('July 27, 2022 01:15:00'),
-                isCompleted: true
+                isCompleted: true,
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
@@ -378,7 +382,7 @@ db.sync(
                 description: 'Come watch this things',
                 startDate: new Date('July 20, 2022 01:15:00'),
                 endDate: new Date('July 25, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '4609 Banks St, New Orleans, LA 70119',
@@ -388,7 +392,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('July 21, 2022 01:15:00'),
                 endDate: new Date('July 25, 2022 01:15:00'),
-                isCompleted: true
+                isCompleted: true,
               },
               {
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
@@ -398,7 +402,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('July 1, 2022 01:15:00'),
                 endDate: new Date('July 5, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
             ]).then(() => {
               Events.bulkCreate([
@@ -451,41 +455,41 @@ db.sync(
                 .then(() => {
                   EventComment.bulkCreate([
                     {
-                      id: 1,
+                      // id: 1,
                       event_id: 1,
                       comment:
                         'Spicy jalapeno bacon ipsum dolor amet ball tip ham hock burgdoggen, chislic porchetta ribeye cupim boudin drumstick shoulder chuck biltong.',
                       user_id: 1,
                     },
                     {
-                      id: 2,
+                      // id: 2,
                       event_id: 1,
                       comment:
                         'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
                       user_id: 2,
                     },
                     {
-                      id: 3,
+                      // id: 3,
                       event_id: 1,
                       comment:
                         'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
                       user_id: 3,
                     },
                     {
-                      id: 4,
+                      // id: 4,
                       event_id: 1,
                       comment:
                         'non lectus aliquam sit amet diam in mGround round tongue pancetta frankfurter drumstick, bresaola chicken boudin cupim burgdoggen.',
                       user_id: 4,
                     },
                     {
-                      id: 5,
+                      // id: 5,
                       event_id: 1,
                       comment: 'fusce consequat nulla nisl nunc nisl duis',
                       user_id: 5,
                     },
                     {
-                      id: 6,
+                      // id: 6,
                       event_id: 1,
                       comment: 'Ham hock tenderloin turkey hamburger',
                       user_id: 1,
@@ -495,28 +499,28 @@ db.sync(
                 .then(() => {
                   EventParticipant.bulkCreate([
                     {
-                      id: 1,
+                      // id: 1,
                       event_id: 1,
                       user_id: 1,
                     },
                     {
-                      id: 2,
+                      // id: 2,
                       event_id: 2,
                       user_id: 2,
                     },
                     {
-                      id: 3,
+                      // id: 3,
                       event_id: 3,
                       user_id: 3,
                     },
                     {
-                      id: 4,
+                      // id: 4,
                       event_id: 4,
                       user_id: 4,
                     },
                   ]);
                 })
-                .then(()=>{
+                .then(() => {
                   JobApplicant.bulkCreate([
                     {
                       user_id: 1,
@@ -540,47 +544,47 @@ db.sync(
                     },
                   ]);
                 })
-                .then(()=>{
+                .then(() => {
                   JobPetsPlants.bulkCreate([
                     {
                       job_id: 1,
-                      pet_plant_id: 2
+                      pet_plant_id: 2,
                     },
                     {
                       job_id: 1,
-                      pet_plant_id: 3
+                      pet_plant_id: 3,
                     },
                     {
                       job_id: 2,
-                      pet_plant_id: 1
+                      pet_plant_id: 1,
                     },
                     {
                       job_id: 2,
-                      pet_plant_id: 4
+                      pet_plant_id: 4,
                     },
                     {
                       job_id: 3,
-                      pet_plant_id: 1
+                      pet_plant_id: 1,
                     },
                     {
                       job_id: 3,
-                      pet_plant_id: 2
+                      pet_plant_id: 2,
                     },
                     {
                       job_id: 4,
-                      pet_plant_id: 3
+                      pet_plant_id: 3,
                     },
                     {
                       job_id: 4,
-                      pet_plant_id: 5
+                      pet_plant_id: 5,
                     },
                     {
                       job_id: 5,
-                      pet_plant_id: 5
+                      pet_plant_id: 5,
                     },
                     {
                       job_id: 5,
-                      pet_plant_id: 4
+                      pet_plant_id: 4,
                     },
                   ]);
                 })

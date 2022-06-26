@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   Image,
   Container,
@@ -119,6 +119,18 @@ const Profile = () => {
   const showWidget = () => {
     widget.open();
   };
+
+  const deleteGallery = (id: number) => {
+    axios
+      .delete('/api/gallery/entry/' + id)
+      .then(() => {
+        getProfile();
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+  };
+
   useEffect(() => {
     if (newImgCloud) {
       if (!profileUser.gallery?.id) {
@@ -159,7 +171,7 @@ const Profile = () => {
     }
   }, [currUser, id]);
   return (
-    <Container>
+    <Container fluid>
       <EditAccountModal
         user={profileUser}
         showModal={showModal}
@@ -192,11 +204,11 @@ const Profile = () => {
               )}
               {profileUser?.ratings.length > 1 &&
                 profileUser?.ratings.length < 5 && (
-                  <Badge pill bg='info'>
-                    {/* if sitter < 2 jobs completed > */}
+                <Badge pill bg='info'>
+                  {/* if sitter < 2 jobs completed > */}
                     New Sitter
-                  </Badge>
-                )}
+                </Badge>
+              )}
               {getRating() === 5 && (
                 <Badge pill bg='primary'>
                   {/* 5 star rating */}
@@ -296,7 +308,15 @@ const Profile = () => {
                           />
                           {editable && showGalleryFooter && (
                             <Card.Footer>
-                              <Button variant='danger'>Delete</Button>
+                              <Button
+                                variant='danger'
+                                onClick={() => {
+                                  console.log(entry.id);
+                                  deleteGallery(entry.id);
+                                }}
+                              >
+                                Delete
+                              </Button>
                             </Card.Footer>
                           )}
                         </Card>

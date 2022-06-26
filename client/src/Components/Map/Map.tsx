@@ -1,8 +1,11 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useState, useCallback, useEffect, useContext } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Map, { Marker } from 'react-map-gl';
+import Map, { Marker, GeolocateControl, Layer, Source, Popup } from 'react-map-gl';
+import axios from 'axios';
 import JobPopup from './JobPopup';
 import EventPopup from './EventPopup';
+import { ListGroup, Button } from 'react-bootstrap';
+import { ThemeContext } from '../../App';
 
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -15,19 +18,30 @@ interface Props {
   jobsLocations: any
   eventsLocations: any
   events: Array<object>
+  navigate: any
 }
  
 
 const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
-const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jobsLocations, eventsLocations, events }) => {
+const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jobsLocations, eventsLocations, events, navigate }) => {
 
-  const [buttonPopup, setButtonPopup] = useState(false);
+  const theme = useContext(ThemeContext);
+  const [jobButtonPopup, setJobButtonPopup] = useState(false);
   const [eventButtonPopup, setEventButtonPopup] = useState(false);
+  // const [smallJobPopup, setSmallJobPopup] = useState(false);
+  const [geoLocateActive, setGeoLocateActive] = useState(false);
+  const [userActiveGeoLon, setUserActiveGeoLon] = useState(null);
+  const [userActiveGeoLat, setUserActiveGeoLat] = useState(null);
   const [jobPopup, setJobPopup] = useState({});
   const [userPopup, setUserPopup] = useState({});
+  const [distanceFromJob, setDistanceFromJob] = useState(null);
   const [petsPlantsPopup, setPetsPlantsPopup] = useState([]);
   const [eventPopup, setEventPopup] = useState({});
+  const [dirCoordinates, setDirCoordinates] = useState([]);
+  const [steps, setSteps] = useState([]);
+  const [cancelNav, setCancelNav] = useState(false);
+
 
   const showJobInfo = (id) => {
     const storage = [];
@@ -39,6 +53,21 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
               if (jobs[i].pet_plant.length > 0) {
                 for (let l = 0; l < jobs[i].pet_plant.length; l++) {
                   if (jobs[i].pet_plant[l] === petsPlants[k].id) {
+                    for (let m = 0; m < jobsLocations.length; m++) {
+                      if (jobs[i].id === jobsLocations[m][1]) {
+                        if (geoLocateActive) {
+                          axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userActiveGeoLon},${userActiveGeoLat};${jobsLocations[m][0][0]},${jobsLocations[m][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
+                            .then((results) => {
+                              setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
+                            });
+                        } else {
+                          axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${jobsLocations[m][0][0]},${jobsLocations[m][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
+                            .then((results) => {
+                              setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
+                            });
+                        }
+                      }
+                    }
                     storage.push(petsPlants[k]);
                   }
                   setPetsPlantsPopup(storage);
@@ -50,8 +79,8 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
         }
         setJobPopup(jobs[i]);
       }
+      setJobButtonPopup(!jobButtonPopup);
     }
-    setButtonPopup(!buttonPopup);
   };
 
   const showEventInfo = (id) => {
@@ -63,23 +92,77 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     setEventButtonPopup(!eventButtonPopup);
   };
 
+  const setUserCurrentCoords = () => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setUserActiveGeoLon(position.coords.longitude);
+      setUserActiveGeoLat(position.coords.latitude);
+    });
+  };
+
+  const userClicksLocateButton = () => {
+    setGeoLocateActive(true);
+  };
+
+  const geolocateControlRef = useCallback((ref) => {
+    if (ref) {
+      // Activate as soon as the control is loaded
+      ref.trigger();
+    }
+  }, []);
+
+  const getEventDirections = () => {
+    for (let i = 0; i < eventsLocations.length; i++) {
+      if (eventsLocations[i][1] === eventPopup.id) {
+        if (geoLocateActive) {
+          axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userActiveGeoLon},${userActiveGeoLat};${eventsLocations[i][0][0]},${eventsLocations[i][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
+            .then((results) => {
+              setDirCoordinates(results.data.routes[0].geometry.coordinates);
+              setSteps(results.data.routes[0].legs[0].steps);
+            });
+        } else {
+          axios.get(`https://api.mapbox.com/directions/v5/mapbox/driving/${userGeoLoc[0]},${userGeoLoc[1]};${eventsLocations[i][0][0]},${eventsLocations[i][0][1]}?steps=true&geometries=geojson&access_token=${TOKEN}`)
+            .then((results) => {
+              setDirCoordinates(results.data.routes[0].geometry.coordinates);
+              setSteps(results.data.routes[0].legs[0].steps);
+            });
+        }
+      }
+      setEventButtonPopup(!eventButtonPopup);
+      setCancelNav(!cancelNav);
+    }
+  };
+
+  const directions = {
+    type: 'Feature',
+    properties: {},
+    geometry: {
+      type: 'LineString',
+      coordinates: dirCoordinates
+    }
+  };
+
+  useEffect(() => {
+    setUserCurrentCoords();
+  }, []);
+
+
   return (
     <div>
       <Map
         initialViewState={{
           longitude: userGeoLoc[0],
           latitude: userGeoLoc[1],
-          zoom: 15
+          zoom: 13
         }}
         style={{minHeight: '100vh'}}
-        mapStyle="mapbox://styles/mapbox/streets-v9"
+        mapStyle={theme === 'dark' ? 'mapbox://styles/mapbox/dark-v10' : 'mapbox://styles/mapbox/streets-v9'}
         mapboxAccessToken={TOKEN}
       >
         <Marker 
           longitude={userGeoLoc[0]}
           latitude={userGeoLoc[1]}
         >
-          <button >
+          <button onClick={()=>{ navigate(`/profile/${user?.id}`); }} >
             <img src={user.image} alt='X' className='markerPic' />
           </button>
         </Marker>
@@ -105,35 +188,106 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
             </Marker>;
           })
         }
+        {/* {
+          smallJobPopup &&
+          <Popup
+            longitude={}
+            latitude={}
+          >
+
+          </Popup>
+        } */}
         {
           jobPopup ?
-            <JobPopup trigger={buttonPopup} setTrigger={showJobInfo}>
+            <JobPopup trigger={jobButtonPopup} setTrigger={showJobInfo}>
               <img src={userPopup.image} alt='' className='popupUserPic'/>
-              <h2>{userPopup.name}</h2>
+              <div 
+                onClick={()=>{ navigate(`/profile/${userPopup.id}`); }} 
+                onKeyPress={()=>{ navigate(`/profile/${userPopup.id}`); }}
+                role='button'
+                tabIndex={0}
+              >
+                <h2>{userPopup.name}</h2>
+              </div>
               <h6>Pets/Plants:</h6>
               {
                 petsPlantsPopup.length > 0 ? petsPlantsPopup.map((petPlant, index) => {
                   return <img src={petPlant.image} alt='' className='popupPetPlantPic' key={`${petPlant.id}${index}`} />;
                 }) : 'No pictures...☹️'
               }
-              <h4>{`Start: ${new Date(jobPopup.startDate).toLocaleDateString()}`}</h4>
-              <h4>{`End: ${new Date(jobPopup.endDate).toLocaleDateString()}`}</h4>
-              <h5>{`Address: ${jobPopup.location}`}</h5>
+              <h5>{jobPopup.description}</h5>
+              <h6>{`Start: ${new Date(jobPopup.startDate).toLocaleDateString()}`}</h6>
+              <h6>{`End: ${new Date(jobPopup.endDate).toLocaleDateString()}`}</h6>
+              <p>{distanceFromJob} miles from you</p>
             </JobPopup> : ''
         }
         {
           eventPopup ?
             <EventPopup trigger={eventButtonPopup} setTrigger={showEventInfo}>
               <h2>{eventPopup.name}</h2>
-              <h4>{eventPopup.location}</h4>
-              <h6>Host: {eventPopup.user?.name} <img src={eventPopup.user?.image} alt='' className='popupEventProfilePic' /></h6>
+              <div
+                onClick={getEventDirections} 
+                onKeyPress={getEventDirections}
+                role='button'
+                tabIndex={0}
+              >
+                <h4>{eventPopup.location}</h4>
+              </div>
+              <div
+                onClick={()=>{ navigate(`/profile/${eventPopup.host}`); }} 
+                onKeyPress={()=>{ navigate(`/profile/${eventPopup.host}`); }}
+                role='button' 
+                tabIndex={0}
+              >
+                <h6>Host: {eventPopup.user?.name} <img src={eventPopup.user?.image} alt='' className='popupEventProfilePic' /></h6>
+              </div>
               <p>{eventPopup.description}</p>
             </EventPopup> : ''
         }
-      </Map> 
+        <GeolocateControl 
+          ref={geolocateControlRef}
+          onGeolocate={userClicksLocateButton}
+          style={{
+            zIndex: '2'
+          }}
+        />
+        {
+          dirCoordinates.length > 0 && cancelNav &&
+        <Source id="polylineLayer" type="geojson" data={directions}>
+          <Layer
+            id="lineLayer"
+            type="line"
+            source="my-data"
+            layout={{
+              'line-join': 'round',
+              'line-cap': 'round'
+            }}
+            paint={{
+              'line-color': 'darkblue',
+              'line-width': 7
+            }}
+          />
+        </Source>
+        }
+        {
+          steps.length > 0 && cancelNav &&
+          <ListGroup variant='flush' as='ol' className='step-instructions' numbered>
+            <Button className='bootstrap-button' onClick={() => setCancelNav(!cancelNav)}>End Route</Button>
+            {
+              steps.map((step, i) => {
+                return <ListGroup.Item as='li'
+                  key={`${step}${i}`}
+                  className='step-instructions-card'
+                >
+                  {step.maneuver.instruction}
+                </ListGroup.Item>;
+              })
+            }
+          </ListGroup>
+        }
+      </Map>
     </div>
   );
 };
-
 
 export default MapComponent;

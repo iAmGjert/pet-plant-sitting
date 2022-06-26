@@ -8,6 +8,7 @@ export const EventCommentModel = {
     allowNull: false,
     autoIncrement: true,
   },
+  event_id: DataTypes.INTEGER,
   comment: DataTypes.STRING,
   user_id: DataTypes.INTEGER,
 };
