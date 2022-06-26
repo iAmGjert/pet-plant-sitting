@@ -86,6 +86,30 @@ body {
   overflow-y: scroll;
   font-family: sans-serif;
 }
+#dark .step-instructions {
+  font-size: 11px;
+  position: absolute;
+  margin: 3px;
+  width: 38%;
+  height: 30vh;
+  top: 0;
+  bottom: 20%;
+  padding: 10px;
+  background-color: #2e2e2e;
+  color: lightgray;
+  overflow-y: scroll;
+  font-family: sans-serif;
+}
+#dark .step-instructions-card {
+  font-size: 11px;
+  top: 0;
+  bottom: 20%;
+  padding: 10px;
+  background-color: #2e2e2e;
+  color: lightgray;
+  font-family: sans-serif;
+}
+
 
 /* body {
   padding-bottom: 60px;
@@ -114,42 +138,50 @@ body {
   color: Black
 }
 #dark {
-  background-color: #46045e;
+  background-color: #1F1B24;
   height: 100vh;
   color: lightgray
 }
 #dark .popup-inner {
-  background-color: #46045e;
+  background-color: #1F1B24;
   color: lightgray
 }
 #dark .topNavBar {
-  background-color: #46045e;
+  background-color: #1F1B24;
   color: lightgray
 }
 #dark .container-fluid {
-  background-color: #46045e;
+  background-color: #1F1B24;
   color: lightgray
 }
 #dark .col {
-  background-color: #46045e;
+  background-color: #1F1B24;
   color: lightgray
 }
 #dark .react-calendar__month-view__days {
-  background-color: #46045e;
+  background-color: #1F1B24;
   color: lightgray
 }
 #dark .bootstrap-card {
-  background-color: #46045e;
+  background-color: #2e2e2e;
   color: lightgrey;
   border-color: lightgrey
 }
 #dark .bootstrap-button {
-  background-color: lightseagreen;
+  background-color: darkgray;
   color: lightgrey;
   border-color: lightgrey
 }
 #dark .react-calendar {
-  background-color: #46045e;
+  background-color: #1F1B24;
+  color: lightgrey;
+  border-color: lightgrey
+}
+#dark .popup-inner .close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: darkgray;
   color: lightgrey;
   border-color: lightgrey
 }

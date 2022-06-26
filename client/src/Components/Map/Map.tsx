@@ -42,7 +42,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const [steps, setSteps] = useState([]);
   const [cancelNav, setCancelNav] = useState(false);
 
-  console.log(cancelNav);
+
   const showJobInfo = (id) => {
     const storage = [];
     for (let i = 0; i < jobs.length; i++) {
@@ -204,7 +204,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
               <div 
                 onClick={()=>{ navigate(`/profile/${userPopup.id}`); }} 
                 onKeyPress={()=>{ navigate(`/profile/${userPopup.id}`); }}
-                role='button' 
+                role='button'
                 tabIndex={0}
               >
                 <h2>{userPopup.name}</h2>
@@ -277,6 +277,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
               steps.map((step, i) => {
                 return <ListGroup.Item as='li'
                   key={`${step}${i}`}
+                  className='step-instructions-card'
                 >
                   {step.maneuver.instruction}
                 </ListGroup.Item>;
