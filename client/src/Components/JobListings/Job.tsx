@@ -27,10 +27,6 @@ const Job = ({ job }) => {
     }
     setModalShow(true);
   };
-  const [load, setLoad] = useState(false);
-  useEffect(()=>{
-    setLoad(true);
-  }, []);
   return (
     <Container>
       <Card>
