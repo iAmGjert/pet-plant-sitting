@@ -16,4 +16,5 @@ export const UserModel = {
   average_rating: { type: DataTypes.FLOAT, defaultValue: 5 },
   total_ratings: DataTypes.INTEGER,
   gallery_id: DataTypes.INTEGER,
+  theme: DataTypes.STRING
 };
