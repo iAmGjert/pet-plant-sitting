@@ -96,6 +96,7 @@ const App: FC<Props> = () => {
             {/* <Route path='/createjob' element={<JobCreation />} /> */}
             <Route path='/chat' element={<ChatMain />} />
             <Route path='/info' element={<InfoMain />} />
+             <Route path='/register' element={<Register />} />
           </Routes>
           <BottomNavBar />
         </BrowserRouter>
