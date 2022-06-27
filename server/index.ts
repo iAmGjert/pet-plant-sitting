@@ -13,30 +13,30 @@ const app = express();
 
 //**************************SOCKET SERVER****************************/
 
-const { Server, Socket } = require('socket.io');
-const { socket } = require('./socket');
-const io = new Server(4000, {
-  cors: {
-    origin: `${process.env.CLIENT_URL}:5000`,
-    credentials: true,
-  },
-});
+// const { Server, Socket } = require('socket.io');
+// const { socket } = require('./socket');
+// const io = new Server(4000, {
+//   cors: {
+//     origin: `${process.env.CLIENT_URL}:5000`,
+//     credentials: true,
+//   },
+// });
 
-io.on('connection', (socket: typeof Socket) => {
-  console.log(`User Connected: ${socket.id}`);
-  socket.on('join_room', (data: string) => {
-    socket.join(data);
-    console.log(`User with ID: ${socket.id} joined room ${data}`);
-  });
+// io.on('connection', (socket: typeof Socket) => {
+//   console.log(`User Connected: ${socket.id}`);
+//   socket.on('join_room', (data: string) => {
+//     socket.join(data);
+//     console.log(`User with ID: ${socket.id} joined room ${data}`);
+//   });
 
-  socket.on('send_message', (data: any) => {
-    socket.to(data.room).emit('receive_message', data);
-  });
+//   socket.on('send_message', (data: any) => {
+//     socket.to(data.room).emit('receive_message', data);
+//   });
 
-  socket.on('disconnect', () => {
-    console.log('User Disconnected', socket.id);
-  });
-});
+//   socket.on('disconnect', () => {
+//     console.log('User Disconnected', socket.id);
+//   });
+// });
 
 //*****************************STATIC MIDDLEWARE***********************************/
 
@@ -75,6 +75,10 @@ app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/pets_plants', require('./routes/pets_plants'));
+app.use('/conversations', require('./routes/conversations'));
+app.use('/messages', require('./routes/messages'));
+
+app.use('/api/info', require('./routes/info'));
 
 app.get('/*', function (req: Request, res: Response | any) {
   res.sendFile(
