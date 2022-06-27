@@ -1,7 +1,7 @@
-import React, { FC, useEffect, useState, createContext} from 'react';
+import React, { FC, useEffect, useState, createContext } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
-import LandingPage from './Pages/LandingPage';
+import LandingPageMain from './Pages/LandingPageMain';
 import Login from './Pages/Login';
 import MapMain from './Pages/MapMain';
 import CalendarMain from './Pages/CalendarMain';
@@ -33,7 +33,9 @@ export const ThemeContext = createContext(null);
 
 const App: FC<Props> = () => {
   const currUser = useAppSelector((state) => state.userProfile.value);
-  const [theme, setTheme] = useState(currUser && currUser.theme !== null ? `${currUser.theme}` : null);
+  const [theme, setTheme] = useState(
+    currUser && currUser.theme !== null ? `${currUser.theme}` : null
+  );
 
   const dispatch = useAppDispatch();
   const getUser = async () => {
@@ -60,7 +62,7 @@ const App: FC<Props> = () => {
   const toggleTheme = () => {
     setTheme((curr: string) => (curr === null ? 'dark' : null));
     axios.patch(`/api/users/${currUser.id}`, {
-      theme: currUser.theme === null ? 'dark' : null
+      theme: currUser.theme === null ? 'dark' : null,
     });
   };
 
@@ -86,7 +88,7 @@ const App: FC<Props> = () => {
             <Route path='/loading' element={<Loading />} />
             <Route path='/profile/:id' element={<Profile />} />
             <Route path='/login' element={<Login />} />
-            <Route path='/landingpage' element={<LandingPage />} />
+            <Route path='/landingpage' element={<LandingPageMain />} />
             <Route path='/map' element={<MapMain />} />
             <Route path='/events' element={<CommunityEvents />} />
             <Route path='/calendar' element={<CalendarMain />} />
@@ -100,7 +102,6 @@ const App: FC<Props> = () => {
         </BrowserRouter>
       </div>
     </ThemeContext.Provider>
-
   );
 };
 

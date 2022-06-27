@@ -58,6 +58,10 @@ Job.hasMany(JobApplicant, {
   foreignKey: 'job_id',
 });
 
+JobApplicant.belongsTo(Job, {
+  foreignKey: 'job_id',
+});
+
 JobApplicant.belongsTo(User, {
   foreignKey: 'user_id',
 });
@@ -356,19 +360,19 @@ db.sync(
                 employer_id: 2,
                 description: 'Come watch my child!',
                 sitter_id: 7,
-                startDate: new Date('July 11, 2022 01:15:00'),
-                endDate: new Date('July 15, 2022 01:15:00'),
-                isCompleted: false,
+                startDate: new Date('June 1, 2022 01:15:00'),
+                endDate: new Date('June 13, 2022 01:15:00'),
+                isCompleted: false
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
                 pet_plant: [5, 2],
                 employer_id: 3,
                 description: 'Come watch this little devil',
-                sitter_id: 7,
-                startDate: new Date('July 22, 2022 01:15:00'),
-                endDate: new Date('July 27, 2022 01:15:00'),
-                isCompleted: true,
+                sitter_id: null,
+                startDate: new Date('June 7, 2022 01:15:00'),
+                endDate: new Date('July 14, 2022 01:15:00'),
+                isCompleted: true
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
@@ -376,29 +380,29 @@ db.sync(
                 employer_id: 3,
                 sitter_id: 5,
                 description: 'Come watch this things',
-                startDate: new Date('July 20, 2022 01:15:00'),
-                endDate: new Date('July 25, 2022 01:15:00'),
-                isCompleted: false,
+                startDate: new Date('July 1, 2022 01:15:00'),
+                endDate: new Date('July 3, 2022 01:15:00'),
+                isCompleted: false
               },
               {
                 location: '4609 Banks St, New Orleans, LA 70119',
                 pet_plant: [3, 1],
                 employer_id: 5,
                 description: 'Come watch my child!',
-                sitter_id: 7,
-                startDate: new Date('July 21, 2022 01:15:00'),
-                endDate: new Date('July 25, 2022 01:15:00'),
-                isCompleted: true,
+                sitter_id: 6,
+                startDate: new Date('July 15, 2022 01:15:00'),
+                endDate: new Date('July 20, 2022 01:15:00'),
+                isCompleted: true
               },
               {
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
-                description: 'Your a bio!',
+                description: 'You\'re a bio!',
                 pet_plant: [3, 1],
                 employer_id: 6,
                 sitter_id: 7,
-                startDate: new Date('July 1, 2022 01:15:00'),
-                endDate: new Date('July 5, 2022 01:15:00'),
-                isCompleted: false,
+                startDate: new Date('July 24, 2022 01:15:00'),
+                endDate: new Date('July 29, 2022 01:15:00'),
+                isCompleted: false
               },
             ]).then(() => {
               Events.bulkCreate([
@@ -521,66 +525,71 @@ db.sync(
                     {
                       user_id: 1,
                       job_id: 1,
+                      status: 'approved'
                     },
                     {
                       user_id: 7,
                       job_id: 1,
+                      status: 'rejected'
                     },
                     {
                       user_id: 7,
                       job_id: 3,
+                      status: 'pending'
                     },
                     {
                       user_id: 7,
                       job_id: 4,
+                      status: 'approved'
                     },
                     {
                       user_id: 7,
                       job_id: 5,
+                      status: 'pending'
                     },
                   ]);
                 })
-                .then(() => {
+                .then(()=>{
                   JobPetsPlants.bulkCreate([
                     {
                       job_id: 1,
-                      pet_plant_id: 2,
+                      pet_plant_id: 2
                     },
                     {
                       job_id: 1,
-                      pet_plant_id: 3,
+                      pet_plant_id: 3
                     },
                     {
                       job_id: 2,
-                      pet_plant_id: 1,
+                      pet_plant_id: 1
                     },
                     {
                       job_id: 2,
-                      pet_plant_id: 4,
+                      pet_plant_id: 4
                     },
                     {
                       job_id: 3,
-                      pet_plant_id: 1,
+                      pet_plant_id: 1
                     },
                     {
                       job_id: 3,
-                      pet_plant_id: 2,
+                      pet_plant_id: 2
                     },
                     {
                       job_id: 4,
-                      pet_plant_id: 3,
+                      pet_plant_id: 3
                     },
                     {
                       job_id: 4,
-                      pet_plant_id: 5,
+                      pet_plant_id: 5
                     },
                     {
                       job_id: 5,
-                      pet_plant_id: 5,
+                      pet_plant_id: 5
                     },
                     {
                       job_id: 5,
-                      pet_plant_id: 4,
+                      pet_plant_id: 4
                     },
                   ]);
                 })
