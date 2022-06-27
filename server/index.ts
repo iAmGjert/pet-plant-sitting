@@ -50,8 +50,9 @@ app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/pets_plants', require('./routes/pets_plants'));
 app.use('/conversations', require('./routes/conversations'));
 app.use('/messages', require('./routes/messages'));
-
+app.use('/api/jobapplicants', require('./routes/jobApplicants'));
 app.use('/api/info', require('./routes/info'));
+
 
 app.get('/*', function (req: Request, res: Response | any) {
   res.sendFile(
