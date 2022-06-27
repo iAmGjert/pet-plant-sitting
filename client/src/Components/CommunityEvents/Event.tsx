@@ -23,7 +23,7 @@ const Event = (props: any) =>{
         <Card.Footer>
           <Button className="btn btn-sm ml-auto" 
             variant="link"
-            onClick={() => switchToDetailsView(eventObj)}>Interact</Button>
+            onClick={() => switchToDetailsView(eventObj)}>More Info</Button>
         </Card.Footer>
       </Card>
     </Container> 

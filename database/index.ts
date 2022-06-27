@@ -31,10 +31,7 @@ const Events = db.define('event', EventModel);
 const Conversation = db.define('conversation', ConversationModel);
 const Gallery = db.define('gallery', GalleryModel);
 const Rating = db.define('rating', RatingModel);
-const PetPlantDescriptor = db.define(
-  'pet_plant_descriptor',
-  PetPlantDescriptorModel
-);
+const PetPlantDescriptor = db.define('pet_plant_descriptor', PetPlantDescriptorModel);
 const JobApplicant = db.define('job_applicant', JobApplicantModel);
 const EventParticipant = db.define('event_participant', EventParticipantModel);
 const EventComment = db.define('event_comment', EventCommentModel);
@@ -171,7 +168,6 @@ db.sync(
           average_rating: 5,
           total_ratings: 95,
         },
-
         {
           name: 'Braeden Ford',
           image:
