@@ -9,6 +9,7 @@ interface messageDetails {
 }
 
 interface userOnline {
+  userId: number,
   name: string,
   socketId: string
 }
@@ -16,14 +17,18 @@ interface state {
   view: string,
   receivedMessages: Array<messageDetails>,
   sentMessages: Array<messageDetails>,
-  usersOnline: Array<userOnline>
+  usersOnline: Array<userOnline>,
+  recipientId: number,
+  conversationId: number,
 }
 
 const initialState = <state>{
   view: 'usersOnline',
   receivedMessages: [],
   sentMessages: [],
-  usersOnline: []
+  usersOnline: [],
+  recipientId: 0,
+  conversationId: 0,
 };
 
 export const chatSlice = createSlice({
@@ -39,13 +44,22 @@ export const chatSlice = createSlice({
     getSentMessages: (state, action: PayloadAction<Array<messageDetails>>) => {
       state.sentMessages = action.payload;
     },
-    getUserOnline: (state, action: PayloadAction<userOnline>) => {
-      state.usersOnline.push(action.payload);
+    getUsersOnline: (state, action: PayloadAction<Array<userOnline>>) => {
+      state.usersOnline = action.payload;
+      return state;
+    },
+    getRecipientId: (state, action: PayloadAction<number>) => {
+      state.recipientId = action.payload;
+      return state;
+    },
+    getConversationId: (state, action: PayloadAction<number>) => {
+      state.conversationId = action.payload;
+      return state;
     }
   }
 });
 
-export const { changeView, getReceivedMessages, getSentMessages, getUserOnline } = chatSlice.actions;
+export const { changeView, getReceivedMessages, getSentMessages, getUsersOnline, getRecipientId, getConversationId } = chatSlice.actions;
 
 export default chatSlice.reducer;
 

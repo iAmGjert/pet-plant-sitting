@@ -38,7 +38,7 @@ const PetPlantDescriptor = db.define(
 const JobApplicant = db.define('job_applicant', JobApplicantModel);
 const EventParticipant = db.define('event_participant', EventParticipantModel);
 const EventComment = db.define('event_comment', EventCommentModel);
-const Message = db.define('message', MessageModel);
+const Messages = db.define('message', MessageModel);
 const GalleryEntry = db.define('gallery_entry', GalleryEntryModel);
 const JobPetsPlants = db.define('job_pets_plants', JobPetsPlantsModel);
 
@@ -100,15 +100,15 @@ Conversation.belongsTo(User, {
   foreignKey: 'participant2_id',
 });
 
-Message.belongsTo(Conversation, {
+Messages.belongsTo(Conversation, {
   foreignKey: 'conversation_id',
 });
 
-Message.belongsTo(User, {
+Messages.belongsTo(User, {
   foreignKey: 'sender_id',
 });
 
-Message.belongsTo(User, {
+Messages.belongsTo(User, {
   foreignKey: 'receiver_id',
 });
 
@@ -605,7 +605,7 @@ export {
   Conversation,
   Gallery,
   GalleryEntry,
-  Message,
+  Messages,
   EventComment,
   EventParticipant,
   JobApplicant,
