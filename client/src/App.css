@@ -178,7 +178,7 @@ body {
   border-color: lightgrey;
 }
 
-/* .chat-main {
+.chat-main {
   width: 100%;
   height: 100vh;
   display: grid;
@@ -308,4 +308,8 @@ body {
 }
 .hide {
   opacity: 0 !important;
+<<<<<<< HEAD
+}
+=======
 } */
+>>>>>>> bf0a7ee0ef018b4fc57ff5652219a916001dd518

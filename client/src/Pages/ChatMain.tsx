@@ -1,44 +1,59 @@
 import { io } from 'socket.io-client';
-import React, { useEffect, useState } from 'react';
-import { useAppSelector } from '../state/hooks';
+import React, { useEffect, useState, useRef } from 'react';
+import { useAppSelector, useAppDispatch } from '../state/hooks';
 import Chat from '../Components/Chat/Chat';
 import UsersOnline from '../Components/Chat/UsersOnline';
 import '../App.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
-import { changeView, getReceivedMessages, getSentMessages, getUserOnline } from '../state/features/chat/chatSlice';
+import { changeView, getReceivedMessages, getSentMessages, getUsersOnline } from '../state/features/chat/chatSlice';
+
+interface userOnline {
+  userId: number,
+  name: string,
+  socketId: string
+}
 
 
+const socket = io(`${process.env.CLIENT_URL}:4000`);
 
-const ChatMain = () => {
-  const socket = io(`${process.env.CLIENT_URL}:4000`);
-  // const [showChat, setShowChat] = useState(false);
+// {transports: ['websocket']}
+
+const ChatMain = () => {   
+  
   const currUser = useAppSelector((state) => state.userProfile.value);
   const view = useAppSelector((state) => state.chat.view);
-  const dispatch = useDispatch();
-  console.log(currUser);
+  // const usersOnline = useAppSelector((state) => state.chat.usersOnline);
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if (socket !== undefined) {
-      dispatch(getUserOnline({
-        name: currUser.name,
-        socketId: socket.id,
-      }));
-    }
-  }, [dispatch, currUser.name, socket]);
 
-  const joinRoom = () => {
-    if (currUser.name !== '') {
-      socket.emit('join_room', 'chat');
-      // setShowChat(true);
+    if (socket.id !== undefined) {
+      socket.emit('addUser', {
+        userId: currUser.id,
+        name: currUser.name
+      }); 
     }
-  };
+
+    socket.on('getUsers', (onlineUsers: userOnline[]) => {
+      dispatch(getUsersOnline(onlineUsers));
+    });
+
+  }, [currUser]);
+
+  // const joinRoom = () => {
+  //   if (currUser.name !== '') {
+  //     socket.emit('join_room', 'chat');
+  //     // setShowChat(true);
+  //   }
+  // };
+
   return (
     <div className="chat-main">
       {
         view === 'usersOnline' ?
           <UsersOnline /> :
-          <Chat />
+          <Chat socket={socket} />
       }
     </div>
   );
