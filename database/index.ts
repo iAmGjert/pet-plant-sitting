@@ -367,7 +367,7 @@ db.sync(
                 description: 'Come watch my child!',
                 sitter_id: 7,
                 startDate: new Date('June 1, 2022 01:15:00'),
-                endDate: new Date('July 13, 2022 01:15:00'),
+                endDate: new Date('June 13, 2022 01:15:00'),
                 isCompleted: false
               },
               {
