@@ -76,7 +76,7 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
 });
 
 auth.get('/login/success', (req: Request | any, res: Response) => {
-  console.log('login/success');
+  console.log('login/success', 'user ID: ', req.user.id);
   if (req.user) {
     User.findOne({ where: { id: req.user.id || req.user[0].id }, 
       include: [{ model: PetPlant,

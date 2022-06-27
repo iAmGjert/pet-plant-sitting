@@ -50,7 +50,7 @@ passport.use(new LocalStrategy(/*{ usernameField: 'email', passwordField: 'passw
 }));
 
 passport.serializeUser((user: any, done: any) => {
-  console.log('serialized User: ', user.id);      
+  console.log('serialized User: ', user.id || user[0].id);      
   done(null, user);
 });
 

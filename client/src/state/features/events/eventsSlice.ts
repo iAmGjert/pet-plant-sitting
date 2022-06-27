@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { response } from 'express';
-import * as moment from 'moment';
+import moment from 'moment';
 import axios from 'axios';
 // import { RootState } from '../../store';
 
@@ -61,7 +60,7 @@ export const fetchUpcomingEvents = createAsyncThunk(
     const response = await axios.get('/api/events/all');
     //console.log('42 response from backend', response);
     const upcomingEvents = response.data.filter((event : {startDate: Date}) => {
-      let currentDate = moment();//'2022-06-03'
+      const currentDate = moment();//'2022-06-03'
       //console.log('current date backend', currentDate);
       //returning endDates that have not yet surpassed the currentDate
       return moment(event.startDate).isAfter(currentDate);
