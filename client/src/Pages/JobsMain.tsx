@@ -41,7 +41,7 @@ const JobsMain = () => {
             <List />
           </div>
       }
-      <Button onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : 'Create New Job'}</Button>
+      <Button className='bootstrap-button' onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : 'Create New Job'}</Button>
     </Container>
   );
 };

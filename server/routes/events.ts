@@ -101,7 +101,9 @@ events.delete('/delete/:id', async (req: Request, res: Response) => {
 
 //* Comments
 events.get('/comments/all', (req: Request, res: Response) => {
-  EventComment.findAll()
+  EventComment.findAll({
+    include: [{ model: User, attributes: ['id', 'name', 'image'] }],
+  })
     .then((comments: Record<string, EventCommentInfo> | null) => {
       res.status(200).send(comments);
     })
@@ -122,23 +124,24 @@ events.post('/comment/add', (req: Request, res: Response) => {
     });
 });
 
-events.put('/comment/update/:id', (req: Request, res: Response) => {
+events.patch('/comment/update/:id', (req: Request, res: Response) => {
+  console.log(req.body);
   const { id } = req.params;
   const { comment } = req.body;
   EventComment.update({ comment }, { where: { id } })
-    .then((comment: any) => {
-      // res.status(200).send(res);
+    .then(() => {
+      res.sendStatus(200);
     }).catch((err: Error) => {   
       console.error(err);
       res.status(500).send(err);  
     });
 });
 
-events.delete('/comment/delete/:id', async (req: Request, res: Response) => {
+events.delete('/comment/delete/:id', (req: Request, res: Response) => {
   const { id } = req.params;
-  const comment = await EventComment.destroy({
+  EventComment.destroy({
     where: { id },
-  }).then((comment: Record<string, EventCommentInfo> | null) => {
+  }).then(() => {
     res.sendStatus(204);
   }).catch((err: Error) => {
     console.error(err);

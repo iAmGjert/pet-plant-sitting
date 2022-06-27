@@ -31,17 +31,13 @@ const Events = db.define('event', EventModel);
 const Conversation = db.define('conversation', ConversationModel);
 const Gallery = db.define('gallery', GalleryModel);
 const Rating = db.define('rating', RatingModel);
-const PetPlantDescriptor = db.define(
-  'pet_plant_descriptor',
-  PetPlantDescriptorModel
-);
+const PetPlantDescriptor = db.define('pet_plant_descriptor', PetPlantDescriptorModel);
 const JobApplicant = db.define('job_applicant', JobApplicantModel);
 const EventParticipant = db.define('event_participant', EventParticipantModel);
 const EventComment = db.define('event_comment', EventCommentModel);
 const Message = db.define('message', MessageModel);
 const GalleryEntry = db.define('gallery_entry', GalleryEntryModel);
 const JobPetsPlants = db.define('job_pets_plants', JobPetsPlantsModel);
-
 
 /************************************************/
 
@@ -55,7 +51,7 @@ Job.belongsTo(User, {
 
 Job.belongsTo(User, {
   foreignKey: 'sitter_id',
-  as: 'sitter'
+  as: 'sitter',
 });
 
 Job.hasMany(JobApplicant, {
@@ -75,7 +71,7 @@ Job.hasMany(JobPetsPlants, {
 });
 
 JobPetsPlants.belongsTo(PetPlant, {
-  foreignKey: 'pet_plant_id'
+  foreignKey: 'pet_plant_id',
 });
 
 User.hasMany(Rating, {
@@ -147,7 +143,6 @@ User.belongsTo(Gallery, {
   foreignKey: 'id',
 });
 
-
 Gallery.hasMany(GalleryEntry, {
   foreignKey: 'gallery_id',
 });
@@ -165,7 +160,7 @@ db.sync(
         {
           name: 'Iben Oneal',
           image:
-          'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2021%2F09%2F04%2FBeyonce-1.jpg',
+            'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2021%2F09%2F04%2FBeyonce-1.jpg',
           location: 'New Orleans, LA',
           sitter_rating: 10,
           total_sitter_ratings: 24,
@@ -177,11 +172,10 @@ db.sync(
           average_rating: 5,
           total_ratings: 95,
         },
-
         {
           name: 'Braeden Ford',
           image:
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKs06QLIdwr5m5iIjxvDitADflWB1gjJCWg&usqp=CAU',
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKs06QLIdwr5m5iIjxvDitADflWB1gjJCWg&usqp=CAU',
           location: 'Superdome, New Orleans',
           sitter_rating: 10,
           total_sitter_ratings: 24,
@@ -245,33 +239,33 @@ db.sync(
             owner_id: 1,
             name: 'Santi',
             image:
-            'https://64.media.tumblr.com/ac3f2698510ef384fdb04620750b228e/25d400665ce53341-ef/s500x750/58c0307cb0fed6a450b04ec559e8a67d99984fbf.jpg',
+              'https://64.media.tumblr.com/ac3f2698510ef384fdb04620750b228e/25d400665ce53341-ef/s500x750/58c0307cb0fed6a450b04ec559e8a67d99984fbf.jpg',
             breed: 'canine',
             species: 'snorkie',
             tags: ['Khaki', 'Violet'],
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
+            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
           },
           {
             owner_id: 2,
             name: 'Nova',
             image:
-            'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
+              'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
             breed: 'Skink, blue-tongued',
             species: 'Tiliqua scincoides',
             tags: ['Khaki', 'Goldenrod'],
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
+            bio: "I am the world's worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this",
           },
           {
             owner_id: 3,
             name: 'Audrey II',
             image:
-            'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
+              'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
             breed: 'Venus Fly Trap Mix',
             species: 'Butterwort',
             tags: ['Crimson', 'Violet'],
@@ -284,7 +278,7 @@ db.sync(
             owner_id: 4,
             name: 'Bénédicte',
             image:
-            'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/plant-names-1650565348.jpg?resize=480:*',
+              'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/plant-names-1650565348.jpg?resize=480:*',
             breed: 'Shy Cacti',
             species: 'Succulent',
             tags: ['Maroon', 'Khaki'],
@@ -297,20 +291,20 @@ db.sync(
             owner_id: 5,
             name: 'Benito',
             image:
-            'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
+              'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
             breed: 'Long-tailed feline',
             species: 'feline',
             tags: ['Turquoise', 'Khaki'],
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
           {
             owner_id: 4,
             name: 'Loïc',
             image:
-            'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
+              'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
             breed: 'Madagascar hawk owl',
             age: 2,
             gender: 'Male',
@@ -319,7 +313,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
         ]).then(() => {
           Rating.bulkCreate([
@@ -417,7 +411,7 @@ db.sync(
                   host: 1,
                   location: '10 Magnolia Dr, New Orleans, LA 70124',
                   description:
-                  'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
+                    'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '3:19 AM',
                 },
@@ -426,7 +420,7 @@ db.sync(
                   host: 2,
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
                   description:
-                  'A gathering for pet-less humans to find and be rescued by their furrever friends',
+                    'A gathering for pet-less humans to find and be rescued by their furrever friends',
                   startDate: new Date('June 29, 2022 01:15:00'),
                   startTime: '4:48 AM',
                 },
@@ -435,7 +429,7 @@ db.sync(
                   host: 3,
                   location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
                   description:
-                  'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
+                    'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
                   startDate: new Date('June 30, 2022 01:15:00'),
                   startTime: '5:59 PM',
                 },
@@ -444,7 +438,7 @@ db.sync(
                   host: 4,
                   location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
                   description:
-                  'Reptiles are our friends, not overlords! Please join in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
+                    'Reptiles are our friends, not overlords! Please join in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '12:20 AM',
                 },
@@ -453,7 +447,7 @@ db.sync(
                   host: 5,
                   location: '8912 Bunker Hill Rd New Orleans, Louisiana, 70127',
                   description:
-                  'A gathering for green-thumbed humans to impart their plant-care wisdom for those high-maintentance plants you just had to buy, Linda',
+                    'A gathering for green-thumbed humans to impart their plant-care wisdom for those high-maintentance plants you just had to buy, Linda',
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '4:33 PM',
                 },
@@ -461,41 +455,41 @@ db.sync(
                 .then(() => {
                   EventComment.bulkCreate([
                     {
-                      id: 1,
+                      // id: 1,
                       event_id: 1,
                       comment:
                         'Spicy jalapeno bacon ipsum dolor amet ball tip ham hock burgdoggen, chislic porchetta ribeye cupim boudin drumstick shoulder chuck biltong.',
                       user_id: 1,
                     },
                     {
-                      id: 2,
+                      // id: 2,
                       event_id: 1,
                       comment:
                         'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
                       user_id: 2,
                     },
                     {
-                      id: 3,
+                      // id: 3,
                       event_id: 1,
                       comment:
                         'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
                       user_id: 3,
                     },
                     {
-                      id: 4,
+                      // id: 4,
                       event_id: 1,
                       comment:
                         'non lectus aliquam sit amet diam in mGround round tongue pancetta frankfurter drumstick, bresaola chicken boudin cupim burgdoggen.',
                       user_id: 4,
                     },
                     {
-                      id: 5,
+                      // id: 5,
                       event_id: 1,
                       comment: 'fusce consequat nulla nisl nunc nisl duis',
                       user_id: 5,
                     },
                     {
-                      id: 6,
+                      // id: 6,
                       event_id: 1,
                       comment: 'Ham hock tenderloin turkey hamburger',
                       user_id: 1,
@@ -505,28 +499,28 @@ db.sync(
                 .then(() => {
                   EventParticipant.bulkCreate([
                     {
-                      id: 1,
+                      // id: 1,
                       event_id: 1,
                       user_id: 1,
                     },
                     {
-                      id: 2,
+                      // id: 2,
                       event_id: 2,
                       user_id: 2,
                     },
                     {
-                      id: 3,
+                      // id: 3,
                       event_id: 3,
                       user_id: 3,
                     },
                     {
-                      id: 4,
+                      // id: 4,
                       event_id: 4,
                       user_id: 4,
                     },
                   ]);
                 })
-                .then(()=>{
+                .then(() => {
                   JobApplicant.bulkCreate([
                     {
                       user_id: 1,
@@ -612,7 +606,9 @@ db.sync(
       process.env.CLIENT_URL === 'http://localhost'
         ? '🐘 Models synced and 🌱 seeded!'
         : '🐘 Models synced!'
-    )).catch((err: string) => console.error(err));
+    )
+  )
+  .catch((err: string) => console.error(err));
 
 export {
   db,

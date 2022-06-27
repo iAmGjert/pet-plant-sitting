@@ -4,6 +4,8 @@ import * as moment from 'moment';
 import axios from 'axios';
 // import { RootState } from '../../store';
 
+//! REFACTOR: Async THUNK
+
 interface Event {
   id: number;
   name: string;
@@ -34,9 +36,7 @@ interface Event {
   }
 }
 
-// interface EventsSliceState {
-//   events: Event[];
-// }
+
 
 const initialState: any = {
   view: 'list',
@@ -76,28 +76,18 @@ export const communityEventsSlice = createSlice({
   name: 'events',
   initialState,
   reducers: {
-    // getView: (state: EventsSliceState, action: PayloadAction<string>) => {
-    //   return { ...state, view: action.payload };
-    // },
 
     setView: (state, action: PayloadAction<string>) => {
       state.view = action.payload;
       return state;
     },
-    // getEvents: (state: EventsSliceState, action: PayloadAction<Event[]>) => {
-    //   return { ...state, events: action.payload };
-    // },
     setEvents: (state, action: PayloadAction<Event[]>) => {
       state.events = action.payload;
       return state;
     },
-    // setEvent: (state, action: PayloadAction<Event>) => {
-    //   state.event = action.payload;
-    //   return state;
-    // },
     setEventObj: (state, action: PayloadAction<Event>) => {
       state.event = action.payload;
-      console.log(state.event);
+      // console.log(state.event);
       return state;
     },
   },
@@ -109,7 +99,7 @@ export const communityEventsSlice = createSlice({
   }
 });
 
-export const { /*getView, getEvents,*/ setView, setEvents, setEventObj } =
+export const { setView, setEvents, setEventObj } =
   communityEventsSlice.actions;
 
 export default communityEventsSlice.reducer;

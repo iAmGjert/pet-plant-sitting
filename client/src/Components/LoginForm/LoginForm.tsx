@@ -43,11 +43,16 @@ const LoginForm = () => {
       <Form.Group className='mb-3' controlId='formBasicCheckbox'>
       </Form.Group>
       <Button variant='primary' href='/loading' onClick={login}>
-        Submit
+        Login
       </Button>
-      <Button variant='primary' onClick={navigateRegister}>
+      <div style={{ margin: '5px'}}>
+        sign up as a new user
+      </div>
+      <div style={{ marginBottom: '5px'}}>
+        <Button variant='primary' onClick={navigateRegister}>
         Sign Up
-      </Button>
+        </Button>
+      </div>
     </Form>
   );
 };
