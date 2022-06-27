@@ -78,6 +78,7 @@ app.use('/api/pets_plants', require('./routes/pets_plants'));
 app.use('/api/jobapplicants', require('./routes/jobApplicants'));
 app.use('/api/info', require('./routes/info'));
 
+
 app.get('/*', function (req: Request, res: Response | any) {
   res.sendFile(
     path.join(__dirname, '../client/build/index.html'),
