@@ -58,11 +58,11 @@ const Landing: FC<Props> = () => {
   const jobs = useAppSelector((state) => state.job.jobs);
   const applications = useAppSelector((state) => state.job.applications);
   const pastJobs = useAppSelector((state) => state.job.pastJobs);
-  console.log('applications', applications);
+  //console.log('applications', applications);
   //see if applicant id matches with sitter id
 
   const events = useAppSelector((state) => state.events.events);
-  console.log('upcomingJobs', upcomingJobs);
+  //console.log('upcomingJobs', upcomingJobs);
   const trimmedUpcommingJobs = upcomingJobs.slice(2);
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
 
@@ -70,18 +70,12 @@ const Landing: FC<Props> = () => {
   // console.log('currentDate', currentDate);
   // console.log(moment(currentDate).isBefore('2022-07-22'));
 
-  // const sitterUpcomingJobs = jobs.filter((job) => {
-  //   console.log('x', job.sitter_id);
-  //   return job.sitter_id === user.id;
-  // });
-  // console.log('sitterUpcomingJobs', sitterUpcomingJobs);
-
-  console.log('pastJobs', pastJobs);
+  //console.log('pastJobs', pastJobs);
   const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
     return job.sitter_id === user.id;
   });
 
-  console.log('sitterWorkHistory', sitterWorkHistory);
+  //console.log('sitterWorkHistory', sitterWorkHistory);
 
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
@@ -138,7 +132,11 @@ const Landing: FC<Props> = () => {
         applications.map((element) => {
           return (
             <>
-              <AppliedJobsBoard key={element.id} {...element} />
+              <AppliedJobsBoard
+                key={element.id}
+                startDate={element.startDate}
+                {...element}
+              />
             </>
           );
         })}
