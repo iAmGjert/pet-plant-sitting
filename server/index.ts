@@ -9,8 +9,6 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 require('./auth/passport.ts');
 
-<<<<<<< HEAD
-=======
 const app = express();
 
 //**************************SOCKET SERVER****************************/
@@ -55,7 +53,6 @@ app.use(cors({
 }));
 app.use(express.static(CLIENT_PATH));
 
->>>>>>> bf0a7ee0ef018b4fc57ff5652219a916001dd518
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
@@ -78,13 +75,9 @@ app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/users', require('./routes/users'));
 app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/pets_plants', require('./routes/pets_plants'));
-<<<<<<< HEAD
-app.use('/conversations', require('./routes/conversations'));
-app.use('/messages', require('./routes/messages'));
-
-=======
+app.use('/api/jobapplicants', require('./routes/jobApplicants'));
 app.use('/api/info', require('./routes/info'));
->>>>>>> bf0a7ee0ef018b4fc57ff5652219a916001dd518
+
 
 app.get('/*', function (req: Request, res: Response | any) {
   res.sendFile(

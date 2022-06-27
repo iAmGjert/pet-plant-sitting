@@ -1,4 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
+import { response } from 'express';
+import * as moment from 'moment';
+import axios from 'axios';
 // import { RootState } from '../../store';
 
 //! REFACTOR: Async THUNK
@@ -30,7 +33,7 @@ interface Event {
   user: {
     name: string;
     image: string;
-  };
+  }
 }
 
 
@@ -48,7 +51,26 @@ const initialState: any = {
     startDate: new Date(),
     startTime: new Date(),
   },
+  upcomingEvents: [], //check to see how this is connected? I'm still not sure how
 };
+
+//Thunk Action Creator
+export const fetchUpcomingEvents = createAsyncThunk(
+  'events/upcomingEvents',
+  async () => {
+    const response = await axios.get('/api/events/all');
+    //console.log('42 response from backend', response);
+    const upcomingEvents = response.data.filter((event : {startDate: Date}) => {
+      let currentDate = moment();//'2022-06-03'
+      //console.log('current date backend', currentDate);
+      //returning endDates that have not yet surpassed the currentDate
+      return moment(event.startDate).isAfter(currentDate);
+    });
+    console.log('backend', upcomingEvents);
+    return upcomingEvents;
+  }
+);
+
 
 export const communityEventsSlice = createSlice({
   name: 'events',
@@ -69,6 +91,12 @@ export const communityEventsSlice = createSlice({
       return state;
     },
   },
+  extraReducers: (builder) => {
+    builder.addCase(fetchUpcomingEvents.fulfilled, (state, action) => {
+      //console.log('event action 104', action);
+      state.upcomingEvents = action.payload;
+    });
+  }
 });
 
 export const { setView, setEvents, setEventObj } =
