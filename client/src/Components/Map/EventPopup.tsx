@@ -1,6 +1,5 @@
-import React, { FC } from 'react';
-import './JobPopup.css';
-
+import React, { FC, useContext } from 'react';
+import { ThemeContext } from '../../App';
 interface Props {
   trigger: boolean
   setTrigger: any
@@ -9,9 +8,11 @@ interface Props {
 
 const EventPopup: FC <Props> = ({ trigger, setTrigger, children }) => {
 
+  const theme = useContext(ThemeContext);
+
   return (trigger) ? (
     <div className='popup'>
-      <div className='popup-inner'>
+      <div className='popup-inner' >
         <button className='close-btn' onClick={setTrigger}>Close</button>
         {children}
       </div>

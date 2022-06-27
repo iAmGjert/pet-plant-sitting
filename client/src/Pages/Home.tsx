@@ -12,12 +12,12 @@ const Home: FC<Props> = () => {
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
   const jobs = useAppSelector((state) => state.job.jobs);
   const handleClick = () => {
-    console.log(jobs);
+    console.log(user);
     setDisplay(!display);
   };
   return (
     <div>
-      <h1>Welcome to Fern Herm{user.name ? `, ${user.name}!` : '!'}</h1>
+      <h1>Welcome to Fern Herm{user.name || user.username ? `, ${user.name || user.username}!` : '!'}</h1>
       <p>
         {' '}
         Fern-Herm is your one stop shop to find a sitter for your lovely plants

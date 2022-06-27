@@ -14,15 +14,23 @@ const LoginPrompt = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const changeView = (option: string) => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    dispatch(setView(option));
+  };
+
   const handleLoginRoute = () => {
     handleClose();
     navigate('/login');
     // window.location.href = '/login';
   };
-  const changeView = (option: string) => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    dispatch(setView(option));
+
+  const handleSignupRoute = () => {
+    handleClose();
+    navigate('/register');
+   
   };
+
   const handleOtherRoute = () => {
     changeView('list');
     handleClose();
@@ -41,16 +49,17 @@ const LoginPrompt = () => {
         keyboard={false}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Login Redirect</Modal.Title>
+          <Modal.Title>Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           Please Login or Signup to create an event. 
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleOtherRoute}>
-          No, Thnaks
+          Keep Viewing Events
           </Button>
-          <Button variant="primary" onClick={handleLoginRoute}>Take Me There</Button>
+          <Button variant='info' onClick={handleSignupRoute}>Signup</Button>
+          <Button variant="info" onClick={handleLoginRoute}>Login</Button>
         </Modal.Footer>
       </Modal>
     </>

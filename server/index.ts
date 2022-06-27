@@ -4,49 +4,87 @@ const path = require('path');
 const cors = require('cors');
 const morgan = require('morgan');
 const { db } = require('../database/index');
-const app = express();
-const authRouter = require('./routes/auth.ts');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 require('./auth/passport.ts');
 
+<<<<<<< HEAD
+=======
+const app = express();
+
+//**************************SOCKET SERVER****************************/
+
+const { Server, Socket } = require('socket.io');
+const { socket } = require('./socket');
+const io = new Server(4000, {
+  cors: {
+    origin: `${process.env.CLIENT_URL}:5000`,
+    credentials: true,
+  },
+});
+
+io.on('connection', (socket: typeof Socket) => {
+  console.log(`User Connected: ${socket.id}`);
+  socket.on('join_room', (data: string) => {
+    socket.join(data);
+    console.log(`User with ID: ${socket.id} joined room ${data}`);
+  });
+
+  socket.on('send_message', (data: any) => {
+    socket.to(data.room).emit('receive_message', data);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('User Disconnected', socket.id);
+  });
+});
+
+//*****************************STATIC MIDDLEWARE***********************************/
+
+const CLIENT_PATH = path.resolve(__dirname, '../client/build');
+app.use(morgan('tiny'));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  methods: 'GET, PUT, POST, PATCH, DELETE',
+  credentials: true,
+}));
+app.use(express.static(CLIENT_PATH));
+
+>>>>>>> bf0a7ee0ef018b4fc57ff5652219a916001dd518
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
-  saveUninitialized: true
+  saveUninitialized: true,
 }));
-app.use(
-  cors({
-    origin: process.env.CLIENT_URL,
-    methods: 'GET, PUT, POST, PATCH, DELETE',
-    credentials: true,
-  })
-);
 
-app.use(
-  session({
-    secret: process.env.SESSION_SECRET,
-    resave: true,
-    saveUninitialized: true,
-  })
-);
+app.use(cookieParser(process.env.SESSION_SECRET));
+//**************************** PASSPORT INIT *********************************** */
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-const CLIENT_PATH = path.resolve(__dirname, '../client/build');
-app.use(express.static(CLIENT_PATH));
-app.use(express.json());
-app.use(morgan('tiny'));
 
-app.use('/auth', authRouter);
+//****************************** OTHER - ROUTES ******************************************* */
+app.use('/auth', require('./routes/auth.ts'));
+
 app.use('/api/map', require('./routes/map.ts'));
 app.use('/api/events', require('./routes/events.ts'));
 app.use('/api/jobs', require('./routes/jobs'));
 app.use('/api/users', require('./routes/users'));
+app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/pets_plants', require('./routes/pets_plants'));
+<<<<<<< HEAD
 app.use('/conversations', require('./routes/conversations'));
 app.use('/messages', require('./routes/messages'));
 
+=======
+app.use('/api/info', require('./routes/info'));
+>>>>>>> bf0a7ee0ef018b4fc57ff5652219a916001dd518
 
 app.get('/*', function (req: Request, res: Response | any) {
   res.sendFile(

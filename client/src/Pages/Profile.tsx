@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import {
   Image,
   Container,
@@ -9,6 +9,7 @@ import {
   Tabs,
   Tab,
   Card,
+  Button,
 } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
@@ -47,12 +48,20 @@ export interface Profile {
   total_sitter_ratings: number;
   pet_plants: PetPlant[];
   ratings: RatingInfo[];
+  gallery: {
+    id: number;
+    user_id: number;
+    gallery_entries: [];
+  };
 }
 
 const Profile = () => {
   const [editable, setEditable] = useState(false);
   const [readMore, setReadMore] = useState(false);
+  const [showGalleryFooter, setShowGalleryFooter] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [newImgCloud, setNewImgCloud] = useState('');
+
   const [completeProfile, setCompleteProfile] = useState(0);
   const [profileUser, setProfileUser] = useState<Profile | null>(null);
   const currUser = useAppSelector((state) => state.userProfile.value);
@@ -96,6 +105,57 @@ const Profile = () => {
     }
     return stars;
   };
+  const widget = window?.cloudinary.createUploadWidget(
+    {
+      cloudName: process.env.CLOUDINARY_NAME,
+      uploadPreset: process.env.CLOUDINARY_PRESET,
+    },
+    (error: Error, result: any) => {
+      if (result.event === 'success') {
+        setNewImgCloud(result.info.url);
+      }
+    }
+  );
+  const showWidget = () => {
+    widget.open();
+  };
+
+  const deleteGallery = (id: number) => {
+    axios
+      .delete('/api/gallery/entry/' + id)
+      .then(() => {
+        getProfile();
+      })
+      .catch((err) => {
+        console.log('error', err);
+      });
+  };
+
+  useEffect(() => {
+    if (newImgCloud) {
+      if (!profileUser.gallery?.id) {
+        axios.post(`/api/gallery/${currUser.id}`).then((results: any) => {
+          axios
+            .post(`/api/gallery/entry/${results.data[0].id}`, {
+              url: newImgCloud,
+              gallery_id: results.data[0].id,
+            })
+            .then(() => {
+              getProfile();
+            });
+        });
+      } else {
+        axios
+          .post(`/api/gallery/entry/${profileUser.gallery.id}`, {
+            url: newImgCloud,
+            gallery_id: profileUser.gallery.id,
+          })
+          .then(() => {
+            getProfile();
+          });
+      }
+    }
+  }, [newImgCloud]);
 
   useEffect(() => {
     if (id) {
@@ -111,7 +171,7 @@ const Profile = () => {
     }
   }, [currUser, id]);
   return (
-    <Container>
+    <Container fluid>
       <EditAccountModal
         user={profileUser}
         showModal={showModal}
@@ -144,11 +204,11 @@ const Profile = () => {
               )}
               {profileUser?.ratings.length > 1 &&
                 profileUser?.ratings.length < 5 && (
-                  <Badge pill bg='info'>
-                    {/* if sitter < 2 jobs completed > */}
+                <Badge pill bg='info'>
+                  {/* if sitter < 2 jobs completed > */}
                     New Sitter
-                  </Badge>
-                )}
+                </Badge>
+              )}
               {getRating() === 5 && (
                 <Badge pill bg='primary'>
                   {/* 5 star rating */}
@@ -231,38 +291,53 @@ const Profile = () => {
                 })}
               </Tab>
               <Tab eventKey='gallery' title='Gallery'>
-                <Card
-                  className='text-center'
-                  onClick={() => {
-                    // check if this user has a gallery, if it dosent make one. Then do some cloudinary to upload a pic to said gallery. then for each pic in the gallery, make a card with the pic and a delete button.
-                    // axios
-                    //   .post('/api/pets_plants/create', {
-                    //     name: '',
-                    //     owner_id: user.id,
-                    //     image:
-                    //       'https://i.pinimg.com/736x/4a/21/33/4a2133dd4dad968c3218fec61d97db55.jpg',
-                    //     breed: 'N/A',
-                    //     species: 'N/A',
-                    //     age: 0,
-                    //     bio: 'No bio yet',
-                    //     is_plant: false,
-                    //     tags: [],
-                    //     rating: 0,
-                    //     total_ratings: 0,
-                    //   })
-                    //   .then((res) => {
-                    //     console.log(res.data.id);
-                    //     setNewPetID(res.data.id);
-                    //   });
-                    // setNewPet(true);
-                  }}
-                >
-                  <Card.Img
-                    variant='top'
-                    src='https://static.thenounproject.com/png/3322766-200.png'
-                  />
-                  <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
-                </Card>
+                {/* for each gallery entry create a card */}
+                {profileUser?.gallery?.gallery_entries.length >= 1 &&
+                  profileUser.gallery.gallery_entries.map((entry: any, i) => {
+                    return (
+                      <>
+                        <Card
+                          onClick={() => {
+                            setShowGalleryFooter(!showGalleryFooter);
+                          }}
+                        >
+                          <Card.Img
+                            variant='top'
+                            src={entry.url}
+                            key={'entry' + i}
+                          />
+                          {editable && showGalleryFooter && (
+                            <Card.Footer>
+                              <Button
+                                variant='danger'
+                                onClick={() => {
+                                  console.log(entry.id);
+                                  deleteGallery(entry.id);
+                                }}
+                              >
+                                Delete
+                              </Button>
+                            </Card.Footer>
+                          )}
+                        </Card>
+                      </>
+                    );
+                  })}
+                {editable && (
+                  <Card
+                    className='text-center'
+                    onClick={() => {
+                      // check if this user has a gallery, if it dosent make one. Then do some cloudinary to upload a pic to said gallery. then for each pic in the gallery, make a card with the pic and a delete button.
+                      showWidget();
+                    }}
+                  >
+                    <Card.Img
+                      variant='top'
+                      src='https://static.thenounproject.com/png/3322766-200.png'
+                    />
+                    <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
+                  </Card>
+                )}
               </Tab>
             </Tabs>
           </span>

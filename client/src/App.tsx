@@ -1,4 +1,4 @@
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState, createContext} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home';
 import LandingPage from './Pages/LandingPage';
@@ -21,19 +21,25 @@ import { mapActions } from './state/features/map/mapSlice';
 import JobsMain from './Pages/JobsMain';
 // import JobCreation from './Pages/JobCreation';
 import ChatMain from './Pages/ChatMain';
-
+import Register from './Components/LoginForm/Register';
 import TopNavBar from './Components/TopNavBar/TopNavBar';
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
 import Loading from './Pages/Loading';
+import InfoMain from './Pages/InfoMain';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
+export const ThemeContext = createContext(null);
+
 const App: FC<Props> = () => {
+  const currUser = useAppSelector((state) => state.userProfile.value);
+  const [theme, setTheme] = useState(currUser && currUser.theme !== null ? `${currUser.theme}` : null);
+
   const dispatch = useAppDispatch();
   const getUser = async () => {
     const user = await axios.get('/auth/login/success');
     dispatch(setUser(user.data.user));
-    // console.log(user, 'LOGIN USER/userProfile state is set');
+    console.log(user.data.user);
   };
   const getJobs = async () => {
     const jobs = await axios.get('/api/jobs/all');
@@ -51,6 +57,12 @@ const App: FC<Props> = () => {
     const events = await axios.get('/api/events/all');
     dispatch(mapActions.setEvents(events.data));
   };
+  const toggleTheme = () => {
+    setTheme((curr: string) => (curr === null ? 'dark' : null));
+    axios.patch(`/api/users/${currUser.id}`, {
+      theme: currUser.theme === null ? 'dark' : null
+    });
+  };
 
   useEffect(() => {
     getUser();
@@ -60,24 +72,35 @@ const App: FC<Props> = () => {
     getEvents();
   }, []);
 
+  useEffect(() => {
+    setTheme(currUser.theme);
+  }, [currUser]);
+
   return (
-    <BrowserRouter>
-      <TopNavBar />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/loading' element={<Loading />} />
-        <Route path='/profile/:id' element={<Profile />} />
-        <Route path='/login' element={<Login />} />
-        <Route path='/landingpage' element={<LandingPage />} />
-        <Route path='/map' element={<MapMain />} />
-        <Route path='/events' element={<CommunityEvents />} />
-        <Route path='/calendar' element={<CalendarMain />} />
-        <Route path='/jobs' element={<JobsMain />} />
-        {/* <Route path='/createjob' element={<JobCreation />} /> */}
-        <Route path='/chat' element={<ChatMain />} />
-      </Routes>
-      <BottomNavBar />
-    </BrowserRouter>
+    <ThemeContext.Provider value={theme}>
+      <div className='App' id={theme}>
+        <BrowserRouter>
+          <TopNavBar toggleTheme={toggleTheme} theme={theme} />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/loading' element={<Loading />} />
+            <Route path='/profile/:id' element={<Profile />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/landingpage' element={<LandingPage />} />
+            <Route path='/map' element={<MapMain />} />
+            <Route path='/events' element={<CommunityEvents />} />
+            <Route path='/calendar' element={<CalendarMain />} />
+            <Route path='/jobs' element={<JobsMain />} />
+            {/* <Route path='/createjob' element={<JobCreation />} /> */}
+            <Route path='/chat' element={<ChatMain />} />
+            <Route path='/info' element={<InfoMain />} />
+             <Route path='/register' element={<Register />} />
+          </Routes>
+          <BottomNavBar />
+        </BrowserRouter>
+      </div>
+    </ThemeContext.Provider>
+
   );
 };
 

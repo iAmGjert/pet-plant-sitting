@@ -1,6 +1,7 @@
 html,
 body {
   min-height: 100%;
+  padding-bottom: 15%;
 }
 .mapJobMarker {
   line-height: 14px;
@@ -12,10 +13,11 @@ body {
   display: inline-block;
 }
 .markerPic {
-  border-radius: 50%;
-  height: 32px;
-  width: 32px;
-  object-fit: cover;
+  line-height: 14px;
+  height: 35px;
+  width: 35px;
+  border-radius: 50px;
+  border: 2px solid rgb(28, 110, 164);
 }
 .mapEventMarker {
   line-height: 14px;
@@ -44,10 +46,71 @@ body {
   width: 25px;
   object-fit: cover;
 }
-
-body {
-  padding-bottom: 60px;
+.popup {
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+.popup-inner {
+  position: relative;
+  padding: 32px;
+  width: 100%;
+  max-width: 640px;
+  background-color: #fff;
+}
+.popup-inner .close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+}
+.map-container {
+  width: 100vw;
+  height: 100vh;
+}
+.step-instructions {
+  font-size: 11px;
+  position: absolute;
+  margin: 3px;
+  width: 38%;
+  height: 30vh;
+  top: 0;
+  bottom: 20%;
+  padding: 10px;
+  background-color: #fff;
+  overflow-y: scroll;
+  font-family: sans-serif;
+}
+#dark .step-instructions {
+  font-size: 11px;
+  position: absolute;
+  margin: 3px;
+  width: 38%;
+  height: 30vh;
+  top: 0;
+  bottom: 20%;
+  padding: 10px;
+  background-color: #2e2e2e;
+  color: lightgray;
+  overflow-y: scroll;
+  font-family: sans-serif;
+}
+#dark .step-instructions-card {
+  font-size: 11px;
+  top: 0;
+  bottom: 20%;
+  padding: 10px;
+  background-color: #2e2e2e;
+  color: lightgray;
+  font-family: sans-serif;
+}
+
 .button-as-link {
   background-color: transparent;
   border: none;
@@ -58,7 +121,6 @@ body {
   padding: 0;
   margin: 0;
 }
-
 .reviewAvatar {
   width: 48px;
   height: 48px;
@@ -66,11 +128,54 @@ body {
   object-fit: cover;
   margin-right: 10px;
 }
-.testDiv {
-  border: solid 5px red;
+
+#dark {
+  background-color: #1f1b24;
+  height: 100vh;
+  color: lightgray;
 }
-.navBars {
-  color: Black
+#dark .popup-inner {
+  background-color: #1f1b24;
+  color: lightgray;
+}
+#dark .topNavBar {
+  background-color: #1f1b24;
+  color: lightgray;
+}
+#dark .container-fluid {
+  background-color: #1f1b24;
+  color: lightgray;
+}
+#dark .col {
+  background-color: #1f1b24;
+  color: lightgray;
+}
+#dark .react-calendar__month-view__days {
+  background-color: #1f1b24;
+  color: lightgray;
+}
+#dark .bootstrap-card {
+  background-color: #2e2e2e;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+#dark .bootstrap-button {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+#dark .react-calendar {
+  background-color: #1f1b24;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+#dark .popup-inner .close-btn {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  background-color: darkgray;
+  color: lightgrey;
+  border-color: lightgrey;
 }
 
 .chat-main {
@@ -198,10 +303,13 @@ body {
   font-size: 25px;
   color: lightgray;
 }
-
 .chat-window .chat-footer button:hover {
   color: #43a047;
 }
 .hide {
   opacity: 0 !important;
+<<<<<<< HEAD
 }
+=======
+} */
+>>>>>>> bf0a7ee0ef018b4fc57ff5652219a916001dd518

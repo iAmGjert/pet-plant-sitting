@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import './JobPopup.css';
+import { Popup } from 'react-map-gl';
 
 interface Props {
   trigger: boolean

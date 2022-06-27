@@ -23,20 +23,13 @@ const Job = ({ job }) => {
   const handleClick = ()=>{
     
     if (user.name === '') {
-      //console.log('Yer not logged in!');
       dispatch(setPrompt(true));      
     }
     setModalShow(true);
-    //onsole.log(`Clicked more info for job#${id}`);
-    //console.log(job);
   };
-  const [load, setLoad] = useState(false);
-  useEffect(()=>{
-    setLoad(true);
-  }, []);
   return (
     <Container>
-      <Card>
+      <Card className='bootstrap-card'>
         <Card.Body>
           <Row>
             <Col xs sm={1} md={1} lg={1}>
@@ -71,7 +64,7 @@ const Job = ({ job }) => {
             Job Location: {location}
             </Col>
           </Row>
-          <Button onClick={handleClick} variant='primary'>More Info</Button>
+          <Button className='bootstrap-button' onClick={handleClick} variant='primary'>More Info</Button>
           <>
             <MoreInfo user={user} show={modalShow} onHide={() => setModalShow(false)} job={job} employer={ users.reduce((employer, users)=>{
               if (users.id === employer_id) {
