@@ -41,7 +41,6 @@ app.use(passport.session());
 
 //****************************** OTHER - ROUTES ******************************************* */
 app.use('/auth', require('./routes/auth.ts'));
-
 app.use('/api/map', require('./routes/map.ts'));
 app.use('/api/events', require('./routes/events.ts'));
 app.use('/api/jobs', require('./routes/jobs'));
@@ -52,7 +51,6 @@ app.use('/conversations', require('./routes/conversations'));
 app.use('/messages', require('./routes/messages'));
 app.use('/api/jobapplicants', require('./routes/jobApplicants'));
 app.use('/api/info', require('./routes/info'));
-
 
 app.get('/*', function (req: Request, res: Response | any) {
   res.sendFile(
