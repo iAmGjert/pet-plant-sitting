@@ -9,50 +9,6 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 require('./auth/passport.ts');
 
-const app = express();
-
-//**************************SOCKET SERVER****************************/
-
-// const { Server, Socket } = require('socket.io');
-// const { socket } = require('./socket');
-// const io = new Server(4000, {
-//   cors: {
-//     origin: `${process.env.CLIENT_URL}:5000`,
-//     credentials: true,
-//   },
-// });
-
-// io.on('connection', (socket: typeof Socket) => {
-//   console.log(`User Connected: ${socket.id}`);
-//   socket.on('join_room', (data: string) => {
-//     socket.join(data);
-//     console.log(`User with ID: ${socket.id} joined room ${data}`);
-//   });
-
-//   socket.on('send_message', (data: any) => {
-//     socket.to(data.room).emit('receive_message', data);
-//   });
-
-//   socket.on('disconnect', () => {
-//     console.log('User Disconnected', socket.id);
-//   });
-// });
-
-//*****************************STATIC MIDDLEWARE***********************************/
-
-const CLIENT_PATH = path.resolve(__dirname, '../client/build');
-app.use(morgan('tiny'));
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.use(cors({
-  origin: process.env.CLIENT_URL,
-  methods: 'GET, PUT, POST, PATCH, DELETE',
-  credentials: true,
-}));
-app.use(express.static(CLIENT_PATH));
-
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
@@ -78,9 +34,7 @@ app.use('/api/pets_plants', require('./routes/pets_plants'));
 app.use('/conversations', require('./routes/conversations'));
 app.use('/messages', require('./routes/messages'));
 
-app.use('/api/jobapplicants', require('./routes/jobApplicants'));
 app.use('/api/info', require('./routes/info'));
-
 
 app.get('/*', function (req: Request, res: Response | any) {
   res.sendFile(
