@@ -69,7 +69,7 @@ const Landing: FC<Props> = () => {
       return job.sitter_id === user.id;
     }
   );
-  console.log('sitterUpcomingJobs', sitterUpcomingJobs);
+  //console.log('sitterUpcomingJobs', sitterUpcomingJobs);
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
 
   // const currentDate = moment().format('YYYY-MM-DD');
