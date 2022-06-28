@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, Modal } from 'react-bootstrap';
-import { setPrompt } from '../../state/features/jobs/jobSlice';
+import { setJobs } from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -34,7 +34,15 @@ const MoreInfo = (props) => {
       return;
     }
     postApplicant(obj);
+    getJobs();
+      
     onHide();
+  };
+  const getJobs = async () => {
+    const jobs = await axios.get(
+      '/api/jobs/all'
+    );
+    dispatch(setJobs(jobs.data));
   };
   return (
 

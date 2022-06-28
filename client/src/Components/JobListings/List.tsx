@@ -22,6 +22,11 @@ const List = () => {
           user?.name !== '' ?
             jobs.filter((job)=>{
               if (job.employer_id !== user.id) {
+                for (let i = 0; i < job.job_applicants.length; i++) {
+                  if (job.job_applicants[i].user_id === user.id) {
+                    return false;
+                  }
+                }
                 return true;
               }
               return false; 
