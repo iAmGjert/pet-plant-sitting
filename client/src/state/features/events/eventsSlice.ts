@@ -66,7 +66,7 @@ export const fetchUpcomingEvents = createAsyncThunk(
       //returning endDates that have not yet surpassed the currentDate
       return moment(event.startDate).isAfter(currentDate);
     });
-    console.log('backend', upcomingEvents);
+    //console.log('backend', upcomingEvents);
     return upcomingEvents;
   }
 );
