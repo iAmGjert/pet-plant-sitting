@@ -21,7 +21,7 @@ const Event = (props: any) =>{
           </Card.Text>
         </Card.Body>
         <Card.Footer>
-          <Button className="btn btn-sm ml-auto" 
+          <Button className="button-as-link" 
             variant="link"
             onClick={() => switchToDetailsView(eventObj)}>More Info</Button>
         </Card.Footer>

@@ -86,7 +86,7 @@ const Landing: FC<Props> = () => {
 
   return (
     <div>
-      <Card>
+      <Card className='bootstrap-card'>
         <Card.Header as='h5'>
           Welcome {user.name ? `, ${user.name}!` : '!'}
         </Card.Header>

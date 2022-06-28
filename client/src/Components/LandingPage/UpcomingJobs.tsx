@@ -65,7 +65,7 @@ const upcomingJobs: FC<Props> = ({
   //new Date(jobPopup.endDate).toLocaleDateString()
 
   return (
-    <Card>
+    <Card className='bootstrap-card'>
       <Card.Body>
         <Card.Title>
           Your Next Job:{' '}
@@ -85,9 +85,9 @@ const upcomingJobs: FC<Props> = ({
         <Card.Text>{`${moment(startDate).format(
           'dddd MMMM Do, YYYY'
         )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}</Card.Text>
-        <Card.Link href='#'>Visit Profile</Card.Link>
+        <Card.Link className='button-as-link' href='#'>Visit Profile</Card.Link>
         <>
-          <Button variant='primary' onClick={handleShow}>
+          <Button className='bootstrap-button' variant='primary' onClick={handleShow}>
             More Info
           </Button>
 
@@ -104,7 +104,7 @@ const upcomingJobs: FC<Props> = ({
             </Modal.Header>
             <Modal.Body>{location}</Modal.Body>
             <Modal.Footer>
-              <Button variant='secondary' onClick={handleClose}>
+              <Button className='bootstrap-button' variant='secondary' onClick={handleClose}>
                 Close
               </Button>
               {/* <Button variant='primary' onClick={handleClose}>

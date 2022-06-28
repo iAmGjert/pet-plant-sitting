@@ -177,6 +177,14 @@ body {
   color: lightgrey;
   border-color: lightgrey;
 }
+#dark .button-as-link {
+  color: lightgray;
+}
+#dark .bootstrap-textbox {
+  background-color: rgb(121, 121, 121);
+  color: lightgrey;
+}
+
 
  .chat-main {
   width: 100%;

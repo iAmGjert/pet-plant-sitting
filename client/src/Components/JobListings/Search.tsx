@@ -23,12 +23,13 @@ const Search = () => {
   return (
     <div>
       <div> </div>
-      <Container>
+      <Container fluid>
         <Form>
           <Row>
             <Col>
               <Form.Group controlId='formSearch'>
                 <Form.Control
+                  className='bootstrap-textbox'
                   type='search'
                   placeholder='Search Jobs...'
                   onChange={(e) => {
