@@ -9,6 +9,26 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 require('./auth/passport.ts');
 
+<<<<<<< HEAD
+=======
+const app = express();
+
+//*****************************STATIC MIDDLEWARE***********************************/
+
+const CLIENT_PATH = path.resolve(__dirname, '../client/build');
+app.use(morgan('tiny'));
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.use(cors({
+  origin: process.env.CLIENT_URL,
+  methods: 'GET, PUT, POST, PATCH, DELETE',
+  credentials: true,
+}));
+app.use(express.static(CLIENT_PATH));
+
+>>>>>>> 1efa79cab4adee5dc786ca9f5a174d104a7587d4
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
@@ -24,7 +44,6 @@ app.use(passport.session());
 
 //****************************** OTHER - ROUTES ******************************************* */
 app.use('/auth', require('./routes/auth.ts'));
-
 app.use('/api/map', require('./routes/map.ts'));
 app.use('/api/events', require('./routes/events.ts'));
 app.use('/api/jobs', require('./routes/jobs'));
@@ -33,7 +52,11 @@ app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/pets_plants', require('./routes/pets_plants'));
 app.use('/conversations', require('./routes/conversations'));
 app.use('/messages', require('./routes/messages'));
+<<<<<<< HEAD
 
+=======
+app.use('/api/jobapplicants', require('./routes/jobApplicants'));
+>>>>>>> 1efa79cab4adee5dc786ca9f5a174d104a7587d4
 app.use('/api/info', require('./routes/info'));
 
 app.get('/*', function (req: Request, res: Response | any) {
