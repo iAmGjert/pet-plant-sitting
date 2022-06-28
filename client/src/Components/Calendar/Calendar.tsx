@@ -4,6 +4,7 @@ import axios from 'axios';
 import { compareAsc, format } from 'date-fns';
 import EventCard from './EventCard';
 import JobCard from './JobCard';
+import CalendarMobile from './CalendarMobile';
 // import PropTypes from 'prop-types';
 //calendar stuff
 import moment from 'moment';

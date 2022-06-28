@@ -53,7 +53,7 @@ export const fetchPastJobs = createAsyncThunk(
     const pastLabor = response.data.filter((event: {startDate: Date, endDate: Date}) => {
       return moment(event.startDate).isBefore(currentDate);
     });
-    console.log('pastLabor on 52', pastLabor);
+    //console.log('pastLabor on 52', pastLabor);
     return pastLabor;
   }
 );
