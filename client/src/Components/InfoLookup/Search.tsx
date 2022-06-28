@@ -94,14 +94,14 @@ const Search = () => {
         </Row>
         <Row>
           <Col>
-            <Button disabled={!click} size='lg' onClick={ ()=>{ handleClick(); } } type='button'>Search</Button>
+            <Button className='bootstrap-button' disabled={!click} size='lg' onClick={ ()=>{ handleClick(); } } type='button'>Search</Button>
           </Col>
           <Col>
-            <Button disabled onClick={ ()=>{ handleClick(); } } type='button'><img alt='' src='https://www.svgrepo.com/show/281155/cloud-computing-upload.svg' style={{height: 35}} /></Button>
+            <Button className='bootstrap-button' disabled onClick={ ()=>{ handleClick(); } } type='button'><img alt='' src='https://www.svgrepo.com/show/281155/cloud-computing-upload.svg' style={{height: 35}} /></Button>
           </Col>
         </Row>
       </Form>
-      <Card>
+      <Card className='bootstrap-card'>
         <Row>
           <Card.Title>
             Most Recent Search: { prevSearch }
@@ -111,7 +111,7 @@ const Search = () => {
           info.searchinfo && info.searchinfo.suggestion && info.searchinfo.suggestion.length > 1 ?
             <Row>
               <Card.Body>
-                  Did you mean {<Button variant='outline-secondary' onClick={(e)=>{ didYouMean(e); }}>{info.searchinfo.suggestion}</Button>}?
+                  Did you mean {<Button className='bootstrap-button' variant='outline-secondary' onClick={(e)=>{ didYouMean(e); }}>{info.searchinfo.suggestion}</Button>}?
               </Card.Body>
             </Row> :
             <Row/>
@@ -121,7 +121,7 @@ const Search = () => {
       {
         info.search && info.search.length > 0 ?
           info.search.map((article, idx)=>{
-            return <Card key={`article${idx}`}>
+            return <Card className='bootstrap-card' key={`article${idx}`}>
               <Card.Title>{article.title}</Card.Title>  
               <Card.Body>
                 <Row>
@@ -147,7 +147,7 @@ const Search = () => {
                 </Row>
               </Card.Body>
              
-              <Button onClick={()=>{ viewArticleButton(article); }}>View Summary</Button>
+              <Button className='bootstrap-button' onClick={()=>{ viewArticleButton(article); }}>View Summary</Button>
             </Card>; 
           }) :
           <div/>

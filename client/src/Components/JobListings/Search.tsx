@@ -42,7 +42,7 @@ const Search = () => {
             </Col>
             <Col xs lg={2}>
               <Button
-                className='bootstrapt-button'
+                className='bootstrap-button'
                 onClick={() => {
                   handleClick();
                 }}
