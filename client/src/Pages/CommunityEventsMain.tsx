@@ -2,14 +2,19 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container'
-import { /*getEvents, getView,*/ setView, setEvents, setEventObj } from '../state/features/events/eventsSlice';
+import Container from 'react-bootstrap/Container';
+import { setView, setEvents, setEventObj, 
+  selectAllEvents,
+  getEventsStatus,
+  fetchEvents
+} from '../state/features/events/eventsSlice';
 import Event from '../Components/CommunityEvents/Event';
 import Details from '../Components/CommunityEvents/Details';
 import CreateEvent from '../Components/CommunityEvents/CreateEvent';
 import '../Components/CommunityEvents/style/EventsMain.css';
 
 interface EventTYPE {
+  // map(arg0: (event: EventTYPE) => JSX.Element): any;
   id: number;
   name: string;
   host: number;
@@ -44,17 +49,35 @@ const CommunityEventsMain = () => {
   const dispatch: any = useAppDispatch();
   const state = useAppSelector((state) => state);
   const view = useAppSelector(state => state.events.view);
-  const events = useAppSelector(state => state.events.events);
-  // console.log(state);
-  // console.log(events, 'events main'); // with user and comment data included 
-  
+  // const events = useAppSelector(state => state.events.events);
+  const events = useAppSelector(selectAllEvents);
+  const eventsStatus = useAppSelector(getEventsStatus);
+
   useEffect(() => {
-    const getEvents = async () => {
-      const res = await axios.get('/api/events/all');
-      return dispatch(setEvents(res.data));
-    };
-    getEvents();
-  }, [dispatch]);
+    if (eventsStatus === 'idle') {
+      dispatch(fetchEvents());
+    }
+  }, [eventsStatus, dispatch]);
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  console.log(events);
+  
+  // useEffect(() => {
+  //   const getEvents = async () => {
+  //     const res = await axios.get('/api/events/all');
+  //     return dispatch(setEvents(res.data));
+  //   };
+  //   getEvents();
+  // }, [dispatch]);
   
   const changeView = (option: string) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
