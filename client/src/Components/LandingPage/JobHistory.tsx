@@ -5,7 +5,7 @@ import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 
 const JobHistory = ({ startDate, endDate, description, petPlants }) => {
-  console.log('petPlants in history', petPlants);
+  //console.log('petPlants in history', petPlants);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

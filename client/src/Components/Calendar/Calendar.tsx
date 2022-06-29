@@ -4,6 +4,7 @@ import axios from 'axios';
 import { compareAsc, format } from 'date-fns';
 import EventCard from './EventCard';
 import JobCard from './JobCard';
+import CalendarMobile from './CalendarMobile';
 // import PropTypes from 'prop-types';
 //calendar stuff
 import moment from 'moment';
@@ -13,16 +14,16 @@ import 'react-calendar/dist/Calendar.css';
 //redux
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { useSelector } from 'react-redux';
-import { getEventListeners } from 'events';
+//import { getEventListeners } from 'events';
 //import { bindActionCreators } from 'redux'; this is what we will import when we have our actions created
 
 //bootstrap
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import FormControl from 'react-bootstrap/FormControl';
-import InputGroup from 'react-bootstrap/InputGroup';
-import { ifError } from 'assert';
+// import 'bootstrap/dist/css/bootstrap.min.css';
+// import Button from 'react-bootstrap/Button';
+// import Card from 'react-bootstrap/Card';
+// import FormControl from 'react-bootstrap/FormControl';
+// import InputGroup from 'react-bootstrap/InputGroup';
+// import { ifError } from 'assert';
 
 // interface jobStuff {
 //   id: number,
@@ -32,7 +33,7 @@ import { ifError } from 'assert';
 //   endDate: Date,
 //   pet_plant: Array<number>
 // }
-
+console.log('hello');
 const CalendarApp = () => {
   const [dateState, setDateState] = useState(new Date());
   const [events, setEvents] = useState([]);
@@ -76,6 +77,13 @@ const CalendarApp = () => {
       });
   };
 
+  // const getAllEvents = () => {
+  //   async () => {
+  //     const response = await axios.get('/api/events/all');
+  //     console.log('getAllEvents Response', response);
+  //   };
+  // };
+
   const getAllJobs = () => {
     return axios
       .get('/api/jobs/all')
@@ -117,76 +125,14 @@ const CalendarApp = () => {
         //console.log(pets);
         setPetPlants(pets);
         return pets;
-        // console.log('hola', trabajos);
-        // console.log('110', response);
-        // const petPlant = response.filter((element) => {
-        //   console.log('e', element);
-        //   let hasId = false;
-        //   console.log(114, trabajos);
-        //   for (const trabajo of trabajos) {
-        //     // console.log(trabajo);
-        //     // console.log('119', trabajo.pet_plant[0]);
-        //     // if (trabajo.pet_plant[0] === element.id) {
-        //     //   hasId = true;
-        //     //   //break;
-        //     // } else {
-        //     //   return 0;
-        //     // }
-        //     // return hasId;
-        //   }
-
-        //   let test = trabajo.pet_plant.map((num) => {
-        //     //num is their id that is listed in the trabajo array
-        //     return response[num - 1];
-        //   });
-        //   console.log('test', test);
-        //   console.log('128 petplant', petPlant);
-        //   setPetPlants(petPlant);
-        // });
-        // console.log('hi', petPlant);
-        // return petPlant;
       })
       .then((res) => {
-        console.log('150', res);
+        //console.log('150', res);
       })
       .catch((err) => {
         console.error(err);
       });
   };
-
-  // const getPetPlants = () => {
-  //   return axios
-  //     .get('/api/pets_plants/all')
-  //     .then((res) => {
-  //       //console.log('p;ant res', res.data);
-  //       setPetPlants(res.data);
-  //       return res.data;
-  //     })
-  //     .then((response) => {
-  //       console.log('113', response);
-  //       const petPlant = response.filter((element) => {
-  //         console.log('e', element);
-  //         let hasId = false;
-
-  //         for (const trabajo of trabajos) {
-  //           console.log('119', trabajo.pet_plant[0]);
-  //           if (trabajo.pet_plant[0] === element.id) {
-  //             hasId = true;
-  //             //break;
-  //           } else {
-  //             return 0;
-  //           }
-  //           return hasId;
-  //         }
-
-  //         console.log('petplant', petPlant);
-  //         setPetPlants(petPlant);
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.error(err);
-  //     });
-  // };
 
   //format(new Date(2014, 1, 11), 'yyyy-MM-dd')
   //=> '2014-02-11'

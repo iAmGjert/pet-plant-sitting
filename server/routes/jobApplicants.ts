@@ -22,7 +22,7 @@ interface applicantInfo {
 jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
   try {
     const applications = await JobApplicant.findAll({
-      where: { user_id: req.user[0].id || req.user.id },
+      where: { user_id: req.user[0]?.id || req.user?.id },
       include: [ {model: Job} ]
     }); 
     res.json(applications);
@@ -30,8 +30,6 @@ jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
     console.log(error);
     res.sendStatus(400);
   }
-
-
 }); 
 
 
