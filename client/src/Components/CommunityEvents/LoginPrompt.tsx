@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setView } from '../../state/features/events/eventsSlice';
+import { ThemeContext } from '../../App';
 
 const LoginPrompt = () => {
+  const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);
   const view = useAppSelector((state) => state.events.view);
   console.log(view);
@@ -43,6 +45,7 @@ const LoginPrompt = () => {
   return (
     <>
       <Modal
+        contentClassName={theme === 'dark' && 'dark'}
         show={show}
         onHide={handleClose}
         backdrop="static"
@@ -55,11 +58,11 @@ const LoginPrompt = () => {
           Please Login or Signup to create an event. 
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleOtherRoute}>
+          <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant="secondary" onClick={handleOtherRoute}>
           Keep Viewing Events
           </Button>
-          <Button variant='info' onClick={handleSignupRoute}>Signup</Button>
-          <Button variant="info" onClick={handleLoginRoute}>Login</Button>
+          <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant='info' onClick={handleSignupRoute}>Signup</Button>
+          <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant="info" onClick={handleLoginRoute}>Login</Button>
         </Modal.Footer>
       </Modal>
     </>

@@ -2,15 +2,6 @@ html,
 body {
   min-height: 100%;
 }
-body.modal-open {
-  line-height: 14px;
-  padding: 6px;
-  border-radius: 100px;
-  background-color: lightgreen;
-  box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
-  border: 2px solid rgb(28, 110, 164);
-  display: inline-block;
-}
 .mapJobMarker {
   line-height: 14px;
   padding: 6px;
@@ -174,6 +165,11 @@ body.modal-open {
   background-color: #252525;
   color: lightgray;
 }
+#dark .react-calendar {
+  background-color: #252525;
+  color: lightgrey;
+  border-color: lightgrey;
+}
 #dark .bootstrap-card {
   background-color: #2e2e2e;
   color: lightgrey;
@@ -181,11 +177,6 @@ body.modal-open {
 }
 #dark .bootstrap-button {
   background-color: #1f1f1f;
-  color: lightgrey;
-  border-color: lightgrey;
-}
-#dark .react-calendar {
-  background-color: #252525;
   color: lightgrey;
   border-color: lightgrey;
 }
@@ -204,10 +195,43 @@ body.modal-open {
   background-color: rgb(121, 121, 121);
   color: lightgrey;
 }
-body.modal-open {
+#dark .chat-main {
   background-color: rgb(121, 121, 121);
-  color: var(--bs-blue);
+  color: lightgrey;
 }
+/* Bootstrap modal classes */
+.modal-content.dark {
+  background: rgb(121, 121, 121);
+  color: lightgrey;
+}
+.bootstrap-modal-button.btn.btn-primary {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.bootstrap-modal-button.btn.btn-secondary {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.bootstrap-modal-button.btn.btn-success {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.bootstrap-modal-button.btn.btn-danger {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.bootstrap-modal-textbox.form-control {
+  background-color: rgb(121, 121, 121);
+  color: lightgrey;
+}
+.modal-button-as-link {
+  color: lightgray;
+}
+/* Bootstrap modal classes */
 
 
  .chat-main {

@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setView } from '../../state/features/events/eventsSlice';
 import Form from 'react-bootstrap/Form';
+import { ThemeContext } from '../../App';
 
 type Props = {
   showAddModal: boolean;
@@ -13,6 +14,7 @@ type Props = {
 }
 
 const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentChange}: Props) => {
+  const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);
 
   const handleClose = () => {
@@ -35,7 +37,7 @@ const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentC
   return (
     
     <Modal
-      className='bootstrap-card'
+      contentClassName={theme === 'dark' && 'dark'}
       show={showAddModal}
       onHide={handleClose}
       backdrop="static"
@@ -48,14 +50,14 @@ const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentC
         <Form>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             {/* <Form.Label>Example textarea</Form.Label> */}
-            <Form.Control className='button-as-link' as="textarea" rows={3} 
+            <Form.Control className={theme === 'dark' && 'bootstrap-modal-textbox'} as="textarea" rows={3} 
               onChange={handleCommentChange}
             />
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button className='bootstrap-button' variant="primary" 
+        <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant="primary" 
           onClick={handleSendComemnt}>Submit</Button>
       </Modal.Footer>
     </Modal>

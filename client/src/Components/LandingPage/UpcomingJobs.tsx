@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import * as moment from 'moment';
@@ -10,6 +10,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Modal from 'react-bootstrap/Modal';
+
+import { ThemeContext } from '../../App';
 
 //typescript
 interface upcomingJobs {
@@ -57,6 +59,7 @@ const upcomingJobs: FC<Props> = ({
   // console.log(49, endDate);
   // console.log(moment(currentDate).isBefore(moment(endDate)));
 
+  const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -91,7 +94,7 @@ const upcomingJobs: FC<Props> = ({
             More Info
           </Button>
 
-          <Modal show={show} onHide={handleClose}>
+          <Modal contentClassName={theme === 'dark' && 'dark'} show={show} onHide={handleClose}>
             <Modal.Header closeButton>
               <Modal.Title>
                 {' '}
@@ -104,7 +107,7 @@ const upcomingJobs: FC<Props> = ({
             </Modal.Header>
             <Modal.Body>{location}</Modal.Body>
             <Modal.Footer>
-              <Button className='bootstrap-button' variant='secondary' onClick={handleClose}>
+              <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant='secondary' onClick={handleClose}>
                 Close
               </Button>
               {/* <Button variant='primary' onClick={handleClose}>
