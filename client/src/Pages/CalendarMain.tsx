@@ -1,18 +1,14 @@
 import React from 'react';
 import CalendarApp from '../Components/Calendar/Calendar';
 //import CalendarMobile from '../Components/Calendar/CalendarMobile';
-import JobCard from '../Components/Calendar/JobCard';
+import Practice from '../Components/Calendar/Practice';
 
 export default function CalendarMain() {
   return (
     <div>
-      <CalendarApp />
-      {/* <JobCard /> */}
+      {/* <CalendarApp /> */}
       {/* <CalendarMobile /> */}
+      <Practice />
     </div>
   );
 }
-
-
-
-

@@ -62,6 +62,9 @@
     "webpack-dev-server": "^4.9.0"
   },
   "dependencies": {
+    "@devexpress/dx-react-core": "^3.0.3",
+    "@devexpress/dx-react-scheduler": "^3.0.3",
+    "@devexpress/dx-react-scheduler-material-ui": "^3.0.3",
     "@mapbox/mapbox-gl-directions": "^4.1.0",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",
