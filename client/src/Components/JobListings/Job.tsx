@@ -51,9 +51,9 @@ const Job = ({ job }) => {
             </Col>
             <Col>        
               {
-                petPlants[pet_plant[0]] ?
+                Array.isArray(pet_plant) ?
                   <div>
-                    Pet/Plants: { pet_plant.map((p, i)=>{ return <div key={`p${i}`}>{petPlants[p - 1].name}</div>; }) }
+                    Pet/Plants: { pet_plant.map((p, i)=>{ return <div key={`p${i}`}>{petPlants[p - 1]?.name}</div>; }) }
                   </div> :
                   <div />
               }

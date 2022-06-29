@@ -18,6 +18,9 @@ const JobsMain = () => {
   const user = useAppSelector(state=>state.userProfile.value);
 
   const handleClick = () => {
+    if (user.name === '') {
+      navigate('/login');
+    }
     if (view !== 'create') {
       dispatch(changeView('create'));
       return;
@@ -40,7 +43,7 @@ const JobsMain = () => {
             <List />
           </div>
       }
-      <Button className='bootstrap-button' onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : 'Create New Job'}</Button>
+      <Button className='bootstrap-button' onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : user.name === '' ? 'Login' : 'Create New Job'}</Button>
     </Container>
   );
 };
