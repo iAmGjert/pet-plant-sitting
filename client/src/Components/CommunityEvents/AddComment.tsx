@@ -35,6 +35,7 @@ const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentC
   return (
     
     <Modal
+      className='bootstrap-card'
       show={showAddModal}
       onHide={handleClose}
       backdrop="static"
@@ -47,14 +48,14 @@ const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentC
         <Form>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             {/* <Form.Label>Example textarea</Form.Label> */}
-            <Form.Control as="textarea" rows={3} 
+            <Form.Control className='button-as-link' as="textarea" rows={3} 
               onChange={handleCommentChange}
             />
           </Form.Group>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" 
+        <Button className='bootstrap-button' variant="primary" 
           onClick={handleSendComemnt}>Submit</Button>
       </Modal.Footer>
     </Modal>

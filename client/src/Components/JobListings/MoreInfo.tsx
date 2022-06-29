@@ -47,7 +47,7 @@ const MoreInfo = (props) => {
       <Modal.Body className="show-grid">
         <Container>
           <Row>
-            <Col className='col' xs={12} md={8}>
+            <Col xs={12} md={8}>
               {`Employer: ${employer}`}
             </Col>
           </Row>
@@ -65,7 +65,7 @@ const MoreInfo = (props) => {
       </Modal.Body>
       <Modal.Footer>
         <Button className='bootstrap-button' onClick={onHide}>Close</Button>
-        <Button className='bootstrap-button' onClick={onApply}>Apply</Button>
+        <Button className='bootstrap-button'onClick={onApply}>Apply</Button>
       </Modal.Footer>
       {
         showLog ?

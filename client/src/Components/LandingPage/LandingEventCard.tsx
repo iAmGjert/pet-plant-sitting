@@ -21,7 +21,7 @@ const LandingEventCard = ({ startDate, location, description, name }) => {
         </Card.Subtitle>
         <Card.Text>{description}</Card.Text>
         <Card.Text>Meets at {location}</Card.Text>
-        <Card.Link href='/events'>More Upcoming Events</Card.Link>
+        <Card.Link className='button-as-link' href='/events'>More Upcoming Events</Card.Link>
       </Card.Body>
     </Card>
   );

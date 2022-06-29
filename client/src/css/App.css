@@ -1,7 +1,15 @@
 html,
 body {
   min-height: 100%;
-  padding-bottom: 15%;
+}
+body.modal-open {
+  line-height: 14px;
+  padding: 6px;
+  border-radius: 100px;
+  background-color: lightgreen;
+  box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
+  border: 2px solid rgb(28, 110, 164);
+  display: inline-block;
 }
 .mapJobMarker {
   line-height: 14px;
@@ -129,29 +137,41 @@ body {
   margin-right: 10px;
 }
 
-#dark {
-  background-color: #1f1b24;
-  height: 100vh;
+#dark body {
+  background-color: #252525;
+  min-height: 100%;
   color: lightgray;
 }
 #dark .popup-inner {
-  background-color: #1f1b24;
+  background-color: #252525;
   color: lightgray;
 }
-#dark .topNavBar {
-  background-color: #1f1b24;
+#dark .navbar.navbar-expand-lg.navbar-dark.bg-dark-mode {
+  background-color: #141313;
+  color: lightgray;
+}
+#dark .dropdown-menu.show {
+  background-color: #303030;
+  color: lightgray;
+}
+#dark .dropdown-item {
+  background-color: #303030;
+  color: lightgray;
+}
+#dark .navbar.navbar-expand.navbar-dark.bg-dark-mode.fixed-bottom {
+  background-color: #141313;
   color: lightgray;
 }
 #dark .container-fluid {
-  background-color: #1f1b24;
+  background-color: #252525;
   color: lightgray;
 }
 #dark .col {
-  background-color: #1f1b24;
+  background-color: #252525;
   color: lightgray;
 }
 #dark .react-calendar__month-view__days {
-  background-color: #1f1b24;
+  background-color: #252525;
   color: lightgray;
 }
 #dark .bootstrap-card {
@@ -165,7 +185,7 @@ body {
   border-color: lightgrey;
 }
 #dark .react-calendar {
-  background-color: #1f1b24;
+  background-color: #252525;
   color: lightgrey;
   border-color: lightgrey;
 }
@@ -183,6 +203,10 @@ body {
 #dark .bootstrap-textbox {
   background-color: rgb(121, 121, 121);
   color: lightgrey;
+}
+body.modal-open {
+  background-color: rgb(121, 121, 121);
+  color: var(--bs-blue);
 }
 
 
