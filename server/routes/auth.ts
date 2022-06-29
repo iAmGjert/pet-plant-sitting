@@ -68,7 +68,7 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
     } else {
       req.logIn(user, (err: any) => {
         if (err) { throw err; }
-        console.log(req.session.passport.user.id, '< - user on session cookie');
+        console.log(req.session.passport.user, '< - user on session cookie');
         res.send(user);
       });
     }
@@ -76,7 +76,7 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
 });
 
 auth.get('/login/success', (req: Request | any, res: Response) => {
-  console.log('login/success', 'user ID: ', req.user.id);
+  console.log('login/success', 'user ID: ', req.user);
   if (req.user) {
     User.findOne({ where: { id: req.user.id || req.user[0].id }, 
       include: [{ model: PetPlant,
