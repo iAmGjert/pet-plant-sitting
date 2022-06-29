@@ -26,6 +26,7 @@ const MoreInfo = (props) => {
     {
       job_id: job_id, 
       user_id: user.id,
+      status: 'pending'
     };
   const postApplicant = async (newApplicant: any) => {
     return await axios.post('/api/jobs/applicant/create', newApplicant)

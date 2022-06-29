@@ -21,7 +21,7 @@ const Job = ({ job }) => {
   const { id, location, pet_plant, employer_id, sitter_id, startDate, endDate}: jobStuff = job;
   const dispatch = useAppDispatch();
   const handleClick = ()=>{
-    console.log(job);
+    //console.log(job);
     if (user.name === '') {
       dispatch(setPrompt(true));      
     }
