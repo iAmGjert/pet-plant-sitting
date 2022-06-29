@@ -37,7 +37,7 @@ const MoreInfo = (props) => {
         return err;
       });
   };
-  const onApply = ()=>{
+  const onApply = async ()=>{
     if (user.name === '') {
       setShowLog(true);
       return;
@@ -46,8 +46,8 @@ const MoreInfo = (props) => {
       console.log('This is your job!');
       return;
     }
-    postApplicant(obj);
-    getJobs();
+    await postApplicant(obj);
+    await getJobs();
     onHide();
   };
   const getJobs = async () => {

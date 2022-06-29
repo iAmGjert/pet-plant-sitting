@@ -21,6 +21,7 @@ const Create = () => {
   const [endDate, setEndDate] = useState(moment().add(2, 'days').format('YYYY-MM-DD'));
   const [description, setDescription] = useState('');
   const [feed, setFeed] = useState(myPets.reduce(arr=>{ arr.push(false); return arr; }, []));
+  const [disabled, setDisabled] = useState(true);
   const getJobs = async () => {
     const jobs = await axios.get(
       '/api/jobs/all'
@@ -90,6 +91,9 @@ const Create = () => {
     dispatch(changeView('list'));
     return;
   };
+  useEffect(()=>{
+    feed.some((ele)=>{ return ele === true; }) ? setDisabled(false) : setDisabled(true);
+  }, [feed]);
   return user.name !== '' ?
     (
       <Form>
@@ -138,7 +142,7 @@ const Create = () => {
             </Form.Group>
           </Col>
         </Row>
-        <Button variant="primary" type="button" onClick={handleSubmit}>
+        <Button disabled={disabled} variant="primary" type="button" onClick={handleSubmit}>
       Submit
         </Button>
       </Form> 
