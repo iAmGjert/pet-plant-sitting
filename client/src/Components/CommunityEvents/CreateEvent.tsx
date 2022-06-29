@@ -73,24 +73,24 @@ const CreateEvent = () => {
       <Form>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
           <Form.Label>Event Name</Form.Label>
-          <Form.Control type="text" placeholder="What is the name of your event?"
+          <Form.Control className='bootstrap-textbox' type="text" placeholder="What is the name of your event?"
             onChange={handleEventNameChange}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
           <Form.Label>Location </Form.Label>
-          <Form.Control type="text" placeholder="address" 
+          <Form.Control className='bootstrap-textbox' type="text" placeholder="address" 
             onChange={handleLocationChange}/>
         </Form.Group>
         <Form.Group className="mb-3" controlId="createEventForm.ControlTextarea1">
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" placeholder="describe your event in one or two sentences" rows={3} onChange={handleDescriptionChange}/>
+          <Form.Control className='bootstrap-textbox' as="textarea" placeholder="describe your event in one or two sentences" rows={3} onChange={handleDescriptionChange}/>
         </Form.Group>
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="createEventForm.ControlInput3">
               <Form.Label>Date</Form.Label>
-              <Form.Control type="date" 
+              <Form.Control className='bootstrap-textbox' type="date" 
                 onChange={handleStartDateChange}
               />
             </Form.Group>
@@ -98,11 +98,11 @@ const CreateEvent = () => {
           <Col>
             <Form.Group className="mb-3" controlId="createEventForm.ControlInput4">
               <Form.Label>Time</Form.Label>
-              <Form.Control type='time' onChange={handleTimeChange}/>
+              <Form.Control className='bootstrap-textbox' type='time' onChange={handleTimeChange}/>
             </Form.Group>
           </Col>
         </Row>
-        <Button variant="primary" type="submit" onClick={handleSubmit}>
+        <Button className='bootstrap-button' variant="primary" type="submit" onClick={handleSubmit}>
           Submit
         </Button>
       </Form>

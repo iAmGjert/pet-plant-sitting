@@ -225,6 +225,7 @@ const Profile = () => {
             <br />
             {editable && (
               <button
+                className='bootstrap-button'
                 onClick={() => {
                   setShowModal(true);
                 }}

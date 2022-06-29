@@ -107,13 +107,13 @@ const Create = () => {
         </Form.Group>
         <Form.Group className="mb-3" controlId="createEventForm.ControlTextarea1">
           <Form.Label>Description</Form.Label>
-          <Form.Control as="textarea" placeholder={'Describe the job in one or two sentenses.'} rows={3} onChange={(e)=>{ handleChangeDescription(e); }}/>
+          <Form.Control className='bootstrap-textbox' as="textarea" placeholder={'Describe the job in one or two sentenses.'} rows={3} onChange={(e)=>{ handleChangeDescription(e); }}/>
         </Form.Group>
         <Row>
           <Col>
             <Form.Group className="mb-3" controlId="createEventForm.ControlInput3">
               <Form.Label>Start Date:</Form.Label>
-              <Form.Control type="date" value={startDate}
+              <Form.Control className='bootstrap-textbox' type="date" value={startDate}
                 onChange={(e)=>{ handleChangeStartDate(e); }}
               />
             </Form.Group>
@@ -121,13 +121,13 @@ const Create = () => {
           <Col>
             <Form.Group className="mb-3" controlId="createEventForm.ControlInput3">
               <Form.Label>End Date:</Form.Label>
-              <Form.Control type="date" value={endDate}
+              <Form.Control className='bootstrap-textbox' type="date" value={endDate}
                 onChange={(e)=>{ handleChangeEndDate(e); }}
               />
             </Form.Group>
           </Col>
         </Row>
-        <Button variant="primary" type="button" onClick={handleSubmit}>
+        <Button className='bootstrap-button' variant="primary" type="button" onClick={handleSubmit}>
       Submit
         </Button>
       </Form> 

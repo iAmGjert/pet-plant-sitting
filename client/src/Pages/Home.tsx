@@ -25,7 +25,7 @@ const Home: FC<Props> = () => {
     // setDisplay(!display);
   };
   return (
-    <Container>
+    <Container fluid>
       <Row>
         <Col className='text-center'>Welcome to Fern Herm!</Col>
       </Row>
@@ -66,7 +66,7 @@ const Home: FC<Props> = () => {
         </Carousel.Item>
       </Carousel>
 
-      <Card style={{ width: '18rem' }}>
+      <Card className='bootstrap-card' style={{ width: '18rem' }}>
         <Card.Body>
           {/* <Card.Title>Card Title</Card.Title> */}
           {/* <Card.Subtitle className='mb-2 text-muted'> */}
@@ -78,14 +78,14 @@ const Home: FC<Props> = () => {
             help you connect with locals who are willing to help!
           </Card.Text>
           <Button
+            className='bootstrap-button'
             variant='primary'
             size='lg'
-            className='button-center'
             onClick={() => navigate('/login')}
           >
             Login
           </Button>
-          <Card.Link href='/events'>Free Community Events</Card.Link>
+          <Card.Link className='button-as-link' href='/events'>Free Community Events</Card.Link>
         </Card.Body>
       </Card>
     </Container>

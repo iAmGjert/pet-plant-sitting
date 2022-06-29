@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { ThemeContext } from '../../App';
 
 type Props = {
   showEditModal: boolean;
@@ -19,7 +20,7 @@ type Props = {
 }
 
 const EditComment = ({ showEditModal, setShowEditModal, editComment, commentObject }: Props) => {
-
+  const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);
   const handleClose = () => {
     setShowEditModal(!showEditModal);
@@ -37,6 +38,7 @@ const EditComment = ({ showEditModal, setShowEditModal, editComment, commentObje
 
   return (
     <Modal
+      contentClassName={theme === 'dark' && 'dark'}
       show={showEditModal}
       onHide={handleClose}
       backdrop="static"
@@ -49,7 +51,7 @@ const EditComment = ({ showEditModal, setShowEditModal, editComment, commentObje
         <Form>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label>Edit Comment</Form.Label>
-            <Form.Control as="textarea" rows={3} 
+            <Form.Control className={theme === 'dark' && 'bootstrap-modal-textbox'} as="textarea" rows={3} 
               name="comment"
               defaultValue={commentObject?.comment}
               onChange={(e) => {
@@ -60,7 +62,7 @@ const EditComment = ({ showEditModal, setShowEditModal, editComment, commentObje
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant="primary" onClick={handleEdit}>
+        <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant="primary" onClick={handleEdit}>
           Save Changes
         </Button>
       </Modal.Footer>

@@ -1,7 +1,6 @@
 html,
 body {
   min-height: 100%;
-  padding-bottom: 15%;
 }
 .mapJobMarker {
   line-height: 14px;
@@ -129,30 +128,47 @@ body {
   margin-right: 10px;
 }
 
-#dark {
-  background-color: #1f1b24;
-  height: 100vh;
+#dark body {
+  background-color: #252525;
+  min-height: 100%;
   color: lightgray;
 }
 #dark .popup-inner {
-  background-color: #1f1b24;
+  background-color: #252525;
   color: lightgray;
 }
-#dark .topNavBar {
-  background-color: #1f1b24;
+#dark .navbar.navbar-expand-lg.navbar-dark.bg-dark-mode {
+  background-color: #141313;
+  color: lightgray;
+}
+#dark .dropdown-menu.show {
+  background-color: #303030;
+  color: lightgray;
+}
+#dark .dropdown-item {
+  background-color: #303030;
+  color: lightgray;
+}
+#dark .navbar.navbar-expand.navbar-dark.bg-dark-mode.fixed-bottom {
+  background-color: #141313;
   color: lightgray;
 }
 #dark .container-fluid {
-  background-color: #1f1b24;
+  background-color: #252525;
   color: lightgray;
 }
 #dark .col {
-  background-color: #1f1b24;
+  background-color: #252525;
   color: lightgray;
 }
 #dark .react-calendar__month-view__days {
-  background-color: #1f1b24;
+  background-color: #252525;
   color: lightgray;
+}
+#dark .react-calendar {
+  background-color: #252525;
+  color: lightgrey;
+  border-color: lightgrey;
 }
 #dark .bootstrap-card {
   background-color: #2e2e2e;
@@ -164,11 +180,6 @@ body {
   color: lightgrey;
   border-color: lightgrey;
 }
-#dark .react-calendar {
-  background-color: #1f1b24;
-  color: lightgrey;
-  border-color: lightgrey;
-}
 #dark .popup-inner .close-btn {
   position: absolute;
   top: 16px;
@@ -177,6 +188,56 @@ body {
   color: lightgrey;
   border-color: lightgrey;
 }
+#dark .button-as-link {
+  color: lightgray;
+}
+#dark .bootstrap-textbox {
+  background-color: rgb(121, 121, 121);
+  color: lightgrey;
+}
+#dark .dropdown-toggle.btn.btn-primary {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+#dark .chat-main {
+  background-color: rgb(121, 121, 121);
+  color: lightgrey;
+}
+/* Bootstrap modal classes */
+.modal-content.dark {
+  background: rgb(121, 121, 121);
+  color: lightgrey;
+}
+.bootstrap-modal-button.btn.btn-primary {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.bootstrap-modal-button.btn.btn-secondary {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.bootstrap-modal-button.btn.btn-success {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.bootstrap-modal-button.btn.btn-danger {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.bootstrap-modal-textbox.form-control {
+  background-color: rgb(121, 121, 121);
+  color: lightgrey;
+}
+.modal-button-as-link {
+  color: lightgray;
+}
+/* Bootstrap modal classes */
+
 
  .chat-main {
   width: 100%;
