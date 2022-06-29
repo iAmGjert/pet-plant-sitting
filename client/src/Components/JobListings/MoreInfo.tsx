@@ -10,14 +10,23 @@ import axios from 'axios';
 const MoreInfo = (props) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { employer, onHide, location, job } = props;
+  const { employer, onHide, location, job, job_id } = props;
   const user = useAppSelector(state => state.userProfile.value);
   const [showLog, setShowLog] = useState(false);
-  const [obj, setObj] = useState(
+  const hasApplied = job.job_applicants.reduce((res, applicant)=>{
+    //console.log(job);
+    //console.log(user.id);
+    if (applicant.user_id === user.id) { 
+      res = true;
+      return res; 
+    }
+    return res; 
+  }, false);
+  const obj = 
     {
-      job_id: job.id, 
+      job_id: job_id, 
       user_id: user.id,
-    });
+    };
   const postApplicant = async (newApplicant: any) => {
     return await axios.post('/api/jobs/applicant/create', newApplicant)
       .then((res: any) => {
@@ -33,9 +42,12 @@ const MoreInfo = (props) => {
       setShowLog(true);
       return;
     }
+    if (user.name === employer) {
+      console.log('This is your job!');
+      return;
+    }
     postApplicant(obj);
     getJobs();
-      
     onHide();
   };
   const getJobs = async () => {
@@ -73,7 +85,7 @@ const MoreInfo = (props) => {
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={onHide}>Close</Button>
-        <Button onClick={onApply}>Apply</Button>
+        <Button disabled={hasApplied} onClick={onApply}>{user.name === employer ? 'Edit' : 'Apply'}</Button>
       </Modal.Footer>
       {
         showLog ?

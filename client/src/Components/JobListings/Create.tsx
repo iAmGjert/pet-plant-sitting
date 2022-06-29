@@ -65,10 +65,21 @@ const Create = () => {
     setFeed(newFeed);
   };
   const handleSubmit = () => {
+    console.log(feed);
+    console.log(petPlants);
+    const jobPetsPlants = petPlants.filter((pet, i)=>{
+      if (feed[i] === true) {
+        return true;
+      }
+      return false;
+    });
+
+    console.log(jobPetsPlants);
+    
     const obj = {
       location: user.location, 
       employer_id: user.id, 
-      pet_plant: petPlants,
+      pet_plant: jobPetsPlants,
       startDate: startDate,
       endDate: endDate,
       isCompleted: false,

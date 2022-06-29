@@ -21,7 +21,7 @@ const Job = ({ job }) => {
   const { id, location, pet_plant, employer_id, sitter_id, startDate, endDate}: jobStuff = job;
   const dispatch = useAppDispatch();
   const handleClick = ()=>{
-    
+    console.log(job);
     if (user.name === '') {
       dispatch(setPrompt(true));      
     }
@@ -66,7 +66,7 @@ const Job = ({ job }) => {
           </Row>
           <Button className='bootstrap-button' onClick={handleClick} variant='primary'>More Info</Button>
           <>
-            <MoreInfo user={user} show={modalShow} onHide={() => setModalShow(false)} job={job} employer={ users.reduce((employer, users)=>{
+            <MoreInfo user={user} show={modalShow} job_id={id} onHide={() => setModalShow(false)} job={job} employer={ users.reduce((employer, users)=>{
               if (users.id === employer_id) {
                 employer = users.name;
               }
