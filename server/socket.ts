@@ -1,7 +1,7 @@
 const { Server, Socket } = require('socket.io');
 require('dotenv').config();
 
-const { socket } = require('./socket');
+//const { socket } = require('./socket');
 
 const io = new Server(4000, {
   cors: {

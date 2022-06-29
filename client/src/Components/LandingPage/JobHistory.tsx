@@ -7,7 +7,6 @@ import { ThemeContext } from '../../App';
 
 const JobHistory = ({ startDate, endDate, description, petPlants }) => {
   const theme = useContext(ThemeContext);
-  console.log('petPlants in history', petPlants);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);

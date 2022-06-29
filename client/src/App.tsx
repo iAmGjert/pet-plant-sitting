@@ -41,7 +41,7 @@ const App: FC<Props> = () => {
   const getUser = async () => {
     const user = await axios.get('/auth/login/success');
     dispatch(setUser(user.data.user));
-    console.log(user.data.user);
+    //console.log(user.data.user);
   };
   const getJobs = async () => {
     const jobs = await axios.get('/api/jobs/all');

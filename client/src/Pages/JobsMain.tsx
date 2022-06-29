@@ -37,7 +37,6 @@ const JobsMain = () => {
         view === 'create' ?
           <Create /> :
           <div>
-            <Search />
             <List />
           </div>
       }

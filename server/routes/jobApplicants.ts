@@ -27,7 +27,7 @@ jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
     const applications = await JobApplicant.findAll({
       where: {
         //id: req.user[0].id,
-        user_id: req.user[0].id
+        user_id: req.user[0].id || req.user.id
       },
       include: [
         {model: Job}

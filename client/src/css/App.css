@@ -195,6 +195,11 @@ body {
   background-color: rgb(121, 121, 121);
   color: lightgrey;
 }
+#dark .dropdown-toggle.btn.btn-primary {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
 #dark .chat-main {
   background-color: rgb(121, 121, 121);
   color: lightgrey;
