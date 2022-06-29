@@ -48,12 +48,12 @@ export const fetchPastJobs = createAsyncThunk(
     const response = await axios.get('/api/jobs/all');
     //console.log('fetchPastJobs response', response);
     const currentDate = moment().format('YYYY-MM-DD');
-    console.log('currentDate from the backend',currentDate);
+    // console.log('currentDate from the backend',currentDate);
     //console.log('currentDate on 47 backend', currentDate);
     const pastLabor = response.data.filter((event: {startDate: Date, endDate: Date}) => {
       return moment(event.startDate).isBefore(currentDate);
     });
-    console.log('pastLabor on 52', pastLabor);
+    // console.log('pastLabor on 52', pastLabor);
     return pastLabor;
   }
 );
@@ -63,7 +63,7 @@ export const fetchUpcomingJobs = createAsyncThunk(
   'jobs/fetchUpcomingJobs',
   async () => {
     const response = await axios.get('/api/jobs/all');
-    console.log('data coming from backend', response);
+    // console.log('data coming from backend', response);
     // const upcomingLabor = response.data.filter((job: { isCompleted: boolean }) => {
     //   console.log('job on 75', job);
     //   return job.isCompleted === false;
@@ -72,7 +72,7 @@ export const fetchUpcomingJobs = createAsyncThunk(
     const upcomingLabor = response.data.filter((job: {startDate: Date}) => {
       return moment(job.startDate).isAfter(currentDate);
     });
-    console.log('data coming from backend', upcomingLabor);
+    // console.log('data coming from backend', upcomingLabor);
     return upcomingLabor;
   }
 );
@@ -119,12 +119,12 @@ export const jobsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUpcomingJobs.fulfilled, (state, action) => {
-      console.log('action', action);
+      // console.log('action', action);
       state.upcomingJobs = action.payload;
       return state;
     });
     builder.addCase(fetchApplications.fulfilled, (state, action) => {
-      console.log('application', action.payload);
+      // console.log('application', action.payload);
       state.applications = action.payload;
       return state;
     });

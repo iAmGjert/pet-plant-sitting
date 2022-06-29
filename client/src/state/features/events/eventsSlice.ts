@@ -3,11 +3,6 @@ import moment from 'moment';
 import axios from 'axios';
 // import { RootState } from '../../store';
 
-
-interface Status {
-  loading: 'idle' | 'pending' | 'succeeded' | 'failed';
-}
-
 interface Event {
   id: number;
   name: string;
@@ -30,9 +25,9 @@ interface Event {
       image: string;
     };
   }>;
-  startDate: Date;
-  endDate: Date;
-  startTime: Date;
+  startDate: Date | string;
+  endDate: Date | string;
+  startTime: Date | string;
   user: {
     name: string;
     image: string;
@@ -70,9 +65,15 @@ export const fetchEvents = createAsyncThunk( 'events/fetchEvents', async () => {
   try {
     const response = await axios.get('/api/events/all');
     return response.data;
-  } catch (error) {
-    console.log(error);
-  }
+  } catch (error) { console.error(error); }
+});
+
+export const addNewEvent = createAsyncThunk( 'events/addNewEvent', async (event: {
+  name: string; host: number; location: string; description: string; startDate: Date | string; startTime: Date | string; user: { name: string, id: number}}) => {
+  try {
+    const response = await axios.post('/api/events/create', event);
+    return response.data;
+  } catch (error) { console.error(error); }
 });
 
 export const communityEventsSlice = createSlice({
@@ -105,7 +106,7 @@ export const communityEventsSlice = createSlice({
         state.upcomingEvents = action.payload;
       });
     builder
-      .addCase(fetchEvents.pending, (state, action) => {
+      .addCase(fetchEvents.pending, (state) => {
         state.status = 'loading';
       });
     builder
@@ -114,14 +115,22 @@ export const communityEventsSlice = createSlice({
         state.events = action.payload;
       });
     builder
-      .addCase(fetchEvents.rejected, (state, action) => {
+      .addCase(fetchEvents.rejected, (state) => {
         state.status = 'failed';
+      });
+    builder
+      .addCase(addNewEvent.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        console.log(action.payload);
+        state.events.push(action.payload);
+        // state.event = action.payload;
       });
   }
 });
 
 export const selectAllEvents = (state: { events: { events: Event } } ) => state.events.events;
 export const getEventsStatus = (state: { events: { status: string } } ) => state.events.status;
+export const pageView = (state: { events: { view: string } } ) => state.events.view;
 
 export const { setView, setEvents, setEventObj, eventAdded } = communityEventsSlice.actions;
 
