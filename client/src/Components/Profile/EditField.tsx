@@ -1,8 +1,10 @@
+/* eslint-disable indent */
 import React, { useEffect, useState } from 'react';
-import { Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 
 import PetPlantCard, { PetPlant } from './PetPlantCard';
 import { RatingInfo, Profile } from '../../Pages/Profile';
+import RangeSlider from 'react-bootstrap-range-slider';
 import axios from 'axios';
 
 type Props = {
@@ -12,6 +14,7 @@ type Props = {
   value: string | number | boolean | RatingInfo[] | string[] | PetPlant[];
   add: boolean;
   newPetId: number;
+  setVal: (val: any) => void;
 };
 
 const EditField = ({
@@ -21,18 +24,13 @@ const EditField = ({
   Pet_Plant,
   add,
   newPetId,
+  setVal,
 }: Props) => {
   const [editable, setEditable] = useState(false);
   const [newImgCloud, setNewImgCloud] = useState('');
-  const [editField, setEditField] = useState<string>(
-    fieldName === 'pet_plants' ? '' : String(value)
-  );
-  // const [fieldName, setFieldName] = useState(field);
-  // console.log(typeof field);
-
+  const [values, setValues] = useState(1);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEditField(e.target.value);
-    // console.log(editField);
+    setVal(e.target.value);
   };
   const widget = window?.cloudinary.createUploadWidget(
     {
@@ -50,8 +48,8 @@ const EditField = ({
   };
   useEffect(() => {
     if (newImgCloud) {
+      setVal(newImgCloud);
       if (add) {
-        console.log('in add');
         axios.put(`/api/pets_plants/${newPetId}`, {
           [fieldName]: newImgCloud,
           id: newPetId,
@@ -75,43 +73,73 @@ const EditField = ({
     setEditable(false);
     if (add) {
       axios.put(`/api/pets_plants/${newPetId}`, {
-        [fieldName]: editField,
+        [fieldName]: value,
         id: newPetId,
       });
     } else if (Pet_Plant) {
       axios.put(`/api/pets_plants/${Pet_Plant.id}`, {
         ...Pet_Plant,
-        [fieldName]: editField,
+        [fieldName]: value,
       });
     } else {
-      axios.put(`/api/users/${user.id}`, { ...user, [fieldName]: editField });
+      axios.put(`/api/users/${user.id}`, { ...user, [fieldName]: value });
     }
   };
 
-  return (
-    <Form.Group className='mb-3' controlId='formBasicEmail'>
-      <h1>{fieldName[0].toUpperCase() + fieldName.slice(1)}</h1>
-      {fieldName !== 'pet_plants' ? (
-        <>
+  const renderSwitch = (fieldName: any) => {
+    switch (fieldName) {
+      case 'pet_plants':
+        return value.map((petPlant: PetPlant, i: number) => {
+          return (
+            <PetPlantCard
+              key={'petPlant' + i}
+              PetPlant={petPlant}
+              edit={true}
+              getStars={null}
+            />
+          );
+        });
+      case 'theme':
+        return (
+          <div>
+            <Button variant='light'>Light Mode</Button>{' '}
+            <Button variant='dark'>Dark Mode</Button>
+          </div>
+        );
+      case 'gender':
+        return (
+          <div>
+            <Button variant='primary'>Male</Button>{' '}
+            <Button variant='primary'>Female</Button>
+          </div>
+        );
+      case 'bio':
+        return (
           <span>
             {editable ? (
-              <input value={editField} onChange={(e) => handleChange(e)} />
-            ) : fieldName === 'image' ? (
-              <div></div>
+              <Form.Control
+                as='textarea'
+                rows={10}
+                value={value}
+                onChange={(e) => handleChange(e)}
+              />
             ) : (
-              <p>{editField}</p>
+              // <textarea value={value} onChange={(e) => handleChange(e)} />
+              <p>{value}</p>
             )}
             {editable ? (
-              <button
+              <Button
+                variant='secondary'
                 onClick={(e: any) => {
                   e.preventDefault();
                   handleSubmit(e);
                 }}
               >
                 Save
-              </button>
+              </Button>
             ) : (
-              <button
+              <Button
+                variant='secondary'
                 onClick={(e) => {
                   // console.log('what');
                   e.preventDefault();
@@ -127,22 +155,88 @@ const EditField = ({
                   : fieldName === 'image'
                   ? 'Upload New Image'
                   : 'Edit'}
-              </button>
+              </Button>
             )}
           </span>
-        </>
-      ) : (
-        value.map((petPlant: PetPlant, i: number) => {
-          return (
-            <PetPlantCard
-              key={'petPlant' + i}
-              PetPlant={petPlant}
-              edit={true}
-              getStars={null}
+        );
+      case 'age':
+        return (
+          <div>
+            <RangeSlider
+              value={values}
+              onChange={(e) => setValues(e.target.value)}
+              min={1}
+              max={3}
+              tooltip='on'
+              tooltipPlacement='bottom'
+              tooltipLabel={(currentValue) => {
+                if (currentValue === 1) {
+                  return 'Puppy';
+                } else if (currentValue === 2) {
+                  return 'Adult';
+                } else if (currentValue === 3) {
+                  return 'Senior';
+                }
+              }}
+              tooltipStyle={{ backgroundColor: 'red' }}
             />
-          );
-        })
-      )}
+          </div>
+        );
+      default:
+        return (
+          <>
+            <span>
+              {editable ? (
+                <input value={value} onChange={(e) => handleChange(e)} />
+              ) : fieldName === 'image' ? (
+                <div></div>
+              ) : (
+                <p>{value}</p>
+              )}
+              {editable ? (
+                <Button
+                  variant='secondary'
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    handleSubmit(e);
+                  }}
+                >
+                  Save
+                </Button>
+              ) : (
+                <Button
+                  variant='secondary'
+                  onClick={(e) => {
+                    // console.log('what');
+                    e.preventDefault();
+                    if (fieldName === 'image') {
+                      showWidget();
+                    } else {
+                      setEditable(!editable);
+                    }
+                  }}
+                >
+                  {newImgCloud
+                    ? 'Image Uploaded!'
+                    : fieldName === 'image'
+                    ? 'Upload New Image'
+                    : 'Edit'}
+                </Button>
+              )}
+            </span>
+          </>
+        );
+    }
+  };
+
+  return (
+    <Form.Group className='mb-3' controlId='formBasicEmail'>
+      <h2>
+        {fieldName === 'pet_plants'
+          ? 'Pets and Plants'
+          : fieldName[0].toUpperCase() + fieldName.slice(1)}
+      </h2>
+      {renderSwitch(fieldName)}
     </Form.Group>
   );
 };

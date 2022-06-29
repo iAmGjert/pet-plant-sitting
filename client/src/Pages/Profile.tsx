@@ -10,6 +10,9 @@ import {
   Tab,
   Card,
   Button,
+  ProgressBar,
+  Toast,
+  ToastContainer,
 } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
@@ -17,6 +20,7 @@ import { format } from 'timeago.js';
 import PetPlantCard, { PetPlant } from '../Components/Profile/PetPlantCard';
 import EditAccountModal from '../Components/Profile/EditAccountModal';
 import Rating from '../Components/Profile/Rating';
+import { now } from 'moment';
 
 export interface RatingInfo {
   id: number;
@@ -60,14 +64,39 @@ const Profile = () => {
   const [readMore, setReadMore] = useState(false);
   const [showGalleryFooter, setShowGalleryFooter] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showToast, setShowToast] = useState(true);
   const [newImgCloud, setNewImgCloud] = useState('');
 
   const [completeProfile, setCompleteProfile] = useState(0);
+  const [missingFields, setMissingFields] = useState([]);
   const [profileUser, setProfileUser] = useState<Profile | null>(null);
   const currUser = useAppSelector((state) => state.userProfile.value);
 
   const { id } = useParams();
-
+  // const missingFields: string[] = [];
+  const checkProgress = () => {
+    let total = 0;
+    if (profileUser) {
+      profileUser?.name
+        ? total++
+        : setMissingFields((prev) => [...prev, 'Name']);
+      profileUser?.username
+        ? total++
+        : setMissingFields((prev) => [...prev, 'Username']);
+      profileUser?.location
+        ? total++
+        : setMissingFields((prev) => [...prev, 'Location']);
+      profileUser?.image
+        ? total++
+        : setMissingFields((prev) => [...prev, 'Image']);
+      profileUser?.bio ? total++ : setMissingFields((prev) => [...prev, 'Bio']);
+      profileUser?.pet_plants.length > 0
+        ? total++
+        : setMissingFields((prev) => [...prev, 'Pets and Plants']);
+    }
+    console.log(missingFields);
+    setCompleteProfile(total);
+  };
   // get a user based on the id in the url
   // offscreen modal for editing profile
   // Change tabs to Nav with style tab https://stackoverflow.com/questions/36342220/tabs-in-react-bootstrap-navbar
@@ -165,13 +194,59 @@ const Profile = () => {
 
   useEffect(() => {
     if (currUser.id && Number(id) == currUser?.id) {
+      checkProgress();
       setEditable(true);
     } else {
       setEditable(false);
     }
   }, [currUser, id]);
+
+  useEffect(() => {
+    checkProgress();
+  }, [profileUser]);
   return (
     <Container fluid>
+      <ToastContainer position='bottom-start'>
+        <Toast
+          bg='light'
+          show={showToast}
+          delay={5000}
+          onClose={() => {
+            setShowToast(false);
+          }}
+        >
+          <Toast.Header>
+            <img
+              src='holder.js/20x20?text=%20'
+              className='rounded me-2'
+              alt=''
+            />
+            <strong className='me-auto'>Complete your Profile</strong>
+          </Toast.Header>
+          <ProgressBar
+            min={0}
+            max={6}
+            now={completeProfile}
+            label={`${completeProfile}/6`}
+            animated
+            striped
+            variant='success'
+          />
+          <Toast.Body>{`Edit your profile and complete the following field(s) : ${missingFields.join(
+            ','
+          )}`}</Toast.Body>
+          <Button
+            size='sm'
+            variant='success'
+            onClick={() => {
+              setShowModal(true);
+              setShowToast(false);
+            }}
+          >
+            Complete
+          </Button>
+        </Toast>
+      </ToastContainer>
       <EditAccountModal
         user={profileUser}
         showModal={showModal}
@@ -204,11 +279,11 @@ const Profile = () => {
               )}
               {profileUser?.ratings.length > 1 &&
                 profileUser?.ratings.length < 5 && (
-                <Badge pill bg='info'>
-                  {/* if sitter < 2 jobs completed > */}
+                  <Badge pill bg='info'>
+                    {/* if sitter < 2 jobs completed > */}
                     New Sitter
-                </Badge>
-              )}
+                  </Badge>
+                )}
               {getRating() === 5 && (
                 <Badge pill bg='primary'>
                   {/* 5 star rating */}
@@ -224,13 +299,15 @@ const Profile = () => {
             </h3>
             <br />
             {editable && (
-              <button
+              <Button
+                variant='secondary'
+                size='sm'
                 onClick={() => {
                   setShowModal(true);
                 }}
               >
-                Edit
-              </button>
+                Edit Profile
+              </Button>
             )}
             <Tabs
               defaultActiveKey='overview'

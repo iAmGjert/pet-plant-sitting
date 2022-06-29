@@ -7,6 +7,7 @@ import TopNavBar from './Components/TopNavBar/TopNavBar';
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
 import './App.css';
 import 'mapbox-gl/dist/mapbox-gl.css';
+import 'react-bootstrap-range-slider/dist/react-bootstrap-range-slider.css';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
