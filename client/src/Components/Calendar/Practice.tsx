@@ -56,6 +56,7 @@ const Practice: FC<Props> = () => {
   const events = useAppSelector((state) => state.events.events);
 
   console.log('jobs on 61 practice', jobs);
+  console.log('events', events);
 
   // useEffect(() => {
 
