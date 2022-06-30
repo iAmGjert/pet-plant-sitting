@@ -2,12 +2,18 @@ import React, {useState, useEffect} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import Job from './Job';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, ToggleButton, ButtonGroup, ToggleButtonGroup, DropdownButton, Dropdown } from 'react-bootstrap';
+import moment from 'moment';
 
 const List = () => {
 
   //const jobs = useAppSelector((state)=>state.job.jobs);
   const user = useAppSelector((state)=>state.userProfile.value);
-  const jobs = useAppSelector((state)=>state.job.jobs); 
+  const jobs = useAppSelector((state)=>state.job.jobs).filter((job)=>{
+    if (moment(job.startDate).diff(moment(), 'days') < 0) {
+      return false;
+    }
+    return true;
+  }); 
   const [view, setView] = useState('Available Jobs');
   return (
     <>
