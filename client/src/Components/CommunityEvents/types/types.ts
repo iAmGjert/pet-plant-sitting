@@ -1,7 +1,7 @@
 export interface EventTYPE {
   id: number;
   name: string;
-  host: number;
+  host: number | null;
   location: string;
   description: string;
   event_comments: Array<{ 
@@ -10,21 +10,21 @@ export interface EventTYPE {
     user: {
       id: number;
       name: string;
-      image: string;
-    }}>;
+      image: string | null;
+    }}> | null;
     event_participants: Array<{ 
     id: number; 
     user: {
       id: number;
       name: string;
-      image: string;
-    }}>;
+      image: string | null;
+    }}> | null;
   startDate: Date;
   endDate: Date;
   startTime: Date;
   user: {
     id: number;
     name: string;
-    image: string;
+    image: string | null;
   }
 }
