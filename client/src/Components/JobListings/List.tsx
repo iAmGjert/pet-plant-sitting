@@ -8,12 +8,7 @@ const List = () => {
 
   //const jobs = useAppSelector((state)=>state.job.jobs);
   const user = useAppSelector((state)=>state.userProfile.value);
-  const jobs = useAppSelector((state)=>state.job.jobs).filter((job)=>{
-    if (moment(job.startDate).diff(moment(), 'days') < 0) {
-      return false;
-    }
-    return true;
-  }); 
+  const jobs = useAppSelector((state)=>state.job.jobs);
   const [view, setView] = useState('Available Jobs');
   return (
     <>
@@ -38,6 +33,11 @@ const List = () => {
                 }
               }
               return false; 
+            }).filter((job)=>{
+              if (moment(job.startDate).diff(moment(), 'days') < 0) {
+                return false;
+              }
+              return true;
             }).map((job, index)=>{
               return (<div key={`job#${index}`}>
                 <Job job={job} />

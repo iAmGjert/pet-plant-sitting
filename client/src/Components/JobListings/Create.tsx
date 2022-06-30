@@ -140,7 +140,7 @@ const Create = () => {
             </Form.Group>
           </Col>
         </Row>
-        <Button className='bootstrap-button' variant="primary" type="button" onClick={handleSubmit}>
+        <Button disabled={disabled} className='bootstrap-button' variant="primary" type="button" onClick={handleSubmit}>
       Submit
         </Button>
       </Form> : <Alert variant='warning'>Add a pet or plant to <Alert.Link onClick={()=>{ navigate('/profile/' + user.id); }}>your profile</Alert.Link> first!</Alert>
