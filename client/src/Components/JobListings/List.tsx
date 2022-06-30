@@ -43,7 +43,12 @@ const List = () => {
                 <Job job={job} />
               </div>);
             }) :
-            jobs.map((job, index)=>{
+            jobs.filter((job)=>{
+              if (moment(job.startDate).diff(moment(), 'days') < 0) {
+                return false;
+              }
+              return true;
+            }).map((job, index)=>{
               return (<div key={`job#${index}`}>
                 <Job job={job} />
               </div>);
