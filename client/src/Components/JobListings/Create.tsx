@@ -143,7 +143,7 @@ const Create = () => {
         <Button className='bootstrap-button' variant="primary" type="button" onClick={handleSubmit}>
       Submit
         </Button>
-      </Form> : <Alert dismissible onClose={ ()=>{ setShowLog(false); } } variant='warning'>Add a pet or plant to <Alert.Link onClick={()=>{ navigate('/profile/' + user.id); }}>your profile</Alert.Link> first!</Alert>
+      </Form> : <Alert variant='warning'>Add a pet or plant to <Alert.Link onClick={()=>{ navigate('/profile/' + user.id); }}>your profile</Alert.Link> first!</Alert>
        
     ) : <LoginPrompt/>;
 };
