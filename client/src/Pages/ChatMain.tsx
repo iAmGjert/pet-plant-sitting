@@ -3,7 +3,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import Chat from '../Components/Chat/Chat';
 import UsersOnline from '../Components/Chat/UsersOnline';
-import '../App.css';
+import '../css/App.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { changeView, getReceivedMessages, getSentMessages, getUsersOnline } from '../state/features/chat/chatSlice';

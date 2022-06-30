@@ -82,8 +82,8 @@ const Comments = (props: any) => {
         numComments ? props.comments.map((comment: Comment, index: number) => {
           return (
             <React.Fragment key={index}>
-              <Card>
-                <Container>
+              <Card className='bootstrap-button'>
+                <Container fluid>
                   <Card.Header >
                     <Row>
                       <Col>
@@ -91,7 +91,7 @@ const Comments = (props: any) => {
                       </Col>
                       {currentUser.id === comment.user_id ? 
                         <Col>
-                          <Button variant='link'
+                          <Button className='button-as-link' variant='link'
                             onClick={() => {
                               setCommentObj(comment);
                               setShowEditModal(true);
@@ -99,7 +99,7 @@ const Comments = (props: any) => {
                             edit
                           </Button>
                             | 
-                          <Button variant='link' 
+                          <Button className='button-as-link' variant='link' 
                             onClick={() => {
                               deleteComment(comment.id);
                               // setCommentObj(comment);

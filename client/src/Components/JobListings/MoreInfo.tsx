@@ -1,13 +1,15 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, Modal } from 'react-bootstrap';
 import { setJobs } from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ThemeContext } from '../../App';
 
 
 
 const MoreInfo = (props) => {
+  const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { employer, onHide, location, job, job_id } = props;
@@ -59,7 +61,7 @@ const MoreInfo = (props) => {
   };
   return (
 
-    <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
+    <Modal {...props} aria-labelledby="contained-modal-title-vcenter" contentClassName={theme === 'dark' && 'dark'}>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           Apply for Job
@@ -85,8 +87,8 @@ const MoreInfo = (props) => {
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
-        <Button disabled={hasApplied} onClick={onApply}>{user.name === employer ? 'Edit' : 'Apply'}</Button>
+        <Button className={theme === 'dark' && 'bootstrap-modal-button'} onClick={onHide}>Close</Button>
+        <Button className={theme === 'dark' && 'bootstrap-modal-button'}onClick={onApply}>Apply</Button>
       </Modal.Footer>
       {
         showLog ?
