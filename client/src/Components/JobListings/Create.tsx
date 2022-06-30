@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { changeView, setJobs } from '../../state/features/jobs/jobSlice';
-import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, ToggleButton, ButtonGroup, ToggleButtonGroup } from 'react-bootstrap';
+import { Row, Col, Button, Form, ToggleButton, ButtonGroup, Card, Alert } from 'react-bootstrap';
 import LoginPrompt from './LoginPrompt';
 import moment from 'moment';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Create = () => {
+  const navigate = useNavigate();
   const user = useAppSelector(state => state.userProfile.value);
   const myPets = useAppSelector(state => state.petPlant.petPlants.filter(pet=>pet.owner_id === user.id));
   const petPlants = useAppSelector(state => state.petPlant.petPlants).reduce( (ans, pet, ind)=>{
@@ -21,6 +23,7 @@ const Create = () => {
   const [endDate, setEndDate] = useState(moment().add(2, 'days').format('YYYY-MM-DD'));
   const [description, setDescription] = useState('');
   const [feed, setFeed] = useState(myPets.reduce(arr=>{ arr.push(false); return arr; }, []));
+  const [disabled, setDisabled] = useState(true);
   const getJobs = async () => {
     const jobs = await axios.get(
       '/api/jobs/all'
@@ -65,10 +68,17 @@ const Create = () => {
     setFeed(newFeed);
   };
   const handleSubmit = () => {
+    const jobPetsPlants = petPlants.filter((pet, i)=>{
+      if (feed[i] === true) {
+        return true;
+      }
+      return false;
+    });
+    
     const obj = {
       location: user.location, 
       employer_id: user.id, 
-      pet_plant: petPlants,
+      pet_plant: jobPetsPlants,
       startDate: startDate,
       endDate: endDate,
       isCompleted: false,
@@ -79,9 +89,12 @@ const Create = () => {
     dispatch(changeView('list'));
     return;
   };
+  useEffect(()=>{
+    feed.some((ele)=>{ return ele === true; }) ? setDisabled(false) : setDisabled(true);
+  }, [feed]);
   return user.name !== '' ?
     (
-      <Form>
+      myPets.length > 0 ? <Form>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
           <Form.Label>Job Location: <div>{user.location}</div></Form.Label>
         </Form.Group>
@@ -127,10 +140,11 @@ const Create = () => {
             </Form.Group>
           </Col>
         </Row>
-        <Button className='bootstrap-button' variant="primary" type="button" onClick={handleSubmit}>
+        <Button disabled={disabled} className='bootstrap-button' variant="primary" type="button" onClick={handleSubmit}>
       Submit
         </Button>
-      </Form> 
+      </Form> : <Alert variant='warning'>Add a pet or plant to <Alert.Link onClick={()=>{ navigate('/profile/' + user.id); }}>your profile</Alert.Link> first!</Alert>
+       
     ) : <LoginPrompt/>;
 };
 

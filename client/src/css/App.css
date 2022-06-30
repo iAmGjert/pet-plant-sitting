@@ -1,6 +1,7 @@
 html,
 body {
   min-height: 100%;
+  padding-bottom: 7%;
 }
 .mapJobMarker {
   line-height: 14px;

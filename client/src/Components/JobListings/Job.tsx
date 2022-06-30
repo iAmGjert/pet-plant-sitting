@@ -3,6 +3,7 @@ import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'reac
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import MoreInfo from './MoreInfo';
 import { setPrompt } from '../../state/features/jobs/jobSlice';
+import moment from 'moment';
  
 interface jobStuff {
   id: number,
@@ -21,7 +22,7 @@ const Job = ({ job }) => {
   const { id, location, pet_plant, employer_id, sitter_id, startDate, endDate}: jobStuff = job;
   const dispatch = useAppDispatch();
   const handleClick = ()=>{
-    
+    //console.log(job);
     if (user.name === '') {
       dispatch(setPrompt(true));      
     }
@@ -51,22 +52,20 @@ const Job = ({ job }) => {
             </Col>
             <Col>        
               {
-                petPlants[pet_plant[0]] ?
+                Array.isArray(pet_plant) ?
                   <div>
-                    Pet/Plants: { pet_plant.map((p, i)=>{ return <div key={`p${i}`}>{petPlants[p - 1].name}</div>; }) }
+                    Pet/Plants: { pet_plant.map((p, i)=>{ return <div key={`p${i}`}>{petPlants[p - 1]?.name}</div>; }) }
                   </div> :
                   <div />
               }
             </Col>
           </Row>
           <Row>
-            <Col>
-            Job Location: {location}
-            </Col>
+            Job starts {moment(startDate).fromNow()}.            
           </Row>
           <Button className='bootstrap-button' onClick={handleClick} variant='primary'>More Info</Button>
           <>
-            <MoreInfo user={user} show={modalShow} onHide={() => setModalShow(false)} job={job} employer={ users.reduce((employer, users)=>{
+            <MoreInfo user={user} show={modalShow} job_id={id} onHide={() => setModalShow(false)} job={job} employer={ users.reduce((employer, users)=>{
               if (users.id === employer_id) {
                 employer = users.name;
               }

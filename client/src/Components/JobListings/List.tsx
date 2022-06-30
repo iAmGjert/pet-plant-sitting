@@ -2,12 +2,13 @@ import React, {useState, useEffect} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import Job from './Job';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, ToggleButton, ButtonGroup, ToggleButtonGroup, DropdownButton, Dropdown } from 'react-bootstrap';
+import moment from 'moment';
 
 const List = () => {
 
   //const jobs = useAppSelector((state)=>state.job.jobs);
   const user = useAppSelector((state)=>state.userProfile.value);
-  const jobs = useAppSelector((state)=>state.job.jobs); 
+  const jobs = useAppSelector((state)=>state.job.jobs);
   const [view, setView] = useState('Available Jobs');
   return (
     <>
@@ -27,15 +28,30 @@ const List = () => {
                     return false;
                   }
                 }
-                return true;
+                if (job.sitter_id === null) {
+                  return true;
+                }
               }
               return false; 
+            }).filter((job)=>{
+              if (moment(job.startDate).diff(moment(), 'days') < 0) {
+                return false;
+              }
+              return true;
             }).map((job, index)=>{
               return (<div key={`job#${index}`}>
                 <Job job={job} />
               </div>);
             }) :
-            jobs.map((job, index)=>{
+            jobs.filter((job)=>{
+              if (moment(job.startDate).diff(moment(), 'days') < 0) {
+                return false;
+              }
+              if (job.sitter_id !== null) {
+                return false;
+              }
+              return true;
+            }).map((job, index)=>{
               return (<div key={`job#${index}`}>
                 <Job job={job} />
               </div>);
