@@ -56,17 +56,17 @@ const Register = () => {
     <Form>
       <Form.Group className='mb-3' controlId='formBasicFirstName'>
         <Form.Label>First Name</Form.Label>
-        <Form.Control type='text' placeholder='First Name'
+        <Form.Control className='bootstrap-textbox' type='text' placeholder='First Name'
           onChange={(e) => setFirstName(e.target.value)} required/>
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicLastName'>
         <Form.Label>Last Name</Form.Label>
-        <Form.Control type='text' placeholder='Last Name' 
+        <Form.Control className='bootstrap-textbox' type='text' placeholder='Last Name' 
           onChange={(e) => setLastName(e.target.value)} required/>
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicEmail'>
         <Form.Label>Email address</Form.Label>
-        <Form.Control type='email' placeholder='Enter email' 
+        <Form.Control className='bootstrap-textbox' type='email' placeholder='Enter email' 
           onChange={(e) => setEmail(e.target.value)} required/>
         <Form.Text className='text-muted'>
           Well never share your email with anyone else.
@@ -74,20 +74,20 @@ const Register = () => {
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicPassword'>
         <Form.Label>Password</Form.Label>
-        <Form.Control type='password' placeholder='Password' 
+        <Form.Control className='bootstrap-textbox' type='password' placeholder='Password' 
           onChange={(e) => setPassword(e.target.value)} required/>
       </Form.Group>
       {/* <Form.Group className='mb-3' controlId='formBasicConfirmPassword'>
         <Form.Label>Confirm Password</Form.Label>
-        <Form.Control type='password' placeholder='Confirm Password' 
+        <Form.Control className='bootstrap-textbox' type='password' placeholder='Confirm Password' 
           onChange={(e) => setPasswordConfirm(e.target.value)} required/>
       </Form.Group> */}
       <Form.Group className='mb-3' controlId='formBasicLocation'>
         <Form.Label>Location</Form.Label>
-        <Form.Control type='text' placeholder='optional' 
+        <Form.Control className='bootstrap-textbox' type='text' placeholder='optional' 
           onChange={(e) => setLocation(e.target.value)} required/>
       </Form.Group>
-      <Button variant='primary' href='/login' onClick={registerUser}>
+      <Button className='bootstrap-button' variant='primary' href='/login' onClick={registerUser}>
         Submit
       </Button>
     </Form> 

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, Modal } from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 import { search, setHistory, newSearch } from '../../state/features/info/infoSlice';
@@ -8,8 +8,10 @@ import moment from 'moment';
 import { marked } from 'marked';
 import { useNavigate } from 'react-router-dom';
 import Test from './test';
+import { ThemeContext } from '../../App';
 
 const Search = () => {
+  const theme = useContext(ThemeContext);
   const navi = useNavigate();
   const dispatch = useAppDispatch();
   const [searchTarget, setSearchTarget] = useState('Fern');
@@ -152,7 +154,7 @@ const Search = () => {
           }) :
           <div/>
       }
-      <Modal show={wikiView} fullscreen='md-down' onHide={() => setWikiView(false)}>
+      <Modal contentClassName={theme === 'dark' && 'dark'} show={wikiView} fullscreen='md-down' onHide={() => setWikiView(false)}>
         <Modal.Header closeButton>
           <Modal.Title>{articleInfo.title}</Modal.Title>
         </Modal.Header>
@@ -162,7 +164,7 @@ const Search = () => {
           </Modal.Body>
         }
         <Modal.Footer>
-          Click <a href={`http://en.wikipedia.org/wiki?curid=${articleInfo.pageid}`} target="_blank" rel="noopener noreferrer">here</a> to open the full Wikipedia article.
+          Click <a href={`http://en.wikipedia.org/wiki?curid=${articleInfo.pageid}`} target="_blank" rel="noopener noreferrer" className={theme === 'dark' && 'modal-button-as-link'}>here</a> to open the full Wikipedia article.
         </Modal.Footer>
       </Modal>
       

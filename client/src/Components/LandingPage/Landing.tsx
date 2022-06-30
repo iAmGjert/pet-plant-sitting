@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import UpcomingJobs from './UpcomingJobs';
 import LandingEventCard from './LandingEventCard';
@@ -60,10 +59,17 @@ const Landing: FC<Props> = () => {
   const pastJobs = useAppSelector((state) => state.job.pastJobs);
   //console.log('applications', applications);
   //see if applicant id matches with sitter id
-
+  //console.log(upcomingJobs, 'upcomingJobs');
+  //console.log('user', user);
   const events = useAppSelector((state) => state.events.events);
   //console.log('upcomingJobs', upcomingJobs);
-  const trimmedUpcommingJobs = upcomingJobs.slice(2);
+  // const trimmedUpcommingJobs = upcomingJobs.slice(2);
+  const sitterUpcomingJobs = upcomingJobs.filter(
+    (job: { sitter_id: number }) => {
+      return job.sitter_id === user.id;
+    }
+  );
+  //console.log('sitterUpcomingJobs', sitterUpcomingJobs);
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
 
   // const currentDate = moment().format('YYYY-MM-DD');
@@ -86,7 +92,7 @@ const Landing: FC<Props> = () => {
 
   return (
     <div>
-      <Card>
+      <Card className='bootstrap-card'>
         <Card.Header as='h5'>
           Welcome {user.name ? `, ${user.name}!` : '!'}
         </Card.Header>
@@ -97,8 +103,8 @@ const Landing: FC<Props> = () => {
         />
       </Card>
 
-      {trimmedUpcommingJobs.length &&
-        trimmedUpcommingJobs.map((element) => {
+      {sitterUpcomingJobs.length &&
+        sitterUpcomingJobs.map((element) => {
           return (
             <>
               <UpcomingJobs

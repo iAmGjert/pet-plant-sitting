@@ -6,8 +6,8 @@ import Login from './Pages/Login';
 import MapMain from './Pages/MapMain';
 import CalendarMain from './Pages/CalendarMain';
 import CommunityEvents from './Pages/CommunityEventsMain';
+import './css/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
 import Profile from './Pages/Profile';
 import axios from 'axios';
 import {
@@ -41,7 +41,7 @@ const App: FC<Props> = () => {
   const getUser = async () => {
     const user = await axios.get('/auth/login/success');
     dispatch(setUser(user.data.user));
-    console.log(user.data.user);
+    //console.log(user.data.user);
   };
   const getJobs = async () => {
     const jobs = await axios.get('/api/jobs/all');
@@ -98,7 +98,7 @@ const App: FC<Props> = () => {
             <Route path='/info' element={<InfoMain />} />
             <Route path='/register' element={<Register />} />
           </Routes>
-          <BottomNavBar />
+          <BottomNavBar theme={theme} />
         </BrowserRouter>
       </div>
     </ThemeContext.Provider>

@@ -2,9 +2,14 @@ import { io } from 'socket.io-client';
 import React, { useEffect, useState, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import Chat from '../Components/Chat/Chat';
+<<<<<<< HEAD
 import ClientList from '../Components/Chat/ClientList';
 import ApplicantList from '../Components/Chat/ApplicantList';
 import '../App.css';
+=======
+import UsersOnline from '../Components/Chat/UsersOnline';
+import '../css/App.css';
+>>>>>>> 7b3cc4c046490930483308cd90ac17179fc766a1
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { changeView, getReceivedMessages, getSentMessages, getUsersOnline } from '../state/features/chat/chatSlice';

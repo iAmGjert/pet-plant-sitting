@@ -29,7 +29,7 @@ const LoginForm = () => {
     <Form>
       <Form.Group className='mb-3' controlId='formBasicEmail'>
         <Form.Label>Email address</Form.Label>
-        <Form.Control type='email' placeholder='Enter email' 
+        <Form.Control className='bootstrap-textbox' type='email' placeholder='Enter email' 
           onChange={(e) => setEmail(e.target.value)} required/>
         <Form.Text className='text-muted'>
           Well never share your email with anyone else.
@@ -37,19 +37,19 @@ const LoginForm = () => {
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicPassword'>
         <Form.Label>Password</Form.Label>
-        <Form.Control type='password' placeholder='Password' 
+        <Form.Control className='bootstrap-textbox' type='password' placeholder='Password' 
           onChange={(e) => setPassword(e.target.value)} required/>
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicCheckbox'>
       </Form.Group>
-      <Button variant='primary' href='/loading' onClick={login}>
+      <Button className='bootstrap-button' variant='primary' href='/loading' onClick={login}>
         Login
       </Button>
       <div style={{ margin: '5px'}}>
         sign up as a new user
       </div>
       <div style={{ marginBottom: '5px'}}>
-        <Button variant='primary' onClick={navigateRegister}>
+        <Button className='bootstrap-button' variant='primary' onClick={navigateRegister}>
         Sign Up
         </Button>
       </div>
