@@ -3,6 +3,7 @@ import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'reac
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import MoreInfo from './MoreInfo';
 import { setPrompt } from '../../state/features/jobs/jobSlice';
+import moment from 'moment';
  
 interface jobStuff {
   id: number,
@@ -60,9 +61,7 @@ const Job = ({ job }) => {
             </Col>
           </Row>
           <Row>
-            <Col>
-            Job Location: {location}
-            </Col>
+            Job starts {moment(startDate).fromNow()}.            
           </Row>
           <Button className='bootstrap-button' onClick={handleClick} variant='primary'>More Info</Button>
           <>
