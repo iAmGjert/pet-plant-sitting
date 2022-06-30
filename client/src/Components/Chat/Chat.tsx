@@ -16,6 +16,7 @@ const Chat = ({ socket }) => {
   const currUser = useAppSelector((state) => state.userProfile.value);
   const conversationId = useAppSelector((state) => state.chat.conversationId);
   const recipientId = useAppSelector((state) => state.chat.recipientId);
+  const isApplicant = useAppSelector((state) => state.chat.isApplicant);
   const [currentMessage, setCurrentMessage] = useState('');
   const [messageList, setMessageList] = useState([]);
   const dispatch = useAppDispatch();
@@ -69,6 +70,10 @@ const Chat = ({ socket }) => {
       setCurrentMessage('');
     }
   };
+
+  const acceptApplicant = async () => {
+    
+  }
 
   useEffect(() => {
 
@@ -137,6 +142,10 @@ const Chat = ({ socket }) => {
           }}  
         />
         <button onClick={sendMessage}>SEND</button>
+      </div>
+      <div>
+        {isApplicant && <button>Accept</button>}
+        {isApplicant && <button>Reject</button>}
       </div>
     </div>
   );

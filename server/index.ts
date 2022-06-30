@@ -9,8 +9,6 @@ const cookieParser = require('cookie-parser');
 require('dotenv').config();
 require('./auth/passport.ts');
 
-<<<<<<< HEAD
-=======
 const app = express();
 
 //*****************************STATIC MIDDLEWARE***********************************/
@@ -28,7 +26,6 @@ app.use(cors({
 }));
 app.use(express.static(CLIENT_PATH));
 
->>>>>>> 1efa79cab4adee5dc786ca9f5a174d104a7587d4
 app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: true,
@@ -52,11 +49,7 @@ app.use('/api/gallery', require('./routes/gallery'));
 app.use('/api/pets_plants', require('./routes/pets_plants'));
 app.use('/conversations', require('./routes/conversations'));
 app.use('/messages', require('./routes/messages'));
-<<<<<<< HEAD
-
-=======
 app.use('/api/jobapplicants', require('./routes/jobApplicants'));
->>>>>>> 1efa79cab4adee5dc786ca9f5a174d104a7587d4
 app.use('/api/info', require('./routes/info'));
 
 app.get('/*', function (req: Request, res: Response | any) {

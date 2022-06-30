@@ -20,6 +20,7 @@ interface state {
   usersOnline: Array<userOnline>,
   recipientId: number,
   conversationId: number,
+  isApplicant: boolean
 }
 
 const initialState = <state>{
@@ -29,6 +30,7 @@ const initialState = <state>{
   usersOnline: [],
   recipientId: 0,
   conversationId: 0,
+  isApplicant: false
 };
 
 export const chatSlice = createSlice({
@@ -55,11 +57,15 @@ export const chatSlice = createSlice({
     getConversationId: (state, action: PayloadAction<number>) => {
       state.conversationId = action.payload;
       return state;
+    },
+    setIsApplicant: (state, action: PayloadAction<boolean>) => {
+      state.isApplicant = action.payload;
+      return state;
     }
   }
 });
 
-export const { changeView, getReceivedMessages, getSentMessages, getUsersOnline, getRecipientId, getConversationId } = chatSlice.actions;
+export const { changeView, getReceivedMessages, getSentMessages, getUsersOnline, getRecipientId, getConversationId, setIsApplicant } = chatSlice.actions;
 
 export default chatSlice.reducer;
 

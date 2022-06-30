@@ -2,7 +2,8 @@ import { io } from 'socket.io-client';
 import React, { useEffect, useState, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import Chat from '../Components/Chat/Chat';
-import UsersOnline from '../Components/Chat/UsersOnline';
+import ClientList from '../Components/Chat/ClientList';
+import ApplicantList from '../Components/Chat/ApplicantList';
 import '../App.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
@@ -51,8 +52,13 @@ const ChatMain = () => {
   return (
     <div className="chat-main">
       {
-        view === 'usersOnline' ?
-          <UsersOnline /> :
+        view === 'usersOnline' ? (
+          <div>
+            <ClientList />
+            <ApplicantList />
+          </div>
+        )
+          :
           <Chat socket={socket} />
       }
     </div>
