@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button, Card } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import MoreInfo from './MoreInfo';
 import { setPrompt } from '../../state/features/jobs/jobSlice';

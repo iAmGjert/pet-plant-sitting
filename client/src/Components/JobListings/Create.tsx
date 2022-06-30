@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { changeView, setJobs } from '../../state/features/jobs/jobSlice';
-import { Row, Col, Button, Form, ToggleButton, ButtonGroup, Card, Alert } from 'react-bootstrap';
+import { Row, Col, Button, Form, ToggleButton, ButtonGroup, Alert } from 'react-bootstrap';
 import LoginPrompt from './LoginPrompt';
 import moment from 'moment';
 import axios from 'axios';
