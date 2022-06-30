@@ -1,60 +1,28 @@
-import React, { useEffect } from 'react';
-import axios from 'axios';
+import React, { ReactNode, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container'
-import { /*getEvents, getView,*/ setView, setEvents, setEventObj } from '../state/features/events/eventsSlice';
+import { setView, setEventObj, selectAllEvents, getEventsStatus, fetchEvents, 
+  pageView } from '../state/features/events/eventsSlice';
 import Event from '../Components/CommunityEvents/Event';
 import Details from '../Components/CommunityEvents/Details';
 import CreateEvent from '../Components/CommunityEvents/CreateEvent';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
 import '../Components/CommunityEvents/style/EventsMain.css';
+import { EventTYPE } from '../Components/CommunityEvents/types/types';
 
-interface EventTYPE {
-  id: number;
-  name: string;
-  host: number;
-  location: string;
-  description: string;
-  event_comments: Array<{ 
-    id: number; 
-    comment: string; 
-    user: {
-      id: number;
-      name: string;
-      image: string;
-    }}>;
-    event_participants: Array<{ 
-    id: number; 
-    user: {
-      id: number;
-      name: string;
-      image: string;
-    }}>;
-  startDate: Date;
-  endDate: Date;
-  startTime: Date;
-  user: {
-    id: number;
-    name: string;
-    image: string;
-  }
-}
 
 const CommunityEventsMain = () => {
-  const dispatch: any = useAppDispatch();
-  const state = useAppSelector((state) => state);
-  const view = useAppSelector(state => state.events.view);
-  const events = useAppSelector(state => state.events.events);
-  // console.log(state);
-  // console.log(events, 'events main'); // with user and comment data included 
-  
+  const dispatch = useAppDispatch();
+  const view = useAppSelector(pageView);
+
+  const events = useAppSelector(selectAllEvents);
+  const eventsStatus = useAppSelector(getEventsStatus);
+
   useEffect(() => {
-    const getEvents = async () => {
-      const res = await axios.get('/api/events/all');
-      return dispatch(setEvents(res.data));
-    };
-    getEvents();
-  }, [dispatch]);
+    if (eventsStatus === 'idle') {
+      dispatch(fetchEvents());
+    }
+  }, [eventsStatus, dispatch]);
   
   const changeView = (option: string) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -69,12 +37,15 @@ const CommunityEventsMain = () => {
     dispatch(setView('create-event'));
   };
   
-  
-  const renderView = (): any => {
+  type events = EventTYPE[];
+  const renderView = (): ReactNode | null => {
     if (view === 'list') {
-      
-      return events.map((event: EventTYPE) => (
-        <div key={event.id} /*style={{border: '1px solid red'}}*/>
+      const orderedEvents = events instanceof Array && events.slice()
+        .sort((a, b) => a.startDate.localeCompare(b.startDate))
+        .filter((event) => new Date() <= new Date(`${event.startDate} ${event.startTime}`));
+
+      return orderedEvents.map((event: EventTYPE) => (
+        <React.Fragment key={event.id} >
           <Event className='events-list'
             name={event.name}
             host={event.host}
@@ -87,9 +58,8 @@ const CommunityEventsMain = () => {
             startTime={event.startTime}
             user={event.user}
             switchToDetailsView={switchToDetailsView}
-            eventObj={event}
-          />
-        </div>
+            eventObj={event} />
+        </React.Fragment>
       ));
     } else if (view === 'details') {
       return <Details />;
