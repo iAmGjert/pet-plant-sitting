@@ -33,7 +33,9 @@ const List = () => {
                     return false;
                   }
                 }
-                return true;
+                if (job.sitter_id === null) {
+                  return true;
+                }
               }
               return false; 
             }).map((job, index)=>{
