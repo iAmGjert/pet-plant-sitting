@@ -18,7 +18,7 @@ interface jobStuff {
 const Job = ({ job }) => {
   const [show, setShow] = useState(false);
   const target = useRef(null);
-  const removeOverlay = ()=>{ setTimeout(()=>{ setShow(false); }, 3000); };
+  const removeOverlay = ()=>{ setTimeout(()=>{ setShow(false); }, 5000); };
 
   const TOKEN = `${process.env.MAPBOX_TOKEN}`;
   const [userGeoLoc, setUserGeoLoc] = useState(null);
