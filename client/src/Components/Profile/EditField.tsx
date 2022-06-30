@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable indent */
 import React, { useEffect, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, ToggleButton } from 'react-bootstrap';
 
 import PetPlantCard, { PetPlant } from './PetPlantCard';
 import { RatingInfo, Profile } from '../../Pages/Profile';
@@ -12,6 +12,7 @@ import axios from 'axios';
 import { AiFillEdit } from '@react-icons/all-files/ai/AiFillEdit';
 import { AiFillSave } from '@react-icons/all-files/ai/AiFillSave';
 import { BiCurrentLocation } from '@react-icons/all-files/bi/BiCurrentLocation';
+import Tags from './Tags';
 
 type Props = {
   user: Profile | null;
@@ -28,6 +29,38 @@ declare global {
     cloudinary: any;
   }
 }
+
+const speciesTags = [
+  'cat',
+  'dog',
+  'bird',
+  'fish',
+  'reptile',
+  'insect',
+  'rodent',
+  'other',
+];
+
+const petTags = [
+  'Energetic',
+  'Loud',
+  'Playful',
+  'Quiet',
+  'Independent',
+  'Shy',
+  'Anxious',
+  'Loves Attention',
+  'Affectionate',
+];
+
+const plantTags = [
+  'Prickly',
+  'Daily Water',
+  'Low-Light',
+  'Direct-Light',
+  'High Maintenance ',
+];
+
 const EditField = ({
   fieldName,
   value,
@@ -167,8 +200,17 @@ const EditField = ({
         return (
           Pet_Plant.is_plant === false && (
             <div>
-              <Button variant='primary'>Male</Button>{' '}
-              <Button variant='primary'>Female</Button>
+              {petTags.map((tag, i) => {
+                return (
+                  <Tags
+                    tag={tag}
+                    i={i}
+                    key={'tag' + i}
+                    setVal={setVal}
+                    value={value}
+                  />
+                );
+              })}
             </div>
           )
         );
