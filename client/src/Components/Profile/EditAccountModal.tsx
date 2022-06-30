@@ -75,7 +75,8 @@ const EditAccountModal = ({
           id: null,
           name: '',
           bio: '',
-          image: '',
+          image:
+            'https://i.pinimg.com/736x/4a/21/33/4a2133dd4dad968c3218fec61d97db55.jpg',
           owner_id: user?.id,
           is_plant: false,
           breed: '',
@@ -92,7 +93,7 @@ const EditAccountModal = ({
         add={true}
         newPetId={newPetId}
       />
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title>Update Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>

@@ -245,6 +245,19 @@ db.sync(
             bio: "I'm very shy, but if you feed me then I instantly become your best friend",
           },
           {
+            owner_id: 1,
+            name: 'Fern',
+            image:
+              'https://cdn.britannica.com/21/6821-050-AE82E5BF/Bracken.jpg',
+            breed: 'plant',
+            species: 'fern',
+            tags: ['Khaki', 'Violet'],
+            rating: 9,
+            total_ratings: 33,
+            is_plant: true,
+            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
+          },
+          {
             owner_id: 2,
             name: 'Nova',
             image:

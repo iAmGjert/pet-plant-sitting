@@ -5,7 +5,7 @@ export const PetPlantModel = {
   name: DataTypes.STRING,
   image: DataTypes.STRING,
   breed: DataTypes.STRING,
-  age: DataTypes.INTEGER,
+  age: DataTypes.STRING,
   gender: DataTypes.STRING,
   species: DataTypes.STRING,
   bio: DataTypes.STRING,

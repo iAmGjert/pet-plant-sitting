@@ -88,11 +88,11 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
                 )}
               </ListGroupItem>
             )}
-            {PetPlant.gender && (
+            {PetPlant.gender && PetPlant.age && (
               <ListGroupItem>
                 {PetPlant.gender === 'Male'
-                  ? `He is ${PetPlant.age} years old`
-                  : `She is ${PetPlant.age} years old`}
+                  ? `He is a ${PetPlant.age} ${PetPlant.breed}`
+                  : `She is  a(n) ${PetPlant.breed} ${PetPlant.age}`}
               </ListGroupItem>
             )}
             {PetPlant.breed && <ListGroupItem>{PetPlant.breed}</ListGroupItem>}

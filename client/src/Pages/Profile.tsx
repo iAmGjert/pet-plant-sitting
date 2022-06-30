@@ -20,7 +20,7 @@ import { format } from 'timeago.js';
 import PetPlantCard, { PetPlant } from '../Components/Profile/PetPlantCard';
 import EditAccountModal from '../Components/Profile/EditAccountModal';
 import Rating from '../Components/Profile/Rating';
-import { now } from 'moment';
+import { useNavigate } from 'react-router-dom';
 
 export interface RatingInfo {
   id: number;
@@ -44,6 +44,8 @@ export interface Profile {
   image: string;
   average_rating: number;
   bio: string;
+  username: string;
+  theme: string;
   gallery_id: number;
   createdAt: string;
   location: string;
@@ -71,11 +73,12 @@ const Profile = () => {
   const [missingFields, setMissingFields] = useState([]);
   const [profileUser, setProfileUser] = useState<Profile | null>(null);
   const currUser = useAppSelector((state) => state.userProfile.value);
-
+  const navigate = useNavigate();
   const { id } = useParams();
   // const missingFields: string[] = [];
   const checkProgress = () => {
     let total = 0;
+    setMissingFields([]);
     if (profileUser) {
       profileUser?.name
         ? total++
@@ -103,8 +106,11 @@ const Profile = () => {
   // Nav will be sticky top and will scroll with the page
   const getProfile = async () => {
     const user = await axios.get('/api/users/' + id);
+    if (user.data === '') {
+      navigate('/');
+    }
+    console.log(user);
     setProfileUser(user.data);
-    // console.log(user.data);
   };
 
   const getRating = () => {
@@ -134,19 +140,37 @@ const Profile = () => {
     }
     return stars;
   };
-  const widget = window?.cloudinary.createUploadWidget(
-    {
-      cloudName: process.env.CLOUDINARY_NAME,
-      uploadPreset: process.env.CLOUDINARY_PRESET,
-    },
-    (error: Error, result: any) => {
-      if (result.event === 'success') {
-        setNewImgCloud(result.info.url);
-      }
-    }
-  );
+  // const widget = window?.cloudinary.openUploadWidget(
+  //   {
+  //     cloudName: process.env.CLOUDINARY_NAME,
+  //     uploadPreset: process.env.CLOUDINARY_PRESET,
+  //   },
+  //   (error: Error, result: any) => {
+  //     if (result.event === 'success') {
+  //       setNewImgCloud(result.info.url);
+  //     }
+  //   }
+  // );
   const showWidget = () => {
-    widget.open();
+    const widget = window?.cloudinary.openUploadWidget(
+      {
+        cloudName: process.env.CLOUDINARY_NAME,
+        uploadPreset: process.env.CLOUDINARY_PRESET,
+      },
+      (error: Error, result: any) => {
+        if (!error && result && result.event === 'success') {
+          setNewImgCloud(result.info.url);
+        }
+      }
+    );
+  };
+  const getLocation = (location: string) => {
+    if (location) {
+      const loc = location.split(',');
+      return loc[1].trim() + ', ' + loc[2].trim();
+    } else {
+      return 'No Location';
+    }
   };
 
   const deleteGallery = (id: number) => {
@@ -206,47 +230,50 @@ const Profile = () => {
   }, [profileUser]);
   return (
     <Container fluid>
-      <ToastContainer position='bottom-start'>
-        <Toast
-          bg='light'
-          show={showToast}
-          delay={5000}
-          onClose={() => {
-            setShowToast(false);
-          }}
-        >
-          <Toast.Header>
-            <img
-              src='holder.js/20x20?text=%20'
-              className='rounded me-2'
-              alt=''
-            />
-            <strong className='me-auto'>Complete your Profile</strong>
-          </Toast.Header>
-          <ProgressBar
-            min={0}
-            max={6}
-            now={completeProfile}
-            label={`${completeProfile}/6`}
-            animated
-            striped
-            variant='success'
-          />
-          <Toast.Body>{`Edit your profile and complete the following field(s) : ${missingFields.join(
-            ','
-          )}`}</Toast.Body>
-          <Button
-            size='sm'
-            variant='success'
-            onClick={() => {
-              setShowModal(true);
+      {completeProfile !== 6 && editable && (
+        <ToastContainer position='middle-center'>
+          <Toast
+            bg='light'
+            show={showToast}
+            // delay={5000}
+            // autohide
+            onClose={() => {
               setShowToast(false);
             }}
           >
-            Complete
-          </Button>
-        </Toast>
-      </ToastContainer>
+            <Toast.Header>
+              <img
+                src='holder.js/20x20?text=%20'
+                className='rounded me-2'
+                alt=''
+              />
+              <strong className='me-auto'>Complete your Profile</strong>
+            </Toast.Header>
+            <ProgressBar
+              min={0}
+              max={6}
+              now={completeProfile}
+              label={`${completeProfile}/6`}
+              animated
+              striped
+              variant='success'
+            />
+            <Toast.Body>{`Edit your profile and complete the following field(s) : ${missingFields.join(
+              ','
+            )}`}</Toast.Body>
+            <Button
+              size='sm'
+              variant='success'
+              onClick={() => {
+                setShowModal(true);
+                setShowToast(false);
+              }}
+            >
+              Complete
+            </Button>
+          </Toast>
+        </ToastContainer>
+      )}
       <EditAccountModal
         user={profileUser}
         showModal={showModal}
@@ -259,13 +286,10 @@ const Profile = () => {
         </Col>
         <Col>
           <span>
-            <h1 style={{ fontSize: '30px', paddingTop: '10px' }}>
-              <>
-                {profileUser?.name}
-                {console.log(currUser)}
-              </>
-            </h1>
-            <h5>{profileUser?.location}</h5>
+            <h2 style={{ fontSize: '30px', paddingTop: '10px' }}>
+              {profileUser?.name}
+            </h2>
+            <h5>{getLocation(profileUser?.location)}</h5>
             <h5>
               {getStars(getRating())}({profileUser?.ratings.length})
             </h5>
@@ -355,7 +379,7 @@ const Profile = () => {
                   );
                 })}
               </Tab>
-              <Tab eventKey='pets' title='Pets'>
+              <Tab eventKey='pets' title='Pets and Plants'>
                 {profileUser?.pet_plants.map((pet) => {
                   return (
                     <PetPlantCard
