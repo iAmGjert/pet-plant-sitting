@@ -47,6 +47,9 @@ const List = () => {
               if (moment(job.startDate).diff(moment(), 'days') < 0) {
                 return false;
               }
+              if (job.sitter_id !== null) {
+                return false;
+              }
               return true;
             }).map((job, index)=>{
               return (<div key={`job#${index}`}>
