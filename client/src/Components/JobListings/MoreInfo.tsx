@@ -1,23 +1,36 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, Modal } from 'react-bootstrap';
 import { setJobs } from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { ThemeContext } from '../../App';
+import moment from 'moment';
 
 
 
 const MoreInfo = (props) => {
+  const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { employer, onHide, location, job } = props;
+  const { employer, onHide, location, job, job_id } = props;
   const user = useAppSelector(state => state.userProfile.value);
   const [showLog, setShowLog] = useState(false);
-  const [obj, setObj] = useState(
+  const hasApplied = job.job_applicants.reduce((res, applicant)=>{
+    //console.log(job);
+    //console.log(user.id);
+    if (applicant.user_id === user.id) { 
+      res = true;
+      return res; 
+    }
+    return res; 
+  }, false);
+  const obj = 
     {
-      job_id: job.id, 
+      job_id: job_id, 
       user_id: user.id,
-    });
+      status: 'pending'
+    };
   const postApplicant = async (newApplicant: any) => {
     return await axios.post('/api/jobs/applicant/create', newApplicant)
       .then((res: any) => {
@@ -28,14 +41,17 @@ const MoreInfo = (props) => {
         return err;
       });
   };
-  const onApply = ()=>{
+  const onApply = async ()=>{
     if (user.name === '') {
       setShowLog(true);
       return;
     }
-    postApplicant(obj);
-    getJobs();
-      
+    if (user.name === employer) {
+      console.log('This is your job!');
+      return;
+    }
+    await postApplicant(obj);
+    await getJobs();
     onHide();
   };
   const getJobs = async () => {
@@ -46,34 +62,34 @@ const MoreInfo = (props) => {
   };
   return (
 
-    <Modal {...props} aria-labelledby="contained-modal-title-vcenter">
+    <Modal {...props} aria-labelledby="contained-modal-title-vcenter" contentClassName={theme === 'dark' && 'dark'}>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
-          Apply for Job
+          {`${employer}\'s job listing:`} 
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="show-grid">
         <Container>
           <Row>
-            <Col xs={12} md={8}>
-              {`Employer: ${employer}`}
-            </Col>
+            Job Descripion:
+            <Row>
+              {job.description}
+            </Row>
           </Row>
           <Row>
-            <Col xs={6} md={4}>
-            Job Descripion
-            </Col>
-            <Row>
-              <Col xs={6} md={4}>
-                {job.description}
-              </Col>
-            </Row>
+            From {moment(job.startDate).format('MM/DD')} to {moment(job.endDate).format('MM/DD')}.
+          </Row>
+          <Row>
+            Job length: {moment(job.endDate).diff(moment(job.startDate), 'days')} {moment(job.endDate).diff(moment(job.startDate), 'days') > 1 ? 'days' : 'day'}
+          </Row>
+          <Row>
+            Distance to job: {job.location}
           </Row>
         </Container>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={onHide}>Close</Button>
-        <Button onClick={onApply}>Apply</Button>
+        <Button className={theme === 'dark' && 'bootstrap-modal-button'} onClick={onHide}>Close</Button>
+        <Button className={theme === 'dark' && 'bootstrap-modal-button'}onClick={onApply}>Apply</Button>
       </Modal.Footer>
       {
         showLog ?

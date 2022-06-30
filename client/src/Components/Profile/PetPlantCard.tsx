@@ -47,6 +47,7 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
 
   return (
     <Card
+      className='bootstrap-card'
       onClick={() => {
         if (edit) {
           setShowModal(!showModal);
