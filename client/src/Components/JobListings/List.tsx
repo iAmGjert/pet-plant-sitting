@@ -33,7 +33,8 @@ const List = () => {
               }
               return false; 
             }).filter((job)=>{
-              if (moment(job.startDate).diff(moment(), 'days') < 0) {
+              console.log(moment(job.endDate).diff(moment(), 'days'));
+              if (moment(job.endDate).diff(moment(), 'days') < 0) {
                 return false;
               }
               return true;
@@ -43,7 +44,7 @@ const List = () => {
               </div>);
             }) :
             jobs.filter((job)=>{
-              if (moment(job.startDate).diff(moment(), 'days') < 0) {
+              if (moment(job.endDate).diff(moment(), 'days') < 0) {
                 return false;
               }
               if (job.sitter_id !== null) {

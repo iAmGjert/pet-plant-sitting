@@ -108,7 +108,7 @@ const Job = ({ job }) => {
             </Col>
           </Row>
           <Row>
-            Job starts {moment(startDate).fromNow()}.            
+            Job {parseInt(moment(startDate).fromNow()) > 0 ? 'started' : 'starts'} {moment(startDate).fromNow()}.            
           </Row>
           <Button ref={target} className='bootstrap-button' onClick={handleClick} variant='primary'>More Info</Button>
           <>
