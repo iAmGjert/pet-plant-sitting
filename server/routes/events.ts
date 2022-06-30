@@ -73,14 +73,18 @@ events.get('/:id', async (req: Request, res: Response) => {
 
 events.put('/update/:id', (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, host, location, description, participants } = req.body;
-  Events.update({ name, host, location, description, participants }, { where: { id } })
-    .then((res: any) => {
-      res.status(200).send(res);
-    }).catch((err: Error) => {
-      console.error(err);
-      // res.status(500).send(err);
-    });
+  // const { name, host, location, description, participants, startDate, startTime } = req.body;
+  // console.log(req.body, req.params);
+  Events.update(req.body, { returning: true, where: { id } })
+    .then(([ updatedRows, [updatedEvent] ]: any) => {
+      console.log(updatedEvent, updatedRows);
+      res.status(201).send(updatedEvent);
+    }
+    ).catch((err: Error) => {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    );
 });
 
 events.delete('/delete/:id', async (req: Request, res: Response) => {
