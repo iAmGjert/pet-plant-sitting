@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { changeView, setJobs } from '../../state/features/jobs/jobSlice';
-import { Row, Col, Button, Form, ToggleButton, ButtonGroup } from 'react-bootstrap';
+import { Row, Col, Button, Form, ToggleButton, ButtonGroup, Card, Alert } from 'react-bootstrap';
 import LoginPrompt from './LoginPrompt';
 import moment from 'moment';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 const Create = () => {
+  const navigate = useNavigate();
   const user = useAppSelector(state => state.userProfile.value);
   const myPets = useAppSelector(state => state.petPlant.petPlants.filter(pet=>pet.owner_id === user.id));
   const petPlants = useAppSelector(state => state.petPlant.petPlants).reduce( (ans, pet, ind)=>{
@@ -92,7 +94,7 @@ const Create = () => {
   }, [feed]);
   return user.name !== '' ?
     (
-      <Form>
+      myPets.length > 0 ? <Form>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
           <Form.Label>Job Location: <div>{user.location}</div></Form.Label>
         </Form.Group>
@@ -139,9 +141,10 @@ const Create = () => {
           </Col>
         </Row>
         <Button disabled={disabled} variant="primary" type="button" onClick={handleSubmit}>
-      Submit
+    Submit
         </Button>
-      </Form> 
+      </Form> : <Alert dismissible onClose={ ()=>{ setShowLog(false); } } variant='warning'>Add a pet or plant to <Alert.Link onClick={()=>{ navigate('/profile/' + user.id); }}>your profile</Alert.Link> first!</Alert>
+       
     ) : <LoginPrompt/>;
 };
 
