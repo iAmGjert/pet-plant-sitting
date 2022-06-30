@@ -1,10 +1,7 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { response } from 'express';
-import * as moment from 'moment';
+import moment from 'moment';
 import axios from 'axios';
 // import { RootState } from '../../store';
-
-//! REFACTOR: Async THUNK
 
 interface Event {
   id: number;
@@ -16,6 +13,7 @@ interface Event {
     id: number;
     comment: string;
     user: {
+      id: number;
       name: string;
       image: string;
     };
@@ -27,19 +25,18 @@ interface Event {
       image: string;
     };
   }>;
-  startDate: Date;
-  endDate: Date;
-  startTime: Date;
+  startDate: Date | string;
+  endDate: Date | string;
+  startTime: Date | string;
   user: {
     name: string;
     image: string;
   }
 }
 
-
-
 const initialState: any = {
-  view: 'list',
+  view: 'list', // list, details, create-event
+  status: 'idle', // idle, loading, success, error
   events: [],
   event: {
     name: '',
@@ -55,28 +52,34 @@ const initialState: any = {
 };
 
 //Thunk Action Creator
-export const fetchUpcomingEvents = createAsyncThunk(
-  'events/upcomingEvents',
-  async () => {
-    const response = await axios.get('/api/events/all');
-    //console.log('42 response from backend', response);
-    const upcomingEvents = response.data.filter((event : {startDate: Date}) => {
-      let currentDate = moment();//'2022-06-03'
-      //console.log('current date backend', currentDate);
-      //returning endDates that have not yet surpassed the currentDate
-      return moment(event.startDate).isAfter(currentDate);
-    });
-    //console.log('backend', upcomingEvents);
-    return upcomingEvents;
-  }
-);
+export const fetchUpcomingEvents = createAsyncThunk( 'events/upcomingEvents', async () => {
+  const response = await axios.get('/api/events/all');
+  const upcomingEvents = response.data.filter((event : {startDate: Date}) => {
+    const currentDate = moment();//'2022-06-03'
+    return moment(event.startDate).isAfter(currentDate);
+  });
+  return upcomingEvents;
+});
 
+export const fetchEvents = createAsyncThunk( 'events/fetchEvents', async () => {
+  try {
+    const response = await axios.get('/api/events/all');
+    return response.data;
+  } catch (error) { console.error(error); }
+});
+
+export const addNewEvent = createAsyncThunk( 'events/addNewEvent', async (event: {
+  name: string; host: number; location: string; description: string; startDate: Date | string; startTime: Date | string; user: { name: string, id: number}}) => {
+  try {
+    const response = await axios.post('/api/events/create', event);
+    return response.data;
+  } catch (error) { console.error(error); }
+});
 
 export const communityEventsSlice = createSlice({
   name: 'events',
   initialState,
   reducers: {
-
     setView: (state, action: PayloadAction<string>) => {
       state.view = action.payload;
       return state;
@@ -90,16 +93,45 @@ export const communityEventsSlice = createSlice({
       // console.log(state.event);
       return state;
     },
+    eventAdded: (state, action: PayloadAction<Event>) => {
+      state.events.push(action.payload);
+      return state;
+    }
+    
+
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchUpcomingEvents.fulfilled, (state, action) => {
-      //console.log('event action 104', action);
-      state.upcomingEvents = action.payload;
-    });
+    builder
+      .addCase(fetchUpcomingEvents.fulfilled, (state, action) => {
+        state.upcomingEvents = action.payload;
+      });
+    builder
+      .addCase(fetchEvents.pending, (state) => {
+        state.status = 'loading';
+      });
+    builder
+      .addCase(fetchEvents.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.events = action.payload;
+      });
+    builder
+      .addCase(fetchEvents.rejected, (state) => {
+        state.status = 'failed';
+      });
+    builder
+      .addCase(addNewEvent.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        console.log(action.payload);
+        state.events.push(action.payload);
+        // state.event = action.payload;
+      });
   }
 });
 
-export const { setView, setEvents, setEventObj } =
-  communityEventsSlice.actions;
+export const selectAllEvents = (state: { events: { events: Event } } ) => state.events.events;
+export const getEventsStatus = (state: { events: { status: string } } ) => state.events.status;
+export const pageView = (state: { events: { view: string } } ) => state.events.view;
+
+export const { setView, setEvents, setEventObj, eventAdded } = communityEventsSlice.actions;
 
 export default communityEventsSlice.reducer;
