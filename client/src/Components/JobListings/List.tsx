@@ -1,21 +1,15 @@
 import React, {useState, useEffect, useRef} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import Job from './Job';
-import { ButtonGroup, DropdownButton, Dropdown, Overlay } from 'react-bootstrap';
+import { ButtonGroup, DropdownButton, Dropdown, Overlay, Card } from 'react-bootstrap';
 import moment from 'moment';
 
-const List = () => {
-  const [showApplied, setShowApplied] = useState(false);
+const List = ({ setShowApplied, setShowRevoked }) => {
   const target = useRef(null);
-  const removeOverlay = ()=>{ setTimeout(()=>{ setShowApplied(false); }, 4500); };
-  //const jobs = useAppSelector((state)=>state.job.jobs);
   const user = useAppSelector((state)=>state.userProfile.value);
   const jobs = useAppSelector((state)=>state.job.jobs);
   const [view, setView] = useState('Available Jobs');
   
-  useEffect(()=>{
-    removeOverlay();
-  }, [showApplied]);
   return (
     <>
       <DropdownButton ref={target} as={ButtonGroup} title={view} id="bg-nested-dropdown">
@@ -23,25 +17,6 @@ const List = () => {
         <Dropdown.Item onClick={(e)=>{ setView(e.target.textContent); }} eventKey="2">My Jobs</Dropdown.Item>
         <Dropdown.Item onClick={(e)=>{ setView(e.target.textContent); }} eventKey="2">My Applications</Dropdown.Item>
       </DropdownButton>
-
-      <Overlay target={target.current} show={showApplied} placement="bottom">
-        {({ placement, arrowProps, show: _show, popper, ...props }) => (
-          <div
-            {...props}
-            style={{
-              position: 'absolute',
-              backgroundColor: 'rgba(100, 255, 100, 0.85)',
-              padding: '2px 10px',
-              color: 'black',
-              borderRadius: 3,
-              ...props.style,
-            }}
-          >
-            Application Submitted
-          </div>
-        )}
-      </Overlay>
-      
       {
         view === 'Available Jobs' && Array.isArray(jobs) ?
           user?.name !== '' ?
@@ -58,16 +33,34 @@ const List = () => {
               }
               return false; 
             }).filter((job)=>{
-              //console.log(moment(job.endDate).diff(moment(), 'days'));
               if (moment(job.endDate).diff(moment(), 'days') < 0) {
                 return false;
               }
               return true;
-            }).map((job, index)=>{
-              return (<div key={`job#${index}`}>
-                <Job setShowApplied={setShowApplied} job={job} />
-              </div>);
-            }) :
+            }).length > 0 ? 
+              jobs.filter((job)=>{
+                if (job.employer_id !== user.id) {
+                  for (let i = 0; i < job.job_applicants.length; i++) {
+                    if (job.job_applicants[i].user_id === user.id) {
+                      return false;
+                    }
+                  }
+                  if (job.sitter_id === null) {
+                    return true;
+                  }
+                }
+                return false; 
+              }).filter((job)=>{
+                if (moment(job.endDate).diff(moment(), 'days') < 0) {
+                  return false;
+                }
+                return true;
+              }).map((job, index)=>{
+                return (
+                  <Job setShowRevoked={setShowRevoked} key={`job#${index}`} setShowApplied={setShowApplied} job={job} />
+                );
+              }) :
+              <Card><Card.Title>No Jobs to Display!</Card.Title></Card> :
             jobs.filter((job)=>{
               if (moment(job.endDate).diff(moment(), 'days') < 0) {
                 return false;
@@ -77,9 +70,9 @@ const List = () => {
               }
               return true;
             }).map((job, index)=>{
-              return (<div key={`job#${index}`}>
-                <Job setShowApplied={setShowApplied} job={job} />
-              </div>);
+              return (
+                <Job setShowRevoked={setShowRevoked} key={`job#${index}`} setShowApplied={setShowApplied} job={job} />
+              );
             }) :
           view === 'My Jobs' && Array.isArray(jobs) && user.name !== '' ?
             
@@ -88,11 +81,18 @@ const List = () => {
                 return false;
               }
               return true; 
-            }).map((job, index)=>{
-              return (<div key={`job#${index}`}>
-                <Job job={job} />
-              </div>);
-            }) :
+            }).length > 0 ? 
+              jobs.filter((job)=>{
+                if (job.employer_id !== user.id) {
+                  return false;
+                }
+                return true; 
+              }).map((job, index)=>{
+                return (
+                  <Job setShowRevoked={setShowRevoked} setShowApplied={setShowApplied} key={`job#${index}`} job={job} />
+                );
+              }) :
+              <Card><Card.Title>No Jobs to Display!</Card.Title></Card> :
             view === 'My Applications' && Array.isArray(jobs) && user.name !== '' ?
               jobs.filter((job)=>{
                 for (let i = 0; i < job.job_applicants.length; i++) {
@@ -101,12 +101,19 @@ const List = () => {
                   }
                 }
                 return false;
-              }).map((job, index)=>{
-                return (<div key={`job#${index}`}>
-                  <Job job={job} />
-                </div>);
-              }) :
-              <div>Login to view these jobs!</div>
+              }).length > 0 ? 
+                jobs.filter((job)=>{
+                  for (let i = 0; i < job.job_applicants.length; i++) {
+                    if (job.job_applicants[i].user_id === user.id) {
+                      return true;
+                    }
+                  }
+                  return false;
+                }).map((job, index)=>{
+                  return <Job setShowRevoked={setShowRevoked} key={`job#${index}`} setShowApplied={setShowApplied} job={job} />;
+                }) :
+                <Card><Card.Title>No Jobs to Display!</Card.Title></Card> :
+              <Card><Card.Title>Login to view these jobs!</Card.Title></Card>
       }
     </>
   );

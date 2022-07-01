@@ -8,7 +8,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 
-const Create = () => {
+const Create = ({ setShowCreated }) => {
   const navigate = useNavigate();
   const user = useAppSelector(state => state.userProfile.value);
   const myPets = useAppSelector(state => state.petPlant.petPlants.filter(pet=>pet.owner_id === user.id));
@@ -68,6 +68,7 @@ const Create = () => {
     setFeed(newFeed);
   };
   const handleSubmit = () => {
+    setShowCreated(true);
     const jobPetsPlants = petPlants.filter((pet, i)=>{
       if (feed[i] === true) {
         return true;

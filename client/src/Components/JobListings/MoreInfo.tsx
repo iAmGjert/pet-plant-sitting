@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ThemeContext } from '../../App';
 import moment from 'moment';
+import { deleteApplication } from '../../state/features/jobs/jobSlice';
+  
 
 
 
@@ -13,7 +15,7 @@ const MoreInfo = (props) => {
   const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { setShowApplied, distance, employer, onHide, job, job_id } = props;
+  const { setShowRevoked, setShowApplied, distance, employer, onHide, job, job_id } = props;
   const user = useAppSelector(state => state.userProfile.value);
   const [showLog, setShowLog] = useState(false);
   const obj = 
@@ -22,7 +24,13 @@ const MoreInfo = (props) => {
       user_id: user.id,
       status: 'pending'
     };
-  const postApplicant = async (newApplicant: any) => {
+  const applicant = job.job_applicants.reduce((res, applicant)=>{
+    if (applicant.user_id === user.id) {
+      res = true;
+    }
+    return res;
+  }, false);
+  const postApplication = async (newApplicant: any) => {
     return await axios.post('/api/jobs/applicant/create', newApplicant)
       .then((res: any) => {
         return res;
@@ -32,8 +40,14 @@ const MoreInfo = (props) => {
         return err;
       });
   };
+
+  const revokeApplication = async (application_id: any) => {
+    await dispatch(deleteApplication(application_id));
+    await getJobs();
+  };
+
+
   const onApply = async ()=>{
-    setShowApplied(true);
     if (user.name === '') {
       setShowLog(true);
       return;
@@ -42,7 +56,19 @@ const MoreInfo = (props) => {
       console.log('This is your job!');
       return;
     }
-    await postApplicant(obj);
+    if (applicant) {
+      const app_id = job.job_applicants.reduce((res, applicant)=>{
+        if (applicant.user_id === user.id) {
+          res = applicant.id;
+        }
+        return res;
+      }, 0);
+      revokeApplication(app_id);
+      setShowRevoked(true);
+      return;
+    }
+    setShowApplied(true);
+    await postApplication(obj);
     await getJobs();
     onHide();
   };
@@ -81,7 +107,7 @@ const MoreInfo = (props) => {
       </Modal.Body>
       <Modal.Footer>
         <Button className={theme === 'dark' && 'bootstrap-modal-button'} onClick={onHide}>Close</Button>
-        <Button className={theme === 'dark' && 'bootstrap-modal-button'}onClick={onApply}>{user.id === job.employer_id ? 'Edit' : 'Apply'}</Button>
+        <Button className={theme === 'dark' && 'bootstrap-modal-button'} onClick={onApply}>{user.id === job.employer_id ? 'Edit' : applicant ? 'Revoke Application' : 'Apply'}</Button>
       </Modal.Footer>
       {
         showLog ?
