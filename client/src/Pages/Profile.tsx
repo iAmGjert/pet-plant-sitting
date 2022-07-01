@@ -15,6 +15,7 @@ import {
   ToastContainer,
   Navbar,
   Nav,
+  CardGroup,
 } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
@@ -534,8 +535,11 @@ const Profile = () => {
           );
         })}
       </Row>
-      <Row>
-        <h2 id='pets'> My Pets and Plants </h2>
+      <h2 id='pets' className='text-decoration-underline'>
+        {' '}
+        My Pets and Plants{' '}
+      </h2>
+      <Row xs={1} md={2} lg={3}>
         {profileUser?.pet_plants.map((pet) => {
           return (
             <PetPlantCard
@@ -547,8 +551,8 @@ const Profile = () => {
           );
         })}
       </Row>
-      <Row>
-        <h2 id='gallery'> My Gallery </h2>
+      <h2 id='gallery'> My Gallery </h2>
+      <Row xs={2} md={4} lg={8}>
         {profileUser?.gallery?.gallery_entries.length >= 1 &&
           profileUser.gallery.gallery_entries.map((entry: any, i) => {
             return (
