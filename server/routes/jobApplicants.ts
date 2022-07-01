@@ -33,7 +33,7 @@ jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
         {model: Job}
       ]
     });
-    console.log('applications', applications);
+    //console.log('applications', applications);
     res.json(applications);
   } else {
     res.sendStatus(404);
