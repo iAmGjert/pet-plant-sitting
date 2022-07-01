@@ -36,6 +36,7 @@ const EditAccountModal = ({
 
   const getUser = async () => {
     const user = await axios.get('/auth/login/success');
+    console.log(user.data.user);
     dispatch(setUser(user.data.user));
     setProfileUser(user.data.user);
   };

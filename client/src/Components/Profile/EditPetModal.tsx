@@ -78,7 +78,9 @@ const EditPetModal = ({
     >
       <Modal.Header closeButton>
         {add ? (
-          <Modal.Title>Add Pet</Modal.Title>
+          <Modal.Title>
+            Add {`${PetPlant.is_plant ? 'Plant' : 'Pet'}`}
+          </Modal.Title>
         ) : (
           <Modal.Title>Edit {PetPlant.name}</Modal.Title>
         )}

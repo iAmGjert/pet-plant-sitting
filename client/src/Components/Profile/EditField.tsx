@@ -77,7 +77,7 @@ const EditField = ({
   );
   const [checked2, setChecked2] = useState(false);
   const [values, setValues] = useState(
-    value === 'Puppy'
+    value === 'Baby'
       ? 0
       : value === 'Adult'
       ? 1
@@ -264,22 +264,6 @@ const EditField = ({
               >
                 Female
               </ToggleButton>
-              {/* <Button
-                variant='primary'
-                onClick={() => {
-                  setVal('Male');
-                }}
-              >
-                Male
-              </Button>{' '}
-              <Button
-                variant='primary'
-                onClick={() => {
-                  setVal('Female');
-                }}
-              >
-                Female
-              </Button> */}
             </div>
           )
         );
@@ -464,8 +448,8 @@ const EditField = ({
                 tooltipPlacement='bottom'
                 tooltipLabel={(currentValue) => {
                   if (currentValue === 0) {
-                    setVal('Puppy');
-                    return 'Puppy';
+                    setVal('Baby');
+                    return 'Baby';
                   } else if (currentValue === 1) {
                     setVal('Adult');
                     return 'Adult';
