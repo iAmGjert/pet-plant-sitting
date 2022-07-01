@@ -13,6 +13,8 @@ import {
   ProgressBar,
   Toast,
   ToastContainer,
+  Navbar,
+  Nav,
 } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
@@ -442,6 +444,106 @@ const Profile = () => {
             </Tabs>
           </span>
         </Col>
+      </Row>
+      <Navbar sticky='top' bg='light' variant='light'>
+        <Nav fill variant='tabs' defaultActiveKey='/home'>
+          <Nav.Item>
+            <Nav.Link href='/home'>Overview</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey='link-1'>Reviews</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey='link-2'>Pets and Plants</Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link eventKey='disabled'>Gallery</Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </Navbar>
+      <Row>
+        <h2>About {profileUser?.name}</h2>
+        {!readMore ? (
+          <>
+            {formatBio(profileUser?.bio)}
+            <br />
+            <button
+              className='button-as-link my-2'
+              onClick={() => {
+                setReadMore(!readMore);
+              }}
+            >
+              (Read More)
+            </button>
+          </>
+        ) : (
+          <>{profileUser?.bio}</>
+        )}
+      </Row>
+      <Row>
+        <h2> {`Reviews(${profileUser?.ratings.length})`} </h2>
+        {profileUser?.ratings.map((rating, i) => {
+          return (
+            <Rating rating={rating} key={'rating' + i} getStars={getStars} />
+          );
+        })}
+      </Row>
+      <Row>
+        <h2> My Pets and Plants </h2>
+        {profileUser?.pet_plants.map((pet) => {
+          return (
+            <PetPlantCard
+              PetPlant={pet}
+              key={pet.id}
+              getStars={getStars}
+              edit={null}
+            />
+          );
+        })}
+      </Row>
+      <Row>
+        <h2> My Gallery </h2>
+        {profileUser?.gallery?.gallery_entries.length >= 1 &&
+          profileUser.gallery.gallery_entries.map((entry: any, i) => {
+            return (
+              <>
+                <Card
+                  onClick={() => {
+                    setShowGalleryFooter(!showGalleryFooter);
+                  }}
+                >
+                  <Card.Img variant='top' src={entry.url} key={'entry' + i} />
+                  {editable && showGalleryFooter && (
+                    <Card.Footer>
+                      <Button
+                        variant='danger'
+                        onClick={() => {
+                          deleteGallery(entry.id);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </Card.Footer>
+                  )}
+                </Card>
+              </>
+            );
+          })}
+        {editable && (
+          <Card
+            className='text-center'
+            onClick={() => {
+              // check if this user has a gallery, if it dosent make one. Then do some cloudinary to upload a pic to said gallery. then for each pic in the gallery, make a card with the pic and a delete button.
+              showWidget();
+            }}
+          >
+            <Card.Img
+              variant='top'
+              src='https://static.thenounproject.com/png/3322766-200.png'
+            />
+            <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
+          </Card>
+        )}
       </Row>
     </Container>
   );
