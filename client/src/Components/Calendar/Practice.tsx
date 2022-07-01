@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from 'react';
+import React, { useState, FC } from 'react';
 import moment from 'moment';
 
 //schedule
@@ -17,11 +17,15 @@ import {
   AppointmentTooltip,
   AppointmentForm,
 } from '@devexpress/dx-react-scheduler-material-ui';
-//import { WeekView } from '@devexpress/dx-react-scheduler-material-ui';
+// import { Scheduler } from '@devexpress/dx-react-scheduler-material-ui';
+// import { DayView } from '@devexpress/dx-react-scheduler-material-ui';
+// import { WeekView } from '@devexpress/dx-react-scheduler-material-ui';
+
 import { Appointments } from '@devexpress/dx-react-scheduler-material-ui';
 
 //Redux
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
+import petPlantSlice from '../../state/features/petPlant/petPlantSlice';
 
 //typescript;
 interface jobs {
@@ -45,10 +49,6 @@ interface events {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
-//2. ENSURE THAT SCHEDULER RUNS INFINITELY
-//3. OFFER USER DIFFERENT VIEWS OF CALENDAR WITH SAME FUNCTIONALITY
-//4. FIGURE OUT A WAY TO SPAN JOB STARTDATES AND ENDDATES IN CALENDAR
-
 const Practice: FC<Props> = () => {
   //const currentDate = moment().format('YYYY-MM-DD'); //2022-06-29
 
@@ -60,21 +60,44 @@ const Practice: FC<Props> = () => {
   console.log('events', events); //such is empty
   console.log(user);
 
+  console.log(
+    'petplants',
+    jobs.map((job: { job_pets_plants: any }) => {
+      return job.job_pets_plants;
+    })
+    // .map((pet) => {
+    //   return pet.image;
+    // })
+  );
+
   //function to filter user appointments
   const userJobs = jobs
     .filter((job: { sitter_id: number }) => {
       return job.sitter_id === user.id;
     })
-    .map((job) => {
-      return {
-        ...job,
-        title: job.description,
-        startDate: moment(job.startDate).toDate(),
-        endDate: moment(job.endDate).toDate(),
-        id: job.id,
-        location: job.location,
-      };
-    });
+    .map(
+      (job: {
+        description: any;
+        startDate: moment.MomentInput;
+        endDate: moment.MomentInput;
+        id: any;
+        location: any;
+        job_pet_plants: any[];
+      }) => {
+        return {
+          ...job,
+          title: job.description,
+          startDate: moment(job.startDate).toDate(),
+          endDate: moment(job.endDate).toDate(),
+          id: job.id,
+          location: job.location,
+          petPlants: job.job_pets_plants,
+          // name: job.job_pet_plants.map((pet: { name: any }) => {
+          //   return pet.name;
+          // }),
+        };
+      }
+    );
 
   //console.log(schedulerData);
   console.log('userJobs', userJobs);
@@ -97,13 +120,28 @@ const Practice: FC<Props> = () => {
   */
 
   const [currentDate, setCurrentDate] = useState(moment().format('YYYY-MM-DD'));
-  const onCurrentDateChange = (_currentDate) => {
+  const onCurrentDateChange = (_currentDate: React.SetStateAction<string>) => {
     setCurrentDate(_currentDate);
   };
 
   const AppointmentContent = ({ appointmentData }) => {
     //console.log('appointment props', props);
-    return <div>{appointmentData.description}</div>;
+    return (
+      <div>
+        {/* {appointmentData.petPlant.map((pet) => {
+          return <img src={appoinmentData.pet_plant.image} key={pet.id} />;
+        })} */}
+        <h2>
+          {' '}
+          Siting for{' '}
+          {appointmentData.petPlants.map((pet) => {
+            return `${pet.pet_plant.name} | `;
+          })}{' '}
+        </h2>
+        <p>Location: {appointmentData.location}</p>
+        <p>Info: {appointmentData.description}</p>
+      </div>
+    );
   };
 
   return (
