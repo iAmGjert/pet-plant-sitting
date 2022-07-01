@@ -24,8 +24,7 @@ import {
 import { Appointments } from '@devexpress/dx-react-scheduler-material-ui';
 
 //Redux
-import { useAppSelector, useAppDispatch } from '../../state/hooks';
-import petPlantSlice from '../../state/features/petPlant/petPlantSlice';
+import { useAppSelector } from '../../state/hooks';
 
 //typescript;
 interface jobs {
@@ -56,19 +55,19 @@ const Practice: FC<Props> = () => {
   const events = useAppSelector((state) => state.events.events);
   const user = useAppSelector((state) => state.userProfile.value);
 
-  console.log('jobs on 61 practice', jobs);
-  console.log('events', events); //such is empty
-  console.log(user);
+  //console.log('jobs on 61 practice', jobs);
+  //console.log('events', events); //such is empty
+  //console.log(user);
 
-  console.log(
-    'petplants',
-    jobs.map((job: { job_pets_plants: any }) => {
-      return job.job_pets_plants;
-    })
-    // .map((pet) => {
-    //   return pet.image;
-    // })
-  );
+  // console.log(
+  //   'petplants',
+  //   jobs.map((job: { job_pets_plants: any }) => {
+  //     return job.job_pets_plants;
+  //   })
+  //   // .map((pet) => {
+  //   //   return pet.image;
+  //   // })
+  // );
 
   //function to filter user appointments
   const userJobs = jobs
@@ -100,24 +99,7 @@ const Practice: FC<Props> = () => {
     );
 
   //console.log(schedulerData);
-  console.log('userJobs', userJobs);
-
-  /* [
-  {
-    title: 'Website Re-Design Plan',
-    startDate: new Date(2018, 5, 25, 9, 35),
-    endDate: new Date(2018, 5, 25, 11, 30),
-    id: 0,
-    location: 'Room 1',
-  }, {
-    title: 'Book Flights to San Fran for Sales Trip',
-    startDate: new Date(2018, 5, 25, 12, 11),
-    endDate: new Date(2018, 5, 25, 13, 0),
-    id: 1,
-    location: 'Room 1',
-  }
-]
-  */
+  //console.log('userJobs', userJobs);
 
   const [currentDate, setCurrentDate] = useState(moment().format('YYYY-MM-DD'));
   const onCurrentDateChange = (_currentDate: React.SetStateAction<string>) => {
