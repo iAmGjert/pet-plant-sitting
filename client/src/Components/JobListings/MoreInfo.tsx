@@ -14,7 +14,7 @@ const MoreInfo = (props) => {
   const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { setshowrevoked, setshowapplied, distance, employer, onHide, job, job_id } = props;
+  const { setshowrevoked, setshowapplied, distance, employer, onHide, job, job_id, ...others } = props;
   const user = useAppSelector(state => state.userProfile.value);
   const [showLog, setShowLog] = useState(false);
   const obj = 
@@ -83,7 +83,7 @@ const MoreInfo = (props) => {
   };
   return (
     
-    <Modal show={props.modalShow} onHide={onHide} {...props} aria-labelledby="contained-modal-title-vcenter" contentClassName={theme === 'dark' && 'dark'}>
+    <Modal show={props.modalShow} onHide={onHide} {...others} aria-labelledby="contained-modal-title-vcenter" contentClassName={theme === 'dark' && 'dark'}>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           {`${employer}\'s job listing:`} 
