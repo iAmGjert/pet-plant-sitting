@@ -394,9 +394,9 @@ db.sync(
                 employer_id: 3,
                 description: 'Come watch this little devil',
                 sitter_id: null,
-                startDate: new Date('July 7, 2022 01:15:00'),
-                endDate: new Date('July 14, 2022 01:15:00'),
-                isCompleted: false
+                startDate: new Date('June 7, 2022 01:15:00'),
+                endDate: new Date('June 14, 2022 01:15:00'),
+                isCompleted: true
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
@@ -424,7 +424,7 @@ db.sync(
                 pet_plant: [3, 1],
                 employer_id: 6,
                 sitter_id: 7,
-                startDate: new Date('July 24, 2022 01:15:00'),
+                startDate: new Date('June 29, 2022 01:15:00'),
                 endDate: new Date('July 29, 2022 01:15:00'),
                 isCompleted: false
               },
