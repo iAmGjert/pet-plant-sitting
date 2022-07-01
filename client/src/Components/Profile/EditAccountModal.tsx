@@ -13,7 +13,7 @@ type Props = {
   user: Profile;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
-  setProfileUser: (user: any) => void;
+  setProfileUser: (user: Profile) => void;
 };
 
 const EditAccountModal = ({
