@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../../state/hooks';
-
+import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { deleteComment } from '../../state/features/events/eventsSlice';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Card from 'react-bootstrap/Card';
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
-import axios from 'axios';
-import { setEventObj } from '../../state/features/events/eventsSlice';
-
-import ConfirmDelete from './ConfirmDelete';
+// import ConfirmDelete from './ConfirmDelete';
 import EditComment from './EditComment';
 
 interface Comment {
@@ -27,44 +24,21 @@ interface Comment {
   updatedAt: string;
 }
 
-const Comments = (props: any) => {
+const Comments = ({ comments }: any) => {
   const dispatch = useAppDispatch();
-  // const comments = useAppSelector((state) => state.events.event.event_comments);
   const currentUser = useAppSelector((state) => state.userProfile.value);
-  const eventObj = useAppSelector((state) => state.events.event);
-  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  
   const [showEditModal, setShowEditModal] = useState(false);
-  console.log(props);
-
-  const [commentsArray, setCommentsArray] = useState(props.comments);
-
-  const deleteComment = (commentId: number) => {
-    axios.delete(`/api/events/comment/delete/${commentId}`)
-      .then(() => {
-        props.getComments();
-      }).catch(err => {
-        console.log(err);
-      });
-    // dispatch(setEventObj({ ...eventObj, event_comments: res.data }));
-    
-  };
-
-  const editComment = (commentId: number, commentMessage: string) => {
-    axios.patch(`/api/events/comment/update/${commentId}`, { comment: commentMessage })
-      .then(() => {
-        props.getComments();
-        setShowEditModal(false);
-      }).catch(err => console.error(err));
-   
-  };
-
   const [commentObj, setCommentObj] = useState(null);
 
-  // console.log(commentObj, 'comment obj');
-  console.log(currentUser);
-  console.log(props.comments);
-  console.log(eventObj);
-  const numComments = props.comments.length;
+  const handleDelete = (comment: Comment) => {
+    console.log(comment);
+    dispatch(deleteComment(comment)).unwrap();
+  };
+
+  const orderedComments = comments.slice().sort((a: Comment, b: Comment) => a.createdAt < b.createdAt ? -1 : 1);
+  const numComments = comments.length;
+  
   return (
     <>
       {/* <ConfirmDelete  
@@ -75,11 +49,10 @@ const Comments = (props: any) => {
       <EditComment
         showEditModal={showEditModal}
         setShowEditModal={setShowEditModal}
-        editComment={editComment}
         commentObject={commentObj} />
         
       { 
-        numComments ? props.comments.map((comment: Comment, index: number) => {
+        numComments ? orderedComments.map((comment: Comment, index: number) => {
           return (
             <React.Fragment key={index}>
               <Card>
@@ -87,7 +60,7 @@ const Comments = (props: any) => {
                   <Card.Header >
                     <Row>
                       <Col>
-                        {comment.user.name} 
+                        {comment.user?.name} 
                       </Col>
                       {currentUser.id === comment.user_id ? 
                         <Col>
@@ -100,11 +73,7 @@ const Comments = (props: any) => {
                           </Button>
                             | 
                           <Button variant='link' 
-                            onClick={() => {
-                              deleteComment(comment.id);
-                              // setCommentObj(comment);
-                              // setShowDeleteModal(true);
-                            }}>delete
+                            onClick={() => handleDelete(comment)}>delete
                           </Button> 
                         </Col> : null}
                     </Row>

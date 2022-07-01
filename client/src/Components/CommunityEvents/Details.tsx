@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
-import { useNavigate } from 'react-router-dom';
-import { setView, setEventObj } from '../../state/features/events/eventsSlice';
+import { useNavigate, Link } from 'react-router-dom';
+import { setView, addComment } from '../../state/features/events/eventsSlice';
 import AddComment from './AddComment';
-
 import { ArrowLeft } from 'react-bootstrap-icons';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
@@ -11,78 +10,50 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Comments from './Comments';
-
 import moment from 'moment';
-import axios from 'axios';
-
-
-
-
 
 const Details = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const currentUser = useAppSelector(state => state.userProfile.value);
-  const events = useAppSelector(state => state.events.events);
-  const eventObj = useAppSelector((state) => state.events.event);
-
-  const {event_comments, event_participants, user} = eventObj;
+  const event = useAppSelector(state => state.events.event);
+  const { event_comments, user } = event;
 
   const [showComments, setShowComments] = useState(false);
   const [commentInput, setCommentInput] = useState('');
   const [showAddModal, setShowAddModal] = useState(false);
+  const [addRequestStatus, setAddRequestStatus] = useState('idle');
   
-  
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => setCommentInput(e.target.value);
 
-  const [comments, setComments] = useState(event_comments);
-  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setCommentInput(e.target.value);
-  };
+  const handleComments = () => setShowComments(!showComments);
 
-  const getComments = () => {
-    axios.get('/api/events/comments/all').then(res => {
-      setComments(res.data);
-    }).catch(err => console.error(err));
-  };
-
-  const postComment = (comment: any) => {
-    axios.post('/api/events/comment/add', comment).then(() => {
-      getComments();
-    }).then(()=> {
-      setCommentInput('');
-    }).catch(err => console.error(err));
-  };
-
-
+  const canSubmit = !!commentInput && addRequestStatus === 'idle';
   const handleSubmit = () => {
-    postComment({
-      event_id: eventObj.id,
-      user_id: currentUser.id,
-      comment: commentInput,
-      user: {
-        id: currentUser.id,
-        name: currentUser.name,
-        image: currentUser.image
+    if (canSubmit) {
+      try {
+        setAddRequestStatus('pending');
+        dispatch(addComment({
+          event_id: event.id, 
+          comment: commentInput, 
+          user_id: currentUser.id,
+          user: {
+            id: currentUser.id,
+            name: currentUser.name,
+            image: currentUser.image
+          }
+        })).unwrap();
+      } catch (error) {
+        setAddRequestStatus('error');
+        console.error('Failed to save comment', error);
+      } finally {
+        setAddRequestStatus('idle');
+        setCommentInput('');
       }
-    });
-    setComments([...comments, {
-      event_id: eventObj.id,
-      user_id: currentUser.id,
-      comment: commentInput,
-      user: {
-        id: currentUser.id,
-        name: currentUser.name,
-        image: currentUser.image
-      }
-    }]);
-  };
-  
-  const handleComments = () => {
-    setShowComments(!showComments);
+    }    
   };
 
-  const numOfComments = comments.length;
-  // const numOfParticipants = event_participants.length;
+  const numOfComments = event_comments.length;
 
   const parseTime = (time: string) => {
     const [hour, minute] = time.split(':');
@@ -92,35 +63,47 @@ const Details = () => {
   return (
     <Container>
       {
-        // showAddModal &&
         <AddComment 
           showAddModal={showAddModal}
           setShowAddModal={setShowAddModal}
           handleSubmit={handleSubmit}
-          handleCommentChange={handleCommentChange}
-        />
+          handleCommentChange={handleCommentChange} 
+          canSubmit={canSubmit} />
       }
       <Button variant="primary" onClick={() => dispatch(setView('list'))}>
         <ArrowLeft /> Back to Events
       </Button>
       <Card>
-        <Card.Header as="h5">{eventObj.name}</Card.Header>
+        <Card.Header as="h5">
+          <Row>
+            <Col>
+              {event.name}
+            </Col>
+            {currentUser?.id === event.user?.id && (
+              <Col>
+                <Link to={`/events/edit/${event.id}`}>
+                  modify
+                </Link>
+              </Col>
+            )}
+          </Row>
+        </Card.Header>
         <Card.Body>
           <Card.Title >Hosted by
             <Button variant="link" size='lg' onClick={() => navigate(`/profile/${user.id}`)}>{user.name}
             </Button>
           </Card.Title>
           <Card.Text>
-            {eventObj.description}
+            {event.description}
           </Card.Text>
           <div>
-            <small><i>🧭 {eventObj.location}</i></small>
+            <small><i>🧭 {event.location}</i></small>
           </div>
           <div>
-            <small><i>🗓️ {moment(eventObj.startDate).format('dddd, MMMM Do YYYY')}</i></small>
+            <small><i>🗓️ {moment(event.startDate).format('dddd, MMMM Do YYYY')}</i></small>
           </div>
           <div>
-            <small><i>🕰️ {parseTime(eventObj.startTime)}</i></small>
+            <small><i>🕰️ {parseTime(event.startTime)}</i></small>
           </div>
         </Card.Body>
         <Card.Footer>
@@ -147,9 +130,7 @@ const Details = () => {
           </Container>
         </Card.Footer>
       </Card>
-      { showComments ? <Comments 
-        comments={comments} 
-        getComments={getComments} /> : <></> }
+      { showComments && <Comments comments={event_comments} /> }
       <Card>
         <Card.Footer>
           {
@@ -157,7 +138,6 @@ const Details = () => {
               <Button variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
                       Add Comment
               </Button> 
-              
               : <Button variant="primary" size="sm" href='/login'>
                     Login to add comment
               </Button>
