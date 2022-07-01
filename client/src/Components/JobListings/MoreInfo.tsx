@@ -1,12 +1,11 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { Container, Row, Col, Button, Alert, Modal } from 'react-bootstrap';
-import { setJobs } from '../../state/features/jobs/jobSlice';
+import { setJobs, deleteApplication } from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ThemeContext } from '../../App';
 import moment from 'moment';
-import { deleteApplication } from '../../state/features/jobs/jobSlice';
   
 
 
@@ -104,9 +103,27 @@ const MoreInfo = (props) => {
           <Row>
             Job length: {moment(job.endDate).diff(moment(job.startDate), 'days')} {moment(job.endDate).diff(moment(job.startDate), 'days') > 1 ? 'days' : 'day'}
           </Row>
-          <Row>
-            {distance === null ? 'Add a location to your profile to see the distance between you and this job!' : `Distance to job: ${distance} miles`}
-          </Row>
+          {
+            employer !== user.name ?
+              <Row>
+                {distance === null ? 'Add a location to your profile to see the distance between you and this job!' : `Distance to job: ${distance} miles`}
+              </Row> :
+              <Row>
+                {
+                  job.job_applicants.length === 0 ? 
+                    'No job applicants, yet.' :
+                    <>
+                      Applicants: 
+                      {
+                        job.job_applicants.map((applicant)=>{
+                          return <><Button variant='text' onClick={()=>{navigate(`/profile/${applicant.user_id}`)}}>{applicant.user.name}</Button></>;
+                        })
+                      }
+                    </>
+                }
+              </Row>
+
+          }          
         </Container>
       </Modal.Body>
       <Modal.Footer>

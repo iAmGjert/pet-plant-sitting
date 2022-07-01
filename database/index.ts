@@ -472,6 +472,36 @@ db.sync(
                 endDate: new Date('September 4, 2022 01:15:00'),
                 isCompleted: false
               },
+              {
+                location: '3707 Derbigny St',
+                pet_plant: [6, 4],
+                employer_id: 4,
+                description: 'Test Job Description 5!',
+                sitter_id: null,
+                startDate: new Date('August 30, 2022 01:15:00'),
+                endDate: new Date('September 4, 2022 01:15:00'),
+                isCompleted: false
+              },
+              {
+                location: '4245 Connecticut Ave, Kenner, LA 70065',
+                pet_plant: [8, 6],
+                employer_id: 4,
+                description: 'Test Job Description 6!',
+                sitter_id: null,
+                startDate: new Date('August 30, 2022 01:15:00'),
+                endDate: new Date('September 4, 2022 01:15:00'),
+                isCompleted: false
+              },
+              {
+                location: 'Superdome New Orleans',
+                pet_plant: [8, 6],
+                employer_id: 4,
+                description: 'Test Job Description 6!',
+                sitter_id: null,
+                startDate: new Date('August 30, 2022 01:15:00'),
+                endDate: new Date('September 4, 2022 01:15:00'),
+                isCompleted: false
+              },
             ]).then(() => {
               Events.bulkCreate([
                 {
@@ -613,6 +643,41 @@ db.sync(
                     {
                       user_id: 7,
                       job_id: 5,
+                      status: 'pending'
+                    },
+                    {
+                      user_id: 7,
+                      job_id: 10,
+                      status: 'pending'
+                    },
+                    {
+                      user_id: 1,
+                      job_id: 10,
+                      status: 'pending'
+                    },
+                    {
+                      user_id: 2,
+                      job_id: 10,
+                      status: 'pending'
+                    },
+                    {
+                      user_id: 7,
+                      job_id: 11,
+                      status: 'pending'
+                    },
+                    {
+                      user_id: 3,
+                      job_id: 11,
+                      status: 'pending'
+                    },
+                    {
+                      user_id: 6,
+                      job_id: 11,
+                      status: 'pending'
+                    },
+                    {
+                      user_id: 5,
+                      job_id: 11,
                       status: 'pending'
                     },
                   ]);

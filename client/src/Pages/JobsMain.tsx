@@ -93,7 +93,7 @@ const JobsMain = () => {
               position: 'absolute',
               backgroundColor: 'rgba(255, 100, 100, 0.85)',
               padding: '2px 10px',
-              color: 'black',
+              color: 'white',
               borderRadius: 3,
               ...props.style,
             }}
