@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Button, Form, Modal, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Profile } from '../../Pages/Profile';
@@ -33,7 +33,7 @@ const EditAccountModal = ({
   const [location, setLocation] = useState(user?.location);
   const [image, setImage] = useState(user?.image);
   const [bio, setBio] = useState(user?.bio);
-  const [theme, setTheme] = useState(user?.theme);
+  const [userTheme, setTheme] = useState(user?.theme);
   const [petPlant, setPetPlant] = useState(user?.pet_plants);
 
   const getUser = async () => {
@@ -50,7 +50,7 @@ const EditAccountModal = ({
       location,
       image,
       bio,
-      theme,
+      theme: userTheme,
     });
     getUser();
     setShowModal(false);
@@ -150,7 +150,7 @@ const EditAccountModal = ({
           <EditField
             fieldName={'theme'}
             setVal={setTheme}
-            value={theme}
+            value={userTheme}
             user={user}
             Pet_Plant={null}
             add={false}
