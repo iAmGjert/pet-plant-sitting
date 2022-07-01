@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { isNull } from 'util';
 //import type { RootState } from '../../store';
 
 interface userStuff {

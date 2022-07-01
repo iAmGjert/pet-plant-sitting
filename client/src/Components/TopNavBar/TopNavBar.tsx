@@ -20,7 +20,7 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
   };
 
   return (
-    <Navbar className='topNavBar' bg='primary' variant='dark' expand='lg'>
+    <Navbar bg={theme === 'dark' ? 'dark-mode' : 'primary'} variant='dark' expand='lg'>
       <Container>
         <Navbar.Brand onClick={()=>{ navigate('/'); }}>
           {user.name ? user.name : 'Fern Herm'}
@@ -29,7 +29,7 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
             <Nav.Link onClick={()=>{ dispatch(changeView('list')); navigate('/jobs'); }}>Job Listings</Nav.Link>
-            <NavDropdown title='Dropdown' id='basic-nav-dropdown'>
+            <NavDropdown title='More Options' id='basic-nav-dropdown'>
               {!user.name && (
                 <NavDropdown.Item onClick={()=>{ navigate('/login'); }}>Login</NavDropdown.Item>
               )}

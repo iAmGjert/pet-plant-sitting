@@ -325,6 +325,7 @@ const Profile = () => {
               <Button
                 variant='secondary'
                 size='sm'
+                className='bootstrap-button'
                 onClick={() => {
                   setShowModal(true);
                 }}

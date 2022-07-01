@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Form, Modal, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Profile } from '../../Pages/Profile';
@@ -7,6 +7,7 @@ import { setUser } from '../../state/features/userProfile/userProfileSlice';
 import EditField from './EditField';
 import EditPetModal from './EditPetModal';
 import { useAppDispatch } from '../../state/hooks';
+import { ThemeContext } from '../../App';
 
 type Props = {
   user: Profile;
@@ -22,6 +23,7 @@ const EditAccountModal = ({
   setProfileUser,
 }: Props) => {
   // loop through fields on a user and create a form field for each
+  const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const [newPet, setNewPet] = useState(false);
@@ -67,6 +69,7 @@ const EditAccountModal = ({
   return (
     <Modal
       // backdrop='static'
+      contentClassName={theme === 'dark' && 'dark'}
       show={showModal}
       fullscreen={true}
       onHide={() => handleOnHide()}
@@ -207,7 +210,7 @@ const EditAccountModal = ({
             variant='success'
             type='button'
             onClick={() => handleOnHide()}
-            className='mt-3 '
+            className={theme === 'dark' && 'bootstrap-modal-button'}
           >
             Finished
           </Button>

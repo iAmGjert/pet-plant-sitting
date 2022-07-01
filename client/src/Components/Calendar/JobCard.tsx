@@ -22,31 +22,6 @@ const JobCard = ({ startDate, location, bio, image, name, breed }) => {
   // const state = useSelector((state) => state);
   // console.log(state);
 
-  // return (
-  //   <Card className='mb-3' style={{ color: '#000' }}>
-  //     <Card.Header>You have a Sitting!</Card.Header>
-  //     <Card.Img src={image} height='300' width='150' />
-  //     <Card.Body>
-  //       <Card.Title>Job for</Card.Title>
-  //       <Card.Text></Card.Text>
-  //       <Card.Subtitle className='mb-2 text-bold'></Card.Subtitle>
-  //       <Card.Subtitle className='mb-4 text-muted'>
-  //         my location {location}
-  //       </Card.Subtitle>
-
-  //       <Button variant='primary'>Exit</Button>
-  //     </Card.Body>
-  //     <InputGroup size='sm' className='mb-3'>
-  //       <InputGroup.Text id='inputGroup-sizing-sm'>Add Note</InputGroup.Text>
-  //       <FormControl
-  //         aria-label='Small'
-  //         aria-describedby='inputGroup-sizing-sm'
-  //       />
-  //     </InputGroup>
-  //     <Button variant='primary'>Exit</Button>
-  //   </Card>
-  // );
-
   return (
     <Card className='mb-3' border='primary' style={{ color: '#000' }}>
       <Card border='secondary' style={{ width: '18rem' }}></Card>

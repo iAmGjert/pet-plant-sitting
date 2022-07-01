@@ -7,7 +7,7 @@ import LoginForm from '../Components/LoginForm/LoginForm';
 
 const Login = () => {
   return (
-    <Container className='vh-100 '>
+    <Container fluid className='vh-100 '>
       <Row className='align-items-center' xs={1} md={1}>
         <Col xs={{ order: 'last' }}>
           <GoogleButton />

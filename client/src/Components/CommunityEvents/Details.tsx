@@ -25,62 +25,64 @@ const Details = () => {
   const currentUser = useAppSelector(state => state.userProfile.value);
   const events = useAppSelector(state => state.events.events);
   const eventObj = useAppSelector((state) => state.events.event);
+
   const {event_comments, event_participants, user} = eventObj;
 
   const [showComments, setShowComments] = useState(false);
-  
   const [commentInput, setCommentInput] = useState('');
-  const [comments, setComments] = useState(event_comments);
   const [showAddModal, setShowAddModal] = useState(false);
-
   
+  
+
+  const [comments, setComments] = useState(event_comments);
   const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    // console.log(e.target.value);
     setCommentInput(e.target.value);
   };
-  const getComments = async () => {
-    const res = await axios.get('/api/events/comments/all');
-    console.log(res.data);
-    setComments(res.data);
-    return res.data;
+
+  const getComments = () => {
+    axios.get('/api/events/comments/all').then(res => {
+      setComments(res.data);
+    }).catch(err => console.error(err));
   };
 
-  const postComment = async (comment: any) => {
-    try {
-      const res = await axios.post('/api/events/comment/add', comment);
-      console.log(res.data, '\n', res.status);
-      const fetchComments = await getComments();
-      console.log(fetchComments);
-      dispatch(setEventObj({...eventObj, event_comments: fetchComments}));
-      // dispatch(setEvents({...events, eventObj.event_comments: fetchComments}));
-      // return fetchComments;
-     
-    } catch (error) {
-      console.error(error);
-    }
+  const postComment = (comment: any) => {
+    axios.post('/api/events/comment/add', comment).then(() => {
+      getComments();
+    }).then(()=> {
+      setCommentInput('');
+    }).catch(err => console.error(err));
   };
-  // console.log(currentUser);
+
+
   const handleSubmit = () => {
     postComment({
       event_id: eventObj.id,
       user_id: currentUser.id,
-      comment: commentInput
+      comment: commentInput,
+      user: {
+        id: currentUser.id,
+        name: currentUser.name,
+        image: currentUser.image
+      }
     });
     setComments([...comments, {
       event_id: eventObj.id,
       user_id: currentUser.id,
-      comment: commentInput
+      comment: commentInput,
+      user: {
+        id: currentUser.id,
+        name: currentUser.name,
+        image: currentUser.image
+      }
     }]);
-    // setCommentInput('');
-    // dispatch(setView('details'));
   };
   
   const handleComments = () => {
     setShowComments(!showComments);
   };
 
-  const numOfComments = event_comments.length;
-  const numOfParticipants = event_participants.length;
+  const numOfComments = comments.length;
+  // const numOfParticipants = event_participants.length;
 
   const parseTime = (time: string) => {
     const [hour, minute] = time.split(':');
@@ -88,7 +90,7 @@ const Details = () => {
   };
    
   return (
-    <Container>
+    <Container fluid>
       {
         // showAddModal &&
         <AddComment 
@@ -98,14 +100,14 @@ const Details = () => {
           handleCommentChange={handleCommentChange}
         />
       }
-      <Button variant="primary" onClick={() => dispatch(setView('list'))}>
+      <Button className='bootstrap-button' variant="primary" onClick={() => dispatch(setView('list'))}>
         <ArrowLeft /> Back to Events
       </Button>
-      <Card>
+      <Card className='bootstrap-card'>
         <Card.Header as="h5">{eventObj.name}</Card.Header>
         <Card.Body>
           <Card.Title >Hosted by
-            <Button variant="link" size='lg' onClick={() => navigate(`/profile/${user.id}`)}>{user.name}
+            <Button className='button-as-link' variant="link" size='lg' onClick={() => navigate(`/profile/${user.id}`)}>{user.name}
             </Button>
           </Card.Title>
           <Card.Text>
@@ -124,14 +126,14 @@ const Details = () => {
         <Card.Footer>
           <Container fluid="sm">
             <Row>
-              <Col>{numOfParticipants === 1 ? 
+              {/* <Col>{numOfParticipants === 1 ? 
                 <small>{numOfParticipants} person interested</small>
                 : numOfParticipants > 1 ?
                   <small>{numOfParticipants} people interested</small>
                   : <small>0 people interested</small>}
-              </Col>
-              <Col>
-                <Button variant="link" onClick={handleComments}>
+              </Col> */}
+              <Col className='bootstrap-card'>
+                <Button className='button-as-link' variant="link" onClick={handleComments}>
                   {
                     numOfComments === 1 ?
                       <small>{numOfComments} comment</small>
@@ -145,22 +147,24 @@ const Details = () => {
           </Container>
         </Card.Footer>
       </Card>
-      { showComments ? <Comments comments={comments} /*ref={commentRef}*//> : <></> }
-      <Card>
+      { showComments ? <Comments 
+        comments={comments} 
+        getComments={getComments} /> : <></> }
+      <Card className='bootstrap-card'>
         <Card.Footer>
           {
             currentUser.name.length ?
-              <Button variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
+              <Button className='bootstrap-button' variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
                       Add Comment
               </Button> 
               
-              : <Button variant="primary" size="sm" href='/login'>
+              : <Button className='bootstrap-button' variant="primary" size="sm" href='/login'>
                     Login to add comment
               </Button>
           }
         </Card.Footer>
       </Card>
-      <Button variant="primary" size='sm' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+      <Button className='bootstrap-button' variant="primary" size='sm' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           back to top
       </Button>
     </Container>

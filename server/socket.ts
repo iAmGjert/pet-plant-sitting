@@ -1,30 +1,74 @@
-// import { Server, Socket } from 'socket.io';
+const { Server, Socket } = require('socket.io');
+require('dotenv').config();
 
-// const rooms: Record<string, { name: string }> = {};
+// const { socket } = require('./socket');
 
-// const socket = ({ io }: { io: Server }) => {
-//   console.log('Sockets enabled');
+const io = new Server(4000, {
+  cors: {
+    origin: `${process.env.CLIENT_URL}:5000`,
+    credentials: true,
+  },
+});
 
-//   io.on('connection', (socket: Socket) => {
-//     console.log(`User connected ${socket.id}`);
+interface onlineUser {
+  userId: number,
+  name: string,
+  socketId: string
+}
 
-//     socket.on('CREATE_ROOM', ({roomName}) => {
-      
-//       rooms[roomName] = {
-//         name: roomName
-//       };
-  
-//       socket.join(roomName);
-  
-//       socket.broadcast.emit('ROOMS', rooms);
+let onlineUsers: onlineUser[] = [];
 
-//       socket.emit('ROOMS', rooms);
+const addUser = (userId: number, name: string, socketId: string) => {
+  if (userId) {
+    if (!onlineUsers.some((user) => user.userId === userId)) {
+      onlineUsers.push({
+        userId,
+        name,
+        socketId
+      });
+    }
+  }
+};
 
-//       socket.emit('JOINED_ROOM', roomName);
-//     });
+const getUser = (userId: number) => {
+  return onlineUsers.find((user) => user.userId === userId);
+};
+
+const removeUser = (socketId: string) => {
+  onlineUsers = onlineUsers.filter((user) => user.socketId !== socketId);
+};
 
 
-//   });
-// };
+io.on('connection', (socket: typeof Socket) => {
+  console.log(`User Connected: ${socket.id}`);
 
-// export default socket;
+  socket.on('addUser', (data: onlineUser) => {
+    addUser(data.userId, data.name, socket.id);
+    io.emit('getUsers', onlineUsers);
+  });
+
+  // socket.on('join_room', (data: string) => {
+  //   socket.join(data);
+  //   console.log(`User with ID: ${socket.id} joined room ${data}`);
+  // });
+
+  // socket.on('send_message', (data: any) => {
+  //   socket.to(data.room).emit('receive_message', data);
+  // });
+
+  socket.on('send_message', ({senderId, receiverId, text, conversationId}: {senderId: number, receiverId: number, text: string, conversationId: number}) => {
+    const user = getUser(receiverId);
+    io.to(user?.socketId).emit('receive_message', {
+      senderId,
+      text,
+      conversationId,
+      name: user?.name
+    });
+  });
+
+  socket.on('disconnect', () => {
+    removeUser(socket.id);
+    console.log('User Disconnected', socket.id);
+    io.emit('getUsers', onlineUsers);
+  });
+});

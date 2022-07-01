@@ -1,8 +1,9 @@
 import axios from 'axios';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import EditField from './EditField';
 import { PetPlant } from './PetPlantCard';
+import { ThemeContext } from '../../App';
 
 type Props = {
   PetPlant: PetPlant;
@@ -19,6 +20,7 @@ const EditPetModal = ({
   add,
   newPetId,
 }: Props) => {
+  const theme = useContext(ThemeContext);
   const [name, setName] = useState(PetPlant?.name);
   const [age, setAge] = useState(PetPlant?.age);
   const [breed, setBreed] = useState(PetPlant?.breed);
@@ -68,6 +70,7 @@ const EditPetModal = ({
 
   return (
     <Modal
+      contentClassName={theme === 'dark' && 'dark'}
       backdrop='static'
       fullscreen={true}
       show={showModal}
@@ -183,11 +186,19 @@ const EditPetModal = ({
           />
 
           {!add && (
-            <Button variant='danger' onClick={() => handleDelete()}>
+            <Button
+              className={theme === 'dark' && 'bootstrap-modal-button'}
+              variant='danger'
+              onClick={() => handleDelete()}
+            >
               Delete
             </Button>
           )}
-          <Button variant='success' onClick={() => handleOnHide()}>
+          <Button
+            className={theme === 'dark' && 'bootstrap-modal-button'}
+            variant='success'
+            onClick={() => handleOnHide()}
+          >
             Finished
           </Button>
         </Form>
