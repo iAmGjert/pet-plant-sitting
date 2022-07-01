@@ -61,7 +61,7 @@ const Details = () => {
   };
    
   return (
-    <Container>
+    <Container fluid>
       {
         <AddComment 
           showAddModal={showAddModal}
@@ -70,10 +70,10 @@ const Details = () => {
           handleCommentChange={handleCommentChange} 
           canSubmit={canSubmit} />
       }
-      <Button variant="primary" onClick={() => dispatch(setView('list'))}>
+      <Button className='bootstrap-button' variant="primary" onClick={() => dispatch(setView('list'))}>
         <ArrowLeft /> Back to Events
       </Button>
-      <Card>
+      <Card className='bootstrap-card'>
         <Card.Header as="h5">
           <Row>
             <Col>
@@ -90,7 +90,7 @@ const Details = () => {
         </Card.Header>
         <Card.Body>
           <Card.Title >Hosted by
-            <Button variant="link" size='lg' onClick={() => navigate(`/profile/${user.id}`)}>{user.name}
+            <Button className='button-as-link' variant="link" size='lg' onClick={() => navigate(`/profile/${user.id}`)}>{user.name}
             </Button>
           </Card.Title>
           <Card.Text>
@@ -115,8 +115,8 @@ const Details = () => {
                   <small>{numOfParticipants} people interested</small>
                   : <small>0 people interested</small>}
               </Col> */}
-              <Col>
-                <Button variant="link" onClick={handleComments}>
+              <Col className='bootstrap-card'>
+                <Button className='button-as-link' variant="link" onClick={handleComments}>
                   {
                     numOfComments === 1 ?
                       <small>{numOfComments} comment</small>
@@ -131,20 +131,21 @@ const Details = () => {
         </Card.Footer>
       </Card>
       { showComments && <Comments comments={event_comments} /> }
-      <Card>
+      <Card className='bootstrap-card'>
         <Card.Footer>
           {
             currentUser.name.length ?
-              <Button variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
+              <Button className='bootstrap-button' variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
                       Add Comment
               </Button> 
-              : <Button variant="primary" size="sm" href='/login'>
+              
+              : <Button className='bootstrap-button' variant="primary" size="sm" href='/login'>
                     Login to add comment
               </Button>
           }
         </Card.Footer>
       </Card>
-      <Button variant="primary" size='sm' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+      <Button className='bootstrap-button' variant="primary" size='sm' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
           back to top
       </Button>
     </Container>

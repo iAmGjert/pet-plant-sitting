@@ -79,7 +79,7 @@ const CommunityEventsMain = () => {
         <h1>Community Events</h1>
       </div>
       <div className="events-create-btn">
-        <Button onClick={switchToCreateView} size='sm'>Create Event</Button>
+        <Button className='bootstrap-button' onClick={switchToCreateView} size='sm'>Create Event</Button>
       </div>
       <div className='container'>{renderView()}</div>
     </Container>
