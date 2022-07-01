@@ -55,19 +55,8 @@ const Practice: FC<Props> = () => {
   const events = useAppSelector((state) => state.events.events);
   const user = useAppSelector((state) => state.userProfile.value);
 
-  //console.log('jobs on 61 practice', jobs);
-  console.log('events', events); //such is empty
+  console.log('events', events);
   //console.log(user);
-  console.log(useAppSelector((state) => state));
-  // console.log(
-  //   'petplants',
-  //   jobs.map((job: { job_pets_plants: any }) => {
-  //     return job.job_pets_plants;
-  //   })
-  //   // .map((pet) => {
-  //   //   return pet.image;
-  //   // })
-  // );
 
   //function to filter user appointments
   const userJobs = jobs
@@ -91,9 +80,6 @@ const Practice: FC<Props> = () => {
           id: job.id,
           location: job.location,
           petPlants: job.job_pets_plants,
-          // name: job.job_pet_plants.map((pet: { name: any }) => {
-          //   return pet.name;
-          // }),
         };
       }
     );
