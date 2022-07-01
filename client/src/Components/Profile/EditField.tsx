@@ -30,17 +30,6 @@ declare global {
   }
 }
 
-const speciesTags = [
-  'cat',
-  'dog',
-  'bird',
-  'fish',
-  'reptile',
-  'insect',
-  'rodent',
-  'other',
-];
-
 const petTags = [
   'Energetic',
   'Loud',
@@ -177,6 +166,59 @@ const EditField = ({
             </Button>
           </div>
         );
+      case 'breed':
+        return (
+          Pet_Plant.is_plant === false && (
+            <>
+              <span>
+                {editable ? (
+                  <input value={value} onChange={(e) => handleChange(e)} />
+                ) : fieldName === 'image' ? (
+                  <div></div>
+                ) : (
+                  <p>
+                    {value}
+                    {
+                      <AiFillEdit
+                        size={28}
+                        style={{
+                          marginLeft: '10px',
+                          borderRadius: '50%',
+                          border: '1px solid black',
+                        }}
+                        onClick={(e) => {
+                          // console.log('what');
+                          e.preventDefault();
+                          if (fieldName === 'image') {
+                            showWidget();
+                          } else {
+                            setEditable(!editable);
+                          }
+                        }}
+                      />
+                    }
+                  </p>
+                )}
+                {editable && (
+                  <AiFillSave
+                    size={28}
+                    style={{
+                      marginLeft: '10px',
+                      borderRadius: '50%',
+                      border: '1px solid black',
+                    }}
+                    onClick={(e: any) => {
+                      e.preventDefault();
+                      handleSubmit(e);
+                    }}
+                  >
+                    Save
+                  </AiFillSave>
+                )}
+              </span>
+            </>
+          )
+        );
       case 'is_plant':
         return (
           add && (
@@ -263,6 +305,125 @@ const EditField = ({
                 }}
               >
                 Female
+              </ToggleButton>
+            </div>
+          )
+        );
+      case 'species':
+        return (
+          Pet_Plant.is_plant === false && (
+            <div>
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkSpecies1'
+                type='radio'
+                name='radio'
+                variant='outline-primary'
+                value='1'
+                checked={value === 'Cat'}
+                onChange={(e) => {
+                  setVal('Cat');
+                }}
+              >
+                Cat
+              </ToggleButton>
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkSpecies2'
+                type='radio'
+                name='radio'
+                checked={value === 'Dog'}
+                variant='outline-primary'
+                value='2'
+                onChange={(e) => {
+                  setVal('Dog');
+                }}
+              >
+                Dog
+              </ToggleButton>
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkSpecies3'
+                type='radio'
+                name='radio'
+                variant='outline-primary'
+                checked={value === 'Bird'}
+                value='2'
+                onChange={(e) => {
+                  setVal('Bird');
+                }}
+              >
+                Bird
+              </ToggleButton>
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkSpecies4'
+                type='radio'
+                name='radio'
+                variant='outline-primary'
+                checked={value === 'Fish'}
+                value='2'
+                onChange={(e) => {
+                  setVal('Fish');
+                }}
+              >
+                Fish
+              </ToggleButton>
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkSpecies5'
+                type='radio'
+                name='radio'
+                variant='outline-primary'
+                checked={value === 'Reptile'}
+                value='2'
+                onChange={(e) => {
+                  setVal('Reptile');
+                }}
+              >
+                Reptile
+              </ToggleButton>
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkSpecies6'
+                type='radio'
+                name='radio'
+                variant='outline-primary'
+                checked={value === 'Insect'}
+                value='2'
+                onChange={(e) => {
+                  setVal('Insect');
+                }}
+              >
+                Insect
+              </ToggleButton>
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkSpecies7'
+                type='radio'
+                name='radio'
+                variant='outline-primary'
+                checked={value === 'Rodent'}
+                value='2'
+                onChange={(e) => {
+                  setVal('Rodent');
+                }}
+              >
+                Rodent
+              </ToggleButton>
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkSpecies8'
+                type='radio'
+                name='radio'
+                variant='outline-primary'
+                checked={value === 'Other'}
+                value='2'
+                onChange={(e) => {
+                  setVal('Other');
+                }}
+              >
+                Other
               </ToggleButton>
             </div>
           )
@@ -536,6 +697,10 @@ const EditField = ({
         {fieldName === 'pet_plants'
           ? 'Pets and Plants'
           : fieldName === 'age' && Pet_Plant.is_plant === true
+          ? ''
+          : fieldName === 'breed' && Pet_Plant.is_plant === true
+          ? ''
+          : fieldName === 'species' && Pet_Plant.is_plant === true
           ? ''
           : fieldName === 'is_plant' && !add
           ? ''

@@ -43,6 +43,7 @@ const EditPetModal = ({
         gender,
         tags,
         is_plant: isPlant,
+        species
       });
       setShowModal(false);
     } else {
@@ -56,6 +57,7 @@ const EditPetModal = ({
         gender,
         tags,
         is_plant: isPlant,
+        species
       });
       setShowModal(false);
     }
