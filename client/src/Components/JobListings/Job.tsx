@@ -28,7 +28,7 @@ const Job = ({ job, setShowApplied, setShowRevoked }) => {
   const users = useAppSelector((state)=>state.userProfile.users);
   const user = useAppSelector((state)=>state.userProfile.value);
   const petPlants = useAppSelector((state)=>state.petPlant.petPlants);
-  const { id, location, pet_plant, employer_id, sitter_id, startDate, endDate}: jobStuff = job;
+  const { id, location, pet_plant, employer_id, sitter_id, startDate, endDate, job_applicants}: jobStuff = job;
   const dispatch = useAppDispatch();
   
   const geoCodeUser = async () => {
@@ -87,14 +87,18 @@ const Job = ({ job, setShowApplied, setShowRevoked }) => {
             </Col>
             <Col>
               {
-                <div>
-                  Employer: {<div>{ users.reduce((employer, users)=>{
-                    if (users.id === employer_id) {
-                      employer = users.name;
-                    }
-                    return employer;
-                  }, '') }</div>}
-                </div>
+                user.id !== employer_id ?
+                  <div>
+                    Employer: {<div>{ users.reduce((employer, users)=>{
+                      if (users.id === employer_id) {
+                        employer = users.name;
+                      }
+                      return employer;
+                    }, '') }</div>}
+                  </div> :
+                  <div>
+                    Applicants: {job_applicants.length}
+                  </div>
               }
             </Col>
             <Col>        
@@ -108,7 +112,7 @@ const Job = ({ job, setShowApplied, setShowRevoked }) => {
             </Col>
           </Row>
           <Row>
-            Job {parseInt(moment(startDate).fromNow()) > 0 ? 'started' : 'starts'} {moment(startDate).fromNow()}.            
+            Job starts {moment(startDate).fromNow()}.            
           </Row>
           <Button ref={target} className='bootstrap-button' onClick={handleClick} variant='primary'>More Info</Button>
           <>
