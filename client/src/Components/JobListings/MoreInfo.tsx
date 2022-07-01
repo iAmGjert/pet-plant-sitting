@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
-import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Button, Alert, Modal } from 'react-bootstrap';
 import { setJobs } from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -9,11 +9,11 @@ import moment from 'moment';
 
 
 
-const MoreInfo = (props) => {
+const MoreInfo = (props) => {         
   const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { employer, onHide, location, job, job_id } = props;
+  const { distance, employer, onHide, location, job, job_id } = props;
   const user = useAppSelector(state => state.userProfile.value);
   const [showLog, setShowLog] = useState(false);
   const hasApplied = job.job_applicants.reduce((res, applicant)=>{
@@ -61,7 +61,7 @@ const MoreInfo = (props) => {
     dispatch(setJobs(jobs.data));
   };
   return (
-
+    
     <Modal {...props} aria-labelledby="contained-modal-title-vcenter" contentClassName={theme === 'dark' && 'dark'}>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
@@ -83,13 +83,13 @@ const MoreInfo = (props) => {
             Job length: {moment(job.endDate).diff(moment(job.startDate), 'days')} {moment(job.endDate).diff(moment(job.startDate), 'days') > 1 ? 'days' : 'day'}
           </Row>
           <Row>
-            Distance to job: {job.location}
+            {distance === null ? 'Add a location to your profile to see the distance between you and this job!' : `Distance to job: ${distance} miles`}
           </Row>
         </Container>
       </Modal.Body>
       <Modal.Footer>
         <Button className={theme === 'dark' && 'bootstrap-modal-button'} onClick={onHide}>Close</Button>
-        <Button className={theme === 'dark' && 'bootstrap-modal-button'}onClick={onApply}>Apply</Button>
+        <Button className={theme === 'dark' && 'bootstrap-modal-button'}onClick={onApply}>{user.id === job.employer_id ? 'Edit' : 'Apply'}</Button>
       </Modal.Footer>
       {
         showLog ?

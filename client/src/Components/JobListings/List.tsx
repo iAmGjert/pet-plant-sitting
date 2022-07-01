@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import Job from './Job';
-import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, ToggleButton, ButtonGroup, ToggleButtonGroup, DropdownButton, Dropdown } from 'react-bootstrap';
+import { ButtonGroup, DropdownButton, Dropdown } from 'react-bootstrap';
 import moment from 'moment';
 
 const List = () => {
@@ -12,7 +12,6 @@ const List = () => {
   const [view, setView] = useState('Available Jobs');
   return (
     <>
-      <h1>Job List</h1>
       <DropdownButton as={ButtonGroup} title={view} id="bg-nested-dropdown">
         <Dropdown.Item onClick={(e)=>{ setView(e.target.textContent); }} eventKey="1">Available Jobs</Dropdown.Item>
         <Dropdown.Item onClick={(e)=>{ setView(e.target.textContent); }} eventKey="2">My Jobs</Dropdown.Item>
@@ -34,7 +33,8 @@ const List = () => {
               }
               return false; 
             }).filter((job)=>{
-              if (moment(job.startDate).diff(moment(), 'days') < 0) {
+              console.log(moment(job.endDate).diff(moment(), 'days'));
+              if (moment(job.endDate).diff(moment(), 'days') < 0) {
                 return false;
               }
               return true;
@@ -44,7 +44,7 @@ const List = () => {
               </div>);
             }) :
             jobs.filter((job)=>{
-              if (moment(job.startDate).diff(moment(), 'days') < 0) {
+              if (moment(job.endDate).diff(moment(), 'days') < 0) {
                 return false;
               }
               if (job.sitter_id !== null) {
