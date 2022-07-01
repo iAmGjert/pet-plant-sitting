@@ -23,6 +23,7 @@ import PetPlantCard, { PetPlant } from '../Components/Profile/PetPlantCard';
 import EditAccountModal from '../Components/Profile/EditAccountModal';
 import Rating from '../Components/Profile/Rating';
 import { useNavigate } from 'react-router-dom';
+import { scroller } from 'react-scroll';
 
 export interface RatingInfo {
   id: number;
@@ -448,40 +449,85 @@ const Profile = () => {
       <Navbar sticky='top' bg='light' variant='light'>
         <Nav fill variant='tabs' defaultActiveKey='/home'>
           <Nav.Item>
-            <Nav.Link href='/home'>Overview</Nav.Link>
+            <Nav.Link
+              onClick={() =>
+                scroller.scrollTo('overview', {
+                  smooth: true,
+                  offset: -70,
+                  duration: 500,
+                })
+              }
+            >
+              Overview
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey='link-1'>Reviews</Nav.Link>
+            <Nav.Link
+              onClick={() =>
+                scroller.scrollTo('ratings', {
+                  smooth: true,
+                  offset: -70,
+                  duration: 500,
+                })
+              }
+            >
+              Reviews
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey='link-2'>Pets and Plants</Nav.Link>
+            <Nav.Link
+              onClick={() =>
+                scroller.scrollTo('pets', {
+                  smooth: true,
+                  offset: -70,
+                  duration: 500,
+                })
+              }
+            >
+              Pets and Plants
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey='disabled'>Gallery</Nav.Link>
+            <Nav.Link
+              onClick={() =>
+                scroller.scrollTo('gallery', {
+                  smooth: true,
+                  offset: -70,
+                  duration: 200,
+                })
+              }
+            >
+              Gallery
+            </Nav.Link>
           </Nav.Item>
         </Nav>
       </Navbar>
       <Row>
-        <h2>About {profileUser?.name}</h2>
+        <h2 id='overview'>About {profileUser?.name}</h2>
         {!readMore ? (
           <>
-            {formatBio(profileUser?.bio)}
+            {formatBio(profileUser?.bio) || (
+              <h6>This user has not written their bio</h6>
+            )}
             <br />
-            <button
-              className='button-as-link my-2'
-              onClick={() => {
-                setReadMore(!readMore);
-              }}
-            >
-              (Read More)
-            </button>
+            {formatBio(profileUser?.bio) && (
+              <button
+                className='button-as-link my-2'
+                onClick={() => {
+                  setReadMore(!readMore);
+                }}
+              >
+                (Read More)
+              </button>
+            )}
           </>
         ) : (
           <>{profileUser?.bio}</>
         )}
       </Row>
       <Row>
-        <h2> {`Reviews(${profileUser?.ratings.length})`} </h2>
+        <h2 id='ratings'> {`Reviews(${profileUser?.ratings.length})`} </h2>
+        {/* if revies higher than 5, map out 5 of them and a button to load the rest  */}
         {profileUser?.ratings.map((rating, i) => {
           return (
             <Rating rating={rating} key={'rating' + i} getStars={getStars} />
@@ -489,7 +535,7 @@ const Profile = () => {
         })}
       </Row>
       <Row>
-        <h2> My Pets and Plants </h2>
+        <h2 id='pets'> My Pets and Plants </h2>
         {profileUser?.pet_plants.map((pet) => {
           return (
             <PetPlantCard
@@ -502,7 +548,7 @@ const Profile = () => {
         })}
       </Row>
       <Row>
-        <h2> My Gallery </h2>
+        <h2 id='gallery'> My Gallery </h2>
         {profileUser?.gallery?.gallery_entries.length >= 1 &&
           profileUser.gallery.gallery_entries.map((entry: any, i) => {
             return (
