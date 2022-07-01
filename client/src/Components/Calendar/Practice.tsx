@@ -1,14 +1,22 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
-import { FC } from 'react';
+import React, { useEffect, useState, FC } from 'react';
 import moment from 'moment';
 
 //schedule
 import Paper from '@mui/material/Paper';
 import { ViewState } from '@devexpress/dx-react-scheduler';
 
-import { Scheduler } from '@devexpress/dx-react-scheduler-material-ui';
-import { DayView } from '@devexpress/dx-react-scheduler-material-ui';
+import {
+  Scheduler,
+  DayView,
+  WeekView,
+  MonthView,
+  Toolbar,
+  DateNavigator,
+  ViewSwitcher,
+  TodayButton,
+  AppointmentTooltip,
+  AppointmentForm,
+} from '@devexpress/dx-react-scheduler-material-ui';
 //import { WeekView } from '@devexpress/dx-react-scheduler-material-ui';
 import { Appointments } from '@devexpress/dx-react-scheduler-material-ui';
 
@@ -37,51 +45,80 @@ interface events {
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
-//1. CONNECT DATES FROM JOBS AND EVENTS TO CALENDAR DATES. MAKE THEM RENDER
 //2. ENSURE THAT SCHEDULER RUNS INFINITELY
 //3. OFFER USER DIFFERENT VIEWS OF CALENDAR WITH SAME FUNCTIONALITY
 //4. FIGURE OUT A WAY TO SPAN JOB STARTDATES AND ENDDATES IN CALENDAR
 
 const Practice: FC<Props> = () => {
-  const currentDate = moment().format('YYYY-MM-DD'); //2022-06-29
-  // const dispatch = useAppDispatch();
+  //const currentDate = moment().format('YYYY-MM-DD'); //2022-06-29
 
   const jobs = useAppSelector((state) => state.job.jobs);
   const events = useAppSelector((state) => state.events.events);
   const user = useAppSelector((state) => state.userProfile.value);
 
-  const [dateState, setDateState] = useState(new Date());
-
   console.log('jobs on 61 practice', jobs);
-  //console.log('events', events);//such is empty
+  console.log('events', events); //such is empty
   console.log(user);
 
-  //function to filter user appointment/event data
-  const userJobs = jobs.filter((job: { sitter_id: number }) => {
-    return job.sitter_id === user.id;
-  });
-
-  const newDate = moment(dateState).format('yyyy-MM-DD');
-  console.log(newDate);
-
-  //setDateState(newDate);
-  const filteredDate = userJobs.filter((job) => {
-    job.startDate === newDate;
-  });
+  //function to filter user appointments
+  const userJobs = jobs
+    .filter((job: { sitter_id: number }) => {
+      return job.sitter_id === user.id;
+    })
+    .map((job) => {
+      return {
+        ...job,
+        title: job.description,
+        startDate: moment(job.startDate).toDate(),
+        endDate: moment(job.endDate).toDate(),
+        id: job.id,
+        location: job.location,
+      };
+    });
 
   //console.log(schedulerData);
   console.log('userJobs', userJobs);
 
-  // useEffect(() => {
-  //   // getAllJobs();
-  // }, [dateState]);
+  /* [
+  {
+    title: 'Website Re-Design Plan',
+    startDate: new Date(2018, 5, 25, 9, 35),
+    endDate: new Date(2018, 5, 25, 11, 30),
+    id: 0,
+    location: 'Room 1',
+  }, {
+    title: 'Book Flights to San Fran for Sales Trip',
+    startDate: new Date(2018, 5, 25, 12, 11),
+    endDate: new Date(2018, 5, 25, 13, 0),
+    id: 1,
+    location: 'Room 1',
+  }
+]
+  */
+
+  const [currentDate, setCurrentDate] = useState(moment().format('YYYY-MM-DD'));
+  const onCurrentDateChange = (_currentDate) => {
+    setCurrentDate(_currentDate);
+  };
 
   return (
     <Paper>
-      <Scheduler>
-        <ViewState currentDate={currentDate} />
+      <Scheduler data={userJobs}>
+        <ViewState
+          currentDate={currentDate}
+          onCurrentDateChange={onCurrentDateChange}
+        />
         <DayView startDayHour={0} endDayHour={23} cellDuration={60} />
+        <WeekView startDayHour={0} endDayHour={23} cellDuration={60} />
+
+        <MonthView startDayHour={0} endDayHour={23} cellDuration={60} />
+        <Toolbar />
+        <DateNavigator />
+        <TodayButton />
+        <ViewSwitcher />
         <Appointments />
+        <AppointmentTooltip showCloseButton showOpenButton />
+        <AppointmentForm readOnly />
       </Scheduler>
     </Paper>
   );
