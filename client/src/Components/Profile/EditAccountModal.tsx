@@ -182,7 +182,7 @@ const EditAccountModal = ({
                   total_ratings: 0,
                 })
                 .then((res) => {
-                  console.log(res.data.id);
+                  // console.log(res.data.id);
                   setNewPetID(res.data.id);
                 });
               setNewPet(true);

@@ -37,7 +37,7 @@ users.put('/:id', async (req: Request, res: Response) => {
   User.update(req.body, { where: { id: req.body.id } })
     .then(() => {
       res.sendStatus(200);
-      console.log('HERE');
+      // console.log('HERE');
     })
     .catch((err: Error) => {
       console.error(err, 'put user error');

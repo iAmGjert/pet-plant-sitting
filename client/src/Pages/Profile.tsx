@@ -97,7 +97,6 @@ const Profile = () => {
         ? total++
         : setMissingFields((prev) => [...prev, 'Pets and Plants']);
     }
-    console.log(missingFields);
     setCompleteProfile(total);
   };
   // get a user based on the id in the url
@@ -109,7 +108,7 @@ const Profile = () => {
     if (user.data === '') {
       navigate('/');
     }
-    console.log(user);
+    //console.log(user);
     setProfileUser(user.data);
   };
 
@@ -412,7 +411,6 @@ const Profile = () => {
                               <Button
                                 variant='danger'
                                 onClick={() => {
-                                  console.log(entry.id);
                                   deleteGallery(entry.id);
                                 }}
                               >

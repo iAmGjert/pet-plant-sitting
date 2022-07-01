@@ -128,7 +128,7 @@ const EditField = ({
     e.preventDefault();
     setEditable(false);
     if (add) {
-      console.log(newPetId);
+      //console.log(newPetId);
       axios.put(`/api/pets_plants/${newPetId}`, {
         [fieldName]: value,
         id: newPetId,
@@ -356,27 +356,15 @@ const EditField = ({
                             navigator.geolocation.getCurrentPosition(function (
                               position
                             ) {
-                              console.log(
-                                'Latitude is :',
-                                position.coords.latitude
-                              );
                               const lat = position.coords.latitude;
-                              console.log(
-                                'Longitude is :',
-                                position.coords.longitude
-                              );
+
                               const long = position.coords.longitude;
-                              console.log(process.env.MAPBOX_TOKEN);
-                              console.log(lat, long);
+
                               axios
                                 .get(
                                   `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${process.env.MAPBOX_TOKEN}`
                                 )
                                 .then((results: any) => {
-                                  console.log(results);
-                                  console.log(
-                                    results.data.features[0].place_name
-                                  );
                                   setVal(results.data.features[0].place_name);
                                 })
                                 .catch((err) => {
@@ -467,7 +455,6 @@ const EditField = ({
         return (
           Pet_Plant.is_plant === false && (
             <div>
-              {console.log(values)}
               <RangeSlider
                 value={values}
                 onChange={(e) => setValues(e.target.value)}
