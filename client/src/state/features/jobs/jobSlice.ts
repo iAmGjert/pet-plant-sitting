@@ -90,7 +90,7 @@ export const deleteApplication = createAsyncThunk(
   'jobs/deleteApplicaiton',
   async(id) => {
     const response = await axios.delete(`/api/jobapplicants/delete/${id}`);
-    return id;
+    return response;
   }
 );
 
