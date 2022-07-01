@@ -46,7 +46,7 @@ interface Props {}
 
 const Landing: FC<Props> = () => {
   //const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const user = useAppSelector((state) => state.userProfile.value);
@@ -57,19 +57,15 @@ const Landing: FC<Props> = () => {
   const jobs = useAppSelector((state) => state.job.jobs);
   const applications = useAppSelector((state) => state.job.applications);
   const pastJobs = useAppSelector((state) => state.job.pastJobs);
-  //console.log('applications', applications);
-  //see if applicant id matches with sitter id
-  //console.log(upcomingJobs, 'upcomingJobs');
-  //console.log('user', user);
+
   const events = useAppSelector((state) => state.events.events);
-  //console.log('upcomingJobs', upcomingJobs);
-  // const trimmedUpcommingJobs = upcomingJobs.slice(2);
+
   const sitterUpcomingJobs = upcomingJobs.filter(
     (job: { sitter_id: number }) => {
       return job.sitter_id === user.id;
     }
   );
-  //console.log('sitterUpcomingJobs', sitterUpcomingJobs);
+
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
 
   // const currentDate = moment().format('YYYY-MM-DD');
@@ -81,8 +77,6 @@ const Landing: FC<Props> = () => {
     return job.sitter_id === user.id;
   });
 
-  //console.log('sitterWorkHistory', sitterWorkHistory);
-
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
@@ -92,7 +86,7 @@ const Landing: FC<Props> = () => {
 
   return (
     <div>
-      <Card>
+      <Card className='bootstrap-card'>
         <Card.Header as='h5'>
           Welcome {user.name ? `, ${user.name}!` : '!'}
         </Card.Header>

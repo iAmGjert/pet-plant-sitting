@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, FC } from 'react';
 import { Navbar, Container, Nav, Row, Col, Button, Alert, Breadcrumb, Card, Form } from 'react-bootstrap';
 import { changeView, getView } from '../../state/features/jobs/jobSlice';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { useNavigate } from 'react-router-dom';
 
 
-// type Props = {}
+interface Props {
+  theme: string
+}
 
-const BottomNavBar = () => {
+const BottomNavBar: FC<Props> = ({ theme }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const user = useAppSelector(state=>state.userProfile.value);
@@ -29,10 +31,9 @@ const BottomNavBar = () => {
           <div />
       }
       <Navbar
-        bg='primary'
+        bg={theme === 'dark' ? 'dark-mode' : 'primary'}
         variant='dark'
         fixed='bottom'
-        className='d-lg-none d-xl-none'
       >
         <Container>
           <Nav className='me-auto'>

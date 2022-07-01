@@ -73,14 +73,16 @@ events.get('/:id', async (req: Request, res: Response) => {
 
 events.put('/update/:id', (req: Request, res: Response) => {
   const { id } = req.params;
-  const { name, host, location, description, participants } = req.body;
-  Events.update({ name, host, location, description, participants }, { where: { id } })
-    .then((res: any) => {
-      res.status(200).send(res);
-    }).catch((err: Error) => {
-      console.error(err);
-      // res.status(500).send(err);
-    });
+  Events.update(req.body, { returning: true, where: { id } })
+    .then(([ updatedRows, [updatedEvent] ]: any) => {
+      console.log(updatedEvent, updatedRows);
+      res.status(201).send(updatedEvent);
+    }
+    ).catch((err: Error) => {
+      console.log(err);
+      res.status(500).send(err);
+    }
+    );
 });
 
 events.delete('/delete/:id', async (req: Request, res: Response) => {
@@ -124,15 +126,12 @@ events.post('/comment/add', (req: Request, res: Response) => {
     });
 });
 
-events.patch('/comment/update/:id', (req: Request, res: Response) => {
-  console.log(req.body);
+events.put('/comment/update/:id', (req: Request, res: Response) => {
   const { id } = req.params;
-  const { comment } = req.body;
-  EventComment.update({ comment }, { where: { id } })
-    .then(() => {
-      res.sendStatus(200);
-    }).catch((err: Error) => {   
-      console.error(err);
+  EventComment.update(req.body, { returning: true, where: { id } })
+    .then(([ updatedRows, [updatedComment]]: any) => {
+      res.status(201).send(updatedComment);
+    }).catch((err: Error) => { 
       res.status(500).send(err);  
     });
 });
@@ -142,7 +141,8 @@ events.delete('/comment/delete/:id', (req: Request, res: Response) => {
   EventComment.destroy({
     where: { id },
   }).then(() => {
-    res.sendStatus(204);
+    // console.log(res.staus);
+    res.sendStatus(200);
   }).catch((err: Error) => {
     console.error(err);
     res.status(500).send(err);

@@ -50,12 +50,14 @@ passport.use(new LocalStrategy(/*{ usernameField: 'email', passwordField: 'passw
 }));
 
 passport.serializeUser((user: any, done: any) => {
-  console.log('serialized User: ', user.id);      
+  console.log('serialized User: ', user.id || user[0].id);      
   done(null, user);
 });
 
 passport.deserializeUser((user: any, done: any) => {
-  console.log('deserialize User:', user.id || user[0].id);
+  if (user.id) {
+    console.log('deserialize User: ', user.id);
+  }
   if (user.id) {
     User.findByPk(user.id)
       .then((user: any) => {

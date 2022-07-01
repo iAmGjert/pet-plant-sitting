@@ -5,6 +5,7 @@ const GoogleButton = () => {
   return (
     <div>
       <Button
+        className='bootstrap-button'
         variant='primary'
         size='lg'
         href={`${process.env.CLIENT_URL}:${process.env.PORT}/auth/google`}
