@@ -89,7 +89,7 @@ const Details = () => {
           </Row>
         </Card.Header>
         <Card.Body>
-          <Card.Title >Hosted by
+          <Card.Title >Hosted by&nbsp;
             <Button className='button-as-link' variant="link" size='lg' onClick={() => navigate(`/profile/${user.id}`)}>{user.name}
             </Button>
           </Card.Title>

@@ -69,11 +69,11 @@ const Comments = ({ comments }: any) => {
                               setCommentObj(comment);
                               setShowEditModal(true);
                             }}>
-                            edit
+                            edit 
                           </Button>
-                            | 
+                          &nbsp;|&nbsp;
                           <Button className='button-as-link' variant='link' 
-                            onClick={() => handleDelete(comment)}>delete
+                            onClick={() => handleDelete(comment)}> delete
                           </Button> 
                         </Col> : null}
                     </Row>
