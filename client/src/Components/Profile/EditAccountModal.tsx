@@ -1,19 +1,19 @@
 import axios from 'axios';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { Button, Form, Modal, Card } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Profile } from '../../Pages/Profile';
 import { setUser } from '../../state/features/userProfile/userProfileSlice';
 import EditField from './EditField';
 import EditPetModal from './EditPetModal';
-import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { useAppDispatch } from '../../state/hooks';
 import { ThemeContext } from '../../App';
 
 type Props = {
   user: Profile;
   showModal: boolean;
   setShowModal: (showModal: boolean) => void;
-  setProfileUser: (user: any) => void;
+  setProfileUser: (user: Profile) => void;
 };
 
 const EditAccountModal = ({
@@ -24,39 +24,47 @@ const EditAccountModal = ({
 }: Props) => {
   // loop through fields on a user and create a form field for each
   const theme = useContext(ThemeContext);
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [newPet, setNewPet] = useState(false);
   const [newPetId, setNewPetID] = useState(0);
-  const navigate = useNavigate();
-  const userFields = [];
-  for (const field in user) {
-    if (
-      field !== 'id' &&
-      field !== 'createdAt' &&
-      field !== 'updatedAt' &&
-      field !== 'average_rating' &&
-      field !== 'gallery_id' &&
-      field !== 'sitter_rating' &&
-      field !== 'total_ratings' &&
-      field !== 'total_sitter_ratings' &&
-      field !== 'gallery' &&
-      field !== 'password' &&
-      field !== 'ratings'
-    ) {
-      userFields.push([field, user[field as keyof typeof user]]);
-    }
-  }
-  const dispatch = useAppDispatch();
+  const [name, setName] = useState(user?.name);
+  const [username, setUsername] = useState(user?.username);
+  const [location, setLocation] = useState(user?.location);
+  const [image, setImage] = useState(user?.image);
+  const [bio, setBio] = useState(user?.bio);
+  const [userTheme, setTheme] = useState(user?.theme);
+  const [petPlant, setPetPlant] = useState(user?.pet_plants);
+
   const getUser = async () => {
     const user = await axios.get('/auth/login/success');
+    console.log(user.data.user);
     dispatch(setUser(user.data.user));
-    // console.log(user, 'LOGIN USER/userProfile state is set');
     setProfileUser(user.data.user);
   };
-  const handleOnHide = () => {
-    setShowModal(false);
+  const handleOnHide = async () => {
+    await axios.put(`/api/users/${user.id}`, {
+      ...user,
+      name,
+      username,
+      location,
+      image,
+      bio,
+      theme: userTheme,
+    });
     getUser();
+    setShowModal(false);
     navigate(`/profile/${user.id}`);
   };
+  useEffect(() => {
+    setName(user?.name);
+    setUsername(user?.username);
+    setBio(user?.bio);
+    setLocation(user?.location);
+    setImage(user?.image);
+    setTheme(user?.theme);
+    setPetPlant(user?.pet_plants);
+  }, [user, showModal]);
 
   return (
     <Modal
@@ -69,18 +77,19 @@ const EditAccountModal = ({
       <EditPetModal
         PetPlant={{
           id: null,
-          name: '',
-          bio: '',
-          image: '',
+          name: 'Enter a name',
+          bio: 'Talk about your pet/plant',
+          image:
+            'https://i.pinimg.com/736x/4a/21/33/4a2133dd4dad968c3218fec61d97db55.jpg',
           owner_id: user?.id,
           is_plant: false,
-          breed: '',
+          breed: 'N/A',
           age: 0,
           gender: '',
           rating: 0,
           tags: [],
           ratings: [],
-          species: '',
+          species: 'N/A',
           total_ratings: 0,
         }}
         showModal={newPet}
@@ -88,25 +97,75 @@ const EditAccountModal = ({
         add={true}
         newPetId={newPetId}
       />
-      <Modal.Header>
+      <Modal.Header closeButton>
         <Modal.Title>Update Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
-          {userFields.map(([field, value], i) => {
-            const fieldName = String(field);
-            return (
-              <EditField
-                key={'field' + i}
-                fieldName={fieldName}
-                value={value}
-                user={user}
-                Pet_Plant={null}
-                add={false}
-                newPetId={null}
-              />
-            );
-          })}
+          <EditField
+            fieldName={'name'}
+            setVal={setName}
+            value={name}
+            user={user}
+            Pet_Plant={null}
+            add={false}
+            newPetId={null}
+          />
+          <EditField
+            fieldName={'username'}
+            setVal={setUsername}
+            value={username}
+            user={user}
+            Pet_Plant={null}
+            add={false}
+            newPetId={null}
+          />
+          <EditField
+            fieldName={'location'}
+            setVal={setLocation}
+            value={location}
+            user={user}
+            Pet_Plant={null}
+            add={false}
+            newPetId={null}
+          />
+          <EditField
+            fieldName={'image'}
+            setVal={setImage}
+            value={image}
+            user={user}
+            Pet_Plant={null}
+            add={false}
+            newPetId={null}
+          />
+          <EditField
+            fieldName={'bio'}
+            setVal={setBio}
+            value={bio}
+            user={user}
+            Pet_Plant={null}
+            add={false}
+            newPetId={null}
+          />
+          <EditField
+            fieldName={'theme'}
+            setVal={setTheme}
+            value={userTheme}
+            user={user}
+            Pet_Plant={null}
+            add={false}
+            newPetId={null}
+          />
+          <EditField
+            fieldName={'pet_plants'}
+            value={petPlant}
+            setVal={setPetPlant}
+            user={user}
+            Pet_Plant={null}
+            add={false}
+            newPetId={null}
+          />
+
           <Card
             className='text-center'
             onClick={() => {
@@ -127,7 +186,7 @@ const EditAccountModal = ({
                   total_ratings: 0,
                 })
                 .then((res) => {
-                  console.log(res.data.id);
+                  // console.log(res.data.id);
                   setNewPetID(res.data.id);
                 });
               setNewPet(true);
@@ -139,7 +198,14 @@ const EditAccountModal = ({
             />
             <h1 style={{ fontWeight: 'bold' }}>Add Pets</h1>
           </Card>
-
+          <Button
+            variant='danger'
+            type='button'
+            onClick={() => setShowModal(false)}
+            className='mt-3 '
+          >
+            Cancel
+          </Button>
           <Button
             variant='success'
             type='button'

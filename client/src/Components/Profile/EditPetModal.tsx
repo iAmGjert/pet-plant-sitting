@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Form, Modal } from 'react-bootstrap';
 import EditField from './EditField';
 import { PetPlant } from './PetPlantCard';
@@ -21,24 +21,47 @@ const EditPetModal = ({
   newPetId,
 }: Props) => {
   const theme = useContext(ThemeContext);
-  const petPlantFields = [];
-  for (const field in PetPlant) {
-    if (
-      field !== 'id' &&
-      field !== 'createdAt' &&
-      field !== 'updatedAt' &&
-      field !== 'average_rating' &&
-      field !== 'is_plant' &&
-      field !== 'total_ratings' &&
-      field !== 'ratings' &&
-      field !== 'rating' &&
-      field !== 'owner_id'
-    ) {
-      petPlantFields.push([field, PetPlant[field as keyof typeof PetPlant]]);
+  const [name, setName] = useState(PetPlant?.name);
+  const [age, setAge] = useState(PetPlant?.age);
+  const [breed, setBreed] = useState(PetPlant?.breed);
+  const [bio, setBio] = useState(PetPlant?.bio);
+  const [image, setImage] = useState(PetPlant?.image);
+  const [species, setSpecies] = useState(PetPlant?.species);
+  const [tags, setTags] = useState(PetPlant?.tags);
+  const [gender, setGender] = useState(PetPlant?.gender);
+  const [isPlant, setIsPlant] = useState(PetPlant?.is_plant);
+  const handleOnHide = async () => {
+    if (add) {
+      await axios.put(`/api/pets_plants/${newPetId}`, {
+        ...PetPlant,
+        id: newPetId,
+        name,
+        age,
+        breed,
+        image,
+        bio,
+        gender,
+        tags,
+        is_plant: isPlant,
+        species
+      });
+      setShowModal(false);
+    } else {
+      await axios.put(`/api/pets_plants/${PetPlant.id}`, {
+        ...PetPlant,
+        name,
+        age,
+        breed,
+        image,
+        bio,
+        gender,
+        tags,
+        is_plant: isPlant,
+        species
+      });
+      setShowModal(false);
     }
-  }
-  const handleOnHide = () => {
-    setShowModal(false);
+    // setShowModal(false);
     // navigate(`/profile/${PetPlant.owner_id}`);
   };
 
@@ -60,33 +83,124 @@ const EditPetModal = ({
     >
       <Modal.Header closeButton>
         {add ? (
-          <Modal.Title>Add Pet</Modal.Title>
+          <Modal.Title>
+            Add {`${PetPlant.is_plant ? 'Plant' : 'Pet'}`}
+          </Modal.Title>
         ) : (
           <Modal.Title>Edit {PetPlant.name}</Modal.Title>
         )}
       </Modal.Header>
       <Modal.Body>
         <Form>
-          {petPlantFields.map(([field, value], i) => {
-            const fieldName = String(field);
-            return (
-              <EditField
-                key={'field' + i}
-                fieldName={fieldName}
-                value={value}
-                Pet_Plant={PetPlant}
-                user={null}
-                add={add}
-                newPetId={newPetId}
-              />
-            );
-          })}
+          <EditField
+            fieldName={'is_plant'}
+            value={isPlant}
+            setVal={setIsPlant}
+            user={null}
+            Pet_Plant={PetPlant}
+            add={add}
+            newPetId={newPetId}
+          />
+          <EditField
+            fieldName={'name'}
+            value={name}
+            setVal={setName}
+            user={null}
+            Pet_Plant={PetPlant}
+            add={add}
+            newPetId={newPetId}
+          />
+          <EditField
+            fieldName={'image'}
+            value={image}
+            setVal={setImage}
+            user={null}
+            Pet_Plant={PetPlant}
+            add={add}
+            newPetId={newPetId}
+          />
+          <EditField
+            fieldName={'age'}
+            value={age}
+            setVal={setAge}
+            user={null}
+            Pet_Plant={PetPlant}
+            add={add}
+            newPetId={newPetId}
+          />
+          <EditField
+            fieldName={'bio'}
+            value={bio}
+            setVal={setBio}
+            user={null}
+            Pet_Plant={PetPlant}
+            add={add}
+            newPetId={newPetId}
+          />
+          {isPlant && (
+            <EditField
+              fieldName={'tags'}
+              value={tags}
+              setVal={setTags}
+              user={null}
+              Pet_Plant={PetPlant}
+              add={add}
+              newPetId={newPetId}
+            />
+          )}
+          {!isPlant && (
+            <EditField
+              fieldName={'tags'}
+              value={tags}
+              setVal={setTags}
+              user={null}
+              Pet_Plant={PetPlant}
+              add={add}
+              newPetId={newPetId}
+            />
+          )}
+          <EditField
+            fieldName={'gender'}
+            value={gender}
+            setVal={setGender}
+            user={null}
+            Pet_Plant={PetPlant}
+            add={add}
+            newPetId={newPetId}
+          />
+          <EditField
+            fieldName={'breed'}
+            value={breed}
+            setVal={setBreed}
+            user={null}
+            Pet_Plant={PetPlant}
+            add={add}
+            newPetId={newPetId}
+          />
+          <EditField
+            fieldName={'species'}
+            value={species}
+            setVal={setSpecies}
+            user={null}
+            Pet_Plant={PetPlant}
+            add={add}
+            newPetId={newPetId}
+          />
+
           {!add && (
-            <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant='danger' onClick={() => handleDelete()}>
+            <Button
+              className={theme === 'dark' && 'bootstrap-modal-button'}
+              variant='danger'
+              onClick={() => handleDelete()}
+            >
               Delete
             </Button>
           )}
-          <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant='success' onClick={() => handleOnHide()}>
+          <Button
+            className={theme === 'dark' && 'bootstrap-modal-button'}
+            variant='success'
+            onClick={() => handleOnHide()}
+          >
             Finished
           </Button>
         </Form>

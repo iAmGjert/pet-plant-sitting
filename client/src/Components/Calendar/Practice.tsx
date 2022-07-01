@@ -16,12 +16,13 @@ import {
   TodayButton,
   AppointmentTooltip,
   AppointmentForm,
+  Appointments,
 } from '@devexpress/dx-react-scheduler-material-ui';
 // import { Scheduler } from '@devexpress/dx-react-scheduler-material-ui';
 // import { DayView } from '@devexpress/dx-react-scheduler-material-ui';
 // import { WeekView } from '@devexpress/dx-react-scheduler-material-ui';
 
-import { Appointments } from '@devexpress/dx-react-scheduler-material-ui';
+// import { Appointments } from '@devexpress/dx-react-scheduler-material-ui';
 
 //Redux
 import { useAppSelector } from '../../state/hooks';
