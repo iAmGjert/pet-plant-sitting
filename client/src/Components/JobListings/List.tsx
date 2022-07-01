@@ -4,7 +4,7 @@ import Job from './Job';
 import { ButtonGroup, DropdownButton, Dropdown, Overlay, Card } from 'react-bootstrap';
 import moment from 'moment';
 
-const List = ({ setShowApplied, setShowRevoked }) => {
+const List = ({ setshowapplied, setshowrevoked }) => {
   const target = useRef(null);
   const user = useAppSelector((state)=>state.userProfile.value);
   const jobs = useAppSelector((state)=>state.job.jobs);
@@ -57,7 +57,7 @@ const List = ({ setShowApplied, setShowRevoked }) => {
                 return true;
               }).map((job, index)=>{
                 return (
-                  <Job setShowRevoked={setShowRevoked} key={`job#${index}`} setShowApplied={setShowApplied} job={job} />
+                  <Job setshowrevoked={setshowrevoked} key={`job#${index}`} setshowapplied={setshowapplied} job={job} />
                 );
               }) :
               <Card><Card.Title>No Jobs to Display!</Card.Title></Card> :
@@ -71,7 +71,7 @@ const List = ({ setShowApplied, setShowRevoked }) => {
               return true;
             }).map((job, index)=>{
               return (
-                <Job setShowRevoked={setShowRevoked} key={`job#${index}`} setShowApplied={setShowApplied} job={job} />
+                <Job setshowrevoked={setshowrevoked} key={`job#${index}`} setshowapplied={setshowapplied} job={job} />
               );
             }) :
           view === 'My Jobs' && Array.isArray(jobs) && user.name !== '' ?
@@ -89,7 +89,7 @@ const List = ({ setShowApplied, setShowRevoked }) => {
                 return true; 
               }).map((job, index)=>{
                 return (
-                  <Job setShowRevoked={setShowRevoked} setShowApplied={setShowApplied} key={`job#${index}`} job={job} />
+                  <Job setshowrevoked={setshowrevoked} setshowapplied={setshowapplied} key={`job#${index}`} job={job} />
                 );
               }) :
               <Card><Card.Title>No Jobs to Display!</Card.Title></Card> :
@@ -110,7 +110,7 @@ const List = ({ setShowApplied, setShowRevoked }) => {
                   }
                   return false;
                 }).map((job, index)=>{
-                  return <Job setShowRevoked={setShowRevoked} key={`job#${index}`} setShowApplied={setShowApplied} job={job} />;
+                  return <Job setshowrevoked={setshowrevoked} key={`job#${index}`} setshowapplied={setshowapplied} job={job} />;
                 }) :
                 <Card><Card.Title>No Jobs to Display!</Card.Title></Card> :
               <Card><Card.Title>Login to view these jobs!</Card.Title></Card>

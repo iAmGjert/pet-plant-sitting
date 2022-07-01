@@ -14,7 +14,7 @@ const MoreInfo = (props) => {
   const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { setShowRevoked, setShowApplied, distance, employer, onHide, job, job_id } = props;
+  const { setshowrevoked, setshowapplied, distance, employer, onHide, job, job_id } = props;
   const user = useAppSelector(state => state.userProfile.value);
   const [showLog, setShowLog] = useState(false);
   const obj = 
@@ -65,11 +65,11 @@ const MoreInfo = (props) => {
         return res;
       }, 0);
       revokeApplication(app_id);
-      setShowRevoked(true);
+      setshowrevoked(true);
       onHide();
       return;
     }
-    setShowApplied(true);
+    setshowapplied(true);
     await postApplication(obj);
     await getJobs();
     

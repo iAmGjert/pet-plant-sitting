@@ -15,7 +15,7 @@ interface jobStuff {
   endDate: Date,
   pet_plant: Array<number>
 }
-const Job = ({ job, setShowApplied, setShowRevoked }) => {
+const Job = ({ job, setshowapplied, setshowrevoked }) => {
   const [show, setShow] = useState(false);
   const target = useRef(null);
   const removeOverlay = ()=>{ setTimeout(()=>{ setShow(false); }, 5000); };
@@ -116,7 +116,7 @@ const Job = ({ job, setShowApplied, setShowRevoked }) => {
           </Row>
           <Button ref={target} className='bootstrap-button' onClick={handleClick} variant='primary'>More Info</Button>
           <>
-            <MoreInfo setShowRevoked={setShowRevoked} setShowApplied={setShowApplied} distance={distanceFromJob} user={user} show={modalShow} job_id={id} onHide={() => setModalShow(false)} job={job} employer={ users.reduce((employer, users)=>{
+            <MoreInfo setshowrevoked={setshowrevoked} setshowapplied={setshowapplied} distance={distanceFromJob} user={user} show={modalShow} job_id={id} onHide={() => setModalShow(false)} job={job} employer={ users.reduce((employer, users)=>{
               if (users.id === employer_id) {
                 employer = users.name;
               }

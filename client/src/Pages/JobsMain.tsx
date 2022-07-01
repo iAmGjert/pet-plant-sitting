@@ -106,7 +106,7 @@ const JobsMain = () => {
         view === 'create' ?
           <Create setShowCreated={setShowCreated}/> :
           <div>
-            <List setShowApplied={setShowApplied} setShowRevoked={setShowRevoked}/>
+            <List setshowapplied={setShowApplied} setshowrevoked={setShowRevoked}/>
           </div>
       }
       
