@@ -72,6 +72,10 @@ const EditField = ({
 }: Props) => {
   const [editable, setEditable] = useState(false);
   const [newImgCloud, setNewImgCloud] = useState('');
+  const [checked, setChecked] = useState(
+    Pet_Plant?.gender === 'Male' && fieldName === 'gender' ? true : false
+  );
+  const [checked2, setChecked2] = useState(false);
   const [values, setValues] = useState(
     value === 'Puppy'
       ? 0
@@ -177,7 +181,37 @@ const EditField = ({
         return (
           add && (
             <div>
-              <Button
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkPet1'
+                type='checkbox'
+                variant='outline-primary'
+                checked={Pet_Plant.is_plant}
+                value='1'
+                onChange={(e) => {
+                  setChecked(e.currentTarget.checked);
+                  Pet_Plant.is_plant = true;
+                  setVal(true);
+                }}
+              >
+                Yes
+              </ToggleButton>
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkPet2'
+                type='checkbox'
+                variant='outline-primary'
+                checked={!Pet_Plant.is_plant}
+                value='2'
+                onChange={(e) => {
+                  setChecked2(e.currentTarget.checked);
+                  Pet_Plant.is_plant = false;
+                  setVal(false);
+                }}
+              >
+                No
+              </ToggleButton>
+              {/* <Button
                 variant='primary'
                 onClick={() => {
                   Pet_Plant.is_plant = true;
@@ -185,8 +219,8 @@ const EditField = ({
                 }}
               >
                 Yes
-              </Button>
-              <Button
+              </Button> */}
+              {/* <Button
                 variant='primary'
                 onClick={() => {
                   Pet_Plant.is_plant = false;
@@ -194,7 +228,7 @@ const EditField = ({
                 }}
               >
                 No
-              </Button>
+              </Button> */}
             </div>
           )
         );
@@ -202,7 +236,35 @@ const EditField = ({
         return (
           Pet_Plant.is_plant === false && (
             <div>
-              <Button
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkPet1'
+                type='checkbox'
+                variant='outline-primary'
+                checked={checked}
+                value='1'
+                onChange={(e) => {
+                  setChecked(e.currentTarget.checked);
+                  setVal('Male');
+                }}
+              >
+                Male
+              </ToggleButton>
+              <ToggleButton
+                className='m-2'
+                id='toggle-checkPet2'
+                type='checkbox'
+                variant='outline-primary'
+                checked={!checked}
+                value='2'
+                onChange={(e) => {
+                  setChecked(!e.currentTarget.checked);
+                  setVal('Female');
+                }}
+              >
+                Female
+              </ToggleButton>
+              {/* <Button
                 variant='primary'
                 onClick={() => {
                   setVal('Male');
@@ -217,7 +279,7 @@ const EditField = ({
                 }}
               >
                 Female
-              </Button>
+              </Button> */}
             </div>
           )
         );
@@ -425,7 +487,6 @@ const EditField = ({
                     return 'Senior';
                   }
                 }}
-                tooltipStyle={{ backgroundColor: 'red' }}
               />
             </div>
           )

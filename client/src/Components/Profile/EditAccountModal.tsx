@@ -73,19 +73,19 @@ const EditAccountModal = ({
       <EditPetModal
         PetPlant={{
           id: null,
-          name: '',
-          bio: '',
+          name: 'Enter a name',
+          bio: 'Talk about your pet/plant',
           image:
             'https://i.pinimg.com/736x/4a/21/33/4a2133dd4dad968c3218fec61d97db55.jpg',
           owner_id: user?.id,
           is_plant: false,
-          breed: '',
+          breed: 'N/A',
           age: 0,
           gender: '',
           rating: 0,
           tags: [],
           ratings: [],
-          species: '',
+          species: 'N/A',
           total_ratings: 0,
         }}
         showModal={newPet}
