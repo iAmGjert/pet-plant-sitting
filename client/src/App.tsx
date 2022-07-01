@@ -95,7 +95,7 @@ const App: FC<Props> = () => {
 
             
             <Route path='/events' element={<CommunityEvents />} />
-            <Route path='/events/edit/:id' element={<EditEvent />} />
+            {/* <Route path='/events/edit/:id' element={<EditEvent />} /> */}
 
             {/* <Route path='events/*'>
               <Route index element={<CommunityEvents />} />
