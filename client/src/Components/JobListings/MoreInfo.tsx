@@ -13,18 +13,9 @@ const MoreInfo = (props) => {
   const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { distance, employer, onHide, location, job, job_id } = props;
+  const { setShowApplied, distance, employer, onHide, job, job_id } = props;
   const user = useAppSelector(state => state.userProfile.value);
   const [showLog, setShowLog] = useState(false);
-  const hasApplied = job.job_applicants.reduce((res, applicant)=>{
-    //console.log(job);
-    //console.log(user.id);
-    if (applicant.user_id === user.id) { 
-      res = true;
-      return res; 
-    }
-    return res; 
-  }, false);
   const obj = 
     {
       job_id: job_id, 
@@ -42,6 +33,7 @@ const MoreInfo = (props) => {
       });
   };
   const onApply = async ()=>{
+    setShowApplied(true);
     if (user.name === '') {
       setShowLog(true);
       return;
