@@ -4,8 +4,9 @@ import Map, { Marker, GeolocateControl, Layer, Source, Popup } from 'react-map-g
 import axios from 'axios';
 import JobPopup from './JobPopup';
 import EventPopup from './EventPopup';
-import { ListGroup, Button } from 'react-bootstrap';
+import { ListGroup, Button, ButtonToolbar } from 'react-bootstrap';
 import { ThemeContext } from '../../App';
+import MapDirections from './MapDirections';
 
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -29,7 +30,6 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const theme = useContext(ThemeContext);
   const [jobButtonPopup, setJobButtonPopup] = useState(false);
   const [eventButtonPopup, setEventButtonPopup] = useState(false);
-  // const [smallJobPopup, setSmallJobPopup] = useState(false);
   const [geoLocateActive, setGeoLocateActive] = useState(false);
   const [userActiveGeoLon, setUserActiveGeoLon] = useState(null);
   const [userActiveGeoLat, setUserActiveGeoLat] = useState(null);
@@ -41,6 +41,8 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const [dirCoordinates, setDirCoordinates] = useState([]);
   const [steps, setSteps] = useState([]);
   const [cancelNav, setCancelNav] = useState(false);
+  const [showJobsOnly, setShowJobsOnly] = useState(true);
+  const [showEventsOnly, setShowEventsOnly] = useState(true);
 
 
   const showJobInfo = (id) => {
@@ -132,6 +134,15 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     }
   };
 
+  const displayEventsOnly = () => {
+    setShowEventsOnly(true);
+    setShowJobsOnly(false);
+  };
+  const displayJobsOnly = () => {
+    setShowEventsOnly(false);
+    setShowJobsOnly(true);
+  };
+
   const directions = {
     type: 'Feature',
     properties: {},
@@ -158,26 +169,36 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
         mapStyle={theme === 'dark' ? 'mapbox://styles/mapbox/dark-v10' : 'mapbox://styles/mapbox/streets-v9'}
         mapboxAccessToken={TOKEN}
       >
+        {
+          !cancelNav &&
+          <ButtonToolbar>
+            <Button onClick={displayJobsOnly} className='map-bootstrap-button'>Jobs</Button>
+            <Button onClick={displayEventsOnly} className='map-bootstrap-button'>Events</Button>
+            <Button onClick={() => setShowJobsOnly(!showJobsOnly)} className='map-bootstrap-button'>My Jobs</Button>
+          </ButtonToolbar>
+        }
         <Marker 
           longitude={userGeoLoc[0]}
           latitude={userGeoLoc[1]}
+          onClick={()=>{ navigate(`/profile/${user?.id}`); }}
         >
-          <button onClick={()=>{ navigate(`/profile/${user?.id}`); }} >
-            <img src={user.image} alt='X' className='markerPic' />
-          </button>
+          <img src={user.image} alt='X' className='markerPic' />
         </Marker>
         {
+          !cancelNav && showJobsOnly &&
           jobsLocations.map((job, index) => {
             return <Marker
-              longitude={job[0][0]}
-              latitude={job[0][1]}
+              longitude={job[0][0] + .0003}
+              latitude={job[0][1] - .0007}
               key={`${job}${index}`}
+              offset={[15, -15]}
             >
               <button className='mapJobMarker' onClick={() => showJobInfo(job[1])}></button>
             </Marker>;
           })
         }
         {
+          !cancelNav && showEventsOnly &&
           eventsLocations.map((event, index) => {
             return <Marker
               longitude={event[0][0]}
@@ -189,7 +210,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           })
         }
         {/* {
-          smallJobPopup &&
+          smallEventPopup &&
           <Popup
             longitude={}
             latitude={}
@@ -247,6 +268,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
         <GeolocateControl 
           ref={geolocateControlRef}
           onGeolocate={userClicksLocateButton}
+          trackUserLocation={true}
           style={{
             zIndex: '2'
           }}

@@ -1,29 +1,32 @@
 html,
 body {
-  min-height: 100%;
+  height: 100vh;
 }
 .mapJobMarker {
   line-height: 14px;
   padding: 6px;
   border-radius: 100px;
   background-color: lightgreen;
-  box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
+  box-shadow: rgb(0, 0, 0) 1px 1px 1px 1px;
   border: 2px solid rgb(28, 110, 164);
   display: inline-block;
+  opacity: 0.4;
+  height: 60px;
+  width: 60px;
 }
 .markerPic {
   line-height: 14px;
-  height: 35px;
-  width: 35px;
+  height: 40px;
+  width: 40px;
   border-radius: 50px;
   border: 2px solid rgb(28, 110, 164);
 }
 .mapEventMarker {
   line-height: 14px;
   padding: 6px;
-  border-radius: 100px;
+  border-radius: 600px;
   background-color: blue;
-  box-shadow: rgb(0, 0, 0) 5px 5px 15px 5px;
+  box-shadow: rgb(0, 0, 0) 1px 1px 1px 1px;
   border: 2px solid rgb(28, 110, 164);
   display: inline-block;
 }
@@ -72,6 +75,16 @@ body {
 .map-container {
   width: 100vw;
   height: 100vh;
+  z-index: -1;
+  position: absolute
+}
+.map-bootstrap-button {
+  height: fit-content;
+  width: fit-content;
+  display: inline-block;
+  font-size: 9px;
+  position: relative; 
+  margin: 1%
 }
 .step-instructions {
   font-size: 11px;
@@ -96,7 +109,7 @@ body {
   bottom: 20%;
   padding: 10px;
   background-color: #2e2e2e;
-  color: lightgray;
+  color: #ffffff;
   overflow-y: scroll;
   font-family: sans-serif;
 }
@@ -106,7 +119,7 @@ body {
   bottom: 20%;
   padding: 10px;
   background-color: #2e2e2e;
-  color: lightgray;
+  color: #ffffff;
   font-family: sans-serif;
 }
 
@@ -129,44 +142,44 @@ body {
 }
 
 #dark body {
-  background-color: #252525;
-  min-height: 100%;
-  color: lightgray;
+  background-color: #2c2c2c;
+  min-height: 100vh;
+  color: #ffffff;
 }
 #dark .popup-inner {
-  background-color: #252525;
-  color: lightgray;
+  background-color: #2c2c2c;
+  color: #ffffff;
 }
 #dark .navbar.navbar-expand-lg.navbar-dark.bg-dark-mode {
   background-color: #141313;
-  color: lightgray;
+  color: #ffffff;
 }
 #dark .dropdown-menu.show {
   background-color: #303030;
-  color: lightgray;
+  color: #ffffff;
 }
 #dark .dropdown-item {
   background-color: #303030;
-  color: lightgray;
+  color: #ffffff;
 }
 #dark .navbar.navbar-expand.navbar-dark.bg-dark-mode.fixed-bottom {
   background-color: #141313;
-  color: lightgray;
+  color: #ffffff;
 }
 #dark .container-fluid {
-  background-color: #252525;
-  color: lightgray;
+  background-color: #2c2c2c;
+  color: #ffffff;
 }
 #dark .col {
-  background-color: #252525;
-  color: lightgray;
+  background-color: #2c2c2c;
+  color: #ffffff;
 }
 #dark .react-calendar__month-view__days {
-  background-color: #252525;
-  color: lightgray;
+  background-color: #2c2c2c;
+  color: #ffffff;
 }
 #dark .react-calendar {
-  background-color: #252525;
+  background-color: #2c2c2c;
   color: lightgrey;
   border-color: lightgrey;
 }
@@ -180,6 +193,11 @@ body {
   color: lightgrey;
   border-color: lightgrey;
 }
+#dark .map-bootstrap-button {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
 #dark .popup-inner .close-btn {
   position: absolute;
   top: 16px;
@@ -189,7 +207,7 @@ body {
   border-color: lightgrey;
 }
 #dark .button-as-link {
-  color: lightgray;
+  color: #ffffff;
 }
 #dark .bootstrap-textbox {
   background-color: rgb(121, 121, 121);
@@ -229,12 +247,17 @@ body {
   color: lightgrey;
   border-color: lightgrey;
 }
+.bootstrap-modal-button.btn.btn-info {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
 .bootstrap-modal-textbox.form-control {
   background-color: rgb(121, 121, 121);
   color: lightgrey;
 }
 .modal-button-as-link {
-  color: lightgray;
+  color: #ffffff;
 }
 /* Bootstrap modal classes */
 
@@ -362,7 +385,7 @@ body {
   background: transparent;
   outline: none;
   font-size: 25px;
-  color: lightgray;
+  color: #ffffff;
 }
 .chat-window .chat-footer button:hover {
   color: #43a047;

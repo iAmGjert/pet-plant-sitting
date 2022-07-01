@@ -53,7 +53,7 @@ const Register = () => {
   };
 
   return (
-    <Form>
+    <Form className='bootstrap-card'>
       <Form.Group className='mb-3' controlId='formBasicFirstName'>
         <Form.Label>First Name</Form.Label>
         <Form.Control className='bootstrap-textbox' type='text' placeholder='First Name'
