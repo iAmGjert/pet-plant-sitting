@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
-import { Container, Row, Col, Button, Alert, Modal } from 'react-bootstrap';
+import { Container, Row, Col, Button, Alert, Modal, Card } from 'react-bootstrap';
 import { setJobs, deleteApplication } from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -115,8 +115,24 @@ const MoreInfo = (props) => {
                     <>
                       Applicants: 
                       {
-                        job.job_applicants.map((applicant)=>{
-                          return <><Button variant='text' onClick={()=>{navigate(`/profile/${applicant.user_id}`)}}>{applicant.user.name}</Button></>;
+                        job.job_applicants.map((applicant, idx)=>{
+                          return (
+                            <Card key={`applicant${idx}`}>
+                              <Row>
+                                <Card.Title>{applicant.user.name}</Card.Title>
+                              </Row>
+                              <Row>
+                                <Col>
+                                  <Button variant='primary' onClick={()=>{ navigate(`/profile/${applicant.user_id}`); }}>Profile</Button>
+                                </Col>
+                                <Col>
+                                  <Button variant='warning' onClick={()=>{ navigate('/chat'); }}>Chat</Button>
+                                </Col>
+                              </Row>
+                              
+                              
+                            </Card>
+                          );
                         })
                       }
                     </>

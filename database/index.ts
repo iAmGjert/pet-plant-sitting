@@ -502,6 +502,16 @@ db.sync(
                 endDate: new Date('September 4, 2022 01:15:00'),
                 isCompleted: false
               },
+              {
+                location: '1213 Gaudet Dr, Marrero, LA 70072',
+                pet_plant: [1, 2],
+                employer_id: 6,
+                description: 'Hello, my name is Raymond. Please come watch my things while I code!!',
+                sitter_id: null,
+                startDate: new Date('June 25, 2022 01:15:00'),
+                endDate: new Date('September 4, 2022 01:15:00'),
+                isCompleted: false
+              },
             ]).then(() => {
               Events.bulkCreate([
                 {
@@ -549,6 +559,7 @@ db.sync(
                   startDate: new Date('July 5, 2022 01:15:00'),
                   startTime: '4:33 PM',
                 },
+                
               ])
                 .then(() => {
                   EventComment.bulkCreate([
@@ -661,7 +672,12 @@ db.sync(
                       status: 'pending'
                     },
                     {
-                      user_id: 7,
+                      user_id: 1,
+                      job_id: 11,
+                      status: 'pending'
+                    },
+                    {
+                      user_id: 2,
                       job_id: 11,
                       status: 'pending'
                     },
@@ -671,12 +687,17 @@ db.sync(
                       status: 'pending'
                     },
                     {
+                      user_id: 5,
+                      job_id: 11,
+                      status: 'pending'
+                    },
+                    {
                       user_id: 6,
                       job_id: 11,
                       status: 'pending'
                     },
                     {
-                      user_id: 5,
+                      user_id: 7,
                       job_id: 11,
                       status: 'pending'
                     },
