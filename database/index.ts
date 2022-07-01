@@ -315,6 +315,34 @@ db.sync(
             is_plant: false,
             bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
+          {
+            owner_id: 7,
+            name: 'Benito',
+            image:
+              'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
+            breed: 'Long-tailed feline',
+            species: 'feline',
+            tags: ['Turquoise', 'Khaki'],
+            rating: 9,
+            total_ratings: 60,
+            is_plant: false,
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+          },
+          {
+            owner_id: 4,
+            name: 'Rex',
+            image:
+              'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
+            breed: 'Dalmation',
+            age: 2,
+            gender: 'Male',
+            species: 'Dog',
+            tags: ['Spotted', 'Silly', 'Speed', 'Cute'],
+            rating: 4,
+            total_ratings: 33,
+            is_plant: false,
+            bio: 'Ain\'t I cute?!',
+          },
         ]).then(() => {
           Rating.bulkCreate([
             {
@@ -402,6 +430,46 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('July 24, 2022 01:15:00'),
                 endDate: new Date('July 29, 2022 01:15:00'),
+                isCompleted: false
+              },
+              {
+                location: '1600 Frankel Ave, Metairie, LA 70003',
+                pet_plant: [1, 2],
+                employer_id: 7,
+                description: 'Test Job Description!',
+                sitter_id: null,
+                startDate: new Date('June 1, 2022 01:15:00'),
+                endDate: new Date('July 2, 2022 01:15:00'),
+                isCompleted: false
+              },
+              {
+                location: '1605 Frankel Ave, Metairie, LA 70003',
+                pet_plant: [1, 2],
+                employer_id: 1,
+                description: 'Test Job Description 2!',
+                sitter_id: null,
+                startDate: new Date('July 1, 2022 01:15:00'),
+                endDate: new Date('June 3, 2022 01:15:00'),
+                isCompleted: false
+              },
+              {
+                location: '1610 Frankel Ave, Metairie, LA 70003',
+                pet_plant: [3, 4],
+                employer_id: 5,
+                description: 'Test Job Description 3!',
+                sitter_id: null,
+                startDate: new Date('June 27, 2022 01:15:00'),
+                endDate: new Date('July 5, 2022 01:15:00'),
+                isCompleted: false
+              },
+              {
+                location: '1221 S Clearview',
+                pet_plant: [1, 4],
+                employer_id: 1,
+                description: 'Test Job Description 4!',
+                sitter_id: null,
+                startDate: new Date('August 30, 2022 01:15:00'),
+                endDate: new Date('September 4, 2022 01:15:00'),
                 isCompleted: false
               },
             ]).then(() => {

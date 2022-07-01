@@ -50,10 +50,12 @@ const MoreInfo = (props) => {
   const onApply = async ()=>{
     if (user.name === '') {
       setShowLog(true);
+      onHide();
       return;
     }
     if (user.name === employer) {
       console.log('This is your job!');
+      onHide();
       return;
     }
     if (applicant) {
@@ -65,11 +67,13 @@ const MoreInfo = (props) => {
       }, 0);
       revokeApplication(app_id);
       setShowRevoked(true);
+      onHide();
       return;
     }
     setShowApplied(true);
     await postApplication(obj);
     await getJobs();
+    
     onHide();
   };
   const getJobs = async () => {
