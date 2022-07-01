@@ -14,7 +14,10 @@ const JobsMain = () => {
 
   const view = useAppSelector((state)=>state.job.view);
   const user = useAppSelector(state => state.userProfile.value);
-
+  const getJobs = async () => {
+    const jobs = await axios.get('/api/jobs/all');
+    dispatch(setJobs(jobs.data));
+  };
   const handleClick = () => {
     if (user.name === '') {
       navigate('/login');
@@ -25,6 +28,10 @@ const JobsMain = () => {
     }
     dispatch(changeView('list'));
   };
+
+  useEffect(()=>{
+    getJobs();
+  }, []);
 
   return (
     <Container fluid>
