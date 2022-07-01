@@ -83,7 +83,7 @@ const MoreInfo = (props) => {
   };
   return (
     
-    <Modal {...props} aria-labelledby="contained-modal-title-vcenter" contentClassName={theme === 'dark' && 'dark'}>
+    <Modal show={props.modalShow} onHide={onHide} {...props} aria-labelledby="contained-modal-title-vcenter" contentClassName={theme === 'dark' && 'dark'}>
       <Modal.Header closeButton>
         <Modal.Title id="contained-modal-title-vcenter">
           {`${employer}\'s job listing:`} 
