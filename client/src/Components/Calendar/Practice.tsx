@@ -56,9 +56,9 @@ const Practice: FC<Props> = () => {
   const user = useAppSelector((state) => state.userProfile.value);
 
   //console.log('jobs on 61 practice', jobs);
-  //console.log('events', events); //such is empty
+  console.log('events', events); //such is empty
   //console.log(user);
-
+  console.log(useAppSelector((state) => state));
   // console.log(
   //   'petplants',
   //   jobs.map((job: { job_pets_plants: any }) => {
