@@ -30,7 +30,7 @@ const Tags = ({ tag, i, setVal, value }: Props) => {
       variant='outline-primary'
       checked={checked}
       value={tag}
-      onChange={(e) => {
+      onChange={() => {
         handleChange();
       }}
     >
