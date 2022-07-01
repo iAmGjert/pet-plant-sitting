@@ -173,6 +173,31 @@ const EditField = ({
             </Button>
           </div>
         );
+      case 'is_plant':
+        return (
+          add && (
+            <div>
+              <Button
+                variant='primary'
+                onClick={() => {
+                  Pet_Plant.is_plant = true;
+                  setVal(true);
+                }}
+              >
+                Yes
+              </Button>
+              <Button
+                variant='primary'
+                onClick={() => {
+                  Pet_Plant.is_plant = false;
+                  setVal(false);
+                }}
+              >
+                No
+              </Button>
+            </div>
+          )
+        );
       case 'gender':
         return (
           Pet_Plant.is_plant === false && (
@@ -197,22 +222,34 @@ const EditField = ({
           )
         );
       case 'tags':
-        return (
-          Pet_Plant.is_plant === false && (
-            <div>
-              {petTags.map((tag, i) => {
-                return (
-                  <Tags
-                    tag={tag}
-                    i={i}
-                    key={'tag' + i}
-                    setVal={setVal}
-                    value={value}
-                  />
-                );
-              })}
-            </div>
-          )
+        return Pet_Plant.is_plant === false ? (
+          <div>
+            {petTags.map((tag, i) => {
+              return (
+                <Tags
+                  tag={tag}
+                  i={i}
+                  key={'tag' + i}
+                  setVal={setVal}
+                  value={value}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div>
+            {plantTags.map((tag, i) => {
+              return (
+                <Tags
+                  tag={tag}
+                  i={i}
+                  key={'tag' + i}
+                  setVal={setVal}
+                  value={value}
+                />
+              );
+            })}
+          </div>
         );
       case 'location':
         return (
@@ -468,9 +505,18 @@ const EditField = ({
           ? 'Pets and Plants'
           : fieldName === 'age' && Pet_Plant.is_plant === true
           ? ''
+          : fieldName === 'is_plant' && !add
+          ? ''
+          : fieldName === 'is_plant' && add
+          ? 'Is this a plant?'
+          : fieldName === 'gender' && Pet_Plant.is_plant === true
+          ? ''
+          : fieldName === 'is_plant' && Pet_Plant.is_plant === true
+          ? 'Is this a plant?'
           : fieldName[0].toUpperCase() + fieldName.slice(1)}
       </h2>
-      {renderSwitch(fieldName)}
+      {Pet_Plant?.is_plant && renderSwitch(fieldName)}
+      {!Pet_Plant?.is_plant && renderSwitch(fieldName)}
     </Form.Group>
   );
 };

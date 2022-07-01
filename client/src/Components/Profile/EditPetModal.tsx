@@ -25,8 +25,9 @@ const EditPetModal = ({
   const [bio, setBio] = useState(PetPlant?.bio);
   const [image, setImage] = useState(PetPlant?.image);
   const [species, setSpecies] = useState(PetPlant?.species);
-  const [gender, setGender] = useState(PetPlant?.gender);
   const [tags, setTags] = useState(PetPlant?.tags);
+  const [gender, setGender] = useState(PetPlant?.gender);
+  const [isPlant, setIsPlant] = useState(PetPlant?.is_plant);
   const handleOnHide = async () => {
     if (add) {
       await axios.put(`/api/pets_plants/${newPetId}`, {
@@ -39,6 +40,7 @@ const EditPetModal = ({
         bio,
         gender,
         tags,
+        is_plant: isPlant,
       });
       setShowModal(false);
     } else {
@@ -51,6 +53,7 @@ const EditPetModal = ({
         bio,
         gender,
         tags,
+        is_plant: isPlant,
       });
       setShowModal(false);
     }
@@ -82,6 +85,15 @@ const EditPetModal = ({
       </Modal.Header>
       <Modal.Body>
         <Form>
+          <EditField
+            fieldName={'is_plant'}
+            value={isPlant}
+            setVal={setIsPlant}
+            user={null}
+            Pet_Plant={PetPlant}
+            add={add}
+            newPetId={newPetId}
+          />
           <EditField
             fieldName={'name'}
             value={name}
@@ -118,15 +130,28 @@ const EditPetModal = ({
             add={add}
             newPetId={newPetId}
           />
-          <EditField
-            fieldName={'tags'}
-            value={tags}
-            setVal={setTags}
-            user={null}
-            Pet_Plant={PetPlant}
-            add={add}
-            newPetId={newPetId}
-          />
+          {isPlant && (
+            <EditField
+              fieldName={'tags'}
+              value={tags}
+              setVal={setTags}
+              user={null}
+              Pet_Plant={PetPlant}
+              add={add}
+              newPetId={newPetId}
+            />
+          )}
+          {!isPlant && (
+            <EditField
+              fieldName={'tags'}
+              value={tags}
+              setVal={setTags}
+              user={null}
+              Pet_Plant={PetPlant}
+              add={add}
+              newPetId={newPetId}
+            />
+          )}
           <EditField
             fieldName={'gender'}
             value={gender}
