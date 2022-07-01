@@ -15,7 +15,7 @@ interface jobStuff {
   endDate: Date,
   pet_plant: Array<number>
 }
-const Job = ({ job }) => {
+const Job = ({ job, setshowapplied, setshowrevoked }) => {
   const [show, setShow] = useState(false);
   const target = useRef(null);
   const removeOverlay = ()=>{ setTimeout(()=>{ setShow(false); }, 5000); };
@@ -28,7 +28,7 @@ const Job = ({ job }) => {
   const users = useAppSelector((state)=>state.userProfile.users);
   const user = useAppSelector((state)=>state.userProfile.value);
   const petPlants = useAppSelector((state)=>state.petPlant.petPlants);
-  const { id, location, pet_plant, employer_id, sitter_id, startDate, endDate}: jobStuff = job;
+  const { id, location, pet_plant, employer_id, sitter_id, startDate, endDate, job_applicants}: jobStuff = job;
   const dispatch = useAppDispatch();
   
   const geoCodeUser = async () => {
@@ -87,14 +87,18 @@ const Job = ({ job }) => {
             </Col>
             <Col>
               {
-                <div>
-                  Employer: {<div>{ users.reduce((employer, users)=>{
-                    if (users.id === employer_id) {
-                      employer = users.name;
-                    }
-                    return employer;
-                  }, '') }</div>}
-                </div>
+                user.id !== employer_id ?
+                  <div>
+                    Employer: {<div>{ users.reduce((employer, users)=>{
+                      if (users.id === employer_id) {
+                        employer = users.name;
+                      }
+                      return employer;
+                    }, '') }</div>}
+                  </div> :
+                  <div>
+                    Applicants: {job_applicants.length}
+                  </div>
               }
             </Col>
             <Col>        
@@ -108,11 +112,11 @@ const Job = ({ job }) => {
             </Col>
           </Row>
           <Row>
-            Job {parseInt(moment(startDate).fromNow()) > 0 ? 'started' : 'starts'} {moment(startDate).fromNow()}.            
+            Job starts {moment(startDate).fromNow()}.            
           </Row>
           <Button ref={target} className='bootstrap-button' onClick={handleClick} variant='primary'>More Info</Button>
           <>
-            <MoreInfo distance={distanceFromJob} user={user} show={modalShow} job_id={id} onHide={() => setModalShow(false)} job={job} employer={ users.reduce((employer, users)=>{
+            <MoreInfo setshowrevoked={setshowrevoked} setshowapplied={setshowapplied} distance={distanceFromJob} user={user} show={modalShow} job_id={id} onHide={() => setModalShow(false)} job={job} employer={ users.reduce((employer, users)=>{
               if (users.id === employer_id) {
                 employer = users.name;
               }
@@ -121,6 +125,7 @@ const Job = ({ job }) => {
           </>
         </Card.Body>
       </Card>
+      
       <Overlay target={target.current} show={show} placement="right">
         {({ placement, arrowProps, show: _show, popper, ...props }) => (
           <div
