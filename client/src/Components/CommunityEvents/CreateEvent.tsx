@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { setView, addNewEvent } from '../../state/features/events/eventsSlice';
 import LoginPrompt from './LoginPrompt';
-
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import moment from 'moment';
-
-
 
 const CreateEvent = () => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(state => state.userProfile.value);
-  // const eventObj = useAppSelector(state => state.events.event);
 
   //* local state for form values
   const [eventName, setEventName] = useState('');
@@ -37,17 +33,13 @@ const CreateEvent = () => {
           host: currentUser.id,
           location: location,
           description: description,
-          startDate: new Date(date),
+          startDate: date, //new Date(date),
           startTime: time,
           user: {
             id: currentUser.id,
             name: currentUser.name,
           }
         })).unwrap();
-        console.log(currentUser.name);
-
-
-
       } catch (error) {
         console.error('Failed to save event', error);        
       } finally {

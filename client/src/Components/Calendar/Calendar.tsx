@@ -33,7 +33,7 @@ import { useSelector } from 'react-redux';
 //   endDate: Date,
 //   pet_plant: Array<number>
 // }
-console.log('hello');
+// console.log('hello');
 const CalendarApp = () => {
   const [dateState, setDateState] = useState(new Date());
   const [events, setEvents] = useState([]);

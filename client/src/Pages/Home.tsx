@@ -85,7 +85,9 @@ const Home: FC<Props> = () => {
           >
             Login
           </Button>
-          <Card.Link className='button-as-link' href='/events'>Free Community Events</Card.Link>
+          <div>
+            <Card.Link className='button-as-link' href='/events'>Free Community Events</Card.Link>
+          </div>
         </Card.Body>
       </Card>
     </Container>
