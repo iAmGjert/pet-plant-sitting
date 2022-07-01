@@ -101,6 +101,11 @@ const Practice: FC<Props> = () => {
     setCurrentDate(_currentDate);
   };
 
+  const AppointmentContent = ({ appointmentData }) => {
+    //console.log('appointment props', props);
+    return <div>{appointmentData.description}</div>;
+  };
+
   return (
     <Paper>
       <Scheduler data={userJobs}>
@@ -117,7 +122,11 @@ const Practice: FC<Props> = () => {
         <TodayButton />
         <ViewSwitcher />
         <Appointments />
-        <AppointmentTooltip showCloseButton showOpenButton />
+        <AppointmentTooltip
+          showCloseButton
+          showOpenButton
+          contentComponent={AppointmentContent}
+        />
         <AppointmentForm readOnly />
       </Scheduler>
     </Paper>
