@@ -6,7 +6,7 @@ import { Profile } from '../../Pages/Profile';
 import { setUser } from '../../state/features/userProfile/userProfileSlice';
 import EditField from './EditField';
 import EditPetModal from './EditPetModal';
-import { useAppDispatch, useAppSelector } from '../../state/hooks';
+import { useAppDispatch } from '../../state/hooks';
 
 type Props = {
   user: Profile;

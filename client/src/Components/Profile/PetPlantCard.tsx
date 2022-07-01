@@ -83,7 +83,7 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
                 {getStars(getRating())}({PetPlant.ratings.length})
                 {getRating() >= 4 && (
                   <Badge pill bg='success'>
-                    {PetPlant.gender === 'Male' ? `Goodest boy` : `Gal Pal`}
+                    {PetPlant.gender === 'Male' ? 'Goodest boy' : 'Gal Pal'}
                   </Badge>
                 )}
               </ListGroupItem>
