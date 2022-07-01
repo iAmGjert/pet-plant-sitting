@@ -71,9 +71,11 @@ jobs.get('/:id', async (req: Request, res: Response) => {
 });
 
 jobs.post('/applicant/create', (req: Request, res: Response) => {
+  //console.log(req.body);
   const { job_id, user_id } = req.body;
   JobApplicant.create({ job_id, user_id })
     .then((jobApplicant: Record<string, applicantInfo> | null) => {
+      console.log(jobApplicant.dataValues);
       res.status(201).send(jobApplicant?.dataValues);
     })
     .catch((err: Error) => {

@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, Modal } from 'react-bootstrap';
 // import PropTypes from 'prop-types';
 import { search, setHistory, newSearch } from '../../state/features/info/infoSlice';
@@ -8,8 +8,10 @@ import moment from 'moment';
 import { marked } from 'marked';
 import { useNavigate } from 'react-router-dom';
 import Test from './test';
+import { ThemeContext } from '../../App';
 
 const Search = () => {
+  const theme = useContext(ThemeContext);
   const navi = useNavigate();
   const dispatch = useAppDispatch();
   const [searchTarget, setSearchTarget] = useState('Fern');
@@ -22,7 +24,7 @@ const Search = () => {
     }
     const data = await axios.get(`/api/info/wiki/${searchTarget}`);
     setInfo(data.data.query);
-    console.log(data.data.query);
+    //console.log(data.data.query);
     dispatch(search(data.data.query));
   };
   const handleClick = ()=>{
@@ -41,7 +43,7 @@ const Search = () => {
   }, [searchTarget]);
   
   const didYouMean = (e)=>{
-    console.log(e.target.textContent);
+    //console.log(e.target.textContent);
     setSearchTarget(e.target.textContent);
     getInfo();
     dispatch(setHistory(prevSearch));
@@ -51,21 +53,21 @@ const Search = () => {
   const [articleInfo, setArticleInfo] = useState({});
   const getArticle = async () => {
     if (clickedArticle.pageid === undefined) {
-      console.log('no page id');
+      //console.log('no page id');
       return;
     }
     const data = await axios.get(`/api/info/wiki/article/${clickedArticle.pageid}`);
     //setArticleInfo(data.parse);
-    console.log(data.data.parse);
+    //console.log(data.data.parse);
   };
   useEffect(()=>{
     if (clickedArticle.title === undefined) {
-      console.log('no title in clicked article or first render');
+      //console.log('no title in clicked article or first render');
       return;
     }
     axios.get(`/api/info/wiki/article/${clickedArticle.title}`)
       .then((data)=>{
-        console.log(data.data.query.pages[clickedArticle.pageid]);
+        //console.log(data.data.query.pages[clickedArticle.pageid]);
         setArticleInfo(data.data.query.pages[clickedArticle.pageid]);
         return data;
       })
@@ -75,7 +77,7 @@ const Search = () => {
   }, [clickedArticle]);
 
   const viewArticleButton = (article)=>{
-    console.log('http://en.wikipedia.org/wiki?curid=' + article.pageid);
+    //console.log('http://en.wikipedia.org/wiki?curid=' + article.pageid);
     setWikiView(!wikiView);
     setClickedArticle(article);
   };
@@ -152,7 +154,7 @@ const Search = () => {
           }) :
           <div/>
       }
-      <Modal show={wikiView} fullscreen='md-down' onHide={() => setWikiView(false)}>
+      <Modal contentClassName={theme === 'dark' && 'dark'} show={wikiView} fullscreen='md-down' onHide={() => setWikiView(false)}>
         <Modal.Header closeButton>
           <Modal.Title>{articleInfo.title}</Modal.Title>
         </Modal.Header>
@@ -162,7 +164,7 @@ const Search = () => {
           </Modal.Body>
         }
         <Modal.Footer>
-          Click <a href={`http://en.wikipedia.org/wiki?curid=${articleInfo.pageid}`} target="_blank" rel="noopener noreferrer">here</a> to open the full Wikipedia article.
+          Click <a href={`http://en.wikipedia.org/wiki?curid=${articleInfo.pageid}`} target="_blank" rel="noopener noreferrer" className={theme === 'dark' && 'modal-button-as-link'}>here</a> to open the full Wikipedia article.
         </Modal.Footer>
       </Modal>
       
@@ -173,37 +175,3 @@ const Search = () => {
 Search.propTypes = {};
 
 export default Search;
-
-/*
-{
-        info.query.search > 0 ? 
-          info.map((ele, idx)=>{
-            console.log('test');
-            return <Card key={`art#${idx}`}>
-              <Card.Title></Card.Title>  
-              <Card.Body>
-                <Row>
-                  <Col xs sm={1} md={1} lg={1}>
-                    <Card.Title>
-                      {'Words: ' + 0}
-                    </Card.Title>
-                  </Col>
-                  <Col>        
-                    <Card.Title>
-                    Insert Title Here
-                    </Card.Title>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Card.Title>
-                    Another Title
-                    </Card.Title>
-                  </Col>
-                </Row>
-              </Card.Body>
-            </Card>; 
-          }) :
-          <div/>
-      }
-      */

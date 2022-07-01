@@ -20,7 +20,7 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
   };
 
   return (
-    <Navbar className='topNavBar' bg='primary' variant='dark' expand='lg'>
+    <Navbar bg={theme === 'dark' ? 'dark-mode' : 'primary'} variant='dark' expand='lg'>
       <Container>
         <Navbar.Brand onClick={()=>{ navigate('/'); }}>
           {user.name ? user.name : 'Fern Herm'}
