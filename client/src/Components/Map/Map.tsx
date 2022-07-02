@@ -6,7 +6,6 @@ import JobPopup from './JobPopup';
 import EventPopup from './EventPopup';
 import { ListGroup, Button, ButtonToolbar } from 'react-bootstrap';
 import { ThemeContext } from '../../App';
-import MapDirections from './MapDirections';
 
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -44,6 +43,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const [showJobsOnly, setShowJobsOnly] = useState(true);
   const [showEventsOnly, setShowEventsOnly] = useState(true);
 
+  console.log(users);
 
   const showJobInfo = (id) => {
     const storage = [];
@@ -134,6 +134,8 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     }
   };
 
+  console.log(userPopup);
+
   const displayEventsOnly = () => {
     setShowEventsOnly(true);
     setShowJobsOnly(false);
@@ -142,6 +144,34 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     setShowEventsOnly(false);
     setShowJobsOnly(true);
   };
+  const displayAll = () => {
+    setShowEventsOnly(true);
+    setShowJobsOnly(true);
+  };
+
+  // const getRating = (user: object) => {
+  //   if (user && user.ratings.length > 0) {
+  //     let sum = 0;
+  //     for (let i = 0; i < user.ratings.length; i++) {
+  //       sum += user.ratings[i].value;
+  //     }
+  //     // console.log(Math.floor(sum / profileUser?.ratings.length));
+  //     return Math.floor(sum / user.ratings.length);
+  //   } else {
+  //     return;
+  //   }
+  // };
+
+  // const getStars = (rating: number) => {
+  //   let stars = '';
+  //   for (let i = 0; i < rating; i++) {
+  //     stars += '⭐';
+  //   }
+  //   while (stars.length < 5) {
+  //     stars += '☆';
+  //   }
+  //   return stars;
+  // };
 
   const directions = {
     type: 'Feature',
@@ -155,7 +185,6 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   useEffect(() => {
     setUserCurrentCoords();
   }, []);
-
 
   return (
     <div>
@@ -172,9 +201,9 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
         {
           !cancelNav &&
           <ButtonToolbar>
-            <Button onClick={displayJobsOnly} className='map-bootstrap-button'>Jobs</Button>
-            <Button onClick={displayEventsOnly} className='map-bootstrap-button'>Events</Button>
-            <Button onClick={() => setShowJobsOnly(!showJobsOnly)} className='map-bootstrap-button'>My Jobs</Button>
+            <Button onClick={displayAll} className='map-bootstrap-button'>All</Button>
+            <Button onClick={displayJobsOnly} className='map-bootstrap-button' style={{borderColor: 'lightgreen'}}>Jobs</Button>
+            <Button onClick={displayEventsOnly} className='map-bootstrap-button' style={{borderColor: 'blue'}}>Events</Button>
           </ButtonToolbar>
         }
         <Marker 
@@ -270,7 +299,8 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           onGeolocate={userClicksLocateButton}
           trackUserLocation={true}
           style={{
-            zIndex: '2'
+            zIndex: -1,
+            position: 'relative'
           }}
         />
         {
