@@ -16,12 +16,11 @@ import {
   TodayButton,
   AppointmentTooltip,
   AppointmentForm,
+  Appointments,
 } from '@devexpress/dx-react-scheduler-material-ui';
 // import { Scheduler } from '@devexpress/dx-react-scheduler-material-ui';
 // import { DayView } from '@devexpress/dx-react-scheduler-material-ui';
 // import { WeekView } from '@devexpress/dx-react-scheduler-material-ui';
-
-import { Appointments } from '@devexpress/dx-react-scheduler-material-ui';
 
 //Redux
 import { useAppSelector } from '../../state/hooks';
@@ -84,10 +83,31 @@ const Practice: FC<Props> = () => {
       }
     );
 
+  //function that maps out events
+  // const allEvents = events.map(
+  //   (event: {
+  //     description: any;
+  //     startDate: moment.MomentInput;
+  //     endDate: moment.MomentInput;
+  //     id: any;
+  //     location: any;
+  //   }) => {
+  //     return {
+  //       ...event,
+  //       title: event.description,
+  //       startDate: moment(event.startDate).toDate(),
+  //       endDate: moment(event.endDate).toDate(),
+  //       location: event.location,
+  //     };
+  //   }
+  // );
+  // console.log(allEvents);
+
   //console.log(schedulerData);
   //console.log('userJobs', userJobs);
 
   const [currentDate, setCurrentDate] = useState(moment().format('YYYY-MM-DD'));
+
   const onCurrentDateChange = (_currentDate: React.SetStateAction<string>) => {
     setCurrentDate(_currentDate);
   };
@@ -96,9 +116,7 @@ const Practice: FC<Props> = () => {
     //console.log('appointment props', props);
     return (
       <div>
-        {/* {appointmentData.petPlant.map((pet) => {
-          return <img src={appoinmentData.pet_plant.image} key={pet.id} />;
-        })} */}
+        <img src={appointmentData.petPlants[0].pet_plant.image} alt='' />
         <h2>
           {' '}
           Siting for{' '}
