@@ -97,30 +97,6 @@ body {
   overflow-y: scroll;
   font-family: sans-serif;
 }
-#dark .step-instructions {
-  font-size: 11px;
-  position: absolute;
-  margin: 3px;
-  width: 38%;
-  height: 30vh;
-  top: 0;
-  bottom: 20%;
-  padding: 10px;
-  background-color: #2e2e2e;
-  color: #ffffff;
-  overflow-y: scroll;
-  font-family: sans-serif;
-}
-#dark .step-instructions-card {
-  font-size: 11px;
-  top: 0;
-  bottom: 20%;
-  padding: 10px;
-  background-color: #2e2e2e;
-  color: #ffffff;
-  font-family: sans-serif;
-}
-
 .button-as-link {
   background-color: transparent;
   border: none;
@@ -172,15 +148,6 @@ body {
   background-color: #2c2c2c;
   color: #ffffff;
 }
-#dark .react-calendar__month-view__days {
-  background-color: #2c2c2c;
-  color: #ffffff;
-}
-#dark .react-calendar {
-  background-color: #2c2c2c;
-  color: lightgrey;
-  border-color: lightgrey;
-}
 #dark .bootstrap-card {
   background-color: #2e2e2e;
   color: lightgrey;
@@ -195,6 +162,29 @@ body {
   background-color: #1f1f1f;
   color: lightgrey;
   border-color: lightgrey;
+}
+#dark .step-instructions {
+  font-size: 11px;
+  position: absolute;
+  margin: 3px;
+  width: 38%;
+  height: 30vh;
+  top: 0;
+  bottom: 20%;
+  padding: 10px;
+  background-color: #2e2e2e;
+  color: #ffffff;
+  overflow-y: scroll;
+  font-family: sans-serif;
+}
+#dark .step-instructions-card {
+  font-size: 11px;
+  top: 0;
+  bottom: 20%;
+  padding: 10px;
+  background-color: #2e2e2e;
+  color: #ffffff;
+  font-family: sans-serif;
 }
 #dark .popup-inner .close-btn {
   position: absolute;
@@ -220,6 +210,72 @@ body {
   background-color: rgb(121, 121, 121);
   color: lightgrey;
 }
+
+/* Calendar */
+#dark .DayScaleEmptyCell-emptyCell.css-1hbvjip {
+  background-color: #2c2c2c;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+#dark .MuiTableRow-root.css-1q1u3t4-MuiTableRow-root {
+  background-color: #2c2c2c;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+#dark .Cell-dayOfWeek.Cell-highlightedText {
+  color: lightgrey;
+}
+#dark .Cell-dayOfMonth.Cell-highlightedText {
+  color: lightgrey;
+}
+#dark .Label-text {
+  color: lightgrey;
+}
+#dark .Cell-dayOfWeek {
+  color: lightgrey;
+}
+#dark .Cell-dayOfMonth {
+  color: lightgrey;
+}
+#dark .Cell-text.Cell-otherMonth {
+  color: lightgrey;
+}
+#dark .Cell-text {
+  color: lightgrey;
+}
+#dark .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.Toolbar-toolbar.css-1b7ni76-MuiToolbar-root {
+  background-color: #2c2c2c;
+  border-color: lightgrey
+}
+#dark .MuiButton-root.MuiButton-outlined
+ .MuiButton-outlinedPrimary
+ .MuiButton-sizeMedium
+ .MuiButton-outlinedSizeMedium
+ .MuiButtonBase-root
+ .TodayButton-button
+ .css-xya8j6-MuiButtonBase-root-MuiButton-root {
+  border-color: lightgrey;
+}
+#dark .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root {
+  color: lightgrey;
+}
+#dark .MuiTouchRipple-root.css-8je8zh-MuiTouchRipple-root {
+  outline-color: lightgrey;
+}
+#dark .MuiSvgIcon-root
+.MuiSvgIcon-fontSizeMedium
+.MuiSelect-icon
+.MuiSelect-iconOutlined
+.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+/* .MuiTableBody-root.css-apqrd9-MuiTableBody-root {
+  background-color: #1f1f1f;;
+} */
+/* Calendar */
+
 /* Bootstrap modal classes */
 .modal-content.dark {
   background: rgb(121, 121, 121);
@@ -391,4 +447,12 @@ body {
 .hide {
   opacity: 0 !important;
 }
+
+
+
+
+
+
+
+
 
