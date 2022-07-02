@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Badge, Card, ListGroup, ListGroupItem } from 'react-bootstrap';
+import { Badge, Card, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import EditPetModal from './EditPetModal';
 import { RatingInfo } from '../../Pages/Profile';
 
@@ -46,70 +46,74 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
   }, []);
 
   return (
-    <Card
-      className='bootstrap-card'
-      onClick={() => {
-        if (edit) {
-          setShowModal(!showModal);
-        } else {
-          setShowDetails(!showDetails);
-        }
+    <Col>
+      <Card
+        className='bootstrap-card'
+        onClick={() => {
+          if (edit) {
+            setShowModal(!showModal);
+          } else {
+            setShowDetails(!showDetails);
+          }
 
-        // console.log(scrollRef);
-        // scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
-      }}
-    >
-      <EditPetModal
-        PetPlant={PetPlant}
-        showModal={showModal}
-        setShowModal={setShowModal}
-        add={false}
-        newPetId={null}
-      />
-      <Card.Img variant='top' src={PetPlant.image} />
-      <Card.Body>
-        <Card.Title>{PetPlant.name}</Card.Title>
-        {edit ? (
-          <Card.Text>Click to edit</Card.Text>
-        ) : (
-          !showDetails && <Card.Text>Click for details</Card.Text>
-        )}
-      </Card.Body>
-      {showDetails && (
-        <>
-          <Card.Body>{<Card.Text>{PetPlant.bio}</Card.Text>}</Card.Body>
-          <ListGroup className='list-group-flush'>
-            {!edit && (
-              <ListGroupItem>
-                {getStars(getRating())}({PetPlant.ratings.length})
-                {getRating() >= 4 && (
-                  <Badge pill bg='success'>
-                    {PetPlant.gender === 'Male' ? `Goodest boy` : `Gal Pal`}
+          // console.log(scrollRef);
+          // scrollRef.current?.scrollIntoView({ behavior: 'smooth' });
+        }}
+      >
+        <EditPetModal
+          PetPlant={PetPlant}
+          showModal={showModal}
+          setShowModal={setShowModal}
+          add={false}
+          newPetId={null}
+        />
+        <Card.Img variant='top' src={PetPlant.image} />
+        <Card.Body>
+          <Card.Title>{PetPlant.name}</Card.Title>
+          {edit ? (
+            <Card.Text>Click to edit</Card.Text>
+          ) : (
+            !showDetails && <Card.Text>Click for details</Card.Text>
+          )}
+        </Card.Body>
+        {showDetails && (
+          <>
+            <Card.Body>{<Card.Text>{PetPlant.bio}</Card.Text>}</Card.Body>
+            <ListGroup className='list-group-flush'>
+              {!edit && (
+                <ListGroupItem>
+                  {getStars(getRating())}({PetPlant.ratings.length})
+                  {getRating() >= 4 && (
+                    <Badge pill bg='success'>
+                      {PetPlant.gender === 'Male' ? 'Goodest boy' : 'Gal Pal'}
+                    </Badge>
+                  )}
+                </ListGroupItem>
+              )}
+              {PetPlant.gender && PetPlant.age && (
+                <ListGroupItem>
+                  {PetPlant.gender === 'Male'
+                    ? `He is a ${PetPlant.age} ${PetPlant.breed}`
+                    : `She is  a(n) ${PetPlant.breed} ${PetPlant.age}`}
+                </ListGroupItem>
+              )}
+              {PetPlant.breed && (
+                <ListGroupItem>{PetPlant.breed}</ListGroupItem>
+              )}
+            </ListGroup>
+            <Card.Body>
+              {PetPlant.tags.map((tag, i) => {
+                return (
+                  <Badge ref={scrollRef} pill bg='info' key={i + PetPlant.id}>
+                    {tag.toUpperCase()}
                   </Badge>
-                )}
-              </ListGroupItem>
-            )}
-            {PetPlant.gender && (
-              <ListGroupItem>
-                {PetPlant.gender === 'Male'
-                  ? `He is ${PetPlant.age} years old`
-                  : `She is ${PetPlant.age} years old`}
-              </ListGroupItem>
-            )}
-            {PetPlant.breed && <ListGroupItem>{PetPlant.breed}</ListGroupItem>}
-          </ListGroup>
-          <Card.Body>
-            {PetPlant.tags.map((tag, i) => {
-              return (
-                <Badge ref={scrollRef} pill bg='info' key={i + PetPlant.id}>
-                  {tag.toUpperCase()}
-                </Badge>
-              );
-            })}
-          </Card.Body>
-        </>
-      )}
-    </Card>
+                );
+              })}
+            </Card.Body>
+          </>
+        )}
+      </Card>
+    </Col>
   );
 };
 
