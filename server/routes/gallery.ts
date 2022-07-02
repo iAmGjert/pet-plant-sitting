@@ -23,7 +23,7 @@ gallery.post('/:user_id', async (req: Request, res: Response) => {
       user_id: req.params.user_id,
     },
   });
-  console.log(gallery[0].id);
+//  console.log(gallery[0].id);
   return res.status(200).send(gallery);
 });
 

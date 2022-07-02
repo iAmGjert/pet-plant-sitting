@@ -18,6 +18,7 @@ import { setJobs } from './state/features/jobs/jobSlice';
 import { setPetPlants } from './state/features/petPlant/petPlantSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import { mapActions } from './state/features/map/mapSlice';
+import { setEvents } from './state/features/events/eventsSlice';
 import JobsMain from './Pages/JobsMain';
 // import JobCreation from './Pages/JobCreation';
 import ChatMain from './Pages/ChatMain';
@@ -26,6 +27,8 @@ import TopNavBar from './Components/TopNavBar/TopNavBar';
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
 import Loading from './Pages/Loading';
 import InfoMain from './Pages/InfoMain';
+import EditEvent from './Components/CommunityEvents/EditEvent';
+import Error from './Pages/Error';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
@@ -57,7 +60,10 @@ const App: FC<Props> = () => {
   };
   const getEvents = async () => {
     const events = await axios.get('/api/events/all');
+
+    dispatch(setEvents(events.data));
     dispatch(mapActions.setEvents(events.data));
+    dispatch(setEvents(events.data));
   };
   const toggleTheme = () => {
     setTheme((curr: string) => (curr === null ? 'dark' : null));
@@ -90,13 +96,23 @@ const App: FC<Props> = () => {
             <Route path='/login' element={<Login />} />
             <Route path='/landingpage' element={<LandingPageMain />} />
             <Route path='/map' element={<MapMain />} />
+
+            
             <Route path='/events' element={<CommunityEvents />} />
+            {/* <Route path='/events/edit/:id' element={<EditEvent />} /> */}
+
+            {/* <Route path='events/*'>
+              <Route index element={<CommunityEvents />} />
+              <Route path='edit/:id' element={<EditEvent />} />
+            </Route>  */}
+
             <Route path='/calendar' element={<CalendarMain />} />
             <Route path='/jobs' element={<JobsMain />} />
             {/* <Route path='/createjob' element={<JobCreation />} /> */}
             <Route path='/chat' element={<ChatMain />} />
             <Route path='/info' element={<InfoMain />} />
             <Route path='/register' element={<Register />} />
+            <Route path='*' element={<Error />} />
           </Routes>
           <BottomNavBar theme={theme} />
         </BrowserRouter>

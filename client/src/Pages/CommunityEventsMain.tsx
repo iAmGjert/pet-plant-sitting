@@ -17,6 +17,10 @@ const CommunityEventsMain = () => {
 
   const events = useAppSelector(selectAllEvents);
   const eventsStatus = useAppSelector(getEventsStatus);
+  
+  console.log(events instanceof Array && events
+    .map((e: EventTYPE) => e.event_comments)
+    .filter((c: any) => c.length));
 
   useEffect(() => {
     if (eventsStatus === 'idle') {
@@ -58,7 +62,8 @@ const CommunityEventsMain = () => {
             startTime={event.startTime}
             user={event.user}
             switchToDetailsView={switchToDetailsView}
-            eventObj={event} />
+            eventObj={event}
+          />
         </React.Fragment>
       ));
     } else if (view === 'details') {
