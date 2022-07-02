@@ -43,8 +43,6 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const [showJobsOnly, setShowJobsOnly] = useState(true);
   const [showEventsOnly, setShowEventsOnly] = useState(true);
 
-  console.log(users);
-
   const showJobInfo = (id) => {
     const storage = [];
     for (let i = 0; i < jobs.length; i++) {
@@ -133,8 +131,6 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
       setCancelNav(!cancelNav);
     }
   };
-
-  console.log(userPopup);
 
   const displayEventsOnly = () => {
     setShowEventsOnly(true);

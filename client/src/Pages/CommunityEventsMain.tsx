@@ -14,7 +14,6 @@ import { EventTYPE } from '../Components/CommunityEvents/types/types';
 const CommunityEventsMain = () => {
   const dispatch = useAppDispatch();
   const view = useAppSelector(pageView);
-
   const events = useAppSelector(selectAllEvents);
   const eventsStatus = useAppSelector(getEventsStatus);
   
