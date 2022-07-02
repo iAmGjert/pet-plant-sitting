@@ -221,12 +221,14 @@ db.sync(
         },
         {
           name: 'velouriagreen',
+          username: 'test',
+          password: 'test',
           image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
-          sitter_rating: 3,
+          sitter_rating: null,
           total_sitter_ratings: 86,
           bio: 'Major laceration of right vertebral artery, initial encounter',
-          rating: 4,
+          rating: null,
           total_ratings: 70,
         },
       ]).then(() => {
