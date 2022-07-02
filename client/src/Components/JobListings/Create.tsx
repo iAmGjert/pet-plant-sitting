@@ -1,60 +1,77 @@
 import React, { useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { changeView, setJobs } from '../../state/features/jobs/jobSlice';
-import { Row, Col, Button, Form, ToggleButton, ButtonGroup, Alert } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  Button,
+  Form,
+  ToggleButton,
+  ButtonGroup,
+  Alert,
+} from 'react-bootstrap';
 import LoginPrompt from './LoginPrompt';
 import moment from 'moment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-
-const Create = ({ setShowCreated }) => {
+const Create = ({ setShowCreated }): JSX.Element => {
   const navigate = useNavigate();
-  const user = useAppSelector(state => state.userProfile.value);
-  const myPets = useAppSelector(state => state.petPlant.petPlants.filter(pet=>pet.owner_id === user.id));
-  const petPlants = useAppSelector(state => state.petPlant.petPlants).reduce( (ans, pet, ind)=>{
-    if (pet.owner_id === user.id) {
-      ans.push(ind + 1);
-    }
-    return ans;
-  }, []);
+  const user = useAppSelector((state) => state.userProfile.value);
+  const myPets = useAppSelector((state) =>
+    state.petPlant.petPlants.filter((pet) => pet.owner_id === user.id)
+  );
+  const petPlants = useAppSelector((state) => state.petPlant.petPlants).reduce(
+    (ans, pet, ind) => {
+      if (pet.owner_id === user.id) {
+        ans.push(ind + 1);
+      }
+      return ans;
+    },
+    []
+  );
   const dispatch = useAppDispatch();
-  const [startDate, setStartDate] = useState(moment().add(1, 'days').format('YYYY-MM-DD'));
-  const [endDate, setEndDate] = useState(moment().add(2, 'days').format('YYYY-MM-DD'));
+  const [startDate, setStartDate] = useState(
+    moment().add(1, 'days').format('YYYY-MM-DD')
+  );
+  const [endDate, setEndDate] = useState(
+    moment().add(2, 'days').format('YYYY-MM-DD')
+  );
   const [description, setDescription] = useState('');
-  const [feed, setFeed] = useState(myPets.reduce(arr=>{ arr.push(false); return arr; }, []));
+  const [feed, setFeed] = useState(
+    myPets.reduce((arr) => {
+      arr.push(false);
+      return arr;
+    }, [])
+  );
   const [disabled, setDisabled] = useState(true);
   const getJobs = async () => {
-    const jobs = await axios.get(
-      '/api/jobs/all'
-    );
+    const jobs = await axios.get('/api/jobs/all');
     dispatch(setJobs(jobs.data));
   };
   const postJob = async (newJob: any) => {
-    return await axios.post('/api/jobs/create', newJob)
+    return await axios
+      .post('/api/jobs/create', newJob)
       .then((res: any) => {
         return res;
       })
-      .then((newJob)=>{
-        newJob.data.pet_plant.forEach((pet)=>{
+      .then((newJob) => {
+        newJob.data.pet_plant.forEach((pet) => {
           axios.post('/api/jobs/jobPetsPlants/create', {
             job_id: newJob.data.id,
-            pet_plant_id: pet
+            pet_plant_id: pet,
           });
         });
       })
-      .then(()=>{
+      .then(() => {
         getJobs();
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
         return err;
       });
   };
-  useEffect(()=>{
-    console.log(user);
-  }, []);
-  
+
   const handleChangeStartDate = (e: Event) => {
     setStartDate(e.target.value);
   };
@@ -64,43 +81,52 @@ const Create = ({ setShowCreated }) => {
   const handleChangeDescription = (e: Event) => {
     setDescription(e.target.value);
   };
-  
-  const petFeedButton = (e, index)=>{
-    const newFeed = feed.reduce((a, e)=>{ a.push(e); return a; }, []);
+
+  const petFeedButton = (e, index) => {
+    const newFeed = feed.reduce((a, e) => {
+      a.push(e);
+      return a;
+    }, []);
     newFeed[index] = !newFeed[index];
     setFeed(newFeed);
   };
   const handleSubmit = () => {
     setShowCreated(true);
-    const jobPetsPlants = petPlants.filter((pet, i)=>{
+    const jobPetsPlants = petPlants.filter((pet, i) => {
       if (feed[i] === true) {
         return true;
       }
       return false;
     });
-    
+
     const obj = {
-      location: user.location, 
-      employer_id: user.id, 
+      location: user.location,
+      employer_id: user.id,
       pet_plant: jobPetsPlants,
       startDate: startDate,
       endDate: endDate,
       isCompleted: false,
-      description: description
+      description: description,
     };
     postJob(obj);
 
     dispatch(changeView('list'));
     return;
   };
-  useEffect(()=>{
-    feed.some((ele)=>{ return ele === true; }) ? setDisabled(false) : setDisabled(true);
+  useEffect(() => {
+    feed.some((ele) => {
+      return ele === true;
+    })
+      ? setDisabled(false)
+      : setDisabled(true);
   }, [feed]);
-  return user.name !== '' ?
-    (
-      user.pet_plants.length > 0 ? <Form>
+  return user.name !== '' ? (
+    user.pet_plants.length > 0 ? (
+      <Form>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
-          <Form.Label>Job Location: <div>{user.location}</div></Form.Label>
+          <Form.Label>
+            Job Location: <div>{user.location}</div>
+          </Form.Label>
         </Form.Group>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
           <Form.Label>Pets/Plants</Form.Label>
@@ -115,41 +141,90 @@ const Create = ({ setShowCreated }) => {
                 name="radio"
                 value={radio.name}
                 checked={feed[idx]}
-                onChange={(e) => { petFeedButton(e, idx); }}
+                onChange={(e) => {
+                  petFeedButton(e, idx);
+                }}
               >
                 {radio.name}
               </ToggleButton>
             ))}
           </ButtonGroup>
         </Form.Group>
-        <Form.Group className="mb-3" controlId="createEventForm.ControlTextarea1">
+        <Form.Group
+          className="mb-3"
+          controlId="createEventForm.ControlTextarea1"
+        >
           <Form.Label>Description</Form.Label>
-          <Form.Control className='bootstrap-textbox' as="textarea" placeholder={'Describe the job in one or two sentenses.'} rows={3} onChange={(e)=>{ handleChangeDescription(e); }}/>
+          <Form.Control
+            className="bootstrap-textbox"
+            as="textarea"
+            placeholder={'Describe the job in one or two sentenses.'}
+            rows={3}
+            onChange={(e) => {
+              handleChangeDescription(e);
+            }}
+          />
         </Form.Group>
         <Row>
           <Col>
-            <Form.Group className="mb-3" controlId="createEventForm.ControlInput3">
+            <Form.Group
+              className="mb-3"
+              controlId="createEventForm.ControlInput3"
+            >
               <Form.Label>Start Date:</Form.Label>
-              <Form.Control className='bootstrap-textbox' type="date" value={startDate}
-                onChange={(e)=>{ handleChangeStartDate(e); }}
+              <Form.Control
+                className="bootstrap-textbox"
+                type="date"
+                value={startDate}
+                onChange={(e) => {
+                  handleChangeStartDate(e);
+                }}
               />
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group className="mb-3" controlId="createEventForm.ControlInput3">
+            <Form.Group
+              className="mb-3"
+              controlId="createEventForm.ControlInput3"
+            >
               <Form.Label>End Date:</Form.Label>
-              <Form.Control className='bootstrap-textbox' type="date" value={endDate}
-                onChange={(e)=>{ handleChangeEndDate(e); }}
+              <Form.Control
+                className="bootstrap-textbox"
+                type="date"
+                value={endDate}
+                onChange={(e) => {
+                  handleChangeEndDate(e);
+                }}
               />
             </Form.Group>
           </Col>
         </Row>
-        <Button disabled={disabled} className='bootstrap-button' variant="primary" type="button" onClick={handleSubmit}>
-      Submit
+        <Button
+          disabled={disabled}
+          className="bootstrap-button"
+          variant="primary"
+          type="button"
+          onClick={handleSubmit}
+        >
+          Submit
         </Button>
-      </Form> : <Alert variant='warning'>Add a pet or plant to <Alert.Link onClick={()=>{ navigate('/profile/' + user.id); }}>your profile</Alert.Link> first!</Alert>
-       
-    ) : <LoginPrompt/>;
+      </Form>
+    ) : (
+      <Alert variant="warning">
+        Add a pet or plant to{' '}
+        <Alert.Link
+          onClick={() => {
+            navigate('/profile/' + user.id);
+          }}
+        >
+          your profile
+        </Alert.Link>{' '}
+        first!
+      </Alert>
+    )
+  ) : (
+    <LoginPrompt />
+  );
 };
 
 Create.propTypes = {};
