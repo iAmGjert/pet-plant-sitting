@@ -18,6 +18,7 @@ import { setJobs } from './state/features/jobs/jobSlice';
 import { setPetPlants } from './state/features/petPlant/petPlantSlice';
 import { useAppDispatch, useAppSelector } from './state/hooks';
 import { mapActions } from './state/features/map/mapSlice';
+import { setEvents } from './state/features/events/eventsSlice';
 import JobsMain from './Pages/JobsMain';
 // import JobCreation from './Pages/JobCreation';
 import ChatMain from './Pages/ChatMain';
@@ -59,7 +60,10 @@ const App: FC<Props> = () => {
   };
   const getEvents = async () => {
     const events = await axios.get('/api/events/all');
+
+    dispatch(setEvents(events.data));
     dispatch(mapActions.setEvents(events.data));
+    dispatch(setEvents(events.data));
   };
   const toggleTheme = () => {
     setTheme((curr: string) => (curr === null ? 'dark' : null));

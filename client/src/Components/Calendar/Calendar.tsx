@@ -17,14 +17,6 @@ import { useSelector } from 'react-redux';
 //import { getEventListeners } from 'events';
 //import { bindActionCreators } from 'redux'; this is what we will import when we have our actions created
 
-//bootstrap
-// import 'bootstrap/dist/css/bootstrap.min.css';
-// import Button from 'react-bootstrap/Button';
-// import Card from 'react-bootstrap/Card';
-// import FormControl from 'react-bootstrap/FormControl';
-// import InputGroup from 'react-bootstrap/InputGroup';
-// import { ifError } from 'assert';
-
 // interface jobStuff {
 //   id: number,
 //   location: string,
