@@ -60,7 +60,7 @@ const Landing: FC<Props> = () => {
   const pastJobs = useAppSelector((state) => state.job.pastJobs);
 
   const events = useAppSelector((state) => state.events.events);
-  console.log(petPlants, 'petPlants');
+  //console.log(petPlants, 'petPlants');
 
   const orderedEvents =
     events instanceof Array &&
@@ -72,21 +72,21 @@ const Landing: FC<Props> = () => {
           new Date() <= new Date(`${event.startDate} ${event.startTime}`)
       );
 
-  console.log('orderedEvents', orderedEvents);
+  //console.log('orderedEvents', orderedEvents);
 
   const sitterUpcomingJobs = upcomingJobs
     .filter((job: { sitter_id: number }) => {
       return job.sitter_id === user.id;
     })
     .slice(2);
-  console.log('sitterUpcomingJobs', sitterUpcomingJobs);
+  //console.log('sitterUpcomingJobs', sitterUpcomingJobs);
 
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
   const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
     return job.sitter_id === user.id;
   });
 
-  console.log('sitterWorkHistory', sitterWorkHistory);
+  //console.log('sitterWorkHistory', sitterWorkHistory);
 
   useEffect(() => {
     dispatch(fetchUpcomingJobs());

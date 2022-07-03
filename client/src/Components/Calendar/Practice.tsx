@@ -56,7 +56,7 @@ const Practice: FC<Props> = () => {
   const events = useAppSelector((state) => state.events.events);
   const user = useAppSelector((state) => state.userProfile.value);
 
-  console.log('events', events);
+  //console.log('events', events);
   //console.log(user);
 
   //function to filter user appointments
@@ -84,7 +84,7 @@ const Practice: FC<Props> = () => {
       }
     );
 
-  console.log('userJobs', userJobs);
+  //console.log('userJobs', userJobs);
 
   const mappedEvents = events.map((event: Event) => {
     return {
@@ -104,7 +104,7 @@ const Practice: FC<Props> = () => {
 
   //combination of jobs and events
   const appointments = userJobs.concat(mappedEvents);
-  console.log('appointments', appointments);
+  //console.log('appointments', appointments);
 
   const AppointmentContent = ({ appointmentData }) => {
     //console.log('appointment props', props);
