@@ -78,7 +78,7 @@ const Practice: FC<Props> = () => {
           startDate: moment(job.startDate).toDate(),
           endDate: moment(job.endDate).toDate(),
           type: 'job',
-          // petPlants: job.job_pets_plants,
+          petPlants: job.job_pets_plants,
         };
       }
     );
@@ -89,7 +89,6 @@ const Practice: FC<Props> = () => {
     return {
       ...event,
       title: event.name,
-      id: event.id + 100,
       startDate: moment(event.startDate).toDate(),
       endDate: moment(event.startDate).add(2, 'hours').toDate(),
       type: 'event',
