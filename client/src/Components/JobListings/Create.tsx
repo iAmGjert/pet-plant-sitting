@@ -49,6 +49,7 @@ const Create = ({ setShowCreated }): JSX.Element => {
     const jobs = await axios.get('/api/jobs/all');
     dispatch(setJobs(jobs.data));
   };
+  
   const postJob = async (newJob: any) => {
     return await axios
       .post('/api/jobs/create', newJob)
