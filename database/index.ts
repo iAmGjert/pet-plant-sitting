@@ -361,7 +361,7 @@ db.sync(
                 description: 'Come watch my child!',
                 sitter_id: 7,
                 startDate: new Date('June 8, 2022 01:15:00'),
-                endDate: new Date('June 13, 2022 01:15:00'),
+                endDate: new Date('June 10, 2022 01:15:00'),
                 isCompleted: false
               },
               {
@@ -371,7 +371,7 @@ db.sync(
                 description: 'Come watch this little devil',
                 sitter_id: null,
                 startDate: new Date('June 7, 2022 01:15:00'),
-                endDate: new Date('June 14, 2022 01:15:00'),
+                endDate: new Date('June 9, 2022 01:15:00'),
                 isCompleted: true
               },
               {
@@ -380,8 +380,8 @@ db.sync(
                 employer_id: 3,
                 sitter_id: 7,
                 description: 'Need someone to water my plant babies while I leave town for two days',
-                startDate: new Date('July 2, 2022 01:15:00'),
-                endDate: new Date('July 3, 2022 01:15:00'),
+                startDate: new Date('July 4, 2022 01:15:00'),
+                endDate: new Date('July 5, 2022 01:15:00'),
                 isCompleted: false
               },
               {
@@ -390,7 +390,7 @@ db.sync(
                 employer_id: 5,
                 description: 'Leaving town for five days and need someone to sit my babies',
                 sitter_id: 7,
-                startDate: new Date('July 15, 2022 01:15:00'),
+                startDate: new Date('July 19, 2022 01:15:00'),
                 endDate: new Date('July 20, 2022 01:15:00'),
                 isCompleted: true
               },
@@ -400,8 +400,8 @@ db.sync(
                 pet_plant: [3, 1],
                 employer_id: 6,
                 sitter_id: 7,
-                startDate: new Date('June 29, 2022 01:15:00'),
-                endDate: new Date('July 29, 2022 01:15:00'),
+                startDate: new Date('July 10, 2022 01:15:00'),
+                endDate: new Date('July 11, 2022 01:15:00'),
                 isCompleted: false
               },
             ]).then(() => {

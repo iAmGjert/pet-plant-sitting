@@ -74,11 +74,11 @@ const Landing: FC<Props> = () => {
 
   console.log('orderedEvents', orderedEvents);
 
-  const sitterUpcomingJobs = upcomingJobs.filter(
-    (job: { sitter_id: number }) => {
+  const sitterUpcomingJobs = upcomingJobs
+    .filter((job: { sitter_id: number }) => {
       return job.sitter_id === user.id;
-    }
-  );
+    })
+    .slice(2);
   console.log('sitterUpcomingJobs', sitterUpcomingJobs);
 
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
