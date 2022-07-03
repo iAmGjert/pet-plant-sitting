@@ -106,59 +106,59 @@ const Landing: FC<Props> = () => {
       {sitterUpcomingJobs.length &&
         sitterUpcomingJobs.map((element) => {
           return (
-            <>
+            <React.Fragment key={`UpcomingJobs key: ${~~(Math.random() * 1000) * (element.id + 1)}`}>
               <UpcomingJobs
-                key={element.id}
+                // key={element.id}
                 startDate={element.startDate}
                 endDate={element.endDate}
                 employer_id={element.employer_id}
                 location={element.location}
                 petPlant={element.job_pets_plants}
               />
-            </>
+            </React.Fragment>
           );
         })}
 
       {trimmedUpcomingEvents.length &&
         trimmedUpcomingEvents.map((element) => {
           return (
-            <>
+            <React.Fragment key={`UpcomingEvents key: ${~~(Math.random() * 1000) * (element.id + 1)}`}>
               <LandingEventCard
-                key={element.id}
+                // key={element.id}
                 startDate={element.startDate}
                 description={element.description}
                 location={element.location}
                 name={element.name}
               />
-            </>
+            </React.Fragment>
           );
         })}
 
       {applications.length &&
         applications.map((element) => {
           return (
-            <>
+            <React.Fragment key={`AppliedJobs key: ${~~(Math.random() * 1000) * (element.id + 1)}`}>
               <AppliedJobsBoard
-                key={element.id}
+                // key={element.id}
                 startDate={element.startDate}
                 {...element}
               />
-            </>
+            </React.Fragment>
           );
         })}
 
       {sitterWorkHistory.length &&
         sitterWorkHistory.map((element) => {
           return (
-            <>
+            <React.Fragment key={`JobHistory key: ${~~(Math.random() * 1000) * (element.id + 1)}`}>
               <JobHistory
-                key={element.id}
+                // key={element.id}
                 startDate={element.startDate}
                 endDate={element.endDate}
                 description={element.description}
                 petPlants={element.job_pets_plants}
               />
-            </>
+            </React.Fragment>
           );
         })}
     </div>
