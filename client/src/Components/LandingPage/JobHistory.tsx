@@ -5,7 +5,8 @@ import Button from 'react-bootstrap/Button';
 import moment from 'moment';
 import { ThemeContext } from '../../App';
 
-const JobHistory = ({ startDate, endDate, description, petPlants }) => {
+const JobHistory = ({ sitterWorkHistory }) => {
+  console.log('sitterWorkHistory in jobHistory', sitterWorkHistory);
   const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);
 
@@ -27,20 +28,24 @@ const JobHistory = ({ startDate, endDate, description, petPlants }) => {
           <Modal.Title>Previous Work History</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <img
-            src='https://media.istockphoto.com/photos/closeup-portrait-of-funny-ginger-cat-wearing-sunglasses-isolated-on-picture-id1188445864?k=20&m=1188445864&s=612x612&w=0&h=0vuJeOxJr8Lu3Q1VdT1z7t6HcM8Oj7EVJe3CexGnH_8='
-            alt=''
-          />
-          <h2>
-            Past Sitting For{' '}
-            {petPlants.map((pet) => {
-              return `${pet.pet_plant.name} | `;
-            })}{' '}
-          </h2>
-          <p>{description}</p>
-          <p>{`${moment(startDate).format('dddd MMMM Do, YYYY')} to ${moment(
-            endDate
-          ).format('dddd MMMM Do, YYYY')}`}</p>
+          {sitterWorkHistory.map(
+            ({ startDate, endDate, description, job_pets_plants, id }) => {
+              return (
+                <div key={id}>
+                  <h2>
+                    Past Sitting For{' '}
+                    {job_pets_plants.map((pet) => {
+                      return `${pet.pet_plant.name} | `;
+                    })}{' '}
+                  </h2>
+                  <p>{description}</p>
+                  <p>{`${moment(startDate).format(
+                    'dddd MMMM Do, YYYY'
+                  )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}</p>
+                </div>
+              );
+            }
+          )}
         </Modal.Body>
         <Modal.Footer>
           <Button

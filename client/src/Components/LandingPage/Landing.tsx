@@ -108,53 +108,53 @@ const Landing: FC<Props> = () => {
         />
       </Card>
 
-      {sitterUpcomingJobs.length &&
-        sitterUpcomingJobs.map(
-          (element: {
-            id: React.Key;
-            startDate: any;
-            endDate: any;
-            employer_id: any;
-            location: any;
-            job_pets_plants: any;
-          }) => {
-            return (
-              <>
-                <UpcomingJobs
-                  key={element.id}
-                  startDate={element.startDate}
-                  endDate={element.endDate}
-                  employer_id={element.employer_id}
-                  location={element.location}
-                  petPlant={element.job_pets_plants}
-                />
-              </>
-            );
-          }
-        )}
+      {sitterUpcomingJobs.length > 0
+        ? sitterUpcomingJobs.map(
+            (element: {
+              id: React.Key;
+              startDate: any;
+              endDate: any;
+              employer_id: any;
+              location: any;
+              job_pets_plants: any;
+            }) => {
+              return (
+                <>
+                  <UpcomingJobs
+                    key={element.id}
+                    startDate={element.startDate}
+                    endDate={element.endDate}
+                    employer_id={element.employer_id}
+                    location={element.location}
+                    petPlant={element.job_pets_plants}
+                  />
+                </>
+              );
+            }
+          )
+        : null}
 
-      {trimmedUpcomingEvents.length &&
-        trimmedUpcomingEvents.map(
-          (element: {
-            id: React.Key;
-            startDate: any;
-            description: any;
-            location: any;
-            name: any;
-          }) => {
-            return (
-              <>
-                <LandingEventCard
-                  key={element.id}
-                  startDate={element.startDate}
-                  description={element.description}
-                  location={element.location}
-                  name={element.name}
-                />
-              </>
-            );
-          }
-        )}
+      {trimmedUpcomingEvents.map(
+        (element: {
+          id: React.Key;
+          startDate: any;
+          description: any;
+          location: any;
+          name: any;
+        }) => {
+          return (
+            <>
+              <LandingEventCard
+                key={element.id}
+                startDate={element.startDate}
+                description={element.description}
+                location={element.location}
+                name={element.name}
+              />
+            </>
+          );
+        }
+      )}
 
       {applications.length &&
         applications.map(
@@ -179,28 +179,7 @@ const Landing: FC<Props> = () => {
           }
         )}
 
-      {sitterWorkHistory.length &&
-        sitterWorkHistory.map(
-          (element: {
-            id: React.Key;
-            startDate: any;
-            endDate: any;
-            description: any;
-            job_pets_plants: any;
-          }) => {
-            return (
-              <>
-                <JobHistory
-                  key={element.id}
-                  startDate={element.startDate}
-                  endDate={element.endDate}
-                  description={element.description}
-                  petPlants={element.job_pets_plants}
-                />
-              </>
-            );
-          }
-        )}
+      <JobHistory sitterWorkHistory={sitterWorkHistory} />
     </div>
   );
 };
