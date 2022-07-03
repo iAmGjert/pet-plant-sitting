@@ -1,5 +1,6 @@
 import React, { useState, FC } from 'react';
 import moment from 'moment';
+import { Event } from '../../state/features/events/eventsSlice';
 
 //schedule
 import Paper from '@mui/material/Paper';
@@ -76,35 +77,24 @@ const Practice: FC<Props> = () => {
           title: job.description,
           startDate: moment(job.startDate).toDate(),
           endDate: moment(job.endDate).toDate(),
-          id: job.id,
-          location: job.location,
-          petPlants: job.job_pets_plants,
+          type: 'job',
+          // petPlants: job.job_pets_plants,
         };
       }
     );
 
-  //function that maps out events
-  // const allEvents = events.map(
-  //   (event: {
-  //     description: any;
-  //     startDate: moment.MomentInput;
-  //     endDate: moment.MomentInput;
-  //     id: any;
-  //     location: any;
-  //   }) => {
-  //     return {
-  //       ...event,
-  //       title: event.description,
-  //       startDate: moment(event.startDate).toDate(),
-  //       endDate: moment(event.endDate).toDate(),
-  //       location: event.location,
-  //     };
-  //   }
-  // );
-  // console.log(allEvents);
+  console.log('userJobs', userJobs);
 
-  //console.log(schedulerData);
-  //console.log('userJobs', userJobs);
+  const mappedEvents = events.map((event: Event) => {
+    return {
+      ...event,
+      title: event.name,
+      id: event.id + 100,
+      startDate: moment(event.startDate).toDate(),
+      endDate: moment(event.startDate).add(2, 'hours').toDate(),
+      type: 'event',
+    };
+  });
 
   const [currentDate, setCurrentDate] = useState(moment().format('YYYY-MM-DD'));
 
@@ -112,27 +102,41 @@ const Practice: FC<Props> = () => {
     setCurrentDate(_currentDate);
   };
 
+  //combination of jobs and events
+  const appointments = userJobs.concat(mappedEvents);
+  console.log('appointments', appointments);
+
   const AppointmentContent = ({ appointmentData }) => {
     //console.log('appointment props', props);
-    return (
-      <div>
-        <img src={appointmentData.petPlants[0].pet_plant.image} alt='' />
-        <h2>
-          {' '}
-          Siting for{' '}
-          {appointmentData.petPlants.map((pet) => {
-            return `${pet.pet_plant.name} | `;
-          })}{' '}
-        </h2>
-        <p>Location: {appointmentData.location}</p>
-        <p>Info: {appointmentData.description}</p>
-      </div>
-    );
+    if (appointmentData.type === 'job') {
+      return (
+        <div>
+          <img src={appointmentData.petPlants[0].pet_plant.image} alt='' />
+          <h2>
+            {' '}
+            Siting for{' '}
+            {appointmentData.petPlants.map((pet) => {
+              return `${pet.pet_plant.name} | `;
+            })}{' '}
+          </h2>
+          <p>Location: {appointmentData.location}</p>
+          <p>Info: {appointmentData.description}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h2>{appointmentData.name}</h2>
+          <p>Location: {appointmentData.location}</p>
+          <p>Info: {appointmentData.description}</p>
+        </div>
+      );
+    }
   };
 
   return (
     <Paper>
-      <Scheduler data={userJobs}>
+      <Scheduler data={appointments}>
         <ViewState
           currentDate={currentDate}
           onCurrentDateChange={onCurrentDateChange}

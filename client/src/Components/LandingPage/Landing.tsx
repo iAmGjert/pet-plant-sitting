@@ -5,10 +5,11 @@ import LandingEventCard from './LandingEventCard';
 import AppliedJobsBoard from './AppliedJobsBoard';
 import * as moment from 'moment';
 import JobHistory from './JobHistory';
+import UpcomingEvent from './UpcomingEvent';
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
+//import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 
 //Redux
@@ -50,7 +51,7 @@ const Landing: FC<Props> = () => {
   const dispatch = useAppDispatch();
 
   const user = useAppSelector((state) => state.userProfile.value);
-  const users = useAppSelector((state) => state.userProfile.users);
+  // const users = useAppSelector((state) => state.userProfile.users);
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
   const upcomingJobs = useAppSelector((state) => state.job.upcomingJobs);
   const upcomingEvents = useAppSelector((state) => state.events.upcomingEvents);
@@ -59,23 +60,33 @@ const Landing: FC<Props> = () => {
   const pastJobs = useAppSelector((state) => state.job.pastJobs);
 
   const events = useAppSelector((state) => state.events.events);
+  console.log(petPlants, 'petPlants');
+
+  const orderedEvents =
+    events instanceof Array &&
+    events
+      .slice() //creating copy of original events array
+      .sort((a, b) => a.startDate.localeCompare(b.startDate)) //sorting by hour as well as time. Returns 1 if sorted after, -1 if sorted before, 0 if equal
+      .filter(
+        (event) =>
+          new Date() <= new Date(`${event.startDate} ${event.startTime}`)
+      );
+
+  console.log('orderedEvents', orderedEvents);
 
   const sitterUpcomingJobs = upcomingJobs.filter(
     (job: { sitter_id: number }) => {
       return job.sitter_id === user.id;
     }
   );
+  console.log('sitterUpcomingJobs', sitterUpcomingJobs);
 
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
-
-  // const currentDate = moment().format('YYYY-MM-DD');
-  // console.log('currentDate', currentDate);
-  // console.log(moment(currentDate).isBefore('2022-07-22'));
-
-  //console.log('pastJobs', pastJobs);
   const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
     return job.sitter_id === user.id;
   });
+
+  console.log('sitterWorkHistory', sitterWorkHistory);
 
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
@@ -98,63 +109,98 @@ const Landing: FC<Props> = () => {
       </Card>
 
       {sitterUpcomingJobs.length &&
-        sitterUpcomingJobs.map((element) => {
-          return (
-            <>
-              <UpcomingJobs
-                key={element.id}
-                startDate={element.startDate}
-                endDate={element.endDate}
-                employer_id={element.employer_id}
-                location={element.location}
-                petPlant={element.job_pets_plants}
-              />
-            </>
-          );
-        })}
+        sitterUpcomingJobs.map(
+          (element: {
+            id: React.Key;
+            startDate: any;
+            endDate: any;
+            employer_id: any;
+            location: any;
+            job_pets_plants: any;
+          }) => {
+            return (
+              <>
+                <UpcomingJobs
+                  key={element.id}
+                  startDate={element.startDate}
+                  endDate={element.endDate}
+                  employer_id={element.employer_id}
+                  location={element.location}
+                  petPlant={element.job_pets_plants}
+                />
+              </>
+            );
+          }
+        )}
 
       {trimmedUpcomingEvents.length &&
-        trimmedUpcomingEvents.map((element) => {
-          return (
-            <>
-              <LandingEventCard
-                key={element.id}
-                startDate={element.startDate}
-                description={element.description}
-                location={element.location}
-                name={element.name}
-              />
-            </>
-          );
-        })}
+        trimmedUpcomingEvents.map(
+          (element: {
+            id: React.Key;
+            startDate: any;
+            description: any;
+            location: any;
+            name: any;
+          }) => {
+            return (
+              <>
+                <LandingEventCard
+                  key={element.id}
+                  startDate={element.startDate}
+                  description={element.description}
+                  location={element.location}
+                  name={element.name}
+                />
+              </>
+            );
+          }
+        )}
 
       {applications.length &&
-        applications.map((element) => {
-          return (
-            <>
-              <AppliedJobsBoard
-                key={element.id}
-                startDate={element.startDate}
-                {...element}
-              />
-            </>
-          );
-        })}
+        applications.map(
+          (
+            element: JSX.IntrinsicAttributes & {
+              status: any;
+              job: any;
+              id: any;
+              startDate: any;
+              endDate: any;
+            }
+          ) => {
+            return (
+              <>
+                <AppliedJobsBoard
+                  key={element.id}
+                  startDate={element.startDate}
+                  {...element}
+                />
+              </>
+            );
+          }
+        )}
 
       {sitterWorkHistory.length &&
-        sitterWorkHistory.map((element) => {
-          return (
-            <>
-              <JobHistory
-                key={element.id}
-                startDate={element.startDate}
-                endDate={element.endDate}
-                description={element.description}
-                petPlants={element.job_pets_plants}
-              />
-            </>
-          );
-        })}
+        sitterWorkHistory.map(
+          (element: {
+            id: React.Key;
+            startDate: any;
+            endDate: any;
+            description: any;
+            job_pets_plants: any;
+          }) => {
+            return (
+              <>
+                <JobHistory
+                  key={element.id}
+                  startDate={element.startDate}
+                  endDate={element.endDate}
+                  description={element.description}
+                  petPlants={element.job_pets_plants}
+                />
+              </>
+            );
+          }
+        )}
     </div>
   );
 };

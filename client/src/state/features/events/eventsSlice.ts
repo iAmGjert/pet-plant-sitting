@@ -3,7 +3,7 @@ import moment from 'moment';
 import axios from 'axios';
 // import { RootState } from '../../store';
 
-interface Event {
+export interface Event {
   id: number;
   name: string;
   host: number;
