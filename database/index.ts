@@ -161,14 +161,10 @@ db.sync(
           name: 'Iben Oneal',
           image:
             'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2021%2F09%2F04%2FBeyonce-1.jpg',
-          location: 'New Orleans, LA',
+          location: '',
           sitter_rating: 10,
           total_sitter_ratings: 24,
-          bio: `I’ve had dogs for the past 27 years. I was my neighbors’ dog sitter off and on for 3 years. Her dog was very comfortable at my home. She had the run of the house. She was allowed on the sofa and in the bed. She got along with my lab so well that they slept together. I have a special place in my heart for strays. I ‘ve found 3 strays wandering around the school where I worked. I took all 3 home (not all at the same time) and each one lived a long life with me.
-
-        I’m a retired teacher of 33 years. My passion then was teaching, now I’d like to care for your baby . I have a very nice spacious home with lots of room to move around. I’m home all day except for when I run errands. Otherwise I will be with your loving pet to give it the attention and love that it needs and deserves.
-          
-        I have a nice fenced yard for your baby to enjoy. Potty breaks will be every hour or more if needed. I have my own dog who will help keep your baby company. As of October 26, 2021 My puppy Stella is 3 months old .I promise to give your dog all the love it deserves.`,
+          bio: ``,
           average_rating: 5,
           total_ratings: 95,
         },
@@ -398,9 +394,9 @@ db.sync(
                 employer_id: 3,
                 description: 'Come watch this little devil',
                 sitter_id: null,
-                startDate: new Date('July 7, 2022 01:15:00'),
-                endDate: new Date('July 14, 2022 01:15:00'),
-                isCompleted: false
+                startDate: new Date('June 7, 2022 01:15:00'),
+                endDate: new Date('June 14, 2022 01:15:00'),
+                isCompleted: true
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
@@ -428,7 +424,7 @@ db.sync(
                 pet_plant: [3, 1],
                 employer_id: 6,
                 sitter_id: 7,
-                startDate: new Date('July 24, 2022 01:15:00'),
+                startDate: new Date('June 29, 2022 01:15:00'),
                 endDate: new Date('July 29, 2022 01:15:00'),
                 isCompleted: false
               },
