@@ -18,6 +18,7 @@ import {
   AppointmentTooltip,
   AppointmentForm,
   Appointments,
+  AllDayPanel,
 } from '@devexpress/dx-react-scheduler-material-ui';
 // import { Scheduler } from '@devexpress/dx-react-scheduler-material-ui';
 // import { DayView } from '@devexpress/dx-react-scheduler-material-ui';
@@ -110,7 +111,11 @@ const Practice: FC<Props> = () => {
     if (appointmentData.type === 'job') {
       return (
         <div>
-          <img src={appointmentData.petPlants[0].pet_plant.image} alt='' />
+          <img
+            src={appointmentData.petPlants[0].pet_plant.image}
+            alt=''
+            style={{ width: '300px' }}
+          />
           <h2>
             {' '}
             Siting for{' '}
@@ -155,6 +160,7 @@ const Practice: FC<Props> = () => {
           contentComponent={AppointmentContent}
         />
         <AppointmentForm readOnly />
+        <AllDayPanel />
       </Scheduler>
     </Paper>
   );
