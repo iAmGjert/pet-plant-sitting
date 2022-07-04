@@ -447,7 +447,7 @@ const Profile = () => {
           </span>
         </Col>
       </Row>
-      <Navbar sticky='top' bg='light' variant='light'>
+      {/* <Navbar sticky='top' bg='light' variant='light'>
         <Nav fill variant='tabs' defaultActiveKey='/home'>
           <Nav.Item>
             <Nav.Link
@@ -528,7 +528,6 @@ const Profile = () => {
       </Row>
       <Row>
         <h2 id='ratings'> {`Reviews(${profileUser?.ratings.length})`} </h2>
-        {/* if revies higher than 5, map out 5 of them and a button to load the rest  */}
         {profileUser?.ratings.map((rating, i) => {
           return (
             <Rating rating={rating} key={'rating' + i} getStars={getStars} />
@@ -594,7 +593,7 @@ const Profile = () => {
             <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
           </Card>
         )}
-      </Row>
+      </Row> */}
     </Container>
   );
 };
