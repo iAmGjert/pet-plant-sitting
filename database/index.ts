@@ -152,10 +152,10 @@ Gallery.hasMany(GalleryEntry, {
 db.sync(
   process.env.CLIENT_URL === 'http://localhost'
     ? { force: true }
-    : { alter: true }
+    : { force: true }
 ) //insert {alter: true}(alters tables if necessary) or {force: true}(drops all tables and recreates them every save) if you need to change the db structure
   .then(() => {
-    if (process.env.CLIENT_URL === 'http://localhost') {
+    if (true) {
       User.bulkCreate([
         {
           name: 'Iben Oneal',
