@@ -48,8 +48,8 @@ auth.post('/local/register', async (req: any, res: any) => {
       });
     }    
   } catch (error) {
-    res.sendStatus(400);
     console.log(error);  
+    res.sendStatus(400);
   }
 });
         
@@ -68,7 +68,7 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
     } else {
       req.logIn(user, (err: any) => {
         if (err) { throw err; }
-        console.log(req.session.passport.user, '< - user on session cookie');
+        console.log(req.session.passport.user.dataValues.id, '< - user on session cookie');
         res.send(user);
       });
     }
@@ -76,7 +76,6 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
 });
 
 auth.get('/login/success', (req: Request | any, res: Response) => {
-  console.log('login/success', 'user ID: ', req.user);
   if (req.user) {
     User.findOne({ where: { id: req.user.id || req.user[0].id }, 
       include: [{ model: PetPlant,
@@ -91,7 +90,6 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
         include: [{ model: GalleryEntry }],
       }],
     }).then((user: object) => {
-      console.log( 'login/success.then()');
       res.status(200).json({
         message: 'success',
         success: true,
@@ -102,7 +100,7 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
       res.sendStatus(400);
     });
   } else {
-    console.log('req.user return as undefined');
+    console.log('req.user undefined');
     res.sendStatus(400);
   }
 });
