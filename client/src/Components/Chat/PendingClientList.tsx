@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAppSelector } from '../../state/hooks';
-import Client from './Client';
+import PendingClient from './PendingClient';
+import { Container, Row } from 'react-bootstrap';
 
-const ClientList = () => {
+const PendingClientList = () => {
   const [availableJobs, setAvailableJobs] = useState([]);
   const currUser = useAppSelector((state) => state.userProfile.value);
 
@@ -13,7 +14,7 @@ const ClientList = () => {
     const availableJobs = jobs.data.filter((job: any) => {
       const aJobIAppliedFor = job.job_applicants.filter((job_applicant: any) => job_applicant['user_id'] === currUser.id);
       
-      if (job.sitter_id === null && aJobIAppliedFor.length > 0) {
+      if (job.sitter_id === null && aJobIAppliedFor.length > 0 && job.isCompleted === false) {
         return true;
       }
     });
@@ -23,14 +24,16 @@ const ClientList = () => {
 
   useEffect(() => {
     getJobs();
-  }, []);
+  }, [currUser]);
 
   return (
-    <div>
-      <h3>Potential Clients</h3>
-      {availableJobs.map((job) => <Client key={job.employer_id} job={job} />)}
-    </div>
+    <Container>
+      <h3>Pending Clients</h3>
+      {availableJobs.map((job) => {
+        return <PendingClient key={job.employer_id} job={job} />;
+      })}
+    </Container>
   );
 }
 
-export default ClientList;
+export default PendingClientList;

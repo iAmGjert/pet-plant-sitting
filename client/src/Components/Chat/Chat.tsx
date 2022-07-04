@@ -18,6 +18,7 @@ const Chat = ({ socket }) => {
   const recipientId = useAppSelector((state) => state.chat.recipientId);
   const isApplicant = useAppSelector((state) => state.chat.isApplicant);
   const [currentMessage, setCurrentMessage] = useState('');
+  const applicant = useAppSelector((state) => state.chat.applicant);
   const [messageList, setMessageList] = useState([]);
   const dispatch = useAppDispatch();
 
@@ -72,8 +73,16 @@ const Chat = ({ socket }) => {
   };
 
   const acceptApplicant = async () => {
-    
-  }
+    await axios.patch('/api/jobs/' + applicant.job_id, {
+      sitter_id: applicant.user_id
+    });
+
+    await axios.patch('/api/jobapplicants/' + applicant.user_id + '/' + applicant.job_id, {
+      status: 'accepted'
+    });
+
+    dispatch(changeView('All'));
+  };
 
   useEffect(() => {
 
@@ -106,10 +115,7 @@ const Chat = ({ socket }) => {
 
   return (
     <div className="chat-window">
-      <button onClick={() => dispatch(changeView('usersOnline'))}>BACK</button>
-      <div className="chat-header">
-        <p>Live Chat</p>
-      </div>
+      <button onClick={() => dispatch(changeView('All'))}>BACK</button>
       <div className="chat-body">
         <ScrollToBottom className="message-container">   
           {messageList.map((messageContent: any, index: number) => {
@@ -144,7 +150,7 @@ const Chat = ({ socket }) => {
         <button onClick={sendMessage}>SEND</button>
       </div>
       <div>
-        {isApplicant && <button>Accept</button>}
+        {isApplicant && <button onClick={acceptApplicant}>Accept</button>}
         {isApplicant && <button>Reject</button>}
       </div>
     </div>

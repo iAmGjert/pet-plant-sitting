@@ -13,6 +13,12 @@ interface userOnline {
   name: string,
   socketId: string
 }
+
+interface applicantDetails {
+  user_id: number,
+  job_id: number,
+  status: string
+}
 interface state {
   view: string,
   receivedMessages: Array<messageDetails>,
@@ -20,17 +26,19 @@ interface state {
   usersOnline: Array<userOnline>,
   recipientId: number,
   conversationId: number,
-  isApplicant: boolean
+  isApplicant: boolean,
+  applicant: applicantDetails
 }
 
 const initialState = <state>{
-  view: 'usersOnline',
+  view: 'All',
   receivedMessages: [],
   sentMessages: [],
   usersOnline: [],
   recipientId: 0,
   conversationId: 0,
-  isApplicant: false
+  isApplicant: false,
+  applicant: {}
 };
 
 export const chatSlice = createSlice({
@@ -61,11 +69,16 @@ export const chatSlice = createSlice({
     setIsApplicant: (state, action: PayloadAction<boolean>) => {
       state.isApplicant = action.payload;
       return state;
+    },
+    setApplicant: (state, action: PayloadAction<applicantDetails>) => {
+      state.applicant = action.payload;
+      
+      return state;
     }
   }
 });
 
-export const { changeView, getReceivedMessages, getSentMessages, getUsersOnline, getRecipientId, getConversationId, setIsApplicant } = chatSlice.actions;
+export const { changeView, getReceivedMessages, getSentMessages, getUsersOnline, getRecipientId, getConversationId, setIsApplicant, setApplicant } = chatSlice.actions;
 
 export default chatSlice.reducer;
 
