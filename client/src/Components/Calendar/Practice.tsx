@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState, useContext, FC } from 'react';
 import moment from 'moment';
 
 //schedule
@@ -18,6 +18,7 @@ import {
   AppointmentForm,
   Appointments,
 } from '@devexpress/dx-react-scheduler-material-ui';
+import { ThemeContext } from '../../App';
 // import { Scheduler } from '@devexpress/dx-react-scheduler-material-ui';
 // import { DayView } from '@devexpress/dx-react-scheduler-material-ui';
 // import { WeekView } from '@devexpress/dx-react-scheduler-material-ui';
@@ -51,7 +52,7 @@ interface Props {}
 
 const Practice: FC<Props> = () => {
   //const currentDate = moment().format('YYYY-MM-DD'); //2022-06-29
-
+  const theme = useContext(ThemeContext);
   const jobs = useAppSelector((state) => state.job.jobs);
   const events = useAppSelector((state) => state.events.events);
   const user = useAppSelector((state) => state.userProfile.value);
@@ -114,7 +115,7 @@ const Practice: FC<Props> = () => {
   };
 
   return (
-    <Paper>
+    <Paper className='dark-scheduler'>
       <Scheduler data={userJobs}>
         <ViewState
           currentDate={currentDate}

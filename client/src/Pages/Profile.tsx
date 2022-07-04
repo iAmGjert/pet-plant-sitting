@@ -306,11 +306,11 @@ const Profile = () => {
               )}
               {profileUser?.ratings.length > 1 &&
                 profileUser?.ratings.length < 5 && (
-                  <Badge pill bg='info'>
-                    {/* if sitter < 2 jobs completed > */}
+                <Badge pill bg='info'>
+                  {/* if sitter < 2 jobs completed > */}
                     New Sitter
-                  </Badge>
-                )}
+                </Badge>
+              )}
               {getRating() === 5 && (
                 <Badge pill bg='primary'>
                   {/* 5 star rating */}
@@ -447,7 +447,7 @@ const Profile = () => {
           </span>
         </Col>
       </Row>
-      <Navbar sticky='top' bg='light' variant='light'>
+      {/* <Navbar sticky='top' bg='light' variant='light'>
         <Nav fill variant='tabs' defaultActiveKey='/home'>
           <Nav.Item>
             <Nav.Link
@@ -502,8 +502,8 @@ const Profile = () => {
             </Nav.Link>
           </Nav.Item>
         </Nav>
-      </Navbar>
-      <Row>
+      </Navbar> */}
+      {/* <Row>
         <h2 id='overview'>About {profileUser?.name}</h2>
         {!readMore ? (
           <>
@@ -525,21 +525,20 @@ const Profile = () => {
         ) : (
           <>{profileUser?.bio}</>
         )}
-      </Row>
-      <Row>
+      </Row> */}
+      {/* <Row>
         <h2 id='ratings'> {`Reviews(${profileUser?.ratings.length})`} </h2>
-        {/* if revies higher than 5, map out 5 of them and a button to load the rest  */}
         {profileUser?.ratings.map((rating, i) => {
           return (
             <Rating rating={rating} key={'rating' + i} getStars={getStars} />
           );
         })}
-      </Row>
-      <h2 id='pets' className='text-decoration-underline'>
+      </Row> */}
+      {/* <h2 id='pets' className='text-decoration-underline'>
         {' '}
         My Pets and Plants{' '}
-      </h2>
-      <Row xs={1} md={2} lg={3}>
+      </h2> */}
+      {/* <Row xs={1} md={2} lg={3}>
         {profileUser?.pet_plants.map((pet) => {
           return (
             <PetPlantCard
@@ -578,8 +577,8 @@ const Profile = () => {
                 </Card>
               </>
             );
-          })}
-        {editable && (
+          })} */}
+      {/* {editable && (
           <Card
             className='text-center'
             onClick={() => {
@@ -594,7 +593,8 @@ const Profile = () => {
             <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
           </Card>
         )}
-      </Row>
+      </Row> */}
+      
     </Container>
   );
 };

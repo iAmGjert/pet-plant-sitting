@@ -2,7 +2,18 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export const mapSlice = createSlice({
   name: 'map',
-  initialState: { userLocation: '', user: {}, job: {}, jobLocation: '', userLocationGeoLng: 0, userLocationGeoLat: 0, users: [], petsPlants: [], events: [] },
+  initialState: { 
+    userLocation: '', 
+    user: {}, job: {}, 
+    jobsLocations: [], 
+    userLocationGeoLng: 0, 
+    userLocationGeoLat: 0, 
+    users: [], 
+    petsPlants: [], 
+    events: [],
+    eventsLocations: []
+  },
+
   reducers: {
     getUserLocation: (state, action: PayloadAction<string>) => {
       state.userLocation = action.payload;
@@ -12,8 +23,8 @@ export const mapSlice = createSlice({
       state.job = action.payload;
       return state;
     },
-    getJobLocation: (state, action: PayloadAction<string>) => {
-      state.jobLocation = action.payload;
+    getJobsLocations: (state, action: PayloadAction<any>) => {
+      state.jobsLocations = action.payload;
       return state;
     },
     getUserLocationGeoLng: (state, action: PayloadAction<number>) => {
@@ -34,6 +45,10 @@ export const mapSlice = createSlice({
     },
     setEvents: (state, action: PayloadAction<any>) => {
       state.events = action.payload;
+      return state;
+    },
+    getEventsLocations: (state, action: PayloadAction<any>) => {
+      state.eventsLocations = action.payload;
       return state;
     }
   }
