@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { setView, addComment } from '../../state/features/events/eventsSlice';
 import AddComment from './AddComment';
-import { ArrowLeft } from 'react-bootstrap-icons';
+// import { ArrowLeft } from 'react-bootstrap-icons';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
@@ -11,6 +11,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Comments from './Comments';
 import moment from 'moment';
+import { ArrowUp, PencilSquare } from 'react-bootstrap-icons';
 
 const Details = () => {
   const dispatch = useAppDispatch();
@@ -53,12 +54,14 @@ const Details = () => {
     }    
   };
 
-  const numOfComments = event_comments.length;
+  const numOfComments = event_comments?.length;
 
   const parseTime = (time: string) => {
     const [hour, minute] = time.split(':');
     return (+hour > 12) ? `${+hour - 12}:${minute} PM` : `${hour}:${minute} AM`;
   };
+  console.log(event);
+  console.log(currentUser);
    
   return (
     <Container fluid>
@@ -70,22 +73,17 @@ const Details = () => {
           handleCommentChange={handleCommentChange} 
           canSubmit={canSubmit} />
       }
-      <Button className='bootstrap-button' variant="primary" onClick={() => dispatch(setView('list'))}>
+      {/* <Button className='bootstrap-button' variant="primary" onClick={() => dispatch(setView('list'))}>
         <ArrowLeft /> Back to Events
-      </Button>
+      </Button> */}
       <Card className='bootstrap-card'>
         <Card.Header as="h5">
           <Row>
-            <Col>
-              {event.name}
-            </Col>
+            <Col>{event.name}</Col>
             {currentUser?.id === event.user?.id && (
-              <Col>
-                <Link to={`/events/edit/${event.id}`}>
-                  modify
-                </Link>
-              </Col>
-            )}
+              <Col><Button className='button-as-link' variant="link" size='sm' onClick={() => dispatch(setView('edit-event'))}>
+                modify <PencilSquare/>
+              </Button></Col>)}
           </Row>
         </Card.Header>
         <Card.Body>
@@ -93,61 +91,47 @@ const Details = () => {
             <Button className='button-as-link' variant="link" size='lg' onClick={() => navigate(`/profile/${user.id}`)}>{user.name}
             </Button>
           </Card.Title>
-          <Card.Text>
-            {event.description}
-          </Card.Text>
-          <div>
-            <small><i>🧭 {event.location}</i></small>
-          </div>
-          <div>
-            <small><i>🗓️ {moment(event.startDate).format('dddd, MMMM Do YYYY')}</i></small>
-          </div>
-          <div>
-            <small><i>🕰️ {parseTime(event.startTime)}</i></small>
-          </div>
+          <Card.Text>{event.description}</Card.Text>
+          <div><small><i>🧭 {event.location}</i></small></div>
+          <div><small><i>🗓️ {moment(event.startDate).format('dddd, MMMM Do YYYY')}</i></small></div>
+          <div><small><i>🕰️ {parseTime(event.startTime)}</i></small></div>
         </Card.Body>
         <Card.Footer>
           <Container fluid="sm">
-            <Row>
-              {/* <Col>{numOfParticipants === 1 ? 
-                <small>{numOfParticipants} person interested</small>
-                : numOfParticipants > 1 ?
-                  <small>{numOfParticipants} people interested</small>
-                  : <small>0 people interested</small>}
-              </Col> */}
-              <Col className='bootstrap-card'>
-                <Button className='button-as-link' variant="link" onClick={handleComments}>
-                  {
-                    numOfComments === 1 ?
-                      <small>{numOfComments} comment</small>
-                      : numOfComments >= 1 ?
-                        <small>{numOfComments} comments</small>
-                        : <small>No comments</small>
-                  }
-                </Button>
-              </Col>
-            </Row>
+            <Row><Col className='bootstrap-card'><Button className='button-as-link' variant="link" onClick={handleComments} disabled={numOfComments === 0}>
+              {numOfComments === 1 ?
+                <small>{numOfComments} comment</small>
+                : numOfComments >= 1 ?
+                  <small>{numOfComments} comments</small>
+                  : <small>No comments</small>}
+            </Button>
+            </Col></Row>
           </Container>
         </Card.Footer>
       </Card>
       { showComments && <Comments comments={event_comments} /> }
       <Card className='bootstrap-card'>
         <Card.Footer>
-          {
-            currentUser.name.length ?
-              <Button className='bootstrap-button' variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
-                      Add Comment
-              </Button> 
-              
-              : <Button className='bootstrap-button' variant="primary" size="sm" href='/login'>
-                    Login to add comment
-              </Button>
-          }
+          {currentUser.name.length ?
+            <Button className='bootstrap-button' variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
+                Add Comment
+            </Button> 
+            : <Button className='bootstrap-button' variant="primary" size="sm" href='/login'>
+                  Login to add comment
+            </Button>}
         </Card.Footer>
       </Card>
-      <Button className='bootstrap-button' variant="primary" size='sm' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-          back to top
-      </Button>
+      <div style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <Button 
+          style={{margin: '1rem'}}
+          className='bootstrap-button' variant="text" size='sm' onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+          <ArrowUp/> back to top
+        </Button>
+      </div>
     </Container>
   );
 };

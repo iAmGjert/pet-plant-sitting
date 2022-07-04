@@ -518,8 +518,8 @@ db.sync(
                   location: '10 Magnolia Dr, New Orleans, LA 70124',
                   description:
                     'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
-                  startDate: new Date('July 5, 2022 01:15:00'),
-                  startTime: '3:19 AM',
+                  startDate: new Date('July 15, 2022 01:15:00'),
+                  startTime: '3:15 AM',
                 },
                 {
                   name: 'Annual Animal Rescue Drive',
@@ -527,8 +527,8 @@ db.sync(
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
                   description:
                     'A gathering for pet-less humans to find and be rescued by their furrever friends',
-                  startDate: new Date('June 29, 2022 01:15:00'),
-                  startTime: '4:48 AM',
+                  startDate: new Date('July 19, 2022 01:15:00'),
+                  startTime: '4:45 AM',
                 },
                 {
                   name: 'Barkus Parade',
@@ -536,8 +536,8 @@ db.sync(
                   location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
                   description:
                     'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
-                  startDate: new Date('June 30, 2022 01:15:00'),
-                  startTime: '5:59 PM',
+                  startDate: new Date('July 4, 2022 01:15:00'),
+                  startTime: '6:00 PM',
                 },
                 {
                   name: 'Post Disaster Food Drive for our Reptile Friends',
@@ -545,8 +545,8 @@ db.sync(
                   location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
                   description:
                     'Reptiles are our friends, not overlords! Please join in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
-                  startDate: new Date('July 5, 2022 01:15:00'),
-                  startTime: '12:20 AM',
+                  startDate: new Date('July 9, 2022 01:15:00'),
+                  startTime: '12:30 AM',
                 },
                 {
                   name: 'Demanding Plant Workshop',
@@ -554,8 +554,8 @@ db.sync(
                   location: '8912 Bunker Hill Rd New Orleans, Louisiana, 70127',
                   description:
                     'A gathering for green-thumbed humans to impart their plant-care wisdom for those high-maintentance plants you just had to buy, Linda',
-                  startDate: new Date('July 5, 2022 01:15:00'),
-                  startTime: '4:33 PM',
+                  startDate: new Date('July 12, 2022 01:15:00'),
+                  startTime: '4:30 PM',
                 },
                 
               ])
