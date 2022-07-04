@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { setView } from '../../state/features/events/eventsSlice';
 import Form from 'react-bootstrap/Form';
 import { ThemeContext } from '../../App';
 
@@ -11,6 +9,7 @@ type Props = {
   setShowAddModal: (showAddModal: boolean) => void;
   handleSubmit: () => void;
   handleCommentChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  canSubmit: boolean;
 }
 
 const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentChange}: Props) => {
@@ -21,21 +20,13 @@ const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentC
     setShowAddModal(!showAddModal);
     setShow(false);
   };
-  const handleShow = () => {
-    setShowAddModal(!showAddModal);
-    setShow(true);
-  };
 
   const handleSendComemnt = () => {
     handleSubmit();
     setShowAddModal(!showAddModal);
   };
 
-  useEffect(() => {
-    // handleShow();
-  }, []);
   return (
-    
     <Modal
       contentClassName={theme === 'dark' && 'dark'}
       show={showAddModal}
@@ -61,8 +52,7 @@ const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentC
           onClick={handleSendComemnt}>Submit</Button>
       </Modal.Footer>
     </Modal>
-   
   );
-
 };
+
 export default AddComment;

@@ -18,7 +18,7 @@ const AppliedJobsBoard = ({ status, job, id, startDate, endDate }) => {
     <Card style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title>
-          Application Status for Job {id}: {status}
+          Application Status for Job {job.id}: {status}
         </Card.Title>
         <Card.Text>{job.startDate}</Card.Text>
         <Card.Text>Description: {job.description}</Card.Text>
