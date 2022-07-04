@@ -34,6 +34,7 @@ jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
 
 
 jobApplicants.delete('/delete/:id', async (req: Request, res: Response) => {
+  console.log(req.body, 'body');
   const deletedApplication = await JobApplicant.destroy({
     where: {
       id: req.params.id

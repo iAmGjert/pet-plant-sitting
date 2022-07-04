@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import UpcomingJobs from './UpcomingJobs';
 import LandingEventCard from './LandingEventCard';
-import AppliedJobsBoard from './AppliedJobsBoard';
+//import AppliedJobsBoard from './AppliedJobsBoard';
 import * as moment from 'moment';
 import JobHistory from './JobHistory';
 import UpcomingEvent from './UpcomingEvent';
@@ -55,30 +55,32 @@ const Landing: FC<Props> = () => {
   const upcomingJobs = useAppSelector((state) => state.job.upcomingJobs);
   const upcomingEvents = useAppSelector((state) => state.events.upcomingEvents);
   const jobs = useAppSelector((state) => state.job.jobs);
-  const applications = useAppSelector((state) => state.job.applications);
+  //const applications = useAppSelector((state) => state.job.applications);
   const pastJobs = useAppSelector((state) => state.job.pastJobs);
 
   const events = useAppSelector((state) => state.events.events);
+  console.log(upcomingJobs, 'upcomingJobs');
   //console.log(petPlants, 'petPlants');
+  //console.log('applications', applications); //such is empty
 
-  const orderedEvents =
-    events instanceof Array &&
-    events
-      .slice() //creating copy of original events array
-      .sort((a, b) => a.startDate.localeCompare(b.startDate)) //sorting by hour as well as time. Returns 1 if sorted after, -1 if sorted before, 0 if equal
-      .filter(
-        (event) =>
-          new Date() <= new Date(`${event.startDate} ${event.startTime}`)
-      );
+  //Royce's code on sorting dates. Still not working
+  // const orderedEvents =
+  //   events instanceof Array &&
+  //   events
+  //     .slice() //creating copy of original events array
+  //     .sort((a, b) => a.startDate.localeCompare(b.startDate)) //sorting by hour as well as time. Returns 1 if sorted after, -1 if sorted before, 0 if equal
+  //     .filter(
+  //       (event) =>
+  //         new Date() <= new Date(`${event.startDate} ${event.startTime}`)
+  //     );
 
   //console.log('orderedEvents', orderedEvents);
 
-  const sitterUpcomingJobs = upcomingJobs
-    .filter((job: { sitter_id: number }) => {
+  const sitterUpcomingJobs = upcomingJobs.filter(
+    (job: { sitter_id: number }) => {
       return job.sitter_id === user.id;
-    })
-    .slice(2);
-  //console.log('sitterUpcomingJobs', sitterUpcomingJobs);
+    }
+  );
 
   const trimmedUpcomingEvents = upcomingEvents.slice(4);
   const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
@@ -87,10 +89,26 @@ const Landing: FC<Props> = () => {
 
   //console.log('sitterWorkHistory', sitterWorkHistory);
 
+  const userApplications = jobs.filter((job) => {
+    if (job.employer_id !== user.id) {
+      for (let i = 0; i < job.job_applicants.length; i++) {
+        if (job.job_applicants[i].user_id === user.id) {
+          return false;
+        }
+      }
+      if (job.sitter_id === null) {
+        return true;
+      }
+    }
+    return false;
+  });
+
+  console.log('userApplications', userApplications);
+  console.log(jobs, 'jobs');
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
-    dispatch(fetchApplications());
+    //dispatch(fetchApplications());
     dispatch(fetchPastJobs());
   }, []);
 
@@ -159,28 +177,27 @@ const Landing: FC<Props> = () => {
         }
       )}
 
-      {applications.length &&
-        applications.map(
-          (
-            element: JSX.IntrinsicAttributes & {
-              status: any;
-              job: any;
-              id: any;
-              startDate: any;
-              endDate: any;
-            }
-          ) => {
-            return (
-              <>
-                <AppliedJobsBoard
-                  key={element.id}
-                  startDate={element.startDate}
-                  {...element}
-                />
-              </>
-            );
+      {/* {userApplications.map(
+        (
+          element: JSX.IntrinsicAttributes & {
+            status: any;
+            job: any;
+            id: any;
+            startDate: any;
+            endDate: any;
           }
-        )}
+        ) => {
+          return (
+            <>
+              <AppliedJobsBoard
+                key={element.id}
+                startDate={element.startDate}
+                {...element}
+              />
+            </>
+          );
+        }
+      )} */}
 
       <JobHistory sitterWorkHistory={sitterWorkHistory} />
     </div>
