@@ -2,11 +2,15 @@ import { io } from 'socket.io-client';
 import React, { useEffect, useState, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import Chat from '../Components/Chat/Chat';
-import UsersOnline from '../Components/Chat/UsersOnline';
+import PendingClientList from '../Components/Chat/PendingClientList';
+import ApplicantList from '../Components/Chat/ApplicantList';
+import AcceptedApplicantList from '../Components/Chat/AcceptedApplicantList';
+import ConfirmedClientList from '../Components/Chat/ConfirmedClientList';
 import '../css/App.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { changeView, getReceivedMessages, getSentMessages, getUsersOnline } from '../state/features/chat/chatSlice';
+import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 
 interface userOnline {
   userId: number,
@@ -22,9 +26,11 @@ const socket = io(`${process.env.CLIENT_URL}:4000`);
 const ChatMain = () => {   
   
   const currUser = useAppSelector((state) => state.userProfile.value);
-  const view = useAppSelector((state) => state.chat.view);
+  // const [view, setView] = useState(useAppSelector((state) => state.chat.view));
   // const usersOnline = useAppSelector((state) => state.chat.usersOnline);
   const dispatch = useAppDispatch();
+
+  const view = useAppSelector((state) => state.chat.view);
 
   useEffect(() => {
 
@@ -39,7 +45,7 @@ const ChatMain = () => {
       dispatch(getUsersOnline(onlineUsers));
     });
 
-  }, [currUser]);
+  }, [socket.id]);
 
   // const joinRoom = () => {
   //   if (currUser.name !== '') {
@@ -50,10 +56,56 @@ const ChatMain = () => {
 
   return (
     <div className="chat-main">
+      <h1>Chat</h1>
+      <DropdownButton as={ButtonGroup} title={view}>
+        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="1">All</Dropdown.Item>
+        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="2">Pending Clients</Dropdown.Item>
+        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="3">Confirmed Clients</Dropdown.Item>
+        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="4">Applicants</Dropdown.Item>
+        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="5">Accepted Applicants</Dropdown.Item>
+      </DropdownButton>
       {
-        view === 'usersOnline' ?
-          <UsersOnline /> :
-          <Chat socket={socket} />
+        view === 'All' ? (
+          <div>
+            <PendingClientList />
+            <ConfirmedClientList />
+            <ApplicantList />
+            <AcceptedApplicantList />
+          </div>
+        )
+          : (
+            view === 'Pending Clients' ? (
+              <div>
+                <PendingClientList />
+              </div>
+            )
+              : (
+                view === 'Confirmed Clients' ? (
+                  <div>
+                    <ConfirmedClientList />
+                  </div>
+                )
+                  : (
+                    view === 'Applicants' ? (
+                      <div>
+                        <ApplicantList />
+                      </div>
+                    )
+                      : (
+                        view === 'Accepted Applicants' ? (
+                          <div>
+                            <AcceptedApplicantList />
+                          </div>
+                        )
+                          : (
+                            <div>
+                              {view === 'Chat' && <Chat socket={socket} />}
+                            </div>
+                          )
+                      )
+                  )
+              )
+          )
       }
     </div>
   );

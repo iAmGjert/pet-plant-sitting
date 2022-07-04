@@ -34,6 +34,7 @@ jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
 
 
 jobApplicants.delete('/delete/:id', async (req: Request, res: Response) => {
+  console.log(req.body, 'body');
   const deletedApplication = await JobApplicant.destroy({
     where: {
       id: req.params.id
@@ -42,6 +43,29 @@ jobApplicants.delete('/delete/:id', async (req: Request, res: Response) => {
   //return res.sendStatus(200).send(deletedApplication);
   return res.json(deletedApplication);
 });
+
+// PATCH Request(s)
+
+jobApplicants.patch('/:user_id/:job_id', async (req: Request, res: Response) => {
+  const { user_id, job_id } = req.params;
+  const { status } = req.body;
+
+  JobApplicant.update({
+    status
+  }, {
+    where: {
+      user_id,
+      job_id
+    }
+  })
+    .then(() => {
+      res.sendStatus(200);
+    })
+    .catch((error: Error) => {
+      res.sendStatus(500);
+      console.log(error);
+    })
+})
 
 
 module.exports = jobApplicants;
