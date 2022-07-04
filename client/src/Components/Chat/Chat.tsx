@@ -5,6 +5,7 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 // import SocketsProvider from '../Chat/context/socket.context';
 import axios from 'axios';
 import { changeView } from '../../state/features/chat/chatSlice';
+import { setJobs } from '../../state/features/jobs/jobSlice';
 
 interface receivedMessage {
   senderId: number,
@@ -81,6 +82,9 @@ const Chat = ({ socket }) => {
       status: 'accepted'
     });
 
+    const jobs = await axios.get('/api/jobs/all');
+
+    dispatch(setJobs(jobs.data));
     dispatch(changeView('All'));
   };
 

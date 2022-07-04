@@ -14,11 +14,12 @@ const AcceptedApplicantList = () => {
   const [filledJobs, setFilledJobs] = useState([]);
   // const jobs = useAppSelector((state) => state.job.jobs);
   const currUser = useAppSelector((state) => state.userProfile.value);
+  const jobs = useAppSelector((state) => state.job.jobs);
 
   const getJobs = async () => {
-    const jobs = await axios.get('/api/jobs/all');
+    // const jobs = await axios.get('/api/jobs/all');
 
-    const filledJobs = jobs.data.filter((job: any) => {
+    const filledJobs = jobs.filter((job: any) => {
       if (job.sitter_id !== null && job.employer_id === currUser.id && job.isCompleted === false) {
         return true;
       }
@@ -37,7 +38,7 @@ const AcceptedApplicantList = () => {
   return (
     <Container>
       <h3>Accepted Applicants</h3>
-      {filledJobs.map((job) => {
+      {filledJobs.map((job: any) => {
         return (
           <div className="chat-user" key={job.id}>
             <AcceptedApplicant accepted_applicant={job.job_applicants.filter((job_applicant: jobApplicant) => job_applicant.status === 'accepted')} job={job}/>
