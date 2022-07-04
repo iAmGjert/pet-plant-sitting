@@ -32,8 +32,12 @@ const Comments = ({ comments }: any) => {
   const [commentObj, setCommentObj] = useState(null);
 
   const handleDelete = (comment: Comment) => {
-    console.log(comment);
-    dispatch(deleteComment(comment)).unwrap();
+    if (window.confirm(
+      `Are you sure you want to delete this comment?
+      This action cannot be undone.`
+    )) {
+      dispatch(deleteComment(comment)).unwrap();
+    }
   };
 
   const orderedComments = comments.slice().sort((a: Comment, b: Comment) => a.createdAt < b.createdAt ? -1 : 1);
@@ -54,7 +58,7 @@ const Comments = ({ comments }: any) => {
       { 
         numComments ? orderedComments.map((comment: Comment, index: number) => {
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={`Comment key: ${~~(Math.random() * 10000) * (index * comment.id)}`}>
               <Card className='bootstrap-button'>
                 <Container fluid>
                   <Card.Header >

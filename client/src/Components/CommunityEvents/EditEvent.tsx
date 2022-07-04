@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
-import { /*selectEventById,*/ updateEvent, deleteEvent } from '../../state/features/events/eventsSlice';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Form, Row, Col, Button } from 'react-bootstrap';
+import { updateEvent, deleteEvent } from '../../state/features/events/eventsSlice';
+import { useNavigate } from 'react-router-dom';
+import { Form, Row, Col, Button, Card, Container, } from 'react-bootstrap';
 import moment from 'moment';
+
 
 
 const EditEvent = () => {
@@ -18,12 +19,10 @@ const EditEvent = () => {
   const [location, setLocation] = useState(event?.location);
   const [description, setDescription] = useState(event?.description);
   const [date, setDate] = useState(moment(event?.startDate).add(1, 'days').format('YYYY-MM-DD'));
-  const [time, setTime] = useState(moment(event?.startTime).format('HH:mm'));
+  const [time, setTime] = useState(event?.startTime);
   const [addRequestStatus, setAddRequestStatus] = useState('idle');
-
-  if (!event) {
-    return <h1>Event not found</h1>;
-  }
+  
+  if (!event) { return <h1>Event not found</h1>; }
 
   const onNameChange = (e: React.ChangeEvent<HTMLInputElement>) => setEventName(e.target.value);
   const onLocationChange = (e: React.ChangeEvent<HTMLInputElement>) => setLocation(e.target.value);
@@ -63,7 +62,7 @@ const EditEvent = () => {
       try {
         setAddRequestStatus('pending');
         dispatch(deleteEvent(event.id)).unwrap();
-        navigate('/events');
+        // navigate('/events');
       } catch (error) {
         console.error('Failed to delete event', error);
       } finally {
@@ -72,45 +71,48 @@ const EditEvent = () => {
     }
   };
 
-
   return (
-    <Form>
-      <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
-        <Form.Label>Event Name</Form.Label>
-        <Form.Control type="text" value={eventName} onChange={onNameChange} />
-        {/* onChange={onNameChange} required /> */}
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
-        <Form.Label>Location </Form.Label>
-        <Form.Control type="text" value={location} onChange={onLocationChange} required />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="createEventForm.ControlTextarea1">
-        <Form.Label>Description</Form.Label>
-        <Form.Control as="textarea" value={description} rows={3} onChange={onDescriptionChange}/>
-      </Form.Group>
-      <Row>
-        <Col>
-          <Form.Group className="mb-3" controlId="createEventForm.ControlInput3">
-            <Form.Label>Date</Form.Label>
-            <Form.Control type="date" value={date} onChange={onStartDateChange} required />
-          </Form.Group>
-        </Col>
-        <Col>
-          <Form.Group className="mb-3" controlId="createEventForm.ControlInput4">
-            <Form.Label>Time</Form.Label>
-            <Form.Control type='time' value={time} onChange={onTimeChange} required/>
-          </Form.Group>
-        </Col>
-      </Row>
-      <Button variant="primary" type="submit" disabled={!canSubmit}
-        onClick={handleUpdate}>
+    <Container fluid>
+      {/* <Card className='bootstrap-card'> */}
+      <Form style={{ marginBottom: '0.5rem'}}>
+        <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
+          <Form.Label>Event Name</Form.Label>
+          <Form.Control type="text" value={eventName} onChange={onNameChange} />
+          {/* onChange={onNameChange} required /> */}
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
+          <Form.Label>Location </Form.Label>
+          <Form.Control type="text" value={location} onChange={onLocationChange} required />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="createEventForm.ControlTextarea1">
+          <Form.Label>Description</Form.Label>
+          <Form.Control as="textarea" value={description} rows={3} onChange={onDescriptionChange}/>
+        </Form.Group>
+        <Row>
+          <Col>
+            <Form.Group className="mb-3" controlId="createEventForm.ControlInput3">
+              <Form.Label>Date</Form.Label>
+              <Form.Control type="date" value={date} onChange={onStartDateChange} required />
+            </Form.Group>
+          </Col>
+          <Col>
+            <Form.Group className="mb-3" controlId="createEventForm.ControlInput4">
+              <Form.Label>Time</Form.Label>
+              <Form.Control type='time' value={time} onChange={onTimeChange} required/>
+            </Form.Group>
+          </Col>
+        </Row>
+        <Button className='bootstrap-button' variant="primary" type="submit" disabled={!canSubmit}
+          onClick={handleUpdate}>
           Save
-      </Button>
-      <Button variant="primary" type="submit" /*disabled={!canSubmit}*/
-        onClick={handleDelete}>
+        </Button>
+        <Button className='bootstrap-button' style={{marginLeft: '10px'}} variant="danger" 
+          type="submit" onClick={handleDelete}>
           Delete
-      </Button>
-    </Form>
+        </Button>
+      </Form>
+      {/* //   </Card> */}
+    </Container>
   );
 };
 
