@@ -16,7 +16,7 @@ const {
 
 const CLIENT_URL: string | undefined =
   process.env.CLIENT_URL === 'http://localhost'
-    ? `${process.env.CLIENT_URL}:${process.env.PORT}`
+    ? `${process.env.CLIENT_URL}:${process.env.PORT}` //remove for deployment?
     : process.env.CLIENT_URL;
 
 
