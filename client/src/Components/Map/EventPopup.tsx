@@ -8,8 +8,6 @@ interface Props {
 
 const EventPopup: FC <Props> = ({ trigger, setTrigger, children }) => {
 
-  const theme = useContext(ThemeContext);
-
   return (trigger) ? (
     <div className='popup'>
       <div className='popup-inner' >

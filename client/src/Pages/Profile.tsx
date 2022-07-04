@@ -502,8 +502,8 @@ const Profile = () => {
             </Nav.Link>
           </Nav.Item>
         </Nav>
-      </Navbar>
-      <Row>
+      </Navbar> */}
+      {/* <Row>
         <h2 id='overview'>About {profileUser?.name}</h2>
         {!readMore ? (
           <>
@@ -525,20 +525,20 @@ const Profile = () => {
         ) : (
           <>{profileUser?.bio}</>
         )}
-      </Row>
-      <Row>
+      </Row> */}
+      {/* <Row>
         <h2 id='ratings'> {`Reviews(${profileUser?.ratings.length})`} </h2>
         {profileUser?.ratings.map((rating, i) => {
           return (
             <Rating rating={rating} key={'rating' + i} getStars={getStars} />
           );
         })}
-      </Row>
-      <h2 id='pets' className='text-decoration-underline'>
+      </Row> */}
+      {/* <h2 id='pets' className='text-decoration-underline'>
         {' '}
         My Pets and Plants{' '}
-      </h2>
-      <Row xs={1} md={2} lg={3}>
+      </h2> */}
+      {/* <Row xs={1} md={2} lg={3}>
         {profileUser?.pet_plants.map((pet) => {
           return (
             <PetPlantCard
@@ -577,8 +577,8 @@ const Profile = () => {
                 </Card>
               </>
             );
-          })}
-        {editable && (
+          })} */}
+      {/* {editable && (
           <Card
             className='text-center'
             onClick={() => {
