@@ -8,6 +8,8 @@ import moment from 'moment';
 const CreateEvent = () => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(state => state.userProfile.value);
+  const event = useAppSelector(state => state.events.event);
+  console.log(event);
 
   //* local state for form values
   const [eventName, setEventName] = useState('');
@@ -51,21 +53,24 @@ const CreateEvent = () => {
 
   return currentUser.name.length ?
     (
-      <Form>
+      <Form style={{ marginBottom: '0.2rem'}}>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
           <Form.Label>Event Name</Form.Label>
           <Form.Control className='bootstrap-textbox' type="text" placeholder="What is the name of your event?"
-            onChange={handleEventNameChange}
+            onChange={onNameChange}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
           <Form.Label>Location </Form.Label>
           <Form.Control className='bootstrap-textbox' type="text" placeholder="address" 
-            onChange={handleLocationChange}/>
+            onChange={onLocationChange}
+          />
         </Form.Group>
         <Form.Group className="mb-3" controlId="createEventForm.ControlTextarea1">
           <Form.Label>Description</Form.Label>
-          <Form.Control className='bootstrap-textbox' as="textarea" placeholder="describe your event in one or two sentences" rows={3} onChange={handleDescriptionChange}/>
+          <Form.Control className='bootstrap-textbox' as="textarea" placeholder="describe your event in one or two sentences" rows={3} 
+            onChange={onDescriptionChange}
+          />
         </Form.Group>
         <Row>
           <Col>
@@ -73,7 +78,7 @@ const CreateEvent = () => {
               <Form.Label>Date</Form.Label>
 
               <Form.Control className='bootstrap-textbox' type="date" 
-                onChange={handleStartDateChange}
+                onChange={onStartDateChange}
               />
             </Form.Group>
           </Col>
@@ -81,12 +86,14 @@ const CreateEvent = () => {
             <Form.Group className="mb-3" controlId="createEventForm.ControlInput4">
               <Form.Label>Time</Form.Label>
 
-              <Form.Control className='bootstrap-textbox' type='time' onChange={handleTimeChange}/>
+              <Form.Control className='bootstrap-textbox' type='time' 
+                onChange={onTimeChange}
+              />
             </Form.Group>
           </Col>
         </Row>
-        <Button className='bootstrap-button' variant="primary" type="submit" onClick={handleSubmit}>
-
+        <Button className='bootstrap-button' variant="primary" type="submit" disabled={!canSubmit}
+          onClick={handleSubmit}>
           Submit
         </Button>
       </Form>

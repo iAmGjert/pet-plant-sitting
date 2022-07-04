@@ -172,7 +172,7 @@ db.sync(
           name: 'Braeden Ford',
           image:
             'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSVKs06QLIdwr5m5iIjxvDitADflWB1gjJCWg&usqp=CAU',
-          location: 'Superdome, New Orleans',
+          location: '1500 Sugar Bowl Dr, New Orleans, LA 70112',
           sitter_rating: 10,
           total_sitter_ratings: 24,
           bio: 'Other specified injury of unspecified blood vessel at ankle and foot level, right leg',

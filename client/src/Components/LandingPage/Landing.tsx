@@ -16,7 +16,6 @@ import Card from 'react-bootstrap/Card';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 // Import fetchUpcomingJobs action-creator in order to make that axios call
 import {
-  jobs,
   fetchUpcomingJobs,
   fetchApplications,
   fetchPastJobs,
@@ -143,15 +142,19 @@ const Landing: FC<Props> = () => {
           name: any;
         }) => {
           return (
-            <>
+            <React.Fragment
+              key={`UpcomingEvents key: ${
+                ~~(Math.random() * 1000) * (element.id + 1)
+              }`}
+            >
               <LandingEventCard
-                key={element.id}
+                // key={element.id}
                 startDate={element.startDate}
                 description={element.description}
                 location={element.location}
                 name={element.name}
               />
-            </>
+            </React.Fragment>
           );
         }
       )}

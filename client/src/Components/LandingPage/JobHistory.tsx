@@ -15,7 +15,7 @@ const JobHistory = ({ sitterWorkHistory }) => {
 
   return (
     <>
-      <Button variant='primary' onClick={handleShow}>
+      <Button className='bootstrap-button' variant='primary' onClick={handleShow}>
         Sitting History
       </Button>
 
