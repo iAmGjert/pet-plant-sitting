@@ -15,14 +15,14 @@ const AppliedJobsBoard = ({ status, job, id, startDate, endDate }) => {
     dispatch(deleteApplication(id));
   };
   return (
-    <Card style={{ width: '18rem' }}>
+    <Card className='bootstrap-card'>
       <Card.Body>
         <Card.Title>
-          Application Status for Job {id}: {status}
+          Application Status for Job {job.id}: {status}
         </Card.Title>
         <Card.Text>{job.startDate}</Card.Text>
         <Card.Text>Description: {job.description}</Card.Text>
-        <Button variant='primary' onClick={() => cancelApplication(id)}>
+        <Button className='bootstrap-button' variant='primary' onClick={() => cancelApplication(id)}>
           Delete
         </Button>
       </Card.Body>

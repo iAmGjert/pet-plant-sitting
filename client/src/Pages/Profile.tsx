@@ -10,6 +10,12 @@ import {
   Tab,
   Card,
   Button,
+  ProgressBar,
+  Toast,
+  ToastContainer,
+  Navbar,
+  Nav,
+  CardGroup,
 } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
@@ -17,6 +23,8 @@ import { format } from 'timeago.js';
 import PetPlantCard, { PetPlant } from '../Components/Profile/PetPlantCard';
 import EditAccountModal from '../Components/Profile/EditAccountModal';
 import Rating from '../Components/Profile/Rating';
+import { useNavigate } from 'react-router-dom';
+import { scroller } from 'react-scroll';
 
 export interface RatingInfo {
   id: number;
@@ -40,6 +48,8 @@ export interface Profile {
   image: string;
   average_rating: number;
   bio: string;
+  username: string;
+  theme: string;
   gallery_id: number;
   createdAt: string;
   location: string;
@@ -60,22 +70,50 @@ const Profile = () => {
   const [readMore, setReadMore] = useState(false);
   const [showGalleryFooter, setShowGalleryFooter] = useState(false);
   const [showModal, setShowModal] = useState(false);
+  const [showToast, setShowToast] = useState(true);
   const [newImgCloud, setNewImgCloud] = useState('');
 
   const [completeProfile, setCompleteProfile] = useState(0);
+  const [missingFields, setMissingFields] = useState([]);
   const [profileUser, setProfileUser] = useState<Profile | null>(null);
   const currUser = useAppSelector((state) => state.userProfile.value);
-
+  const navigate = useNavigate();
   const { id } = useParams();
-
+  // const missingFields: string[] = [];
+  const checkProgress = () => {
+    let total = 0;
+    setMissingFields([]);
+    if (profileUser) {
+      profileUser?.name
+        ? total++
+        : setMissingFields((prev) => [...prev, 'Name']);
+      profileUser?.username
+        ? total++
+        : setMissingFields((prev) => [...prev, 'Username']);
+      profileUser?.location
+        ? total++
+        : setMissingFields((prev) => [...prev, 'Location']);
+      profileUser?.image
+        ? total++
+        : setMissingFields((prev) => [...prev, 'Image']);
+      profileUser?.bio ? total++ : setMissingFields((prev) => [...prev, 'Bio']);
+      profileUser?.pet_plants.length > 0
+        ? total++
+        : setMissingFields((prev) => [...prev, 'Pets and Plants']);
+    }
+    setCompleteProfile(total);
+  };
   // get a user based on the id in the url
   // offscreen modal for editing profile
   // Change tabs to Nav with style tab https://stackoverflow.com/questions/36342220/tabs-in-react-bootstrap-navbar
   // Nav will be sticky top and will scroll with the page
   const getProfile = async () => {
     const user = await axios.get('/api/users/' + id);
+    if (user.data === '') {
+      navigate('/');
+    }
+    //console.log(user);
     setProfileUser(user.data);
-    // console.log(user.data);
   };
 
   const getRating = () => {
@@ -105,19 +143,37 @@ const Profile = () => {
     }
     return stars;
   };
-  const widget = window?.cloudinary.createUploadWidget(
-    {
-      cloudName: process.env.CLOUDINARY_NAME,
-      uploadPreset: process.env.CLOUDINARY_PRESET,
-    },
-    (error: Error, result: any) => {
-      if (result.event === 'success') {
-        setNewImgCloud(result.info.url);
-      }
-    }
-  );
+  // const widget = window?.cloudinary.openUploadWidget(
+  //   {
+  //     cloudName: process.env.CLOUDINARY_NAME,
+  //     uploadPreset: process.env.CLOUDINARY_PRESET,
+  //   },
+  //   (error: Error, result: any) => {
+  //     if (result.event === 'success') {
+  //       setNewImgCloud(result.info.url);
+  //     }
+  //   }
+  // );
   const showWidget = () => {
-    widget.open();
+    const widget = window?.cloudinary.openUploadWidget(
+      {
+        cloudName: process.env.CLOUDINARY_NAME,
+        uploadPreset: process.env.CLOUDINARY_PRESET,
+      },
+      (error: Error, result: any) => {
+        if (!error && result && result.event === 'success') {
+          setNewImgCloud(result.info.url);
+        }
+      }
+    );
+  };
+  const getLocation = (location: string) => {
+    if (location) {
+      const loc = location.split(',');
+      return loc[1].trim() + ', ' + loc[2].trim();
+    } else {
+      return 'No Location';
+    }
   };
 
   const deleteGallery = (id: number) => {
@@ -165,13 +221,62 @@ const Profile = () => {
 
   useEffect(() => {
     if (currUser.id && Number(id) == currUser?.id) {
+      checkProgress();
       setEditable(true);
     } else {
       setEditable(false);
     }
   }, [currUser, id]);
+
+  useEffect(() => {
+    checkProgress();
+  }, [profileUser]);
   return (
     <Container fluid>
+      {completeProfile !== 6 && editable && (
+        <ToastContainer position='middle-center'>
+          <Toast
+            bg='light'
+            show={showToast}
+            // delay={5000}
+            // autohide
+            onClose={() => {
+              setShowToast(false);
+            }}
+          >
+            <Toast.Header>
+              <img
+                src='holder.js/20x20?text=%20'
+                className='rounded me-2'
+                alt=''
+              />
+              <strong className='me-auto'>Complete your Profile</strong>
+            </Toast.Header>
+            <ProgressBar
+              min={0}
+              max={6}
+              now={completeProfile}
+              label={`${completeProfile}/6`}
+              animated
+              striped
+              variant='success'
+            />
+            <Toast.Body>{`Edit your profile and complete the following field(s) : ${missingFields.join(
+              ','
+            )}`}</Toast.Body>
+            <Button
+              size='sm'
+              variant='success'
+              onClick={() => {
+                setShowModal(true);
+                setShowToast(false);
+              }}
+            >
+              Complete
+            </Button>
+          </Toast>
+        </ToastContainer>
+      )}
       <EditAccountModal
         user={profileUser}
         showModal={showModal}
@@ -184,13 +289,10 @@ const Profile = () => {
         </Col>
         <Col>
           <span>
-            <h1 style={{ fontSize: '30px', paddingTop: '10px' }}>
-              <>
-                {profileUser?.name}
-                {console.log(currUser)}
-              </>
-            </h1>
-            <h5>{profileUser?.location}</h5>
+            <h2 style={{ fontSize: '30px', paddingTop: '10px' }}>
+              {profileUser?.name}
+            </h2>
+            <h5>{getLocation(profileUser?.location)}</h5>
             <h5>
               {getStars(getRating())}({profileUser?.ratings.length})
             </h5>
@@ -224,14 +326,16 @@ const Profile = () => {
             </h3>
             <br />
             {editable && (
-              <button
+              <Button
+                variant='secondary'
+                size='sm'
                 className='bootstrap-button'
                 onClick={() => {
                   setShowModal(true);
                 }}
               >
-                Edit
-              </button>
+                Edit Profile
+              </Button>
             )}
             <Tabs
               defaultActiveKey='overview'
@@ -279,7 +383,7 @@ const Profile = () => {
                   );
                 })}
               </Tab>
-              <Tab eventKey='pets' title='Pets'>
+              <Tab eventKey='pets' title='Pets and Plants'>
                 {profileUser?.pet_plants.map((pet) => {
                   return (
                     <PetPlantCard
@@ -312,7 +416,6 @@ const Profile = () => {
                               <Button
                                 variant='danger'
                                 onClick={() => {
-                                  console.log(entry.id);
                                   deleteGallery(entry.id);
                                 }}
                               >
@@ -344,6 +447,154 @@ const Profile = () => {
           </span>
         </Col>
       </Row>
+      {/* <Navbar sticky='top' bg='light' variant='light'>
+        <Nav fill variant='tabs' defaultActiveKey='/home'>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() =>
+                scroller.scrollTo('overview', {
+                  smooth: true,
+                  offset: -70,
+                  duration: 500,
+                })
+              }
+            >
+              Overview
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() =>
+                scroller.scrollTo('ratings', {
+                  smooth: true,
+                  offset: -70,
+                  duration: 500,
+                })
+              }
+            >
+              Reviews
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() =>
+                scroller.scrollTo('pets', {
+                  smooth: true,
+                  offset: -70,
+                  duration: 500,
+                })
+              }
+            >
+              Pets and Plants
+            </Nav.Link>
+          </Nav.Item>
+          <Nav.Item>
+            <Nav.Link
+              onClick={() =>
+                scroller.scrollTo('gallery', {
+                  smooth: true,
+                  offset: -70,
+                  duration: 200,
+                })
+              }
+            >
+              Gallery
+            </Nav.Link>
+          </Nav.Item>
+        </Nav>
+      </Navbar> */}
+      {/* <Row>
+        <h2 id='overview'>About {profileUser?.name}</h2>
+        {!readMore ? (
+          <>
+            {formatBio(profileUser?.bio) || (
+              <h6>This user has not written their bio</h6>
+            )}
+            <br />
+            {formatBio(profileUser?.bio) && (
+              <button
+                className='button-as-link my-2'
+                onClick={() => {
+                  setReadMore(!readMore);
+                }}
+              >
+                (Read More)
+              </button>
+            )}
+          </>
+        ) : (
+          <>{profileUser?.bio}</>
+        )}
+      </Row> */}
+      {/* <Row>
+        <h2 id='ratings'> {`Reviews(${profileUser?.ratings.length})`} </h2>
+        {profileUser?.ratings.map((rating, i) => {
+          return (
+            <Rating rating={rating} key={'rating' + i} getStars={getStars} />
+          );
+        })}
+      </Row> */}
+      {/* <h2 id='pets' className='text-decoration-underline'>
+        {' '}
+        My Pets and Plants{' '}
+      </h2> */}
+      {/* <Row xs={1} md={2} lg={3}>
+        {profileUser?.pet_plants.map((pet) => {
+          return (
+            <PetPlantCard
+              PetPlant={pet}
+              key={pet.id}
+              getStars={getStars}
+              edit={null}
+            />
+          );
+        })}
+      </Row>
+      <h2 id='gallery'> My Gallery </h2>
+      <Row xs={2} md={4} lg={8}>
+        {profileUser?.gallery?.gallery_entries.length >= 1 &&
+          profileUser.gallery.gallery_entries.map((entry: any, i) => {
+            return (
+              <>
+                <Card
+                  onClick={() => {
+                    setShowGalleryFooter(!showGalleryFooter);
+                  }}
+                >
+                  <Card.Img variant='top' src={entry.url} key={'entry' + i} />
+                  {editable && showGalleryFooter && (
+                    <Card.Footer>
+                      <Button
+                        variant='danger'
+                        onClick={() => {
+                          deleteGallery(entry.id);
+                        }}
+                      >
+                        Delete
+                      </Button>
+                    </Card.Footer>
+                  )}
+                </Card>
+              </>
+            );
+          })} */}
+      {/* {editable && (
+          <Card
+            className='text-center'
+            onClick={() => {
+              // check if this user has a gallery, if it dosent make one. Then do some cloudinary to upload a pic to said gallery. then for each pic in the gallery, make a card with the pic and a delete button.
+              showWidget();
+            }}
+          >
+            <Card.Img
+              variant='top'
+              src='https://static.thenounproject.com/png/3322766-200.png'
+            />
+            <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
+          </Card>
+        )}
+      </Row> */}
+      
     </Container>
   );
 };

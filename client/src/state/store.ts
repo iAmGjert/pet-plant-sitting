@@ -3,7 +3,6 @@ import userProfileReducer from './features/userProfile/userProfileSlice';
 import infoReducer from './features/info/infoSlice';
 import jobsReducer from './features/jobs/jobSlice';
 import { mapReducer } from './features/map/mapSlice';
-import calendarReducer from './features/calendar/calendarSlice';
 import communityEventsReducer from './features/events/eventsSlice';
 import petPlantReducer from './features/petPlant/petPlantSlice';
 import chatReducer from './features/chat/chatSlice';
@@ -17,7 +16,6 @@ export const store = configureStore({
     info: infoReducer,
     job: jobsReducer,
     map: mapReducer,
-    calendar: calendarReducer,
     petPlant: petPlantReducer,
     chat: chatReducer,
   },

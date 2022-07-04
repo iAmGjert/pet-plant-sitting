@@ -1,19 +1,23 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-// import Row from 'react-bootstrap/Row';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
-
-
 
 const Event = (props: any) =>{
   const { name, location, user, eventObj, switchToDetailsView } = props;
 
   return (
     <Container>
-
       <Card style={{ width: '95%' }} className='bootstrap-card'>
-        <Card.Header>Host: {user.name}</Card.Header>
+        <Card.Header>
+          <Row>
+            <Col>
+            Host: {user?.name}
+            </Col>
+          </Row>
+        </Card.Header>
         <Card.Body>
           <Card.Title>{name}</Card.Title>
           <Card.Text>
@@ -29,8 +33,5 @@ const Event = (props: any) =>{
     </Container> 
   );
 };
-
-
-// CommunityEvents.propTypes = {};
 
 export default Event;

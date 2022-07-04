@@ -14,7 +14,6 @@ const Rating = ({ rating, getStars }: Props) => {
   const navigateToUser = async (id: number) => {
     navigate(`/profile/${id}`);
   };
-  console.log(rating.submitter);
   return (
     <Card>
       <Card.Body>

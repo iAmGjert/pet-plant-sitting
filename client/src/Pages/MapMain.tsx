@@ -66,9 +66,11 @@ const MapMain: FC<Props> = () => {
       geoCodeUser();
       geoCodeJobs().then((jobs) => {
         setJobsLocations(jobs);
+        dispatch(mapActions.getJobsLocations(jobs));
       });
       geoCodeEvents().then((events) => {
         setEventsLocations(events);
+        dispatch(mapActions.getEventsLocations(events));
       });
     }
     getUsers();
