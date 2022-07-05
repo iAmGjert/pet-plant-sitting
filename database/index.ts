@@ -152,10 +152,10 @@ Gallery.hasMany(GalleryEntry, {
 db.sync(
   process.env.CLIENT_URL === 'http://localhost'
     ? { force: true }
-    : { alter: true }
+    : { force: true }
 ) //insert {alter: true}(alters tables if necessary) or {force: true}(drops all tables and recreates them every save) if you need to change the db structure
   .then(() => {
-    if (process.env.CLIENT_URL === 'http://localhost') {
+    if (true) {
       User.bulkCreate([
         {
           name: 'Iben Oneal',
@@ -221,11 +221,13 @@ db.sync(
         },
         {
           name: 'velouriagreen',
+          username: 'test',
+          password: 'test',
           image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
-          sitter_rating: 3,
+          sitter_rating: null,
           total_sitter_ratings: 86,
-          bio: 'Major laceration of right vertebral artery, initial encounter',
+          bio: 'Exiled Vixen of California',
           rating: 4,
           total_ratings: 70,
         },
@@ -344,7 +346,7 @@ db.sync(
             {
               user_id: 1,
               value: 5,
-              text: 'What a beautiful choclate man!',
+              text: 'What a beautiful chocolate man!',
               submitter_id: 3,
             },
             {
@@ -384,8 +386,8 @@ db.sync(
                 employer_id: 2,
                 description: 'Come watch my child!',
                 sitter_id: 7,
-                startDate: new Date('June 1, 2022 01:15:00'),
-                endDate: new Date('June 13, 2022 01:15:00'),
+                startDate: new Date('June 8, 2022 01:15:00'),
+                endDate: new Date('June 10, 2022 01:15:00'),
                 isCompleted: false
               },
               {
@@ -395,37 +397,37 @@ db.sync(
                 description: 'Come watch this little devil',
                 sitter_id: null,
                 startDate: new Date('June 7, 2022 01:15:00'),
-                endDate: new Date('June 14, 2022 01:15:00'),
+                endDate: new Date('June 9, 2022 01:15:00'),
                 isCompleted: true
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
                 pet_plant: [3],
                 employer_id: 3,
-                sitter_id: 5,
-                description: 'Come watch this things',
-                startDate: new Date('July 1, 2022 01:15:00'),
-                endDate: new Date('July 3, 2022 01:15:00'),
+                sitter_id: 7,
+                description: 'Need someone to water my plant babies while I leave town for two days',
+                startDate: new Date('July 4, 2022 01:15:00'),
+                endDate: new Date('July 5, 2022 01:15:00'),
                 isCompleted: false
               },
               {
                 location: '4609 Banks St, New Orleans, LA 70119',
                 pet_plant: [3, 1],
                 employer_id: 5,
-                description: 'Come watch my child!',
-                sitter_id: 6,
-                startDate: new Date('July 15, 2022 01:15:00'),
+                description: 'Leaving town for five days and need someone to sit my babies',
+                sitter_id: 7,
+                startDate: new Date('July 19, 2022 01:15:00'),
                 endDate: new Date('July 20, 2022 01:15:00'),
                 isCompleted: true
               },
               {
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
-                description: 'You\'re a bio!',
+                description: 'Looking for an energetic person to care for my rambunctious bunch',
                 pet_plant: [3, 1],
                 employer_id: 6,
                 sitter_id: 7,
-                startDate: new Date('June 29, 2022 01:15:00'),
-                endDate: new Date('July 29, 2022 01:15:00'),
+                startDate: new Date('July 10, 2022 01:15:00'),
+                endDate: new Date('July 11, 2022 01:15:00'),
                 isCompleted: false
               },
               {
@@ -454,8 +456,8 @@ db.sync(
                 employer_id: 5,
                 description: 'Test Job Description 3!',
                 sitter_id: null,
-                startDate: new Date('June 27, 2022 01:15:00'),
-                endDate: new Date('July 5, 2022 01:15:00'),
+                startDate: new Date('June 30, 2022 01:15:00'),
+                endDate: new Date('July 1, 2022 01:15:00'),
                 isCompleted: false
               },
               {
@@ -516,8 +518,8 @@ db.sync(
                   location: '10 Magnolia Dr, New Orleans, LA 70124',
                   description:
                     'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
-                  startDate: new Date('July 15, 2022 01:15:00'),
-                  startTime: '3:15 AM',
+                  startDate: new Date('July 7, 2022 01:15:00'),
+                  startTime: '3:19 AM',
                 },
                 {
                   name: 'Annual Animal Rescue Drive',
@@ -525,8 +527,8 @@ db.sync(
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
                   description:
                     'A gathering for pet-less humans to find and be rescued by their furrever friends',
-                  startDate: new Date('July 19, 2022 01:15:00'),
-                  startTime: '4:45 AM',
+                  startDate: new Date('July 9, 2022 01:15:00'),
+                  startTime: '4:48 AM',
                 },
                 {
                   name: 'Barkus Parade',
@@ -534,8 +536,8 @@ db.sync(
                   location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
                   description:
                     'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
-                  startDate: new Date('July 4, 2022 01:15:00'),
-                  startTime: '6:00 PM',
+                  startDate: new Date('July 15, 2022 01:15:00'),
+                  startTime: '5:59 PM',
                 },
                 {
                   name: 'Post Disaster Food Drive for our Reptile Friends',
@@ -543,8 +545,8 @@ db.sync(
                   location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
                   description:
                     'Reptiles are our friends, not overlords! Please join in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
-                  startDate: new Date('July 9, 2022 01:15:00'),
-                  startTime: '12:30 AM',
+                  startDate: new Date('July 29, 2022 01:15:00'),
+                  startTime: '12:20 AM',
                 },
                 {
                   name: 'Demanding Plant Workshop',
@@ -552,8 +554,8 @@ db.sync(
                   location: '8912 Bunker Hill Rd New Orleans, Louisiana, 70127',
                   description:
                     'A gathering for green-thumbed humans to impart their plant-care wisdom for those high-maintentance plants you just had to buy, Linda',
-                  startDate: new Date('July 12, 2022 01:15:00'),
-                  startTime: '4:30 PM',
+                  startDate: new Date('July 30, 2022 01:15:00'),
+                  startTime: '4:33 PM',
                 },
                 
               ])

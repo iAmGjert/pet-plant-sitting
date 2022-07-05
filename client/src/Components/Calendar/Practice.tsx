@@ -1,5 +1,6 @@
 import React, { useState, useContext, FC } from 'react';
 import moment from 'moment';
+import { Event } from '../../state/features/events/eventsSlice';
 
 //schedule
 import Paper from '@mui/material/Paper';
@@ -17,13 +18,12 @@ import {
   AppointmentTooltip,
   AppointmentForm,
   Appointments,
+  AllDayPanel,
 } from '@devexpress/dx-react-scheduler-material-ui';
 import { ThemeContext } from '../../App';
 // import { Scheduler } from '@devexpress/dx-react-scheduler-material-ui';
 // import { DayView } from '@devexpress/dx-react-scheduler-material-ui';
 // import { WeekView } from '@devexpress/dx-react-scheduler-material-ui';
-
-// import { Appointments } from '@devexpress/dx-react-scheduler-material-ui';
 
 //Redux
 import { useAppSelector } from '../../state/hooks';
@@ -57,7 +57,7 @@ const Practice: FC<Props> = () => {
   const events = useAppSelector((state) => state.events.events);
   const user = useAppSelector((state) => state.userProfile.value);
 
-  console.log('events', events);
+  //console.log('events', events);
   //console.log(user);
 
   //function to filter user appointments
@@ -79,44 +79,69 @@ const Practice: FC<Props> = () => {
           title: job.description,
           startDate: moment(job.startDate).toDate(),
           endDate: moment(job.endDate).toDate(),
-          id: job.id,
-          location: job.location,
+          type: 'job',
           petPlants: job.job_pets_plants,
         };
       }
     );
 
-  //console.log(schedulerData);
   //console.log('userJobs', userJobs);
 
+  const mappedEvents = events.map((event: Event) => {
+    return {
+      ...event,
+      title: event.name,
+      startDate: moment(event.startDate).toDate(),
+      endDate: moment(event.startDate).add(2, 'hours').toDate(),
+      type: 'event',
+    };
+  });
+
   const [currentDate, setCurrentDate] = useState(moment().format('YYYY-MM-DD'));
+
   const onCurrentDateChange = (_currentDate: React.SetStateAction<string>) => {
     setCurrentDate(_currentDate);
   };
 
+  //combination of jobs and events
+  const appointments = userJobs.concat(mappedEvents);
+  //console.log('appointments', appointments);
+
   const AppointmentContent = ({ appointmentData }) => {
     //console.log('appointment props', props);
-    return (
-      <div>
-        {/* {appointmentData.petPlant.map((pet) => {
-          return <img src={appoinmentData.pet_plant.image} key={pet.id} />;
-        })} */}
-        <h2>
-          {' '}
-          Siting for{' '}
-          {appointmentData.petPlants.map((pet) => {
-            return `${pet.pet_plant.name} | `;
-          })}{' '}
-        </h2>
-        <p>Location: {appointmentData.location}</p>
-        <p>Info: {appointmentData.description}</p>
-      </div>
-    );
+    if (appointmentData.type === 'job') {
+      return (
+        <div>
+          <img
+            src={appointmentData.petPlants[0].pet_plant.image}
+            alt=''
+            style={{ width: '300px' }}
+          />
+          <h2>
+            {' '}
+            Siting for{' '}
+            {appointmentData.petPlants.map((pet) => {
+              return `${pet.pet_plant.name} | `;
+            })}{' '}
+          </h2>
+          <p>Location: {appointmentData.location}</p>
+          <p>Info: {appointmentData.description}</p>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <h2>{appointmentData.name}</h2>
+          <p>Location: {appointmentData.location}</p>
+          <p>Info: {appointmentData.description}</p>
+        </div>
+      );
+    }
   };
 
   return (
-    <Paper className='dark-scheduler'>
-      <Scheduler data={userJobs}>
+    <Paper>
+      <Scheduler data={appointments}>
         <ViewState
           currentDate={currentDate}
           onCurrentDateChange={onCurrentDateChange}
@@ -136,6 +161,7 @@ const Practice: FC<Props> = () => {
           contentComponent={AppointmentContent}
         />
         <AppointmentForm readOnly />
+        <AllDayPanel />
       </Scheduler>
     </Paper>
   );
