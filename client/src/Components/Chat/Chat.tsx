@@ -155,7 +155,6 @@ const Chat = ({ socket }) => {
       </div>
       <div>
         {isApplicant && <button onClick={acceptApplicant}>Accept</button>}
-        {isApplicant && <button>Reject</button>}
       </div>
     </div>
   );

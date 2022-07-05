@@ -57,7 +57,7 @@ const Applicant = ({ applicant }: {applicant: any}) => {
   useEffect(() => {
     getApplicant();
     getOnlineStatus();
-  }, [currUser, users, usersOnline]);
+  }, [users, usersOnline]);
 
   return (
     <Container>

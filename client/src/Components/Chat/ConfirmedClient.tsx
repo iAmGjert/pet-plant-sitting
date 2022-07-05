@@ -55,7 +55,7 @@ const ConfirmedClient = ({job}: {job: any}) => {
   useEffect(() => {
     getClient();
     getOnlineStatus();
-  }, [currUser, users, usersOnline]);
+  }, [users, usersOnline]);
 
   return (
     <Container>

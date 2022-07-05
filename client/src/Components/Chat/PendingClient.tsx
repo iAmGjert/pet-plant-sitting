@@ -40,7 +40,7 @@ const PendingClient = ({job}: {job: any}) => {
     console.log(usersOnline);
     
     for (let i = 0; i < usersOnline.length; i++) {
-      if (usersOnline[i].userId === client.id) {
+      if (usersOnline[i].userId === client?.id) {
         isOnline = true;
       }
     }
@@ -55,7 +55,7 @@ const PendingClient = ({job}: {job: any}) => {
   useEffect(() => {
     getClient();
     getOnlineStatus();
-  }, [usersOnline]);
+  }, [users, usersOnline]);
 
   return (
     <Container className="chat-card">
@@ -63,7 +63,7 @@ const PendingClient = ({job}: {job: any}) => {
         <Card.Body>
           <h6>{job.startDate}</h6>
           <div onClick={handleClick} onKeyPress={() => { return; }} role='button' tabIndex={0}>
-            {client.name}
+            {client?.name}
             <span className="circle" style={{ color: colorOfStatus }}></span>
           </div>
         </Card.Body>
