@@ -226,6 +226,22 @@ body {
   background-color: rgb(121, 121, 121);
   color: #ffffff;
 }
+#dark .toast-header {
+  background-color: rgb(121, 121, 121);
+  color: #ffffff;
+}
+#dark .toast-body {
+  background-color: rgb(121, 121, 121);
+  color: #ffffff;
+}
+/* #dark .btn.btn-success.btn-sm {
+  background: rgb(121, 121, 121);
+  color: #ffffff;
+} */
+#dark .fade.toast.bootstrap-toast.bg-light.show {
+  background-color: rgb(121, 121, 121);
+}
+
 
 /* Calendar */
 #dark .DayScaleEmptyCell-emptyCell.css-1hbvjip {
