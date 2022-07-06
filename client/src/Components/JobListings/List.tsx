@@ -19,11 +19,11 @@ const List = ({ setshowapplied, setshowrevoked }) => {
   return (
     <>
       <Tabs
-        defaultActiveKey="profile"
+        defaultActiveKey="available jobs"
         id="uncontrolled-tab-example"
         className="mb-3"
       >
-        <Tab eventKey="home" title="Avaiable Jobs">
+        <Tab eventKey="available jobs" title="Avaiable Jobs">
           {user?.name !== '' ? (
             jobs
               .filter((job) => {
@@ -103,7 +103,7 @@ const List = ({ setshowapplied, setshowrevoked }) => {
               })
           )}
         </Tab>
-        <Tab eventKey="profile" title="My Jobs">
+        <Tab eventKey="My Jobs" title="My Jobs">
           {
             user.name !== '' ? (
               jobs.filter((job) => {
@@ -141,7 +141,7 @@ const List = ({ setshowapplied, setshowrevoked }) => {
             )
           }
         </Tab>
-        <Tab eventKey="contact" title="My Applications">
+        <Tab eventKey="My Apps" title="My Applications">
           {user.name !== '' ? (
             jobs.filter((job) => {
               for (let i = 0; i < job.job_applicants.length; i++) {
