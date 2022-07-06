@@ -52,7 +52,7 @@ const EditAccountModal = ({
       bio,
       theme: userTheme,
     });
-    getUser();
+    await getUser();
     setShowModal(false);
     navigate(`/profile/${user.id}`);
   };
