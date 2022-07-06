@@ -11,7 +11,7 @@ const { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, PORT, CLIENT_URL } =
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: `${CLIENT_URL}:${PORT}/auth/google/callback`,
+  callbackURL: `${CLIENT_URL}:${PORT}/auth/google/callback`, // port needs to come out fo rdeployment
 }, (accessToken: any, refreshToken: any, profile: { displayName: any/*, emails: [{value: string}]*/ },
   cb: (arg0: null, arg1: any) => any) => {
   // console.log(`USER INFO: 
