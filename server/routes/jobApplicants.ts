@@ -21,11 +21,21 @@ interface applicantInfo {
 
 jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
   try {
-    const applications = await JobApplicant.findAll({
-      where: { user_id: req.user[0]?.id || req.user?.id },
-      include: [ {model: Job} ]
-    }); 
-    res.json(applications);
+    if (req.user) {
+      console.log('req user', req.user);
+      if (req.user) {
+        console.log('req.user.id', req.user.id);
+      }
+      const applications = await JobApplicant.findAll({
+        where: { user_id: req.user.id || req.user[0].id },
+        include: [ {model: Job} ]
+      }); 
+      res.json(applications);
+    } else {
+      res.json([]);
+    }
+
+
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
