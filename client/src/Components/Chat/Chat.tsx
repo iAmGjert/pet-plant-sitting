@@ -5,6 +5,7 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 // import SocketsProvider from '../Chat/context/socket.context';
 import axios from 'axios';
 import { changeView } from '../../state/features/chat/chatSlice';
+import { setJobs } from '../../state/features/jobs/jobSlice';
 
 interface receivedMessage {
   senderId: number,
@@ -16,7 +17,9 @@ const Chat = ({ socket }) => {
   const currUser = useAppSelector((state) => state.userProfile.value);
   const conversationId = useAppSelector((state) => state.chat.conversationId);
   const recipientId = useAppSelector((state) => state.chat.recipientId);
+  const isApplicant = useAppSelector((state) => state.chat.isApplicant);
   const [currentMessage, setCurrentMessage] = useState('');
+  const applicant = useAppSelector((state) => state.chat.applicant);
   const [messageList, setMessageList] = useState([]);
   const dispatch = useAppDispatch();
 
@@ -70,6 +73,21 @@ const Chat = ({ socket }) => {
     }
   };
 
+  const acceptApplicant = async () => {
+    await axios.patch('/api/jobs/' + applicant.job_id, {
+      sitter_id: applicant.user_id
+    });
+
+    await axios.patch('/api/jobapplicants/' + applicant.user_id + '/' + applicant.job_id, {
+      status: 'accepted'
+    });
+
+    const jobs = await axios.get('/api/jobs/all');
+
+    dispatch(setJobs(jobs.data));
+    dispatch(changeView('All'));
+  };
+
   useEffect(() => {
 
     getPastMessages();
@@ -101,10 +119,7 @@ const Chat = ({ socket }) => {
 
   return (
     <div className="chat-window">
-      <button onClick={() => dispatch(changeView('usersOnline'))}>BACK</button>
-      <div className="chat-header">
-        <p>Live Chat</p>
-      </div>
+      <button onClick={() => dispatch(changeView('All'))}>BACK</button>
       <div className="chat-body">
         <ScrollToBottom className="message-container">   
           {messageList.map((messageContent: any, index: number) => {
@@ -137,6 +152,9 @@ const Chat = ({ socket }) => {
           }}  
         />
         <button onClick={sendMessage}>SEND</button>
+      </div>
+      <div>
+        {isApplicant && <button onClick={acceptApplicant}>Accept</button>}
       </div>
     </div>
   );
