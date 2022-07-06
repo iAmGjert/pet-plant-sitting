@@ -68,7 +68,7 @@ const AcceptedApplicant = ({ accepted_applicant, job }: { accepted_applicant: Ar
   useEffect(() => {
     getProfileOfHired();
     getOnlineStatus();
-  }, [currUser, users, usersOnline]);
+  }, [users, usersOnline]);
 
   return (
     <Container>
