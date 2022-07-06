@@ -17,7 +17,7 @@ const AppliedJobsBoard = ({ job, startDate, petPlants, location, id }) => {
     dispatch(deleteApplication(id));
   };
 
-  console.log('petPlants', petPlants);
+  // console.log('petPlants', petPlants);
   return (
     <Card className='bootstrap-card'>
       <Card.Body>

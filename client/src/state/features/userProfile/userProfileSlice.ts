@@ -69,7 +69,7 @@ export const userProfileSlice = createSlice({
       return state;
     },
     setUser: (state, action: PayloadAction<any>) => {
-      console.log(action);
+      // console.log(action);
       state.value = action.payload;
       return state;
     },

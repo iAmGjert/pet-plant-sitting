@@ -238,6 +238,10 @@ const Profile = () => {
   }, [newImgCloud]);
 
   useEffect(() => {
+    if (id === undefined || id === 'undefined' || id === '') {
+      navigate('/');
+    }
+
     if (id) {
       getProfile();
     }

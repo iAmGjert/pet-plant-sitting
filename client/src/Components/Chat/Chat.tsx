@@ -8,9 +8,9 @@ import { changeView } from '../../state/features/chat/chatSlice';
 import { setJobs } from '../../state/features/jobs/jobSlice';
 
 interface receivedMessage {
-  senderId: number,
-  text: string,
-  conversationId: number
+  senderId: number;
+  text: string;
+  conversationId: number;
 }
 
 const Chat = ({ socket }) => {
@@ -23,18 +23,18 @@ const Chat = ({ socket }) => {
   const [messageList, setMessageList] = useState([]);
   const dispatch = useAppDispatch();
 
-  console.log(conversationId);
-  console.log(recipientId);
+  // console.log(conversationId);
+  // console.log(recipientId);
 
   const getPastMessages = async () => {
     try {
       const pastMessages = await axios.get('/messages/past', {
         params: {
           conversationId: conversationId,
-        }
+        },
       });
 
-      console.log(pastMessages);
+      // console.log(pastMessages);
       setMessageList([...messageList, ...pastMessages.data]);
     } catch (error) {
       console.log(error);
@@ -48,7 +48,7 @@ const Chat = ({ socket }) => {
         sender_id: currUser.id,
         receiver_id: recipientId,
         conversation_id: conversationId,
-        text: currentMessage
+        text: currentMessage,
       };
 
       socket.emit('send_message', {
@@ -75,12 +75,15 @@ const Chat = ({ socket }) => {
 
   const acceptApplicant = async () => {
     await axios.patch('/api/jobs/' + applicant.job_id, {
-      sitter_id: applicant.user_id
+      sitter_id: applicant.user_id,
     });
 
-    await axios.patch('/api/jobapplicants/' + applicant.user_id + '/' + applicant.job_id, {
-      status: 'accepted'
-    });
+    await axios.patch(
+      '/api/jobapplicants/' + applicant.user_id + '/' + applicant.job_id,
+      {
+        status: 'accepted',
+      }
+    );
 
     const jobs = await axios.get('/api/jobs/all');
 
@@ -89,9 +92,7 @@ const Chat = ({ socket }) => {
   };
 
   useEffect(() => {
-
     getPastMessages();
-
 
     // socket.on('receive_message', (data: object) => {
     //   setMessageList((list) => [...list, data]);
@@ -101,7 +102,13 @@ const Chat = ({ socket }) => {
   useEffect(() => {
     socket.on('receive_message', async (data: receivedMessage) => {
       const sender = await axios.get('/api/users/' + data.senderId);
-      const newMessage: { name: string; senderId: number; text: string; conversationId: number; createdAt: Date } = {
+      const newMessage: {
+        name: string;
+        senderId: number;
+        text: string;
+        conversationId: number;
+        createdAt: Date;
+      } = {
         name: sender.data.name,
         senderId: data.senderId,
         text: data.text,
@@ -109,7 +116,7 @@ const Chat = ({ socket }) => {
         createdAt: new Date(),
       };
 
-      console.log('This line ran (1)', data);
+      // console.log('This line ran (1)', data);
 
       if (conversationId === newMessage.conversationId) {
         setMessageList((messageList) => [...messageList, newMessage]);
@@ -118,38 +125,41 @@ const Chat = ({ socket }) => {
   }, [socket]);
 
   return (
-    <div className="chat-window">
+    <div className='chat-window'>
       <button onClick={() => dispatch(changeView('All'))}>BACK</button>
-      <div className="chat-body">
-        <ScrollToBottom className="message-container">   
+      <div className='chat-body'>
+        <ScrollToBottom className='message-container'>
           {messageList.map((messageContent: any, index: number) => {
             return (
-              <div 
-                className="message"
+              <div
+                className='message'
                 id={currUser.id === messageContent.sender_id ? 'you' : 'other'}
                 key={index}
               >
                 <div>
-                  <div className="message-content">
+                  <div className='message-content'>
                     <p>{messageContent.text}</p>
                   </div>
-                  <div className="message-meta">
-                    <p id="time">{moment(messageContent.createdAt).fromNow()}</p>
-                    <p id="author">{messageContent.name}</p>
+                  <div className='message-meta'>
+                    <p id='time'>
+                      {moment(messageContent.createdAt).fromNow()}
+                    </p>
+                    <p id='author'>{messageContent.name}</p>
                   </div>
                 </div>
-              </div>);
+              </div>
+            );
           })}
         </ScrollToBottom>
       </div>
-      <div className="chat-footer">
-        <input 
-          type="text"
+      <div className='chat-footer'>
+        <input
+          type='text'
           value={currentMessage}
-          placeholder="Enter a Message"
+          placeholder='Enter a Message'
           onChange={(event) => {
             setCurrentMessage(event.target.value);
-          }}  
+          }}
         />
         <button onClick={sendMessage}>SEND</button>
       </div>
