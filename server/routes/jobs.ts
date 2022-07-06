@@ -55,9 +55,16 @@ jobs.get('/all', async (req: Request, res: Response) => {
     const jobs = await Job.findAll({
       include: [
         { model: User, attributes: ['name', 'image'], as: 'sitter' },
-        { model: JobApplicant, include: [{ model: User, attributes: ['name', 'image']}] },
-        { model: JobPetsPlants, include: [{ model: PetPlant, attributes: ['name', 'image']}] },
-      ]
+        {
+          model: JobApplicant,
+          include: [{ model: User, attributes: ['name', 'image'] }],
+        },
+        {
+          model: JobPetsPlants,
+          include: [{ model: PetPlant, attributes: ['name', 'image'] }],
+        },
+      ],
+      order: [['startDate', 'ASC']],
     });
     return res.status(200).send(jobs);
   } catch (err) {
