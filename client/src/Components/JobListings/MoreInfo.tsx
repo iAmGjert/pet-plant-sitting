@@ -1,11 +1,12 @@
 import React, {useState, useEffect, useContext} from 'react';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { Container, Row, Col, Button, Alert, Modal, Card } from 'react-bootstrap';
-import { setJobs, deleteApplication } from '../../state/features/jobs/jobSlice';
+import { changeView, setJobs, deleteApplication } from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ThemeContext } from '../../App';
 import moment from 'moment';
+
   
 
 
@@ -14,7 +15,7 @@ const MoreInfo = (props) => {
   const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { setshowrevoked, setshowapplied, distance, employer, onHide, job, job_id, ...others } = props;
+  const { setTemp, setshowrevoked, setshowapplied, distance, employer, onHide, job, job_id, ...others } = props;
   const user = useAppSelector(state => state.userProfile.value);
   const [showLog, setShowLog] = useState(false);
   const obj = 
@@ -53,8 +54,10 @@ const MoreInfo = (props) => {
       return;
     }
     if (user.name === employer) {
-      console.log('This is your job!');
+      console.log(`Job number ${job.id} is your job!`);
+      await setTemp(job);
       onHide();
+      dispatch(changeView('edit'));
       return;
     }
     if (applicant) {

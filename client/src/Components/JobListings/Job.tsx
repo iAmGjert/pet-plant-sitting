@@ -15,7 +15,7 @@ interface jobStuff {
   endDate: Date;
   pet_plant: Array<number>;
 }
-const Job = ({ job, setshowapplied, setshowrevoked }) => {
+const Job = ({ setTemp, job, setshowapplied, setshowrevoked }) => {
   const [show, setShow] = useState(false);
   const target = useRef(null);
   const removeOverlay = () => {
@@ -148,6 +148,7 @@ const Job = ({ job, setshowapplied, setshowrevoked }) => {
           </Button>
           <>
             <MoreInfo
+              setTemp = {setTemp}
               setshowrevoked={setshowrevoked}
               setshowapplied={setshowapplied}
               distance={distanceFromJob}

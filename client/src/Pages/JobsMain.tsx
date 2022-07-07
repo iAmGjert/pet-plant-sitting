@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Create from '../Components/JobListings/Create';
 import List from '../Components/JobListings/List';
+import Edit from '../Components/JobListings/Edit';
 import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, Overlay } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
-import { changeView, setJobs, setPrompt } from '../state/features/jobs/jobSlice';
+import { changeView, setJobs } from '../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
@@ -11,6 +12,17 @@ const JobsMain = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const [temp, setTemp] = useState( {
+    location: '',
+    pet_plant: [],
+    employer_id: 0,
+    sitter_id: null, 
+    startDate: null, 
+    endDate: null, 
+    description: '', 
+    isCompleted: false,
+  });
 
   const view = useAppSelector((state)=>state.job.view);
   const user = useAppSelector(state => state.userProfile.value);
@@ -105,9 +117,10 @@ const JobsMain = () => {
       {
         view === 'create' ?
           <Create setShowCreated={setShowCreated}/> :
-          <div>
-            <List setshowapplied={setShowApplied} setshowrevoked={setShowRevoked}/>
-          </div>
+          view === 'edit' ?
+            <Edit job={temp} /> :          
+            <List setTemp={setTemp} setshowapplied={setShowApplied} setshowrevoked={setShowRevoked}/>
+          
       }
       
       <Button className='bootstrap-button' onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : user.name === '' ? 'Login' : 'Create New Job'}</Button>

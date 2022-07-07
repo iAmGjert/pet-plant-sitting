@@ -12,7 +12,7 @@ import {
 } from 'react-bootstrap';
 import moment from 'moment';
 
-const List = ({ setshowapplied, setshowrevoked }) => {
+const List = ({ setTemp, setshowapplied, setshowrevoked }) => {
   const target = useRef(null);
   const user = useAppSelector((state) => state.userProfile.value);
   const jobs = useAppSelector((state) => state.job.jobs);
@@ -20,10 +20,10 @@ const List = ({ setshowapplied, setshowrevoked }) => {
     <>
       <Tabs
         defaultActiveKey="available jobs"
-        id="uncontrolled-tab-example"
+        id="jobTabs"
         className="mb-3"
       >
-        <Tab eventKey="available jobs" title="Avaiable Jobs">
+        <Tab eventKey="available jobs" title="New Jobs">
           {user?.name !== '' ? (
             jobs
               .filter((job) => {
@@ -122,6 +122,7 @@ const List = ({ setshowapplied, setshowrevoked }) => {
                     .map((job, index) => {
                       return (
                         <Job
+                          setTemp = {setTemp}
                           setshowrevoked={setshowrevoked}
                           setshowapplied={setshowapplied}
                           key={`job#${index}`}
@@ -141,7 +142,7 @@ const List = ({ setshowapplied, setshowrevoked }) => {
             )
           }
         </Tab>
-        <Tab eventKey="My Apps" title="My Applications">
+        <Tab eventKey="My Apps" title="My Apps">
           {user.name !== '' ? (
             jobs.filter((job) => {
               for (let i = 0; i < job.job_applicants.length; i++) {
