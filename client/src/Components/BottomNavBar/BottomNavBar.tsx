@@ -14,11 +14,11 @@ import {
 import { changeView, getView } from '../../state/features/jobs/jobSlice';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { useNavigate } from 'react-router-dom';
+import landingpage from '../LandingPage/Landing';
 
 interface Props {
   theme: string;
 }
-
 const BottomNavBar: FC<Props> = ({ theme }) => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ const BottomNavBar: FC<Props> = ({ theme }) => {
     navigate('/jobs');
   };
   const [loginPrompt, setLoginPrompt] = useState(false);
-
+  // console.log('user', user);
   return (
     <div>
       {loginPrompt ? (
@@ -72,7 +72,11 @@ const BottomNavBar: FC<Props> = ({ theme }) => {
             </Nav.Link>
             <Nav.Link
               onClick={() => {
-                navigate('/');
+                if (user.name === '') {
+                  navigate('/');
+                } else {
+                  navigate('/landingPage');
+                }
               }}
             >
               Home

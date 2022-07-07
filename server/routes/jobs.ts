@@ -31,7 +31,7 @@ interface jobApplicant {
 
 jobs.post('/create', async (req: Request, res: Response) => {
   const { location, pet_plant, employer_id, sitter_id, startDate, endDate, description, isCompleted } = req.body;
-  console.log('create job', req.body);
+  //console.log('create job', req.body);
   try {
     const job = await Job.create(<jobInfo>{
       location,
@@ -55,9 +55,16 @@ jobs.get('/all', async (req: Request, res: Response) => {
     const jobs = await Job.findAll({
       include: [
         { model: User, attributes: ['name', 'image'], as: 'sitter' },
-        { model: JobApplicant, include: [{ model: User, attributes: ['name', 'image']}] },
-        { model: JobPetsPlants, include: [{ model: PetPlant, attributes: ['name', 'image']}] },
-      ]
+        {
+          model: JobApplicant,
+          include: [{ model: User, attributes: ['name', 'image'] }],
+        },
+        {
+          model: JobPetsPlants,
+          include: [{ model: PetPlant, attributes: ['name', 'image'] }],
+        },
+      ],
+      order: [['startDate', 'ASC']],
     });
     return res.status(200).send(jobs);
   } catch (err) {
@@ -92,6 +99,23 @@ jobs.post('/applicant/create', (req: Request, res: Response) => {
     });
 });
 
+jobs.delete('/jobPetsPlants/delete/:id', async (req: Request, res: Response) => {
+  
+  const deletedJobPetPlant = await JobPetsPlants.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((data: any)=>{
+      return res.sendStatus(200);
+    })
+    .catch((err: any)=>{
+      console.error(err, 'error deleting JobPetPlant');
+      return res.status(418).send(err);
+    });
+  
+});
+
 jobs.post('/jobPetsPlants/create', (req: Request, res: Response) => {
   const { job_id, pet_plant_id } = req.body;
   JobPetsPlants.create({ job_id, pet_plant_id })
@@ -104,6 +128,64 @@ jobs.post('/jobPetsPlants/create', (req: Request, res: Response) => {
 });
 
 // PATCH Request(s)
+
+jobs.patch('/edit/:id', async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const { location, pet_plant, employer_id, sitter_id, startDate, endDate, description, isCompleted } = req.body;
+
+  Job.update({
+    location,
+    pet_plant,
+    employer_id,
+    sitter_id, 
+    startDate, 
+    endDate, 
+    description, 
+    isCompleted
+  }, {
+    where: {
+      id
+    }
+  })
+    .then(() => {
+      res.status(200).send(req.body);
+    })
+    .catch((error: Error) => {
+      res.sendStatus(418);
+    });
+
+  // const job = await Job.findOne({
+  //   where: {
+  //     id
+  //   },
+  //   include: [
+  //     { model: User, attributes: ['name', 'image'], as: 'sitter' },
+  //     { model: JobApplicant, include: [{ model: User, attributes: ['name', 'image']}] },
+  //     { model: JobPetsPlants, include: [{ model: PetPlant, attributes: ['name', 'image']}] },
+  //   ]
+  // });
+
+
+
+  // const job_applicants = job.dataValues.job_applicants.filter((applicant: any) => {
+  //   return applicant.dataValues.user_id !== sitter_id;
+  // });
+
+
+  // if (job_applicants.length > 0) {
+  //   for (let i = 0; i < job_applicants.length; i++) {
+  //     JobApplicant.update({
+  //       status: 'declined'
+  //     }, {
+  //       where: {
+  //         user_id: job_applicants[i].dataValues.user_id,
+  //         job_id: id
+  //       }
+  //     });
+  //   }
+  // }
+});
+
 
 jobs.patch('/:id', async (req: Request, res: Response) => {
   const { id } = req.params;
@@ -121,7 +203,7 @@ jobs.patch('/:id', async (req: Request, res: Response) => {
     })
     .catch((error: Error) => {
       res.sendStatus(500);
-      console.log(error);
+      
     });
 
   const job = await Job.findOne({
@@ -135,15 +217,12 @@ jobs.patch('/:id', async (req: Request, res: Response) => {
     ]
   });
 
-  console.log('This line ran (3)', job);
 
-  console.log('This line ran (4)', job.dataValues.job_applicants);
 
   const job_applicants = job.dataValues.job_applicants.filter((applicant: any) => {
     return applicant.dataValues.user_id !== sitter_id;
   });
 
-  console.log('This line ran (5)', job_applicants);
 
   if (job_applicants.length > 0) {
     for (let i = 0; i < job_applicants.length; i++) {
