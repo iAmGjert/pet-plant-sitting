@@ -10,7 +10,7 @@ const LoginPrompt = () => {
   const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);
   const view = useAppSelector((state) => state.events.view);
-  console.log(view);
+  // console.log(view);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const handleClose = () => setShow(false);
@@ -30,7 +30,6 @@ const LoginPrompt = () => {
   const handleSignupRoute = () => {
     handleClose();
     navigate('/register');
-   
   };
 
   const handleOtherRoute = () => {
@@ -48,21 +47,35 @@ const LoginPrompt = () => {
         contentClassName={theme === 'dark' && 'dark'}
         show={show}
         onHide={handleClose}
-        backdrop="static"
+        backdrop='static'
         keyboard={false}
       >
         <Modal.Header closeButton>
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          Please Login or Signup to create an event. 
-        </Modal.Body>
+        <Modal.Body>Please Login or Signup to create an event.</Modal.Body>
         <Modal.Footer>
-          <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant="secondary" onClick={handleOtherRoute}>
-          Keep Viewing Events
+          <Button
+            className={theme === 'dark' && 'bootstrap-modal-button'}
+            variant='secondary'
+            onClick={handleOtherRoute}
+          >
+            Keep Viewing Events
           </Button>
-          <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant='info' onClick={handleSignupRoute}>Signup</Button>
-          <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant="info" onClick={handleLoginRoute}>Login</Button>
+          <Button
+            className={theme === 'dark' && 'bootstrap-modal-button'}
+            variant='info'
+            onClick={handleSignupRoute}
+          >
+            Signup
+          </Button>
+          <Button
+            className={theme === 'dark' && 'bootstrap-modal-button'}
+            variant='info'
+            onClick={handleLoginRoute}
+          >
+            Login
+          </Button>
         </Modal.Footer>
       </Modal>
     </>
@@ -70,4 +83,3 @@ const LoginPrompt = () => {
 };
 
 export default LoginPrompt;
-

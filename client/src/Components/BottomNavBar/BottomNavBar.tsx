@@ -32,7 +32,7 @@ const BottomNavBar: FC<Props> = ({ theme }) => {
     navigate('/jobs');
   };
   const [loginPrompt, setLoginPrompt] = useState(false);
-  //console.log('user', user);
+  // console.log('user', user);
   return (
     <div>
       {loginPrompt ? (
