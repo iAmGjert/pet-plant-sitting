@@ -743,6 +743,70 @@ db.sync(
                       job_id: 5,
                       pet_plant_id: 4
                     },
+                    {
+                      job_id: 6,
+                      pet_plant_id: 1
+                    },
+                    {
+                      job_id: 6,
+                      pet_plant_id: 2
+                    },
+                    {
+                      job_id: 7,
+                      pet_plant_id: 1
+                    },
+                    {
+                      job_id: 7,
+                      pet_plant_id: 2
+                    },
+                    {
+                      job_id: 8,
+                      pet_plant_id: 3
+                    },
+                    {
+                      job_id: 8,
+                      pet_plant_id: 4
+                    },
+                    {
+                      job_id: 9,
+                      pet_plant_id: 1
+                    },
+                    {
+                      job_id: 9,
+                      pet_plant_id: 4
+                    },
+                    {
+                      job_id: 10,
+                      pet_plant_id: 6
+                    },
+                    {
+                      job_id: 10,
+                      pet_plant_id: 4
+                    },
+                    {
+                      job_id: 11,
+                      pet_plant_id: 6
+                    },
+                    {
+                      job_id: 11,
+                      pet_plant_id: 8
+                    },
+                    {
+                      job_id: 12,
+                      pet_plant_id: 6
+                    },
+                    {
+                      job_id: 12,
+                      pet_plant_id: 8
+                    },
+                    {
+                      job_id: 13,
+                      pet_plant_id: 1
+                    },
+                    {
+                      job_id: 13,
+                      pet_plant_id: 2
+                    },
                   ]);
                 })
                 .catch((err: Error) => console.log(err));

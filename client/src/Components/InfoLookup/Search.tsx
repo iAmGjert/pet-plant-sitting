@@ -24,7 +24,6 @@ const Search = () => {
     }
     const data = await axios.get(`/api/info/wiki/${searchTarget}`);
     setInfo(data.data.query);
-    //console.log(data.data.query);
     dispatch(search(data.data.query));
   };
   const handleClick = ()=>{
@@ -43,7 +42,6 @@ const Search = () => {
   }, [searchTarget]);
   
   const didYouMean = (e)=>{
-    //console.log(e.target.textContent);
     setSearchTarget(e.target.textContent);
     getInfo();
     dispatch(setHistory(prevSearch));
@@ -53,31 +51,23 @@ const Search = () => {
   const [articleInfo, setArticleInfo] = useState({});
   const getArticle = async () => {
     if (clickedArticle.pageid === undefined) {
-      //console.log('no page id');
       return;
     }
     const data = await axios.get(`/api/info/wiki/article/${clickedArticle.pageid}`);
-    //setArticleInfo(data.parse);
-    //console.log(data.data.parse);
   };
   useEffect(()=>{
     if (clickedArticle.title === undefined) {
-      //console.log('no title in clicked article or first render');
       return;
     }
     axios.get(`/api/info/wiki/article/${clickedArticle.title}`)
       .then((data)=>{
-        //console.log(data.data.query.pages[clickedArticle.pageid]);
         setArticleInfo(data.data.query.pages[clickedArticle.pageid]);
         return data;
       })
       .catch((err)=>{ console.error(err); });
-    //setArticleInfo(data.parse);
-    //console.log(data.data.parse);
   }, [clickedArticle]);
 
   const viewArticleButton = (article)=>{
-    //console.log('http://en.wikipedia.org/wiki?curid=' + article.pageid);
     setWikiView(!wikiView);
     setClickedArticle(article);
   };
