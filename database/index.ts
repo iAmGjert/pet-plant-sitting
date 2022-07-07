@@ -221,8 +221,8 @@ db.sync(
         },
         {
           name: 'velouriagreen',
-          username: 'test',
-          password: 'test',
+          // username: 'test',
+          // password: 'test',
           image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: null,
