@@ -1,9 +1,9 @@
 import React, { FC, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+//import { useNavigate } from 'react-router-dom';
 import UpcomingJobs from './UpcomingJobs';
 import LandingEventCard from './LandingEventCard';
-//import AppliedJobsBoard from './AppliedJobsBoard';
-import * as moment from 'moment';
+import AppliedJobsBoard from './AppliedJobsBoard';
+//import * as moment from 'moment';
 import JobHistory from './JobHistory';
 import UpcomingEvent from './UpcomingEvent';
 
@@ -55,26 +55,12 @@ const Landing: FC<Props> = () => {
   const upcomingJobs = useAppSelector((state) => state.job.upcomingJobs);
   const upcomingEvents = useAppSelector((state) => state.events.upcomingEvents);
   const jobs = useAppSelector((state) => state.job.jobs);
-  //const applications = useAppSelector((state) => state.job.applications);
+  const applications = useAppSelector((state) => state.job.applications);
   const pastJobs = useAppSelector((state) => state.job.pastJobs);
 
   const events = useAppSelector((state) => state.events.events);
-  console.log(upcomingJobs, 'upcomingJobs');
-  //console.log(petPlants, 'petPlants');
-  //console.log('applications', applications); //such is empty
 
-  //Royce's code on sorting dates. Still not working
-  // const orderedEvents =
-  //   events instanceof Array &&
-  //   events
-  //     .slice() //creating copy of original events array
-  //     .sort((a, b) => a.startDate.localeCompare(b.startDate)) //sorting by hour as well as time. Returns 1 if sorted after, -1 if sorted before, 0 if equal
-  //     .filter(
-  //       (event) =>
-  //         new Date() <= new Date(`${event.startDate} ${event.startTime}`)
-  //     );
-
-  //console.log('orderedEvents', orderedEvents);
+  // console.log('applications', applications); //such is empty
 
   const sitterUpcomingJobs = upcomingJobs.filter(
     (job: { sitter_id: number }) => {
@@ -82,33 +68,17 @@ const Landing: FC<Props> = () => {
     }
   );
 
-  const trimmedUpcomingEvents = upcomingEvents.slice(4);
   const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
     return job.sitter_id === user.id;
   });
-
+  // console.log('upcomingEvents', upcomingEvents);
   //console.log('sitterWorkHistory', sitterWorkHistory);
 
-  const userApplications = jobs.filter((job) => {
-    if (job.employer_id !== user.id) {
-      for (let i = 0; i < job.job_applicants.length; i++) {
-        if (job.job_applicants[i].user_id === user.id) {
-          return false;
-        }
-      }
-      if (job.sitter_id === null) {
-        return true;
-      }
-    }
-    return false;
-  });
-
-  console.log('userApplications', userApplications);
-  console.log(jobs, 'jobs');
+  //console.log(jobs, 'jobs');
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
-    //dispatch(fetchApplications());
+    dispatch(fetchApplications());
     dispatch(fetchPastJobs());
   }, []);
 
@@ -151,33 +121,35 @@ const Landing: FC<Props> = () => {
           )
         : null}
 
-      {trimmedUpcomingEvents.map(
-        (element: {
-          id: React.Key;
-          startDate: any;
-          description: any;
-          location: any;
-          name: any;
-        }) => {
-          return (
-            <React.Fragment
-              key={`UpcomingEvents key: ${
-                ~~(Math.random() * 1000) * (element.id + 1)
-              }`}
-            >
-              <LandingEventCard
-                // key={element.id}
-                startDate={element.startDate}
-                description={element.description}
-                location={element.location}
-                name={element.name}
-              />
-            </React.Fragment>
-          );
-        }
-      )}
+      {upcomingEvents
+        .slice(0, 1)
+        .map(
+          (element: {
+            id: React.Key;
+            startDate: any;
+            description: any;
+            location: any;
+            name: any;
+          }) => {
+            return (
+              <React.Fragment
+                key={`UpcomingEvents key: ${
+                  ~~(Math.random() * 1000) * (element.id + 1)
+                }`}
+              >
+                <LandingEventCard
+                  // key={element.id}
+                  startDate={element.startDate}
+                  description={element.description}
+                  location={element.location}
+                  name={element.name}
+                />
+              </React.Fragment>
+            );
+          }
+        )}
 
-      {/* {userApplications.map(
+      {applications.map(
         (
           element: JSX.IntrinsicAttributes & {
             status: any;
@@ -191,13 +163,15 @@ const Landing: FC<Props> = () => {
             <>
               <AppliedJobsBoard
                 key={element.id}
-                startDate={element.startDate}
+                startDate={element.job.startDate}
+                petPlants={element.job_pets_plants}
+                location={element.job.location}
                 {...element}
               />
             </>
           );
         }
-      )} */}
+      )}
 
       <JobHistory sitterWorkHistory={sitterWorkHistory} />
     </div>

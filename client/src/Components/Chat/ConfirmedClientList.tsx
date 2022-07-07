@@ -7,12 +7,12 @@ import { Container } from 'react-bootstrap';
 const ConfirmedClientList = () => {
   const [confirmedJobs, setConfirmedJobs] = useState([]);
   const currUser = useAppSelector((state) => state.userProfile.value);
-  const jobs = useAppSelector((state) => state.job.jobs);
+  // const jobs = useAppSelector((state) => state.job.jobs);
 
   const getJobs = async () => {
-    // const jobs = await axios.get('/api/jobs/all');
+    const jobs = await axios.get('/api/jobs/all');
 
-    const confirmedJobs = jobs.filter((job: any) => {
+    const confirmedJobs = jobs.data.filter((job: any) => {
       if (job.sitter_id === currUser.id && job.isCompleted === false) {
         return true;
       }

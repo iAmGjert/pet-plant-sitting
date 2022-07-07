@@ -502,9 +502,7 @@ const EditField = ({
                               position
                             ) {
                               const lat = position.coords.latitude;
-
                               const long = position.coords.longitude;
-
                               axios
                                 .get(
                                   `https://api.mapbox.com/geocoding/v5/mapbox.places/${long},${lat}.json?access_token=${process.env.MAPBOX_TOKEN}`
