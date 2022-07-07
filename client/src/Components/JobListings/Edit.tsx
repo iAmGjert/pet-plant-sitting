@@ -47,7 +47,6 @@ const Edit = ({ job }): JSX.Element => {
       })
       .then((editedJob) => {
         editedJob.data.job_pets_plants.forEach((petPlant: any)=> {
-          console.log(`deleteing jobPetPlant#${petPlant.id}`);
           axios
             .delete(`/api/jobs/jobPetsPlants/delete/${petPlant.id}`)
             .then((res: any)=>{

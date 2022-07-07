@@ -100,7 +100,6 @@ jobs.post('/applicant/create', (req: Request, res: Response) => {
 });
 
 jobs.delete('/jobPetsPlants/delete/:id', async (req: Request, res: Response) => {
-  console.log(req.params.id, 'id to delete');
   
   const deletedJobPetPlant = await JobPetsPlants.destroy({
     where: {
@@ -149,12 +148,10 @@ jobs.patch('/edit/:id', async (req: Request, res: Response) => {
     }
   })
     .then(() => {
-      console.log(req.body);
       res.status(200).send(req.body);
     })
     .catch((error: Error) => {
       res.sendStatus(418);
-      console.log(error);
     });
 
   // const job = await Job.findOne({
@@ -206,7 +203,7 @@ jobs.patch('/:id', async (req: Request, res: Response) => {
     })
     .catch((error: Error) => {
       res.sendStatus(500);
-      console.log(error);
+      
     });
 
   const job = await Job.findOne({

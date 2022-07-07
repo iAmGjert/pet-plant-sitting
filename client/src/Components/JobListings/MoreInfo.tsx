@@ -54,7 +54,6 @@ const MoreInfo = (props) => {
       return;
     }
     if (user.name === employer) {
-      console.log(`Job number ${job.id} is your job!`);
       await setTemp(job);
       onHide();
       dispatch(changeView('edit'));

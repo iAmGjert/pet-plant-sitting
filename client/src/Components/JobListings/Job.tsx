@@ -51,7 +51,6 @@ const Job = ({ setTemp, job, setshowapplied, setshowrevoked }) => {
       )
       .then((results) => {
         setUserGeoLoc(results.data.features[0].center);
-        //console.log(results.data.features[0].center);
         return results.data.features[0].center;
       });
   };
@@ -63,19 +62,16 @@ const Job = ({ setTemp, job, setshowapplied, setshowrevoked }) => {
       )
       .then((results) => {
         setJobGeoLoc(results.data.features[0].center);
-        //console.log(results.data.features[0].center);
         return results.data.features[0].center;
       });
   };
 
   const handleClick = () => {
     if (user.name === '') {
-      //console.log('Go login!');
       setShow(true);
       removeOverlay();
       return;
     }
-    //console.log(`Calculating distance between ${user.location} and ${job.location}.`);
     geoCodeUser();
     geoCodeJob();
 
@@ -94,7 +90,6 @@ const Job = ({ setTemp, job, setshowapplied, setshowrevoked }) => {
       )
       .then((results) => {
         setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
-        //console.log((results.data.routes[0].distance / 1609).toFixed(1));
       });
   }, [jobGeoLoc, userGeoLoc]);
   return (
@@ -148,7 +143,7 @@ const Job = ({ setTemp, job, setshowapplied, setshowrevoked }) => {
           </Button>
           <>
             <MoreInfo
-              setTemp = {setTemp}
+              setTemp={setTemp}
               setshowrevoked={setshowrevoked}
               setshowapplied={setshowapplied}
               distance={distanceFromJob}
