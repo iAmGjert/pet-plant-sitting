@@ -13,7 +13,7 @@ const JobsMain = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const [temp, setTemp] = useState( {
+  const [temp, settemp] = useState( {
     location: '',
     pet_plant: [],
     employer_id: 0,
@@ -46,15 +46,20 @@ const JobsMain = () => {
   }, []);
 
   const [showCreated, setShowCreated] = useState(false);
+  const [showEdited, setShowEdited] = useState(false);
   const [showRevoked, setShowRevoked] = useState(false);
   const [showApplied, setShowApplied] = useState(false);
   const target = useRef(null);
   const removeCreatedOverlay = ()=>{ setTimeout(()=>{ setShowCreated(false); }, 4500); };
   const removeAppliedOverlay = ()=>{ setTimeout(()=>{ setShowApplied(false); }, 4500); };
   const removeRevokedOverlay = ()=>{ setTimeout(()=>{ setShowRevoked(false); }, 4500); };
+  const removeEditedOverlay = ()=>{ setTimeout(()=>{ setShowEdited(false); }, 4500); };
   useEffect(()=>{
     removeCreatedOverlay();
   }, [showCreated]);
+  useEffect(()=>{
+    removeEditedOverlay();
+  }, [showEdited]);
   useEffect(()=>{
     removeAppliedOverlay();
   }, [showApplied]);
@@ -77,6 +82,23 @@ const JobsMain = () => {
             }}
           >
             Job Created!
+          </div>
+        )}
+      </Overlay>
+      <Overlay target={target.current} show={showEdited} placement="top">
+        {({ placement, arrowProps, show: _show, popper, ...props }) => (
+          <div
+            {...props}
+            style={{
+              position: 'absolute',
+              backgroundColor: 'rgba(255, 255, 100, 0.85)',
+              padding: '2px 10px',
+              color: 'black',
+              borderRadius: 3,
+              ...props.style,
+            }}
+          >
+            Job Edited!
           </div>
         )}
       </Overlay>
@@ -118,8 +140,8 @@ const JobsMain = () => {
         view === 'create' ?
           <Create setShowCreated={setShowCreated}/> :
           view === 'edit' ?
-            <Edit job={temp} /> :          
-            <List setTemp={setTemp} setshowapplied={setShowApplied} setshowrevoked={setShowRevoked}/>
+            <Edit setShowEdited={setShowEdited} job={temp} /> :          
+            <List settemp={settemp} setshowapplied={setShowApplied} setshowrevoked={setShowRevoked}/>
           
       }
       

@@ -9,7 +9,7 @@ import {
   Modal,
   Card,
 } from 'react-bootstrap';
-import { setJobs, deleteApplication } from '../../state/features/jobs/jobSlice';
+import { changeView, setJobs, deleteApplication } from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ThemeContext } from '../../App';
@@ -20,6 +20,7 @@ const MoreInfo = (props) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {
+    settemp,
     setshowrevoked,
     setshowapplied,
     distance,

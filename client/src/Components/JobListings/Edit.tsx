@@ -15,7 +15,7 @@ import moment from 'moment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Edit = ({ job }): JSX.Element => {
+const Edit = ({ job, setShowEdited }): JSX.Element => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.userProfile.value);
   const petPlants = user.pet_plants;
@@ -59,15 +59,6 @@ const Edit = ({ job }): JSX.Element => {
             pet_plant_id: pet,
           });
         });
-
-        // newJob.data.pet_plant.forEach((pet: any) => {
-        //   console.log(pet);
-          
-        //   // axios.post('/api/jobs/jobPetsPlants/create', {
-        //   //   job_id: newJob.data.id,
-        //   //   pet_plant_id: pet,
-        //   // });
-        // });
       })
       .then(() => {
         getJobs();
@@ -124,7 +115,7 @@ const Edit = ({ job }): JSX.Element => {
       job_pets_plants: job.job_pets_plants,
     };
     editJob(obj);
-
+    setShowEdited(true);
     dispatch(changeView('list'));
     return;
   };

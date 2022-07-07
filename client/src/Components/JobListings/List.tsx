@@ -12,7 +12,7 @@ import {
 } from 'react-bootstrap';
 import moment from 'moment';
 
-const List = ({ setTemp, setshowapplied, setshowrevoked }) => {
+const List = ({ settemp, setshowapplied, setshowrevoked }) => {
   const target = useRef(null);
   const user = useAppSelector((state) => state.userProfile.value);
   const jobs = useAppSelector((state) => state.job.jobs);
@@ -122,7 +122,7 @@ const List = ({ setTemp, setshowapplied, setshowrevoked }) => {
                     .map((job, index) => {
                       return (
                         <Job
-                          setTemp = {setTemp}
+                          settemp = {settemp}
                           setshowrevoked={setshowrevoked}
                           setshowapplied={setshowapplied}
                           key={`job#${index}`}
@@ -187,6 +187,7 @@ const List = ({ setTemp, setshowapplied, setshowrevoked }) => {
   );
 };
 
-List.propTypes = {};
+List.propTypes = {
+};
 
 export default List;
