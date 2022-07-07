@@ -632,7 +632,7 @@ db.sync(
                     {
                       user_id: 1,
                       job_id: 1,
-                      status: 'approved'
+                      status: 'accepted'
                     },
                     {
                       user_id: 7,
@@ -642,12 +642,12 @@ db.sync(
                     {
                       user_id: 7,
                       job_id: 3,
-                      status: 'pending'
+                      status: 'accepted'
                     },
                     {
                       user_id: 7,
                       job_id: 4,
-                      status: 'approved'
+                      status: 'accepted'
                     },
                     {
                       user_id: 7,
