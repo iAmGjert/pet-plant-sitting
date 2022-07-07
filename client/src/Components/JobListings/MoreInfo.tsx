@@ -9,7 +9,11 @@ import {
   Modal,
   Card,
 } from 'react-bootstrap';
-import { changeView, setJobs, deleteApplication } from '../../state/features/jobs/jobSlice';
+import {
+  changeView,
+  setJobs,
+  deleteApplication,
+} from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ThemeContext } from '../../App';
@@ -67,7 +71,7 @@ const MoreInfo = (props) => {
       return;
     }
     if (user.name === employer) {
-      // console.log('This is your job!');
+      await settemp(job);
       onHide();
       dispatch(changeView('edit'));
       return;
@@ -99,15 +103,15 @@ const MoreInfo = (props) => {
       show={props.modalShow}
       onHide={onHide}
       {...others}
-      aria-labelledby='contained-modal-title-vcenter'
+      aria-labelledby="contained-modal-title-vcenter"
       contentClassName={theme === 'dark' && 'dark'}
     >
       <Modal.Header closeButton>
-        <Modal.Title id='contained-modal-title-vcenter'>
+        <Modal.Title id="contained-modal-title-vcenter">
           {`${employer}\'s job listing:`}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className='show-grid'>
+      <Modal.Body className="show-grid">
         <Container>
           <Row>
             Job Descripion:
@@ -146,7 +150,7 @@ const MoreInfo = (props) => {
                         <Row>
                           <Col>
                             <Button
-                              variant='primary'
+                              variant="primary"
                               onClick={() => {
                                 navigate(`/profile/${applicant.user_id}`);
                               }}
@@ -156,7 +160,7 @@ const MoreInfo = (props) => {
                           </Col>
                           <Col>
                             <Button
-                              variant='warning'
+                              variant="warning"
                               onClick={() => {
                                 navigate('/chat');
                               }}
@@ -198,7 +202,7 @@ const MoreInfo = (props) => {
           onClose={() => {
             setShowLog(false);
           }}
-          variant='warning'
+          variant="warning"
         >
           You must{' '}
           <Alert.Link
