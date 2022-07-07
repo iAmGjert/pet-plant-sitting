@@ -129,7 +129,7 @@ export const jobsSlice = createSlice({
       return state;
     });
     builder.addCase(deleteApplication.fulfilled, (state, action) => {
-      console.log('delete application payload', action.payload, state.applications);
+      //console.log('delete application payload', action.payload, state.applications);
       state.applications = state.applications.filter((application) => {
         return application.id !== action.payload;
       });
