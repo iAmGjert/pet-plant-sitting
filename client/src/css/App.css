@@ -355,7 +355,7 @@ body {
 .modal-button-as-link {
   color: #ffffff;
 }
-.bootstrap-card.card {
+.bootstrap-modal-card.card {
   background-color: #2e2e2e;
   color: lightgrey;
   border-color: lightgrey;

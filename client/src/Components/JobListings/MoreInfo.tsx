@@ -143,7 +143,7 @@ const MoreInfo = (props) => {
                   Applicants:
                   {job.job_applicants.map((applicant, idx) => {
                     return (
-                      <Card className={theme === 'dark' && 'bootstrap-card'} key={`applicant${idx}`}>
+                      <Card className={theme === 'dark' && 'bootstrap-modal-card'} key={`applicant${idx}`}>
                         <Row>
                           <Card.Title>{applicant.user.name}</Card.Title>
                         </Row>
