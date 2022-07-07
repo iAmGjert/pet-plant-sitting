@@ -338,6 +338,11 @@ body {
   color: lightgrey;
   border-color: lightgrey;
 }
+.bootstrap-modal-button.btn.btn-warning {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
 .bootstrap-modal-button.btn.btn-info {
   background-color: #1f1f1f;
   color: lightgrey;
@@ -349,6 +354,11 @@ body {
 }
 .modal-button-as-link {
   color: #ffffff;
+}
+.bootstrap-card.card {
+  background-color: #2e2e2e;
+  color: lightgrey;
+  border-color: lightgrey;
 }
 /* Bootstrap modal classes */
 

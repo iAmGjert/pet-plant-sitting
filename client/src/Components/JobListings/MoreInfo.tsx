@@ -143,13 +143,14 @@ const MoreInfo = (props) => {
                   Applicants:
                   {job.job_applicants.map((applicant, idx) => {
                     return (
-                      <Card key={`applicant${idx}`}>
+                      <Card className={theme === 'dark' && 'bootstrap-card'} key={`applicant${idx}`}>
                         <Row>
                           <Card.Title>{applicant.user.name}</Card.Title>
                         </Row>
                         <Row>
                           <Col>
                             <Button
+                              className={theme === 'dark' && 'bootstrap-modal-button'}
                               variant="primary"
                               onClick={() => {
                                 navigate(`/profile/${applicant.user_id}`);
@@ -160,6 +161,7 @@ const MoreInfo = (props) => {
                           </Col>
                           <Col>
                             <Button
+                              className={theme === 'dark' && 'bootstrap-modal-button'}
                               variant="warning"
                               onClick={() => {
                                 navigate('/chat');
