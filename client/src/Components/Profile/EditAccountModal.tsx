@@ -69,7 +69,7 @@ const EditAccountModal = ({
   return (
     <Modal
       // backdrop='static'
-      contentClassName={theme === 'dark' && 'dark'}
+      contentClassName={userTheme === 'dark' && 'dark'}
       show={showModal}
       fullscreen={true}
       onHide={() => handleOnHide()}
@@ -198,22 +198,24 @@ const EditAccountModal = ({
             />
             <h1 style={{ fontWeight: 'bold' }}>Add Pets</h1>
           </Card>
-          <Button
-            variant='danger'
-            type='button'
-            onClick={() => setShowModal(false)}
-            className='mt-3 '
-          >
-            Cancel
-          </Button>
-          <Button
-            variant='success'
-            type='button'
-            onClick={() => handleOnHide()}
-            className={theme === 'dark' && 'bootstrap-modal-button'}
-          >
-            Finished
-          </Button>
+          <span>
+            <Button
+              variant='danger'
+              type='button'
+              onClick={() => setShowModal(false)}
+              className='m-2'
+            >
+              Cancel
+            </Button>
+            <Button
+              variant='success'
+              type='button'
+              onClick={() => handleOnHide()}
+              className={theme === 'dark' && 'bootstrap-modal-button'}
+            >
+              Finished
+            </Button>
+          </span>
         </Form>
       </Modal.Body>
     </Modal>

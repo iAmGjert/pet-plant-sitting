@@ -149,9 +149,11 @@ const EditField = ({
         return (
           <div>
             <Button
+              className='m-2'
               variant='light'
               onClick={() => {
                 setVal(null);
+                // user.theme = null;
               }}
             >
               Light Mode
@@ -160,6 +162,7 @@ const EditField = ({
               variant='dark'
               onClick={() => {
                 setVal('dark');
+                // user.theme = 'dark';
               }}
             >
               Dark Mode
@@ -626,8 +629,8 @@ const EditField = ({
           <div>
             <img
               src={value}
+              style={{ width: 'auto' }}
               alt='profile picture'
-              width='160'
               height='160'
               onClick={() => {
                 showWidget();
