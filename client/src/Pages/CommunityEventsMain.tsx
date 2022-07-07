@@ -65,7 +65,7 @@ const CommunityEventsMain = () => {
       return <EditEvent />;
     }
   };
-  console.log(view);
+  // console.log(view);
   
   const event = useAppSelector(state => state.events.event);
 

@@ -121,7 +121,7 @@ export const updateComment = createAsyncThunk('events/updateComment',
   async (comment: { id: number, comment: string, event_id: number, user_id: number, 
   user: { id: number, name: string, image: string | null } }) => {
     try {
-      console.log(comment);
+      // console.log(comment);
       const { id } = comment;
       await axios.put(`/api/events/comment/update/${id}`, comment);
       return comment;

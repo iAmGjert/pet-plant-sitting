@@ -41,7 +41,7 @@ const EditComment = ({ showEditModal, setShowEditModal, commentObject }: Props) 
     if (canSubmit) {
       try {
         setAddRequestStatus('pending');
-        console.log(commentObject);
+        // console.log(commentObject);
         dispatch(updateComment({
           id: commentObject.id,
           comment: commentMessage,

@@ -60,7 +60,7 @@ const Landing: FC<Props> = () => {
 
   const events = useAppSelector((state) => state.events.events);
 
-  console.log('applications', applications); //such is empty
+  // console.log('applications', applications); //such is empty
 
   const sitterUpcomingJobs = upcomingJobs.filter(
     (job: { sitter_id: number }) => {
@@ -71,7 +71,7 @@ const Landing: FC<Props> = () => {
   const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
     return job.sitter_id === user.id;
   });
-  console.log('upcomingEvents', upcomingEvents);
+  // console.log('upcomingEvents', upcomingEvents);
   //console.log('sitterWorkHistory', sitterWorkHistory);
 
   //console.log(jobs, 'jobs');

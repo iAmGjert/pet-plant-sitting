@@ -60,8 +60,8 @@ const Details = () => {
     const [hour, minute] = time.split(':');
     return (+hour > 12) ? `${+hour - 12}:${minute} PM` : `${hour}:${minute} AM`;
   };
-  console.log(event);
-  console.log(currentUser);
+  // console.log(event);
+  // console.log(currentUser);
    
   return (
     <Container fluid>
