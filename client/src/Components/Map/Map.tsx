@@ -100,7 +100,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   };
 
   const userClicksLocateButton = () => {
-    setGeoLocateActive(true);
+    setGeoLocateActive(!geoLocateActive);
   };
 
   const geolocateControlRef = useCallback((ref) => {
@@ -294,10 +294,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           ref={geolocateControlRef}
           onGeolocate={userClicksLocateButton}
           trackUserLocation={true}
-          style={{
-            zIndex: -1,
-            position: 'relative'
-          }}
+          className-='geolocate-button'
         />
         {
           dirCoordinates.length > 0 && cancelNav &&
