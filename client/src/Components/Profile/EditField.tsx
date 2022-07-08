@@ -638,6 +638,7 @@ const EditField = ({
               />
             ) : (
               <Button
+                className='bootstrap-button'
                 onClick={() => {
                   showWidget();
                 }}
