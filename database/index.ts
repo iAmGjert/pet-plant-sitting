@@ -637,7 +637,7 @@ db.sync(
                     {
                       user_id: 1,
                       job_id: 1,
-                      status: 'approved',
+                      status: 'accepted',
                     },
                     {
                       user_id: 7,
@@ -647,12 +647,12 @@ db.sync(
                     {
                       user_id: 7,
                       job_id: 3,
-                      status: 'pending',
+                      status: 'accepted',
                     },
                     {
                       user_id: 7,
                       job_id: 4,
-                      status: 'approved',
+                      status: 'accepted',
                     },
                     {
                       user_id: 7,
@@ -747,6 +747,70 @@ db.sync(
                     {
                       job_id: 5,
                       pet_plant_id: 4,
+                    },
+                    {
+                      job_id: 6,
+                      pet_plant_id: 1,
+                    },
+                    {
+                      job_id: 6,
+                      pet_plant_id: 2,
+                    },
+                    {
+                      job_id: 7,
+                      pet_plant_id: 1,
+                    },
+                    {
+                      job_id: 7,
+                      pet_plant_id: 2,
+                    },
+                    {
+                      job_id: 8,
+                      pet_plant_id: 3,
+                    },
+                    {
+                      job_id: 8,
+                      pet_plant_id: 4,
+                    },
+                    {
+                      job_id: 9,
+                      pet_plant_id: 1,
+                    },
+                    {
+                      job_id: 9,
+                      pet_plant_id: 4,
+                    },
+                    {
+                      job_id: 10,
+                      pet_plant_id: 6,
+                    },
+                    {
+                      job_id: 10,
+                      pet_plant_id: 4,
+                    },
+                    {
+                      job_id: 11,
+                      pet_plant_id: 6,
+                    },
+                    {
+                      job_id: 11,
+                      pet_plant_id: 8,
+                    },
+                    {
+                      job_id: 12,
+                      pet_plant_id: 6,
+                    },
+                    {
+                      job_id: 12,
+                      pet_plant_id: 8,
+                    },
+                    {
+                      job_id: 13,
+                      pet_plant_id: 1,
+                    },
+                    {
+                      job_id: 13,
+                      pet_plant_id: 2,
                     },
                   ]);
                 })

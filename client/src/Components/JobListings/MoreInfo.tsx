@@ -9,7 +9,11 @@ import {
   Modal,
   Card,
 } from 'react-bootstrap';
-import { setJobs, deleteApplication } from '../../state/features/jobs/jobSlice';
+import {
+  changeView,
+  setJobs,
+  deleteApplication,
+} from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { ThemeContext } from '../../App';
@@ -20,6 +24,7 @@ const MoreInfo = (props) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const {
+    settemp,
     setshowrevoked,
     setshowapplied,
     distance,
@@ -66,8 +71,9 @@ const MoreInfo = (props) => {
       return;
     }
     if (user.name === employer) {
-      // console.log('This is your job!');
+      await settemp(job);
       onHide();
+      dispatch(changeView('edit'));
       return;
     }
     if (applicant) {
@@ -97,15 +103,15 @@ const MoreInfo = (props) => {
       show={props.modalShow}
       onHide={onHide}
       {...others}
-      aria-labelledby='contained-modal-title-vcenter'
+      aria-labelledby="contained-modal-title-vcenter"
       contentClassName={theme === 'dark' && 'dark'}
     >
       <Modal.Header closeButton>
-        <Modal.Title id='contained-modal-title-vcenter'>
+        <Modal.Title id="contained-modal-title-vcenter">
           {`${employer}\'s job listing:`}
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body className='show-grid'>
+      <Modal.Body className="show-grid">
         <Container>
           <Row>
             Job Descripion:
@@ -137,14 +143,15 @@ const MoreInfo = (props) => {
                   Applicants:
                   {job.job_applicants.map((applicant, idx) => {
                     return (
-                      <Card key={`applicant${idx}`}>
+                      <Card className={theme === 'dark' && 'bootstrap-card'} key={`applicant${idx}`}>
                         <Row>
                           <Card.Title>{applicant.user.name}</Card.Title>
                         </Row>
                         <Row>
                           <Col>
                             <Button
-                              variant='primary'
+                              className={theme === 'dark' && 'bootstrap-modal-button'}
+                              variant="primary"
                               onClick={() => {
                                 navigate(`/profile/${applicant.user_id}`);
                               }}
@@ -154,7 +161,8 @@ const MoreInfo = (props) => {
                           </Col>
                           <Col>
                             <Button
-                              variant='warning'
+                              className={theme === 'dark' && 'bootstrap-modal-button'}
+                              variant="warning"
                               onClick={() => {
                                 navigate('/chat');
                               }}
@@ -186,8 +194,8 @@ const MoreInfo = (props) => {
           {user.id === job.employer_id
             ? 'Edit'
             : applicant
-            ? 'Revoke Application'
-            : 'Apply'}
+              ? 'Revoke Application'
+              : 'Apply'}
         </Button>
       </Modal.Footer>
       {showLog ? (
@@ -196,7 +204,7 @@ const MoreInfo = (props) => {
           onClose={() => {
             setShowLog(false);
           }}
-          variant='warning'
+          variant="warning"
         >
           You must{' '}
           <Alert.Link

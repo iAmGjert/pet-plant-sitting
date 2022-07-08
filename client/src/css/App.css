@@ -3,6 +3,10 @@ body {
   min-height: 100%;
   padding-bottom: 7%;
 }
+.geolocate-button {
+  position: relative;
+  z-index: -2;
+}
 .mapJobMarker {
   border-radius: 100px;
   background-color: lightgreen;
@@ -48,7 +52,7 @@ body {
 }
 .popup {
   position: fixed;
-  z-index: 1;
+  z-index: 2;
   top: 0;
   left: 0;
   width: 100%;
@@ -219,6 +223,29 @@ body {
   background-color: rgb(121, 121, 121);
   color: lightgrey;
 }
+#dark .nav-link {
+  color: #ffffff;
+}
+#dark .nav-link.active {
+  background-color: rgb(121, 121, 121);
+  color: #ffffff;
+}
+#dark .toast-header {
+  background-color: rgb(121, 121, 121);
+  color: #ffffff;
+}
+#dark .toast-body {
+  background-color: rgb(121, 121, 121);
+  color: #ffffff;
+}
+/* #dark .btn.btn-success.btn-sm {
+  background: rgb(121, 121, 121);
+  color: #ffffff;
+} */
+#dark .fade.toast.bootstrap-toast.bg-light.show {
+  background-color: rgb(121, 121, 121);
+}
+
 
 /* Calendar */
 #dark .DayScaleEmptyCell-emptyCell.css-1hbvjip {
@@ -280,6 +307,7 @@ body {
   color: lightgrey;
   border-color: lightgrey;
 }
+
 /* .MuiTableBody-root.css-apqrd9-MuiTableBody-root {
   background-color: #1f1f1f;;
 } */
@@ -310,6 +338,11 @@ body {
   color: lightgrey;
   border-color: lightgrey;
 }
+.bootstrap-modal-button.btn.btn-warning {
+  background-color: #1f1f1f;
+  color: lightgrey;
+  border-color: lightgrey;
+}
 .bootstrap-modal-button.btn.btn-info {
   background-color: #1f1f1f;
   color: lightgrey;
@@ -321,6 +354,11 @@ body {
 }
 .modal-button-as-link {
   color: #ffffff;
+}
+.bootstrap-card.card {
+  background-color: #2e2e2e;
+  color: lightgrey;
+  border-color: lightgrey;
 }
 /* Bootstrap modal classes */
 
