@@ -12,6 +12,7 @@ import axios from 'axios';
 import { AiFillEdit } from '@react-icons/all-files/ai/AiFillEdit';
 import { AiFillSave } from '@react-icons/all-files/ai/AiFillSave';
 import { BiCurrentLocation } from '@react-icons/all-files/bi/BiCurrentLocation';
+import { BiUpload } from '@react-icons/all-files/bi/BiUpload';
 import Tags from './Tags';
 
 type Props = {
@@ -153,7 +154,6 @@ const EditField = ({
               variant='light'
               onClick={() => {
                 setVal(null);
-                // user.theme = null;
               }}
             >
               Light Mode
@@ -162,7 +162,6 @@ const EditField = ({
               variant='dark'
               onClick={() => {
                 setVal('dark');
-                // user.theme = 'dark';
               }}
             >
               Dark Mode
@@ -627,15 +626,26 @@ const EditField = ({
       case 'image':
         return (
           <div>
-            <img
-              src={value}
-              style={{ width: 'auto' }}
-              alt='profile picture'
-              height='160'
-              onClick={() => {
-                showWidget();
-              }}
-            />
+            {value ? (
+              <img
+                src={value}
+                style={{ width: 'auto' }}
+                alt='profile picture'
+                height='160'
+                onClick={() => {
+                  showWidget();
+                }}
+              />
+            ) : (
+              <Button
+                onClick={() => {
+                  showWidget();
+                }}
+              >
+                Upload
+                <BiUpload style={{ margin: '2px', paddingBottom: '1px' }} />
+              </Button>
+            )}
           </div>
         );
       default:

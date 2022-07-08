@@ -31,7 +31,10 @@ const Events = db.define('event', EventModel);
 const Conversation = db.define('conversation', ConversationModel);
 const Gallery = db.define('gallery', GalleryModel);
 const Rating = db.define('rating', RatingModel);
-const PetPlantDescriptor = db.define('pet_plant_descriptor', PetPlantDescriptorModel);
+const PetPlantDescriptor = db.define(
+  'pet_plant_descriptor',
+  PetPlantDescriptorModel
+);
 const JobApplicant = db.define('job_applicant', JobApplicantModel);
 const EventParticipant = db.define('event_participant', EventParticipantModel);
 const EventComment = db.define('event_comment', EventCommentModel);
@@ -159,8 +162,7 @@ db.sync(
       User.bulkCreate([
         {
           name: 'Iben Oneal',
-          image:
-            'https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fstatic.onecms.io%2Fwp-content%2Fuploads%2Fsites%2F20%2F2021%2F09%2F04%2FBeyonce-1.jpg',
+          image: '',
           location: '',
           sitter_rating: 10,
           total_sitter_ratings: 24,
@@ -244,7 +246,7 @@ db.sync(
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
+            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
           },
           {
             owner_id: 2,
@@ -257,7 +259,7 @@ db.sync(
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
+            bio: "I am the world's worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this",
           },
           {
             owner_id: 3,
@@ -296,7 +298,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
           {
             owner_id: 4,
@@ -311,7 +313,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
           {
             owner_id: 7,
@@ -324,7 +326,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
           {
             owner_id: 4,
@@ -339,7 +341,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: 'Ain\'t I cute?!',
+            bio: "Ain't I cute?!",
           },
         ]).then(() => {
           Rating.bulkCreate([
@@ -388,7 +390,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('June 8, 2022 01:15:00'),
                 endDate: new Date('June 10, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
@@ -398,37 +400,40 @@ db.sync(
                 sitter_id: null,
                 startDate: new Date('June 7, 2022 01:15:00'),
                 endDate: new Date('June 9, 2022 01:15:00'),
-                isCompleted: true
+                isCompleted: true,
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
                 pet_plant: [3],
                 employer_id: 3,
                 sitter_id: 7,
-                description: 'Need someone to water my plant babies while I leave town for two days',
+                description:
+                  'Need someone to water my plant babies while I leave town for two days',
                 startDate: new Date('July 4, 2022 01:15:00'),
                 endDate: new Date('July 5, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '4609 Banks St, New Orleans, LA 70119',
                 pet_plant: [3, 1],
                 employer_id: 5,
-                description: 'Leaving town for five days and need someone to sit my babies',
+                description:
+                  'Leaving town for five days and need someone to sit my babies',
                 sitter_id: 7,
                 startDate: new Date('July 19, 2022 01:15:00'),
                 endDate: new Date('July 20, 2022 01:15:00'),
-                isCompleted: true
+                isCompleted: true,
               },
               {
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
-                description: 'Looking for an energetic person to care for my rambunctious bunch',
+                description:
+                  'Looking for an energetic person to care for my rambunctious bunch',
                 pet_plant: [3, 1],
                 employer_id: 6,
                 sitter_id: 7,
                 startDate: new Date('July 10, 2022 01:15:00'),
                 endDate: new Date('July 11, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '1600 Frankel Ave, Metairie, LA 70003',
@@ -438,7 +443,7 @@ db.sync(
                 sitter_id: null,
                 startDate: new Date('June 1, 2022 01:15:00'),
                 endDate: new Date('July 2, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '1605 Frankel Ave, Metairie, LA 70003',
@@ -448,7 +453,7 @@ db.sync(
                 sitter_id: null,
                 startDate: new Date('July 1, 2022 01:15:00'),
                 endDate: new Date('June 3, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '1610 Frankel Ave, Metairie, LA 70003',
@@ -458,7 +463,7 @@ db.sync(
                 sitter_id: null,
                 startDate: new Date('June 30, 2022 01:15:00'),
                 endDate: new Date('July 1, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '1221 S Clearview',
@@ -468,7 +473,7 @@ db.sync(
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '3707 Derbigny St',
@@ -478,7 +483,7 @@ db.sync(
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '4245 Connecticut Ave, Kenner, LA 70065',
@@ -488,7 +493,7 @@ db.sync(
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: 'Superdome New Orleans',
@@ -498,17 +503,18 @@ db.sync(
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
               {
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
                 pet_plant: [1, 2],
                 employer_id: 6,
-                description: 'Hello, my name is Raymond. Please come watch my things while I code!!',
+                description:
+                  'Hello, my name is Raymond. Please come watch my things while I code!!',
                 sitter_id: null,
                 startDate: new Date('June 25, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
-                isCompleted: false
+                isCompleted: false,
               },
             ]).then(() => {
               Events.bulkCreate([
@@ -557,7 +563,6 @@ db.sync(
                   startDate: new Date('July 30, 2022 01:15:00'),
                   startTime: '4:33 PM',
                 },
-                
               ])
                 .then(() => {
                   EventComment.bulkCreate([
@@ -632,116 +637,116 @@ db.sync(
                     {
                       user_id: 1,
                       job_id: 1,
-                      status: 'approved'
+                      status: 'approved',
                     },
                     {
                       user_id: 7,
                       job_id: 1,
-                      status: 'rejected'
+                      status: 'rejected',
                     },
                     {
                       user_id: 7,
                       job_id: 3,
-                      status: 'pending'
+                      status: 'pending',
                     },
                     {
                       user_id: 7,
                       job_id: 4,
-                      status: 'approved'
+                      status: 'approved',
                     },
                     {
                       user_id: 7,
                       job_id: 5,
-                      status: 'accepted'
+                      status: 'accepted',
                     },
                     {
                       user_id: 7,
                       job_id: 10,
-                      status: 'pending'
+                      status: 'pending',
                     },
                     {
                       user_id: 1,
                       job_id: 10,
-                      status: 'pending'
+                      status: 'pending',
                     },
                     {
                       user_id: 2,
                       job_id: 10,
-                      status: 'pending'
+                      status: 'pending',
                     },
                     {
                       user_id: 1,
                       job_id: 11,
-                      status: 'pending'
+                      status: 'pending',
                     },
                     {
                       user_id: 2,
                       job_id: 11,
-                      status: 'pending'
+                      status: 'pending',
                     },
                     {
                       user_id: 3,
                       job_id: 11,
-                      status: 'pending'
+                      status: 'pending',
                     },
                     {
                       user_id: 5,
                       job_id: 11,
-                      status: 'pending'
+                      status: 'pending',
                     },
                     {
                       user_id: 6,
                       job_id: 11,
-                      status: 'pending'
+                      status: 'pending',
                     },
                     {
                       user_id: 7,
                       job_id: 11,
-                      status: 'pending'
+                      status: 'pending',
                     },
                   ]);
                 })
-                .then(()=>{
+                .then(() => {
                   JobPetsPlants.bulkCreate([
                     {
                       job_id: 1,
-                      pet_plant_id: 2
+                      pet_plant_id: 2,
                     },
                     {
                       job_id: 1,
-                      pet_plant_id: 3
+                      pet_plant_id: 3,
                     },
                     {
                       job_id: 2,
-                      pet_plant_id: 1
+                      pet_plant_id: 1,
                     },
                     {
                       job_id: 2,
-                      pet_plant_id: 4
+                      pet_plant_id: 4,
                     },
                     {
                       job_id: 3,
-                      pet_plant_id: 1
+                      pet_plant_id: 1,
                     },
                     {
                       job_id: 3,
-                      pet_plant_id: 2
+                      pet_plant_id: 2,
                     },
                     {
                       job_id: 4,
-                      pet_plant_id: 3
+                      pet_plant_id: 3,
                     },
                     {
                       job_id: 4,
-                      pet_plant_id: 5
+                      pet_plant_id: 5,
                     },
                     {
                       job_id: 5,
-                      pet_plant_id: 5
+                      pet_plant_id: 5,
                     },
                     {
                       job_id: 5,
-                      pet_plant_id: 4
+                      pet_plant_id: 4,
                     },
                   ]);
                 })
