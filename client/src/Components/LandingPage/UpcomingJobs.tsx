@@ -36,29 +36,6 @@ const upcomingJobs: FC<Props> = ({
 }) => {
   const jobs = useAppSelector((state) => state.job.jobs);
 
-  // console.log(38, petPlant);
-
-  // console.log(
-  //   35,
-  //   petPlant.map((pet) => {
-  //     return pet.pet_plant.name;
-  //   })
-  // );
-
-  // console.log(45,
-  //   petPlant.map((pet) => {
-  //     return pet.pet_plant.image;
-  //   })
-  //   );
-
-  //date checking
-  // const currentDate = moment().format('L');
-  // console.log(44, currentDate);
-  // // console.log(44, moment().format('YYYY MM dd'));
-  // endDate = moment(endDate).format('L');
-  // console.log(49, endDate);
-  // console.log(moment(currentDate).isBefore(moment(endDate)));
-
   const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);
 
@@ -88,13 +65,23 @@ const upcomingJobs: FC<Props> = ({
         <Card.Text>{`${moment(startDate).format(
           'dddd MMMM Do, YYYY'
         )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}</Card.Text>
-        <Card.Link className='button-as-link' href='#'>Visit Profile</Card.Link>
+        <Card.Link className='button-as-link' href='#'>
+          Visit Profile
+        </Card.Link>
         <>
-          <Button className='bootstrap-button' variant='primary' onClick={handleShow}>
+          <Button
+            className='bootstrap-button'
+            variant='primary'
+            onClick={handleShow}
+          >
             More Info
           </Button>
 
-          <Modal contentClassName={theme === 'dark' && 'dark'} show={show} onHide={handleClose}>
+          <Modal
+            contentClassName={theme === 'dark' && 'dark'}
+            show={show}
+            onHide={handleClose}
+          >
             <Modal.Header closeButton>
               <Modal.Title>
                 {' '}
@@ -107,7 +94,11 @@ const upcomingJobs: FC<Props> = ({
             </Modal.Header>
             <Modal.Body>{location}</Modal.Body>
             <Modal.Footer>
-              <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant='secondary' onClick={handleClose}>
+              <Button
+                className={theme === 'dark' && 'bootstrap-modal-button'}
+                variant='secondary'
+                onClick={handleClose}
+              >
                 Close
               </Button>
               {/* <Button variant='primary' onClick={handleClose}>

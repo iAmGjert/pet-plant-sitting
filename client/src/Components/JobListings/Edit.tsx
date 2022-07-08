@@ -15,32 +15,21 @@ import moment from 'moment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Create = ({ setShowCreated }): JSX.Element => {
+const Edit = ({ job, setShowEdited }): JSX.Element => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.userProfile.value);
-  const myPets = useAppSelector((state) =>
-    state.petPlant.petPlants.filter((pet) => pet.owner_id === user.id)
-  );
-  const petPlants = useAppSelector((state) => state.petPlant.petPlants).reduce(
-    (ans, pet, ind) => {
-      if (pet.owner_id === user.id) {
-        ans.push(ind + 1);
-      }
-      return ans;
-    },
-    []
-  );
+  const petPlants = user.pet_plants;
   const dispatch = useAppDispatch();
-  const [startDate, setStartDate] = useState(
-    moment().add(1, 'days').format('YYYY-MM-DD')
-  );
-  const [endDate, setEndDate] = useState(
-    moment().add(2, 'days').format('YYYY-MM-DD')
-  );
+  const [startDate, setStartDate] = useState(job.startDate);
+  const [endDate, setEndDate] = useState(job.endDate);
   const [description, setDescription] = useState('');
   const [feed, setFeed] = useState(
-    myPets.reduce((arr) => {
-      arr.push(false);
+    petPlants.reduce((arr, pet) => {
+      if (job.pet_plant.includes(pet.id)) {
+        arr.push(true);
+      } else {
+        arr.push(false);
+      }
       return arr;
     }, [])
   );
@@ -50,16 +39,23 @@ const Create = ({ setShowCreated }): JSX.Element => {
     dispatch(setJobs(jobs.data));
   };
   
-  const postJob = async (newJob: any) => {
+  const editJob = async (editedJob: any) => {
     return await axios
-      .post('/api/jobs/create', newJob)
+      .patch(`/api/jobs/edit/${job.id}`, editedJob)
       .then((res: any) => {
         return res;
       })
-      .then((newJob) => {
-        newJob.data.pet_plant.forEach((pet) => {
+      .then((editedJob) => {
+        editedJob.data.job_pets_plants.forEach((petPlant: any)=> {
+          axios
+            .delete(`/api/jobs/jobPetsPlants/delete/${petPlant.id}`)
+            .then((res: any)=>{
+              return res;
+            });
+        });
+        editedJob.data.pet_plant.forEach((pet) => {
           axios.post('/api/jobs/jobPetsPlants/create', {
-            job_id: newJob.data.id,
+            job_id: job.id,
             pet_plant_id: pet,
           });
         });
@@ -72,6 +68,10 @@ const Create = ({ setShowCreated }): JSX.Element => {
         return err;
       });
   };
+  
+  useEffect(()=>{
+    //console.log(job.pet_plant);
+  }, []);
 
   const handleChangeStartDate = (e: Event) => {
     setStartDate(e.target.value);
@@ -92,25 +92,30 @@ const Create = ({ setShowCreated }): JSX.Element => {
     setFeed(newFeed);
   };
   const handleSubmit = () => {
-    setShowCreated(true);
     const jobPetsPlants = petPlants.filter((pet, i) => {
       if (feed[i] === true) {
         return true;
       }
       return false;
-    });
+    }).reduce((petIds, pet)=>{
+      petIds.push(pet.id);
+      return petIds;
+    }, []);
+    //console.log(job);
 
     const obj = {
-      location: user.location,
+      location: job.location,
       employer_id: user.id,
       pet_plant: jobPetsPlants,
+      sitter_id: null,
       startDate: startDate,
       endDate: endDate,
       isCompleted: false,
       description: description,
+      job_pets_plants: job.job_pets_plants,
     };
-    postJob(obj);
-
+    editJob(obj);
+    setShowEdited(true);
     dispatch(changeView('list'));
     return;
   };
@@ -126,7 +131,7 @@ const Create = ({ setShowCreated }): JSX.Element => {
       <Form>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
           <Form.Label>
-            Job Location: <div>{user.location}</div>
+            Job Location: <div>{job.location}</div>
           </Form.Label>
         </Form.Group>
         <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
@@ -159,7 +164,7 @@ const Create = ({ setShowCreated }): JSX.Element => {
           <Form.Control
             className="bootstrap-textbox"
             as="textarea"
-            placeholder={'Describe the job in one or two sentenses.'}
+            placeholder={job.description}
             rows={3}
             onChange={(e) => {
               handleChangeDescription(e);
@@ -207,7 +212,7 @@ const Create = ({ setShowCreated }): JSX.Element => {
           type="button"
           onClick={handleSubmit}
         >
-          Submit
+          Submit Your Changes
         </Button>
       </Form>
     ) : (
@@ -228,6 +233,6 @@ const Create = ({ setShowCreated }): JSX.Element => {
   );
 };
 
-Create.propTypes = {};
+Edit.propTypes = {};
 
-export default Create;
+export default Edit;

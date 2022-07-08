@@ -3,7 +3,7 @@ import moment from 'moment';
 import axios from 'axios';
 // import { RootState } from '../../store';
 
-interface Event {
+export interface Event {
   id: number;
   name: string;
   host: number | null;
@@ -121,7 +121,7 @@ export const updateComment = createAsyncThunk('events/updateComment',
   async (comment: { id: number, comment: string, event_id: number, user_id: number, 
   user: { id: number, name: string, image: string | null } }) => {
     try {
-      console.log(comment);
+      // console.log(comment);
       const { id } = comment;
       await axios.put(`/api/events/comment/update/${id}`, comment);
       return comment;
@@ -185,12 +185,11 @@ export const communityEventsSlice = createSlice({
     builder
       .addCase(addNewEvent.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log(action.payload);
-        state.events.push(action.payload);
-      });
-    builder //!BUG - this is not working Date object needs to be refactored - trace to backend
-      .addCase(updateEvent.fulfilled, (state, action) => {
         console.log(action);
+        state.events.push({...action.meta.arg, event_comments: [], event_participants: []});
+      });
+    builder 
+      .addCase(updateEvent.fulfilled, (state, action) => {
         if (!action.payload?.id) {
           console.log('Update could not complete');
           console.log(action.payload);
@@ -200,7 +199,7 @@ export const communityEventsSlice = createSlice({
         const events = state.events.filter((event: { id: number; }) => event.id !== id);
         state.events = [...events, action.payload];     
       });
-    builder //!BUG - same here
+    builder
       .addCase(deleteEvent.fulfilled, (state, action) => {
         if (!action.payload?.id) {
           console.log('Delete could not complete');

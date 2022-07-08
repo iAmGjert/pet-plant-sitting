@@ -9,7 +9,6 @@ import { ThemeContext } from '../../App';
 type Props = {
   showEditModal: boolean;
   setShowEditModal: (showEditModal: boolean) => void;
-  // editComment: (commentId: number, commentMessage: string) => void;
   commentObject: {
     id: number;
     event_id: number;
@@ -22,10 +21,11 @@ type Props = {
   };
 }
 
-const EditComment = ({ showEditModal, setShowEditModal, /*editComment*/ commentObject }: Props) => {
+const EditComment = ({ showEditModal, setShowEditModal, commentObject }: Props) => {
   const theme = useContext(ThemeContext);
   const currentUser = useAppSelector(state => state.userProfile.value);
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [show, setShow] = useState(false);
   const [addRequestStatus, setAddRequestStatus] = useState('idle');
 
@@ -41,7 +41,7 @@ const EditComment = ({ showEditModal, setShowEditModal, /*editComment*/ commentO
     if (canSubmit) {
       try {
         setAddRequestStatus('pending');
-        console.log(commentObject);
+        // console.log(commentObject);
         dispatch(updateComment({
           id: commentObject.id,
           comment: commentMessage,

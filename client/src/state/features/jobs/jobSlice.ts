@@ -90,7 +90,7 @@ export const deleteApplication = createAsyncThunk(
   'jobs/deleteApplicaiton',
   async(id) => {
     const response = await axios.delete(`/api/jobapplicants/delete/${id}`);
-    return response;
+    return id;//returning this to return id;
   }
 );
 
@@ -129,6 +129,7 @@ export const jobsSlice = createSlice({
       return state;
     });
     builder.addCase(deleteApplication.fulfilled, (state, action) => {
+      //console.log('delete application payload', action.payload, state.applications);
       state.applications = state.applications.filter((application) => {
         return application.id !== action.payload;
       });

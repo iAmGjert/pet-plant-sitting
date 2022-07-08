@@ -41,6 +41,9 @@ events.get('/all', (req: Request, res: Response) => {
       { model: EventParticipant, include: [{ model: User, attributes: ['id', 'name', 'image']}] },
       { model: User, attributes: ['id', 'name', 'image'] },
     ],
+    order: [
+      ['startDate', 'ASC']
+    ]
   }).then((events: Record<string, EventInfo> | null) => {
     // console.log(events);
     res.status(200).send(events);

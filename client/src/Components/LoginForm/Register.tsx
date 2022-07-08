@@ -48,40 +48,40 @@ const Register = () => {
   };
 
   return (
-    <Container className='Register'><Row><Col><Card>
+    <Container fluid className='Register'><Row><Col><Card className='bootstrap-card'>
       <Card.Header className='title'>Create a new user</Card.Header><Card.Body className='inputs'>    
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
-            <input type="text" placeholder="First name" name="firstName"
+            <input className='bootstrap-textbox' type="text" placeholder="First name" name="firstName"
               {...register('firstName', { required: true, /*pattern: /^[a-zA-Z]{3,15}$/i*/ })} />
             {errors.firstName && <p>{errors.firstName.message}</p>}
           </div>
           <div>
-            <input type="text" placeholder="Last name" name="lastName"
+            <input className='bootstrap-textbox' type="text" placeholder="Last name" name="lastName"
               {...register('lastName', {required: true, /*pattern: /^[a-zA-Z]{3,15}$/i*/ })} />
             {errors.lastName && <p>{errors.lastName.message}</p>}
           </div>
           <div>
-            <input type="email" placeholder="Email" name="email"
+            <input className='bootstrap-textbox' type="email" placeholder="Email" name="email"
               {...register('email', {required: true, maxLength: 30, pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 
               })} />
             {errors.email && <p>That ain&apos;t a valid email fool</p>}
           </div>
           <div>
-            <input type="password" placeholder="Password" name="password"
+            <input className='bootstrap-textbox' type="password" placeholder="Password" name="password"
               {...register('password', {required: true, maxLength: 30, pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i})} />
             {errors.password && <p>{errors.password.message}</p>} 
           </div>
           <div>
-            <input type="password" placeholder="Confirm Password" name="confirmPassword"
+            <input className='bootstrap-textbox' type="password" placeholder="Confirm Password" name="confirmPassword"
               {...register('confirmPassword', {required: true, maxLength: 30, pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i})} />
             {errors.confirmPassword && <p>Passwords Should Match!</p>} 
           </div>
           <div>
-            <input type='text' placeholder='location' name='location'
+            <input className='bootstrap-textbox' type='text' placeholder='location' name='location'
               {...register('location', {required: false, maxLength: 50 })} />
           </div>
-          <input type="submit" />
+          <input className='bootstrap-button' type="submit" />
         </form>
       </Card.Body>
     </Card></Col></Row></Container>    
