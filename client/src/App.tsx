@@ -64,8 +64,6 @@ const App: FC<Props> = () => {
   };
   const getEvents = async () => {
     const events = await axios.get('/api/events/all');
-
-    dispatch(setEvents(events.data));
     dispatch(mapActions.setEvents(events.data));
     dispatch(setEvents(events.data));
   };
@@ -101,7 +99,6 @@ const App: FC<Props> = () => {
             <Route path='/landingpage' element={<LandingPageMain />} />
             <Route path='/map' element={<MapMain />} />
 
-            
             <Route path='/events' element={<CommunityEvents />} />
             {/* <Route path='/events/edit/:id' element={<EditEvent />} /> */}
 

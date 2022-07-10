@@ -16,7 +16,7 @@ type Props = {
     user: {
       name: string;
       image: string;
-    }
+    };
   };
   // commentsArray: [{
   //   id: number;
@@ -36,10 +36,14 @@ type Props = {
   //     image: string;
   //   }
   // }]) => void;
-}
+};
 
-
-const ConfirmDelete = ({ showDeleteModal, setShowDeleteModal, deleteComment, commentObject}: Props) => {
+const ConfirmDelete = ({
+  showDeleteModal,
+  setShowDeleteModal,
+  deleteComment,
+  commentObject,
+}: Props) => {
   const [show, setShow] = useState(false);
   // console.log(show);
   const handleClose = () => {
@@ -54,34 +58,34 @@ const ConfirmDelete = ({ showDeleteModal, setShowDeleteModal, deleteComment, com
     deleteComment(commentObject.id);
     setShowDeleteModal(!showDeleteModal);
   };
-  console.log(commentObject);
+  // console.log(commentObject);
 
   return (
     <Modal
       show={showDeleteModal}
       onHide={handleClose}
-      backdrop="static"
+      backdrop='static'
       keyboard={false}
     >
       <Modal.Header closeButton>
         <Modal.Title>Confirm Delete</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form >
+        <Form>
           <Form.Text>
-            This action cannot be undone. Are you sure you want to delete this comment?
-            
+            This action cannot be undone. Are you sure you want to delete this
+            comment?
           </Form.Text>
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant='primary'
-          onClick={handleClose}
-        >Cancel</Button>
-         
+        <Button variant='primary' onClick={handleClose}>
+          Cancel
+        </Button>
 
-        <Button variant="primary"
-          onClick={handleConfirmDelete}>Yes</Button>
+        <Button variant='primary' onClick={handleConfirmDelete}>
+          Yes
+        </Button>
       </Modal.Footer>
     </Modal>
   );

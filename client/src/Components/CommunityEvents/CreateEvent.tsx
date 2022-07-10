@@ -9,7 +9,7 @@ const CreateEvent = () => {
   const dispatch = useAppDispatch();
   const currentUser = useAppSelector(state => state.userProfile.value);
   const event = useAppSelector(state => state.events.event);
-  console.log(event);
+  // console.log(event);
 
   //* local state for form values
   const [eventName, setEventName] = useState('');
