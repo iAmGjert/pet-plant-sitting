@@ -26,9 +26,33 @@ const Home: FC<Props> = () => {
   };
   return (
     <Container fluid>
-      <Row>
-        <Col className='text-center'>Welcome to Fern Herm!</Col>
-      </Row>
+      {/* <h1
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          fontWeight: 'bold',
+          padding: 10px 20px,
+        }}
+      >
+        Welcome to
+      </h1> */}
+      <h1 className='home-header'>Welcome to</h1>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '50vh',
+        }}
+      >
+        <img
+          src='https://64.media.tumblr.com/290a29bc6dcf179117ab4933ff583acc/4677f106597bcd32-27/s500x750/69d26528d580d86580d284278eb83b373a0a7435.jpg'
+          width={300}
+          height={300}
+          alt=''
+        />
+      </div>
       <Carousel fade>
         <Carousel.Item>
           <img
@@ -53,11 +77,24 @@ const Home: FC<Props> = () => {
             <p>Loves to cuddle!</p>
           </Carousel.Caption>
         </Carousel.Item>
+
+        <Carousel.Item>
+          <img
+            className='d-block w-100'
+            src='https://media.istockphoto.com/photos/pure-joy-picture-id519709986?k=20&m=519709986&s=612x612&w=0&h=IwCN9wp0L2Pt4gXHzP5HojZqO3JkTC82uUJcw4GBHi8='
+            alt='Third slide'
+          />
+          <Carousel.Caption>
+            <h3>Ronnie</h3>
+            <p>All smiles!</p>
+          </Carousel.Caption>
+        </Carousel.Item>
+
         <Carousel.Item>
           <img
             className='d-block w-100'
             src='https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/plant-names-1650565348.jpg?resize=768:*'
-            alt='Third slide'
+            alt='Fourth slide'
           />
           <Carousel.Caption>
             <h3>Benedict the Cactus</h3>
@@ -65,31 +102,22 @@ const Home: FC<Props> = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-
-      <Card className='bootstrap-card' style={{ width: '18rem' }}>
-        <Card.Body>
-          {/* <Card.Title>Card Title</Card.Title> */}
-          {/* <Card.Subtitle className='mb-2 text-muted'> */}
-          {/* Card Subtitle
-          </Card.Subtitle> */}
-          <Card.Text>
-            Fern-Herm is your one stop shop to find a sitter for your lovely
-            plants and animals while you are too busy to manage! Fern-Herm will
-            help you connect with locals who are willing to help!
-          </Card.Text>
-          <Button
-            className='bootstrap-button'
-            variant='primary'
-            size='lg'
-            onClick={() => navigate('/login')}
-          >
-            Login
-          </Button>
-          <div>
+      <div className='home-description'>
+        Fern-Herm is your one-stop shop to find a sitter for your lovely plants
+        and animals! Fern-Herm will help connect you with locals that are ready
+        to help.
+      </div>
+      <Button
+        className='bootstrap-button'
+        variant='primary'
+        size='sm'
+        onClick={() => navigate('/login')}
+      >
+        Login
+      </Button>
+      {/* <div>
             <Card.Link className='button-as-link' href='/events'>Free Community Events</Card.Link>
-          </div>
-        </Card.Body>
-      </Card>
+          </div> */}
     </Container>
   );
 };

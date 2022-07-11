@@ -470,3 +470,30 @@ body {
   position: absolute;
 }
 
+.home-header {
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
+  margin: 70px 80px 10px;
+  font-weight: 'bold';
+  font-family: "Times New Roman", Times, serif;
+  font-size: '12px';
+}
+
+.home-description {
+  display: 'flex';
+  justify-content: 'center';
+  padding: '1em 0em';
+  font-weight: 'bold';
+  margin: 20px 20px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+
+}
+
+.carousel-item img {
+  object-fit: cover;
+  object-position: center;
+  height: 50vh;
+  overflow: hidden;
+}
