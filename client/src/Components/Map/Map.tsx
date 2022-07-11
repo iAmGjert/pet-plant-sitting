@@ -197,9 +197,9 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
         {
           !cancelNav &&
           <ButtonToolbar>
-            <Button onClick={displayAll} className='map-bootstrap-button'>All</Button>
-            <Button onClick={displayJobsOnly} className='map-bootstrap-button' style={{borderColor: 'lightgreen'}}>Jobs</Button>
-            <Button onClick={displayEventsOnly} className='map-bootstrap-button' style={{borderColor: 'blue'}}>Events</Button>
+            <Button onClick={displayAll} className='map-bootstrap-button-all'>All</Button>
+            <Button onClick={displayJobsOnly} className='map-bootstrap-button-jobs'>Jobs</Button>
+            <Button onClick={displayEventsOnly} className='map-bootstrap-button-events'>Events</Button>
           </ButtonToolbar>
         }
         <Marker 
