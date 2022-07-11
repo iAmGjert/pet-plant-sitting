@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Offcanvas from 'react-bootstrap/Offcanvas';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
@@ -20,39 +21,29 @@ const Home: FC<Props> = () => {
   const users = useAppSelector((state) => state.userProfile.users);
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
   const jobs = useAppSelector((state) => state.job.jobs);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const handleClick = () => {
     // console.log(user);
     // setDisplay(!display);
   };
+
   return (
     <Container fluid>
-      {/* <h1
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          fontWeight: 'bold',
-          padding: 10px 20px,
-        }}
-      >
-        Welcome to
-      </h1> */}
       <h1 className='home-header'>Welcome to</h1>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '50vh',
-        }}
-      >
-        <img
-          src='https://64.media.tumblr.com/290a29bc6dcf179117ab4933ff583acc/4677f106597bcd32-27/s500x750/69d26528d580d86580d284278eb83b373a0a7435.jpg'
-          width={300}
-          height={300}
-          alt=''
-        />
-      </div>
+
+      <img
+        className='home-logo'
+        src='https://64.media.tumblr.com/290a29bc6dcf179117ab4933ff583acc/4677f106597bcd32-27/s500x750/69d26528d580d86580d284278eb83b373a0a7435.jpg'
+        width={300}
+        height={300}
+        alt=''
+      />
+
       <Carousel fade>
         <Carousel.Item>
           <img
@@ -86,7 +77,7 @@ const Home: FC<Props> = () => {
           />
           <Carousel.Caption>
             <h3>Ronnie</h3>
-            <p>All smiles!</p>
+            <p>The goodest boy to sit for!</p>
           </Carousel.Caption>
         </Carousel.Item>
 
@@ -102,19 +93,36 @@ const Home: FC<Props> = () => {
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
-      <div className='home-description'>
+      <p className='home-description'>
         Fern-Herm is your one-stop shop to find a sitter for your lovely plants
         and animals! Fern-Herm will help connect you with locals that are ready
         to help.
+      </p>
+
+      <div className='home-btns'>
+        <Button
+          className='bootstrap-button'
+          variant='primary'
+          size='sm'
+          onClick={() => navigate('/login')}
+        >
+          Login
+        </Button>
+        <Button variant='primary' size='sm' onClick={handleShow}>
+          Events
+        </Button>
+
+        <Offcanvas show={show} onHide={handleClose}>
+          <Offcanvas.Header closeButton>
+            <Offcanvas.Title>Next Upcoming Community Event:</Offcanvas.Title>
+          </Offcanvas.Header>
+          <Offcanvas.Body>
+            Some text as placeholder. In real life you can have the elements you
+            have chosen. Like, text, images, lists, etc.
+          </Offcanvas.Body>
+        </Offcanvas>
       </div>
-      <Button
-        className='bootstrap-button'
-        variant='primary'
-        size='sm'
-        onClick={() => navigate('/login')}
-      >
-        Login
-      </Button>
+
       {/* <div>
             <Card.Link className='button-as-link' href='/events'>Free Community Events</Card.Link>
           </div> */}

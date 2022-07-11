@@ -472,12 +472,34 @@ body {
 
 .home-header {
   display: 'flex';
-  justify-content: 'center';
-  align-items: 'center';
-  margin: 70px 80px 10px;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 80px 10px;
   font-weight: 'bold';
   font-family: "Times New Roman", Times, serif;
   font-size: '12px';
+}
+
+.home-logo {
+  display: 'flex';
+  justify-content: 'center';
+  align-items: 'center';
+  /* height: '50vh'; */
+  margin: 10px 50px 10px 30px;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  object-position: center;
+  height: 50vh;
+  overflow: hidden;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  object-position: center;
+  height: 50vh;
+  overflow: hidden;
 }
 
 .home-description {
@@ -491,9 +513,11 @@ body {
 
 }
 
-.carousel-item img {
-  object-fit: cover;
-  object-position: center;
-  height: 50vh;
-  overflow: hidden;
+.home-btns {
+  text-align: center;
+  padding-bottom: 20px;
+
 }
+
+
+
