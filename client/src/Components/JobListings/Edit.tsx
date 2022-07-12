@@ -69,10 +69,6 @@ const Edit = ({ job, setShowEdited, setShowDeleted }): JSX.Element => {
       });
   };
 
-  useEffect(() => {
-    //console.log(job.pet_plant);
-  }, []);
-
   const handleChangeStartDate = (e: Event) => {
     setStartDate(e.target.value);
   };
@@ -92,7 +88,6 @@ const Edit = ({ job, setShowEdited, setShowDeleted }): JSX.Element => {
     setFeed(newFeed);
   };
   const handleDelete = () => {
-    console.log(`You're attempting to delete job# ${job.id}`);
     axios
       .delete(`/api/jobs/delete/${job.id}`)
       .then((res: any) => {
@@ -117,7 +112,6 @@ const Edit = ({ job, setShowEdited, setShowDeleted }): JSX.Element => {
         petIds.push(pet.id);
         return petIds;
       }, []);
-    //console.log(job);
 
     const obj = {
       location: job.location,

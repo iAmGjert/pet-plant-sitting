@@ -31,7 +31,6 @@ interface jobApplicant {
 
 jobs.post('/create', async (req: Request, res: Response) => {
   const { location, pet_plant, employer_id, sitter_id, startDate, endDate, description, isCompleted } = req.body;
-  //console.log('create job', req.body);
   try {
     const job = await Job.create(<jobInfo>{
       location,
@@ -87,7 +86,6 @@ jobs.get('/:id', async (req: Request, res: Response) => {
 });
 
 jobs.delete('/delete/:id', async (req: Request, res: Response) => {
-  console.log(req.body);
   await Job.destroy({
     where: {
       id: req.params.id,
@@ -104,11 +102,9 @@ jobs.delete('/delete/:id', async (req: Request, res: Response) => {
 });
 
 jobs.post('/applicant/create', (req: Request, res: Response) => {
-  //console.log(req.body);
   const { job_id, user_id, status } = req.body;
   JobApplicant.create({ job_id, user_id, status })
     .then((jobApplicant: Record<string, applicantInfo> | null) => {
-      //console.log(jobApplicant?.dataValues);
       res.status(201).send(jobApplicant?.dataValues);
     })
     .catch((err: Error) => {
