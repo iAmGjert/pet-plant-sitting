@@ -367,6 +367,12 @@ db.sync(
               submitter_id: 4,
             },
             {
+              user_id: 2,
+              value: 4,
+              text: 'This is a test',
+              submitter_id: 4,
+            },
+            {
               petplant_id: 1,
               value: 1,
               text: 'I love this dog',

@@ -40,7 +40,7 @@ const MapDirections: FC<Props> = ({ steps, dirCoordinates, cancelNav, setCancelN
             }} />
         </Source><ListGroup variant='flush' as='ol' className='step-instructions' numbered>
           <Button className='bootstrap-button' onClick={() => setCancelNav(!cancelNav)}>End Route</Button>
-          {steps.map((step, i) => {
+          {steps.map((step, i: number) => {
             return <ListGroup.Item as='li'
               key={`${step}${i}`}
               className='step-instructions-card'

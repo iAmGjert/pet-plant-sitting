@@ -8,8 +8,6 @@ import { Button, ButtonToolbar } from 'react-bootstrap';
 import { ThemeContext } from '../../App';
 import MapDirections from './MapDirections';
 
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {
   user: object
   users: Array<object>
@@ -21,7 +19,6 @@ interface Props {
   events: Array<object>
   navigate: any
 }
- 
 
 const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
@@ -44,6 +41,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const [showJobsOnly, setShowJobsOnly] = useState(true);
   const [showEventsOnly, setShowEventsOnly] = useState(true);
 
+  
   const showJobInfo = (id) => {
     const storage = [];
     for (let i = 0; i < jobs.length; i++) {
@@ -150,6 +148,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     setUserCurrentCoords();
   }, []);
 
+  
   return (
     <div>
       <Map
