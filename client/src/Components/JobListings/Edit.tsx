@@ -126,110 +126,95 @@ const Edit = ({ job, setShowEdited }): JSX.Element => {
       ? setDisabled(false)
       : setDisabled(true);
   }, [feed]);
-  return user.name !== '' ? (
-    user.pet_plants.length > 0 ? (
-      <Form>
-        <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
-          <Form.Label>
+  return (
+    
+    <Form>
+      <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
+        <Form.Label>
             Job Location: <div>{job.location}</div>
-          </Form.Label>
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
-          <Form.Label>Pets/Plants</Form.Label>
-          <br />
-          <ButtonGroup className="mb-2">
-            {user.pet_plants.map((radio, idx) => (
-              <ToggleButton
-                key={idx}
-                id={`checkbox-${idx}`}
-                type="checkbox"
-                variant={feed[idx] ? 'outline-success' : 'outline-danger'}
-                name="radio"
-                value={radio.name}
-                checked={feed[idx]}
-                onChange={(e) => {
-                  petFeedButton(e, idx);
-                }}
-              >
-                {radio.name}
-              </ToggleButton>
-            ))}
-          </ButtonGroup>
-        </Form.Group>
-        <Form.Group
-          className="mb-3"
-          controlId="createEventForm.ControlTextarea1"
-        >
-          <Form.Label>Description</Form.Label>
-          <Form.Control
-            className="bootstrap-textbox"
-            as="textarea"
-            placeholder={job.description}
-            rows={3}
-            onChange={(e) => {
-              handleChangeDescription(e);
-            }}
-          />
-        </Form.Group>
-        <Row>
-          <Col>
-            <Form.Group
-              className="mb-3"
-              controlId="createEventForm.ControlInput3"
+        </Form.Label>
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
+        <Form.Label>Pets/Plants</Form.Label>
+        <br />
+        <ButtonGroup className="mb-2">
+          {user.pet_plants.map((radio, idx) => (
+            <ToggleButton
+              key={idx}
+              id={`checkbox-${idx}`}
+              type="checkbox"
+              variant={feed[idx] ? 'outline-success' : 'outline-danger'}
+              name="radio"
+              value={radio.name}
+              checked={feed[idx]}
+              onChange={(e) => {
+                petFeedButton(e, idx);
+              }}
             >
-              <Form.Label>Start Date:</Form.Label>
-              <Form.Control
-                className="bootstrap-textbox"
-                type="date"
-                value={startDate}
-                onChange={(e) => {
-                  handleChangeStartDate(e);
-                }}
-              />
-            </Form.Group>
-          </Col>
-          <Col>
-            <Form.Group
-              className="mb-3"
-              controlId="createEventForm.ControlInput3"
-            >
-              <Form.Label>End Date:</Form.Label>
-              <Form.Control
-                className="bootstrap-textbox"
-                type="date"
-                value={endDate}
-                onChange={(e) => {
-                  handleChangeEndDate(e);
-                }}
-              />
-            </Form.Group>
-          </Col>
-        </Row>
-        <Button
-          disabled={disabled}
-          className="bootstrap-button"
-          variant="primary"
-          type="button"
-          onClick={handleSubmit}
-        >
-          Submit Your Changes
-        </Button>
-      </Form>
-    ) : (
-      <Alert variant="warning">
-        Add a pet or plant to{' '}
-        <Alert.Link
-          onClick={() => {
-            navigate('/profile/' + user.id);
+              {radio.name}
+            </ToggleButton>
+          ))}
+        </ButtonGroup>
+      </Form.Group>
+      <Form.Group
+        className="mb-3"
+        controlId="createEventForm.ControlTextarea1"
+      >
+        <Form.Label>Description</Form.Label>
+        <Form.Control
+          className="bootstrap-textbox"
+          as="textarea"
+          placeholder={job.description}
+          rows={3}
+          onChange={(e) => {
+            handleChangeDescription(e);
           }}
-        >
-          your profile
-        </Alert.Link>{' '}
-        first!
-      </Alert>
-    )
-  ) : (
-    <LoginPrompt />
+        />
+      </Form.Group>
+      <Row>
+        <Col>
+          <Form.Group
+            className="mb-3"
+            controlId="createEventForm.ControlInput3"
+          >
+            <Form.Label>Start Date:</Form.Label>
+            <Form.Control
+              className="bootstrap-textbox"
+              type="date"
+              value={startDate}
+              onChange={(e) => {
+                handleChangeStartDate(e);
+              }}
+            />
+          </Form.Group>
+        </Col>
+        <Col>
+          <Form.Group
+            className="mb-3"
+            controlId="createEventForm.ControlInput3"
+          >
+            <Form.Label>End Date:</Form.Label>
+            <Form.Control
+              className="bootstrap-textbox"
+              type="date"
+              value={endDate}
+              onChange={(e) => {
+                handleChangeEndDate(e);
+              }}
+            />
+          </Form.Group>
+        </Col>
+      </Row>
+      <Button
+        disabled={disabled}
+        className="bootstrap-button"
+        variant="primary"
+        type="button"
+        onClick={handleSubmit}
+      >
+          Submit Your Changes
+      </Button>
+    </Form>
   );
 };
 

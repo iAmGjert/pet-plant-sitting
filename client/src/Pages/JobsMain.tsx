@@ -34,7 +34,7 @@ const JobsMain = () => {
     if (user.name === '') {
       navigate('/login');
     }
-    if (view !== 'create') {
+    if (view !== 'create' && view !== 'edit') {
       dispatch(changeView('create'));
       return;
     }
@@ -67,7 +67,7 @@ const JobsMain = () => {
     removeRevokedOverlay();
   }, [showRevoked]);
   return (
-    <Container fluid ref={target}>
+    <Container className='testTime' fluid ref={target}>
       <Overlay target={target.current} show={showCreated} placement="top">
         {({ placement, arrowProps, show: _show, popper, ...props }) => (
           <div
@@ -145,7 +145,7 @@ const JobsMain = () => {
           
       }
       
-      <Button className='bootstrap-button' onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : user.name === '' ? 'Login' : 'Create New Job'}</Button>
+      <Button className='bootstrap-button' onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : view === 'edit' ? 'Return to Job List' : user.name === '' ? 'Login' : 'Create New Job'}</Button>
     </Container>
   );
 };
