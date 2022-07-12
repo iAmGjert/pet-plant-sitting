@@ -22,9 +22,9 @@ const Create = ({ setShowCreated }): JSX.Element => {
     state.petPlant.petPlants.filter((pet) => pet.owner_id === user.id)
   );
   const petPlants = useAppSelector((state) => state.petPlant.petPlants).reduce(
-    (ans, pet, ind) => {
+    (ans, pet, ind, array) => {
       if (pet.owner_id === user.id) {
-        ans.push(ind + 1);
+        ans.push(pet.id);
       }
       return ans;
     },

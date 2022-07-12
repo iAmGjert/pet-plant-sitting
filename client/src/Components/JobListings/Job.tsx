@@ -124,7 +124,11 @@ const Job = ({ settemp, job, setshowapplied, setshowrevoked }) => {
                 <>
                   <strong>Pet/Plants: </strong>
                   {pet_plant.map((p, i) => {
-                    return <div key={`p${i}`}>{petPlants[p - 1]?.name}</div>;
+                    return <div key={`p${i}`}>{petPlants.filter((pet)=>{
+                      if (p === pet.id) {
+                        return true;
+                      }
+                    })[0]?.name}</div>;
                   })}
                 </>
               ) : (
