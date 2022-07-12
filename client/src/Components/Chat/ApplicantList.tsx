@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useAppSelector } from '../../state/hooks';
 import Applicants from './Applicants';
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import { Container, Card } from 'react-bootstrap';
 
 const ApplicantList = () => {
   const [jobsIPosted, setJobsIPosted] = useState([]);
   // const jobs = useAppSelector((state) => state.job.jobs);
   const currUser = useAppSelector((state) => state.userProfile.value);
-  // const jobs = useAppSelector((state) => state.job.jobs);
 
   const getJobs = async () => {
 
@@ -33,8 +32,16 @@ const ApplicantList = () => {
       {jobsIPosted.map((job) => {
         return (
           <div key={job.id}>
-            <h6>{job.startDate}</h6>
-            <Applicants job_applicants={job.job_applicants} />
+            <Container>
+              <Card>
+                <h6>{job.startDate}</h6>
+                <h6>Description: {job.description}</h6>
+                {job.job_applicants.length > 0 ? <Applicants job_applicants={job.job_applicants} /> : 
+                  <p>No Applicants</p>
+                }
+              
+              </Card>
+            </Container>
           </div>
         );
       })}

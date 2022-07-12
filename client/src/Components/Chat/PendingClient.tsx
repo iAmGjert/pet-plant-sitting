@@ -67,6 +67,7 @@ const PendingClient = ({ job }: { job: any }) => {
       <Card>
         <Card.Body>
           <h6>{job.startDate}</h6>
+          <h6>Description: {job.description}</h6>
           <div
             onClick={handleClick}
             onKeyPress={() => {
