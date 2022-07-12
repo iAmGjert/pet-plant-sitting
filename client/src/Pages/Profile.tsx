@@ -17,13 +17,12 @@ import {
   Nav,
   CardGroup,
 } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { format } from 'timeago.js';
 import PetPlantCard, { PetPlant } from '../Components/Profile/PetPlantCard';
 import EditAccountModal from '../Components/Profile/EditAccountModal';
 import Rating from '../Components/Profile/Rating';
-import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { profile } from 'console';
 
@@ -336,11 +335,11 @@ const Profile = () => {
               )}
               {profileUser?.ratings.length > 1 &&
                 profileUser?.ratings.length < 5 && (
-                  <Badge pill bg='info'>
-                    {/* if sitter < 2 jobs completed > */}
+                <Badge pill bg='info'>
+                  {/* if sitter < 2 jobs completed > */}
                     New Sitter
-                  </Badge>
-                )}
+                </Badge>
+              )}
               {getRating() === 5 && (
                 <Badge pill bg='primary'>
                   {/* 5 star rating */}

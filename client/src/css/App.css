@@ -508,3 +508,19 @@ body {
   position: absolute;
 }
 
+.job-list-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.job-tab-catagories {
+  width: 100%;
+}
+.job-card {
+  width: 100vw;
+}
+.job-bottom-button {
+  margin-top: 5px;
+}
+

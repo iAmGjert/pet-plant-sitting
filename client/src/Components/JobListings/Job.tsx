@@ -93,54 +93,67 @@ const Job = ({ settemp, job, setshowapplied, setshowrevoked }) => {
       });
   }, [jobGeoLoc, userGeoLoc]);
   return (
-    <Container>
+    <Container className="job-card">
       <Card className="bootstrap-card">
         <Card.Body>
           <Row>
-            <Col xs sm={1} md={1} lg={1}>
-              <Card.Title>Job#{id}</Card.Title>
-            </Col>
             <Col>
               {user.id !== employer_id ? (
-                <div>
-                  Employer:{' '}
+                <>
+                  <strong>Employer: </strong>
                   {
-                    <div>
+                    <>
                       {users.reduce((employer, users) => {
                         if (users.id === employer_id) {
                           employer = users.name;
                         }
-                        return employer;
+                        return <div>{employer}</div>;
                       }, '')}
-                    </div>
+                    </>
                   }
-                </div>
+                </>
               ) : (
-                <div>Applicants: {job_applicants.length}</div>
+                <>
+                  <strong>Applicants: </strong>
+                  {job_applicants.length}
+                </>
               )}
             </Col>
             <Col>
               {Array.isArray(pet_plant) ? (
-                <div>
-                  Pet/Plants:{' '}
+                <>
+                  <strong>Pet/Plants: </strong>
                   {pet_plant.map((p, i) => {
                     return <div key={`p${i}`}>{petPlants[p - 1]?.name}</div>;
                   })}
-                </div>
+                </>
               ) : (
                 <div />
               )}
             </Col>
           </Row>
-          <Row>Job starts {moment(startDate).fromNow()}.</Row>
-          <Button
-            ref={target}
-            className="bootstrap-button"
-            onClick={handleClick}
-            variant="primary"
-          >
-            More Info
-          </Button>
+          <Row className="jobStartsInRow">
+            <Col>
+              <strong>Job starts {moment(startDate).fromNow()}.</strong>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button
+                ref={target}
+                className="bootstrap-button"
+                onClick={handleClick}
+                variant="primary"
+              >
+                More Info
+              </Button>
+            </Col>
+
+            <Col>
+              <Card.Title>Job#{id}</Card.Title>
+            </Col>
+          </Row>
+
           <>
             <MoreInfo
               settemp={settemp}

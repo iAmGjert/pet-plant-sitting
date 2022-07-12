@@ -138,7 +138,7 @@ const Create = ({ setShowCreated }): JSX.Element => {
                 key={idx}
                 id={`checkbox-${idx}`}
                 type="checkbox"
-                variant={feed[idx] ? 'outline-success' : 'outline-danger'}
+                variant={feed[idx] ? 'success' : 'outline-success'}
                 name="radio"
                 value={radio.name}
                 checked={feed[idx]}

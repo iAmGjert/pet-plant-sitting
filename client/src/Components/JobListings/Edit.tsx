@@ -15,7 +15,7 @@ import moment from 'moment';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
-const Edit = ({ job, setShowEdited }): JSX.Element => {
+const Edit = ({ job, setShowEdited, setShowDeleted }): JSX.Element => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.userProfile.value);
   const petPlants = user.pet_plants;
@@ -38,7 +38,7 @@ const Edit = ({ job, setShowEdited }): JSX.Element => {
     const jobs = await axios.get('/api/jobs/all');
     dispatch(setJobs(jobs.data));
   };
-  
+
   const editJob = async (editedJob: any) => {
     return await axios
       .patch(`/api/jobs/edit/${job.id}`, editedJob)
@@ -46,10 +46,10 @@ const Edit = ({ job, setShowEdited }): JSX.Element => {
         return res;
       })
       .then((editedJob) => {
-        editedJob.data.job_pets_plants.forEach((petPlant: any)=> {
+        editedJob.data.job_pets_plants.forEach((petPlant: any) => {
           axios
             .delete(`/api/jobs/jobPetsPlants/delete/${petPlant.id}`)
-            .then((res: any)=>{
+            .then((res: any) => {
               return res;
             });
         });
@@ -68,8 +68,8 @@ const Edit = ({ job, setShowEdited }): JSX.Element => {
         return err;
       });
   };
-  
-  useEffect(()=>{
+
+  useEffect(() => {
     //console.log(job.pet_plant);
   }, []);
 
@@ -91,16 +91,32 @@ const Edit = ({ job, setShowEdited }): JSX.Element => {
     newFeed[index] = !newFeed[index];
     setFeed(newFeed);
   };
+  const handleDelete = () => {
+    console.log(`You're attempting to delete job# ${job.id}`);
+    axios
+      .delete(`/api/jobs/delete/${job.id}`)
+      .then((res: any) => {
+        getJobs();
+      })
+      .catch((err: any) => {
+        console.error(err, 'Error deleting job');
+      });
+    setShowDeleted(true);
+    dispatch(changeView('list'));
+    return;
+  };
   const handleSubmit = () => {
-    const jobPetsPlants = petPlants.filter((pet, i) => {
-      if (feed[i] === true) {
-        return true;
-      }
-      return false;
-    }).reduce((petIds, pet)=>{
-      petIds.push(pet.id);
-      return petIds;
-    }, []);
+    const jobPetsPlants = petPlants
+      .filter((pet, i) => {
+        if (feed[i] === true) {
+          return true;
+        }
+        return false;
+      })
+      .reduce((petIds, pet) => {
+        petIds.push(pet.id);
+        return petIds;
+      }, []);
     //console.log(job);
 
     const obj = {
@@ -127,11 +143,10 @@ const Edit = ({ job, setShowEdited }): JSX.Element => {
       : setDisabled(true);
   }, [feed]);
   return (
-    
     <Form>
       <Form.Group className="mb-3" controlId="createEventForm.ControlInput2">
         <Form.Label>
-            Job Location: <div>{job.location}</div>
+          Job Location: <div>{job.location}</div>
         </Form.Label>
       </Form.Group>
       <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
@@ -143,7 +158,7 @@ const Edit = ({ job, setShowEdited }): JSX.Element => {
               key={idx}
               id={`checkbox-${idx}`}
               type="checkbox"
-              variant={feed[idx] ? 'outline-success' : 'outline-danger'}
+              variant={feed[idx] ? 'success' : 'outline-success'}
               name="radio"
               value={radio.name}
               checked={feed[idx]}
@@ -156,10 +171,7 @@ const Edit = ({ job, setShowEdited }): JSX.Element => {
           ))}
         </ButtonGroup>
       </Form.Group>
-      <Form.Group
-        className="mb-3"
-        controlId="createEventForm.ControlTextarea1"
-      >
+      <Form.Group className="mb-3" controlId="createEventForm.ControlTextarea1">
         <Form.Label>Description</Form.Label>
         <Form.Control
           className="bootstrap-textbox"
@@ -205,15 +217,29 @@ const Edit = ({ job, setShowEdited }): JSX.Element => {
           </Form.Group>
         </Col>
       </Row>
-      <Button
-        disabled={disabled}
-        className="bootstrap-button"
-        variant="primary"
-        type="button"
-        onClick={handleSubmit}
-      >
-          Submit Your Changes
-      </Button>
+      <Row>
+        <Col>
+          <Button
+            disabled={disabled}
+            className="bootstrap-button"
+            variant="primary"
+            type="button"
+            onClick={handleSubmit}
+          >
+            Submit Changes
+          </Button>
+        </Col>
+        <Col>
+          <Button
+            className="bootstrap-button"
+            variant="danger"
+            type="button"
+            onClick={handleDelete}
+          >
+            Delete Job
+          </Button>
+        </Col>
+      </Row>
     </Form>
   );
 };
