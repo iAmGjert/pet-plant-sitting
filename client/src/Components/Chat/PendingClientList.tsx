@@ -29,7 +29,7 @@ const PendingClientList = () => {
 
   return (
     <Container>
-      <h3>Pending Clients</h3>
+      <h3>Pending Employers</h3>
       {availableJobs.map((job) => {
         return <PendingClient key={'Job: ' + job.id} job={job} />;
       })}
