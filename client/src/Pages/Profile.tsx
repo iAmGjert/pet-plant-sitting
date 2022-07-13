@@ -482,7 +482,7 @@ const Profile = () => {
           </span>
         </Col>
       </Row>
-      <Navbar sticky='top' bg='light' variant='light'>
+      {/* <Navbar sticky='top' bg='light' variant='light'>
         <Nav fill variant='tabs' defaultActiveKey='/home'>
           <Nav.Item>
             <Nav.Link
@@ -628,7 +628,7 @@ const Profile = () => {
             <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
           </Card>
         )}
-      </Row>
+      </Row> */}
     </Container>
   );
 };
