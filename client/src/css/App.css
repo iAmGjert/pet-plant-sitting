@@ -481,14 +481,13 @@ body,
   width: 100%;
   height: 100vh;
   /* display: grid; */
+  background-color: #C2F8CB;
   place-items: center;
 }
 
-/* .chat-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+.chat-card {
+  background-color: #558564;
+}
 
 .chat-window {
   width: 300px;
@@ -546,7 +545,7 @@ body,
 
 #you .message-content {
   justify-content: flex-start;
-  background-color: limegreen;
+  background-color: #7D6F86;
 }
 
 #you .message-meta {
@@ -560,7 +559,7 @@ body,
 
 #other .message-content {
   justify-content: flex-end;
-  background-color: cornflowerblue;
+  background-color: #F5C396;
 }
 
 #other .message-meta {
