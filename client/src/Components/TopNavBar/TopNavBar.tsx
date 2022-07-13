@@ -38,6 +38,9 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
             filter: 'invert(100%)',  
           }}/>}
         </Navbar.Brand>
+        <Navbar.Brand style={{textAlign: 'right'}}>
+          <Theme toggleTheme={toggleTheme} theme={theme} />
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
           <Nav className='me-auto'>
@@ -110,8 +113,6 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
               >
                 Info Lookup
               </NavDropdown.Item>
-              {/* <NavDropdown.Divider />
-              <NavDropdown.Item ><Theme toggleTheme={toggleTheme} theme={theme} /></NavDropdown.Item> */}
               {user.name && (
                 <>
                   <NavDropdown.Divider />

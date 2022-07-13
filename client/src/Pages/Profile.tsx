@@ -17,13 +17,12 @@ import {
   Nav,
   CardGroup,
 } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { format } from 'timeago.js';
 import PetPlantCard, { PetPlant } from '../Components/Profile/PetPlantCard';
 import EditAccountModal from '../Components/Profile/EditAccountModal';
 import Rating from '../Components/Profile/Rating';
-import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { profile } from 'console';
 
@@ -315,7 +314,13 @@ const Profile = () => {
       />
       <Row className='d-flex justify-content-center text-center' xs={1} md={1}>
         <Col>
-          <Image roundedCircle fluid thumbnail src={profileUser?.image} />
+          <Image
+            roundedCircle
+            fluid
+            thumbnail
+            style={{ width: 'auto', maxHeight: '500px' }}
+            src={profileUser?.image}
+          />
         </Col>
         <Col>
           <span>
@@ -532,8 +537,8 @@ const Profile = () => {
             </Nav.Link>
           </Nav.Item>
         </Nav>
-      </Navbar> */}
-      {/* <Row>
+      </Navbar>
+      <Row>
         <h2 id='overview'>About {profileUser?.name}</h2>
         {!readMore ? (
           <>
@@ -555,20 +560,20 @@ const Profile = () => {
         ) : (
           <>{profileUser?.bio}</>
         )}
-      </Row> */}
-      {/* <Row>
+      </Row>
+      <Row>
         <h2 id='ratings'> {`Reviews(${profileUser?.ratings.length})`} </h2>
         {profileUser?.ratings.map((rating, i) => {
           return (
             <Rating rating={rating} key={'rating' + i} getStars={getStars} />
           );
         })}
-      </Row> */}
-      {/* <h2 id='pets' className='text-decoration-underline'>
+      </Row>
+      <h2 id='pets' className='text-decoration-underline'>
         {' '}
         My Pets and Plants{' '}
-      </h2> */}
-      {/* <Row xs={1} md={2} lg={3}>
+      </h2>
+      <Row xs={1} md={2} lg={3}>
         {profileUser?.pet_plants.map((pet) => {
           return (
             <PetPlantCard
@@ -607,8 +612,8 @@ const Profile = () => {
                 </Card>
               </>
             );
-          })} */}
-      {/* {editable && (
+          })}
+        {editable && (
           <Card
             className='text-center'
             onClick={() => {

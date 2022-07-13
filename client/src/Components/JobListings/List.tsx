@@ -21,7 +21,8 @@ const List = ({ settemp, setshowapplied, setshowrevoked }) => {
       <Tabs
         defaultActiveKey="available jobs"
         id="jobTabs"
-        className="mb-3"
+        className="job-tab-catagories"
+        fill
       >
         <Tab eventKey="available jobs" title="New Jobs">
           {user?.name !== '' ? (
@@ -76,9 +77,7 @@ const List = ({ settemp, setshowapplied, setshowrevoked }) => {
                     );
                   })
               ) : (
-                <Card>
-                  <Card.Title>No Jobs to Display!</Card.Title>
-                </Card>
+                <strong>No Jobs to Display!</strong>
               )
           ) : (
             jobs
@@ -104,43 +103,37 @@ const List = ({ settemp, setshowapplied, setshowrevoked }) => {
           )}
         </Tab>
         <Tab eventKey="My Jobs" title="My Jobs">
-          {
-            user.name !== '' ? (
-              jobs.filter((job) => {
-                if (job.employer_id !== user.id) {
-                  return false;
-                }
-                return true;
-              }).length > 0 ? (
-                  jobs
-                    .filter((job) => {
-                      if (job.employer_id !== user.id) {
-                        return false;
-                      }
-                      return true;
-                    })
-                    .map((job, index) => {
-                      return (
-                        <Job
-                          settemp = {settemp}
-                          setshowrevoked={setshowrevoked}
-                          setshowapplied={setshowapplied}
-                          key={`job#${index}`}
-                          job={job}
-                        />
-                      );
-                    })
-                ) : (
-                  <Card>
-                    <Card.Title>No Jobs to Display!</Card.Title>
-                  </Card>
-                )
-            ) : (
-              <Card>
-                <Card.Title>Login to view these jobs!</Card.Title>
-              </Card>
-            )
-          }
+          {user.name !== '' ? (
+            jobs.filter((job) => {
+              if (job.employer_id !== user.id) {
+                return false;
+              }
+              return true;
+            }).length > 0 ? (
+                jobs
+                  .filter((job) => {
+                    if (job.employer_id !== user.id) {
+                      return false;
+                    }
+                    return true;
+                  })
+                  .map((job, index) => {
+                    return (
+                      <Job
+                        settemp={settemp}
+                        setshowrevoked={setshowrevoked}
+                        setshowapplied={setshowapplied}
+                        key={`job#${index}`}
+                        job={job}
+                      />
+                    );
+                  })
+              ) : (
+                <strong>No Jobs to Display!</strong>
+              )
+          ) : (
+            <strong>Login to view these jobs!</strong>
+          )}
         </Tab>
         <Tab eventKey="My Apps" title="My Apps">
           {user.name !== '' ? (
@@ -172,14 +165,10 @@ const List = ({ settemp, setshowapplied, setshowrevoked }) => {
                     );
                   })
               ) : (
-                <Card>
-                  <Card.Title>No Jobs to Display!</Card.Title>
-                </Card>
+                <strong>No Jobs to Display!</strong>
               )
           ) : (
-            <Card>
-              <Card.Title>Login to view these jobs!</Card.Title>
-            </Card>
+            <strong>Login to view these jobs!</strong>
           )}
         </Tab>
       </Tabs>
@@ -187,7 +176,6 @@ const List = ({ settemp, setshowapplied, setshowrevoked }) => {
   );
 };
 
-List.propTypes = {
-};
+List.propTypes = {};
 
 export default List;

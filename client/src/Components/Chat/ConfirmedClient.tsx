@@ -64,7 +64,7 @@ const ConfirmedClient = ({ job }: { job: any }) => {
 
   return (
     <Container>
-      <Card>
+      <Card className='chat-card'>
         <Card.Body>
           <h6>{job.startDate}</h6>
           <h6>Description: {job.description}</h6>

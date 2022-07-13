@@ -16,7 +16,7 @@ const Rating = ({ rating, getStars }: Props) => {
   };
   // console.log(rating, 'rating');
   return (
-    <Card>
+    <Card className='bootstrap-card'>
       <Card.Body>
         <Card.Title
           onClick={() => {

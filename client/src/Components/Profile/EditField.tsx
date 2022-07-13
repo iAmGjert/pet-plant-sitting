@@ -12,6 +12,7 @@ import axios from 'axios';
 import { AiFillEdit } from '@react-icons/all-files/ai/AiFillEdit';
 import { AiFillSave } from '@react-icons/all-files/ai/AiFillSave';
 import { BiCurrentLocation } from '@react-icons/all-files/bi/BiCurrentLocation';
+import { BiUpload } from '@react-icons/all-files/bi/BiUpload';
 import Tags from './Tags';
 
 type Props = {
@@ -149,6 +150,7 @@ const EditField = ({
         return (
           <div>
             <Button
+              className='m-2'
               variant='light'
               onClick={() => {
                 setVal(null);
@@ -624,15 +626,27 @@ const EditField = ({
       case 'image':
         return (
           <div>
-            <img
-              src={value}
-              alt='profile picture'
-              width='160'
-              height='160'
-              onClick={() => {
-                showWidget();
-              }}
-            />
+            {value ? (
+              <img
+                src={value}
+                style={{ width: 'auto' }}
+                alt='profile picture'
+                height='160'
+                onClick={() => {
+                  showWidget();
+                }}
+              />
+            ) : (
+              <Button
+                className='bootstrap-button'
+                onClick={() => {
+                  showWidget();
+                }}
+              >
+                Upload
+                <BiUpload style={{ margin: '2px', paddingBottom: '1px' }} />
+              </Button>
+            )}
           </div>
         );
       default:
