@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
@@ -9,24 +10,34 @@ import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-
-//import { events } from '../state/features/events/eventsSlice';
+import { fetchUpcomingEvents } from '../state/features/events/eventsSlice';
 interface Props {}
 
 const Home: FC<Props> = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   //const [display, setDisplay] = useState(false);
   const upcomingEvents = useAppSelector((state) => state.events.upcomingEvents);
-  const dispatch = useAppDispatch();
-  console.log(upcomingEvents);
+  //console.log('upcomingEvents', upcomingEvents);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const mappedEvents = upcomingEvents
+    .map((event: Event) => {
+      return {
+        title: event.name,
+        startDate: moment(event.startDate).toDate(),
+        description: event.description,
+      };
+    })
+    .slice(0, 1);
+  //console.log('mappedEvents', mappedEvents);
+
   useEffect(() => {
-    dispatch(fetchUpcomingEvents);
-  });
+    dispatch(fetchUpcomingEvents());
+  }, []);
 
   return (
     <Container className='home-container'>
@@ -110,11 +121,17 @@ const Home: FC<Props> = () => {
 
         <Offcanvas show={show} onHide={handleClose}>
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Next Upcoming Community Event:</Offcanvas.Title>
+            <Offcanvas.Title>
+              Next Upcoming Community Event:
+              {mappedEvents.map((element) => {
+                return <h1>{element.title}</h1>;
+              })}
+            </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            Some text as placeholder. In real life you can have the elements you
-            have chosen. Like, text, images, lists, etc.
+            {mappedEvents.map((element) => {
+              return <p>{element.description}</p>;
+            })}
           </Offcanvas.Body>
         </Offcanvas>
       </div>
