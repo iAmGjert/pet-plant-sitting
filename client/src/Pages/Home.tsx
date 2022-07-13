@@ -5,38 +5,28 @@ import { useNavigate } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
+
+//import { events } from '../state/features/events/eventsSlice';
 interface Props {}
 
 const Home: FC<Props> = () => {
   const navigate = useNavigate();
-  const [display, setDisplay] = useState(false);
-  const user = useAppSelector((state) => state.userProfile.value);
-  const users = useAppSelector((state) => state.userProfile.users);
-  const petPlants = useAppSelector((state) => state.petPlant.petPlants);
-  const jobs = useAppSelector((state) => state.job.jobs);
-  const events = useAppSelector((state) => state.events.events);
-
-  console.log(events);
+  //const [display, setDisplay] = useState(false);
+  const upcomingEvents = useAppSelector((state) => state.events.upcomingEvents);
+  const dispatch = useAppDispatch();
+  console.log(upcomingEvents);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // const handleClick = () => {
-  //   // console.log(user);
-  //   // setDisplay(!display);
-  // };
-
-  // useEffect(() => {
-  //   dispatch(events);
-  // });
+  useEffect(() => {
+    dispatch(fetchUpcomingEvents);
+  });
 
   return (
     <Container className='home-container'>
