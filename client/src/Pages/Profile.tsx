@@ -17,14 +17,14 @@ import {
   Nav,
   CardGroup,
 } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { format } from 'timeago.js';
 import PetPlantCard, { PetPlant } from '../Components/Profile/PetPlantCard';
 import EditAccountModal from '../Components/Profile/EditAccountModal';
 import Rating from '../Components/Profile/Rating';
-import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
+import { profile } from 'console';
 
 export interface RatingInfo {
   id: number;
@@ -72,7 +72,7 @@ const Profile = () => {
   const [showModal, setShowModal] = useState(false);
   const [showToast, setShowToast] = useState(true);
   const [newImgCloud, setNewImgCloud] = useState('');
-
+  const [calcLoc, setCalcLoc] = useState('');
   const [completeProfile, setCompleteProfile] = useState(0);
   const [missingFields, setMissingFields] = useState([]);
   const [profileUser, setProfileUser] = useState<Profile | null>(null);
@@ -167,12 +167,35 @@ const Profile = () => {
       }
     );
   };
-  const getLocation = (location: string) => {
+  const getLocation = async (location: string) => {
     if (location) {
-      const loc = location.split(',');
-      return loc[1].trim() + ', ' + loc[2].trim();
+      const arr = []; //[city, state, zip]
+      // const loc = location.split(',');
+      // return loc[1].trim() + ', ' + loc[2].trim();
+      const loc = await axios.get(
+        `https://api.mapbox.com/geocoding/v5/mapbox.places/${profileUser?.location}.json?access_token=${process.env.MAPBOX_TOKEN}`
+      );
+      if (loc.data.features.length === 0) {
+        setCalcLoc('No Location');
+        return;
+      }
+      // console.log(loc);
+      for (let i = 0; i < loc.data.features[0].context.length; i++) {
+        if (loc.data.features[0].context[i].id.includes('place')) {
+          arr[0] = loc.data.features[0].context[i].text;
+        }
+        if (loc.data.features[0].context[i].id.includes('region')) {
+          arr[1] = loc.data.features[0].context[i].text;
+        }
+        if (loc.data.features[0].context[i].id.includes('postcode')) {
+          arr[2] = loc.data.features[0].context[i].text;
+        }
+      }
+      setCalcLoc(arr.join(', '));
+      // return arr.join(',');
     } else {
-      return 'No Location';
+      setCalcLoc('No Location');
+      // return 'No Location';
     }
   };
 
@@ -214,6 +237,10 @@ const Profile = () => {
   }, [newImgCloud]);
 
   useEffect(() => {
+    if (id === undefined || id === 'undefined' || id === '') {
+      navigate('/');
+    }
+
     if (id) {
       getProfile();
     }
@@ -230,6 +257,7 @@ const Profile = () => {
 
   useEffect(() => {
     checkProgress();
+    getLocation(profileUser?.location);
   }, [profileUser]);
   return (
     <Container fluid>
@@ -267,6 +295,7 @@ const Profile = () => {
             <Button
               size='sm'
               variant='success'
+              className='bootstrap-button'
               onClick={() => {
                 setShowModal(true);
                 setShowToast(false);
@@ -292,7 +321,7 @@ const Profile = () => {
             <h2 style={{ fontSize: '30px', paddingTop: '10px' }}>
               {profileUser?.name}
             </h2>
-            <h5>{getLocation(profileUser?.location)}</h5>
+            <h5>{calcLoc}</h5>
             <h5>
               {getStars(getRating())}({profileUser?.ratings.length})
             </h5>
@@ -594,7 +623,6 @@ const Profile = () => {
           </Card>
         )}
       </Row> */}
-      
     </Container>
   );
 };

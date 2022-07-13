@@ -33,7 +33,7 @@ users.get('/all', async (req: Request, res: Response) => {
 });
 
 users.put('/:id', async (req: Request, res: Response) => {
-  console.log(req.body);
+  // console.log(req.body);
   User.update(req.body, { where: { id: req.body.id } })
     .then(() => {
       res.sendStatus(200);

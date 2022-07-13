@@ -38,7 +38,7 @@ const EditAccountModal = ({
 
   const getUser = async () => {
     const user = await axios.get('/auth/login/success');
-    console.log(user.data.user);
+    // console.log(user.data.user);
     dispatch(setUser(user.data.user));
     setProfileUser(user.data.user);
   };
@@ -52,7 +52,7 @@ const EditAccountModal = ({
       bio,
       theme: userTheme,
     });
-    getUser();
+    await getUser();
     setShowModal(false);
     navigate(`/profile/${user.id}`);
   };
@@ -97,7 +97,7 @@ const EditAccountModal = ({
         add={true}
         newPetId={newPetId}
       />
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className={theme === 'dark' && 'dark'}>
         <Modal.Title>Update Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>

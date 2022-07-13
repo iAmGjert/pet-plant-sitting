@@ -1,4 +1,10 @@
-const { User, PetPlant, Job, JobApplicant, JobPetsPlants } = require('../../database/index');
+const {
+  User,
+  PetPlant,
+  Job,
+  JobApplicant,
+  JobPetsPlants,
+} = require('../../database/index');
 
 import express, { Request, Response } from 'express';
 const jobApplicants = express();
@@ -13,11 +19,10 @@ interface jobInfo {
   description: string;
 }
 interface applicantInfo {
-  id: number,
-  job_id: number,
-  pet_plant_id: number
+  id: number;
+  job_id: number;
+  pet_plant_id: number;
 }
-
 
 jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
   try {
@@ -28,27 +33,24 @@ jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
       }
       const applications = await JobApplicant.findAll({
         where: { user_id: req.user.id || req.user[0].id },
-        include: [ {model: Job} ]
-      }); 
+        include: [{ model: Job }],
+      });
       res.json(applications);
     } else {
       res.json([]);
     }
-
-
   } catch (error) {
     console.log(error);
     res.sendStatus(400);
   }
-}); 
-
+});
 
 jobApplicants.delete('/delete/:id', async (req: Request, res: Response) => {
   //console.log(req.body, 'body');
   const deletedApplication = await JobApplicant.destroy({
     where: {
-      id: req.params.id
-    }
+      id: req.params.id,
+    },
   });
   //return res.sendStatus(200).send(deletedApplication);
   return res.json(deletedApplication);
@@ -77,5 +79,33 @@ jobApplicants.patch('/:user_id/:job_id', async (req: Request, res: Response) => 
     });
 });
 
+/*
+jobApplicants.patch(
+  '/:user_id/:job_id',
+  async (req: Request, res: Response) => {
+    const { user_id, job_id } = req.params;
+    const { status } = req.body;
+*/
+
+    JobApplicant.update(
+      {
+        status,
+      },
+      {
+        where: {
+          user_id,
+          job_id,
+        },
+      }
+    )
+      .then(() => {
+        res.sendStatus(200);
+      })
+      .catch((error: Error) => {
+        res.sendStatus(500);
+        console.log(error);
+      });
+  }
+);
 
 module.exports = jobApplicants;

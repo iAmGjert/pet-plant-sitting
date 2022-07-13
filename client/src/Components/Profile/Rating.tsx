@@ -11,15 +11,16 @@ type Props = {
 
 const Rating = ({ rating, getStars }: Props) => {
   const navigate = useNavigate();
-  const navigateToUser = async (id: number) => {
+  const navigateToUser = (id: number) => {
     navigate(`/profile/${id}`);
   };
+  // console.log(rating, 'rating');
   return (
-    <Card>
+    <Card className='bootstrap-card'>
       <Card.Body>
         <Card.Title
           onClick={() => {
-            navigateToUser(rating.submitter.id);
+            navigateToUser(rating.submitter_id);
           }}
         >
           <img
