@@ -30,7 +30,7 @@ const Home: FC<Props> = () => {
   });
 
   return (
-    <Container className='home-container'>
+    <Container fluid className='home-container'>
       <h1 className='home-header'>Welcome to</h1>
 
       <img

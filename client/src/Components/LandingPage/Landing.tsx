@@ -11,6 +11,7 @@ import UpcomingEvent from './UpcomingEvent';
 import 'bootstrap/dist/css/bootstrap.min.css';
 //import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import Container from 'react-bootstrap/Container';
 
 //Redux
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
@@ -79,19 +80,20 @@ const Landing: FC<Props> = () => {
 
   return (
     <div>
-      <Card className='bootstrap-card'>
-        <Card.Header as='h5'>
+      <Container fluid>
+        <Card className='bootstrap-card'>
+          <Card.Header as='h5'>
           Welcome {user.name ? `, ${user.name}!` : '!'}
-        </Card.Header>
-        <Card.Title>Fern Herm is happy to have you!</Card.Title>
-        <Card.Img
-          variant='top'
-          src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
-        />
-      </Card>
+          </Card.Header>
+          <Card.Title>Fern Herm is happy to have you!</Card.Title>
+          <Card.Img
+            variant='top'
+            src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
+          />
+        </Card>
 
-      {sitterUpcomingJobs.length > 0
-        ? sitterUpcomingJobs.map(
+        {sitterUpcomingJobs.length > 0
+          ? sitterUpcomingJobs.map(
             (element: {
               id: React.Key;
               startDate: any;
@@ -114,61 +116,62 @@ const Landing: FC<Props> = () => {
               );
             }
           )
-        : null}
+          : null}
 
-      {upcomingEvents
-        .slice(0, 1)
-        .map(
-          (element: {
+        {upcomingEvents
+          .slice(0, 1)
+          .map(
+            (element: {
             id: React.Key;
             startDate: any;
             description: any;
             location: any;
             name: any;
           }) => {
-            return (
-              <React.Fragment
-                key={`UpcomingEvents key: ${
-                  ~~(Math.random() * 1000) * (element.id + 1)
-                }`}
-              >
-                <LandingEventCard
+              return (
+                <React.Fragment
+                  key={`UpcomingEvents key: ${
+                    ~~(Math.random() * 1000) * (element.id + 1)
+                  }`}
+                >
+                  <LandingEventCard
                   // key={element.id}
-                  startDate={element.startDate}
-                  description={element.description}
-                  location={element.location}
-                  name={element.name}
-                />
-              </React.Fragment>
-            );
-          }
-        )}
+                    startDate={element.startDate}
+                    description={element.description}
+                    location={element.location}
+                    name={element.name}
+                  />
+                </React.Fragment>
+              );
+            }
+          )}
 
-      {applications.map(
-        (
-          element: JSX.IntrinsicAttributes & {
+        {applications.map(
+          (
+            element: JSX.IntrinsicAttributes & {
             status: any;
             job: any;
             id: any;
             startDate: any;
             endDate: any;
           }
-        ) => {
-          return (
-            <>
-              <AppliedJobsBoard
-                key={element.id}
-                startDate={element.job.startDate}
-                petPlants={element.job_pets_plants}
-                location={element.job.location}
-                {...element}
-              />
-            </>
-          );
-        }
-      )}
+          ) => {
+            return (
+              <>
+                <AppliedJobsBoard
+                  key={element.id}
+                  startDate={element.job.startDate}
+                  petPlants={element.job_pets_plants}
+                  location={element.job.location}
+                  {...element}
+                />
+              </>
+            );
+          }
+        )}
 
-      <JobHistory sitterWorkHistory={sitterWorkHistory} />
+        <JobHistory sitterWorkHistory={sitterWorkHistory} />
+      </Container>
     </div>
   );
 };
