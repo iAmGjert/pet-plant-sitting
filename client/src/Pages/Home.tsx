@@ -11,7 +11,6 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import { fetchUpcomingEvents } from '../state/features/events/eventsSlice';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-import { fetchUpcomingEvents } from '../state/features/events/eventsSlice';
 interface Props {}
 
 const Home: FC<Props> = () => {
@@ -41,7 +40,7 @@ const Home: FC<Props> = () => {
   }, []);
 
   return (
-    <Container className='home-container'>
+    <Container fluid className='home-container'>
       <h1 className='home-header'>Welcome to</h1>
 
       <img
