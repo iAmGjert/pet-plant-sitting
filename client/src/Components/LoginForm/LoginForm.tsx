@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+// import './fern-herm-logo.svg';
 
 const LoginForm = () => {
   const [email, setEmail] = useState<string>('');
@@ -26,32 +27,32 @@ const LoginForm = () => {
   };
 
   return (
-    <Form>
+    <Form className='login-form'>
+      <img className="fern-herm-logo" src={require('./fern-herm-logo.svg')} alt="Fern and Herm logo" />
       <Form.Group className='mb-3' controlId='formBasicEmail'>
-        <Form.Label>Email address</Form.Label>
+        {/* <Form.Label>Email address</Form.Label> */}
         <Form.Control className='bootstrap-textbox' type='email' placeholder='Enter email' 
           onChange={(e) => setEmail(e.target.value)} required/>
-        <Form.Text className='text-muted'>
+        {/* <Form.Text className='text-muted'>
           Well never share your email with anyone else.
-        </Form.Text>
+        </Form.Text> */}
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicPassword'>
-        <Form.Label>Password</Form.Label>
+        {/* <Form.Label>Password</Form.Label> */}
         <Form.Control className='bootstrap-textbox' type='password' placeholder='Password' 
           onChange={(e) => setPassword(e.target.value)} required/>
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicCheckbox'>
       </Form.Group>
-      <Button className='bootstrap-button' variant='primary' href='/loading' onClick={login}>
+      <Button className='bootstrap-button login-btn' variant='primary' href='/loading' onClick={login}>
         Login
       </Button>
-      <div style={{ margin: '5px'}}>
-        sign up as a new user
-      </div>
-      <div style={{ marginBottom: '5px'}}>
-        <Button className='bootstrap-button' variant='primary' onClick={navigateRegister}>
-        Sign Up
-        </Button>
+      <div id="login-footer" >
+        <span>new to fern herm?</span>
+        <span>
+          <Button className='bootstrap-button sign-up-btn' variant='link' 
+            onClick={navigateRegister}>Sign Up</Button>
+        </span>
       </div>
     </Form>
   );

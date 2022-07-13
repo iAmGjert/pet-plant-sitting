@@ -1,19 +1,19 @@
 import React from 'react';
 import { Button } from 'react-bootstrap';
+import GoogleButton from 'react-google-button';
 
-const GoogleButton = () => {
+const Google = () => {
   return (
-    <div>
+    <>
       <Button
-        className='bootstrap-button'
-        variant='primary'
-        size='lg'
-        href={`${process.env.CLIENT_URL}:${process.env.PORT}/auth/google`}
-      >
-        Login with Google
+        name="google"
+        className='bootstrap-button google-btn'
+        variant='light'
+        href={'/auth/google'}
+      ><GoogleButton />
       </Button>
-    </div>
+    </>
   );
 };
 
-export default GoogleButton;
+export default Google;

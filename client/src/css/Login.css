@@ -1,0 +1,116 @@
+.Register {
+  background-color: deepskyblue;
+  box-shadow: 3px 3px 10px;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  background-color: aliceblue;
+  width: 90vw;
+  height: 75vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Register .title {
+  color: black;
+  flex: 20%;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  font-size: 35px;
+}
+
+.Register .inputs {
+  flex: 80%;
+  width: 100%;
+}
+
+.inputs input {
+  width: 250px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 6px;
+  border: none;
+  padding-left: 10px;
+  margin-top: 10px;
+}
+
+.inputs #submit {
+  cursor: pointer;
+}
+
+.fern-herm-logo {
+  margin: 2em auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30%;
+  max-width: 200px;
+  height: auto;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border: transparent solid 1px;
+  padding-bottom: 1em;
+}
+
+#login-footer {
+  position: fixed;
+  bottom: 7%;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  border-top: grey solid 1px;
+  padding: 0.3em 0;
+}
+
+.sign-up-btn {
+  cursor: pointer;
+  vertical-align: middle;
+  margin-top: -6px;
+}
+
+.google-btn {
+  border: none;
+  border-radius: 6px;
+  padding: 0.5em 1em;
+  cursor: pointer;
+}
+a[name="google"] {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+} 
+
+.login-btn {
+  cursor: pointer;
+  width: 50%;
+  max-width: 230px;
+}
+
+.space {
+  border: 1px solid grey;
+  margin: 2%;
+  max-width: 250px;
+}
+
+.seperator .space {
+  display: inline-block;
+  width: 40%;
+}
+.seperator {
+  text-transform: uppercase;
+  margin: 1em 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -5,7 +5,7 @@ import { Card, Container, Row, Col } from 'react-bootstrap';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import axios from 'axios';
-import './style.css';
+import '../../css/Login.css';
 
 type Inputs = {
   firstName: string;
