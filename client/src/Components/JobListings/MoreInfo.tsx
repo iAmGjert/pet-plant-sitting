@@ -106,7 +106,7 @@ const MoreInfo = (props) => {
       aria-labelledby="contained-modal-title-vcenter"
       contentClassName={theme === 'dark' && 'dark'}
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className={theme === 'dark' && 'dark'}>
         <Modal.Title id="contained-modal-title-vcenter">
           {`${employer}\'s job listing:`}
         </Modal.Title>
@@ -143,7 +143,7 @@ const MoreInfo = (props) => {
                   Applicants:
                   {job.job_applicants.map((applicant, idx) => {
                     return (
-                      <Card className={theme === 'dark' && 'bootstrap-card'} key={`applicant${idx}`}>
+                      <Card className={theme === 'dark' && 'bootstrap-modal-card'} key={`applicant${idx}`}>
                         <Row>
                           <Card.Title>{applicant.user.name}</Card.Title>
                         </Row>
@@ -180,7 +180,7 @@ const MoreInfo = (props) => {
           )}
         </Container>
       </Modal.Body>
-      <Modal.Footer>
+      <Modal.Footer className={theme === 'dark' && 'dark'}>
         <Button
           className={theme === 'dark' && 'bootstrap-modal-button'}
           onClick={onHide}

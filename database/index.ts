@@ -223,8 +223,8 @@ db.sync(
         },
         {
           name: 'velouriagreen',
-          username: 'test',
-          password: 'test',
+          // username: 'test',
+          // password: 'test',
           image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: null,
@@ -289,7 +289,7 @@ db.sync(
           },
           {
             owner_id: 5,
-            name: 'Benito',
+            name: 'Borg',
             image:
               'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
             breed: 'Long-tailed feline',
@@ -343,6 +343,21 @@ db.sync(
             is_plant: false,
             bio: "Ain't I cute?!",
           },
+          {
+            owner_id: 6,
+            name: 'Tiger',
+            image:
+              'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
+            breed: 'Tiger',
+            age: 2,
+            gender: 'Female',
+            species: 'Tiger',
+            tags: ['Spotted', 'Silly', 'Speed', 'Cute'],
+            rating: 4,
+            total_ratings: 33,
+            is_plant: false,
+            bio: "Ain't I cute?!",
+          },
         ]).then(() => {
           Rating.bulkCreate([
             {
@@ -369,6 +384,12 @@ db.sync(
               submitter_id: 4,
             },
             {
+              user_id: 2,
+              value: 4,
+              text: 'This is a test',
+              submitter_id: 4,
+            },
+            {
               petplant_id: 1,
               value: 1,
               text: 'I love this dog',
@@ -384,7 +405,7 @@ db.sync(
             Job.bulkCreate([
               {
                 location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
-                pet_plant: [2, 2],
+                pet_plant: [2],
                 employer_id: 2,
                 description: 'Come watch my child!',
                 sitter_id: 7,
@@ -394,7 +415,7 @@ db.sync(
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
-                pet_plant: [5, 2],
+                pet_plant: [3],
                 employer_id: 3,
                 description: 'Come watch this little devil',
                 sitter_id: null,
@@ -415,7 +436,7 @@ db.sync(
               },
               {
                 location: '4609 Banks St, New Orleans, LA 70119',
-                pet_plant: [3, 1],
+                pet_plant: [5],
                 employer_id: 5,
                 description:
                   'Leaving town for five days and need someone to sit my babies',
@@ -428,8 +449,8 @@ db.sync(
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
                 description:
                   'Looking for an energetic person to care for my rambunctious bunch',
-                pet_plant: [3, 1],
-                employer_id: 6,
+                pet_plant: [4, 8],
+                employer_id: 4,
                 sitter_id: 7,
                 startDate: new Date('July 10, 2022 01:15:00'),
                 endDate: new Date('July 11, 2022 01:15:00'),
@@ -437,7 +458,7 @@ db.sync(
               },
               {
                 location: '1600 Frankel Ave, Metairie, LA 70003',
-                pet_plant: [1, 2],
+                pet_plant: [7],
                 employer_id: 7,
                 description: 'Test Job Description!',
                 sitter_id: null,
@@ -447,7 +468,7 @@ db.sync(
               },
               {
                 location: '1605 Frankel Ave, Metairie, LA 70003',
-                pet_plant: [1, 2],
+                pet_plant: [1],
                 employer_id: 1,
                 description: 'Test Job Description 2!',
                 sitter_id: null,
@@ -457,7 +478,7 @@ db.sync(
               },
               {
                 location: '1610 Frankel Ave, Metairie, LA 70003',
-                pet_plant: [3, 4],
+                pet_plant: [5],
                 employer_id: 5,
                 description: 'Test Job Description 3!',
                 sitter_id: null,
@@ -467,7 +488,7 @@ db.sync(
               },
               {
                 location: '1221 S Clearview',
-                pet_plant: [1, 4],
+                pet_plant: [1],
                 employer_id: 1,
                 description: 'Test Job Description 4!',
                 sitter_id: null,
@@ -507,7 +528,7 @@ db.sync(
               },
               {
                 location: '1213 Gaudet Dr, Marrero, LA 70072',
-                pet_plant: [1, 2],
+                pet_plant: [9],
                 employer_id: 6,
                 description:
                   'Hello, my name is Raymond. Please come watch my things while I code!!',
@@ -524,8 +545,8 @@ db.sync(
                   location: '10 Magnolia Dr, New Orleans, LA 70124',
                   description:
                     'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
-                  startDate: new Date('July 7, 2022 01:15:00'),
-                  startTime: '3:19 AM',
+                  startDate: new Date('July 20, 2022 13:15:00'),
+                  startTime: '3:20 PM',
                 },
                 {
                   name: 'Annual Animal Rescue Drive',
@@ -533,8 +554,8 @@ db.sync(
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
                   description:
                     'A gathering for pet-less humans to find and be rescued by their furrever friends',
-                  startDate: new Date('July 9, 2022 01:15:00'),
-                  startTime: '4:48 AM',
+                  startDate: new Date('July 15, 2022 01:15:00'),
+                  startTime: '4:45 PM',
                 },
                 {
                   name: 'Barkus Parade',
@@ -543,7 +564,7 @@ db.sync(
                   description:
                     'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
                   startDate: new Date('July 15, 2022 01:15:00'),
-                  startTime: '5:59 PM',
+                  startTime: '6:00 PM',
                 },
                 {
                   name: 'Post Disaster Food Drive for our Reptile Friends',
@@ -552,7 +573,7 @@ db.sync(
                   description:
                     'Reptiles are our friends, not overlords! Please join in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
                   startDate: new Date('July 29, 2022 01:15:00'),
-                  startTime: '12:20 AM',
+                  startTime: '12:20 PM',
                 },
                 {
                   name: 'Demanding Plant Workshop',
@@ -561,7 +582,7 @@ db.sync(
                   description:
                     'A gathering for green-thumbed humans to impart their plant-care wisdom for those high-maintentance plants you just had to buy, Linda',
                   startDate: new Date('July 30, 2022 01:15:00'),
-                  startTime: '4:33 PM',
+                  startTime: '4:30 PM',
                 },
               ])
                 .then(() => {
@@ -713,27 +734,11 @@ db.sync(
                       pet_plant_id: 2,
                     },
                     {
-                      job_id: 1,
+                      job_id: 2,
                       pet_plant_id: 3,
                     },
                     {
-                      job_id: 2,
-                      pet_plant_id: 1,
-                    },
-                    {
-                      job_id: 2,
-                      pet_plant_id: 4,
-                    },
-                    {
                       job_id: 3,
-                      pet_plant_id: 1,
-                    },
-                    {
-                      job_id: 3,
-                      pet_plant_id: 2,
-                    },
-                    {
-                      job_id: 4,
                       pet_plant_id: 3,
                     },
                     {
@@ -742,43 +747,27 @@ db.sync(
                     },
                     {
                       job_id: 5,
-                      pet_plant_id: 5,
+                      pet_plant_id: 4,
                     },
                     {
                       job_id: 5,
-                      pet_plant_id: 4,
+                      pet_plant_id: 8,
                     },
                     {
                       job_id: 6,
-                      pet_plant_id: 1,
-                    },
-                    {
-                      job_id: 6,
-                      pet_plant_id: 2,
+                      pet_plant_id: 7,
                     },
                     {
                       job_id: 7,
                       pet_plant_id: 1,
                     },
                     {
-                      job_id: 7,
-                      pet_plant_id: 2,
-                    },
-                    {
                       job_id: 8,
-                      pet_plant_id: 3,
-                    },
-                    {
-                      job_id: 8,
-                      pet_plant_id: 4,
+                      pet_plant_id: 5,
                     },
                     {
                       job_id: 9,
                       pet_plant_id: 1,
-                    },
-                    {
-                      job_id: 9,
-                      pet_plant_id: 4,
                     },
                     {
                       job_id: 10,
@@ -806,11 +795,7 @@ db.sync(
                     },
                     {
                       job_id: 13,
-                      pet_plant_id: 1,
-                    },
-                    {
-                      job_id: 13,
-                      pet_plant_id: 2,
+                      pet_plant_id: 9,
                     },
                   ]);
                 })

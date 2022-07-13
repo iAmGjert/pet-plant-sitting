@@ -97,7 +97,7 @@ const EditAccountModal = ({
         add={true}
         newPetId={newPetId}
       />
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className={theme === 'dark' && 'dark'}>
         <Modal.Title>Update Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>

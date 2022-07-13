@@ -17,13 +17,12 @@ import {
   Nav,
   CardGroup,
 } from 'react-bootstrap';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { format } from 'timeago.js';
 import PetPlantCard, { PetPlant } from '../Components/Profile/PetPlantCard';
 import EditAccountModal from '../Components/Profile/EditAccountModal';
 import Rating from '../Components/Profile/Rating';
-import { useNavigate } from 'react-router-dom';
 import { scroller } from 'react-scroll';
 import { profile } from 'console';
 
@@ -483,7 +482,7 @@ const Profile = () => {
           </span>
         </Col>
       </Row>
-      <Navbar sticky='top' bg='light' variant='light'>
+      {/* <Navbar sticky='top' bg='light' variant='light'>
         <Nav fill variant='tabs' defaultActiveKey='/home'>
           <Nav.Item>
             <Nav.Link
@@ -629,7 +628,7 @@ const Profile = () => {
             <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
           </Card>
         )}
-      </Row>
+      </Row> */}
     </Container>
   );
 };

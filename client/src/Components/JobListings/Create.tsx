@@ -22,9 +22,9 @@ const Create = ({ setShowCreated }): JSX.Element => {
     state.petPlant.petPlants.filter((pet) => pet.owner_id === user.id)
   );
   const petPlants = useAppSelector((state) => state.petPlant.petPlants).reduce(
-    (ans, pet, ind) => {
+    (ans, pet, ind, array) => {
       if (pet.owner_id === user.id) {
-        ans.push(ind + 1);
+        ans.push(pet.id);
       }
       return ans;
     },
@@ -138,7 +138,7 @@ const Create = ({ setShowCreated }): JSX.Element => {
                 key={idx}
                 id={`checkbox-${idx}`}
                 type="checkbox"
-                variant={feed[idx] ? 'outline-success' : 'outline-danger'}
+                variant={feed[idx] ? 'success' : 'outline-success'}
                 name="radio"
                 value={radio.name}
                 checked={feed[idx]}

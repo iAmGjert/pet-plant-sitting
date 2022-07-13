@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { Popup } from 'react-map-gl';
 
 interface Props {
   trigger: boolean
