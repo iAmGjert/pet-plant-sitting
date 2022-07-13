@@ -621,6 +621,61 @@ body,
   position: absolute;
 }
 
+.home-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.home-header {
+  width: 100px;
+  /* height: 100px; */
+  font-weight: 'bold';
+  font-family: "Times New Roman", Times, serif;
+  font-size: '12px';
+  margin-top: 60px; 
+  margin-left: -100px;
+  white-space: nowrap;
+}
+
+.home-logo {
+  width: 390px;
+  height: 400px;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  object-position: center;
+  height: 50vh;
+  overflow: hidden;
+  
+}
+
+.carousel-item img {
+  object-fit: cover;
+  object-position: center;
+  height: 50vh;
+  overflow: hidden;
+}
+
+.home-description {
+  display: 'flex';
+  justify-content: 'center';
+  padding: '1em 0em';
+  font-weight: 'bold';
+  margin: 20px 20px;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 20px;
+
+}
+
+.home-btns {
+  text-align: center;
+  padding-bottom: 10px;
+
+}
+
 .job-list-main {
   display: flex;
   justify-content: center;
@@ -636,3 +691,4 @@ body,
 .job-bottom-button {
   margin-top: 5px;
 }
+

@@ -6,7 +6,7 @@ import moment from 'moment';
 import { ThemeContext } from '../../App';
 
 const JobHistory = ({ sitterWorkHistory }) => {
-  console.log('sitterWorkHistory in jobHistory', sitterWorkHistory);
+  // console.log('sitterWorkHistory in jobHistory', sitterWorkHistory);
   const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);
 
@@ -15,7 +15,11 @@ const JobHistory = ({ sitterWorkHistory }) => {
 
   return (
     <>
-      <Button className='bootstrap-button' variant='primary' onClick={handleShow}>
+      <Button
+        className='bootstrap-button'
+        variant='primary'
+        onClick={handleShow}
+      >
         Sitting History
       </Button>
 
