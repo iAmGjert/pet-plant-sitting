@@ -350,6 +350,10 @@ body,
 #dark .fade.toast.bootstrap-toast.bg-light.show {
   background-color: rgb(121, 121, 121);
 }
+#dark .form-control {
+  background-color: rgb(137, 137, 137);
+  color: lightgrey;
+}
 
 
 /* Calendar */
@@ -469,7 +473,7 @@ body,
   color: #ffffff;
 }
 
-.bootstrap-modal.card {
+.bootstrap-modal-card.card {
   background-color: #2e2e2e;
   color: lightgrey;
   border-color: lightgrey;
