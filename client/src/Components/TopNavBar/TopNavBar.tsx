@@ -31,7 +31,7 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
             navigate('/');
           }}
         >
-          {user.name ? user.name : <img src={require('./fern-herm-pets-alt.svg')} alt='fh-alt' style={{
+          {user.name ? user.name : <img src={require('../../css/fern-herm-pets-alt.svg')} alt='fh-alt' style={{
             width: '50px',
             height: '50px',
             marginLeft: '15px',
