@@ -6,7 +6,7 @@ import Details from '../Components/CommunityEvents/Details';
 import CreateEvent from '../Components/CommunityEvents/CreateEvent';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
-import '../Components/CommunityEvents/style/EventsMain.css';
+import '../css/Events.css';
 import { EventTYPE } from '../Components/CommunityEvents/types/types';
 import EditEvent from '../Components/CommunityEvents/EditEvent';
 import { ArrowLeft } from 'react-bootstrap-icons';
