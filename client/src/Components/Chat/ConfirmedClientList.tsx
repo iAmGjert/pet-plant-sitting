@@ -27,7 +27,7 @@ const ConfirmedClientList = () => {
 
   return (
     <Container>
-      <h3>Confirmed Clients</h3>
+      <h3>Confirmed Employers</h3>
       {confirmedJobs.map((job) => <ConfirmedClient key={job.employer_id} job={job} />)}
     </Container>
   );

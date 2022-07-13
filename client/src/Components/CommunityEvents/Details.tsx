@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/Col';
 import Comments from './Comments';
 import moment from 'moment';
 import { ArrowUp, PencilSquare } from 'react-bootstrap-icons';
+// import * as Maps from '../../Pages/MapMain';
 
 const Details = () => {
   const dispatch = useAppDispatch();
@@ -53,15 +54,15 @@ const Details = () => {
       }
     }    
   };
-
+  // console.log(Maps);
   const numOfComments = event_comments?.length;
 
   const parseTime = (time: string) => {
     const [hour, minute] = time.split(':');
     return (+hour > 12) ? `${+hour - 12}:${minute} PM` : `${hour}:${minute} AM`;
   };
-  console.log(event);
-  console.log(currentUser);
+  // console.log(event);
+  // console.log(currentUser);
    
   return (
     <Container fluid>
@@ -111,7 +112,9 @@ const Details = () => {
       </Card>
       { showComments && <Comments comments={event_comments} /> }
       <Card className='bootstrap-card'>
-        <Card.Footer>
+        <Card.Footer
+          // style={{ marginTop: '10px' }}
+        >
           {currentUser.name.length ?
             <Button className='bootstrap-button' variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
                 Add Comment

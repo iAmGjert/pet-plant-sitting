@@ -29,10 +29,14 @@ import Loading from './Pages/Loading';
 import InfoMain from './Pages/InfoMain';
 import EditEvent from './Components/CommunityEvents/EditEvent';
 import Error from './Pages/Error';
+import { io } from 'socket.io-client';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
 export const ThemeContext = createContext(null);
+
+const socket = io(`${process.env.CLIENT_URL}:4000`);
+
 
 const App: FC<Props> = () => {
   const currUser = useAppSelector((state) => state.userProfile.value);
@@ -60,8 +64,6 @@ const App: FC<Props> = () => {
   };
   const getEvents = async () => {
     const events = await axios.get('/api/events/all');
-
-    dispatch(setEvents(events.data));
     dispatch(mapActions.setEvents(events.data));
     dispatch(setEvents(events.data));
   };
@@ -97,7 +99,6 @@ const App: FC<Props> = () => {
             <Route path='/landingpage' element={<LandingPageMain />} />
             <Route path='/map' element={<MapMain />} />
 
-            
             <Route path='/events' element={<CommunityEvents />} />
             {/* <Route path='/events/edit/:id' element={<EditEvent />} /> */}
 
@@ -109,7 +110,7 @@ const App: FC<Props> = () => {
             <Route path='/calendar' element={<CalendarMain />} />
             <Route path='/jobs' element={<JobsMain />} />
             {/* <Route path='/createjob' element={<JobCreation />} /> */}
-            <Route path='/chat' element={<ChatMain />} />
+            <Route path='/chat' element={<ChatMain socket={socket}/>} />
             <Route path='/info' element={<InfoMain />} />
             <Route path='/register' element={<Register />} />
             <Route path='*' element={<Error />} />

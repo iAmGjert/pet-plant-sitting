@@ -1,14 +1,13 @@
 import React, { FC, useState, useCallback, useEffect, useContext } from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import Map, { Marker, GeolocateControl, Layer, Source, Popup } from 'react-map-gl';
+import Map, { Marker, GeolocateControl } from 'react-map-gl';
 import axios from 'axios';
 import JobPopup from './JobPopup';
 import EventPopup from './EventPopup';
-import { ListGroup, Button, ButtonToolbar } from 'react-bootstrap';
+import { Button, ButtonToolbar } from 'react-bootstrap';
 import { ThemeContext } from '../../App';
+import MapDirections from './MapDirections';
 
-
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {
   user: object
   users: Array<object>
@@ -20,7 +19,6 @@ interface Props {
   events: Array<object>
   navigate: any
 }
- 
 
 const TOKEN = `${process.env.MAPBOX_TOKEN}`;
 
@@ -43,6 +41,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   const [showJobsOnly, setShowJobsOnly] = useState(true);
   const [showEventsOnly, setShowEventsOnly] = useState(true);
 
+  
   const showJobInfo = (id) => {
     const storage = [];
     for (let i = 0; i < jobs.length; i++) {
@@ -100,7 +99,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
   };
 
   const userClicksLocateButton = () => {
-    setGeoLocateActive(true);
+    setGeoLocateActive(!geoLocateActive);
   };
 
   const geolocateControlRef = useCallback((ref) => {
@@ -145,43 +144,11 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
     setShowJobsOnly(true);
   };
 
-  // const getRating = (user: object) => {
-  //   if (user && user.ratings.length > 0) {
-  //     let sum = 0;
-  //     for (let i = 0; i < user.ratings.length; i++) {
-  //       sum += user.ratings[i].value;
-  //     }
-  //     // console.log(Math.floor(sum / profileUser?.ratings.length));
-  //     return Math.floor(sum / user.ratings.length);
-  //   } else {
-  //     return;
-  //   }
-  // };
-
-  // const getStars = (rating: number) => {
-  //   let stars = '';
-  //   for (let i = 0; i < rating; i++) {
-  //     stars += '⭐';
-  //   }
-  //   while (stars.length < 5) {
-  //     stars += '☆';
-  //   }
-  //   return stars;
-  // };
-
-  const directions = {
-    type: 'Feature',
-    properties: {},
-    geometry: {
-      type: 'LineString',
-      coordinates: dirCoordinates
-    }
-  };
-
   useEffect(() => {
     setUserCurrentCoords();
   }, []);
 
+  
   return (
     <div>
       <Map
@@ -190,16 +157,16 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           latitude: userGeoLoc[1],
           zoom: 13
         }}
-        style={{minHeight: '100vh'}}
+        style={{minHeight: '100vh', position: 'sticky'}}
         mapStyle={theme === 'dark' ? 'mapbox://styles/mapbox/dark-v10' : 'mapbox://styles/mapbox/streets-v9'}
         mapboxAccessToken={TOKEN}
       >
         {
           !cancelNav &&
           <ButtonToolbar>
-            <Button onClick={displayAll} className='map-bootstrap-button'>All</Button>
-            <Button onClick={displayJobsOnly} className='map-bootstrap-button' style={{borderColor: 'lightgreen'}}>Jobs</Button>
-            <Button onClick={displayEventsOnly} className='map-bootstrap-button' style={{borderColor: 'blue'}}>Events</Button>
+            <Button onClick={displayAll} className='map-bootstrap-button-all'>All</Button>
+            <Button onClick={displayJobsOnly} className='map-bootstrap-button-jobs'>Jobs</Button>
+            <Button onClick={displayEventsOnly} className='map-bootstrap-button-events'>Events</Button>
           </ButtonToolbar>
         }
         <Marker 
@@ -234,15 +201,6 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
             </Marker>;
           })
         }
-        {/* {
-          smallEventPopup &&
-          <Popup
-            longitude={}
-            latitude={}
-          >
-
-          </Popup>
-        } */}
         {
           jobPopup ?
             <JobPopup trigger={jobButtonPopup} setTrigger={showJobInfo}>
@@ -294,44 +252,11 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
           ref={geolocateControlRef}
           onGeolocate={userClicksLocateButton}
           trackUserLocation={true}
-          style={{
-            zIndex: -1,
-            position: 'relative'
-          }}
+          className-='geolocate-button'
         />
         {
           dirCoordinates.length > 0 && cancelNav &&
-        <Source id="polylineLayer" type="geojson" data={directions}>
-          <Layer
-            id="lineLayer"
-            type="line"
-            source="my-data"
-            layout={{
-              'line-join': 'round',
-              'line-cap': 'round'
-            }}
-            paint={{
-              'line-color': 'darkblue',
-              'line-width': 7
-            }}
-          />
-        </Source>
-        }
-        {
-          steps.length > 0 && cancelNav &&
-          <ListGroup variant='flush' as='ol' className='step-instructions' numbered>
-            <Button className='bootstrap-button' onClick={() => setCancelNav(!cancelNav)}>End Route</Button>
-            {
-              steps.map((step, i) => {
-                return <ListGroup.Item as='li'
-                  key={`${step}${i}`}
-                  className='step-instructions-card'
-                >
-                  {step.maneuver.instruction}
-                </ListGroup.Item>;
-              })
-            }
-          </ListGroup>
+          <MapDirections steps={steps} dirCoordinates={dirCoordinates} cancelNav={cancelNav} setCancelNav={setCancelNav} />
         }
       </Map>
     </div>

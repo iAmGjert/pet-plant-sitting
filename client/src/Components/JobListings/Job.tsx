@@ -15,7 +15,7 @@ interface jobStuff {
   endDate: Date;
   pet_plant: Array<number>;
 }
-const Job = ({ job, setshowapplied, setshowrevoked }) => {
+const Job = ({ settemp, job, setshowapplied, setshowrevoked }) => {
   const [show, setShow] = useState(false);
   const target = useRef(null);
   const removeOverlay = () => {
@@ -51,7 +51,6 @@ const Job = ({ job, setshowapplied, setshowrevoked }) => {
       )
       .then((results) => {
         setUserGeoLoc(results.data.features[0].center);
-        //console.log(results.data.features[0].center);
         return results.data.features[0].center;
       });
   };
@@ -63,19 +62,16 @@ const Job = ({ job, setshowapplied, setshowrevoked }) => {
       )
       .then((results) => {
         setJobGeoLoc(results.data.features[0].center);
-        //console.log(results.data.features[0].center);
         return results.data.features[0].center;
       });
   };
 
   const handleClick = () => {
     if (user.name === '') {
-      //console.log('Go login!');
       setShow(true);
       removeOverlay();
       return;
     }
-    //console.log(`Calculating distance between ${user.location} and ${job.location}.`);
     geoCodeUser();
     geoCodeJob();
 
@@ -94,60 +90,77 @@ const Job = ({ job, setshowapplied, setshowrevoked }) => {
       )
       .then((results) => {
         setDistanceFromJob((results.data.routes[0].distance / 1609).toFixed(1));
-        //console.log((results.data.routes[0].distance / 1609).toFixed(1));
       });
   }, [jobGeoLoc, userGeoLoc]);
   return (
-    <Container>
+    <Container className="job-card">
       <Card className="bootstrap-card">
         <Card.Body>
           <Row>
-            <Col xs sm={1} md={1} lg={1}>
-              <Card.Title>Job#{id}</Card.Title>
-            </Col>
             <Col>
               {user.id !== employer_id ? (
-                <div>
-                  Employer:{' '}
+                <>
+                  <strong>Employer: </strong>
                   {
-                    <div>
+                    <>
                       {users.reduce((employer, users) => {
                         if (users.id === employer_id) {
                           employer = users.name;
                         }
-                        return employer;
+                        return <div>{employer}</div>;
                       }, '')}
-                    </div>
+                    </>
                   }
-                </div>
+                </>
               ) : (
-                <div>Applicants: {job_applicants.length}</div>
+                <>
+                  <strong>Applicants: </strong>
+                  {job_applicants.length}
+                </>
               )}
             </Col>
             <Col>
               {Array.isArray(pet_plant) ? (
-                <div>
-                  Pet/Plants:{' '}
+                <>
+                  <strong>Pet/Plants: </strong>
                   {pet_plant.map((p, i) => {
-                    return <div key={`p${i}`}>{petPlants[p - 1]?.name}</div>;
+                    return <div key={`p${i}`}>{petPlants.filter((pet)=>{
+                      if (p === pet.id) {
+                        return true;
+                      }
+                    })[0]?.name}</div>;
                   })}
-                </div>
+                </>
               ) : (
                 <div />
               )}
             </Col>
           </Row>
-          <Row>Job starts {moment(startDate).fromNow()}.</Row>
-          <Button
-            ref={target}
-            className="bootstrap-button"
-            onClick={handleClick}
-            variant="primary"
-          >
-            More Info
-          </Button>
+          <Row className="jobStartsInRow">
+            <Col>
+              <strong>Job starts {moment(startDate).fromNow()}.</strong>
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <Button
+                ref={target}
+                className="bootstrap-button"
+                onClick={handleClick}
+                variant="primary"
+              >
+                More Info
+              </Button>
+            </Col>
+
+            <Col>
+              <Card.Title>Job#{id}</Card.Title>
+            </Col>
+          </Row>
+
           <>
             <MoreInfo
+              settemp={settemp}
               setshowrevoked={setshowrevoked}
               setshowapplied={setshowapplied}
               distance={distanceFromJob}

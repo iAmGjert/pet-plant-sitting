@@ -1,19 +1,40 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Create from '../Components/JobListings/Create';
 import List from '../Components/JobListings/List';
-import { Container, Row, Col, Button, Alert, Breadcrumb, Card, Form, Overlay } from 'react-bootstrap';
+import Edit from '../Components/JobListings/Edit';
+import {
+  Container,
+  Row,
+  Col,
+  Button,
+  Alert,
+  Breadcrumb,
+  Card,
+  Form,
+  Overlay,
+} from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
-import { changeView, setJobs, setPrompt } from '../state/features/jobs/jobSlice';
+import { changeView, setJobs } from '../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const JobsMain = () => {
-
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const view = useAppSelector((state)=>state.job.view);
-  const user = useAppSelector(state => state.userProfile.value);
+  const [temp, settemp] = useState({
+    location: '',
+    pet_plant: [],
+    employer_id: 0,
+    sitter_id: null,
+    startDate: null,
+    endDate: null,
+    description: '',
+    isCompleted: false,
+  });
+
+  const view = useAppSelector((state) => state.job.view);
+  const user = useAppSelector((state) => state.userProfile.value);
   const getJobs = async () => {
     const jobs = await axios.get('/api/jobs/all');
     dispatch(setJobs(jobs.data));
@@ -22,35 +43,65 @@ const JobsMain = () => {
     if (user.name === '') {
       navigate('/login');
     }
-    if (view !== 'create') {
+    if (view !== 'create' && view !== 'edit') {
       dispatch(changeView('create'));
       return;
     }
     dispatch(changeView('list'));
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getJobs();
   }, []);
 
   const [showCreated, setShowCreated] = useState(false);
+  const [showEdited, setShowEdited] = useState(false);
   const [showRevoked, setShowRevoked] = useState(false);
   const [showApplied, setShowApplied] = useState(false);
+  const [showDeleted, setShowDeleted] = useState(false);
   const target = useRef(null);
-  const removeCreatedOverlay = ()=>{ setTimeout(()=>{ setShowCreated(false); }, 4500); };
-  const removeAppliedOverlay = ()=>{ setTimeout(()=>{ setShowApplied(false); }, 4500); };
-  const removeRevokedOverlay = ()=>{ setTimeout(()=>{ setShowRevoked(false); }, 4500); };
-  useEffect(()=>{
+  const removeCreatedOverlay = () => {
+    setTimeout(() => {
+      setShowCreated(false);
+    }, 4500);
+  };
+  const removeAppliedOverlay = () => {
+    setTimeout(() => {
+      setShowApplied(false);
+    }, 4500);
+  };
+  const removeRevokedOverlay = () => {
+    setTimeout(() => {
+      setShowRevoked(false);
+    }, 4500);
+  };
+  const removeEditedOverlay = () => {
+    setTimeout(() => {
+      setShowEdited(false);
+    }, 4500);
+  };
+  const removeDeletedOverlay = () => {
+    setTimeout(() => {
+      setShowDeleted(false);
+    }, 4500);
+  };
+  useEffect(() => {
     removeCreatedOverlay();
   }, [showCreated]);
-  useEffect(()=>{
+  useEffect(() => {
+    removeEditedOverlay();
+  }, [showEdited]);
+  useEffect(() => {
     removeAppliedOverlay();
   }, [showApplied]);
-  useEffect(()=>{
+  useEffect(() => {
     removeRevokedOverlay();
   }, [showRevoked]);
+  useEffect(() => {
+    removeDeletedOverlay();
+  }, [showDeleted]);
   return (
-    <Container fluid ref={target}>
+    <Container className="job-list-main" ref={target}>
       <Overlay target={target.current} show={showCreated} placement="top">
         {({ placement, arrowProps, show: _show, popper, ...props }) => (
           <div
@@ -65,6 +116,23 @@ const JobsMain = () => {
             }}
           >
             Job Created!
+          </div>
+        )}
+      </Overlay>
+      <Overlay target={target.current} show={showEdited} placement="top">
+        {({ placement, arrowProps, show: _show, popper, ...props }) => (
+          <div
+            {...props}
+            style={{
+              position: 'absolute',
+              backgroundColor: 'rgba(255, 255, 100, 0.85)',
+              padding: '2px 10px',
+              color: 'black',
+              borderRadius: 3,
+              ...props.style,
+            }}
+          >
+            Job Edited!
           </div>
         )}
       </Overlay>
@@ -102,15 +170,53 @@ const JobsMain = () => {
           </div>
         )}
       </Overlay>
-      {
-        view === 'create' ?
-          <Create setShowCreated={setShowCreated}/> :
-          <div>
-            <List setshowapplied={setShowApplied} setshowrevoked={setShowRevoked}/>
+      <Overlay target={target.current} show={showDeleted} placement="top">
+        {({ placement, arrowProps, show: _show, popper, ...props }) => (
+          <div
+            {...props}
+            style={{
+              position: 'absolute',
+              backgroundColor: 'rgba(255, 100, 100, 0.85)',
+              padding: '2px 10px',
+              color: 'white',
+              borderRadius: 3,
+              ...props.style,
+            }}
+          >
+            Job Deleted!
           </div>
-      }
-      
-      <Button className='bootstrap-button' onClick={()=>{ handleClick(); }}>{view === 'create' ? 'Return to Job List' : user.name === '' ? 'Login' : 'Create New Job'}</Button>
+        )}
+      </Overlay>
+      {view === 'create' ? (
+        <Create setShowCreated={setShowCreated} />
+      ) : view === 'edit' ? (
+        <Edit
+          setShowDeleted={setShowDeleted}
+          setShowEdited={setShowEdited}
+          job={temp}
+        />
+      ) : (
+        <List
+          settemp={settemp}
+          setshowapplied={setShowApplied}
+          setshowrevoked={setShowRevoked}
+        />
+      )}
+
+      <Button
+        className="bootstrap-button job-bottom-button"
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        {view === 'create'
+          ? 'Return to Job List'
+          : view === 'edit'
+            ? 'Return to Job List'
+            : user.name === ''
+              ? 'Login'
+              : 'Create New Job'}
+      </Button>
     </Container>
   );
 };

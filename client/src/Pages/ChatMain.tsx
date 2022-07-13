@@ -19,11 +19,11 @@ interface userOnline {
 }
 
 
-const socket = io(`${process.env.CLIENT_URL}:4000`);
+// const socket = io(`${process.env.CLIENT_URL}:4000`);
 
 // {transports: ['websocket']}
 
-const ChatMain = () => {   
+const ChatMain = ({ socket }) => {   
   
   const currUser = useAppSelector((state) => state.userProfile.value);
   // const [view, setView] = useState(useAppSelector((state) => state.chat.view));
@@ -56,11 +56,12 @@ const ChatMain = () => {
 
   return (
     <div className="chat-main">
-      <h1>Chat</h1>
+      {/* <h1>Chat</h1> */}
+      <h2>Chat</h2>   
       <DropdownButton as={ButtonGroup} title={view}>
         <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="1">All</Dropdown.Item>
-        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="2">Pending Clients</Dropdown.Item>
-        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="3">Confirmed Clients</Dropdown.Item>
+        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="2">Pending Employers</Dropdown.Item>
+        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="3">Confirmed Employers</Dropdown.Item>
         <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="4">Applicants</Dropdown.Item>
         <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="5">Accepted Applicants</Dropdown.Item>
       </DropdownButton>

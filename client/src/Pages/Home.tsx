@@ -8,6 +8,7 @@ import Carousel from 'react-bootstrap/Carousel';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import { fetchUpcomingEvents } from '../state/features/events/eventsSlice';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 import { fetchUpcomingEvents } from '../state/features/events/eventsSlice';
