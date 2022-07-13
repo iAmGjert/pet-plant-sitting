@@ -45,7 +45,6 @@ interface events {
 interface Props {}
 
 const Landing: FC<Props> = () => {
-  //const dispatch = useAppDispatch();
   //const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -60,8 +59,6 @@ const Landing: FC<Props> = () => {
 
   const events = useAppSelector((state) => state.events.events);
 
-  // console.log('applications', applications); //such is empty
-
   const sitterUpcomingJobs = upcomingJobs.filter(
     (job: { sitter_id: number }) => {
       return job.sitter_id === user.id;
@@ -71,8 +68,6 @@ const Landing: FC<Props> = () => {
   const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
     return job.sitter_id === user.id;
   });
-  // console.log('upcomingEvents', upcomingEvents);
-  //console.log('sitterWorkHistory', sitterWorkHistory);
 
   //console.log(jobs, 'jobs');
   useEffect(() => {

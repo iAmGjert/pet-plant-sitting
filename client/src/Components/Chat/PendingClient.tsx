@@ -63,8 +63,8 @@ const PendingClient = ({ job }: { job: any }) => {
   }, [users, usersOnline]);
 
   return (
-    <Container className='chat-card'>
-      <Card>
+    <Container>
+      <Card className='chat-card'>
         <Card.Body>
           <h6>{job.startDate}</h6>
           <h6>Description: {job.description}</h6>

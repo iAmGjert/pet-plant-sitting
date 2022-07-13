@@ -22,9 +22,8 @@ const AppliedJobsBoard = ({ job, startDate, petPlants, location, id }) => {
     <Card className='bootstrap-card'>
       <Card.Body>
         <Card.Title>
-          Application Status for Job {job.id}: {job.status}
+          Application Status for Job # {job.id}: {job.status}
         </Card.Title>
-        <Card.Text>hey</Card.Text>
         <Card.Text>Description: {job.description}</Card.Text>
         <Button
           className='bootstrap-button'
