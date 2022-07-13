@@ -58,34 +58,11 @@ jobApplicants.delete('/delete/:id', async (req: Request, res: Response) => {
 
 // PATCH Request(s)
 
-jobApplicants.patch('/:user_id/:job_id', async (req: Request, res: Response) => {
-  const { user_id, job_id } = req.params;
-  const { status } = req.body;
-
-  JobApplicant.update({
-    status
-  }, {
-    where: {
-      user_id,
-      job_id
-    }
-  })
-    .then(() => {
-      res.sendStatus(200);
-    })
-    .catch((error: Error) => {
-      res.sendStatus(500);
-      console.log(error);
-    });
-});
-
-/*
 jobApplicants.patch(
   '/:user_id/:job_id',
   async (req: Request, res: Response) => {
     const { user_id, job_id } = req.params;
     const { status } = req.body;
-*/
 
     JobApplicant.update(
       {
