@@ -33,7 +33,7 @@ const ApplicantList = () => {
         return (
           <div key={job.id}>
             <Container>
-              <Card>
+              <Card className='chat-card'>
                 <h6>{job.startDate}</h6>
                 <h6>Description: {job.description}</h6>
                 {job.job_applicants.length > 0 ? <Applicants job_applicants={job.job_applicants} /> : 

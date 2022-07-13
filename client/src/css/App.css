@@ -64,7 +64,7 @@ body,
 .mapJobMarker {
   border-radius: 100px;
   background-color: lightgreen;
-  box-shadow: rgb(0, 0, 0) .5px .5px .5px .5px;
+  box-shadow: rgb(0, 0, 0) 0.5px 0.5px 0.5px 0.5px;
   display: block;
   opacity: 0.29;
   height: 42px;
@@ -132,14 +132,14 @@ body,
   width: 100vw;
   height: 100vh;
   z-index: -1;
-  position: absolute
+  position: absolute;
 }
 .map-bootstrap-button-all {
   height: fit-content;
   width: fit-content;
   display: inline-block;
   font-size: 9px;
-  position: relative; 
+  position: relative;
   margin: 1%;
   border-width: 4px;
 }
@@ -148,20 +148,20 @@ body,
   width: fit-content;
   display: inline-block;
   font-size: 9px;
-  position: relative; 
+  position: relative;
   margin: 1%;
   border-width: 4px;
-  border-color: lightgreen
+  border-color: lightgreen;
 }
 .map-bootstrap-button-events {
   height: fit-content;
   width: fit-content;
   display: inline-block;
   font-size: 9px;
-  position: relative; 
+  position: relative;
   margin: 1%;
   border-width: 4px;
-  border-color: blue
+  border-color: blue;
 }
 .map-bootstrap-button-jobs:focus {
   background-color: lightgreen;
@@ -351,7 +351,6 @@ body,
   background-color: rgb(121, 121, 121);
 }
 
-
 /* Calendar */
 #dark .DayScaleEmptyCell-emptyCell.css-1hbvjip {
   background-color: #2c2c2c;
@@ -384,17 +383,19 @@ body,
 #dark .Cell-text {
   color: lightgrey;
 }
-#dark .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.Toolbar-toolbar.css-1b7ni76-MuiToolbar-root {
+#dark
+  .MuiToolbar-root.MuiToolbar-gutters.MuiToolbar-regular.Toolbar-toolbar.css-1b7ni76-MuiToolbar-root {
   background-color: #2c2c2c;
-  border-color: lightgrey
+  border-color: lightgrey;
 }
-#dark .MuiButton-root.MuiButton-outlined
- .MuiButton-outlinedPrimary
- .MuiButton-sizeMedium
- .MuiButton-outlinedSizeMedium
- .MuiButtonBase-root
- .TodayButton-button
- .css-xya8j6-MuiButtonBase-root-MuiButton-root {
+#dark
+  .MuiButton-root.MuiButton-outlined
+  .MuiButton-outlinedPrimary
+  .MuiButton-sizeMedium
+  .MuiButton-outlinedSizeMedium
+  .MuiButtonBase-root
+  .TodayButton-button
+  .css-xya8j6-MuiButtonBase-root-MuiButton-root {
   border-color: lightgrey;
 }
 #dark .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root {
@@ -403,11 +404,12 @@ body,
 #dark .MuiTouchRipple-root.css-8je8zh-MuiTouchRipple-root {
   outline-color: lightgrey;
 }
-#dark .MuiSvgIcon-root
-.MuiSvgIcon-fontSizeMedium
-.MuiSelect-icon
-.MuiSelect-iconOutlined
-.css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
+#dark
+  .MuiSvgIcon-root
+  .MuiSvgIcon-fontSizeMedium
+  .MuiSelect-icon
+  .MuiSelect-iconOutlined
+  .css-hfutr2-MuiSvgIcon-root-MuiSelect-icon {
   background-color: #1f1f1f;
   color: lightgrey;
   border-color: lightgrey;
@@ -468,27 +470,24 @@ body,
 .modal-button-as-link {
   color: #ffffff;
 }
-
-.bootstrap-modal.card {
+.bootstrap-modal-card.card {
   background-color: #2e2e2e;
   color: lightgrey;
   border-color: lightgrey;
 }
 /* Bootstrap modal classes */
 
-
- .chat-main {
+.chat-main {
   width: 100%;
   height: 100vh;
   /* display: grid; */
+  background-color: #C2F8CB;
   place-items: center;
 }
 
-/* .chat-card {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
+.chat-card {
+  background-color: #558564;
+}
 
 .chat-window {
   width: 300px;
@@ -517,7 +516,7 @@ body,
   display: none;
 }
 
-.chat-window .chat-body .message{
+.chat-window .chat-body .message {
   height: auto;
   padding: 10px;
   display: flex;
@@ -546,7 +545,7 @@ body,
 
 #you .message-content {
   justify-content: flex-start;
-  background-color: limegreen;
+  background-color: #7D6F86;
 }
 
 #you .message-meta {
@@ -560,7 +559,7 @@ body,
 
 #other .message-content {
   justify-content: flex-end;
-  background-color: cornflowerblue;
+  background-color: #F5C396;
 }
 
 #other .message-meta {
@@ -593,7 +592,7 @@ body,
   border-right: 1px dotted #607d8b;
 
   outline: none;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .chat-window .chat-footer button {
@@ -692,5 +691,4 @@ body,
 .job-bottom-button {
   margin-top: 5px;
 }
-
 
