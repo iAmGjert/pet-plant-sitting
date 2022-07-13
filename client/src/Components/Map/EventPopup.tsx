@@ -1,5 +1,4 @@
-import React, { FC, useContext } from 'react';
-import { ThemeContext } from '../../App';
+import React, { FC } from 'react';
 interface Props {
   trigger: boolean
   setTrigger: any
