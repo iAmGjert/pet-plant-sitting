@@ -148,20 +148,20 @@ body,
   width: fit-content;
   display: inline-block;
   font-size: 9px;
-  position: relative; 
+  position: relative;
   margin: 1%;
   border-width: 4px;
-  border-color: lightgreen
+  border-color: lightgreen;
 }
 .map-bootstrap-button-events {
   height: fit-content;
   width: fit-content;
   display: inline-block;
   font-size: 9px;
-  position: relative; 
+  position: relative;
   margin: 1%;
   border-width: 4px;
-  border-color: blue
+  border-color: blue;
 }
 .map-bootstrap-button-jobs:focus {
   background-color: lightgreen;
@@ -470,12 +470,7 @@ body,
 .modal-button-as-link {
   color: #ffffff;
 }
-<<<<<<< HEAD
 .bootstrap-modal-card.card {
-=======
-
-.bootstrap-modal.card {
->>>>>>> 2e4439266da880cf6bf73ab2eb524dac5eecb0fd
   background-color: #2e2e2e;
   color: lightgrey;
   border-color: lightgrey;
@@ -626,8 +621,6 @@ body,
   margin-left: 10px;
   position: absolute;
 }
-<<<<<<< HEAD
-=======
 
 .job-list-main {
   display: flex;
@@ -644,5 +637,3 @@ body,
 .job-bottom-button {
   margin-top: 5px;
 }
-
->>>>>>> 2e4439266da880cf6bf73ab2eb524dac5eecb0fd
