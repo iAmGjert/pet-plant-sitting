@@ -31,7 +31,6 @@ interface jobApplicant {
 
 jobs.post('/create', async (req: Request, res: Response) => {
   const { location, pet_plant, employer_id, sitter_id, startDate, endDate, description, isCompleted } = req.body;
-  //console.log('create job', req.body);
   try {
     const job = await Job.create(<jobInfo>{
       location,
@@ -86,12 +85,26 @@ jobs.get('/:id', async (req: Request, res: Response) => {
   return res.status(200).send(job);
 });
 
+jobs.delete('/delete/:id', async (req: Request, res: Response) => {
+  await Job.destroy({
+    where: {
+      id: req.params.id,
+    },
+  })
+    .then((data: any)=>{
+      return res.sendStatus(200);
+    })
+    .catch((err: any)=>{
+      console.error(err, 'error deleting Job');
+      return res.status(418).send(err);
+    });
+  
+});
+
 jobs.post('/applicant/create', (req: Request, res: Response) => {
-  //console.log(req.body);
   const { job_id, user_id, status } = req.body;
   JobApplicant.create({ job_id, user_id, status })
     .then((jobApplicant: Record<string, applicantInfo> | null) => {
-      //console.log(jobApplicant?.dataValues);
       res.status(201).send(jobApplicant?.dataValues);
     })
     .catch((err: Error) => {
@@ -115,6 +128,8 @@ jobs.delete('/jobPetsPlants/delete/:id', async (req: Request, res: Response) => 
     });
   
 });
+
+
 
 jobs.post('/jobPetsPlants/create', (req: Request, res: Response) => {
   const { job_id, pet_plant_id } = req.body;

@@ -1,67 +1,54 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { useAppDispatch } from '../../state/hooks';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
+import { ThemeContext } from '../../App';
+import { deleteComment } from '../../state/features/events/eventsSlice';
+
 
 type Props = {
   showDeleteModal: boolean;
   setShowDeleteModal: (showDeleteModal: boolean) => void;
-  deleteComment: (commentId: number) => Promise<void>;
-  // commentId: number;
-  // eventId: number;
   commentObject: {
     id: number;
     event_id: number;
     comment: string;
+    user_id: number;
     user: {
+      id: number;
       name: string;
       image: string;
     };
   };
-  // commentsArray: [{
-  //   id: number;
-  //   event_id: number;
-  //   comment: string;
-  //   user: {
-  //     name: string;
-  //     image: string;
-  //   }
-  // }];
-  // setCommentsArray: (commentsArray: [{
-  //   id: number;
-  //   event_id: number;
-  //   comment: string;
-  //   user: {
-  //     name: string;
-  //     image: string;
-  //   }
-  // }]) => void;
 };
 
-const ConfirmDelete = ({
-  showDeleteModal,
-  setShowDeleteModal,
-  deleteComment,
-  commentObject,
-}: Props) => {
+const ConfirmDelete = ({ showDeleteModal, setShowDeleteModal, commentObject }: Props) => {
+  const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);
+  const dispatch = useAppDispatch();
+
   // console.log(show);
   const handleClose = () => {
     setShowDeleteModal(!showDeleteModal);
     setShow(false);
   };
-  const handleShow = () => {
-    setShowDeleteModal(!showDeleteModal);
-    setShow(true);
-  };
+ 
   const handleConfirmDelete = () => {
-    deleteComment(commentObject.id);
-    setShowDeleteModal(!showDeleteModal);
+    try {
+      dispatch(deleteComment(commentObject)).unwrap();
+    } catch (error) {
+      console.error('Failed to delete comment', error);
+    } finally {
+      setShowDeleteModal(!showDeleteModal);
+      setShow(false);
+    }
+
   };
-  // console.log(commentObject);
 
   return (
     <Modal
+      contentClassName={theme === 'dark' && 'dark'}
       show={showDeleteModal}
       onHide={handleClose}
       backdrop='static'
@@ -79,11 +66,12 @@ const ConfirmDelete = ({
         </Form>
       </Modal.Body>
       <Modal.Footer>
-        <Button variant='primary' onClick={handleClose}>
+        <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant='primary' onClick={handleClose}>
           Cancel
         </Button>
 
-        <Button variant='primary' onClick={handleConfirmDelete}>
+        <Button className={theme === 'dark' && 'bootstrap-modal-button'} variant='primary' 
+          onClick={handleConfirmDelete}>
           Yes
         </Button>
       </Modal.Footer>

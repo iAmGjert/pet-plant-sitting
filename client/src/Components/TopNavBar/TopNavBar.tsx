@@ -31,7 +31,15 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
             navigate('/');
           }}
         >
-          {user.name ? user.name : 'Fern Herm'}
+          {user.name ? user.name : <img src={require('./fern-herm-pets-alt.svg')} alt='fh-alt' style={{
+            width: '50px',
+            height: '50px',
+            marginLeft: '15px',
+            filter: 'invert(100%)',  
+          }}/>}
+        </Navbar.Brand>
+        <Navbar.Brand style={{textAlign: 'right'}}>
+          <Theme toggleTheme={toggleTheme} theme={theme} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse id='basic-navbar-nav'>
@@ -105,8 +113,6 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
               >
                 Info Lookup
               </NavDropdown.Item>
-              {/* <NavDropdown.Divider /> */}
-              {/* <NavDropdown.Item ><Theme toggleTheme={toggleTheme} theme={theme} /></NavDropdown.Item> */}
               {user.name && (
                 <>
                   <NavDropdown.Divider />

@@ -78,7 +78,7 @@ const EditComment = ({ showEditModal, setShowEditModal, commentObject }: Props) 
       <Modal.Body>
         <Form>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Edit Comment</Form.Label>
+            {/* <Form.Label>Edit Comment</Form.Label> */}
             <Form.Control className={theme === 'dark' && 'bootstrap-modal-textbox'} as="textarea" rows={3} 
               name="comment"
               defaultValue={commentObject?.comment}

@@ -21,7 +21,7 @@ const CLIENT_URL: string | undefined =
 
 
 auth.post('/local/register', async (req: any, res: any) => {
-  console.log(req.body);
+  console.log(req.body, 'req.body in auth.post /local/register');
   const { name, username, password, location } = req?.body;
   try {
     if (!username || !password || typeof username !== 'string' || typeof password !== 'string') {
@@ -41,6 +41,7 @@ auth.post('/local/register', async (req: any, res: any) => {
         password: hashedPassword,
         location,
       });
+      console.table(user.name);
       res.status(200).json({
         message: 'success',
         success: true,
@@ -54,21 +55,22 @@ auth.post('/local/register', async (req: any, res: any) => {
 });
         
 auth.post('/local/login', (req: any, res: any, next: any) => {
+  console.log(req.body, 'req.body in auth.post /local/login');
   passport.authenticate('local', {
     successRedirect: '/login/success',
     failureRedirect: '/login/fail',
-    failureMessage: true,
-    successMessage: true,
+    // failureMessage: true,
+    // successMessage: true,
   }, (err: any, user: boolean, info: any, status: any) => {
-    console.log(color.xterm(11).bold('authenticate function'));
-    // console.log(req.body, req.user, user);
+    console.log(color.xterm(122).bold('authenticate function', 'user', user ));
+    // console.log('user', user ); //user
     if (err) { throw err; }
     if (!user) {
       res.send('Invalid Credentials'); 
     } else {
       req.logIn(user, (err: any) => {
         if (err) { throw err; }
-        console.log(req.session.passport.user.dataValues.id, '< - user on session cookie');
+        console.log(color.xterm(11).bold(req.session.passport.user, '< - user on session cookie', req.user));
         res.send(user);
       });
     }
@@ -76,6 +78,9 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
 });
 
 auth.get('/login/success', (req: Request | any, res: Response) => {
+  console.log(color.xterm(122).bold(req.user, 'req.user in auth.get /login/success'));
+
+  // console.log(req.user, 'req.user in auth.get /login/success');
   if (req.user) {
     User.findOne({ where: { id: req.user.id || req.user[0].id }, 
       include: [{ model: PetPlant,
@@ -90,6 +95,9 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
         include: [{ model: GalleryEntry }],
       }],
     }).then((user: object) => {
+      console.log(color.xterm(122).bold(user, 'user in auth.get /login/success'));
+
+      // console.log(user, 'user in auth.get /login/success');
       res.status(200).json({
         message: 'success',
         success: true,

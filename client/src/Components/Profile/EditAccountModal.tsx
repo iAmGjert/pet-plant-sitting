@@ -8,6 +8,7 @@ import EditField from './EditField';
 import EditPetModal from './EditPetModal';
 import { useAppDispatch } from '../../state/hooks';
 import { ThemeContext } from '../../App';
+import { setPetPlants } from '../../state/features/petPlant/petPlantSlice';
 
 type Props = {
   user: Profile;
@@ -53,6 +54,9 @@ const EditAccountModal = ({
       theme: userTheme,
     });
     await getUser();
+    const petPlants = await axios.get('/api/pets_plants/all');
+    // console.log(petPlants.data);
+    dispatch(setPetPlants(petPlants.data));
     setShowModal(false);
     navigate(`/profile/${user.id}`);
   };
@@ -69,7 +73,7 @@ const EditAccountModal = ({
   return (
     <Modal
       // backdrop='static'
-      contentClassName={theme === 'dark' && 'dark'}
+      contentClassName={userTheme === 'dark' && 'dark'}
       show={showModal}
       fullscreen={true}
       onHide={() => handleOnHide()}
@@ -97,7 +101,7 @@ const EditAccountModal = ({
         add={true}
         newPetId={newPetId}
       />
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className={theme === 'dark' && 'dark'}>
         <Modal.Title>Update Profile</Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -198,22 +202,24 @@ const EditAccountModal = ({
             />
             <h1 style={{ fontWeight: 'bold' }}>Add Pets</h1>
           </Card>
-          <Button
-            variant='danger'
-            type='button'
-            onClick={() => setShowModal(false)}
-            className='mt-3 '
-          >
-            Cancel
-          </Button>
-          <Button
-            variant='success'
-            type='button'
-            onClick={() => handleOnHide()}
-            className={theme === 'dark' && 'bootstrap-modal-button'}
-          >
-            Finished
-          </Button>
+          <span>
+            <Button
+              variant='danger'
+              type='button'
+              onClick={() => setShowModal(false)}
+              className='m-2'
+            >
+              Cancel
+            </Button>
+            <Button
+              variant='success'
+              type='button'
+              onClick={() => handleOnHide()}
+              className={theme === 'dark' && 'bootstrap-modal-button'}
+            >
+              Finished
+            </Button>
+          </span>
         </Form>
       </Modal.Body>
     </Modal>

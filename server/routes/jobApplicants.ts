@@ -27,9 +27,9 @@ interface applicantInfo {
 jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
   try {
     if (req.user) {
-      console.log('req user', req.user);
+      //console.log('req user', req.user);
       if (req.user) {
-        console.log('req.user.id', req.user.id);
+        //console.log('req.user.id', req.user.id);
       }
       const applications = await JobApplicant.findAll({
         where: { user_id: req.user.id || req.user[0].id },
@@ -46,7 +46,7 @@ jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
 });
 
 jobApplicants.delete('/delete/:id', async (req: Request, res: Response) => {
-  console.log(req.body, 'body');
+  //console.log(req.body, 'body');
   const deletedApplication = await JobApplicant.destroy({
     where: {
       id: req.params.id,
