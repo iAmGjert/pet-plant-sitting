@@ -19,11 +19,11 @@ interface userOnline {
 }
 
 
-const socket = io(`${process.env.CLIENT_URL}:4000`);
+// const socket = io(`${process.env.CLIENT_URL}:4000`);
 
 // {transports: ['websocket']}
 
-const ChatMain = () => {   
+const ChatMain = ({ socket }) => {   
   
   const currUser = useAppSelector((state) => state.userProfile.value);
   // const [view, setView] = useState(useAppSelector((state) => state.chat.view));
