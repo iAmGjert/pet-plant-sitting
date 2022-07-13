@@ -468,7 +468,8 @@ body,
 .modal-button-as-link {
   color: #ffffff;
 }
-.bootstrap-modal-card.card {
+
+.bootstrap-modal.card {
   background-color: #2e2e2e;
   color: lightgrey;
   border-color: lightgrey;
@@ -619,5 +620,21 @@ body,
   border-radius: 10px;
   margin-left: 10px;
   position: absolute;
+}
+
+.job-list-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.job-tab-catagories {
+  width: 100%;
+}
+.job-card {
+  width: 100vw;
+}
+.job-bottom-button {
+  margin-top: 5px;
 }
 
