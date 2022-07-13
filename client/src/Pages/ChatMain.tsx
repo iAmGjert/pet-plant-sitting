@@ -57,7 +57,7 @@ const ChatMain = ({ socket }) => {
   return (
     <div className="chat-main">
       {/* <h1>Chat</h1> */}
-      <h2>Chat</h2>
+      <h2>Chat</h2>   
       <DropdownButton as={ButtonGroup} title={view}>
         <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="1">All</Dropdown.Item>
         <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="2">Pending Employers</Dropdown.Item>
