@@ -479,14 +479,16 @@ body,
 
 .chat-main {
   width: 100%;
-  height: 100vh;
+  height: 75%;
   /* display: grid; */
   background-color: #C2F8CB;
   place-items: center;
+  padding-bottom: 15%;
 }
 
 .chat-card {
   background-color: #558564;
+  color: #C2F8CB;
 }
 
 .chat-window {
