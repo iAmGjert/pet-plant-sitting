@@ -21,19 +21,25 @@ const Home: FC<Props> = () => {
   const users = useAppSelector((state) => state.userProfile.users);
   const petPlants = useAppSelector((state) => state.petPlant.petPlants);
   const jobs = useAppSelector((state) => state.job.jobs);
+  const events = useAppSelector((state) => state.events.events);
 
+  console.log(events);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const handleClick = () => {
-    // console.log(user);
-    // setDisplay(!display);
-  };
+  // const handleClick = () => {
+  //   // console.log(user);
+  //   // setDisplay(!display);
+  // };
+
+  // useEffect(() => {
+  //   dispatch(events);
+  // });
 
   return (
-    <Container fluid>
+    <Container className='home-container'>
       <h1 className='home-header'>Welcome to</h1>
 
       <img
