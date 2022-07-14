@@ -106,23 +106,35 @@ const Details = () => {
                   <small>{numOfComments} comments</small>
                   : <small>No comments</small>}
             </Button>
+            </Col><Col 
+              style={{
+                textAlign: 'right'
+              }}
+            >
+              {currentUser.name.length ?
+                <Button className='bootstrap-button' variant="link" size="sm" onClick={() => setShowAddModal(true)}>
+                  Add Comment
+                </Button> 
+                : <Button className='bootstrap-button' variant="link" size="sm" href='/login'>
+                  Login to add comment
+                </Button>}
             </Col></Row>
           </Container>
         </Card.Footer>
       </Card>
       { showComments && <Comments comments={event_comments} /> }
       <Card className='bootstrap-card'>
-        <Card.Footer
+        {/* <Card.Footer
           // style={{ marginTop: '10px' }}
-        >
-          {currentUser.name.length ?
+        > */}
+        {/* {currentUser.name.length ?
             <Button className='bootstrap-button' variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
                 Add Comment
             </Button> 
             : <Button className='bootstrap-button' variant="primary" size="sm" href='/login'>
                   Login to add comment
-            </Button>}
-        </Card.Footer>
+            </Button>} */}
+        {/* </Card.Footer> */}
       </Card>
       <div style={{
         display: 'flex',
