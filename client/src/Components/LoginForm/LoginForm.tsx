@@ -28,7 +28,7 @@ const LoginForm = () => {
 
   return (
     <Form className='login-form'>
-      <img className="fern-herm-logo" src={require('./fern-herm-logo.svg')} alt="Fern and Herm logo" />
+      <img className="fern-herm-logo" src={require('../../../Public/svg/fern-herm-logo.svg')} alt="Fern and Herm logo" />
       <Form.Group className='mb-3' controlId='formBasicEmail'>
         {/* <Form.Label>Email address</Form.Label> */}
         <Form.Control className='bootstrap-textbox' type='email' placeholder='Enter email' 
