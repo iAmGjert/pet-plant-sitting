@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ThemeContext } from '../../App';
 // import './fern-herm-logo.svg';
 
 const LoginForm = () => {
+  const theme = useContext(ThemeContext);
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const navigate = useNavigate();
@@ -28,7 +30,11 @@ const LoginForm = () => {
 
   return (
     <Form className='login-form'>
-      <img className="fern-herm-logo" src={require('./fern-herm-logo.svg')} alt="Fern and Herm logo" />
+      <img className="fern-herm-logo" src={require('./fern-herm-logo.svg')} alt="Fern and Herm logo" 
+        style={{
+          filter: theme === 'dark' && 'invert(100%)',  
+        }}
+      />
       <Form.Group className='mb-3' controlId='formBasicEmail'>
         {/* <Form.Label>Email address</Form.Label> */}
         <Form.Control className='bootstrap-textbox' type='email' placeholder='Enter email' 
@@ -50,7 +56,7 @@ const LoginForm = () => {
       <div id="login-footer" >
         <span>new to fern herm?</span>
         <span>
-          <Button className='bootstrap-button sign-up-btn' variant='link' 
+          <Button className='button-as-link sign-up-btn' variant='link' 
             onClick={navigateRegister}>Sign Up</Button>
         </span>
       </div>

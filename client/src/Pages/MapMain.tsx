@@ -92,7 +92,7 @@ const MapMain: FC<Props> = () => {
             eventsLocations={eventsLocations}
             navigate={navigate}
           />
-          : <div>Please log in <button onClick={()=>{ navigate('/login'); }}>Login</button></div>
+          : <div>Please log in <button className='bootstrap-button' onClick={()=>{ navigate('/login'); }}>Login</button></div>
       }
     </div>
   );

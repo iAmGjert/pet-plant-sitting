@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useContext } from 'react';
 //import { useNavigate } from 'react-router-dom';
 import UpcomingJobs from './UpcomingJobs';
 import LandingEventCard from './LandingEventCard';
@@ -22,6 +22,7 @@ import {
   fetchPastJobs,
 } from '../../state/features/jobs/jobSlice';
 import { fetchUpcomingEvents } from '../../state/features/events/eventsSlice';
+import { ThemeContext } from '../../App';
 
 //typescript;
 interface jobs {
@@ -46,6 +47,7 @@ interface events {
 interface Props {}
 
 const Landing: FC<Props> = () => {
+  const theme = useContext(ThemeContext);
   //const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -89,6 +91,9 @@ const Landing: FC<Props> = () => {
           <Card.Img
             variant='top'
             src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
+            style={{
+              filter: theme === 'dark' && 'invert(100%)',  
+            }}
           />
         </Card>
 
