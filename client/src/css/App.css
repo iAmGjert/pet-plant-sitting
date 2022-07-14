@@ -1,4 +1,4 @@
-/* :root {
+:root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
@@ -50,7 +50,7 @@
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
   --bs-body-bg: #c2f8cb;
-} */
+}
 html,
 body,
 #root {
@@ -676,6 +676,13 @@ body,
   text-align: center;
   padding-bottom: 10px;
 
+}
+
+.landing-welcome-header {
+  text-align: center;
+  font-size: 40px;
+  font-family: Sans-Serif;
+  padding-top: 40px;
 }
 
 .job-list-main {
