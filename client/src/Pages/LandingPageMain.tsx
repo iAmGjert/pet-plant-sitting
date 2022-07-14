@@ -4,13 +4,13 @@ import Landing from '../Components/LandingPage/Landing';
 
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
+//import Button from 'react-bootstrap/Button';
+//import Card from 'react-bootstrap/Card';
 
 //Redux
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 
-import axios from 'axios';
+//import axios from 'axios';
 
 //typescript
 interface jobStuff {

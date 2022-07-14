@@ -80,16 +80,13 @@ const Landing: FC<Props> = () => {
   }, []);
 
   return (
-    <div>
+    <div className='landingpage-contents'>
       <Card className='landing-welcome-card'>
         <Card.Header className='landing-welcome-header'>
-          Welcome {user.name ? `, ${user.name}!` : '!'}
+          Welcome {user.name ? ` ${user.name}!` : '!'}
         </Card.Header>
-        <Card.Title>Fern Herm is happy to have you!</Card.Title>
-        <Card.Img
-          variant='top'
-          src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
-        />
+        {/* <Card.Title>Fern Herm is happy to have you!</Card.Title> */}
+        <Card.Img variant='top' src={require('./Logo.svg')} />
       </Card>
 
       {sitterUpcomingJobs.length > 0
@@ -98,6 +95,7 @@ const Landing: FC<Props> = () => {
               id: React.Key;
               startDate: any;
               endDate: any;
+              3;
               employer_id: any;
               location: any;
               job_pets_plants: any;
@@ -116,7 +114,7 @@ const Landing: FC<Props> = () => {
               );
             }
           )
-        : null}
+        : 'You Have No Upcoming Jobs'}
 
       {upcomingEvents
         .slice(0, 1)

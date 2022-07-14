@@ -678,11 +678,20 @@ body,
 
 }
 
-.landing-welcome-header {
-  text-align: center;
-  font-size: 40px;
+.landingpage-contents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* text-align: center; */
+  /* font-size: 40px; */
   font-family: Sans-Serif;
   padding-top: 40px;
+}
+
+.landingpage-contents .landing-welcome-header {
+   text-align: center; 
+   font-size: 40px;
 }
 
 .job-list-main {
