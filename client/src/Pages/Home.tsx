@@ -42,6 +42,7 @@ const Home: FC<Props> = () => {
   return (
     <Container fluid className='home-container'>
       <h1 className='home-header'>Welcome to</h1>
+      <h1 className='home-fern-herm'>Fern Herm</h1>
 
       <img
         className='home-logo'
@@ -108,14 +109,19 @@ const Home: FC<Props> = () => {
 
       <div className='home-btns'>
         <Button
-          className='bootstrap-button'
+          className='home-login-btn'
           variant='primary'
           size='sm'
           onClick={() => navigate('/login')}
         >
           Login
         </Button>
-        <Button variant='primary' size='sm' onClick={handleShow}>
+        <Button
+          className='home-events-btn'
+          variant='primary'
+          size='sm'
+          onClick={handleShow}
+        >
           Events
         </Button>
 
@@ -124,13 +130,21 @@ const Home: FC<Props> = () => {
             <Offcanvas.Title>
               Next Upcoming Community Event:
               {mappedEvents.map((element) => {
-                return <h1>{element.title}</h1>;
+                return (
+                  <h1 className='home-offcanvas-event-title'>
+                    {element.title}
+                  </h1>
+                );
               })}
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             {mappedEvents.map((element) => {
-              return <p>{element.description}</p>;
+              return (
+                <p className='home-offcanvas-event-description'>
+                  {element.description}
+                </p>
+              );
             })}
           </Offcanvas.Body>
         </Offcanvas>

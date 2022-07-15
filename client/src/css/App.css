@@ -20,7 +20,7 @@
   --bs-gray-600: #6c757d;
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
-  --bs-gray-900: #212529;
+  --bs-gray-900: #212529; 
   --bs-primary: #0d6efd;
   --bs-secondary: #6c757d;
   --bs-success: #198754;
@@ -634,9 +634,21 @@ body,
   width: 100px;
   /* height: 100px; */
   font-weight: 'bold';
-  font-family: ;
-  font-size: '12px';
+  /* font-variant: 1rem/1.5 var(--bs-font-monospace); */
+  font-family: monospace, monospace ;
+  font-size: 40px;
   margin-top: 60px; 
+  margin-left: -124px;
+  white-space: nowrap;
+}
+
+.home-fern-herm {
+  width: 100px;
+  /* height: 100px; */
+  font-weight: 'bold';
+  /* font-variant: 1rem/1.5 var(--bs-font-monospace); */
+  font-family: monospace, monospace;
+  font-size: 40px;
   margin-left: -100px;
   white-space: nowrap;
 }
@@ -644,8 +656,8 @@ body,
 .home-logo {
   width: 390px;
   height: 400px;
+  margin-bottom: 40px;
 }
-
 .carousel-item img {
   object-fit: cover;
   object-position: center;
@@ -667,15 +679,24 @@ body,
   padding: '1em 0em';
   font-weight: 'bold';
   margin: 20px 20px;
-  font-family: Poppins;
+  font-family: monospace, monospace;
   font-size: 20px;
 
 }
 
-.home-btns {
+.home-login-btn {
+  background-color: #198754;
   text-align: center;
   padding-bottom: 10px;
+  margin-bottom: 20px;
 
+}
+
+.home-events-btn {
+  background-color: #198754;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .landingpage-contents {

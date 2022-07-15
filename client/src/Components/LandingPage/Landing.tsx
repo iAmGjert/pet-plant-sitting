@@ -115,7 +115,7 @@ const Landing: FC<Props> = () => {
       ) : (
         <p className='no_upcoming_jobs'>
           You Have No Upcoming Jobs. Click <Link to='/jobs'>here</Link> to start
-          applying.
+          applying or <Link to='/jobs'>here</Link> to find the perfect sitter!
         </p>
       )}
 
