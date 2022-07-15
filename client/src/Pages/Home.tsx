@@ -28,12 +28,12 @@ const Home: FC<Props> = () => {
     .map((event: Event) => {
       return {
         title: event.name,
-        startDate: moment(event.startDate).toDate(),
+        startDate: event.startDate,
         description: event.description,
       };
     })
     .slice(0, 1);
-  //console.log('mappedEvents', mappedEvents);
+  console.log('mappedEvents', mappedEvents);
 
   useEffect(() => {
     dispatch(fetchUpcomingEvents());
@@ -107,7 +107,7 @@ const Home: FC<Props> = () => {
         to help.
       </p>
 
-      <div className='home-btns'>
+      <div>
         <Button
           className='home-login-btn'
           variant='primary'
@@ -125,20 +125,27 @@ const Home: FC<Props> = () => {
           Events
         </Button>
 
-        <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas className='offcanvas' show={show} onHide={handleClose}>
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>
-              Next Upcoming Community Event:
-              {mappedEvents.map((element) => {
-                return (
-                  <h1 className='home-offcanvas-event-title'>
-                    {element.title}
-                  </h1>
-                );
-              })}
+            <Offcanvas.Title className='offcanvas-title'>
+              Next Free Community Event:
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
+            {mappedEvents.map((element) => {
+              return (
+                <h1 className='home-offcanvas-event-title'>{element.title}</h1>
+              );
+            })}
+
+            {mappedEvents.map((element) => {
+              return (
+                <p className='offcanvas-event-date'>
+                  {moment(element.startDate).format('dddd, MMMM Do YYYY')}
+                </p>
+              );
+            })}
+
             {mappedEvents.map((element) => {
               return (
                 <p className='home-offcanvas-event-description'>
@@ -146,6 +153,7 @@ const Home: FC<Props> = () => {
                 </p>
               );
             })}
+            {/* <Offcanvas.Button>Hey</Offcanvas.Button> */}
           </Offcanvas.Body>
         </Offcanvas>
       </div>

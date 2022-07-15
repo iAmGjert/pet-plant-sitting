@@ -684,6 +684,32 @@ body,
 
 }
 
+.offcanvas {
+  background-color:  #C2F8CB;
+}
+
+.offcanvas-title {
+  text-align: center;
+  font-family: monospace, monospace;
+}
+.home-offcanvas-event-title {
+  margin-top: 20px;
+  background-color:  #C2F8CB;
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
+.offcanvas-event-date {
+  margin-top: 10px;
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
+.home-offcanvas-event-description {
+  margin-top:20px;
+  font-family: monospace, monospace;
+}
+
 .home-login-btn {
   background-color: #198754;
   text-align: center;
