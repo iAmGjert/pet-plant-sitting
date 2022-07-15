@@ -44,7 +44,7 @@ const LoginForm = () => {
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicCheckbox'>
       </Form.Group>
-      <Button className='bootstrap-button login-btn' variant='primary' href='/loading' onClick={login}>
+      <Button className='bootstrap-button login-btn' href='/loading' onClick={login}>
         Login
       </Button>
       <div id="login-footer" >

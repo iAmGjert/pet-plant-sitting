@@ -92,7 +92,7 @@ input[type="submit"] {
   font-size: 16px;
   border-top: grey solid 1px;
   padding: 0.3em 0;
-  background-color: whitesmoke;
+  background-color: #b7f6c0;
 }
 
 .sign-up-btn {
@@ -106,7 +106,11 @@ input[type="submit"] {
   border-radius: 6px;
   padding: 0.5em 1em;
   cursor: pointer;
+  background-color: #C2F8CB;
 }
+/* .login-btn {
+  background-color: #F5C396;
+} */
 
 a[name="google"] {
   display: flex;
