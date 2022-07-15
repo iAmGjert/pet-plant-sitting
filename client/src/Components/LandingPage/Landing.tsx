@@ -21,7 +21,7 @@ import {
   fetchPastJobs,
 } from '../../state/features/jobs/jobSlice';
 import { fetchUpcomingEvents } from '../../state/features/events/eventsSlice';
-
+import { Link } from 'react-router-dom';
 //typescript;
 interface jobs {
   id: number;
@@ -59,19 +59,17 @@ const Landing: FC<Props> = () => {
 
   const events = useAppSelector((state) => state.events.events);
 
-  console.log('upcomingEvents', upcomingEvents);
-
   const sitterUpcomingJobs = upcomingJobs.filter(
     (job: { sitter_id: number }) => {
       return job.sitter_id === user.id;
     }
   );
 
+  //console.log(sitterUpcomingJobs, 11);
   const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
     return job.sitter_id === user.id;
   });
-
-  //console.log(jobs, 'jobs');
+  console.log('applications', applications);
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
@@ -89,32 +87,37 @@ const Landing: FC<Props> = () => {
         <Card.Img variant='top' src={require('./Logo.svg')} />
       </Card>
 
-      {sitterUpcomingJobs.length > 0
-        ? sitterUpcomingJobs.map(
-            (element: {
-              id: React.Key;
-              startDate: any;
-              endDate: any;
-              3;
-              employer_id: any;
-              location: any;
-              job_pets_plants: any;
-            }) => {
-              return (
-                <>
-                  <UpcomingJobs
-                    key={element.id}
-                    startDate={element.startDate}
-                    endDate={element.endDate}
-                    employer_id={element.employer_id}
-                    location={element.location}
-                    petPlant={element.job_pets_plants}
-                  />
-                </>
-              );
-            }
-          )
-        : 'You Have No Upcoming Jobs'}
+      {sitterUpcomingJobs.length > 0 ? (
+        sitterUpcomingJobs.map(
+          (element: {
+            id: React.Key;
+            startDate: any;
+            endDate: any;
+            //3;
+            employer_id: any;
+            location: any;
+            job_pets_plants: any;
+          }) => {
+            return (
+              <>
+                <UpcomingJobs
+                  key={element.id}
+                  startDate={element.startDate}
+                  endDate={element.endDate}
+                  employer_id={element.employer_id}
+                  location={element.location}
+                  petPlant={element.job_pets_plants}
+                />
+              </>
+            );
+          }
+        )
+      ) : (
+        <p className='no_upcoming_jobs'>
+          You Have No Upcoming Jobs. Click <Link to='/jobs'>here</Link> to start
+          applying.
+        </p>
+      )}
 
       {upcomingEvents
         .slice(0, 1)
@@ -143,19 +146,18 @@ const Landing: FC<Props> = () => {
             );
           }
         )}
-
-      {applications.map(
-        (
-          element: JSX.IntrinsicAttributes & {
-            status: any;
-            job: any;
-            id: any;
-            startDate: any;
-            endDate: any;
-          }
-        ) => {
-          return (
-            <>
+      <section className='applications'>
+        {applications.map(
+          (
+            element: JSX.IntrinsicAttributes & {
+              status: any;
+              job: any;
+              id: any;
+              startDate: any;
+              endDate: any;
+            }
+          ) => {
+            return (
               <AppliedJobsBoard
                 key={element.id}
                 startDate={element.job.startDate}
@@ -163,10 +165,10 @@ const Landing: FC<Props> = () => {
                 location={element.job.location}
                 {...element}
               />
-            </>
-          );
-        }
-      )}
+            );
+          }
+        )}
+      </section>
 
       <JobHistory sitterWorkHistory={sitterWorkHistory} />
     </div>

@@ -60,7 +60,7 @@ jobs.get('/all', async (req: Request, res: Response) => {
         },
         {
           model: JobPetsPlants,
-          include: [{ model: PetPlant, attributes: ['name', 'image'] }],
+          include: [{ model: PetPlant, attributes: ['name', 'image', 'species', 'bio'] }],
         },
       ],
       order: [['startDate', 'ASC']],

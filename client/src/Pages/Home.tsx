@@ -45,7 +45,7 @@ const Home: FC<Props> = () => {
 
       <img
         className='home-logo'
-        src='https://64.media.tumblr.com/290a29bc6dcf179117ab4933ff583acc/4677f106597bcd32-27/s500x750/69d26528d580d86580d284278eb83b373a0a7435.jpg'
+        src={require('../Components/LandingPage/Logo.svg')}
         width={300}
         height={300}
         alt=''

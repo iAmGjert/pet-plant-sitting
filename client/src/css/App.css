@@ -634,7 +634,7 @@ body,
   width: 100px;
   /* height: 100px; */
   font-weight: 'bold';
-  font-family: "Times New Roman", Times, serif;
+  font-family: ;
   font-size: '12px';
   margin-top: 60px; 
   margin-left: -100px;
@@ -667,7 +667,7 @@ body,
   padding: '1em 0em';
   font-weight: 'bold';
   margin: 20px 20px;
-  font-family: "Times New Roman", Times, serif;
+  font-family: Poppins;
   font-size: 20px;
 
 }
@@ -687,11 +687,29 @@ body,
   /* font-size: 40px; */
   font-family: Sans-Serif;
   padding-top: 40px;
+  padding-bottom: 56px;
 }
 
 .landingpage-contents .landing-welcome-header {
    text-align: center; 
    font-size: 40px;
+}
+
+.landing-welcome-card {
+  margin-bottom: 24px;
+}
+
+.landing-event-card {
+  margin-bottom: 24px;
+}
+
+.landing-upcomingjobs-card {
+  margin-bottom: 24px;
+}
+
+.landing-upcomingjobs-card .landing-upcomingjob-title {
+  text-align: center;
+  margin-bottom: 24px;
 }
 
 .job-list-main {
@@ -710,3 +728,31 @@ body,
   margin-top: 5px;
 }
 
+.applications {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.job-application-container {
+  width: 300px;
+  margin: 16px;
+}
+.job-application-container .job-description {
+  height: 100px;
+  overflow: scroll;
+}
+
+.pet_container {
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+.pet_container p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}

@@ -33,7 +33,14 @@ jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
       }
       const applications = await JobApplicant.findAll({
         where: { user_id: req.user.id || req.user[0].id },
-        include: [{ model: Job }],
+        include: [
+          { model: Job, 
+            include: [
+              { model: JobPetsPlants,
+                include: [{ model: PetPlant, attributes: ['name', 'image', 'species', 'bio']}],
+              }
+            ]
+          }],
       });
       res.json(applications);
     } else {

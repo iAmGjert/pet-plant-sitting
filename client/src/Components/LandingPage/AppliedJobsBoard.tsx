@@ -7,7 +7,14 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { deleteApplication } from '../../state/features/jobs/jobSlice';
 
-const AppliedJobsBoard = ({ job, startDate, petPlants, location, id }) => {
+const AppliedJobsBoard = ({
+  job,
+  startDate,
+  petPlants,
+  location,
+  id,
+  status,
+}) => {
   //console.log(location);
   const dispatch = useAppDispatch();
   //console.log('job in board', job);
@@ -19,12 +26,15 @@ const AppliedJobsBoard = ({ job, startDate, petPlants, location, id }) => {
 
   // console.log('petPlants', petPlants);
   return (
-    <Card className='bootstrap-card'>
+    <Card className='bootstrap-card job-application-container'>
       <Card.Body>
         <Card.Title>
-          Application Status for Job # {job.id}: {job.status}
+          Application Status for Job # {job.id}:{' '}
+          {status.charAt(0).toUpperCase() + status.slice(1)}
         </Card.Title>
-        <Card.Text>Description: {job.description}</Card.Text>
+        <Card.Text className='job-description'>
+          Description: {job.description}
+        </Card.Text>
         <Button
           className='bootstrap-button'
           variant='primary'
