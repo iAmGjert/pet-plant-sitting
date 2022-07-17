@@ -15,7 +15,7 @@ const LandingEventCard = ({ startDate, location, description, name }) => {
   return (
     <Card className='landing-event-card' style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
+        <Card.Title className='landing-event-card-title'>{name}</Card.Title>
         <Card.Subtitle className='mb-2 text-muted'>
           {moment(startDate).format('dddd, MMMM Do YYYY')}
         </Card.Subtitle>

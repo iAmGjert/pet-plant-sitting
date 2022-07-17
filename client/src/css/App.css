@@ -710,11 +710,19 @@ body,
   font-family: monospace, monospace;
 }
 
+.offcanvas-more-events-btn {
+  text-align: center;
+  background-color: #198754;
+  margin-top: 30px;
+  font-family: monospace, monospace;
+}
+
 .home-login-btn {
   background-color: #198754;
   text-align: center;
   padding-bottom: 10px;
   margin-bottom: 20px;
+  font-family: monospace, monospace;
 
 }
 
@@ -723,6 +731,7 @@ body,
   text-align: center;
   padding-bottom: 10px;
   margin-bottom: 20px;
+  font-family: monospace, monospace;
 }
 
 .landingpage-contents {
@@ -740,25 +749,76 @@ body,
 .landingpage-contents .landing-welcome-header {
    text-align: center; 
    font-size: 40px;
+   font-family: monospace, monospace;
+
 }
 
-.landing-welcome-card {
-  margin-bottom: 24px;
+.landing-svg {
+  margin-top: 30px;
+  width: 390px;
+  height: 400px;
+  margin-bottom: 40px;
 }
+
+/* .landing-welcome-card {
+  margin-bottom: 24px;
+} */
 
 .landing-event-card {
   margin-bottom: 24px;
+  font-family: monospace, monospace;
+}
+
+.landing-event-card-title {
+  text-align: center;
 }
 
 .landing-upcomingjobs-card {
   margin-bottom: 24px;
 }
 
+
 .landing-upcomingjobs-card .landing-upcomingjob-title {
   text-align: center;
   margin-bottom: 24px;
+  font-family: monospace, monospace;
 }
 
+.landing-upcomingjobs-date{
+  font-family: monospace, monospace;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.landing-upcomingjobs-btn {
+  text-align: center;
+  background-color: #198754;
+  font-family: monospace, monospace;
+}
+
+.upcomingjob-modal {
+  font-family: monospace, monospace;
+}
+
+.landing-upcomingjob-modal-header {
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
+.landing-sitting-history-btn {
+  background-color: #198754;
+  font-family: monospace, monospace;
+  margin-bottom: 20px;
+}
+
+.landing-job-history-modal-title {
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
+.landing-job-history-modal-body {
+  font-family: monospace, monospace;
+}
 .job-list-main {
   display: flex;
   justify-content: center;

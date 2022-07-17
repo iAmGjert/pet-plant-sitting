@@ -25,8 +25,10 @@ import { ThemeContext } from '../../App';
 // import { DayView } from '@devexpress/dx-react-scheduler-material-ui';
 // import { WeekView } from '@devexpress/dx-react-scheduler-material-ui';
 
+import { Button } from '@material-ui/core';
 //Redux
-import { useAppSelector } from '../../state/hooks';
+import { useAppSelector, useAppDispatch } from '../../state/hooks';
+import { deleteJob } from '../../state/features/jobs/jobSlice';
 
 //typescript;
 interface jobs {
@@ -56,7 +58,8 @@ const Practice: FC<Props> = () => {
   const jobs = useAppSelector((state) => state.job.jobs);
   const events = useAppSelector((state) => state.events.events);
   const user = useAppSelector((state) => state.userProfile.value);
-
+  const [visible, setVisible] = useState(false);
+  const dispatch = useAppDispatch();
   //console.log('events', events);
   //console.log(user);
 
@@ -107,6 +110,11 @@ const Practice: FC<Props> = () => {
   const appointments = userJobs.concat(mappedEvents);
   //console.log('appointments', appointments);
 
+  const deleteSitting = (id) => {
+    dispatch(deleteJob(id));
+    setVisible(false);
+  };
+
   const AppointmentContent = ({ appointmentData }) => {
     //console.log('appointment props', props);
     if (appointmentData.type === 'job') {
@@ -126,6 +134,9 @@ const Practice: FC<Props> = () => {
           </h2>
           <p>Location: {appointmentData.location}</p>
           <p>Info: {appointmentData.description}</p>
+          <button onClick={() => deleteSitting(appointmentData.id)}>
+            Cancel Sitting
+          </button>
         </div>
       );
     } else {
@@ -156,6 +167,8 @@ const Practice: FC<Props> = () => {
         <ViewSwitcher />
         <Appointments />
         <AppointmentTooltip
+          visible={visible}
+          onVisibilityChange={() => setVisible((prevState) => !prevState)}
           showCloseButton
           showOpenButton
           contentComponent={AppointmentContent}

@@ -61,12 +61,14 @@ const upcomingJobs: FC<Props> = ({
         {petPlant.map((pet) => {
           return <Card.Img src={pet.pet_plant.image} key={pet.id} />;
         })}
-        <Card.Text>{`${moment(startDate).format(
+        <Card.Text className='landing-upcomingjobs-date'>{`${moment(
+          startDate
+        ).format('dddd MMMM Do, YYYY')} to ${moment(endDate).format(
           'dddd MMMM Do, YYYY'
-        )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}</Card.Text>
+        )}`}</Card.Text>
         <>
           <Button
-            className='bootstrap-button'
+            className='landing-upcomingjobs-btn'
             variant='primary'
             onClick={handleShow}
           >
@@ -77,10 +79,15 @@ const upcomingJobs: FC<Props> = ({
             contentClassName={theme === 'dark' && 'dark'}
             show={show}
             onHide={handleClose}
+            className='upcomingjob-modal'
           >
-            <Modal.Header closeButton>
+            <Modal.Header
+              className='landing-upcomingjob-modal-header'
+              closeButton
+            >
               <Modal.Title>
                 {' '}
+                All about{' '}
                 {petPlant
                   .map((pet) => {
                     return pet.pet_plant.name;
@@ -91,7 +98,7 @@ const upcomingJobs: FC<Props> = ({
             <Modal.Body>Location of Sitting: {location}</Modal.Body>
             {petPlant.map((pet) => (
               <div className='pet_container' key={pet.pet_plant.name}>
-                <p>Name: {pet.pet_plant.name}</p>
+                <p>Name(s): {pet.pet_plant.name}</p>
                 <p>Bio: {pet.pet_plant.bio}</p>
                 <p>Species: {pet.pet_plant.species}</p>
               </div>

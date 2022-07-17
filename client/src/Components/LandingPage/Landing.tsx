@@ -79,10 +79,15 @@ const Landing: FC<Props> = () => {
 
   return (
     <div className='landingpage-contents'>
+      <h1 className='landing-welcome-header'>
+        Welcome {user.name ? ` ${user.name}!` : '!'}
+      </h1>
+      <img className='landing-svg' src={require('./Logo.svg')} alt='' />
+
       <Card className='landing-welcome-card'>
-        <Card.Header className='landing-welcome-header'>
+        {/* <Card.Header className='landing-welcome-header'>
           Welcome {user.name ? ` ${user.name}!` : '!'}
-        </Card.Header>
+        </Card.Header> */}
         {/* <Card.Title>Fern Herm is happy to have you!</Card.Title> */}
         <Card.Img variant='top' src={require('./Logo.svg')} />
       </Card>
@@ -115,7 +120,7 @@ const Landing: FC<Props> = () => {
       ) : (
         <p className='no_upcoming_jobs'>
           You Have No Upcoming Jobs. Click <Link to='/jobs'>here</Link> to start
-          applying or <Link to='/jobs'>here</Link> to find the perfect sitter!
+          applying or to find the perfect sitter for your pet or plant babies!
         </p>
       )}
 

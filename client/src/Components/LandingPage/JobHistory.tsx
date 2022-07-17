@@ -16,7 +16,7 @@ const JobHistory = ({ sitterWorkHistory }) => {
   return (
     <>
       <Button
-        className='bootstrap-button'
+        className='landing-sitting-history-btn'
         variant='primary'
         onClick={handleShow}
       >
@@ -29,9 +29,11 @@ const JobHistory = ({ sitterWorkHistory }) => {
         onHide={handleClose}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Previous Work History</Modal.Title>
+          <Modal.Title className='landing-job-history-modal-title'>
+            Previous Work History
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className='landing-job-history-modal-body'>
           {sitterWorkHistory.map(
             ({ startDate, endDate, description, job_pets_plants, id }) => {
               return (

@@ -153,7 +153,9 @@ const Home: FC<Props> = () => {
                 </p>
               );
             })}
-            {/* <Offcanvas.Button>Hey</Offcanvas.Button> */}
+            <Button className='offcanvas-more-events-btn' href='/events'>
+              More Free Events
+            </Button>
           </Offcanvas.Body>
         </Offcanvas>
       </div>
