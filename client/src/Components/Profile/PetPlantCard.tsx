@@ -48,6 +48,7 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
   return (
     <Col>
       <Card
+        // style={{ width: '18rem' }}
         className='bootstrap-card'
         onClick={() => {
           if (edit) {
@@ -67,7 +68,13 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
           add={false}
           newPetId={null}
         />
-        <Card.Img variant='top' src={PetPlant.image} />
+        <Card.Img
+          variant='top'
+          src={PetPlant.image}
+          style={{ width: 'auto', objectFit: 'cover' }}
+          alt='pet/plant picture'
+          height='300px'
+        />
         <Card.Body>
           <Card.Title>{PetPlant.name}</Card.Title>
           {edit ? (
