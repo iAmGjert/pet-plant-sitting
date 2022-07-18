@@ -623,6 +623,8 @@ body,
   position: absolute;
 }
 
+/*************HOME PAGE************************************************/
+
 .home-container {
   display: flex;
   align-items: center;
@@ -734,6 +736,8 @@ body,
   font-family: monospace, monospace;
 }
 
+/****************LANDING PAGE**************************************/
+
 .landingpage-contents {
   display: flex;
   align-items: center;
@@ -819,6 +823,7 @@ body,
 .landing-job-history-modal-body {
   font-family: monospace, monospace;
 }
+
 .job-list-main {
   display: flex;
   justify-content: center;
