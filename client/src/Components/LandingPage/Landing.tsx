@@ -69,7 +69,9 @@ const Landing: FC<Props> = () => {
   const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
     return job.sitter_id === user.id;
   });
-  console.log('applications', applications);
+
+  console.log('sitterWorkHistory', sitterWorkHistory);
+  //console.log('applications', applications);
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
@@ -89,9 +91,9 @@ const Landing: FC<Props> = () => {
           Welcome {user.name ? ` ${user.name}!` : '!'}
         </Card.Header> */}
         {/* <Card.Title>Fern Herm is happy to have you!</Card.Title> */}
-        <Card.Img variant='top' src={require('./Logo.svg')} />
+        {/* <Card.Img variant='top' src={require('./Logo.svg')} /> */}
       </Card>
-
+      <JobHistory sitterWorkHistory={sitterWorkHistory} />
       {sitterUpcomingJobs.length > 0 ? (
         sitterUpcomingJobs.map(
           (element: {
@@ -119,11 +121,12 @@ const Landing: FC<Props> = () => {
         )
       ) : (
         <p className='no_upcoming_jobs'>
-          You Have No Upcoming Jobs. Click <Link to='/jobs'>here</Link> to start
-          applying or to find the perfect sitter for your pet or plant babies!
+          You have no upcoming sittings. Click <Link to='/jobs'>here</Link> to
+          find the perfect sitter or to connect yourself with a sitting gig!
         </p>
       )}
 
+      <h1 className='next-upcoming-event-header'>Next Community Event:</h1>
       {upcomingEvents
         .slice(0, 1)
         .map(
@@ -174,8 +177,6 @@ const Landing: FC<Props> = () => {
           }
         )}
       </section>
-
-      <JobHistory sitterWorkHistory={sitterWorkHistory} />
     </div>
   );
 };

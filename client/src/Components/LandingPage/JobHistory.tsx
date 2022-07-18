@@ -44,10 +44,38 @@ const JobHistory = ({ sitterWorkHistory }) => {
                       return `${pet.pet_plant.name} | `;
                     })}{' '}
                   </h2>
-                  <p>{description}</p>
-                  <p>{`${moment(startDate).format(
-                    'dddd MMMM Do, YYYY'
-                  )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}</p>
+
+                  <img
+                    className='job-history-image'
+                    src={job_pets_plants.map((pet) => {
+                      return pet.pet_plant.image;
+                    })}
+                    alt=''
+                  />
+
+                  <p className='job-history-about'>
+                    Description:{' '}
+                    {job_pets_plants.map((pet) => {
+                      return `${pet.pet_plant.name} | `;
+                    })}
+                    {job_pets_plants.map((pet) => {
+                      return pet.pet_plant.bio;
+                    })}{' '}
+                  </p>
+
+                  <p>
+                    Species:{' '}
+                    {job_pets_plants.map((pet) => {
+                      return pet.pet_plant.species;
+                    })}
+                  </p>
+
+                  <p>
+                    This sitting took place from:{' '}
+                    {`${moment(startDate).format(
+                      'dddd MMMM Do, YYYY'
+                    )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}{' '}
+                  </p>
                 </div>
               );
             }
