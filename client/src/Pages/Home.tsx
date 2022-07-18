@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useContext } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -9,11 +9,13 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { fetchUpcomingEvents } from '../state/features/events/eventsSlice';
+import { ThemeContext } from '../App';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 interface Props {}
 
 const Home: FC<Props> = () => {
+  const theme = useContext(ThemeContext);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   //const [display, setDisplay] = useState(false);
@@ -49,6 +51,9 @@ const Home: FC<Props> = () => {
         width={300}
         height={300}
         alt=''
+        style={{
+          filter: theme === 'dark' && 'invert(100%)',  
+        }}
       />
 
       <Carousel fade>
@@ -115,7 +120,7 @@ const Home: FC<Props> = () => {
         >
           Login
         </Button>
-        <Button variant='primary' size='sm' onClick={handleShow}>
+        <Button variant='primary' size='sm' onClick={handleShow} className='bootstrap-button'>
           Events
         </Button>
 

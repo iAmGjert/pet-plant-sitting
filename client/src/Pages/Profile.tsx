@@ -260,7 +260,7 @@ const Profile = () => {
     getLocation(profileUser?.location);
   }, [profileUser]);
   return (
-    <Container fluid>
+    <Container>
       {completeProfile !== 6 && editable && (
         <ToastContainer position='middle-center'>
           <Toast
@@ -292,17 +292,19 @@ const Profile = () => {
             <Toast.Body>{`Edit your profile and complete the following field(s) : ${missingFields.join(
               ','
             )}`}</Toast.Body>
-            <Button
-              size='sm'
-              variant='success'
-              className='bootstrap-button'
-              onClick={() => {
-                setShowModal(true);
-                setShowToast(false);
-              }}
-            >
+            <div className='toast-footer'>
+              <Button
+                size='sm'
+                variant='success'
+                className='bootstrap-button'
+                onClick={() => {
+                  setShowModal(true);
+                  setShowToast(false);
+                }}
+              >
               Complete
-            </Button>
+              </Button>
+            </div>
           </Toast>
         </ToastContainer>
       )}
@@ -341,11 +343,11 @@ const Profile = () => {
               )}
               {profileUser?.ratings.length > 1 &&
                 profileUser?.ratings.length < 5 && (
-                  <Badge pill bg='info'>
-                    {/* if sitter < 2 jobs completed > */}
+                <Badge pill bg='info'>
+                  {/* if sitter < 2 jobs completed > */}
                     New Sitter
-                  </Badge>
-                )}
+                </Badge>
+              )}
               {getRating() === 5 && (
                 <Badge pill bg='primary'>
                   {/* 5 star rating */}
