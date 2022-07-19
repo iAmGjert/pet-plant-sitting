@@ -17,7 +17,7 @@ const MapMain: FC<Props> = () => {
 
   const user = useAppSelector((state) => state.userProfile.value);
   const jobs = useAppSelector((state) => state.job.jobs);
-  const users = useAppSelector((state) => state.map.users);
+  const users = useAppSelector((state) => state.userProfile.users);
   const petsPlants = useAppSelector((state) => state.map.petsPlants);
   const events = useAppSelector((state) => state.map.events);
   const navigate = useNavigate();

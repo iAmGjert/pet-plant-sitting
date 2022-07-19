@@ -7,6 +7,7 @@ import EventPopup from './EventPopup';
 import { Button, ButtonToolbar } from 'react-bootstrap';
 import { ThemeContext } from '../../App';
 import MapDirections from './MapDirections';
+import { PersonCircle } from 'react-bootstrap-icons';
 
 interface Props {
   user: object
@@ -204,7 +205,11 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
         {
           jobPopup ?
             <JobPopup trigger={jobButtonPopup} setTrigger={showJobInfo}>
-              <img src={userPopup.image} alt='' className='popupUserPic'/>
+              {
+                userPopup.image ?
+                  <img src={userPopup.image} alt='' className='popupUserPic'/>
+                  : <PersonCircle className='popupUserPic' /> 
+              }
               <div 
                 onClick={()=>{ navigate(`/profile/${userPopup.id}`); }} 
                 onKeyPress={()=>{ navigate(`/profile/${userPopup.id}`); }}
@@ -243,7 +248,13 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
                 role='button' 
                 tabIndex={0}
               >
-                <h6>Host: {eventPopup.user?.name} <img src={eventPopup.user?.image} alt='' className='popupEventProfilePic' /></h6>
+                <h6>Host: {eventPopup.user?.name}
+                  {
+                    eventPopup.user?.image ?
+                      <img src={eventPopup.user?.image} alt='' className='popupEventProfilePic' />
+                      : <PersonCircle className='popupEventProfilePic' /> 
+                  }
+                </h6>
               </div>
               <p>{eventPopup.description}</p>
             </EventPopup> : ''
