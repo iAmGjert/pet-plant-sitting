@@ -1,10 +1,10 @@
-import React, { FC } from 'react';
+import React, { FC, useRef } from 'react';
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { changeView } from '../../state/features/jobs/jobSlice';
 import { useNavigate } from 'react-router-dom';
 import Theme from '../Theme/Theme';
-
+import { setView } from '../../state/features/events/eventsSlice';
 interface Props {
   theme: string;
   toggleTheme: any;
@@ -14,13 +14,16 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
   const user = useAppSelector((state) => state.userProfile.value);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const handleClick = () => {
-    dispatch(changeView('create'));
-    navigate('/jobs');
+  const navButton = useRef(null);
+  const linksContainerRef = useRef(null);
+
+  const collapseNav = () => {
+    navButton.current.classList.add('collapsed');
+    linksContainerRef.current.classList.remove('show');
   };
 
   return (
-    <Navbar
+    <Navbar collapseOnSelect
       bg={theme === 'dark' ? 'dark-mode' : 'primary'}
       variant='dark'
       expand='lg'
@@ -28,10 +31,11 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
       <Container>
         <Navbar.Brand
           onClick={() => {
+            
             navigate('/');
           }}
         >
-          {user.name ? user.name : <img src={require('./fern-herm-pets-alt.svg')} alt='fh-alt' style={{
+          {user.name ? user.name : <img src={require('../../../Public/svg/fern-herm-pets-alt.svg')} alt='fh-alt' style={{
             width: '50px',
             height: '50px',
             marginLeft: '15px',
@@ -41,89 +45,102 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
         <Navbar.Brand style={{textAlign: 'right'}}>
           <Theme toggleTheme={toggleTheme} theme={theme} />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse id='basic-navbar-nav'>
+        <Navbar.Toggle aria-controls='basic-navbar-nav' ref={navButton} data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"/>
+        <Navbar.Collapse id='basic-navbar-nav' ref={linksContainerRef}>
           <Nav className='me-auto'>
+            {!user.name && (
+              <Nav.Link
+                onClick={() => {
+                  navigate('/login');
+                  collapseNav();
+                }}
+              >
+                  Login
+              </Nav.Link>
+            )}
             <Nav.Link
               onClick={() => {
                 dispatch(changeView('list'));
                 navigate('/jobs');
+                collapseNav();
               }}
             >
               Job Listings
             </Nav.Link>
-            <NavDropdown title='More Options' id='basic-nav-dropdown'>
-              {!user.name && (
-                <NavDropdown.Item
-                  onClick={() => {
-                    navigate('/login');
-                  }}
-                >
-                  Login
-                </NavDropdown.Item>
-              )}
-              <NavDropdown.Item
-                onClick={() => {
-                  handleClick();
-                }}
-              >
+            {/* <NavDropdown title='More Options' id='basic-nav-dropdown'> */}
+          
+            {/* <Nav.Link
+              onClick={() => {
+                handleClick();
+              }}
+            >
                 Create Job
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                onClick={() => {
-                  navigate('/events');
-                }}
-              >
+            </Nav.Link> */}
+            <Nav.Link
+              onClick={() => {
+                dispatch(setView('list'));
+                navigate('/events');
+                collapseNav();
+              }}
+            >
                 Community
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                onClick={() => {
-                  navigate('/map');
-                }}
-              >
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate('/map');
+                collapseNav();
+              }}
+            >
                 Map
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                onClick={() => {
-                  navigate('/calendar');
-                }}
-              >
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate('/calendar');
+                collapseNav();
+              }}
+            >
                 Calendar
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                onClick={() => {
-                  navigate(`/profile/${user?.id}`);
-                }}
-              >
+            </Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate(`/profile/${user?.id}`);
+                collapseNav();
+              }}
+            >
                 Profile
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item
-                onClick={() => {
-                  navigate('/chat');
-                }}
-              >
+            </Nav.Link>
+            <NavDropdown.Divider />
+            <Nav.Link
+              onClick={() => {
+                navigate('/chat');
+                collapseNav();
+              }}
+            >
                 Chat
-              </NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item
-                onClick={() => {
-                  navigate('/info');
-                }}
-              >
+            </Nav.Link>
+            <NavDropdown.Divider />
+            <Nav.Link
+              onClick={() => {
+                navigate('/info');
+                collapseNav();
+              }}
+            >
                 Info Lookup
-              </NavDropdown.Item>
-              {user.name && (
-                <>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href='/auth/logout'>
+            </Nav.Link>
+            {user.name && (
+              <>
+                <NavDropdown.Divider />
+                <Nav.Link href='/auth/logout'>
                     Logout
-                  </NavDropdown.Item>
-                </>
-              )}
-            </NavDropdown>
+                </Nav.Link>
+              </>
+            )}
+            {/* </NavDropdown> */}
+           
           </Nav>
         </Navbar.Collapse>
+    
       </Container>
     </Navbar>
   );

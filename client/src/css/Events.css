@@ -1,4 +1,10 @@
+/* Add Comment */
 
+.comment-form {
+ width: 100%;
+}
+
+/* Comments */
 h1 {
   font-weight: 400;
   text-transform: uppercase;
@@ -36,14 +42,15 @@ h1 {
 }
 
 .comment-container {
-  border: red solid 1px;
+  border: #cfcfcf solid 1px;
   border-radius: 10px;
   padding: 5px 8px;
+  background-color: #e8e8e8;
 }
 
 .comment-footer small {
-  display: inline-block;
-  
+  display: inline-block; 
+  margin-bottom: 10px; 
 }
 
 .comment-time {

@@ -30,11 +30,11 @@ const LoginForm = () => {
 
   return (
     <Form className='login-form'>
-      <img className="fern-herm-logo" src={require('./fern-herm-logo.svg')} alt="Fern and Herm logo" 
+      <img className="fern-herm-logo" src={require('../../../Public/svg/fern-herm-logo.svg')} alt="Fern and Herm logo"  
         style={{
           filter: theme === 'dark' && 'invert(100%)',  
-        }}
-      />
+        }} />
+     
       <Form.Group className='mb-3' controlId='formBasicEmail'>
         {/* <Form.Label>Email address</Form.Label> */}
         <Form.Control className='bootstrap-textbox' type='email' placeholder='Enter email' 
@@ -50,7 +50,7 @@ const LoginForm = () => {
       </Form.Group>
       <Form.Group className='mb-3' controlId='formBasicCheckbox'>
       </Form.Group>
-      <Button className='bootstrap-button login-btn' variant='primary' href='/loading' onClick={login}>
+      <Button className='bootstrap-button login-btn' href='/loading' onClick={login}>
         Login
       </Button>
       <div id="login-footer" >

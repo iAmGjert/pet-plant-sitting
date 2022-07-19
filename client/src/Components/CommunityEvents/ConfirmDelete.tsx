@@ -58,7 +58,7 @@ const ConfirmDelete = ({ showDeleteModal, setShowDeleteModal, commentObject }: P
         <Modal.Title>Confirm Delete</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form className='comment-form'>
           <Form.Text>
             This action cannot be undone. Are you sure you want to delete this
             comment?
