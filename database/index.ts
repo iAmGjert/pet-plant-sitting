@@ -166,7 +166,7 @@ db.sync(
           location: '',
           sitter_rating: 10,
           total_sitter_ratings: 24,
-          bio: ``,
+          bio: '',
           average_rating: 5,
           total_ratings: 95,
         },
@@ -246,7 +246,7 @@ db.sync(
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
+            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
           },
           {
             owner_id: 2,
@@ -259,7 +259,7 @@ db.sync(
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: "I am the world's worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this",
+            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
           },
           {
             owner_id: 3,
@@ -298,7 +298,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 4,
@@ -313,7 +313,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 7,
@@ -326,7 +326,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 4,
@@ -341,7 +341,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "Ain't I cute?!",
+            bio: 'Ain\'t I cute?!',
           },
           {
             owner_id: 6,
@@ -356,7 +356,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "Ain't I cute?!",
+            bio: 'Ain\'t I cute?!',
           },
         ]).then(() => {
           Rating.bulkCreate([
@@ -554,7 +554,7 @@ db.sync(
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
                   description:
                     'A gathering for pet-less humans to find and be rescued by their furrever friends',
-                  startDate: new Date('July 15, 2022 01:15:00'),
+                  startDate: new Date('July 25, 2022 01:15:00'),
                   startTime: '4:45 PM',
                 },
                 {
@@ -563,7 +563,7 @@ db.sync(
                   location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
                   description:
                     'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
-                  startDate: new Date('July 15, 2022 01:15:00'),
+                  startDate: new Date('July 25, 2022 01:15:00'),
                   startTime: '6:00 PM',
                 },
                 {

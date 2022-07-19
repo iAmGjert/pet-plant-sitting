@@ -65,7 +65,7 @@ const Comments = ({ comments }: any) => {
                         onClick={() => {
                           setCommentObj(comment);
                           setShowEditModal(true);
-                        }}>edit</Button> &nbsp;|&nbsp;
+                        }}>edit</Button>&nbsp;|&nbsp;
                       <Button className='button-as-link' variant='link' 
                         onClick={() => { 
                           setCommentObj(comment);
