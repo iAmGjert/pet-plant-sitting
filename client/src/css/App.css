@@ -204,6 +204,10 @@ body,
 .container-fluid {
   padding-bottom: 15%;
 }
+.bottom-navbar-icon {
+  width: 28px;
+  height: 28px;
+}
 
 #dark {
   background: #2c2c2c;
@@ -371,6 +375,13 @@ body,
 }
 #dark .fern-herm-logo {
   color-interpolation-filters: white;
+}
+#dark #login-footer {
+  background-color: #2c2c2c;
+  color: #ffffff;
+}
+#dark .google-btn {
+  background-color: #2c2c2c;
 }
 
 /* Calendar */

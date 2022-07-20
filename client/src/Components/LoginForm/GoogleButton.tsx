@@ -7,7 +7,7 @@ const Google = () => {
     <>
       <Button
         name="google"
-        className='bootstrap-button google-btn'
+        className='google-btn'
         variant='light'
         href={'/auth/google'}
       ><GoogleButton />
