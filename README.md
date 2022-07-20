@@ -13,7 +13,7 @@ The name of our app *Fern Herm* is a play on words from the iconic 1980's Film *
 
 https://fernherm.com/
 ### Technologies Used
- **NOTE:** This app was built using a Mac OS and WSL (Windows Subsystem for Linux) environment, Node.js v14.0.0, Git, and PostgreSQL v12 and can be consider prerequisites for the installation of the app.
+ **NOTE:** This app was built using a Mac OS and WSL (Windows Subsystem for Linux) environment, Node.js v14, Git, and PostgreSQL v12 and can be consider prerequisites for the installation of the app.
 * Node - Runtime Environment
 * Git - Version Control System
 * TypeScript - JavaScript superset
