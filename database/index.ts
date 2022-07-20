@@ -162,7 +162,7 @@ db.sync(
       User.bulkCreate([
         {
           name: 'Iben Oneal',
-          image: '',
+          // image: '',
           location: '',
           sitter_rating: 10,
           total_sitter_ratings: 24,
@@ -183,7 +183,7 @@ db.sync(
         },
         {
           name: 'Royce Reed',
-          image: 'http://dummyimage.com/138x100.png/dddddd/000000',
+          // image: 'http://dummyimage.com/138x100.png/dddddd/000000',
           location: '6838 Louisville St, New Orleans, LA 70124',
           sitter_rating: 8,
           total_sitter_ratings: 93,
@@ -193,7 +193,7 @@ db.sync(
         },
         {
           name: 'Eric Gjertsen',
-          image: 'http://dummyimage.com/142x100.png/cc0000/ffffff',
+          // image: 'http://dummyimage.com/142x100.png/cc0000/ffffff',
           location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
           sitter_rating: 8,
           total_sitter_ratings: 88,
@@ -203,7 +203,7 @@ db.sync(
         },
         {
           name: 'Caity',
-          image: 'http://dummyimage.com/249x100.png/5fa2dd/ffffff',
+          // image: 'http://dummyimage.com/249x100.png/5fa2dd/ffffff',
           location: '4609 Banks St, New Orleans, LA 70119',
           sitter_rating: 4,
           total_sitter_ratings: 38,
@@ -213,7 +213,7 @@ db.sync(
         },
         {
           name: 'Raymond Jeong',
-          image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
+          // image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Gaudet Dr, Marrero, LA 70072',
           sitter_rating: 3,
           total_sitter_ratings: 86,
@@ -223,9 +223,7 @@ db.sync(
         },
         {
           name: 'velouriagreen',
-          // username: 'test',
-          // password: 'test',
-          image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
+          // image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: null,
           total_sitter_ratings: 86,
