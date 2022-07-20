@@ -62,6 +62,8 @@ const Landing: FC<Props> = () => {
 
   const events = useAppSelector((state) => state.events.events);
 
+  console.log('upcomingEvents', upcomingEvents);
+
   const sitterUpcomingJobs = upcomingJobs.filter(
     (job: { sitter_id: number }) => {
       return job.sitter_id === user.id;

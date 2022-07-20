@@ -8,6 +8,7 @@ import EditField from './EditField';
 import EditPetModal from './EditPetModal';
 import { useAppDispatch } from '../../state/hooks';
 import { ThemeContext } from '../../App';
+import { setPetPlants } from '../../state/features/petPlant/petPlantSlice';
 
 type Props = {
   user: Profile;
@@ -53,6 +54,9 @@ const EditAccountModal = ({
       theme: userTheme,
     });
     await getUser();
+    const petPlants = await axios.get('/api/pets_plants/all');
+    // console.log(petPlants.data);
+    dispatch(setPetPlants(petPlants.data));
     setShowModal(false);
     navigate(`/profile/${user.id}`);
   };
