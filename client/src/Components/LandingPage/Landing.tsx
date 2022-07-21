@@ -71,7 +71,7 @@ const Landing: FC<Props> = () => {
   });
 
   console.log('sitterWorkHistory', sitterWorkHistory);
-  //console.log('applications', applications);
+  console.log('applications', applications);
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
@@ -154,27 +154,36 @@ const Landing: FC<Props> = () => {
             );
           }
         )}
+
+      <h1 className='applications-header'>Your Status on Upcoming Sittings:</h1>
       <section className='applications'>
-        {applications.map(
-          (
-            element: JSX.IntrinsicAttributes & {
-              status: any;
-              job: any;
-              id: any;
-              startDate: any;
-              endDate: any;
+        {applications.length > 0 ? (
+          applications.map(
+            (
+              element: JSX.IntrinsicAttributes & {
+                status: any;
+                job: any;
+                id: any;
+                startDate: any;
+                endDate: any;
+              }
+            ) => {
+              return (
+                <AppliedJobsBoard
+                  key={element.id}
+                  startDate={element.job.startDate}
+                  petPlants={element.job.job_pets_plants}
+                  location={element.job.location}
+                  {...element}
+                />
+              );
             }
-          ) => {
-            return (
-              <AppliedJobsBoard
-                key={element.id}
-                startDate={element.job.startDate}
-                petPlants={element.job_pets_plants}
-                location={element.job.location}
-                {...element}
-              />
-            );
-          }
+          )
+        ) : (
+          <p className='no-applications'>
+            You have 0 pending sittings. Click <Link to='/jobs'>here</Link> to
+            apply!
+          </p>
         )}
       </section>
     </div>

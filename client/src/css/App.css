@@ -787,7 +787,7 @@ body,
   padding-top: 10px;
   padding-left: 35px;
   padding-right: 35px;
-  font-weight: bold;
+  font-size: 20px;
 }
 
 .next-upcoming-event-header {
@@ -852,6 +852,14 @@ body,
   font-family: monospace, monospace;
 }
 
+.landing-application-status-card-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 200px;
+  width: 200px;
+}
 .job-list-main {
   display: flex;
   justify-content: center;
@@ -868,6 +876,16 @@ body,
   margin-top: 5px;
 }
 
+
+.applications-header {
+  font-family: monospace, monospace;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 40px;
+  justify-content: center;
+  margin-top: 40px;
+}
 .applications {
   display: flex;
   align-items: center;
@@ -876,8 +894,20 @@ body,
   max-width: 800px;
   margin: 0 auto;
   justify-content: center;
+  font-family: monospace, monospace;
+  
 }
 
+.no-applications {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+  margin-bottom: 40px;
+}
+
+.application-status-card-btn {
+  background-color: #198754;
+}
 .job-application-container {
   width: 300px;
   margin: 16px;
@@ -887,6 +917,7 @@ body,
   overflow: scroll;
 }
 
+
 .pet_container {
   margin-bottom: 16px;
   padding: 16px;
@@ -895,4 +926,23 @@ body,
 .pet_container p {
   font-size: 16px;
   margin-bottom: 8px;
+}
+
+
+/*Calendar*/
+
+.calendar-event-appointment {
+  font-family: monospace, monospace;
+}
+
+.calendar-event-appointment-title {
+  text-align: center;
+}
+
+.calendar-event-appointment-location {
+  margin-left: 20px;
+}
+
+.calendar-event-appointment-info {
+  margin-left: 20px;
 }

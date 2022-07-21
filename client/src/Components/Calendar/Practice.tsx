@@ -25,7 +25,8 @@ import { ThemeContext } from '../../App';
 // import { DayView } from '@devexpress/dx-react-scheduler-material-ui';
 // import { WeekView } from '@devexpress/dx-react-scheduler-material-ui';
 
-import { Button } from '@material-ui/core';
+//import { Button } from '@material-ui/core';
+import Button from 'react-bootstrap/Button';
 //Redux
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { deleteJob } from '../../state/features/jobs/jobSlice';
@@ -140,11 +141,18 @@ const Practice: FC<Props> = () => {
         </div>
       );
     } else {
+      //events
       return (
-        <div>
-          <h2>{appointmentData.name}</h2>
-          <p>Location: {appointmentData.location}</p>
-          <p>Info: {appointmentData.description}</p>
+        <div className='calendar-event-appointment'>
+          <h2 className='calendar-event-appointment-title'>
+            {appointmentData.name}
+          </h2>
+          <p className='calendar-event-appointment-location'>
+            Location: {appointmentData.location}
+          </p>
+          <p className='calendar-event-appointment-info'>
+            Info: {appointmentData.description}
+          </p>
         </div>
       );
     }

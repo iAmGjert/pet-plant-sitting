@@ -20,6 +20,7 @@ const AppliedJobsBoard = ({
   //console.log('job in board', job);
   //console.log(id, 'id'); //job id
   // console.log('startDate', startDate);
+  console.log('petPlants', petPlants);
   const cancelApplication = (id) => {
     dispatch(deleteApplication(id));
   };
@@ -29,15 +30,38 @@ const AppliedJobsBoard = ({
     <Card className='bootstrap-card job-application-container'>
       <Card.Body>
         <Card.Title>
-          Application Status for Job # {job.id}:{' '}
-          {status.charAt(0).toUpperCase() + status.slice(1)}
+          Application For{' '}
+          {petPlants.map((pet) => {
+            return `${pet.pet_plant.name} | `;
+          })}{' '}
         </Card.Title>
+        <p>
+          Status for Job ID # {job.id}:{' '}
+          {status.charAt(0).toUpperCase() + status.slice(1)}
+        </p>
+        <img
+          className='landing-application-status-card-image'
+          src={petPlants.map((pet) => {
+            return pet.pet_plant.image;
+          })}
+          alt=''
+        />
         <Card.Text className='job-description'>
-          Description: {job.description}
+          Species:{' '}
+          {petPlants.map((pet) => {
+            return pet.pet_plant.species;
+          })}
+          <p>
+            About:{' '}
+            {petPlants.map((pet) => {
+              return pet.pet_plant.bio;
+            })}
+          </p>
+          <h4>{job.startDate}</h4>
         </Card.Text>
         <Button
-          className='bootstrap-button'
-          variant='primary'
+          className='application-status-card-btn'
+          // variant='primary'
           onClick={() => cancelApplication(id)}
         >
           Delete
