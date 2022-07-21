@@ -117,10 +117,13 @@ const Home: FC<Props> = () => {
           variant='primary'
           size='sm'
           onClick={() => navigate('/login')}
+          style={{ marginRight: '5px' }}
         >
           Login
         </Button>
-        <Button variant='primary' size='sm' onClick={handleShow} className='bootstrap-button'>
+        <Button variant='primary' size='sm' onClick={handleShow} 
+          style={{ marginLeft: '5px' }}
+          className='bootstrap-button'>
           Events
         </Button>
 
