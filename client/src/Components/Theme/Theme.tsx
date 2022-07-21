@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Button } from 'react-bootstrap';
-import { Sun, SunFill } from 'react-bootstrap-icons';
+import { SunFill, MoonFill} from 'react-bootstrap-icons';
 
 interface Props {
   theme: string
@@ -17,7 +17,7 @@ const Theme: FC<Props> = ({ theme, toggleTheme }) => {
         role='button' 
         tabIndex={0}
       >
-        {theme === 'dark' ? <Sun /> : <SunFill />}
+        {theme === 'dark' ? <MoonFill /> : <SunFill />}
       </div>
     </div>
   );

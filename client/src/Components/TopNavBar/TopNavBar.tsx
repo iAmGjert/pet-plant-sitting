@@ -29,10 +29,9 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
       expand='lg'
     >
       <Container>
-        <Navbar.Brand
+        <Navbar.Brand style={{ cursor: 'pointer' }}
           onClick={() => {
-            
-            navigate('/');
+            user.name ? navigate('/landingPage') : navigate('/');
           }}
         >
           {user.name ? user.name : <img src={require('../../../Public/svg/fern-herm-pets-alt.svg')} alt='fh-alt' style={{

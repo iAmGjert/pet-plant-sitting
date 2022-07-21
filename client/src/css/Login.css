@@ -92,7 +92,7 @@ input[type="submit"] {
   font-size: 16px;
   border-top: grey solid 1px;
   padding: 0.3em 0;
-  background-color: #b7f6c0;
+  background-color: #8bdaa4;
 }
 
 .sign-up-btn {
@@ -106,11 +106,8 @@ input[type="submit"] {
   border-radius: 6px;
   padding: 0.5em 1em;
   cursor: pointer;
-  background-color: #C2F8CB;
+  background-color: #8bdaa4;
 }
-/* .login-btn {
-  background-color: #F5C396;
-} */
 
 a[name="google"] {
   display: flex;
@@ -118,6 +115,10 @@ a[name="google"] {
   align-items: center;
   margin-bottom: 2%;
 } 
+
+a[name="google"]:hover {
+  background-color: #8bdaa4;
+}
 
 .login-btn {
   cursor: pointer;
@@ -143,9 +144,3 @@ a[name="google"] {
   justify-content: center;
   align-items: center;
 }
-
-/* .login-container {
-  width: 100%;
-  height: 100%;
-  margin: 0;
-} */
