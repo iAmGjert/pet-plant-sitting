@@ -67,7 +67,7 @@ const Applicant = ({ applicant }: { applicant: any }) => {
 
   return (
     <Container>
-      <Card className='chat-card'>
+      <Card className='chat-card bootstrap-card'>
         <Card.Body>
           <div
             onClick={handleClick}

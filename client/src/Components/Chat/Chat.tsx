@@ -126,7 +126,7 @@ const Chat = ({ socket }) => {
 
   return (
     <div className='chat-window'>
-      <button onClick={() => dispatch(changeView('All'))}>BACK</button>
+      <button className='bootstrap-button' onClick={() => dispatch(changeView('All'))}>BACK</button>
       <div className='chat-body'>
         <ScrollToBottom className='message-container'>
           {messageList.map((messageContent: any, index: number) => {
@@ -154,6 +154,7 @@ const Chat = ({ socket }) => {
       </div>
       <div className='chat-footer'>
         <input
+          className='bootstrap-textbox'
           type='text'
           value={currentMessage}
           placeholder='Enter a Message'
@@ -161,10 +162,10 @@ const Chat = ({ socket }) => {
             setCurrentMessage(event.target.value);
           }}
         />
-        <button onClick={sendMessage}>SEND</button>
+        <button className='bootstrap-button' onClick={sendMessage}>SEND</button>
       </div>
       <div>
-        {isApplicant && <button onClick={acceptApplicant}>Accept</button>}
+        {isApplicant && <button className='bootstrap-button' onClick={acceptApplicant}>Accept</button>}
       </div>
     </div>
   );
