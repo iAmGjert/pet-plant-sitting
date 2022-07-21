@@ -543,7 +543,7 @@ db.sync(
                   location: '10 Magnolia Dr, New Orleans, LA 70124',
                   description:
                     'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
-                  startDate: new Date('July 20, 2022 13:15:00'),
+                  startDate: new Date('July 25, 2022 13:15:00'),
                   startTime: '3:20 PM',
                 },
                 {
