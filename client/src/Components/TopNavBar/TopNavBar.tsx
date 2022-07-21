@@ -41,13 +41,13 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
             filter: 'invert(100%)',  
           }}/>}
         </Navbar.Brand>
-        <Navbar.Brand style={{textAlign: 'right'}}>
+        <Navbar.Brand className='ms-auto' style={{ marginRight: '15px', marginLeft: '15px' }}>
           <Theme toggleTheme={toggleTheme} theme={theme} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' ref={navButton} data-bs-toggle="collapse"
           data-bs-target="#navbarNav"/>
         <Navbar.Collapse id='basic-navbar-nav' ref={linksContainerRef}>
-          <Nav className='me-auto'>
+          <Nav className='flex-grow-1 justify-content-evenly'>
             {!user.name && (
               <Nav.Link
                 onClick={() => {
@@ -109,7 +109,6 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
             >
                 Profile
             </Nav.Link>
-            <NavDropdown.Divider />
             <Nav.Link
               onClick={() => {
                 navigate('/chat');
@@ -118,7 +117,6 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
             >
                 Chat
             </Nav.Link>
-            <NavDropdown.Divider />
             <Nav.Link
               onClick={() => {
                 navigate('/info');
