@@ -45,7 +45,7 @@ interface state {
 const initialState = {
   value: {
     name: '',
-    id: 1,
+    id: 314,
     username: '',
     job: [],
     image: '',

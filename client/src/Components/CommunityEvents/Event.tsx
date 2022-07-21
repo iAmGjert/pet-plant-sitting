@@ -9,7 +9,7 @@ const Event = (props: any) =>{
   const { name, location, user, eventObj, switchToDetailsView } = props;
 
   return (
-    <Container>
+    <Container className='comm-card'>
       <Card style={{ width: '95%',
         marginBottom: '1em',
       }} className='bootstrap-card'>
@@ -28,6 +28,7 @@ const Event = (props: any) =>{
         </Card.Body>
         <Card.Footer>
           <Button className="button-as-link" 
+            style={{ color: '#ffffff' }}
             variant="link"
             onClick={() => switchToDetailsView(eventObj)}>More Info</Button>
         </Card.Footer>

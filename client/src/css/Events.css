@@ -1,5 +1,14 @@
-/* Add Comment */
+.card {
+  background-color: #558564;
+  color: #C2F8CB;
+}
 
+input {
+  background-color: #d8f3e1;
+  /* color: #C2F8CB; */
+}
+
+/* Add Comment */
 .comment-form {
  width: 100%;
 }
@@ -45,17 +54,18 @@ h1 {
   border: #cfcfcf solid 1px;
   border-radius: 10px;
   padding: 5px 8px;
-  background-color: #e8e8e8;
+  background-color: #d8f3e1;
 }
 
 .comment-footer small {
   display: inline-block; 
   margin-bottom: 10px; 
+  /* color: black; */
 }
 
 .comment-time {
   text-align: left;
-  width: 70%;
+  width: 60%;
   margin-left: 5px;
 }
 

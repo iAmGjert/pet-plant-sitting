@@ -1,71 +1,141 @@
-# Project Title
 
-Simple overview of use/purpose.
+# Fern Herm
+
+Fern Herm is a mobile-focused web service connecting users to the perfect pet and/or plant sitter. 
 
 ## Description
 
-An in-depth paragraph about your project and overview of use.
+The name of our app *Fern Herm* is a play on words from the iconic 1980's Film **E.T. the Extra-Terrestrial** and the character's  "Phone Home" line. Our app allows users to find potential sitters for their pet or plant or, conversely, allows potential sitters to find a job looking after someone is while they are away from home. Users can post job listings, setup a profile for themselves, their pets, and their plants, view others' profiles, communicate with each other using our live chat feature, find interesting local events, use our built-in map and calendar features to keep organized, and even look up information regarding plant or animal species/breeds with which they might be unfamiliar.   
 
 ## Getting Started
 
-### Dependencies
+### Deployed Instance
 
-* Describe any prerequisites, libraries, OS version, etc., needed before installing program.
-* ex. Windows 10
+https://fernherm.com/
+### Technologies Used
+ **NOTE:** This app was built using a Mac OS and WSL (Windows Subsystem for Linux) environment, Node.js v14, Git, and PostgreSQL v12 and can be considered prerequisites for the installation of the app.
+* Node - Runtime Environment
+* Git - Version Control System
+* TypeScript - JavaScript superset
+* Express - Back-End Web Framework
+* React - Front-End JavaScript Library
+* Redux - State Management Framework
+* PostgreSQL - Relational Database Management System
+* Sequelize - Object–relational mapping tool
+* Bootstrap - CSS Framework
+* AWS Elastic Compute Cloud (EC2) - Cloud Computing Platform for Hosting Web Server
+* AWS Relational Database Service (RDS) - Relational Database Service 
+* socket.io - Web Socket Library
+* Passport - Authentication Framework
+* Axios - HTTP Client Library
+* Mapbox - Geocoding and Reverse Geocoding Library
+* Cloudinary - Image Library
+* Eslint - Code Analyzer
+* Webpack - Bundler
+* Babel - Transpiler
 
-### Installing
-
-* How/where to download your program
-* Any modifications needed to be made to files/folders
-
-### Executing program
-
-* How to run the program
-* Step-by-step bullets
+## Installing
+### fork the repo and clone into your project directory
+```bash
+# install dependencies
+$ npm install
 ```
-code blocks for commands
+
+
+## Executing program
+
+### Connect to local DB
+
+```bash 
+# WSL users
+# start postgresql service
+$ sudo service postgresql start
+
+# connect to postgres shell
+$ sudo -u postgres psql
+
+# MAC users
+# start postgresql service
+$ postgres -D /usr/local/var/postgres
+
+# connect to postgres shell
+$ psql postgres
 ```
 
-## Help
-Any advise for common problems or issues.
+### Inside the postgres shell
 
-# connect to local DB
+```sql
+# ALTER USER postgres CREATEDB
+
+/* check permissions */
+# \du
+
+/* change password if needed */
+# \password new_password
+
+/* create database */
+# CREATE DATABASE db_name;
+
+/* check that database was created */
+# \l
+
+/* quit shell if desired */
+# \q
 ```
-command to run if program contains helper info
+
+### Setup the Environment Variables
+#### Links to setup .env file
+* [Google Developer Console](https://console.cloud.google.com)
+* [Map Box](https://www.mapbox.com/)
+* [Cloudinary](https://cloudinary.com/)
+
+```bash
+# create .env file
+$ touch .env
+
+# .env file contents
+# Client
+PORT=
+CLIENT_URL=
+
+# Database
+DB_USERNAME=
+DB_PASSWORD=
+DB_DATABASE=
+DB_HOST=
+DB_DIALECT=
+DB_PORT=
+
+# Google OAuth
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
+SESSION_SECRET=
+
+#Mapbox
+MAPBOX_TOKEN=
+
+#Cloudinary
+CLOUDINARY_NAME=
+CLOUDINARY_PRESET=
 ```
+### Start the app 
+```bash
+# Build the app
+$ npm run build
+
+# Run the app
+$ npm run start
+```
+
 
 ## Authors
+  
+* [Braeden Ford](https://github.com/bford002)
+* [Eric Gjertsen](https://github.com/iAmGjert)
+* [Iben Oneal](https://github.com/Ibenyourbro)
+* [Raymond Jeong](https://github.com/raymondjjeong)
+* [Royce Reed](https://github.com/royce-reed)
+* [Sam Cabrera](https://github.com/velouriagreen)
 
-Contributors names and contact info
 
-ex. Dominique Pizzie  
-ex. [@DomPizzie](https://twitter.com/dompizzie)
 
-## Version History
-
-* 0.2
-    * Various bug fixes and optimizations
-    * See [commit change]() or See [release history]()
-* 0.1
-    * Initial Release
-
-## License
-
-This project is licensed under the [NAME HERE] License - see the LICENSE.md file for details
-
-## Acknowledgments
-
-Inspiration, code snippets, etc.
-* [awesome-readme](https://github.com/matiassingers/awesome-readme)
-* [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
-* [dbader](https://github.com/dbader/readme-template)
-* [zenorocha](https://gist.github.com/zenorocha/4526327)
-* [fvcproductions](https://gist.github.com/fvcproductions/1bfc2d4aecb01a834b46)
-
-## mac users
-```
-psql postgres
-ALTER USER postgres CREATEDB
-\du # check new permission
-sequelize db:create
-```

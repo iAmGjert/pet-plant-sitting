@@ -13,7 +13,7 @@ import moment from 'moment';
 
 const LandingEventCard = ({ startDate, location, description, name }) => {
   return (
-    <Card className='bootstrap-card' style={{ width: '18rem' }}>
+    <Card className='bootstrap-card' style={{ width: '97%', margin: '2%' }}>
       <Card.Body>
         <Card.Title>{name}</Card.Title>
         <Card.Subtitle className='mb-2 text-muted'>
@@ -21,7 +21,9 @@ const LandingEventCard = ({ startDate, location, description, name }) => {
         </Card.Subtitle>
         <Card.Text>{description}</Card.Text>
         <Card.Text>Meets at {location}</Card.Text>
-        <Card.Link className='button-as-link' href='/events'>More Upcoming Events</Card.Link>
+        <Card.Link className='button-as-link' 
+          style={{ color: '#ffffff' }}
+          href='/events'>More Upcoming Events</Card.Link>
       </Card.Body>
     </Card>
   );

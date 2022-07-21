@@ -140,7 +140,7 @@ const Practice: FC<Props> = () => {
   };
 
   return (
-    <Paper>
+    <Paper >
       <Scheduler data={appointments}>
         <ViewState
           currentDate={currentDate}

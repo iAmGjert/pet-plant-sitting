@@ -162,11 +162,11 @@ db.sync(
       User.bulkCreate([
         {
           name: 'Iben Oneal',
-          image: '',
+          // image: '',
           location: '',
           sitter_rating: 10,
           total_sitter_ratings: 24,
-          bio: ``,
+          bio: '',
           average_rating: 5,
           total_ratings: 95,
         },
@@ -183,7 +183,7 @@ db.sync(
         },
         {
           name: 'Royce Reed',
-          image: 'http://dummyimage.com/138x100.png/dddddd/000000',
+          // image: 'http://dummyimage.com/138x100.png/dddddd/000000',
           location: '6838 Louisville St, New Orleans, LA 70124',
           sitter_rating: 8,
           total_sitter_ratings: 93,
@@ -193,7 +193,7 @@ db.sync(
         },
         {
           name: 'Eric Gjertsen',
-          image: 'http://dummyimage.com/142x100.png/cc0000/ffffff',
+          // image: 'http://dummyimage.com/142x100.png/cc0000/ffffff',
           location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
           sitter_rating: 8,
           total_sitter_ratings: 88,
@@ -203,7 +203,7 @@ db.sync(
         },
         {
           name: 'Caity',
-          image: 'http://dummyimage.com/249x100.png/5fa2dd/ffffff',
+          // image: 'http://dummyimage.com/249x100.png/5fa2dd/ffffff',
           location: '4609 Banks St, New Orleans, LA 70119',
           sitter_rating: 4,
           total_sitter_ratings: 38,
@@ -213,7 +213,7 @@ db.sync(
         },
         {
           name: 'Raymond Jeong',
-          image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
+          // image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Gaudet Dr, Marrero, LA 70072',
           sitter_rating: 3,
           total_sitter_ratings: 86,
@@ -223,9 +223,7 @@ db.sync(
         },
         {
           name: 'velouriagreen',
-          // username: 'test',
-          // password: 'test',
-          image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
+          // image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: null,
           total_sitter_ratings: 86,
@@ -246,7 +244,7 @@ db.sync(
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
+            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
           },
           {
             owner_id: 2,
@@ -259,7 +257,7 @@ db.sync(
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: "I am the world's worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this",
+            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
           },
           {
             owner_id: 3,
@@ -298,7 +296,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 4,
@@ -313,7 +311,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 7,
@@ -326,7 +324,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 4,
@@ -341,7 +339,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "Ain't I cute?!",
+            bio: 'Ain\'t I cute?!',
           },
           {
             owner_id: 6,
@@ -356,7 +354,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "Ain't I cute?!",
+            bio: 'Ain\'t I cute?!',
           },
         ]).then(() => {
           Rating.bulkCreate([
@@ -545,7 +543,7 @@ db.sync(
                   location: '10 Magnolia Dr, New Orleans, LA 70124',
                   description:
                     'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
-                  startDate: new Date('July 20, 2022 13:15:00'),
+                  startDate: new Date('July 25, 2022 13:15:00'),
                   startTime: '3:20 PM',
                 },
                 {
@@ -554,7 +552,7 @@ db.sync(
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
                   description:
                     'A gathering for pet-less humans to find and be rescued by their furrever friends',
-                  startDate: new Date('July 15, 2022 01:15:00'),
+                  startDate: new Date('July 25, 2022 01:15:00'),
                   startTime: '4:45 PM',
                 },
                 {
@@ -563,7 +561,7 @@ db.sync(
                   location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
                   description:
                     'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
-                  startDate: new Date('July 15, 2022 01:15:00'),
+                  startDate: new Date('July 25, 2022 01:15:00'),
                   startTime: '6:00 PM',
                 },
                 {
