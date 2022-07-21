@@ -82,14 +82,16 @@ const Details = () => {
           <Row>
             <Col>{event.name}</Col>
             {currentUser?.id === event.user?.id && (
-              <Col><Button className='button-as-link' variant="link" size='sm' onClick={() => dispatch(setView('edit-event'))}>
+              <Col><Button className='button-as-link' style={{ color: '#ffffff' }}
+                variant="link" size='sm' onClick={() => dispatch(setView('edit-event'))}>
                 modify <PencilSquare/>
               </Button></Col>)}
           </Row>
         </Card.Header>
         <Card.Body>
           <Card.Title >Hosted by&nbsp;
-            <Button className='button-as-link' variant="link" size='lg' onClick={() => navigate(`/profile/${user.id}`)}>{user.name}
+            <Button className='button-as-link' variant="link" size='lg' style={{ color: '#ffffff' }}
+              onClick={() => navigate(`/profile/${user.id}`)}>{user.name}
             </Button>
           </Card.Title>
           <Card.Text>{event.description}</Card.Text>
@@ -99,7 +101,9 @@ const Details = () => {
         </Card.Body>
         <Card.Footer>
           <Container fluid="sm">
-            <Row><Col className='bootstrap-card'><Button className='button-as-link' variant="link" onClick={handleComments} disabled={numOfComments === 0}>
+            <Row><Col className='bootstrap-card'><Button className='button-as-link' variant="link" 
+              style={{ color: '#ffffff' }}
+              onClick={handleComments} disabled={numOfComments === 0}>
               {numOfComments === 1 ?
                 <small>{numOfComments} comment</small>
                 : numOfComments >= 1 ?
@@ -108,14 +112,17 @@ const Details = () => {
             </Button>
             </Col><Col 
               style={{
-                textAlign: 'right'
+                textAlign: 'right',
               }}
             >
               {currentUser.name.length ?
-                <Button className='bootstrap-button' variant="link" size="sm" onClick={() => setShowAddModal(true)}>
+                <Button className='bootstrap-button' variant="link" size="sm" 
+                  style={{ color: '#ffffff' }}
+                  onClick={() => setShowAddModal(true)}>
                   Add Comment
                 </Button> 
-                : <Button className='bootstrap-button' variant="link" size="sm" href='/login'>
+                : <Button className='bootstrap-button' style={{ color: '#ffffff' }}
+                  variant="link" size="sm" href='/login'>
                   Login to add comment
                 </Button>}
             </Col></Row>
