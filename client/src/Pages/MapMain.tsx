@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'react-bootstrap';
 
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { mapActions } from '../state/features/map/mapSlice';
@@ -92,7 +93,7 @@ const MapMain: FC<Props> = () => {
             eventsLocations={eventsLocations}
             navigate={navigate}
           />
-          : <div>Please log in <button className='bootstrap-button' onClick={()=>{ navigate('/login'); }}>Login</button></div>
+          : <div>Please log in <Button className='bootstrap-button' onClick={()=>{ navigate('/login'); }}>Login</Button></div>
       }
     </div>
   );

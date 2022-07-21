@@ -171,7 +171,7 @@ const EditAccountModal = ({
           />
 
           <Card
-            className='text-center'
+            className={theme === 'dark' ? 'text-center bootstrap-modal-card' : 'text-center'}
             onClick={() => {
               // create a new pet in the database
               axios

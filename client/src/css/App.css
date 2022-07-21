@@ -58,6 +58,10 @@ body,
   height: 100%;
   padding-bottom: 7%;
 }
+.btn-primary {
+  background-color: #556c85;
+  border-color: var(--bs-primary);
+}
 .geolocate-button {
   position: relative;
   z-index: -2;
@@ -163,6 +167,9 @@ body,
   margin: 1%;
   border-width: 4px;
   border-color: blue;
+}
+.map-bootstrap-button-all:focus {
+  background-color: #556c85;
 }
 .map-bootstrap-button-jobs:focus {
   background-color: lightgreen;
@@ -319,7 +326,7 @@ body,
   color: #ffffff;
   font-family: sans-serif;
 }
-#dark .popup-inner .close-btn {
+#dark .popup-inner.close-btn {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -481,11 +488,11 @@ body,
   color: lightgrey;
   border-color: lightgrey;
 }
-.bootstrap-modal-button.btn.btn-danger {
+/* .bootstrap-modal-button.btn.btn-danger {
   background-color: #1f1f1f;
   color: lightgrey;
   border-color: lightgrey;
-}
+} */
 .bootstrap-modal-button.btn.btn-warning {
   background-color: #1f1f1f;
   color: lightgrey;
@@ -505,6 +512,15 @@ body,
 }
 .bootstrap-modal-card.card {
   background-color: #2e2e2e;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.bootstrap-modal-card.card-body {
+  background-color: #2e2e2e;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.m-2.dark.btn.btn-outline-primary {
   color: lightgrey;
   border-color: lightgrey;
 }
