@@ -858,7 +858,9 @@ body,
   align-items: center;
   flex-direction: column;
   height: 200px;
-  width: 200px;
+  width: 250px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .job-list-main {
   display: flex;
@@ -931,8 +933,23 @@ body,
 
 /*Calendar*/
 
+/* .calendar-paper {
+  font-family: monospace, monospace;
+}
+
+.scheduler {
+  font-family: monospace, monospace;
+}
+
+.day-view {
+  font-family: monospace, monospace;
+} */
+
+
 .calendar-event-appointment {
   font-family: monospace, monospace;
+  overflow: scroll;
+  max-height: 300px;
 }
 
 .calendar-event-appointment-title {
@@ -945,4 +962,33 @@ body,
 
 .calendar-event-appointment-info {
   margin-left: 20px;
+}
+
+.calendar-job-appointment {
+  font-family: monospace, monospace;
+  overflow: scroll;
+  max-height: 300px;
+}
+
+.calendar-job-appointment-img {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.calendar-job-appointment-btn {
+  background-color: #198754;
+  text-align: center;
+  /* margin-bottom: 20px;
+  margin-left: 40px; */
+  display: block;
+  margin: 0 auto 20px auto;
+  
+}
+
+.Appointment-appointment {
+  /* background-color:  #C2F8CB !important; */
+  background-color:  #198754 !important;
 }

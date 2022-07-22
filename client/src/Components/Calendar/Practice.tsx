@@ -120,24 +120,33 @@ const Practice: FC<Props> = () => {
     //console.log('appointment props', props);
     if (appointmentData.type === 'job') {
       return (
-        <div>
+        <div className='calendar-job-appointment'>
           <img
+            className='calendar-job-appointment-img'
             src={appointmentData.petPlants[0].pet_plant.image}
             alt=''
             style={{ width: '300px' }}
           />
           <h2>
             {' '}
-            Siting for{' '}
+            Sitting for{' '}
             {appointmentData.petPlants.map((pet) => {
               return `${pet.pet_plant.name} | `;
             })}{' '}
           </h2>
           <p>Location: {appointmentData.location}</p>
-          <p>Info: {appointmentData.description}</p>
-          <button onClick={() => deleteSitting(appointmentData.id)}>
+          <p>
+            Bio:{' '}
+            {appointmentData.petPlants.map((pet) => {
+              return pet.pet_plant.bio;
+            })}{' '}
+          </p>
+          <Button
+            className='calendar-job-appointment-btn'
+            onClick={() => deleteSitting(appointmentData.id)}
+          >
             Cancel Sitting
-          </button>
+          </Button>
         </div>
       );
     } else {
@@ -159,13 +168,18 @@ const Practice: FC<Props> = () => {
   };
 
   return (
-    <Paper>
-      <Scheduler data={appointments}>
+    <Paper className='calendar-paper'>
+      <Scheduler className='scheduler' data={appointments} height={800}>
         <ViewState
           currentDate={currentDate}
           onCurrentDateChange={onCurrentDateChange}
         />
-        <DayView startDayHour={0} endDayHour={23} cellDuration={60} />
+        <DayView
+          className='day-view'
+          startDayHour={0}
+          endDayHour={23}
+          cellDuration={60}
+        />
         <WeekView startDayHour={0} endDayHour={23} cellDuration={60} />
 
         <MonthView startDayHour={0} endDayHour={23} cellDuration={60} />

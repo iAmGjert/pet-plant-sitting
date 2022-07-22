@@ -247,6 +247,7 @@ db.sync(
             total_ratings: 33,
             is_plant: false,
             bio: "I'm very shy, but if you feed me then I instantly become your best friend",
+            medication: ['simparica trio']
           },
           {
             owner_id: 2,
@@ -272,7 +273,7 @@ db.sync(
             rating: 5,
             total_ratings: 71,
             is_plant: true,
-            bio: 'Forget the water! I feed human blood.',
+            bio: 'Forget the water! I feed on human blood.',
           },
           {
             owner_id: 4,
@@ -411,7 +412,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('June 8, 2022 01:15:00'),
                 endDate: new Date('June 10, 2022 01:15:00'),
-                isCompleted: false,
+                isCompleted: false, 
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
