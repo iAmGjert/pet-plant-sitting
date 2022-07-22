@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useAppDispatch } from '../../state/hooks';
 import moment from 'moment';
 //Bootstrap
@@ -6,6 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { deleteApplication } from '../../state/features/jobs/jobSlice';
+import Modal from 'react-bootstrap/Modal';
 
 const AppliedJobsBoard = ({
   job,
@@ -20,7 +21,11 @@ const AppliedJobsBoard = ({
   //console.log('job in board', job);
   //console.log(id, 'id'); //job id
   // console.log('startDate', startDate);
-  console.log('petPlants', petPlants);
+  //console.log('petPlants', petPlants);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const cancelApplication = (id) => {
     dispatch(deleteApplication(id));
   };
@@ -63,13 +68,37 @@ const AppliedJobsBoard = ({
             })}
           </p>
         </Card.Text>
-        <Button
+        {/* <Button
           className='application-status-card-btn'
           // variant='primary'
           onClick={() => cancelApplication(id)}
         >
           Delete
+        </Button> */}
+
+        <Button className='application-status-card-btn' onClick={handleShow}>
+          Delete
         </Button>
+
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Are you sure you want to delete?</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            Deleting will permanently remove this application from this page.
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant='secondary' onClick={handleClose}>
+              No
+            </Button>
+            <Button
+              className='finalize-delete'
+              onClick={() => cancelApplication(id)}
+            >
+              Delete
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </Card.Body>
     </Card>
   );
