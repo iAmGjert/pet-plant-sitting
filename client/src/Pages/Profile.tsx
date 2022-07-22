@@ -260,7 +260,7 @@ const Profile = () => {
     getLocation(profileUser?.location);
   }, [profileUser]);
   return (
-    <Container fluid>
+    <Container>
       {completeProfile !== 6 && editable && (
         <ToastContainer position='middle-center' style={{ zIndex: 2 }}>
           <Toast

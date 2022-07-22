@@ -284,7 +284,7 @@ const EditField = ({
             <div>
               <ToggleButton
                 className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
-                id='toggle-checkPet1'
+                id='toggle-checkPetgender1'
                 type='checkbox'
                 variant='outline-primary'
                 checked={checked}
@@ -298,7 +298,7 @@ const EditField = ({
               </ToggleButton>
               <ToggleButton
                 className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
-                id='toggle-checkPet2'
+                id='toggle-checkPetgender2'
                 type='checkbox'
                 variant='outline-primary'
                 checked={!checked}
