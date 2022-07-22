@@ -9,7 +9,10 @@ export const UserModel = {
     unique: true,
   },
   password: DataTypes.STRING,
-  image: DataTypes.STRING,
+  image: {
+    type: DataTypes.STRING,
+    defaultValue: 'https://thumbs.dreamstime.com/b/default-avatar-profile-vector-user-profile-default-avatar-profile-vector-user-profile-profile-179376714.jpg',
+  },
   location: DataTypes.STRING,
   sitter_rating: DataTypes.FLOAT,
   total_sitter_ratings: DataTypes.INTEGER,

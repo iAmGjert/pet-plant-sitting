@@ -1,4 +1,4 @@
-/* :root {
+:root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
   --bs-purple: #6f42c1;
@@ -21,7 +21,7 @@
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529;
-  --bs-primary: #0d6efd;
+  --bs-primary: #558564;
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
@@ -44,18 +44,33 @@
   --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
-  --bs-body-font-family: var(--bs-font-sans-serif);
+  --bs-body-font-family: var(--bs-font-monospace);
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
-  --bs-body-bg: #c2f8cb;
-} */
+  --bs-body-bg: #8bdaa4;
+}
+
+.btn-primary {
+  background-color: #556c85;
+  /* background-color: var(--bs-primary);  */
+  border-color: var(--bs-primary);
+}
+
 html,
 body,
 #root {
   height: 100%;
   padding-bottom: 7%;
+}
+.btn-primary {
+  background-color: #556c85;
+  border-color: var(--bs-primary);
+}
+.btn-primary:focus, .btn-primary:active, .btn-primary:visited {
+  background-color: var(--bs-primary);
+  border-color: #556c85;
 }
 .geolocate-button {
   position: relative;
@@ -163,6 +178,9 @@ body,
   border-width: 4px;
   border-color: blue;
 }
+.map-bootstrap-button-all:focus {
+  background-color: #556c85;
+}
 .map-bootstrap-button-jobs:focus {
   background-color: lightgreen;
   color: black;
@@ -202,6 +220,10 @@ body,
 }
 .container-fluid {
   padding-bottom: 15%;
+}
+.bottom-navbar-icon {
+  width: 28px;
+  height: 28px;
 }
 
 #dark {
@@ -314,7 +336,7 @@ body,
   color: #ffffff;
   font-family: sans-serif;
 }
-#dark .popup-inner .close-btn {
+#dark .popup-inner.close-btn {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -371,6 +393,13 @@ body,
 #dark .fern-herm-logo {
   color-interpolation-filters: white;
 }
+#dark #login-footer {
+  background-color: #2c2c2c;
+  color: #ffffff;
+}
+#dark .google-btn {
+  background-color: #2c2c2c;
+}
 
 /* Calendar */
 #dark .DayScaleEmptyCell-emptyCell.css-1hbvjip {
@@ -417,7 +446,12 @@ body,
   .MuiButtonBase-root
   .TodayButton-button
   .css-xya8j6-MuiButtonBase-root-MuiButton-root {
+  border-color: lightgrey !important;
+  color: lightgrey !important;
+}
+#dark .MuiTouchRipple-root.css-8je8zh-MuiTouchRipple-root {
   border-color: lightgrey;
+  color: lightgrey;
 }
 #dark .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root {
   color: lightgrey;
@@ -435,10 +469,13 @@ body,
   color: lightgrey;
   border-color: lightgrey;
 }
-
-/* .MuiTableBody-root.css-apqrd9-MuiTableBody-root {
-  background-color: #1f1f1f;;
-} */
+#dark .MainLayout-stickyElement.MainLayout-leftPanel.MainLayout-dayScaleEmptyCell.MainLayout-ordinaryLeftPanelBorder {
+  background-color: #2c2c2c;
+  border-color: lightgrey;
+}
+#dark .MuiTypography-root.MuiTypography-body1.TitleCell-title.css-1e41c9a-MuiTypography-root {
+  color: lightgrey;
+}
 /* Calendar */
 
 /* Bootstrap modal classes */
@@ -469,16 +506,16 @@ body,
   color: lightgrey;
   border-color: lightgrey;
 }
-.bootstrap-modal-button.btn.btn-danger {
+/* .bootstrap-modal-button.btn.btn-danger {
   background-color: #1f1f1f;
   color: lightgrey;
   border-color: lightgrey;
-}
-.bootstrap-modal-button.btn.btn-warning {
+} */
+/* .bootstrap-modal-button.btn.btn-warning {
   background-color: #1f1f1f;
   color: lightgrey;
   border-color: lightgrey;
-}
+} */
 .bootstrap-modal-button.btn.btn-info {
   background-color: #1f1f1f;
   color: lightgrey;
@@ -496,13 +533,22 @@ body,
   color: lightgrey;
   border-color: lightgrey;
 }
+.bootstrap-modal-card.card-body {
+  background-color: #2e2e2e;
+  color: lightgrey;
+  border-color: lightgrey;
+}
+.m-2.dark.btn.btn-outline-primary {
+  color: lightgrey;
+  border-color: lightgrey;
+}
 /* Bootstrap modal classes */
 
 .chat-main {
   width: 100%;
   height: 75%;
   /* display: grid; */
-  background-color: #C2F8CB;
+  background-color: #8bdaa4;
   place-items: center;
   padding-bottom: 15%;
 }
@@ -655,10 +701,9 @@ body,
   width: 100px;
   /* height: 100px; */
   font-weight: 'bold';
-  font-family: "Times New Roman", Times, serif;
   font-size: '12px';
   margin-top: 60px; 
-  margin-left: -100px;
+  margin-left: -30px;
   white-space: nowrap;
 }
 
@@ -688,9 +733,7 @@ body,
   padding: '1em 0em';
   font-weight: 'bold';
   margin: 20px 20px;
-  font-family: "Times New Roman", Times, serif;
   font-size: 20px;
-
 }
 
 .home-btns {
