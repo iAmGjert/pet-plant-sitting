@@ -54,7 +54,7 @@ const LoginForm = () => {
         Login
       </Button>
       <div id="login-footer" >
-        <span>new to fern herm?</span>
+        <span>new to fern herm? </span>
         <span>
           <Button className='button-as-link sign-up-btn' variant='link' 
             onClick={navigateRegister}>Sign Up</Button>
