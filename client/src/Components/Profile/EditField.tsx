@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable indent */
 import React, { useEffect, useState } from 'react';
-import { Button, Form, ToggleButton } from 'react-bootstrap';
+import { Button, Form, Row, ToggleButton } from 'react-bootstrap';
 
 import PetPlantCard, { PetPlant } from './PetPlantCard';
 import { RatingInfo, Profile } from '../../Pages/Profile';
@@ -136,16 +136,20 @@ const EditField = ({
   const renderSwitch = (fieldName: any) => {
     switch (fieldName) {
       case 'pet_plants':
-        return value.map((petPlant: PetPlant, i: number) => {
-          return (
-            <PetPlantCard
-              key={'petPlant' + i}
-              PetPlant={petPlant}
-              edit={true}
-              getStars={null}
-            />
-          );
-        });
+        return (
+          <Row xs={1} md={2} lg={4} className='g-4'>
+            {value.map((petPlant: PetPlant, i: number) => {
+              return (
+                <PetPlantCard
+                  key={'petPlant' + i}
+                  PetPlant={petPlant}
+                  edit={true}
+                  getStars={null}
+                />
+              );
+            })}
+          </Row>
+        );
       case 'theme':
         return (
           <div>

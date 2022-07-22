@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useContext, useEffect } from 'react';
-import { Button, Form, Modal, Card } from 'react-bootstrap';
+import { Button, Form, Modal, Card, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Profile } from '../../Pages/Profile';
 import { setUser } from '../../state/features/userProfile/userProfileSlice';
@@ -76,6 +76,7 @@ const EditAccountModal = ({
       contentClassName={userTheme === 'dark' && 'dark'}
       show={showModal}
       fullscreen={true}
+      size='lg'
       onHide={() => handleOnHide()}
     >
       <EditPetModal
@@ -169,39 +170,43 @@ const EditAccountModal = ({
             add={false}
             newPetId={null}
           />
-
-          <Card
-            className='text-center'
-            onClick={() => {
-              // create a new pet in the database
-              axios
-                .post('/api/pets_plants/create', {
-                  name: '',
-                  owner_id: user.id,
-                  image:
-                    'https://i.pinimg.com/736x/4a/21/33/4a2133dd4dad968c3218fec61d97db55.jpg',
-                  breed: 'N/A',
-                  species: 'N/A',
-                  age: 0,
-                  bio: 'No bio yet',
-                  is_plant: false,
-                  tags: [],
-                  rating: 0,
-                  total_ratings: 0,
-                })
-                .then((res) => {
-                  // console.log(res.data.id);
-                  setNewPetID(res.data.id);
-                });
-              setNewPet(true);
-            }}
-          >
-            <Card.Img
-              variant='top'
-              src='https://t3.ftcdn.net/jpg/02/36/83/48/360_F_236834856_k64hP3apLaj1u62rSTSAKkhVd9TuuMLV.jpg'
-            />
-            <h1 style={{ fontWeight: 'bold' }}>Add Pets</h1>
-          </Card>
+          <Row xs={1} md={2} lg={4} className='g-4'>
+            <Card
+              className='text-center'
+              onClick={() => {
+                // create a new pet in the database
+                axios
+                  .post('/api/pets_plants/create', {
+                    name: '',
+                    owner_id: user.id,
+                    image:
+                      'https://i.pinimg.com/736x/4a/21/33/4a2133dd4dad968c3218fec61d97db55.jpg',
+                    breed: 'N/A',
+                    species: 'N/A',
+                    age: 0,
+                    bio: 'No bio yet',
+                    is_plant: false,
+                    tags: [],
+                    rating: 0,
+                    total_ratings: 0,
+                  })
+                  .then((res) => {
+                    // console.log(res.data.id);
+                    setNewPetID(res.data.id);
+                  });
+                setNewPet(true);
+              }}
+            >
+              <Card.Img
+                variant='top'
+                style={{ width: 'auto', objectFit: 'cover' }}
+                alt='add pet/plant picture'
+                height='300px'
+                src='https://t3.ftcdn.net/jpg/02/36/83/48/360_F_236834856_k64hP3apLaj1u62rSTSAKkhVd9TuuMLV.jpg'
+              />
+              <h1 style={{ fontWeight: 'bold' }}>Add Pets or Plants</h1>
+            </Card>
+          </Row>
           <span>
             <Button
               variant='danger'
