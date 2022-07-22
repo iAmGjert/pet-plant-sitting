@@ -16,12 +16,17 @@ const LandingEventCard = ({ startDate, location, description, name }) => {
     <Card className='landing-event-card' style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title className='landing-event-card-title'>{name}</Card.Title>
-        <Card.Subtitle className='mb-2 text-muted'>
+        <Card.Subtitle className='landing-event-card-date'>
           {moment(startDate).format('dddd, MMMM Do YYYY')}
         </Card.Subtitle>
-        <Card.Text>{description}</Card.Text>
-        <Card.Text>Meets at {location}</Card.Text>
-        <Card.Link className='button-as-link' href='/events'>
+        <p className='landing-event-card-lines'>----------------</p>
+        <Card.Text className='landing-event-card-description'>
+          {description}
+        </Card.Text>
+        <Card.Text className='landing-event-card-location'>
+          Location: {location}
+        </Card.Text>
+        <Card.Link className='landing-event-card-events-link' href='/events'>
           More Upcoming Events
         </Card.Link>
       </Card.Body>

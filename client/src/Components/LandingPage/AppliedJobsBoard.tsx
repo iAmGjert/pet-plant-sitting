@@ -26,17 +26,20 @@ const AppliedJobsBoard = ({
   };
 
   // console.log('petPlants', petPlants);
+  //'bootstrap-card job-application-container'
   return (
-    <Card className='bootstrap-card job-application-container'>
+    <Card className='landing-applications-card'>
       <Card.Body>
-        <Card.Title>
+        <Card.Title className='landing-application-card-title'>
           Application For{' '}
           {petPlants.map((pet) => {
             return `${pet.pet_plant.name} | `;
           })}{' '}
         </Card.Title>
-        <h4>{moment(startDate).format('dddd MMMM Do, YYYY')}</h4>
-        <p>
+        <p className='landing-application-date'>
+          {moment(startDate).format('dddd MMMM Do, YYYY')}
+        </p>
+        <p className='landing-application-status'>
           Status for Job ID # {job.id}:{' '}
           {status.charAt(0).toUpperCase() + status.slice(1)}
         </p>
@@ -48,12 +51,12 @@ const AppliedJobsBoard = ({
           alt=''
         />
 
-        <Card.Text className='job-description'>
+        <Card.Text className='landing-application-job-description'>
           Species:{' '}
           {petPlants.map((pet) => {
             return pet.pet_plant.species;
           })}
-          <p>
+          <p className='huh'>
             About:{' '}
             {petPlants.map((pet) => {
               return pet.pet_plant.bio;

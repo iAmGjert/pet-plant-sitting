@@ -46,7 +46,7 @@ interface events {
 interface Props {}
 
 const Landing: FC<Props> = () => {
-  const theme = useContext(ThemeContext);
+  //const theme = useContext(ThemeContext);
   //const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
