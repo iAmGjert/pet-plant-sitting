@@ -38,7 +38,7 @@ const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentC
         <Modal.Title>Add Comment</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
+        <Form className='comment-form'>
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Control className={theme === 'dark' && 'bootstrap-modal-textbox'} 
               as="textarea" 

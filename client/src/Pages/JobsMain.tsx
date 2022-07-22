@@ -101,7 +101,7 @@ const JobsMain = () => {
     removeDeletedOverlay();
   }, [showDeleted]);
   return (
-    <Container className="job-list-main" ref={target}>
+    <Container fluid className="job-list-main" ref={target}>
       <Overlay target={target.current} show={showCreated} placement="top">
         {({ placement, arrowProps, show: _show, popper, ...props }) => (
           <div

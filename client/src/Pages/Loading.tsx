@@ -14,8 +14,8 @@ const Loading = () => {
   }, [currUser.name, currUser.username, navigate]);
   
   return (
-    <div>
-      <Oval height='500' width='500' color='grey' ariaLabel='loading' />
+    <div style={{position: 'fixed', top: '50%', left: '50%', transform: 'translate(-50%, -50%)'}}>
+      <Oval height='200' width='200' ariaLabel='loading' />
     </div>
   );
 };

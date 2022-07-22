@@ -15,6 +15,7 @@ import { changeView, getView } from '../../state/features/jobs/jobSlice';
 import { useAppDispatch, useAppSelector } from '../../state/hooks';
 import { useNavigate } from 'react-router-dom';
 import landingpage from '../LandingPage/Landing';
+import { HouseDoor, PlusLg, Calendar } from 'react-bootstrap-icons';
 
 interface Props {
   theme: string;
@@ -60,13 +61,13 @@ const BottomNavBar: FC<Props> = ({ theme }) => {
         variant='dark'
         fixed='bottom'
       >
-        <Nav className='me-auto'>
+        <Nav className='flex-grow-1 justify-content-evenly'>
           <Nav.Link
             onClick={() => {
               handleClick();
             }}
           >
-              Create Job
+            <PlusLg className='bottom-navbar-icon' />
           </Nav.Link>
           <Nav.Link
             onClick={() => {
@@ -77,14 +78,14 @@ const BottomNavBar: FC<Props> = ({ theme }) => {
               }
             }}
           >
-              Home
+            <HouseDoor className='bottom-navbar-icon' />
           </Nav.Link>
           <Nav.Link
             onClick={() => {
               navigate('/calendar');
             }}
           >
-              Calendar
+            <Calendar className='bottom-navbar-icon' />
           </Nav.Link>
         </Nav>
       </Navbar>

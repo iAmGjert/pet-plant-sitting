@@ -7,7 +7,7 @@ import LoginForm from '../Components/LoginForm/LoginForm';
 
 const Login = () => {
   return (
-    <Container fluid className='vh-100 login-container' >
+    <Container fluid className='login-container' >
       <Row className='align-items-center' xs={1} md={1}>
         <Col xs={{ order: 'last' }}>
           <Google />

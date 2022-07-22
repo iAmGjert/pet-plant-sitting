@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { ToggleButton } from 'react-bootstrap';
+import { ThemeContext } from '../../App';
 
 interface Props {
   tag: string;
@@ -9,6 +10,7 @@ interface Props {
 }
 
 const Tags = ({ tag, i, setVal, value }: Props) => {
+  const theme = useContext(ThemeContext);
   const [checked, setChecked] = useState(
     value.find((val) => val === tag) !== undefined
   );
@@ -24,7 +26,7 @@ const Tags = ({ tag, i, setVal, value }: Props) => {
 
   return (
     <ToggleButton
-      className={`${tag === 'Playful' ? 'mr-30 m-2 ' : 'm-2'}`}
+      className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
       id={`tag-${i}`}
       type='checkbox'
       variant='outline-primary'
