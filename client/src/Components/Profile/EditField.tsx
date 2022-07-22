@@ -138,20 +138,16 @@ const EditField = ({
   const renderSwitch = (fieldName: any) => {
     switch (fieldName) {
       case 'pet_plants':
-        return (
-          <Row xs={1} md={2} lg={4} className='g-4'>
-            {value.map((petPlant: PetPlant, i: number) => {
-              return (
-                <PetPlantCard
-                  key={'petPlant' + i}
-                  PetPlant={petPlant}
-                  edit={true}
-                  getStars={null}
-                />
-              );
-            })}
-          </Row>
-        );
+        return value.map((petPlant: PetPlant, i: number) => {
+          return (
+            <PetPlantCard
+              key={'petPlant' + i}
+              PetPlant={petPlant}
+              edit={true}
+              getStars={null}
+            />
+          );
+        });
       case 'theme':
         return (
           <div>
@@ -711,7 +707,7 @@ const EditField = ({
 
   return (
     <Form.Group className='mb-3' controlId='formBasicEmail'>
-      <h2>
+      <h2 className='text-start'>
         {fieldName === 'pet_plants'
           ? 'Pets and Plants'
           : fieldName === 'age' && Pet_Plant.is_plant === true
