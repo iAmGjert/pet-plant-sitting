@@ -260,9 +260,9 @@ const Profile = () => {
     getLocation(profileUser?.location);
   }, [profileUser]);
   return (
-    <Container fluid>
+    <Container style={{ height: '100%', paddingBottom: '18%' }}>
       {completeProfile !== 6 && editable && (
-        <ToastContainer position='middle-center'>
+        <ToastContainer position='middle-center' style={{ zIndex: 2 }}>
           <Toast
             bg='light'
             show={showToast}
@@ -315,17 +315,18 @@ const Profile = () => {
         setProfileUser={setProfileUser}
       />
       <Row className='d-flex justify-content-center text-center' xs={1} md={1}>
-        <Col>
-          <Image
-            roundedCircle
-            fluid
-            thumbnail
-            style={{ width: 'auto', maxHeight: '500px' }}
-            src={profileUser?.image}
-          />
-        </Col>
-        <Col>
-          <span>
+        <Row xs={1} md={1} lg={2}>
+          <Col>
+            <Image
+              roundedCircle
+              fluid
+              thumbnail
+              className='m-4'
+              style={{ width: 'auto', maxHeight: '300px' }}
+              src={profileUser?.image}
+            />
+          </Col>
+          <Col>
             <h2 style={{ fontSize: '30px', paddingTop: '10px' }}>
               {profileUser?.name}
             </h2>
@@ -333,7 +334,9 @@ const Profile = () => {
             <h5>
               {getStars(getRating())}({profileUser?.ratings.length})
             </h5>
-            <h5>Member Since: {format(profileUser?.createdAt)}</h5>
+            <h5 className='mb-1'>
+              Member Since: {format(profileUser?.createdAt)}
+            </h5>
             <h3>
               {getRating() >= 2 && (
                 <Badge pill bg='success'>
@@ -374,128 +377,126 @@ const Profile = () => {
                 Edit Profile
               </Button>
             )}
-            <Tabs
-              defaultActiveKey='overview'
-              id='uncontrolled-tab-example'
-              className='mb-3 '
-              fill
-              justify
-              onSelect={() => {
-                if (readMore) {
-                  setReadMore(!readMore);
-                }
-              }}
-            >
-              {/* when we click tab scroll to that section of the site */}
-              <Tab
-                eventKey='overview'
-                title='Bio'
-                style={{ textAlign: 'left' }}
-              >
-                <h2 id='overview'>About Me</h2>
-                {!readMore ? (
-                  <>
-                    {formatBio(profileUser?.bio) || (
-                      <h6>This user has not written their bio</h6>
-                    )}
-                    <br />
-                    {formatBio(profileUser?.bio) && (
-                      <button
-                        className='button-as-link my-2'
+          </Col>
+        </Row>
+        <Tabs
+          defaultActiveKey='overview'
+          id='uncontrolled-tab-example'
+          className='mb-3'
+          fill
+          justify
+          onSelect={() => {
+            if (readMore) {
+              setReadMore(!readMore);
+            }
+          }}
+        >
+          {/* when we click tab scroll to that section of the site */}
+          <Tab eventKey='overview' title='Bio' style={{ textAlign: 'left' }}>
+            <h2 className='text-start' id='overview'>
+              About Me
+            </h2>
+            {!readMore ? (
+              <>
+                {formatBio(profileUser?.bio) || (
+                  <h6>This user has not written their bio</h6>
+                )}
+                <br />
+                {formatBio(profileUser?.bio) && (
+                  <button
+                    className='button-as-link my-2'
+                    onClick={() => {
+                      setReadMore(!readMore);
+                    }}
+                  >
+                    (Read More)
+                  </button>
+                )}
+              </>
+            ) : (
+              <>{profileUser?.bio}</>
+            )}
+          </Tab>
+          <Tab eventKey='profile' title='Reviews'>
+            {profileUser?.ratings.map((rating, i) => {
+              return (
+                <Rating
+                  rating={rating}
+                  key={'rating' + i}
+                  getStars={getStars}
+                />
+              );
+            })}
+          </Tab>
+          <Tab eventKey='pets' title='Pets and Plants'>
+            <Row xs={1} md={2} lg={4} className='g-4'>
+              {profileUser?.pet_plants.map((pet) => {
+                return (
+                  <PetPlantCard
+                    PetPlant={pet}
+                    key={pet.id}
+                    getStars={getStars}
+                    edit={null}
+                  />
+                );
+              })}
+            </Row>
+          </Tab>
+          <Tab eventKey='gallery' title='Gallery'>
+            {/* for each gallery entry create a card */}
+            <Row xs={1} md={2} lg={4} className='g-4'>
+              {profileUser?.gallery?.gallery_entries.length >= 1 &&
+                profileUser.gallery.gallery_entries.map((entry: any, i) => {
+                  return (
+                    <>
+                      <Card
                         onClick={() => {
-                          setReadMore(!readMore);
+                          setShowGalleryFooter(!showGalleryFooter);
                         }}
                       >
-                        (Read More)
-                      </button>
-                    )}
-                  </>
-                ) : (
-                  <>{profileUser?.bio}</>
-                )}
-              </Tab>
-              <Tab eventKey='profile' title='Reviews'>
-                {profileUser?.ratings.map((rating, i) => {
-                  return (
-                    <Rating
-                      rating={rating}
-                      key={'rating' + i}
-                      getStars={getStars}
-                    />
+                        <Card.Img
+                          variant='top'
+                          src={entry.url}
+                          key={'entry' + i}
+                          className='p-2'
+                          style={{ width: 'auto', objectFit: 'cover' }}
+                          height='300px'
+                        />
+                        {editable && showGalleryFooter && (
+                          <Card.Footer>
+                            <Button
+                              variant='danger'
+                              onClick={() => {
+                                deleteGallery(entry.id);
+                              }}
+                            >
+                              Delete
+                            </Button>
+                          </Card.Footer>
+                        )}
+                      </Card>
+                    </>
                   );
                 })}
-              </Tab>
-              <Tab eventKey='pets' title='Pets and Plants'>
-                <Row xs={1} md={2} lg={4} className='g-4'>
-                  {profileUser?.pet_plants.map((pet) => {
-                    return (
-                      <PetPlantCard
-                        PetPlant={pet}
-                        key={pet.id}
-                        getStars={getStars}
-                        edit={null}
-                      />
-                    );
-                  })}
-                </Row>
-              </Tab>
-              <Tab eventKey='gallery' title='Gallery'>
-                {/* for each gallery entry create a card */}
-                <Row xs={1} md={2} lg={4} className='g-4'>
-                  {profileUser?.gallery?.gallery_entries.length >= 1 &&
-                    profileUser.gallery.gallery_entries.map((entry: any, i) => {
-                      return (
-                        <>
-                          <Card
-                            onClick={() => {
-                              setShowGalleryFooter(!showGalleryFooter);
-                            }}
-                          >
-                            <Card.Img
-                              variant='top'
-                              src={entry.url}
-                              key={'entry' + i}
-                              className='p-2'
-                              style={{ width: 'auto', objectFit: 'cover' }}
-                              height='300px'
-                            />
-                            {editable && showGalleryFooter && (
-                              <Card.Footer>
-                                <Button
-                                  variant='danger'
-                                  onClick={() => {
-                                    deleteGallery(entry.id);
-                                  }}
-                                >
-                                  Delete
-                                </Button>
-                              </Card.Footer>
-                            )}
-                          </Card>
-                        </>
-                      );
-                    })}
 
-                  {editable && (
-                    <Card
-                      className='text-center'
-                      onClick={() => {
-                        // check if this user has a gallery, if it dosent make one. Then do some cloudinary to upload a pic to said gallery. then for each pic in the gallery, make a card with the pic and a delete button.
-                        showWidget();
-                      }}
-                    >
-                      <Card.Img
-                        variant='top'
-                        src='https://static.thenounproject.com/png/3322766-200.png'
-                      />
-                      <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
-                    </Card>
-                  )}
-                </Row>
-              </Tab>
-            </Tabs>
-          </span>
-        </Col>
+              {editable && (
+                <Card
+                  className='text-center'
+                  onClick={() => {
+                    // check if this user has a gallery, if it dosent make one. Then do some cloudinary to upload a pic to said gallery. then for each pic in the gallery, make a card with the pic and a delete button.
+                    showWidget();
+                  }}
+                >
+                  <Card.Img
+                    variant='top'
+                    src='https://static.thenounproject.com/png/3322766-200.png'
+                  />
+                  <h1 style={{ fontWeight: 'bold' }}>Add Pictures</h1>
+                </Card>
+              )}
+            </Row>
+          </Tab>
+        </Tabs>
       </Row>
       {/* <Navbar sticky='top' bg='light' variant='light'>
         <Nav fill variant='tabs' defaultActiveKey='/home'>
