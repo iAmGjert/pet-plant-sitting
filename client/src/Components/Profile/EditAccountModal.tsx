@@ -75,6 +75,7 @@ const EditAccountModal = ({
       // backdrop='static'
       contentClassName={userTheme === 'dark' && 'dark'}
       show={showModal}
+      className='profile-modal'
       fullscreen={true}
       size='lg'
       onHide={() => handleOnHide()}
