@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAppDispatch } from '../../state/hooks';
-//import moment from 'moment';
+import moment from 'moment';
 //Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
@@ -35,6 +35,7 @@ const AppliedJobsBoard = ({
             return `${pet.pet_plant.name} | `;
           })}{' '}
         </Card.Title>
+        <h4>{moment(startDate).format('dddd MMMM Do, YYYY')}</h4>
         <p>
           Status for Job ID # {job.id}:{' '}
           {status.charAt(0).toUpperCase() + status.slice(1)}
@@ -46,6 +47,7 @@ const AppliedJobsBoard = ({
           })}
           alt=''
         />
+
         <Card.Text className='job-description'>
           Species:{' '}
           {petPlants.map((pet) => {
@@ -57,7 +59,6 @@ const AppliedJobsBoard = ({
               return pet.pet_plant.bio;
             })}
           </p>
-          <h4>{job.startDate}</h4>
         </Card.Text>
         <Button
           className='application-status-card-btn'

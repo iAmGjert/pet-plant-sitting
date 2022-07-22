@@ -623,6 +623,23 @@ body,
   position: absolute;
 }
 
+.job-list-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.job-tab-catagories {
+  width: 100%;
+}
+.job-card {
+  width: 100vw;
+}
+
+.job-bottom-button {
+  margin-top: 5px;
+}
+
 /*************HOME PAGE************************************************/
 
 .home-container {
@@ -735,6 +752,7 @@ body,
   margin-bottom: 20px;
   font-family: monospace, monospace;
 }
+
 
 
 
@@ -861,21 +879,14 @@ body,
   width: 250px;
   margin-left: 10px;
   margin-right: 10px;
-}
-.job-list-main {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.job-tab-catagories {
-  width: 100%;
-}
-.job-card {
-  width: 100vw;
-}
-.job-bottom-button {
-  margin-top: 5px;
+  object-fit: cover;
+
+  
+  /* display: block;
+  margin: 0 10px 0 10px;
+  width: 300px;
+  height: 300px;
+  object-fit: cover; */
 }
 
 
@@ -888,6 +899,7 @@ body,
   justify-content: center;
   margin-top: 40px;
 }
+
 .applications {
   display: flex;
   align-items: center;
@@ -909,6 +921,8 @@ body,
 
 .application-status-card-btn {
   background-color: #198754;
+  display: block;
+  margin: 0 auto 20px auto;
 }
 .job-application-container {
   width: 300px;
@@ -931,7 +945,7 @@ body,
 }
 
 
-/*Calendar*/
+/***********Calendar**************/
 
 /* .calendar-paper {
   font-family: monospace, monospace;
