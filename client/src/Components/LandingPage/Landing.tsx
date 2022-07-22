@@ -74,6 +74,7 @@ const Landing: FC<Props> = () => {
 
   console.log('sitterWorkHistory', sitterWorkHistory);
   console.log('applications', applications);
+  console.log('upcoming jobs', upcomingJobs);
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());

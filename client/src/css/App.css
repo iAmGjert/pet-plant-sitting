@@ -790,7 +790,9 @@ body,
 .job-history-image {
   height: 250px;
   width: 200px;
-  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 /* .landing-welcome-card {
   margin-bottom: 24px;
@@ -844,7 +846,7 @@ body,
   color: black;
 }
 
-.landing-event-card-location{
+.landing-event-card-location {
   text-align: center;
   color: black;
 }
@@ -857,18 +859,25 @@ body,
 
 .landing-upcomingjobs-card {
   margin-bottom: 24px;
+  display: block;
 }
 
 /* .bootstrap-card .job-application-container {
   background-color: white;
 } */
 
-/* .landing-upcomingjobs-card .landing-upcomingjob-title {
+.landing-upcomingjobs-card {
+  background-color: white;
+}
+
+.landing-upcomingjobs-card .landing-upcomingjob-title {
   text-align: center;
   margin-bottom: 24px;
   font-family: monospace, monospace;
   background-color: white;
-} */
+  color: black;
+  font-size: 20px;
+}
 
 .landing-application-card-title {
   color: black;
@@ -908,6 +917,10 @@ body,
   font-family: monospace, monospace;
 }
 
+.landing-upcomingjobs-btn:hover {
+  background-color: #198754;
+}
+
 .upcomingjob-modal {
   font-family: monospace, monospace;
 }
@@ -921,6 +934,10 @@ body,
   background-color: #198754;
   font-family: monospace, monospace;
   margin-bottom: 20px;
+}
+
+.landing-sitting-history-btn: hover {
+  background-color: #198754;
 }
 
 .landing-job-history-modal-title {
