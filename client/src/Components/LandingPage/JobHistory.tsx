@@ -47,9 +47,11 @@ const JobHistory = ({ sitterWorkHistory }) => {
 
                   <img
                     className='job-history-image'
-                    src={job_pets_plants.map((pet) => {
-                      return pet.pet_plant.image;
-                    })}
+                    src={
+                      job_pets_plants.map((pet) => {
+                        return pet.pet_plant.image;
+                      })[0]
+                    }
                     alt=''
                   />
 
@@ -70,12 +72,13 @@ const JobHistory = ({ sitterWorkHistory }) => {
                     })}
                   </p>
 
-                  <p>
-                    This sitting took place from:{' '}
+                  <p className='job-history-date'>
+                    This sitting took place:{' '}
                     {`${moment(startDate).format(
                       'dddd MMMM Do, YYYY'
                     )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}{' '}
                   </p>
+                  <p className='job-history-lines'>-------------------</p>
                 </div>
               );
             }

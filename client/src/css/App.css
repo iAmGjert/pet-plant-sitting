@@ -805,17 +805,15 @@ body,
   padding-top: 15px;
 }
 
-.no_upcoming_jobs {
-  text-align: center;
-  font-family: monospace, monospace;
-  padding-top: 10px;
-  padding-left: 35px;
-  padding-right: 35px;
-  font-size: 20px;
+.job-history-date {
+  margin-bottom: 20px;
 }
 
+.job-history-lines {
+  text-align: center;
+}
 
-/**EVENT CARD**/
+/****EVENT CARD****/
 .next-upcoming-event-header {
   font-family: monospace, monospace;
   padding-top: 40px;
@@ -861,11 +859,20 @@ body,
   margin: 0 auto 20px auto;
 }
 
-/*UPCOMING JOBS*/
-
 /* .bootstrap-card .job-application-container {
   background-color: white;
 } */
+
+/*****UPCOMING JOBS*****/
+
+.no_upcoming_jobs {
+  text-align: center;
+  font-family: monospace, monospace;
+  padding-top: 10px;
+  padding-left: 35px;
+  padding-right: 35px;
+  font-size: 20px;
+}
 
 .landing-upcomingjobs-card {
   background-color: #fef8f3;
@@ -884,6 +891,7 @@ body,
 
 .landing-upcomingjobs-date {
   color: black;
+  margin-bottom: 40px;
 }
 
 .landing-application-card-title {
