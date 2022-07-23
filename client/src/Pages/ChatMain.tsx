@@ -75,13 +75,13 @@ const ChatMain = ({ socket }) => {
           </div>
         )
           : (
-            view === 'Pending Clients' ? (
+            view === 'Pending Employers' ? (
               <div>
                 <PendingClientList />
               </div>
             )
               : (
-                view === 'Confirmed Clients' ? (
+                view === 'Confirmed Employers' ? (
                   <div>
                     <ConfirmedClientList />
                   </div>
