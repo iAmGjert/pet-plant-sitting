@@ -20,7 +20,7 @@ interface userOnline {
 
 const ChatList = ({ socket }) => {
   const currUser = useAppSelector((state) => state.userProfile.value);
-  // const usersOnline = useAppSelector((state) => state.chat.usersOnline);
+  const usersOnline = useAppSelector((state) => state.chat.usersOnline);
   const dispatch = useAppDispatch();
 
   const view = useAppSelector((state) => state.chat.view);
@@ -38,7 +38,7 @@ const ChatList = ({ socket }) => {
       dispatch(getUsersOnline(onlineUsers));
     });
 
-  }, [socket.id]);
+  }, [socket.id, usersOnline]);
 
   return (
     <Container>
