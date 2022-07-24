@@ -163,7 +163,9 @@ const Home: FC<Props> = () => {
 
             {mappedEvents.map((element) => {
               return (
-                <p>{moment(element.startTime, 'HH:mm:ss').format('LT')}</p>
+                <p className='home-offcanvas-event-date'>
+                  Meets at {moment(element.startTime, 'HH:mm:ss').format('LT')}
+                </p>
               );
             })}
             <Button className='offcanvas-more-events-btn' href='/events'>

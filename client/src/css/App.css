@@ -729,11 +729,19 @@ body,
   font-family: monospace, monospace;
 }
 
+.home-offcanvas-event-date {
+  font-family: monospace, monospace;
+  margin-top: 20px;
+  text-align: center;
+}
+
 .offcanvas-more-events-btn {
   text-align: center;
   background-color: #198754;
   margin-top: 30px;
   font-family: monospace, monospace;
+  display: block;
+  margin: 0 auto 20px auto;
 }
 
 .home-login-btn {
