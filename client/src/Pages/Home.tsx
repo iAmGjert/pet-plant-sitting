@@ -30,8 +30,9 @@ const Home: FC<Props> = () => {
     .map((event: Event) => {
       return {
         title: event.name,
-        startDate: moment(event.startDate).toDate(),
+        startDate: event.startDate,
         description: event.description,
+        startTime: event.startTime,
       };
     })
     .slice(0, 1);
@@ -44,15 +45,16 @@ const Home: FC<Props> = () => {
   return (
     <Container fluid className='home-container'>
       <h1 className='home-header'>Welcome to</h1>
+      <h1 className='home-fern-herm'>Fern Herm</h1>
 
       <img
         className='home-logo'
-        src={require('../../Public/svg/fern-herm-logo.svg')}
+        src={require('../Components/LandingPage/Logo.svg')}
         width={300}
         height={300}
         alt=''
         style={{
-          filter: theme === 'dark' && 'invert(100%)',  
+          filter: theme === 'dark' && 'invert(100%)',
         }}
       />
 
@@ -111,9 +113,9 @@ const Home: FC<Props> = () => {
         to help.
       </p>
 
-      <div className='home-btns'>
+      <div>
         <Button
-          className='bootstrap-button'
+          className='home-login-btn'
           variant='primary'
           size='sm'
           onClick={() => navigate('/login')}
@@ -121,25 +123,54 @@ const Home: FC<Props> = () => {
         >
           Login
         </Button>
-        <Button variant='primary' size='sm' onClick={handleShow} 
-          style={{ marginLeft: '5px' }}
-          className='bootstrap-button'>
+        <Button
+          className='home-events-btn'
+          variant='primary'
+          size='sm'
+          onClick={handleShow}
+        >
           Events
         </Button>
 
-        <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas className='offcanvas' show={show} onHide={handleClose}>
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>
-              Next Upcoming Community Event:
-              {mappedEvents.map((element) => {
-                return <h1>{element.title}</h1>;
-              })}
+            <Offcanvas.Title className='offcanvas-title'>
+              Next Free Community Event:
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             {mappedEvents.map((element) => {
-              return <p>{element.description}</p>;
+              return (
+                <h1 className='home-offcanvas-event-title'>{element.title}</h1>
+              );
             })}
+
+            {mappedEvents.map((element) => {
+              return (
+                <p className='offcanvas-event-date'>
+                  {moment(element.startDate).format('dddd, MMMM Do YYYY')}
+                </p>
+              );
+            })}
+
+            {mappedEvents.map((element) => {
+              return (
+                <p className='home-offcanvas-event-description'>
+                  {element.description}
+                </p>
+              );
+            })}
+
+            {mappedEvents.map((element) => {
+              return (
+                <p className='home-offcanvas-event-date'>
+                  Meets at {moment(element.startTime, 'HH:mm:ss').format('LT')}
+                </p>
+              );
+            })}
+            <Button className='offcanvas-more-events-btn' href='/events'>
+              More Free Events
+            </Button>
           </Offcanvas.Body>
         </Offcanvas>
       </div>

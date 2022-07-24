@@ -20,8 +20,9 @@
   --bs-gray-600: #6c757d;
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
-  --bs-gray-900: #212529;
-  --bs-primary: #558564;
+  --bs-gray-900: #212529; 
+
+  --bs-primary: #0d6efd;
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
@@ -56,15 +57,8 @@
   --bs-body-font-weight: 400;
   --bs-body-line-height: 1.5;
   --bs-body-color: #212529;
-  --bs-body-bg: #8bdaa4;
+  --bs-body-bg: #c2f8cb;
 }
-
-.btn-primary {
-  background-color: #556c85;
-  /* background-color: var(--bs-primary);  */
-  border-color: var(--bs-primary);
-}
-
 html,
 body,
 #root {
@@ -147,7 +141,7 @@ body,
   max-width: 640px;
   background-color: #fff;
 }
-.popup-inner .btn-close {
+.popup-inner .close-btn {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -186,9 +180,6 @@ body,
   margin: 1%;
   border-width: 4px;
   border-color: blue;
-}
-.map-bootstrap-button-all:focus {
-  background-color: #556c85;
 }
 .map-bootstrap-button-jobs:focus {
   background-color: lightgreen;
@@ -230,10 +221,6 @@ body,
 .container-fluid {
   padding-bottom: 15%;
 }
-.bottom-navbar-icon {
-  width: 28px;
-  height: 28px;
-}
 
 #dark {
   background: #2c2c2c;
@@ -249,11 +236,11 @@ body,
   color: #ffffff;
 }
 #dark .dropdown-menu.show {
-  background-color: #171717;
+  background-color: #303030;
   color: #ffffff;
 }
 #dark .dropdown-item {
-  background-color: #1c1c1c;
+  background-color: #303030;
   color: #ffffff;
 }
 #dark .navbar.navbar-expand.navbar-dark.bg-dark-mode.fixed-bottom {
@@ -268,22 +255,12 @@ body,
   background-color: #2c2c2c;
   color: #ffffff;
 }
-/* #dark .col {
+#dark .col {
   background-color: #2c2c2c;
   color: #ffffff;
-} */
+}
 #dark .bootstrap-card {
-  background-color: #222222;
-  color: lightgrey;
-  border-color: lightgrey;
-}
-#dark .card-header {
-  background-color: #151414;
-  color: lightgrey;
-  border-color: lightgrey;
-}
-#dark .card-footer {
-  background-color: #151414;
+  background-color: #2e2e2e;
   color: lightgrey;
   border-color: lightgrey;
 }
@@ -345,7 +322,7 @@ body,
   color: #ffffff;
   font-family: sans-serif;
 }
-#dark .popup-inner.close-btn {
+#dark .popup-inner .close-btn {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -366,8 +343,8 @@ body,
   border-color: lightgrey;
 }
 #dark .chat-main {
-  background-color: #2c2c2c;
-  color: #ffffff;
+  background-color: rgb(121, 121, 121);
+  color: lightgrey;
 }
 #dark .nav-link {
   color: #ffffff;
@@ -377,15 +354,11 @@ body,
   color: #ffffff;
 }
 #dark .toast-header {
-  background-color: rgb(81, 81, 81);
+  background-color: rgb(121, 121, 121);
   color: #ffffff;
 }
 #dark .toast-body {
-  background-color: rgb(81, 81, 81);
-  color: #ffffff;
-}
-#dark .toast-footer {
-  background-color: rgb(81, 81, 81);
+  background-color: rgb(121, 121, 121);
   color: #ffffff;
 }
 /* #dark .btn.btn-success.btn-sm {
@@ -394,20 +367,6 @@ body,
 } */
 #dark .fade.toast.bootstrap-toast.bg-light.show {
   background-color: rgb(121, 121, 121);
-}
-#dark .form-control {
-  background-color: rgb(137, 137, 137);
-  color: lightgrey;
-}
-#dark .fern-herm-logo {
-  color-interpolation-filters: white;
-}
-#dark #login-footer {
-  background-color: #2c2c2c;
-  color: #ffffff;
-}
-#dark .google-btn {
-  background-color: #2c2c2c;
 }
 
 /* Calendar */
@@ -455,12 +414,7 @@ body,
   .MuiButtonBase-root
   .TodayButton-button
   .css-xya8j6-MuiButtonBase-root-MuiButton-root {
-  border-color: lightgrey !important;
-  color: lightgrey !important;
-}
-#dark .MuiTouchRipple-root.css-8je8zh-MuiTouchRipple-root {
   border-color: lightgrey;
-  color: lightgrey;
 }
 #dark .MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-i4bv87-MuiSvgIcon-root {
   color: lightgrey;
@@ -517,16 +471,16 @@ body,
   color: lightgrey;
   border-color: lightgrey;
 }
-/* .bootstrap-modal-button.btn.btn-danger {
+.bootstrap-modal-button.btn.btn-danger {
   background-color: #1f1f1f;
   color: lightgrey;
   border-color: lightgrey;
-} */
-/* .bootstrap-modal-button.btn.btn-warning {
+}
+.bootstrap-modal-button.btn.btn-warning {
   background-color: #1f1f1f;
   color: lightgrey;
   border-color: lightgrey;
-} */
+}
 .bootstrap-modal-button.btn.btn-info {
   background-color: #1f1f1f;
   color: lightgrey;
@@ -544,22 +498,13 @@ body,
   color: lightgrey;
   border-color: lightgrey;
 }
-.bootstrap-modal-card.card-body {
-  background-color: #2e2e2e;
-  color: lightgrey;
-  border-color: lightgrey;
-}
-.m-2.dark.btn.btn-outline-primary {
-  color: lightgrey;
-  border-color: lightgrey;
-}
 /* Bootstrap modal classes */
 
 .chat-main {
   width: 100%;
   height: 75%;
   /* display: grid; */
-  background-color: #8bdaa4;
+  background-color: #C2F8CB;
   place-items: center;
   padding-bottom: 15%;
 }
@@ -714,6 +659,25 @@ body,
   margin-top: 5px;
 }
 
+.job-list-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.job-tab-catagories {
+  width: 100%;
+}
+.job-card {
+  width: 100vw;
+}
+
+.job-bottom-button {
+  margin-top: 5px;
+}
+
+/*************HOME PAGE************************************************/
+
 .home-container {
   display: flex;
   align-items: center;
@@ -725,22 +689,35 @@ body,
   width: 100px;
   /* height: 100px; */
   font-weight: 'bold';
-  font-size: '12px';
-  margin-top: 60px;
-  margin-left: -30px;
+  /* font-variant: 1rem/1.5 var(--bs-font-monospace); */
+  font-family: monospace, monospace ;
+  font-size: 40px;
+  margin-top: 60px; 
+  margin-left: -124px;
+  white-space: nowrap;
+}
+
+.home-fern-herm {
+  width: 100px;
+  /* height: 100px; */
+  font-weight: 'bold';
+  /* font-variant: 1rem/1.5 var(--bs-font-monospace); */
+  font-family: monospace, monospace;
+  font-size: 40px;
+  margin-left: -100px;
   white-space: nowrap;
 }
 
 .home-logo {
   width: 390px;
   height: 400px;
+  margin-bottom: 40px;
 }
 
-.carousel-item img {
-  object-fit: cover;
-  object-position: center;
-  height: 50vh;
-  overflow: hidden;
+.carousel {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .carousel-item img {
@@ -756,39 +733,432 @@ body,
   padding: '1em 0em';
   font-weight: 'bold';
   margin: 20px 20px;
+  font-family: monospace, monospace;
+  font-size: 20px;
+
+}
+
+.offcanvas {
+  background-color:  #C2F8CB;
+}
+
+.offcanvas-title {
+  text-align: center;
+  font-family: monospace, monospace;
+}
+.home-offcanvas-event-title {
+  margin-top: 20px;
+  background-color:  #C2F8CB;
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
+.offcanvas-event-date {
+  margin-top: 10px;
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
+.home-offcanvas-event-description {
+  margin-top:20px;
+  font-family: monospace, monospace;
+}
+
+.home-offcanvas-event-date {
+  font-family: monospace, monospace;
+  margin-top: 20px;
+  text-align: center;
+}
+
+.offcanvas-more-events-btn {
+  text-align: center;
+  background-color: #198754;
+  margin-top: 30px;
+  font-family: monospace, monospace;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.home-login-btn {
+  background-color: #198754;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-family: monospace, monospace;
+
+}
+
+.home-events-btn {
+  background-color: #198754;
+  text-align: center;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-family: monospace, monospace;
+}
+
+
+
+
+/****************LANDING PAGE**************************************/
+
+.landingpage-contents {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  /* text-align: center; */
+  /* font-size: 40px; */
+  font-family: Sans-Serif;
+  padding-top: 40px;
+  padding-bottom: 56px;
+}
+
+.landingpage-contents .landing-welcome-header {
+   text-align: center; 
+   font-size: 40px;
+   font-family: monospace, monospace;
+
+}
+
+.landing-svg {
+  margin-top: 30px;
+  width: 390px;
+  height: 400px;
+  margin-bottom: 40px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.job-history-image {
+  /* height: 250px;
+  width: 200px;*/
+  display: block;
+  margin-left: auto;
+  margin-right: auto; 
+  height: 200px;
+  width: 250px;
+  object-fit: cover;
+}
+/* .landing-welcome-card {
+  margin-bottom: 24px;
+} */
+
+.job-history-about {
+  padding-top: 15px;
+}
+
+.job-history-date {
+  margin-bottom: 20px;
+}
+
+.job-history-lines {
+  text-align: center;
+}
+
+/****EVENT CARD****/
+.next-upcoming-event-header {
+  font-family: monospace, monospace;
+  padding-top: 40px;
+
+}
+
+.landing-event-card {
+  margin-bottom: 24px;
+  font-family: monospace, monospace;
+  background-color: white;
+  
+}
+.landing-event-card-date {
+  text-align: center;
+  color: black;
+  margin-top: 10px;
+}
+
+.landing-event-card-lines {
+  text-align: center;
+  color: black;
+}
+
+.landing-event-card-description {
+  color: black;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.landing-event-card-title {
+  text-align: center;
+  color: black;
+}
+
+.landing-event-card-location {
+  text-align: center;
+  color: black;
+}
+
+.landing-event-card-events-link {
+  text-align: center;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.landing-event-card-startTime {
+  text-align: center;
+  display: block;
+  margin: 0 auto 20px auto;
+  color: black;
+}
+
+/* .bootstrap-card .job-application-container {
+  background-color: white;
+} */
+
+/*****UPCOMING JOBS*****/
+
+.no_upcoming_jobs {
+  text-align: center;
+  font-family: monospace, monospace;
+  padding-top: 10px;
+  padding-left: 35px;
+  padding-right: 35px;
   font-size: 20px;
 }
 
-.home-btns {
+.landing-upcomingjobs-card {
+  background-color: #fef8f3;
   text-align: center;
-  padding-bottom: 10px;
+  margin-bottom: 24px;
+  font-family: monospace, monospace;
 }
 
-.job-list-main {
-  display: flex;
+.landing-upcomingjobs-card .landing-upcomingjob-title {
+  text-align: center;
+  margin-bottom: 24px;
+  font-family: monospace, monospace;
+  color: black;
+  font-size: 20px;
+}
+
+.landing-upcomingjobs-date {
+  color: black;
+  margin-bottom: 40px;
+}
+
+.landing-application-card-title {
+  color: black;
+}
+
+.landing-applications-card {
+  text-align: center;
+  margin-bottom: 24px;
+  font-family: monospace, monospace;
+  background-color: white;
+  color: black;
+}
+
+.landing-application-date {
+  font-family: monospace, monospace;
+  text-align: center;
+  margin-top: 20px;
+  color: black;
+}
+
+.landing-application-status {
+  color: black;
+}
+
+.landing-application-job-description {
+  color: black;
+  margin-top: 10px;
+
+}
+
+/* .huh {
+  color: black;
+} */
+
+.landing-upcomingjobs-btn {
+  text-align: center;
+  background-color: #198754;
+  font-family: monospace, monospace;
+}
+
+.landing-upcomingjobs-btn:hover {
+  background-color: #198754;
+}
+
+.upcomingjob-modal {
+  font-family: monospace, monospace;
+}
+
+.landing-upcomingjob-modal-header {
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
+.landing-sitting-history-btn {
+  background-color: #198754;
+  font-family: monospace, monospace;
+  margin-bottom: 20px;
+}
+
+.landing-sitting-history-btn: hover {
+  background-color: #198754;
+}
+
+.landing-job-history-modal-title {
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
+.landing-job-history-modal-body {
+  font-family: monospace, monospace;
+}
+
+.landing-application-status-card-image {
+  /* display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 200px;
+  width: 250px;
+  margin: 10px 10px 10px 10px;
+  object-fit: cover; */
+  height: 200px;
+  width: 250px;
+  object-fit: cover;
+  
+  /* display: block;
+  margin: 0 10px 0 10px;
+  width: 300px;
+  height: 300px;
+  object-fit: cover; */
 }
-.job-tab-catagories {
-  width: 100%;
-}
-.job-card {
-  width: 100vw;
-}
-.job-bottom-button {
-  margin-top: 5px;
+.applications-header {
+  font-family: monospace, monospace;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 40px;
+  justify-content: center;
+  margin-top: 40px;
 }
 
-.nav-tabs .nav-link.active {
-  background-color: #558564;
-  color: white;
+.applications {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+  justify-content: center;
+  font-family: monospace, monospace;
+  
 }
 
-.nav-tabs .nav-link {
-  color: #ffffff;
+.no-applications {
+  margin-left: 20px;
+  margin-right: 20px;
+  font-size: 20px;
+  margin-bottom: 40px;
 }
 
-.profile-modal .modal-content {
-  background-color: #8bdaa4;
+.application-status-card-btn {
+  background-color: #198754;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+
+.finalize-delete {
+  background-color: red;
+}
+
+.job-application-container {
+  width: 300px;
+  margin: 16px;
+}
+.job-application-container .job-description {
+  margin-top: 10px;
+  height: 100px;
+  overflow: scroll;
+}
+
+
+.pet_container {
+  margin-bottom: 16px;
+  padding: 16px;
+}
+
+.pet_container p {
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+
+/***********Calendar**************/
+
+/* .calendar-paper {
+  font-family: monospace, monospace;
+}
+
+.scheduler {
+  font-family: monospace, monospace;
+}
+
+.day-view {
+  font-family: monospace, monospace;
+} */
+
+
+.calendar-event-appointment {
+  font-family: monospace, monospace;
+  overflow: scroll;
+  max-height: 300px;
+  text-align: center;
+}
+
+.calendar-event-appointment-title {
+  text-align: center;
+}
+
+.calendar-event-appointment-location {
+  //margin-left: 20px;
+  text-align: center;
+}
+
+.calendar-event-appointment-info {
+  text-align: center;
+}
+
+.calendar-job-appointment {
+  font-family: monospace, monospace;
+  overflow: scroll;
+  max-height: 300px;
+}
+
+.calendar-job-appointment-img {
+  display: block;
+  margin: 0 auto;
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.calendar-job-appointment-btn {
+  background-color: #198754;
+  text-align: center;
+  /* margin-bottom: 20px;
+  margin-left: 40px; */
+  display: block;
+  margin: 0 auto 20px auto;
+  
+}
+
+.Appointment-appointment {
+  /* background-color:  #C2F8CB !important; */
+  background-color: 	#4682B4 !important;
+}
+
+/* remove edit icon from header in appointment tooltip */
+.Header-head > button {
+  display: none;
 }
