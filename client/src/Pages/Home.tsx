@@ -1,6 +1,7 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useContext } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import { useNavigate } from 'react-router-dom';
+import moment from 'moment';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Carousel from 'react-bootstrap/Carousel';
@@ -8,37 +9,51 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import { fetchUpcomingEvents } from '../state/features/events/eventsSlice';
+import { ThemeContext } from '../App';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-
-//import { events } from '../state/features/events/eventsSlice';
 interface Props {}
 
 const Home: FC<Props> = () => {
+  const theme = useContext(ThemeContext);
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   //const [display, setDisplay] = useState(false);
   const upcomingEvents = useAppSelector((state) => state.events.upcomingEvents);
-  const dispatch = useAppDispatch();
-  console.log(upcomingEvents);
+  //console.log('upcomingEvents', upcomingEvents);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const mappedEvents = upcomingEvents
+    .map((event: Event) => {
+      return {
+        title: event.name,
+        startDate: moment(event.startDate).toDate(),
+        description: event.description,
+      };
+    })
+    .slice(0, 1);
+  //console.log('mappedEvents', mappedEvents);
+
   useEffect(() => {
-    dispatch(fetchUpcomingEvents);
-  });
+    dispatch(fetchUpcomingEvents());
+  }, []);
 
   return (
-    <Container className='home-container'>
+    <Container fluid className='home-container'>
       <h1 className='home-header'>Welcome to</h1>
 
       <img
         className='home-logo'
-        src='https://64.media.tumblr.com/290a29bc6dcf179117ab4933ff583acc/4677f106597bcd32-27/s500x750/69d26528d580d86580d284278eb83b373a0a7435.jpg'
+        src={require('../../Public/svg/fern-herm-logo.svg')}
         width={300}
         height={300}
         alt=''
+        style={{
+          filter: theme === 'dark' && 'invert(100%)',  
+        }}
       />
 
       <Carousel fade>
@@ -102,20 +117,29 @@ const Home: FC<Props> = () => {
           variant='primary'
           size='sm'
           onClick={() => navigate('/login')}
+          style={{ marginRight: '5px' }}
         >
           Login
         </Button>
-        <Button variant='primary' size='sm' onClick={handleShow}>
+        <Button variant='primary' size='sm' onClick={handleShow} 
+          style={{ marginLeft: '5px' }}
+          className='bootstrap-button'>
           Events
         </Button>
 
         <Offcanvas show={show} onHide={handleClose}>
           <Offcanvas.Header closeButton>
-            <Offcanvas.Title>Next Upcoming Community Event:</Offcanvas.Title>
+            <Offcanvas.Title>
+              Next Upcoming Community Event:
+              {mappedEvents.map((element) => {
+                return <h1>{element.title}</h1>;
+              })}
+            </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
-            Some text as placeholder. In real life you can have the elements you
-            have chosen. Like, text, images, lists, etc.
+            {mappedEvents.map((element) => {
+              return <p>{element.description}</p>;
+            })}
           </Offcanvas.Body>
         </Offcanvas>
       </div>

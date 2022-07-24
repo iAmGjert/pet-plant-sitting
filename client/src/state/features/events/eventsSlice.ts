@@ -248,9 +248,9 @@ export const communityEventsSlice = createSlice({
   }
 });
 
-export const selectAllEvents = (state: { events: { events: Event } } ) => state.events.events;
-export const getEventsStatus = (state: { events: { status: string } } ) => state.events.status;
-export const pageView = (state: { events: { view: string } } ) => state.events.view;
+export const selectAllEvents = (state: { events: { events: Event }}) => state.events.events;
+export const getEventsStatus = (state: { events: { status: string }}) => state.events.status;
+export const pageView = (state: { events: { view: string }}) => state.events.view;
 
 export const { setView, setEvents, setEventObj, eventAdded, commentAdded } = communityEventsSlice.actions;
 

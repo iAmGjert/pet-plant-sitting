@@ -37,9 +37,7 @@ const LandingPageMain: FC<Props> = () => {
   const events = useAppSelector((state) => state.events.events);
 
   return (
-    <div>
-      <Landing />
-    </div>
+    <Landing />
   );
 };
 

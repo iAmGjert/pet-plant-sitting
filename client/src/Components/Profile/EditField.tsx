@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable indent */
-import React, { useEffect, useState } from 'react';
-import { Button, Form, ToggleButton } from 'react-bootstrap';
+import React, { useEffect, useState, useContext } from 'react';
+import { Button, Form, ToggleButton, Row } from 'react-bootstrap';
 
 import PetPlantCard, { PetPlant } from './PetPlantCard';
 import { RatingInfo, Profile } from '../../Pages/Profile';
@@ -14,6 +14,7 @@ import { AiFillSave } from '@react-icons/all-files/ai/AiFillSave';
 import { BiCurrentLocation } from '@react-icons/all-files/bi/BiCurrentLocation';
 import { BiUpload } from '@react-icons/all-files/bi/BiUpload';
 import Tags from './Tags';
+import { ThemeContext } from '../../App';
 
 type Props = {
   user: Profile | null;
@@ -60,6 +61,7 @@ const EditField = ({
   newPetId,
   setVal,
 }: Props) => {
+  const theme = useContext(ThemeContext);
   const [editable, setEditable] = useState(false);
   const [newImgCloud, setNewImgCloud] = useState('');
   const [checked, setChecked] = useState(
@@ -226,7 +228,7 @@ const EditField = ({
           add && (
             <div>
               <ToggleButton
-                className='m-2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
                 id='toggle-checkPet1'
                 type='checkbox'
                 variant='outline-primary'
@@ -241,7 +243,7 @@ const EditField = ({
                 Yes
               </ToggleButton>
               <ToggleButton
-                className='m-2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
                 id='toggle-checkPet2'
                 type='checkbox'
                 variant='outline-primary'
@@ -281,8 +283,8 @@ const EditField = ({
           Pet_Plant.is_plant === false && (
             <div>
               <ToggleButton
-                className='m-2'
-                id='toggle-checkPet1'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
+                id='toggle-checkPetgender1'
                 type='checkbox'
                 variant='outline-primary'
                 checked={checked}
@@ -295,8 +297,8 @@ const EditField = ({
                 Male
               </ToggleButton>
               <ToggleButton
-                className='m-2'
-                id='toggle-checkPet2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
+                id='toggle-checkPetgender2'
                 type='checkbox'
                 variant='outline-primary'
                 checked={!checked}
@@ -316,7 +318,7 @@ const EditField = ({
           Pet_Plant.is_plant === false && (
             <div>
               <ToggleButton
-                className='m-2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
                 id='toggle-checkSpecies1'
                 type='radio'
                 name='radio'
@@ -330,7 +332,7 @@ const EditField = ({
                 Cat
               </ToggleButton>
               <ToggleButton
-                className='m-2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
                 id='toggle-checkSpecies2'
                 type='radio'
                 name='radio'
@@ -344,7 +346,7 @@ const EditField = ({
                 Dog
               </ToggleButton>
               <ToggleButton
-                className='m-2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
                 id='toggle-checkSpecies3'
                 type='radio'
                 name='radio'
@@ -358,7 +360,7 @@ const EditField = ({
                 Bird
               </ToggleButton>
               <ToggleButton
-                className='m-2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
                 id='toggle-checkSpecies4'
                 type='radio'
                 name='radio'
@@ -372,7 +374,7 @@ const EditField = ({
                 Fish
               </ToggleButton>
               <ToggleButton
-                className='m-2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
                 id='toggle-checkSpecies5'
                 type='radio'
                 name='radio'
@@ -386,7 +388,7 @@ const EditField = ({
                 Reptile
               </ToggleButton>
               <ToggleButton
-                className='m-2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
                 id='toggle-checkSpecies6'
                 type='radio'
                 name='radio'
@@ -400,7 +402,7 @@ const EditField = ({
                 Insect
               </ToggleButton>
               <ToggleButton
-                className='m-2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
                 id='toggle-checkSpecies7'
                 type='radio'
                 name='radio'
@@ -414,7 +416,7 @@ const EditField = ({
                 Rodent
               </ToggleButton>
               <ToggleButton
-                className='m-2'
+                className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
                 id='toggle-checkSpecies8'
                 type='radio'
                 name='radio'
@@ -705,7 +707,7 @@ const EditField = ({
 
   return (
     <Form.Group className='mb-3' controlId='formBasicEmail'>
-      <h2>
+      <h2 className='text-start'>
         {fieldName === 'pet_plants'
           ? 'Pets and Plants'
           : fieldName === 'age' && Pet_Plant.is_plant === true

@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Badge, Card, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import EditPetModal from './EditPetModal';
 import { RatingInfo } from '../../Pages/Profile';
+import { ThemeContext } from '../../App';
 
 export interface PetPlant {
   id: number;
@@ -15,7 +16,7 @@ export interface PetPlant {
   ratings: RatingInfo[];
   species: string;
   total_ratings: number;
-  age: number;
+  age: string;
   gender: string;
   bio: string;
 }
@@ -27,6 +28,7 @@ type Props = {
 };
 
 const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
+  const theme = useContext(ThemeContext);
   const [showDetails, setShowDetails] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const scrollRef = useRef();
@@ -48,7 +50,7 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
   return (
     <Col>
       <Card
-        className='bootstrap-card'
+        // style={{ width: '18rem' }}
         onClick={() => {
           if (edit) {
             setShowModal(!showModal);
@@ -67,8 +69,14 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
           add={false}
           newPetId={null}
         />
-        <Card.Img variant='top' src={PetPlant.image} />
-        <Card.Body>
+        <Card.Img
+          variant='top'
+          src={PetPlant.image}
+          style={{ width: 'auto', objectFit: 'cover' }}
+          alt='pet/plant picture'
+          height='300px'
+        />
+        <Card.Body className={theme === 'dark' && 'bootstrap-modal-card'}>
           <Card.Title>{PetPlant.name}</Card.Title>
           {edit ? (
             <Card.Text>Click to edit</Card.Text>

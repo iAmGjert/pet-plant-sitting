@@ -48,43 +48,44 @@ const Register = () => {
   };
 
   return (
-    <Container fluid className='Register'><Row><Col><Card className='bootstrap-card'>
-      <Card.Header className='title'>Create a new user</Card.Header><Card.Body className='inputs'>    
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <div>
-            <input className='bootstrap-textbox' type="text" placeholder="First name" name="firstName"
-              {...register('firstName', { required: true, /*pattern: /^[a-zA-Z]{3,15}$/i*/ })} />
-            {errors.firstName && <p>{errors.firstName.message}</p>}
-          </div>
-          <div>
-            <input className='bootstrap-textbox' type="text" placeholder="Last name" name="lastName"
-              {...register('lastName', {required: true, /*pattern: /^[a-zA-Z]{3,15}$/i*/ })} />
-            {errors.lastName && <p>{errors.lastName.message}</p>}
-          </div>
-          <div>
-            <input className='bootstrap-textbox' type="email" placeholder="Email" name="email"
-              {...register('email', {required: true, maxLength: 30, pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 
-              })} />
-            {errors.email && <p>That ain&apos;t a valid email fool</p>}
-          </div>
-          <div>
-            <input className='bootstrap-textbox' type="password" placeholder="Password" name="password"
-              {...register('password', {required: true, maxLength: 30, pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i})} />
-            {errors.password && <p>{errors.password.message}</p>} 
-          </div>
-          <div>
-            <input className='bootstrap-textbox' type="password" placeholder="Confirm Password" name="confirmPassword"
-              {...register('confirmPassword', {required: true, maxLength: 30, pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i})} />
-            {errors.confirmPassword && <p>Passwords Should Match!</p>} 
-          </div>
-          <div>
-            <input className='bootstrap-textbox' type='text' placeholder='location' name='location'
-              {...register('location', {required: false, maxLength: 50 })} />
-          </div>
-          <input className='bootstrap-button' type="submit" />
-        </form>
-      </Card.Body>
-    </Card></Col></Row></Container>    
+    <div className='login-container'>
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        
+        <label htmlFor='firstName'>Enter Your First Name: </label>
+        <input className='bootstrap-textbox' type='text' name='first-name'
+          {...register('firstName', { required: true, /*pattern: /^[a-zA-Z]{3,15}$/i*/ })} />
+        {errors.firstName && <p>{errors.firstName.message}</p>}
+        
+        <label htmlFor='lastName'>Enter Your Last Name: </label>
+        <input className='bootstrap-textbox' type='text' name='last-name'
+          {...register('lastName', {required: true, /*pattern: /^[a-zA-Z]{3,15}$/i*/ })} />
+        {errors.lastName && <p>{errors.lastName.message}</p>}
+        
+        <label htmlFor='email'>Enter Your Email: </label>
+        <input className='bootstrap-textbox' type='email' name='email'
+          {...register('email', {required: true, maxLength: 30, pattern: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/, 
+          })} />
+        {errors.email && <p>Please enter a valid email</p>}
+        
+        <label htmlFor='password'>Create a New Password: </label>
+        <input className='bootstrap-textbox' type='password' name='password'
+          {...register('password', {required: true, maxLength: 30, pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i})} />
+        {errors.password && <p>{errors.password.message}</p>} 
+        
+        <label htmlFor='confirmPassword'>Confirm Your Password: </label>
+        <input className='bootstrap-textbox' type='password' name='confirmPassword'
+          {...register('confirmPassword', {required: true, maxLength: 30, pattern: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/i})} />
+        {errors.confirmPassword && <p>Passwords Should Match!</p>} 
+     
+
+        <label htmlFor='location'>Please Enter Your Location: </label>
+        <input className='bootstrap-textbox' type='text' name='location'
+          {...register('location', {required: false, maxLength: 50 })} />
+        
+        <input className='bootstrap-button' type='submit' />
+      </form>
+    </div>
   );
 };
 

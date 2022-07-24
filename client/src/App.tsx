@@ -27,7 +27,7 @@ import TopNavBar from './Components/TopNavBar/TopNavBar';
 import BottomNavBar from './Components/BottomNavBar/BottomNavBar';
 import Loading from './Pages/Loading';
 import InfoMain from './Pages/InfoMain';
-import EditEvent from './Components/CommunityEvents/EditEvent';
+// import EditEvent from './Components/CommunityEvents/EditEvent';
 import Error from './Pages/Error';
 import { io } from 'socket.io-client';
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -98,15 +98,7 @@ const App: FC<Props> = () => {
             <Route path='/login' element={<Login />} />
             <Route path='/landingpage' element={<LandingPageMain />} />
             <Route path='/map' element={<MapMain />} />
-
             <Route path='/events' element={<CommunityEvents />} />
-            {/* <Route path='/events/edit/:id' element={<EditEvent />} /> */}
-
-            {/* <Route path='events/*'>
-              <Route index element={<CommunityEvents />} />
-              <Route path='edit/:id' element={<EditEvent />} />
-            </Route>  */}
-
             <Route path='/calendar' element={<CalendarMain />} />
             <Route path='/jobs' element={<JobsMain />} />
             {/* <Route path='/createjob' element={<JobCreation />} /> */}

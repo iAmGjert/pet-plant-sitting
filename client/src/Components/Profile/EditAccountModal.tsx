@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useState, useContext, useEffect } from 'react';
-import { Button, Form, Modal, Card } from 'react-bootstrap';
+import { Button, Form, Modal, Card, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { Profile } from '../../Pages/Profile';
 import { setUser } from '../../state/features/userProfile/userProfileSlice';
@@ -75,7 +75,9 @@ const EditAccountModal = ({
       // backdrop='static'
       contentClassName={userTheme === 'dark' && 'dark'}
       show={showModal}
+      className='profile-modal'
       fullscreen={true}
+      size='lg'
       onHide={() => handleOnHide()}
     >
       <EditPetModal
@@ -88,7 +90,7 @@ const EditAccountModal = ({
           owner_id: user?.id,
           is_plant: false,
           breed: 'N/A',
-          age: 0,
+          age: 'Baby',
           gender: '',
           rating: 0,
           tags: [],
@@ -169,9 +171,12 @@ const EditAccountModal = ({
             add={false}
             newPetId={null}
           />
-
           <Card
-            className='text-center'
+            className={
+              theme === 'dark'
+                ? 'text-center bootstrap-modal-card'
+                : 'text-center'
+            }
             onClick={() => {
               // create a new pet in the database
               axios
@@ -198,9 +203,12 @@ const EditAccountModal = ({
           >
             <Card.Img
               variant='top'
+              style={{ width: 'auto', objectFit: 'cover' }}
+              alt='add pet/plant picture'
+              height='300px'
               src='https://t3.ftcdn.net/jpg/02/36/83/48/360_F_236834856_k64hP3apLaj1u62rSTSAKkhVd9TuuMLV.jpg'
             />
-            <h1 style={{ fontWeight: 'bold' }}>Add Pets</h1>
+            <h1 style={{ fontWeight: 'bold' }}>Add Pets or Plants</h1>
           </Card>
           <span>
             <Button
