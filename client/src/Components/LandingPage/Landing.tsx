@@ -60,7 +60,7 @@ const Landing: FC<Props> = () => {
   const pastJobs = useAppSelector((state) => state.job.pastJobs);
 
   const events = useAppSelector((state) => state.events.events);
-
+  console.log('events', events);
   const sitterUpcomingJobs = upcomingJobs.filter(
     (job: { sitter_id: number }) => {
       return job.sitter_id === user.id;
@@ -72,8 +72,8 @@ const Landing: FC<Props> = () => {
     return job.sitter_id === user.id;
   });
 
-  console.log('sitterWorkHistory', sitterWorkHistory);
-  console.log('applications', applications);
+  //console.log('sitterWorkHistory', sitterWorkHistory);
+  //console.log('applications', applications);
   console.log('upcoming jobs', upcomingJobs);
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
@@ -136,6 +136,7 @@ const Landing: FC<Props> = () => {
           (element: {
             id: React.Key;
             startDate: any;
+            startTime: any;
             description: any;
             location: any;
             name: any;
@@ -149,6 +150,7 @@ const Landing: FC<Props> = () => {
                 <LandingEventCard
                   // key={element.id}
                   startDate={element.startDate}
+                  startTime={element.startTime}
                   description={element.description}
                   location={element.location}
                   name={element.name}

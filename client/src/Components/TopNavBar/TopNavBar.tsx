@@ -23,29 +23,46 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
   };
 
   return (
-    <Navbar collapseOnSelect
+    <Navbar
+      collapseOnSelect
       bg={theme === 'dark' ? 'dark-mode' : 'primary'}
       variant='dark'
       expand='lg'
     >
       <Container>
-        <Navbar.Brand style={{ cursor: 'pointer' }}
+        <Navbar.Brand
+          style={{ cursor: 'pointer' }}
           onClick={() => {
             user.name ? navigate('/landingPage') : navigate('/');
           }}
         >
-          {user.name ? user.name : <img src={require('../../../Public/svg/fern-herm-pets-alt.svg')} alt='fh-alt' style={{
-            width: '50px',
-            height: '50px',
-            marginLeft: '15px',
-            filter: 'invert(100%)',  
-          }}/>}
+          {user.name ? (
+            user.name
+          ) : (
+            <img
+              src={require('../../../Public/svg/fern-herm-pets-alt.svg')}
+              alt='fh-alt'
+              style={{
+                width: '50px',
+                height: '50px',
+                marginLeft: '15px',
+                filter: 'invert(100%)',
+              }}
+            />
+          )}
         </Navbar.Brand>
-        <Navbar.Brand className='ms-auto' style={{ marginRight: '15px', marginLeft: '15px' }}>
+        <Navbar.Brand
+          className='ms-auto'
+          style={{ marginRight: '15px', marginLeft: '15px' }}
+        >
           <Theme toggleTheme={toggleTheme} theme={theme} />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' ref={navButton} data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"/>
+        <Navbar.Toggle
+          aria-controls='basic-navbar-nav'
+          ref={navButton}
+          data-bs-toggle='collapse'
+          data-bs-target='#navbarNav'
+        />
         <Navbar.Collapse id='basic-navbar-nav' ref={linksContainerRef}>
           <Nav className='flex-grow-1 justify-content-evenly'>
             {!user.name && (
@@ -55,7 +72,7 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
                   collapseNav();
                 }}
               >
-                  Login
+                Login
               </Nav.Link>
             )}
             <Nav.Link
@@ -68,7 +85,7 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
               Job Listings
             </Nav.Link>
             {/* <NavDropdown title='More Options' id='basic-nav-dropdown'> */}
-          
+
             {/* <Nav.Link
               onClick={() => {
                 handleClick();
@@ -83,7 +100,7 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
                 collapseNav();
               }}
             >
-                Community
+              Community
             </Nav.Link>
             <Nav.Link
               onClick={() => {
@@ -91,7 +108,7 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
                 collapseNav();
               }}
             >
-                Map
+              Map
             </Nav.Link>
             <Nav.Link
               onClick={() => {
@@ -99,23 +116,25 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
                 collapseNav();
               }}
             >
-                Calendar
+              Calendar
             </Nav.Link>
-            <Nav.Link
-              onClick={() => {
-                navigate(`/profile/${user?.id}`);
-                collapseNav();
-              }}
-            >
+            {user.name && (
+              <Nav.Link
+                onClick={() => {
+                  navigate(`/profile/${user?.id}`);
+                  collapseNav();
+                }}
+              >
                 Profile
-            </Nav.Link>
+              </Nav.Link>
+            )}
             <Nav.Link
               onClick={() => {
                 navigate('/chat');
                 collapseNav();
               }}
             >
-                Chat
+              Chat
             </Nav.Link>
             <Nav.Link
               onClick={() => {
@@ -123,21 +142,17 @@ const TopNavBar: FC<Props> = ({ toggleTheme, theme }) => {
                 collapseNav();
               }}
             >
-                Info Lookup
+              Info Lookup
             </Nav.Link>
             {user.name && (
               <>
                 <NavDropdown.Divider />
-                <Nav.Link href='/auth/logout'>
-                    Logout
-                </Nav.Link>
+                <Nav.Link href='/auth/logout'>Logout</Nav.Link>
               </>
             )}
             {/* </NavDropdown> */}
-           
           </Nav>
         </Navbar.Collapse>
-    
       </Container>
     </Navbar>
   );

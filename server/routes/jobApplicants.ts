@@ -39,7 +39,7 @@ jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
               { model: JobPetsPlants,
                 include: [{ model: PetPlant, attributes: ['name', 'image', 'species', 'bio']}],
               }
-            ]
+            ],
           }],
       });
       res.json(applications);

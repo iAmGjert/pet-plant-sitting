@@ -1,5 +1,5 @@
 import React from 'react';
-//import * as moment from 'moment';
+import moment from 'moment';
 
 //Redux
 // import { useAppSelector, useAppDispatch } from '../../state/hooks';
@@ -9,9 +9,14 @@ import React from 'react';
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
-import moment from 'moment';
 
-const LandingEventCard = ({ startDate, location, description, name }) => {
+const LandingEventCard = ({
+  startDate,
+  startTime,
+  location,
+  description,
+  name,
+}) => {
   return (
     <Card className='landing-event-card' style={{ width: '18rem' }}>
       <Card.Body>
@@ -23,9 +28,13 @@ const LandingEventCard = ({ startDate, location, description, name }) => {
         <Card.Text className='landing-event-card-description'>
           {description}
         </Card.Text>
+        <Card.Text className='landing-event-card-startTime'>
+          Meets @ {moment(startTime, 'HH:mm:ss').format('LT')}
+        </Card.Text>
         <Card.Text className='landing-event-card-location'>
           Location: {location}
         </Card.Text>
+
         <Card.Link className='landing-event-card-events-link' href='/events'>
           More Upcoming Events
         </Card.Link>
