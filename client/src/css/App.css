@@ -1100,6 +1100,7 @@ body,
   font-family: monospace, monospace;
   overflow: scroll;
   max-height: 300px;
+  text-align: center;
 }
 
 .calendar-event-appointment-title {
@@ -1107,11 +1108,12 @@ body,
 }
 
 .calendar-event-appointment-location {
-  margin-left: 20px;
+  //margin-left: 20px;
+  text-align: center;
 }
 
 .calendar-event-appointment-info {
-  margin-left: 20px;
+  text-align: center;
 }
 
 .calendar-job-appointment {
@@ -1140,7 +1142,7 @@ body,
 
 .Appointment-appointment {
   /* background-color:  #C2F8CB !important; */
-  background-color: 	#00008B !important;
+  background-color: 	#4682B4 !important;
 }
 
 /* remove edit icon from header in appointment tooltip */
