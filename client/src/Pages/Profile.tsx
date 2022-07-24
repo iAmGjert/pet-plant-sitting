@@ -25,6 +25,8 @@ import EditAccountModal from '../Components/Profile/EditAccountModal';
 import Rating from '../Components/Profile/Rating';
 import { scroller } from 'react-scroll';
 import { profile } from 'console';
+import { AiFillStar } from '@react-icons/all-files/ai/AiFillStar';
+import { AiOutlineStar } from '@react-icons/all-files/ai/AiOutlineStar';
 
 export interface RatingInfo {
   id: number;
@@ -143,17 +145,18 @@ const Profile = () => {
     }
     return stars;
   };
-  // const widget = window?.cloudinary.openUploadWidget(
-  //   {
-  //     cloudName: process.env.CLOUDINARY_NAME,
-  //     uploadPreset: process.env.CLOUDINARY_PRESET,
-  //   },
-  //   (error: Error, result: any) => {
-  //     if (result.event === 'success') {
-  //       setNewImgCloud(result.info.url);
-  //     }
-  //   }
-  // );
+
+  const findStars = (rating: number) => {
+    const stars = [];
+    for (let i = 0; i < rating; i++) {
+      stars.push(1);
+    }
+    while (stars.length < 5) {
+      stars.push(0);
+    }
+    return stars;
+  };
+
   const showWidget = () => {
     const widget = window?.cloudinary.openUploadWidget(
       {
@@ -332,7 +335,14 @@ const Profile = () => {
             </h2>
             <h5>{calcLoc}</h5>
             <h5>
-              {getStars(getRating())}({profileUser?.ratings.length})
+              {findStars(getRating()).map((e) => {
+                if (e === 1) {
+                  return <AiFillStar color='gold' />;
+                } else {
+                  return <AiOutlineStar />;
+                }
+              })}
+              ({profileUser?.ratings.length})
             </h5>
             <h5 className='mb-1'>
               Member Since: {format(profileUser?.createdAt)}
@@ -423,7 +433,7 @@ const Profile = () => {
                 <Rating
                   rating={rating}
                   key={'rating' + i}
-                  getStars={getStars}
+                  getStars={findStars}
                 />
               );
             })}
