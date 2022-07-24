@@ -27,6 +27,7 @@ import { ThemeContext } from '../../App';
 
 //import { Button } from '@material-ui/core';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 //Redux
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { deleteJob } from '../../state/features/jobs/jobSlice';
@@ -63,6 +64,11 @@ const Practice: FC<Props> = () => {
   const dispatch = useAppDispatch();
   //console.log('events', events);
   //console.log(user);
+
+  //functions for bootstrap modal
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   //function to filter user appointments
   const userJobs = jobs
@@ -147,6 +153,29 @@ const Practice: FC<Props> = () => {
           >
             Cancel Sitting
           </Button>
+          {/* <Button className='application-status-card-btn' onClick={handleShow}>
+            Delete
+          </Button>
+
+          <Modal show={show} onHide={handleClose}>
+            <Modal.Header closeButton>
+              <Modal.Title>Are you sure you want to delete?</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              Deleting will permanently remove this application from this page.
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant='secondary' onClick={handleClose}>
+                No
+              </Button>
+              <Button
+                className=''
+                onClick={() => deleteSitting(appointmentData.id)}
+              >
+                Delete
+              </Button>
+            </Modal.Footer>
+          </Modal> */}
         </div>
       );
     } else {
@@ -195,7 +224,8 @@ const Practice: FC<Props> = () => {
           showOpenButton
           contentComponent={AppointmentContent}
         />
-        <AppointmentForm readOnly />
+
+        {/* <AppointmentForm readOnly /> */}
         <AllDayPanel />
       </Scheduler>
     </Paper>

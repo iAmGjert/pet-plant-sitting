@@ -678,12 +678,11 @@ body,
   height: 400px;
   margin-bottom: 40px;
 }
-.carousel-item img {
-  object-fit: cover;
-  object-position: center;
-  height: 50vh;
-  overflow: hidden;
-  
+
+.carousel {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .carousel-item img {
@@ -1105,4 +1104,9 @@ body,
 .Appointment-appointment {
   /* background-color:  #C2F8CB !important; */
   background-color:  #198754 !important;
+}
+
+/* remove edit icon from header in appointment tooltip */
+.Header-head > button {
+  display: none;
 }
