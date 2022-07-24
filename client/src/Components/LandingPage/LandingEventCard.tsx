@@ -1,29 +1,38 @@
 import React from 'react';
-//import * as moment from 'moment';
-
-//Redux
-// import { useAppSelector, useAppDispatch } from '../../state/hooks';
-// // Import fetchUpcomingJobs action-creator in order to make that axios call
-// const events = useAppSelector((state) => state.events.events);
+import moment from 'moment';
 
 //bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
-import moment from 'moment';
 
-const LandingEventCard = ({ startDate, location, description, name }) => {
+const LandingEventCard = ({
+  startDate,
+  startTime,
+  location,
+  description,
+  name,
+}) => {
   return (
-    <Card className='bootstrap-card' style={{ width: '97%', margin: '2%' }}>
+    <Card className='landing-event-card' style={{ width: '18rem' }}>
       <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <Card.Subtitle className='mb-2 text-muted'>
+        <Card.Title className='landing-event-card-title'>{name}</Card.Title>
+        <Card.Subtitle className='landing-event-card-date'>
           {moment(startDate).format('dddd, MMMM Do YYYY')}
         </Card.Subtitle>
-        <Card.Text>{description}</Card.Text>
-        <Card.Text>Meets at {location}</Card.Text>
-        <Card.Link className='button-as-link' 
-          style={{ color: '#ffffff' }}
-          href='/events'>More Upcoming Events</Card.Link>
+        <p className='landing-event-card-lines'>----------------</p>
+        <Card.Text className='landing-event-card-description'>
+          {description}
+        </Card.Text>
+        <Card.Text className='landing-event-card-startTime'>
+          Meets @ {moment(startTime, 'HH:mm:ss').format('LT')}
+        </Card.Text>
+        <Card.Text className='landing-event-card-location'>
+          Location: {location}
+        </Card.Text>
+
+        <Card.Link className='landing-event-card-events-link' href='/events'>
+          More Upcoming Events
+        </Card.Link>
       </Card.Body>
     </Card>
   );

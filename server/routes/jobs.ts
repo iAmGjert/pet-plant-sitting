@@ -40,7 +40,7 @@ jobs.post('/create', async (req: Request, res: Response) => {
       startDate,
       endDate,
       description,
-      isCompleted
+      isCompleted,
     });
     res.status(201).send(job);
     return job;
@@ -60,7 +60,7 @@ jobs.get('/all', async (req: Request, res: Response) => {
         },
         {
           model: JobPetsPlants,
-          include: [{ model: PetPlant, attributes: ['name', 'image'] }],
+          include: [{ model: PetPlant, attributes: ['name', 'image', 'species', 'bio'] }],
         },
       ],
       order: [['startDate', 'ASC']],
