@@ -2,6 +2,7 @@ import { io } from 'socket.io-client';
 import React, { useEffect, useState, useRef } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
 import Chat from '../Components/Chat/Chat';
+import ChatList from '../Components/Chat/ChatList';
 import PendingClientList from '../Components/Chat/PendingClientList';
 import ApplicantList from '../Components/Chat/ApplicantList';
 import AcceptedApplicantList from '../Components/Chat/AcceptedApplicantList';
@@ -10,7 +11,7 @@ import '../css/App.css';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { changeView, getReceivedMessages, getSentMessages, getUsersOnline } from '../state/features/chat/chatSlice';
-import { ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Button, ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
 
 interface userOnline {
   userId: number,
@@ -26,88 +27,20 @@ interface userOnline {
 const ChatMain = ({ socket }) => {   
   
   const currUser = useAppSelector((state) => state.userProfile.value);
-  // const [view, setView] = useState(useAppSelector((state) => state.chat.view));
-  // const usersOnline = useAppSelector((state) => state.chat.usersOnline);
   const dispatch = useAppDispatch();
 
   const view = useAppSelector((state) => state.chat.view);
 
-  useEffect(() => {
-
-    if (socket.id !== undefined) {
-      socket.emit('addUser', {
-        userId: currUser.id,
-        name: currUser.name
-      }); 
-    }
-
-    socket.on('getUsers', (onlineUsers: userOnline[]) => {
-      dispatch(getUsersOnline(onlineUsers));
-    });
-
-  }, [socket.id]);
-
-  // const joinRoom = () => {
-  //   if (currUser.name !== '') {
-  //     socket.emit('join_room', 'chat');
-  //     // setShowChat(true);
-  //   }
-  // };
-
   return (
     <div className="chat-main">
-      {/* <h1>Chat</h1> */}
-      <h2>Chat</h2>   
-      <DropdownButton as={ButtonGroup} title={view}>
-        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="1">All</Dropdown.Item>
-        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="2">Pending Employers</Dropdown.Item>
-        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="3">Confirmed Employers</Dropdown.Item>
-        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="4">Applicants</Dropdown.Item>
-        <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="5">Accepted Applicants</Dropdown.Item>
-      </DropdownButton>
-      {
-        view === 'All' ? (
-          <div>
-            <PendingClientList />
-            <ConfirmedClientList />
-            <ApplicantList />
-            <AcceptedApplicantList />
-          </div>
-        )
-          : (
-            view === 'Pending Employers' ? (
-              <div>
-                <PendingClientList />
-              </div>
-            )
-              : (
-                view === 'Confirmed Employers' ? (
-                  <div>
-                    <ConfirmedClientList />
-                  </div>
-                )
-                  : (
-                    view === 'Applicants' ? (
-                      <div>
-                        <ApplicantList />
-                      </div>
-                    )
-                      : (
-                        view === 'Accepted Applicants' ? (
-                          <div>
-                            <AcceptedApplicantList />
-                          </div>
-                        )
-                          : (
-                            <div>
-                              {view === 'Chat' && <Chat socket={socket} />}
-                            </div>
-                          )
-                      )
-                  )
-              )
-          )
-      }
+      {currUser.name === '' ? (
+          <div className="chat-login"><b>Login to view available chats!</b></div>
+          <Button>
+              Login
+          </Button>
+      ) : (
+        <ChatList socket={socket}/>
+      )}
     </div>
   );
 };

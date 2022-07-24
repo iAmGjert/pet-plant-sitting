@@ -486,6 +486,12 @@ body,
   padding-bottom: 15%;
 }
 
+.chat-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .chat-card {
   background-color: #558564;
   color: #C2F8CB;
