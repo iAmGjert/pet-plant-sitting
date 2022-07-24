@@ -42,8 +42,8 @@ const removeUser = (socketId: string) => {
 io.on('connection', (socket: typeof Socket) => {
   console.log(`User Connected: ${socket.id}`);
 
-  socket.on('addUser', (data: onlineUser) => {
-    addUser(data.userId, data.name, socket.id);
+  socket.on('addUser', async (data: onlineUser) => {
+    await addUser(data.userId, data.name, socket.id);
     io.emit('getUsers', onlineUsers);
   });
 

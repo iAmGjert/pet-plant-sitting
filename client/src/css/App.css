@@ -41,9 +41,16 @@
   --bs-black-rgb: 0, 0, 0;
   --bs-body-color-rgb: 33, 37, 41;
   --bs-body-bg-rgb: 255, 255, 255;
-  --bs-font-sans-serif: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-  --bs-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+  --bs-font-sans-serif: system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --bs-font-monospace: SFMono-Regular, Menlo, Monaco, Consolas,
+    'Liberation Mono', 'Courier New', monospace;
+  --bs-gradient: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0)
+  );
   --bs-body-font-family: var(--bs-font-monospace);
   --bs-body-font-size: 1rem;
   --bs-body-font-weight: 400;
@@ -68,7 +75,9 @@ body,
   background-color: #556c85;
   border-color: var(--bs-primary);
 }
-.btn-primary:focus, .btn-primary:active, .btn-primary:visited {
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary:visited {
   background-color: var(--bs-primary);
   border-color: #556c85;
 }
@@ -469,11 +478,13 @@ body,
   color: lightgrey;
   border-color: lightgrey;
 }
-#dark .MainLayout-stickyElement.MainLayout-leftPanel.MainLayout-dayScaleEmptyCell.MainLayout-ordinaryLeftPanelBorder {
+#dark
+  .MainLayout-stickyElement.MainLayout-leftPanel.MainLayout-dayScaleEmptyCell.MainLayout-ordinaryLeftPanelBorder {
   background-color: #2c2c2c;
   border-color: lightgrey;
 }
-#dark .MuiTypography-root.MuiTypography-body1.TitleCell-title.css-1e41c9a-MuiTypography-root {
+#dark
+  .MuiTypography-root.MuiTypography-body1.TitleCell-title.css-1e41c9a-MuiTypography-root {
   color: lightgrey;
 }
 /* Calendar */
@@ -553,9 +564,21 @@ body,
   padding-bottom: 15%;
 }
 
+.chat-login-request {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-login-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .chat-card {
   background-color: #558564;
-  color: #C2F8CB;
+  color: #c2f8cb;
 }
 
 .chat-window {
@@ -614,7 +637,7 @@ body,
 
 #you .message-content {
   justify-content: flex-start;
-  background-color: #7D6F86;
+  background-color: #7d6f86;
 }
 
 #you .message-meta {
@@ -628,7 +651,7 @@ body,
 
 #other .message-content {
   justify-content: flex-end;
-  background-color: #F5C396;
+  background-color: #f5c396;
 }
 
 #other .message-meta {
@@ -684,10 +707,11 @@ body,
 }
 
 .circle {
-  border: 10px solid;
+  border: 7px solid;
   border-radius: 10px;
   margin-left: 10px;
   position: absolute;
+  margin-top: 5px;
 }
 
 .home-container {
@@ -702,7 +726,7 @@ body,
   /* height: 100px; */
   font-weight: 'bold';
   font-size: '12px';
-  margin-top: 60px; 
+  margin-top: 60px;
   margin-left: -30px;
   white-space: nowrap;
 }
@@ -717,7 +741,6 @@ body,
   object-position: center;
   height: 50vh;
   overflow: hidden;
-  
 }
 
 .carousel-item img {
@@ -739,7 +762,6 @@ body,
 .home-btns {
   text-align: center;
   padding-bottom: 10px;
-
 }
 
 .job-list-main {
@@ -758,3 +780,15 @@ body,
   margin-top: 5px;
 }
 
+.nav-tabs .nav-link.active {
+  background-color: #558564;
+  color: white;
+}
+
+.nav-tabs .nav-link {
+  color: #ffffff;
+}
+
+.profile-modal .modal-content {
+  background-color: #8bdaa4;
+}

@@ -16,7 +16,7 @@ export interface PetPlant {
   ratings: RatingInfo[];
   species: string;
   total_ratings: number;
-  age: number;
+  age: string;
   gender: string;
   bio: string;
 }
