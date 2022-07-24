@@ -486,7 +486,13 @@ body,
   padding-bottom: 15%;
 }
 
-.chat-login {
+.chat-login-request {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.chat-login-button {
   display: flex;
   justify-content: center;
   align-items: center;

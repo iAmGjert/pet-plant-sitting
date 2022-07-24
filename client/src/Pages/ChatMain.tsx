@@ -12,6 +12,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { changeView, getReceivedMessages, getSentMessages, getUsersOnline } from '../state/features/chat/chatSlice';
 import { Button, ButtonGroup, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 interface userOnline {
   userId: number,
@@ -27,17 +28,23 @@ interface userOnline {
 const ChatMain = ({ socket }) => {   
   
   const currUser = useAppSelector((state) => state.userProfile.value);
-  const dispatch = useAppDispatch();
-
-  const view = useAppSelector((state) => state.chat.view);
-
+  const navigate = useNavigate();
+  
   return (
     <div className="chat-main">
       {currUser.name === '' ? (
-          <div className="chat-login"><b>Login to view available chats!</b></div>
-          <Button>
+        <div>
+          <div className="chat-login-request">
+            <b>Login to view available chats!</b>
+          </div>
+          <div className="chat-login-request">
+            <Button onClick={() => {
+              navigate('/login');
+            }}>
               Login
-          </Button>
+            </Button>
+          </div>
+        </div>
       ) : (
         <ChatList socket={socket}/>
       )}
