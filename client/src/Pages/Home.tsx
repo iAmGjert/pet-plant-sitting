@@ -36,7 +36,7 @@ const Home: FC<Props> = () => {
       };
     })
     .slice(0, 1);
-  console.log('mappedEvents', mappedEvents);
+  //console.log('mappedEvents', mappedEvents);
 
   useEffect(() => {
     dispatch(fetchUpcomingEvents());

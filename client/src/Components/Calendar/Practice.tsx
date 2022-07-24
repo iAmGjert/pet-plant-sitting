@@ -64,7 +64,7 @@ const Practice: FC<Props> = () => {
   const dispatch = useAppDispatch();
   //console.log('events', events);
   //console.log(user);
-
+  //console.log('jobs', jobs);
   //functions for bootstrap modal
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);

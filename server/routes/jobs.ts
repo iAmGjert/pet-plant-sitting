@@ -40,7 +40,7 @@ jobs.post('/create', async (req: Request, res: Response) => {
       startDate,
       endDate,
       description,
-      isCompleted
+      isCompleted,
     });
     res.status(201).send(job);
     return job;

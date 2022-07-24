@@ -150,15 +150,6 @@ Gallery.hasMany(GalleryEntry, {
   foreignKey: 'gallery_id',
 });
 
-///////////CALENDAR COMMENT////////////
-// CalendarComment.belongsTo(User, {
-//   foreignKey: 'id',
-// });
-
-// User.hasMany(CalendarComment, {
-//   foreignKey: 'id',
-// });
-
 /************************************************/
 
 db.sync(
