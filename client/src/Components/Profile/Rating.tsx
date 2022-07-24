@@ -37,7 +37,7 @@ const Rating = ({ rating, getStars }: Props) => {
             if (e === 1) {
               return <AiFillStar color='gold' />;
             } else {
-              return <AiOutlineStar />;
+              return <AiOutlineStar color=' #8bdaa4' />;
             }
           })}
         </Card.Subtitle>

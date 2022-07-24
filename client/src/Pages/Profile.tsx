@@ -445,7 +445,7 @@ const Profile = () => {
                   <PetPlantCard
                     PetPlant={pet}
                     key={pet.id}
-                    getStars={getStars}
+                    getStars={findStars}
                     edit={null}
                   />
                 );
