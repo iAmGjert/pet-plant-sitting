@@ -26,6 +26,8 @@ const Home: FC<Props> = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  console.log(upcomingEvents);
+
   const mappedEvents = upcomingEvents
     .map((event: Event) => {
       return {
@@ -33,6 +35,7 @@ const Home: FC<Props> = () => {
         startDate: event.startDate,
         description: event.description,
         startTime: event.startTime,
+        location: event.location,
       };
     })
     .slice(0, 1);
@@ -45,11 +48,11 @@ const Home: FC<Props> = () => {
   return (
     <Container fluid className='home-container'>
       <h1 className='home-header'>Welcome to</h1>
-      {/* <h1 className='home-fern-herm'>Fern Herm</h1> */}
+      <h1 className='home-fern-herm'>Fern Herm</h1>
 
       <img
         className='home-logo'
-        src={require('../../Public/svg/fern-herm-logo.svg')}
+        src={require('../../Public/svg/fern-herm-logo-no-lashes.svg')}
         width={300}
         height={300}
         alt=''
@@ -142,7 +145,9 @@ const Home: FC<Props> = () => {
             {mappedEvents.map((element, idx) => {
               return (
                 <React.Fragment key={idx * 5421}>
-                  <h1 className='home-offcanvas-event-title'>{element.title}</h1>
+                  <h1 className='home-offcanvas-event-title'>
+                    {element.title}
+                  </h1>
                 </React.Fragment>
               );
             })}
@@ -171,7 +176,11 @@ const Home: FC<Props> = () => {
               return (
                 <React.Fragment key={idx * 7897}>
                   <p className='home-offcanvas-event-date'>
-                  Meets at {moment(element.startTime, 'HH:mm:ss').format('LT')}
+                    Meets at{' '}
+                    {moment(element.startTime, 'HH:mm:ss').format('LT')}
+                  </p>
+                  <p className='home-offcanvas-event-location'>
+                    {element.location}
                   </p>
                 </React.Fragment>
               );

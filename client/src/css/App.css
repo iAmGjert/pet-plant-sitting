@@ -817,6 +817,12 @@ body,
   font-family: monospace, monospace;
 }
 
+.home-offcanvas-event-location {
+  margin-top: 10px;
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
 .home-offcanvas-event-description {
   margin-top:20px;
   font-family: monospace, monospace;
