@@ -16,7 +16,7 @@ const JobHistory = ({ sitterWorkHistory }) => {
   return (
     <>
       <Button
-        className='bootstrap-button'
+        className='landing-sitting-history-btn'
         variant='primary'
         onClick={handleShow}
       >
@@ -29,9 +29,11 @@ const JobHistory = ({ sitterWorkHistory }) => {
         onHide={handleClose}
       >
         <Modal.Header closeButton>
-          <Modal.Title>Previous Work History</Modal.Title>
+          <Modal.Title className='landing-job-history-modal-title'>
+            Previous Work History
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>
+        <Modal.Body className='landing-job-history-modal-body'>
           {sitterWorkHistory.map(
             ({ startDate, endDate, description, job_pets_plants, id }) => {
               return (
@@ -42,10 +44,41 @@ const JobHistory = ({ sitterWorkHistory }) => {
                       return `${pet.pet_plant.name} | `;
                     })}{' '}
                   </h2>
-                  <p>{description}</p>
-                  <p>{`${moment(startDate).format(
-                    'dddd MMMM Do, YYYY'
-                  )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}</p>
+
+                  <img
+                    className='job-history-image'
+                    src={
+                      job_pets_plants.map((pet) => {
+                        return pet.pet_plant.image;
+                      })[0]
+                    }
+                    alt=''
+                  />
+
+                  <p className='job-history-about'>
+                    Description:{' '}
+                    {job_pets_plants.map((pet) => {
+                      return `${pet.pet_plant.name} | `;
+                    })}
+                    {job_pets_plants.map((pet) => {
+                      return pet.pet_plant.bio;
+                    })}{' '}
+                  </p>
+
+                  <p>
+                    Species:{' '}
+                    {job_pets_plants.map((pet) => {
+                      return pet.pet_plant.species;
+                    })}
+                  </p>
+
+                  <p className='job-history-date'>
+                    This sitting took place:{' '}
+                    {`${moment(startDate).format(
+                      'dddd MMMM Do, YYYY'
+                    )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}{' '}
+                  </p>
+                  <p className='job-history-lines'>-------------------</p>
                 </div>
               );
             }

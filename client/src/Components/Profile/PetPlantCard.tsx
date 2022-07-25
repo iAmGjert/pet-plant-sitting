@@ -3,6 +3,8 @@ import { Badge, Card, Col, ListGroup, ListGroupItem } from 'react-bootstrap';
 import EditPetModal from './EditPetModal';
 import { RatingInfo } from '../../Pages/Profile';
 import { ThemeContext } from '../../App';
+import { AiFillStar } from '@react-icons/all-files/ai/AiFillStar';
+import { AiOutlineStar } from '@react-icons/all-files/ai/AiOutlineStar';
 
 export interface PetPlant {
   id: number;
@@ -16,14 +18,14 @@ export interface PetPlant {
   ratings: RatingInfo[];
   species: string;
   total_ratings: number;
-  age: number;
+  age: string;
   gender: string;
   bio: string;
 }
 
 type Props = {
   PetPlant: PetPlant;
-  getStars: (num: number) => string;
+  getStars: (num: number) => [number];
   edit: boolean;
 };
 
@@ -86,8 +88,38 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
         </Card.Body>
         {showDetails && (
           <>
-            <Card.Body>{<Card.Text>{PetPlant.bio}</Card.Text>}</Card.Body>
-            <ListGroup className='list-group-flush'>
+            <Card.Body>
+              {getStars(getRating()).map((e) => {
+                if (e === 1) {
+                  return <AiFillStar color='gold' />;
+                } else {
+                  return <AiOutlineStar />;
+                }
+              })}
+              ({PetPlant.ratings.length}){<Card.Text>{PetPlant.bio}</Card.Text>}
+              {!edit && (
+                <div>
+                  {getRating() >= 4 && (
+                    <Badge pill bg='success'>
+                      {PetPlant.gender === 'Male' ? 'Goodest boy' : 'Gal Pal'}
+                    </Badge>
+                  )}
+                </div>
+              )}
+              {PetPlant.gender && PetPlant.age && (
+                <Card.Text>
+                  {PetPlant.gender === 'Male'
+                    ? `He is a${PetPlant.age === 'Adult' ? 'n' : ''} ${
+                        PetPlant.age
+                      } ${PetPlant.breed}`
+                    : `She is  a${PetPlant.age === 'Adult' ? 'n' : ''} ${
+                        PetPlant.age
+                      } ${PetPlant.breed}`}
+                </Card.Text>
+              )}
+              {PetPlant.species && <Card.Text>{PetPlant.species}</Card.Text>}
+            </Card.Body>
+            {/* <ListGroup className='list-group-flush'>
               {!edit && (
                 <ListGroupItem>
                   {getStars(getRating())}({PetPlant.ratings.length})
@@ -108,7 +140,7 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
               {PetPlant.breed && (
                 <ListGroupItem>{PetPlant.breed}</ListGroupItem>
               )}
-            </ListGroup>
+            </ListGroup> */}
             <Card.Body>
               {PetPlant.tags.map((tag, i) => {
                 return (

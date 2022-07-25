@@ -32,27 +32,26 @@ const upcomingJobs: FC<Props> = ({
   endDate,
   employer_id,
   location,
-  petPlant,
+  petPlant, //supposed to be an array
 }) => {
-  const jobs = useAppSelector((state) => state.job.jobs);
+  console.log('petPlant in upcoming jobs', petPlant);
 
   const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  //moment(eventObj.startDate).format('dddd, MMMM Do YYYY')
-  //new Date(jobPopup.endDate).toLocaleDateString()
 
   return (
-    <Card className='bootstrap-card'>
+    <Card className='landing-upcomingjobs-card'>
       <Card.Body>
-        <Card.Title>
-          Your Next Job:{' '}
-          {petPlant.map((pet) => {
-            //return pet.pet_plant.name;
-            return `${pet.pet_plant.name} | `;
-          })}{' '}
+        <Card.Title className='landing-upcomingjob-title'>
+          Your Next Sitting:{' '}
+          {petPlant
+            .map((pet) => {
+              return pet.pet_plant.name;
+            })
+            .join(' | ')}
         </Card.Title>
         {/* <Card.Img
           src={petPlant.map((pet) => {
@@ -62,15 +61,14 @@ const upcomingJobs: FC<Props> = ({
         {petPlant.map((pet) => {
           return <Card.Img src={pet.pet_plant.image} key={pet.id} />;
         })}
-        <Card.Text>{`${moment(startDate).format(
+        <Card.Text className='landing-upcomingjobs-date'>{`${moment(
+          startDate
+        ).format('dddd MMMM Do, YYYY')} to ${moment(endDate).format(
           'dddd MMMM Do, YYYY'
-        )} to ${moment(endDate).format('dddd MMMM Do, YYYY')}`}</Card.Text>
-        <Card.Link className='button-as-link' href='#'>
-          Visit Profile
-        </Card.Link>
+        )}`}</Card.Text>
         <>
           <Button
-            className='bootstrap-button'
+            className='landing-upcomingjobs-btn'
             variant='primary'
             onClick={handleShow}
           >
@@ -81,18 +79,31 @@ const upcomingJobs: FC<Props> = ({
             contentClassName={theme === 'dark' && 'dark'}
             show={show}
             onHide={handleClose}
+            className='upcomingjob-modal'
           >
-            <Modal.Header closeButton>
+            <Modal.Header
+              className='landing-upcomingjob-modal-header'
+              closeButton
+            >
               <Modal.Title>
                 {' '}
-                {
-                  petPlant.map((pet) => {
+                All about{' '}
+                {petPlant
+                  .map((pet) => {
                     return pet.pet_plant.name;
-                  })[0]
-                }{' '}
+                  })
+                  .join(' | ')}{' '}
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body>{location}</Modal.Body>
+            <Modal.Body>Location of Sitting: {location}</Modal.Body>
+            {petPlant.map((pet) => (
+              <div className='pet_container' key={pet.pet_plant.name}>
+                <p>Name(s): {pet.pet_plant.name}</p>
+                <p>Bio: {pet.pet_plant.bio}</p>
+                <p>Species: {pet.pet_plant.species}</p>
+              </div>
+            ))}
+
             <Modal.Footer>
               <Button
                 className={theme === 'dark' && 'bootstrap-modal-button'}

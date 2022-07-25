@@ -3,7 +3,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable indent */
 import React, { useEffect, useState, useContext } from 'react';
-import { Button, Form, ToggleButton } from 'react-bootstrap';
+import { Button, Form, ToggleButton, Row } from 'react-bootstrap';
 
 import PetPlantCard, { PetPlant } from './PetPlantCard';
 import { RatingInfo, Profile } from '../../Pages/Profile';
@@ -284,7 +284,7 @@ const EditField = ({
             <div>
               <ToggleButton
                 className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
-                id='toggle-checkPet1'
+                id='toggle-checkPetgender1'
                 type='checkbox'
                 variant='outline-primary'
                 checked={checked}
@@ -298,7 +298,7 @@ const EditField = ({
               </ToggleButton>
               <ToggleButton
                 className={theme === 'dark' ? 'm-2 dark' : 'm-2'}
-                id='toggle-checkPet2'
+                id='toggle-checkPetgender2'
                 type='checkbox'
                 variant='outline-primary'
                 checked={!checked}
@@ -707,7 +707,7 @@ const EditField = ({
 
   return (
     <Form.Group className='mb-3' controlId='formBasicEmail'>
-      <h2>
+      <h2 className='text-start'>
         {fieldName === 'pet_plants'
           ? 'Pets and Plants'
           : fieldName === 'age' && Pet_Plant.is_plant === true
