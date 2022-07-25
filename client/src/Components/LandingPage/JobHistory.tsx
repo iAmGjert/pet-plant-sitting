@@ -28,7 +28,7 @@ const JobHistory = ({ sitterWorkHistory }) => {
         show={show}
         onHide={handleClose}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
           <Modal.Title>Previous Work History</Modal.Title>
         </Modal.Header>
         <Modal.Body>

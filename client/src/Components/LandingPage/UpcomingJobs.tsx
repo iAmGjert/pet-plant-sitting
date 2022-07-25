@@ -82,7 +82,7 @@ const upcomingJobs: FC<Props> = ({
             show={show}
             onHide={handleClose}
           >
-            <Modal.Header closeButton>
+            <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
               <Modal.Title>
                 {' '}
                 {
