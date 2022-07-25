@@ -41,7 +41,7 @@ auth.post('/local/register', async (req: any, res: any) => {
         password: hashedPassword,
         location,
       });
-      console.table(user.name);
+      // console.log(user.name, user.username);
       res.status(200).json({
         message: 'success',
         success: true,
@@ -59,26 +59,25 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
   passport.authenticate('local', {
     successRedirect: '/login/success',
     failureRedirect: '/login/fail',
-    // failureMessage: true,
-    // successMessage: true,
+    failureMessage: true,
+    successMessage: true,
   }, (err: any, user: boolean, info: any, status: any) => {
-    console.log(color.xterm(122).bold('authenticate function', 'user', user ));
-    // console.log('user', user ); //user
+    // console.log(info, status); 
     if (err) { throw err; }
-    if (!user) {
-      res.send('Invalid Credentials'); 
+    if (!user) { 
+      res.status(401).send(info);
     } else {
       req.logIn(user, (err: any) => {
         if (err) { throw err; }
-        console.log(color.xterm(11).bold(req.session.passport.user, '< - user on session cookie', req.user));
-        res.send(user);
+        // console.log(info, /*req.session.passport.user*/);
+        res.send(info);
       });
     }
   })(req, res, next);
 });
 
 auth.get('/login/success', (req: Request | any, res: Response) => {
-  console.log(color.xterm(122).bold(req.user, 'req.user in auth.get /login/success'));
+  // console.log(req.session.passport.user);
 
   // console.log(req.user, 'req.user in auth.get /login/success');
   if (req.user) {
@@ -95,9 +94,6 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
         include: [{ model: GalleryEntry }],
       }],
     }).then((user: object) => {
-      console.log(color.xterm(122).bold(user, 'user in auth.get /login/success'));
-
-      // console.log(user, 'user in auth.get /login/success');
       res.status(200).json({
         message: 'success',
         success: true,
@@ -109,12 +105,14 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
     });
   } else {
     console.log('req.user undefined');
-    res.sendStatus(400);
+    res.status(401).json({
+      message: 'Something went wrong',
+    });
   }
 });
 
 auth.get('/login/fail', (req: Request, res: Response) => {
-  res.sendStatus(400).redirect('/login');
+  res.status(401).redirect('/login');
 });
 
 auth.get('/google', passport.authenticate('google', {
