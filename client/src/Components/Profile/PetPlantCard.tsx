@@ -52,6 +52,7 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
   return (
     <Col>
       <Card
+        className='bootstrap-card'
         // style={{ width: '18rem' }}
         onClick={() => {
           if (edit) {
@@ -144,7 +145,9 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
             <Card.Body>
               {PetPlant.tags.map((tag, i) => {
                 return (
-                  <Badge ref={scrollRef} pill bg='info' key={i + PetPlant.id}>
+                  <Badge
+                    className='bootstrap-badge'
+                    ref={scrollRef} pill bg={theme === 'dark' ? '' : 'info'} key={i + PetPlant.id}>
                     {tag.toUpperCase()}
                   </Badge>
                 );

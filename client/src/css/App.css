@@ -277,6 +277,9 @@ body,
   color: lightgrey;
   border-color: lightgrey;
 }
+#dark .card-body {
+  background-color: ;
+}
 #dark .card-text {
   color: lightgrey;
 }
@@ -421,6 +424,10 @@ body,
 }
 #dark .d-flex.justify-content-center.text-center.row.row-cols-md-1.row-cols-1 {
   background: #2c2c2c;
+  border-color: lightgrey;
+}
+#dark .bootstrap-badge {
+  background: rgb(85, 133, 100);
 }
 
 /* Calendar */
