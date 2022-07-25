@@ -52,7 +52,7 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
   return (
     <Col>
       <Card
-        className='bootstrap-card'
+        className={theme === 'dark' && 'bootstrap-modal-card'}
         // style={{ width: '18rem' }}
         onClick={() => {
           if (edit) {
