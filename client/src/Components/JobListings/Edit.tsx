@@ -19,7 +19,6 @@ const Edit = ({ job, setShowEdited, setShowDeleted }): JSX.Element => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.userProfile.value);
   const petPlants = user.pet_plants;
-  console.log(petPlants);
   const dispatch = useAppDispatch();
   const [startDate, setStartDate] = useState(job.startDate);
   const [endDate, setEndDate] = useState(job.endDate);
@@ -147,9 +146,10 @@ const Edit = ({ job, setShowEdited, setShowDeleted }): JSX.Element => {
       <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
         <Form.Label>Pets/Plants</Form.Label>
         <br />
-        <ButtonGroup className="mb-2">
+        <ButtonGroup className="mb-2 bootstrap-button">
           {user.pet_plants.map((radio, idx) => (
             <ToggleButton
+              className = {feed[idx] ? 'petButton1' : 'petButton2'}
               key={idx}
               id={`checkbox-${idx}`}
               type="checkbox"

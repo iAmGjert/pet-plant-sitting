@@ -185,14 +185,14 @@ export const communityEventsSlice = createSlice({
     builder
       .addCase(addNewEvent.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log(action);
+        //console.log(action);
         state.events.push({...action.meta.arg, event_comments: [], event_participants: []});
       });
     builder 
       .addCase(updateEvent.fulfilled, (state, action) => {
         if (!action.payload?.id) {
-          console.log('Update could not complete');
-          console.log(action.payload);
+          //console.log('Update could not complete');
+          //console.log(action.payload);
           return;
         }
         const { id } = action.payload;
@@ -202,8 +202,8 @@ export const communityEventsSlice = createSlice({
     builder
       .addCase(deleteEvent.fulfilled, (state, action) => {
         if (!action.payload?.id) {
-          console.log('Delete could not complete');
-          console.log(action.payload);
+          //console.log('Delete could not complete');
+          //console.log(action.payload);
           return;
         }
         const { id } = action.payload;
@@ -215,7 +215,7 @@ export const communityEventsSlice = createSlice({
     builder
       .addCase(addComment.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log({ ...action.payload, user: { ...action.meta.arg.user }});
+        //console.log({ ...action.payload, user: { ...action.meta.arg.user }});
         const newComment = { ...action.payload, user: { ...action.meta.arg.user }};
         state.event.event_comments.push(newComment);
         state.events.splice(state.event.id - 1, 1, state.event);
@@ -223,8 +223,8 @@ export const communityEventsSlice = createSlice({
     builder
       .addCase(updateComment.fulfilled, (state, action) => {
         if (!action.payload?.id) {
-          console.log('Update could not complete');
-          console.log(action.payload);
+          //console.log('Update could not complete');
+          //console.log(action.payload);
           return;
         }
         const { id } = action.payload;
@@ -235,8 +235,8 @@ export const communityEventsSlice = createSlice({
     builder
       .addCase(deleteComment.fulfilled, (state, action) => {
         if (action.payload !== 'OK') {
-          console.log('Delete could not complete');
-          console.log(action.payload);
+          //console.log('Delete could not complete');
+          //console.log(action.payload);
           return;
         }
         const { id } = action.meta.arg;

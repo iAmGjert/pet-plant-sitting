@@ -238,8 +238,8 @@ db.sync(
             name: 'Santi',
             image:
               'https://64.media.tumblr.com/ac3f2698510ef384fdb04620750b228e/25d400665ce53341-ef/s500x750/58c0307cb0fed6a450b04ec559e8a67d99984fbf.jpg',
-            breed: 'canine',
-            species: 'snorkie',
+            breed: 'snorkie',
+            species: 'Dog',
             tags: ['Khaki', 'Violet'],
             rating: 9,
             total_ratings: 33,
@@ -252,7 +252,7 @@ db.sync(
             image:
               'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
             breed: 'Skink, blue-tongued',
-            species: 'Canine',
+            species: 'Dog',
             tags: ['Khaki', 'Goldenrod'],
             rating: 8,
             total_ratings: 96,
@@ -274,7 +274,7 @@ db.sync(
           },
           {
             owner_id: 4,
-            name: 'Bénédicte',
+            name: 'Béné',
             image:
               'https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/plant-names-1650565348.jpg?resize=480:*',
             breed: 'Shy Cacti',
@@ -291,7 +291,7 @@ db.sync(
             image:
               'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
             breed: 'Long-tailed feline',
-            species: 'feline',
+            species: 'Cat',
             tags: ['Turquoise', 'Khaki'],
             rating: 9,
             total_ratings: 60,
@@ -306,7 +306,7 @@ db.sync(
             breed: 'Madagascar hawk owl',
             age: 2,
             gender: 'Male',
-            species: 'Ninox superciliaris',
+            species: 'Owl',
             tags: ['Khaki', 'Violet', 'Speed', 'Cute'],
             rating: 4,
             total_ratings: 33,
@@ -319,7 +319,7 @@ db.sync(
             image:
               'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
             breed: 'Long-tailed feline',
-            species: 'feline',
+            species: 'Cat',
             tags: ['Turquoise', 'Khaki'],
             rating: 9,
             total_ratings: 60,
@@ -349,7 +349,7 @@ db.sync(
             breed: 'Tiger',
             age: 2,
             gender: 'Female',
-            species: 'Tiger',
+            species: 'Cat',
             tags: ['Spotted', 'Silly', 'Speed', 'Cute'],
             rating: 4,
             total_ratings: 33,

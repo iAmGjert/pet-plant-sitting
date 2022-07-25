@@ -82,7 +82,7 @@ const EditPetModal = ({
         e.stopPropagation();
       }}
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
         {add ? (
           <Modal.Title>
             Add {`${PetPlant.is_plant ? 'Plant' : 'Pet'}`}

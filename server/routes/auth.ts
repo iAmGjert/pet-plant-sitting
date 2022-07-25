@@ -21,7 +21,7 @@ const CLIENT_URL: string | undefined =
 
 
 auth.post('/local/register', async (req: any, res: any) => {
-  console.log(req.body, 'req.body in auth.post /local/register');
+  //console.log(req.body, 'req.body in auth.post /local/register');
   const { name, username, password, location } = req?.body;
   try {
     if (!username || !password || typeof username !== 'string' || typeof password !== 'string') {
@@ -49,20 +49,19 @@ auth.post('/local/register', async (req: any, res: any) => {
       });
     }    
   } catch (error) {
-    console.log(error);  
+    console.error(error);  
     res.sendStatus(400);
   }
 });
         
 auth.post('/local/login', (req: any, res: any, next: any) => {
-  console.log(req.body, 'req.body in auth.post /local/login');
+  //console.log(req.body, 'req.body in auth.post /local/login');
   passport.authenticate('local', {
     successRedirect: '/login/success',
     failureRedirect: '/login/fail',
     failureMessage: true,
     successMessage: true,
   }, (err: any, user: boolean, info: any, status: any) => {
-    // console.log(info, status); 
     if (err) { throw err; }
     if (!user) { 
       res.status(401).send(info);
@@ -77,9 +76,6 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
 });
 
 auth.get('/login/success', (req: Request | any, res: Response) => {
-  // console.log(req.session.passport.user);
-
-  // console.log(req.user, 'req.user in auth.get /login/success');
   if (req.user) {
     User.findOne({ where: { id: req.user.id || req.user[0].id }, 
       include: [{ model: PetPlant,
@@ -100,11 +96,10 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
         user: user,
       });
     }).catch((error: string) => {
-      console.log(error);
+      console.error(error);
       res.sendStatus(400);
     });
   } else {
-    console.log('req.user undefined');
     res.status(401).json({
       message: 'Something went wrong',
     });

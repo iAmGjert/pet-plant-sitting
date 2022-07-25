@@ -115,7 +115,7 @@ const Home: FC<Props> = () => {
 
       <div>
         <Button
-          className='home-login-btn'
+          className='home-login-btn bootstrap-button'
           variant='primary'
           size='sm'
           onClick={() => navigate('/login')}
@@ -124,7 +124,7 @@ const Home: FC<Props> = () => {
           Login
         </Button>
         <Button
-          className='home-events-btn'
+          className='home-events-btn bootstrap-button'
           variant='primary'
           size='sm'
           onClick={handleShow}

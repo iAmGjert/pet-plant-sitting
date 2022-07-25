@@ -1,10 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Container, Row, Col, Button, Card, Overlay } from 'react-bootstrap';
-import { useAppSelector, useAppDispatch } from '../../state/hooks';
-import MoreInfo from './MoreInfo';
-import { setPrompt } from '../../state/features/jobs/jobSlice';
-import moment from 'moment';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from "react";
+import { Container, Row, Col, Button, Card, Overlay } from "react-bootstrap";
+import { useAppSelector, useAppDispatch } from "../../state/hooks";
+import MoreInfo from "./MoreInfo";
+import { setPrompt } from "../../state/features/jobs/jobSlice";
+import moment from "moment";
+import axios from "axios";
 
 interface jobStuff {
   id: number;
@@ -67,7 +67,7 @@ const Job = ({ settemp, job, setshowapplied, setshowrevoked }) => {
   };
 
   const handleClick = () => {
-    if (user.name === '') {
+    if (user.name === "") {
       setShow(true);
       removeOverlay();
       return;
@@ -75,7 +75,7 @@ const Job = ({ settemp, job, setshowapplied, setshowrevoked }) => {
     geoCodeUser();
     geoCodeJob();
 
-    if (user.name === '') {
+    if (user.name === "") {
       dispatch(setPrompt(true));
     }
     setModalShow(true);
@@ -108,7 +108,7 @@ const Job = ({ settemp, job, setshowapplied, setshowrevoked }) => {
                           employer = users.name;
                         }
                         return <div>{employer}</div>;
-                      }, '')}
+                      }, "")}
                     </>
                   }
                 </>
@@ -120,15 +120,17 @@ const Job = ({ settemp, job, setshowapplied, setshowrevoked }) => {
               )}
             </Col>
             <Col>
-              {Array.isArray(pet_plant) ? (
+              {Array.isArray(job.job_pets_plants) ? (
                 <>
                   <strong>Pet/Plants: </strong>
-                  {pet_plant.map((p, i) => {
-                    return <div key={`p${i}`}>{petPlants.filter((pet)=>{
-                      if (p === pet.id) {
-                        return true;
-                      }
-                    })[0]?.name}</div>;
+                  {job.job_pets_plants.map((p, i) => {
+                    return (
+                      <Row key={`p${i}`}>
+                        <Col><img src={p.pet_plant?.image} className='img-fluid testImg' alt='Responsive Img' /></Col>
+                        <Col>{p.pet_plant?.name}</Col>
+                        <Col>{p.pet_plant?.species}</Col>
+                      </Row>
+                    );
                   })}
                 </>
               ) : (
@@ -174,7 +176,7 @@ const Job = ({ settemp, job, setshowapplied, setshowrevoked }) => {
                   employer = users.name;
                 }
                 return employer;
-              }, '')}
+              }, "")}
             />
           </>
         </Card.Body>
@@ -185,10 +187,10 @@ const Job = ({ settemp, job, setshowapplied, setshowrevoked }) => {
           <div
             {...props}
             style={{
-              position: 'absolute',
-              backgroundColor: 'rgba(255, 100, 100, 0.85)',
-              padding: '2px 10px',
-              color: 'white',
+              position: "absolute",
+              backgroundColor: "rgba(255, 100, 100, 0.85)",
+              padding: "2px 10px",
+              color: "white",
               borderRadius: 3,
               ...props.style,
             }}

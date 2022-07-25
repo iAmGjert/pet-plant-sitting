@@ -209,7 +209,7 @@ const Profile = () => {
         getProfile();
       })
       .catch((err) => {
-        console.log('error', err);
+        console.error('error', err);
       });
   };
 
@@ -263,7 +263,9 @@ const Profile = () => {
     getLocation(profileUser?.location);
   }, [profileUser]);
   return (
-    <Container style={{ height: '100%', paddingBottom: '18%' }}>
+    <Container style={{ height: '100%', paddingBottom: '18%' }}
+      className='profile-container'
+    >
       {completeProfile !== 6 && editable && (
         <ToastContainer position='middle-center' style={{ zIndex: 2 }}>
           <Toast
