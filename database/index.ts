@@ -291,7 +291,7 @@ db.sync(
             image:
               'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
             breed: 'Long-tailed feline',
-            species: 'Feline',
+            species: 'Cat',
             tags: ['Turquoise', 'Khaki'],
             rating: 9,
             total_ratings: 60,
@@ -319,7 +319,7 @@ db.sync(
             image:
               'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
             breed: 'Long-tailed feline',
-            species: 'Feline',
+            species: 'Cat',
             tags: ['Turquoise', 'Khaki'],
             rating: 9,
             total_ratings: 60,

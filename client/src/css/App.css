@@ -66,14 +66,14 @@ body,
   padding-bottom: 7%;
 }
 .btn-primary {
-  background-color: #556c85;
+  background-color: var(--bs-primary);
   border-color: #556c85;
 }
 .btn-primary:focus,
 .btn-primary:disabled,
 .btn-primary:active,
 .btn-primary:visited {
-  background-color: #556c85;
+  background-color: var(--bs-primary);
   border-color: #556c85;
 }
 .geolocate-button {
@@ -1175,5 +1175,5 @@ body,
 .petButton2 {
   background-color:transparent !important;
   border-color:#556c85 !important;
-  color: #556c85 !important;
+  color: #556c85 !important; /* still needs some work. These don't translate right to dark atm because of important, but I haven't found what is overwriting them without it. */
 }
