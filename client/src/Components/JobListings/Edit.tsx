@@ -147,13 +147,14 @@ const Edit = ({ job, setShowEdited, setShowDeleted }): JSX.Element => {
       <Form.Group className="mb-3" controlId="createEventForm.ControlInput1">
         <Form.Label>Pets/Plants</Form.Label>
         <br />
-        <ButtonGroup className="mb-2">
+        <ButtonGroup className="mb-2 bootstrap-button">
           {user.pet_plants.map((radio, idx) => (
             <ToggleButton
+              className = {feed[idx] ? 'petButton1' : 'petButton2'}
               key={idx}
               id={`checkbox-${idx}`}
               type="checkbox"
-              variant={feed[idx] ? 'success' : 'outline-success'}
+              variant={feed[idx] ? 'primary' : 'outline-primary'}
               name="radio"
               value={radio.name}
               checked={feed[idx]}

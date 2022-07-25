@@ -202,21 +202,23 @@ const JobsMain = () => {
           setshowrevoked={setShowRevoked}
         />
       )}
-
-      <Button
-        className="bootstrap-button job-bottom-button"
-        onClick={() => {
-          handleClick();
-        }}
-      >
-        {view === 'create'
-          ? 'Return to Job List'
-          : view === 'edit'
+      {
+        view !== 'list' &&
+        <Button
+          className="bootstrap-button job-bottom-button"
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {view === 'create'
             ? 'Return to Job List'
-            : user.name === ''
-              ? 'Login'
-              : 'Create New Job'}
-      </Button>
+            : view === 'edit'
+              ? 'Return to Job List'
+              : user.name === ''
+                ? 'Login'
+                : 'Create New Job'}
+        </Button>
+      }
     </Container>
   );
 };
