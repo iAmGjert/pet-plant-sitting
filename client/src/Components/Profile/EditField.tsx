@@ -515,7 +515,7 @@ const EditField = ({
                                   setVal(results.data.features[0].place_name);
                                 })
                                 .catch((err) => {
-                                  console.log(err);
+                                  console.error(err);
                                 });
                             });
                           };

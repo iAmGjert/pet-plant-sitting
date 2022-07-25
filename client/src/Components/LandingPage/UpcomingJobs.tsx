@@ -34,7 +34,7 @@ const upcomingJobs: FC<Props> = ({
   location,
   petPlant, //supposed to be an array
 }) => {
-  console.log('petPlant in upcoming jobs', petPlant);
+  //console.log('petPlant in upcoming jobs', petPlant);
 
   const theme = useContext(ThemeContext);
   const [show, setShow] = useState(false);

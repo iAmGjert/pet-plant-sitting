@@ -26,7 +26,7 @@ messages.get('/past', (req: Request, res: Response) => {
     })
     .catch((error: Error) => {
       res.sendStatus(500);
-      console.log(error);
+      console.error(error);
     })
 })
 
@@ -47,7 +47,7 @@ messages.post('/', (req: Request, res: Response) => {
       res.status(201).send(message?.dataValues);
     })
     .catch((error: Error) => {
-      console.log(error);
+      console.error(error);
       res.status(500).send(error);
     });
 });

@@ -79,7 +79,7 @@ const Search = () => {
           <Form.Group controlId='formSearch'>
             <Form.Control onKeyPress={(e)=>{ if (e.key === 'Enter') { e.preventDefault(); handleClick(); } }} type='search' placeholder='Octopus, Fern, Dog, etc...' onChange={ (e)=>{ setSearchTarget(e.target.value); }} value={searchTarget}/>
             <Form.Text className='text-muted'>
-          Search Wikipedia or **COMING SOON** upload a photo to search!
+          Search Wikipedia!
             </Form.Text>
           </Form.Group>
             
@@ -87,9 +87,6 @@ const Search = () => {
         <Row>
           <Col>
             <Button className='bootstrap-button' disabled={!click} size='lg' onClick={ ()=>{ handleClick(); } } type='button'>Search</Button>
-          </Col>
-          <Col>
-            <Button className='bootstrap-button' disabled onClick={ ()=>{ handleClick(); } } type='button'><img alt='' src='https://www.svgrepo.com/show/281155/cloud-computing-upload.svg' style={{height: 35}} /></Button>
           </Col>
         </Row>
       </Form>
@@ -103,7 +100,7 @@ const Search = () => {
           info.searchinfo && info.searchinfo.suggestion && info.searchinfo.suggestion.length > 1 ?
             <Row>
               <Card.Body>
-                  Did you mean {<Button className='bootstrap-button' variant='outline-secondary' onClick={(e)=>{ didYouMean(e); }}>{info.searchinfo.suggestion}</Button>}?
+                  Did you mean {<Button className='bootstrap-button' variant='primary' onClick={(e)=>{ didYouMean(e); }}>{info.searchinfo.suggestion}</Button>}?
               </Card.Body>
             </Row> :
             <Row/>

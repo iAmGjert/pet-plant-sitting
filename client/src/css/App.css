@@ -67,12 +67,13 @@ body,
 }
 .btn-primary {
   background-color: #556c85;
-  border-color: var(--bs-primary);
+  border-color: #556c85;
 }
 .btn-primary:focus,
+.btn-primary:disabled,
 .btn-primary:active,
 .btn-primary:visited {
-  background-color: var(--bs-primary);
+  background-color: #556c85;
   border-color: #556c85;
 }
 .geolocate-button {
@@ -1218,4 +1219,26 @@ body,
 /* remove edit icon from header in appointment tooltip */
 .Header-head > button {
   display: none;
+}
+
+.modal-content {
+  background: #C2F8CB;
+ }
+
+.petButton1 {
+  background-color: #556c85 !important;
+  border-color: #556c85 !important;
+}
+.petButton2 {
+  background-color:transparent !important;
+  border-color:#556c85 !important;
+  color: #556c85 !important; /* still needs some work. These don't translate right to dark atm because of important, but I haven't found what is overwriting them without it. */
+}
+.testImg {
+  object-fit: contain;
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  min-height: 30px;
+  border-radius: 50%;
 }
