@@ -159,7 +159,7 @@ const Create = ({ setShowCreated }): JSX.Element => {
           <Form.Control
             className="bootstrap-textbox"
             as="textarea"
-            placeholder={'Describe the job in one or two sentenses.'}
+            placeholder={'Describe the job in one or two sentences.'}
             rows={3}
             onChange={(e) => {
               handleChangeDescription(e);
