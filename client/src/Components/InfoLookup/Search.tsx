@@ -142,7 +142,7 @@ const Search = () => {
           <div/>
       }
       <Modal contentClassName={theme === 'dark' && 'dark'} show={wikiView} fullscreen='md-down' onHide={() => setWikiView(false)}>
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
           <Modal.Title>{articleInfo.title}</Modal.Title>
         </Modal.Header>
         {

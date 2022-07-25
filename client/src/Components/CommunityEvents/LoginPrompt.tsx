@@ -50,7 +50,7 @@ const LoginPrompt = () => {
         backdrop='static'
         keyboard={false}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
           <Modal.Title>Login</Modal.Title>
         </Modal.Header>
         <Modal.Body>Please Login or Signup to create an event.</Modal.Body>

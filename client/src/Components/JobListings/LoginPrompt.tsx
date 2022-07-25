@@ -37,7 +37,7 @@ const LoginPrompt = () => {
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
           <Modal.Title>Login Redirect</Modal.Title>
         </Modal.Header>
         <Modal.Body>

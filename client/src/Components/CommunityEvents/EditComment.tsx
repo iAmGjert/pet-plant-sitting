@@ -72,7 +72,7 @@ const EditComment = ({ showEditModal, setShowEditModal, commentObject }: Props) 
       backdrop="static"
       keyboard={false}>
 
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
         <Modal.Title>Edit Comment</Modal.Title>
       </Modal.Header>
       <Modal.Body>
