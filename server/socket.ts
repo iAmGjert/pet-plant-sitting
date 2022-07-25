@@ -5,7 +5,7 @@ require('dotenv').config();
 
 const io = new Server(4000, {
   cors: {
-    origin: `${process.env.CLIENT_URL}:5000`, //remove for deployment
+    origin: `${process.env.CLIENT_URL}`, //remove for deployment
     credentials: true,
   },
 });

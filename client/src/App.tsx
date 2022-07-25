@@ -35,7 +35,7 @@ interface Props {}
 
 export const ThemeContext = createContext(null);
 
-const socket = io(`${process.env.CLIENT_URL}:4000`);
+const socket = io(`${process.env.CLIENT_URL}`); // take out for production
 
 
 const App: FC<Props> = () => {
