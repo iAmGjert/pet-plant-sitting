@@ -45,11 +45,11 @@ const Home: FC<Props> = () => {
   return (
     <Container fluid className='home-container'>
       <h1 className='home-header'>Welcome to</h1>
-      <h1 className='home-fern-herm'>Fern Herm</h1>
+      {/* <h1 className='home-fern-herm'>Fern Herm</h1> */}
 
       <img
         className='home-logo'
-        src={require('../Components/LandingPage/Logo.svg')}
+        src={require('../../Public/svg/fern-herm-logo.svg')}
         width={300}
         height={300}
         alt=''
@@ -141,31 +141,39 @@ const Home: FC<Props> = () => {
           <Offcanvas.Body className={theme === 'dark' && 'modal-content dark'}>
             {mappedEvents.map((element) => {
               return (
-                <h1 className={theme === 'dark' ? 'modal-content dark home-offcanvas-event-title' : 'home-offcanvas-event-title'}>{element.title}</h1>
+                <h1 className={theme === 'dark' 
+                  ? 'modal-content dark home-offcanvas-event-title' 
+                  : 'home-offcanvas-event-title'}>{element.title}</h1>
               );
             })}
 
-            {mappedEvents.map((element) => {
+            {mappedEvents.map((element, idx) => {
               return (
-                <p className='offcanvas-event-date'>
-                  {moment(element.startDate).format('dddd, MMMM Do YYYY')}
-                </p>
+                <React.Fragment key={idx * 6546}>
+                  <p className='offcanvas-event-date'>
+                    {moment(element.startDate).format('dddd, MMMM Do YYYY')}
+                  </p>
+                </React.Fragment>
               );
             })}
 
-            {mappedEvents.map((element) => {
+            {mappedEvents.map((element, idx) => {
               return (
-                <p className='home-offcanvas-event-description'>
-                  {element.description}
-                </p>
+                <React.Fragment key={idx * 5645}>
+                  <p className='home-offcanvas-event-description'>
+                    {element.description}
+                  </p>
+                </React.Fragment>
               );
             })}
 
-            {mappedEvents.map((element) => {
+            {mappedEvents.map((element, idx) => {
               return (
-                <p className='home-offcanvas-event-date'>
+                <React.Fragment key={idx * 7897}>
+                  <p className='home-offcanvas-event-date'>
                   Meets at {moment(element.startTime, 'HH:mm:ss').format('LT')}
-                </p>
+                  </p>
+                </React.Fragment>
               );
             })}
             <Button className={theme === 'dark'
