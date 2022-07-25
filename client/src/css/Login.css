@@ -92,6 +92,7 @@ input[type="submit"] {
   font-size: 16px;
   border-top: grey solid 1px;
   padding: 0.3em 0;
+  margin-bottom: -6px;
   background-color: #8bdaa4;
 }
 
@@ -105,9 +106,13 @@ input[type="submit"] {
   border: none;
   border-radius: 6px;
   padding: 0.5em 1em;
+  width: 250px;
   cursor: pointer;
-  background-color: #8bdaa4;
+  /* background-color: #8bdaa4; */
+  background-color: #c2f8cb;
+  margin: auto;
 }
+
 
 a[name="google"] {
   display: flex;
