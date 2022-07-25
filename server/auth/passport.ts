@@ -23,7 +23,7 @@ passport.use(new GoogleStrategy({
   //? defaults: { name: profile.displayName, email: profile.emails[0].value } }) 
 
   User.findOrCreate({ where: { name: profile.displayName }, /*defaults: { username: profile.emails[0].value }*/ }).then((user: any) => cb(null, user))
-    .catch((err: any) => console.log(err));
+    .catch((err: any) => console.error(err));
 }));
 
 

@@ -216,7 +216,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
                 role='button'
                 tabIndex={0}
               >
-                <h2>{userPopup.name}</h2>
+                <h2 className='map-popup-h2'>{userPopup.name}</h2>
               </div>
               <h6>Pets/Plants:</h6>
               {
@@ -233,7 +233,7 @@ const MapComponent: FC<Props> = ({ user, users, petsPlants, userGeoLoc, jobs, jo
         {
           eventPopup ?
             <EventPopup trigger={eventButtonPopup} setTrigger={showEventInfo}>
-              <h2>{eventPopup.name}</h2>
+              <h2 className='map-popup-h2'>{eventPopup.name}</h2>
               <div
                 onClick={getEventDirections} 
                 onKeyPress={getEventDirections}

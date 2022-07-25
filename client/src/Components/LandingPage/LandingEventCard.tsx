@@ -13,7 +13,7 @@ const LandingEventCard = ({
   name,
 }) => {
   return (
-    <Card className='landing-event-card' style={{ width: '18rem' }}>
+    <Card className='landing-event-card bootstrap-card' style={{ width: '18rem' }}>
       <Card.Body>
         <Card.Title className='landing-event-card-title'>{name}</Card.Title>
         <Card.Subtitle className='landing-event-card-date'>
@@ -30,7 +30,7 @@ const LandingEventCard = ({
           Location: {location}
         </Card.Text>
 
-        <Card.Link className='landing-event-card-events-link' href='/events'>
+        <Card.Link className='landing-event-card-events-link button-as-link' href='/events'>
           More Upcoming Events
         </Card.Link>
       </Card.Body>

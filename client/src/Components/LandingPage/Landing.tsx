@@ -23,6 +23,7 @@ import {
 } from '../../state/features/jobs/jobSlice';
 import { fetchUpcomingEvents } from '../../state/features/events/eventsSlice';
 import { Link } from 'react-router-dom';
+import { ThemeContext } from '../../App';
 //typescript;
 interface jobs {
   id: number;
@@ -46,7 +47,7 @@ interface events {
 interface Props {}
 
 const Landing: FC<Props> = () => {
-  //const theme = useContext(ThemeContext);
+  const theme = useContext(ThemeContext);
   //const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -87,7 +88,8 @@ const Landing: FC<Props> = () => {
       <h1 className='landing-welcome-header'>
         Welcome {user.name ? ` ${user.name}!` : '!'}
       </h1>
-      <img className='landing-svg' src={require('../../../Public/svg/fern-herm-pets-alt.svg')} alt='' />
+      <img className='landing-svg' src={require('../../../Public/svg/fern-herm-pets-alt.svg')} alt=''
+        style={{ filter: theme === 'dark' && 'invert(100%)' }} />
 
       <Card className='landing-welcome-card'>
         {/* <Card.Header className='landing-welcome-header'>
@@ -124,7 +126,7 @@ const Landing: FC<Props> = () => {
         )
       ) : (
         <p className='no_upcoming_jobs'>
-          You have no upcoming sittings. Click <Link to='/jobs'>here</Link> to
+          You have no upcoming sittings. Click <Link to='/jobs' className='button-as-link'>here</Link> to
           find the perfect sitter or to connect yourself with a sitting gig!
         </p>
       )}
@@ -186,7 +188,7 @@ const Landing: FC<Props> = () => {
           )
         ) : (
           <p className='no-applications'>
-            You have 0 pending sittings. Click <Link to='/jobs'>here</Link> to
+            You have 0 pending sittings. Click <Link to='/jobs' className='button-as-link'>here</Link> to
             apply!
           </p>
         )}

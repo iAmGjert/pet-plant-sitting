@@ -47,7 +47,7 @@ jobApplicants.get('/byuser', async (req: Request | any, res: Response) => {
       res.json([]);
     }
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.sendStatus(400);
   }
 });
@@ -87,7 +87,7 @@ jobApplicants.patch(
       })
       .catch((error: Error) => {
         res.sendStatus(500);
-        console.log(error);
+        console.error(error);
       });
   }
 );

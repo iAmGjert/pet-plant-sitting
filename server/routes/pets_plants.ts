@@ -43,7 +43,7 @@ pets_plants.delete('/:id', async (req: Request, res: Response) => {
       res.sendStatus(200);
     })
     .catch((err: Error) => {
-      console.log(err, 'delete petplant err');
+      console.error(err, 'delete petplant err');
     });
 });
 

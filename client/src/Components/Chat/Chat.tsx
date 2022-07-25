@@ -37,7 +37,7 @@ const Chat = ({ socket }) => {
       // console.log(pastMessages);
       setMessageList([...messageList, ...pastMessages.data]);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 
@@ -66,7 +66,7 @@ const Chat = ({ socket }) => {
         // res.data.name = sender.data.name;
         setMessageList([...messageList, res.data]);
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
       // setMessageList((list) => [...list, messageData]);
       setCurrentMessage('');

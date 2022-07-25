@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useAppDispatch } from '../../state/hooks';
 import moment from 'moment';
 //Bootstrap
@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { deleteApplication } from '../../state/features/jobs/jobSlice';
 import Modal from 'react-bootstrap/Modal';
+import { ThemeContext } from '../../App';
 
 const AppliedJobsBoard = ({
   job,
@@ -16,6 +17,7 @@ const AppliedJobsBoard = ({
   id,
   status,
 }) => {
+  const theme = useContext(ThemeContext);
   //console.log(location);
   const dispatch = useAppDispatch();
   //console.log('job in board', job);
@@ -33,7 +35,7 @@ const AppliedJobsBoard = ({
   // console.log('petPlants', petPlants);
   //'bootstrap-card job-application-container'
   return (
-    <Card className='landing-applications-card'>
+    <Card className='landing-applications-card bootstrap-card'>
       <Card.Body>
         <Card.Title className='landing-application-card-title'>
           Application For{' '}
@@ -76,23 +78,27 @@ const AppliedJobsBoard = ({
           Delete
         </Button> */}
 
-        <Button className='application-status-card-btn' onClick={handleShow}>
+        <Button className='application-status-card-btn bootstrap-button' onClick={handleShow}>
           Delete
         </Button>
 
-        <Modal show={show} onHide={handleClose}>
-          <Modal.Header closeButton>
+        <Modal show={show} onHide={handleClose}
+          contentClassName={theme === 'dark' && 'dark'}
+        >
+          <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
             <Modal.Title>Are you sure you want to delete?</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             Deleting will permanently remove this application from this page.
           </Modal.Body>
           <Modal.Footer>
-            <Button variant='secondary' onClick={handleClose}>
+            <Button variant='secondary' onClick={handleClose}
+              className={theme === 'dark' && 'bootstrap-modal-button'}
+            >
               No
             </Button>
             <Button
-              className='finalize-delete'
+              variant='danger'
               onClick={() => cancelApplication(id)}
             >
               Delete
