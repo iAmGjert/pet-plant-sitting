@@ -16,7 +16,7 @@ const JobHistory = ({ sitterWorkHistory }) => {
   return (
     <>
       <Button
-        className='landing-sitting-history-btn'
+        className='landing-sitting-history-btn bootstrap-button'
         variant='primary'
         onClick={handleShow}
       >
@@ -28,7 +28,7 @@ const JobHistory = ({ sitterWorkHistory }) => {
         show={show}
         onHide={handleClose}
       >
-        <Modal.Header closeButton>
+        <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
           <Modal.Title className='landing-job-history-modal-title'>
             Previous Work History
           </Modal.Title>

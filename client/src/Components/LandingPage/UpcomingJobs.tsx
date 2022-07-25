@@ -43,7 +43,7 @@ const upcomingJobs: FC<Props> = ({
   const handleShow = () => setShow(true);
 
   return (
-    <Card className='landing-upcomingjobs-card'>
+    <Card className='landing-upcomingjobs-card bootstrap-card'>
       <Card.Body>
         <Card.Title className='landing-upcomingjob-title'>
           Your Next Sitting:{' '}
@@ -68,7 +68,7 @@ const upcomingJobs: FC<Props> = ({
         )}`}</Card.Text>
         <>
           <Button
-            className='landing-upcomingjobs-btn'
+            className='landing-upcomingjobs-btn bootstrap-button'
             variant='primary'
             onClick={handleShow}
           >
@@ -82,7 +82,9 @@ const upcomingJobs: FC<Props> = ({
             className='upcomingjob-modal'
           >
             <Modal.Header
-              className='landing-upcomingjob-modal-header'
+              className={theme === 'dark'
+                ? 'landing-upcomingjob-modal-header btn-close-white' 
+                : 'landing-upcomingjob-modal-header'}
               closeButton
             >
               <Modal.Title>

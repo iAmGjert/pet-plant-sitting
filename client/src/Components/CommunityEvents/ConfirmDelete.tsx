@@ -54,7 +54,7 @@ const ConfirmDelete = ({ showDeleteModal, setShowDeleteModal, commentObject }: P
       backdrop='static'
       keyboard={false}
     >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
         <Modal.Title>Confirm Delete</Modal.Title>
       </Modal.Header>
       <Modal.Body>

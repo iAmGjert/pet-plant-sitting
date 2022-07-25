@@ -34,7 +34,7 @@ const AddComment = ({showAddModal, setShowAddModal, handleSubmit, handleCommentC
       onHide={handleClose}
       backdrop="static"
       keyboard={false} >
-      <Modal.Header closeButton>
+      <Modal.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
         <Modal.Title>Add Comment</Modal.Title>
       </Modal.Header>
       <Modal.Body>
