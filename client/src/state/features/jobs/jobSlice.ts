@@ -1,11 +1,10 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
-import { isAfter } from 'date-fns';
 import { STATUS_CODES } from 'http';
 import moment from 'moment';
 //import type { RootState } from '../../store';
 
-interface newJob {
+export interface newJob {
   id: number;
   pet_plant: Array<number>,
   sitter_id: number;
@@ -94,6 +93,14 @@ export const deleteApplication = createAsyncThunk(
   }
 );
 
+export const deleteJob = createAsyncThunk(
+  'jobs/deletejob',
+  async(id) => {
+    const response = await axios.delete(`/api/jobs/delete/${id}`);
+    return id;//action creators to update state
+  }
+);
+
 export const jobsSlice = createSlice({
   name: 'jobs',
   initialState: newInitialState,
@@ -137,6 +144,12 @@ export const jobsSlice = createSlice({
     builder.addCase(fetchPastJobs.fulfilled, (state, action) => {
       state.pastJobs = action.payload;
       return state;
+    });
+    builder.addCase(deleteJob.fulfilled, (state, action) => {
+      state.jobs = state.jobs.filter((job) => {
+        console.log('what is job id and action id', job.id, action.payload)
+        return job.id !== action.payload;//filtering by the payload, which is whatever is returned from the function
+      });
     });
   }
 });

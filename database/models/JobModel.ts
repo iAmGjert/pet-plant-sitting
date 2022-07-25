@@ -9,5 +9,5 @@ export const JobModel = {
   sitter_id: DataTypes.INTEGER,
   startDate: DataTypes.DATEONLY,
   endDate: DataTypes.DATEONLY,
-  isCompleted: DataTypes.BOOLEAN
+  isCompleted: DataTypes.BOOLEAN,
 };

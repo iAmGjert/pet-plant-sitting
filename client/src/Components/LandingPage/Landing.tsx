@@ -22,8 +22,8 @@ import {
   fetchPastJobs,
 } from '../../state/features/jobs/jobSlice';
 import { fetchUpcomingEvents } from '../../state/features/events/eventsSlice';
+import { Link } from 'react-router-dom';
 import { ThemeContext } from '../../App';
-
 //typescript;
 interface jobs {
   id: number;
@@ -61,20 +61,21 @@ const Landing: FC<Props> = () => {
   const pastJobs = useAppSelector((state) => state.job.pastJobs);
 
   const events = useAppSelector((state) => state.events.events);
-
-  console.log('upcomingEvents', upcomingEvents);
-
+  //console.log('events', events);
   const sitterUpcomingJobs = upcomingJobs.filter(
     (job: { sitter_id: number }) => {
       return job.sitter_id === user.id;
     }
   );
 
+  //console.log(sitterUpcomingJobs, 11);
   const sitterWorkHistory = pastJobs.filter((job: { sitter_id: number }) => {
     return job.sitter_id === user.id;
   });
 
-  //console.log(jobs, 'jobs');
+  //console.log('sitterWorkHistory', sitterWorkHistory);
+  //console.log('applications', applications);
+  //console.log('upcoming jobs', upcomingJobs);
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
@@ -83,102 +84,118 @@ const Landing: FC<Props> = () => {
   }, []);
 
   return (
-    <div>
-      <Container fluid>
-        <Card className='bootstrap-card'>
-          <Card.Header as='h5'>
-          Welcome {user.name ? `, ${user.name}!` : '!'}
-          </Card.Header>
-          <Card.Title>Fern Herm is happy to have you!</Card.Title>
-          <Card.Img
-            variant='top'
-            src='https://i.pinimg.com/originals/f3/76/ba/f376ba480a39d91f373541063de5c8e8.png'
-            style={{
-              filter: theme === 'dark' && 'invert(100%)',  
-            }}
-          />
-        </Card>
+    <div className='landingpage-contents'>
+      <h1 className='landing-welcome-header'>
+        Welcome {user.name ? ` ${user.name}!` : '!'}
+      </h1>
+      <img className='landing-svg' src={require('./Logo.svg')} alt=''
+        style={{
+          filter: theme === 'dark' && 'invert(100%)',
+        }}
+      />
 
-        {sitterUpcomingJobs.length > 0
-          ? sitterUpcomingJobs.map(
-            (element: {
-              id: React.Key;
-              startDate: any;
-              endDate: any;
-              employer_id: any;
-              location: any;
-              job_pets_plants: any;
-            }) => {
-              return (
-                <>
-                  <UpcomingJobs
-                    key={element.id}
-                    startDate={element.startDate}
-                    endDate={element.endDate}
-                    employer_id={element.employer_id}
-                    location={element.location}
-                    petPlant={element.job_pets_plants}
-                  />
-                </>
-              );
-            }
-          )
-          : null}
-
-        {upcomingEvents
-          .slice(0, 1)
-          .map(
-            (element: {
+      <Card className='landing-welcome-card'>
+        {/* <Card.Header className='landing-welcome-header'>
+          Welcome {user.name ? ` ${user.name}!` : '!'}
+        </Card.Header> */}
+        {/* <Card.Title>Fern Herm is happy to have you!</Card.Title> */}
+        {/* <Card.Img variant='top' src={require('./Logo.svg')} /> */}
+      </Card>
+      <JobHistory sitterWorkHistory={sitterWorkHistory} />
+      {sitterUpcomingJobs.length > 0 ? (
+        sitterUpcomingJobs.map(
+          (element: {
             id: React.Key;
             startDate: any;
-            description: any;
-            location: any;
-            name: any;
-          }) => {
-              return (
-                <React.Fragment
-                  key={`UpcomingEvents key: ${
-                    ~~(Math.random() * 1000) * (element.id + 1)
-                  }`}
-                >
-                  <LandingEventCard
-                  // key={element.id}
-                    startDate={element.startDate}
-                    description={element.description}
-                    location={element.location}
-                    name={element.name}
-                  />
-                </React.Fragment>
-              );
-            }
-          )}
-
-        {applications.map(
-          (
-            element: JSX.IntrinsicAttributes & {
-            status: any;
-            job: any;
-            id: any;
-            startDate: any;
             endDate: any;
-          }
-          ) => {
+            //3;
+            employer_id: any;
+            location: any;
+            job_pets_plants: any;
+          }) => {
             return (
               <>
-                <AppliedJobsBoard
+                <UpcomingJobs
                   key={element.id}
-                  startDate={element.job.startDate}
-                  petPlants={element.job_pets_plants}
-                  location={element.job.location}
-                  {...element}
+                  startDate={element.startDate}
+                  endDate={element.endDate}
+                  employer_id={element.employer_id}
+                  location={element.location}
+                  petPlant={element.job_pets_plants}
                 />
               </>
             );
           }
+        )
+      ) : (
+        <p className='no_upcoming_jobs'>
+          You have no upcoming sittings. Click <Link to='/jobs' className='button-as-link'>here</Link> to
+          find the perfect sitter or to connect yourself with a sitting gig!
+        </p>
+      )}
+
+      <h1 className='next-upcoming-event-header'>Next Community Event:</h1>
+      {upcomingEvents
+        .slice(0, 1)
+        .map(
+          (element: {
+            id: React.Key;
+            startDate: any;
+            startTime: any;
+            description: any;
+            location: any;
+            name: any;
+          }) => {
+            return (
+              <React.Fragment
+                key={`UpcomingEvents key: ${
+                  ~~(Math.random() * 1000) * (element.id + 1)
+                }`}
+              >
+                <LandingEventCard
+                  // key={element.id}
+                  startDate={element.startDate}
+                  startTime={element.startTime}
+                  description={element.description}
+                  location={element.location}
+                  name={element.name}
+                />
+              </React.Fragment>
+            );
+          }
         )}
 
-        <JobHistory sitterWorkHistory={sitterWorkHistory} />
-      </Container>
+      <h1 className='applications-header'>Your Status on Upcoming Sittings:</h1>
+      <section className='applications'>
+        {applications.length > 0 ? (
+          applications.map(
+            (
+              element: JSX.IntrinsicAttributes & {
+                status: any;
+                job: any;
+                id: any;
+                startDate: any;
+                endDate: any;
+              }
+            ) => {
+              return (
+                <AppliedJobsBoard
+                  key={element.id}
+                  startDate={element.job.startDate}
+                  petPlants={element.job.job_pets_plants}
+                  location={element.job.location}
+                  {...element}
+                />
+              );
+            }
+          )
+        ) : (
+          <p className='no-applications'>
+            You have 0 pending sittings. Click <Link to='/jobs' className='button-as-link'>here</Link> to
+            apply!
+          </p>
+        )}
+      </section>
     </div>
   );
 };

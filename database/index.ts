@@ -252,7 +252,7 @@ db.sync(
             image:
               'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
             breed: 'Skink, blue-tongued',
-            species: 'Tiliqua scincoides',
+            species: 'Canine',
             tags: ['Khaki', 'Goldenrod'],
             rating: 8,
             total_ratings: 96,
@@ -270,7 +270,7 @@ db.sync(
             rating: 5,
             total_ratings: 71,
             is_plant: true,
-            bio: 'Forget the water! I feed human blood.',
+            bio: 'Forget the water! I feed on human blood.',
           },
           {
             owner_id: 4,
@@ -283,7 +283,7 @@ db.sync(
             rating: 4,
             total_ratings: 92,
             is_plant: true,
-            bio: 'Thrives on neglect! Just like Sam',
+            bio: 'Thrives on neglect!',
           },
           {
             owner_id: 5,
@@ -409,7 +409,7 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('June 8, 2022 01:15:00'),
                 endDate: new Date('June 10, 2022 01:15:00'),
-                isCompleted: false,
+                isCompleted: false, 
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
@@ -439,8 +439,8 @@ db.sync(
                 description:
                   'Leaving town for five days and need someone to sit my babies',
                 sitter_id: 7,
-                startDate: new Date('July 19, 2022 01:15:00'),
-                endDate: new Date('July 20, 2022 01:15:00'),
+                startDate: new Date('July 24, 2022 01:15:00'),
+                endDate: new Date('July 25, 2022 01:15:00'),
                 isCompleted: true,
               },
               {
@@ -458,7 +458,7 @@ db.sync(
                 location: '1600 Frankel Ave, Metairie, LA 70003',
                 pet_plant: [7],
                 employer_id: 7,
-                description: 'Test Job Description!',
+                description: '',
                 sitter_id: null,
                 startDate: new Date('June 1, 2022 01:15:00'),
                 endDate: new Date('July 2, 2022 01:15:00'),
@@ -468,7 +468,7 @@ db.sync(
                 location: '1605 Frankel Ave, Metairie, LA 70003',
                 pet_plant: [1],
                 employer_id: 1,
-                description: 'Test Job Description 2!',
+                description: 'Could use an extra hand here while I\'m out of town for two nights',
                 sitter_id: null,
                 startDate: new Date('July 1, 2022 01:15:00'),
                 endDate: new Date('June 3, 2022 01:15:00'),
@@ -478,7 +478,7 @@ db.sync(
                 location: '1610 Frankel Ave, Metairie, LA 70003',
                 pet_plant: [5],
                 employer_id: 5,
-                description: 'Test Job Description 3!',
+                description: 'Interested in ',
                 sitter_id: null,
                 startDate: new Date('June 30, 2022 01:15:00'),
                 endDate: new Date('July 1, 2022 01:15:00'),
@@ -529,7 +529,7 @@ db.sync(
                 pet_plant: [9],
                 employer_id: 6,
                 description:
-                  'Hello, my name is Raymond. Please come watch my things while I code!!',
+                  'Hello, my name is Raymond. Please come watch my babies while I code!!',
                 sitter_id: null,
                 startDate: new Date('June 25, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),

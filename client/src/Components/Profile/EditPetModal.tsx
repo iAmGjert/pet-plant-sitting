@@ -43,7 +43,7 @@ const EditPetModal = ({
         gender,
         tags,
         is_plant: isPlant,
-        species
+        species,
       });
       setShowModal(false);
     } else {
@@ -57,7 +57,7 @@ const EditPetModal = ({
         gender,
         tags,
         is_plant: isPlant,
-        species
+        species,
       });
       setShowModal(false);
     }
@@ -74,6 +74,7 @@ const EditPetModal = ({
     <Modal
       contentClassName={theme === 'dark' && 'dark'}
       backdrop='static'
+      className='profile-modal'
       fullscreen={true}
       show={showModal}
       onHide={() => handleOnHide()}
@@ -189,7 +190,7 @@ const EditPetModal = ({
 
           {!add && (
             <Button
-              className={theme === 'dark' && 'bootstrap-modal-button'}
+              className={theme === 'dark' ? 'bootstrap-modal-button' : 'mx-2'}
               variant='danger'
               onClick={() => handleDelete()}
             >
