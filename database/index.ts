@@ -543,7 +543,7 @@ db.sync(
                   location: '10 Magnolia Dr, New Orleans, LA 70124',
                   description:
                     'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
-                  startDate: new Date('July 25, 2022 13:15:00'),
+                  startDate: new Date('July 29, 2022 13:15:00'),
                   startTime: '3:20 PM',
                 },
                 {
@@ -552,7 +552,7 @@ db.sync(
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
                   description:
                     'A gathering for pet-less humans to find and be rescued by their furrever friends',
-                  startDate: new Date('July 25, 2022 01:15:00'),
+                  startDate: new Date('July 29, 2022 01:15:00'),
                   startTime: '4:45 PM',
                 },
                 {
@@ -561,7 +561,7 @@ db.sync(
                   location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
                   description:
                     'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
-                  startDate: new Date('July 25, 2022 01:15:00'),
+                  startDate: new Date('July 30, 2022 01:15:00'),
                   startTime: '6:00 PM',
                 },
                 {
