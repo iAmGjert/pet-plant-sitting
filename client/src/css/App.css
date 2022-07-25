@@ -66,8 +66,8 @@ body,
   padding-bottom: 7%;
 }
 .btn-primary {
-  background-color: var(--bs-primary);
-  border-color: #556c85;
+  background-color: #556c85;
+  border-color: var(--bs-primary);
 }
 .btn-primary:focus,
 .btn-primary:disabled,
