@@ -48,7 +48,7 @@ events.get('/all', (req: Request, res: Response) => {
     // console.log(events);
     res.status(200).send(events);
   }).catch((err: Error) => {
-    console.log(err);
+    console.error(err);
     res.status(500).send(err);
   });
 });
@@ -62,7 +62,7 @@ events.post('/create', (req: Request, res: Response) => {
       res.status(201).send(event?.dataValues);
     })
     .catch((err: Error) => {
-      console.log(err);
+      console.error(err);
       res.status(500).send(err);
     });
 });
@@ -78,11 +78,11 @@ events.put('/update/:id', (req: Request, res: Response) => {
   const { id } = req.params;
   Events.update(req.body, { returning: true, where: { id } })
     .then(([ updatedRows, [updatedEvent] ]: any) => {
-      console.log(updatedEvent, updatedRows);
+      //console.log(updatedEvent, updatedRows);
       res.status(201).send(updatedEvent);
     }
     ).catch((err: Error) => {
-      console.log(err);
+      console.error(err);
       res.status(500).send(err);
     }
     );
@@ -124,7 +124,7 @@ events.post('/comment/add', (req: Request, res: Response) => {
       res.status(201).send(eventComment?.dataValues);
     })
     .catch((err: Error) => {
-      console.log(err);
+      console.error(err);
       res.status(500).send(err);
     });
 });

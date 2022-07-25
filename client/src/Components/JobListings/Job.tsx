@@ -120,15 +120,13 @@ const Job = ({ settemp, job, setshowapplied, setshowrevoked }) => {
               )}
             </Col>
             <Col>
-              {Array.isArray(pet_plant) ? (
+              {Array.isArray(job.job_pets_plants) ? (
                 <>
                   <strong>Pet/Plants: </strong>
-                  {pet_plant.map((p, i) => {
-                    return <div key={`p${i}`}>{petPlants.filter((pet)=>{
-                      if (p === pet.id) {
-                        return true;
-                      }
-                    })[0]?.name}</div>;
+                  {job.job_pets_plants.map((p, i) => {
+                    return (
+                      <div key={`p${i}`}>{`${p.pet_plant?.name} (${p.pet_plant?.species})`}</div>
+                    );
                   })}
                 </>
               ) : (

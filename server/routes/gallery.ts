@@ -32,7 +32,7 @@ gallery.post('/entry/:gallery_id', async (req: Request, res: Response) => {
     const gallery = await GalleryEntry.create(req.body);
     return res.status(200).send(gallery);
   } catch (err) {
-    console.log(err);
+    console.error(err);
     res.sendStatus(404);
   }
 });
@@ -46,7 +46,7 @@ gallery.delete('/entry/:gallery_id', async (req: Request, res: Response) => {
     });
     res.sendStatus(200);
   } catch (err) {
-    console.log(err, 'delete petplant err');
+    console.error(err, 'delete petplant err');
     res.sendStatus(404);
   }
 });

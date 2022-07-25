@@ -19,7 +19,6 @@ const Edit = ({ job, setShowEdited, setShowDeleted }): JSX.Element => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.userProfile.value);
   const petPlants = user.pet_plants;
-  console.log(petPlants);
   const dispatch = useAppDispatch();
   const [startDate, setStartDate] = useState(job.startDate);
   const [endDate, setEndDate] = useState(job.endDate);
@@ -154,7 +153,7 @@ const Edit = ({ job, setShowEdited, setShowDeleted }): JSX.Element => {
               key={idx}
               id={`checkbox-${idx}`}
               type="checkbox"
-              variant={feed[idx] ? 'primary' : 'outline-primary'}
+              variant={feed[idx] ? 'success' : 'outline-success'}
               name="radio"
               value={radio.name}
               checked={feed[idx]}

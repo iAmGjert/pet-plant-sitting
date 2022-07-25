@@ -135,6 +135,7 @@ const Create = ({ setShowCreated }): JSX.Element => {
           <ButtonGroup className="mb-2">
             {user.pet_plants.map((radio, idx) => (
               <ToggleButton
+                className = {feed[idx] ? 'petButton1' : 'petButton2'}
                 key={idx}
                 id={`checkbox-${idx}`}
                 type="checkbox"
