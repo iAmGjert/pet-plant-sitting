@@ -22,12 +22,12 @@
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529; 
 
-  --bs-primary: #0d6efd;
+  --bs-primary: #556c85;
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
-  --bs-danger: #dc3545;
+  --bs-danger: #ae2c39;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
   --bs-primary-rgb: 85, 133, 100;
@@ -277,6 +277,9 @@ body,
   color: lightgrey;
   border-color: lightgrey;
 }
+#dark .card-body {
+  background-color: ;
+}
 #dark .card-text {
   color: lightgrey;
 }
@@ -421,6 +424,10 @@ body,
 }
 #dark .d-flex.justify-content-center.text-center.row.row-cols-md-1.row-cols-1 {
   background: #2c2c2c;
+  border-color: lightgrey;
+}
+#dark .bootstrap-badge {
+  background: rgb(85, 133, 100);
 }
 
 /* Calendar */
@@ -558,6 +565,68 @@ body,
 }
 /* Bootstrap modal classes */
 
+/*************************** CHAT ********************/
+
+.pending-employers-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pending-client-start-date {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.pending-client-description {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.pending-client-name {
+  font-weight: bold;
+}
+
+.confirmed-client-name {
+  font-weight: bold;
+}
+
+.confirmed-employers-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.confirmed-client-start-date {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.confirmed-client-sitting-description {
+  margin-top: 10px;
+  font-weight: bold;
+  
+}
+
+.card-body {
+  margin-bottom: 20px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
+.applicants-sitting-startdate {
+  font-weight: bold;
+}
+
+.chat-applicants-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
 .chat-main {
   width: 100%;
   height: 75%;
@@ -580,8 +649,11 @@ body,
 }
 
 .chat-card {
-  background-color: #558564;
-  color: #c2f8cb;
+  /* background-color: #558564; */
+  background-color: #f2f3f4;
+  /* color: #c2f8cb; */
+  color: black;
+
 }
 
 .chat-window {
@@ -639,21 +711,21 @@ body,
 }
 
 #you .message-content {
-  justify-content: flex-start;
+  justify-content: flex-end;
   background-color: #7d6f86;
 }
 
 #you .message-meta {
-  justify-content: flex-start;
+  justify-content: flex-end;
   margin-left: 5px;
 }
 
 #other {
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 #other .message-content {
-  justify-content: flex-end;
+  justify-content: flex-start;
   background-color: #f5c396;
 }
 
@@ -717,6 +789,12 @@ body,
   margin-top: 5px;
 }
 
+.chat-key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .job-list-main {
   display: flex;
   justify-content: center;
@@ -734,7 +812,7 @@ body,
   margin-top: 5px;
 }
 
-/*************HOME PAGE************************************************/
+/************* HOME PAGE ************************************************/
 
 .home-container {
   display: flex;
@@ -817,6 +895,12 @@ body,
   font-family: monospace, monospace;
 }
 
+.home-offcanvas-event-location {
+  margin-top: 10px;
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
 .home-offcanvas-event-description {
   margin-top:20px;
   font-family: monospace, monospace;
@@ -838,7 +922,7 @@ body,
 }
 
 .home-login-btn {
-  background-color: #198754;
+  /* background-color: #198754; */
   text-align: center;
   padding-bottom: 10px;
   margin-bottom: 20px;
@@ -847,7 +931,7 @@ body,
 }
 
 .home-events-btn {
-  background-color: #198754;
+  /* background-color: #198754; */
   text-align: center;
   padding-bottom: 10px;
   margin-bottom: 20px;
@@ -982,7 +1066,7 @@ body,
 }
 
 .landing-upcomingjobs-card {
-  background-color: #fef8f3;
+  background-color: white;
   text-align: center;
   margin-bottom: 24px;
   font-family: monospace, monospace;
@@ -1036,13 +1120,13 @@ body,
 
 .landing-upcomingjobs-btn {
   text-align: center;
-  background-color: #198754;
+  /* background-color: #198754; */
   font-family: monospace, monospace;
 }
 
-.landing-upcomingjobs-btn:hover {
+/* .landing-upcomingjobs-btn:hover {
   background-color: #198754;
-}
+} */
 
 .upcomingjob-modal {
   font-family: monospace, monospace;
@@ -1054,14 +1138,14 @@ body,
 }
 
 .landing-sitting-history-btn {
-  background-color: #198754;
+  /* background-color: #198754; */
   font-family: monospace, monospace;
   margin-bottom: 20px;
 }
 
-.landing-sitting-history-btn: hover {
+/* .landing-sitting-history-btn: hover {
   background-color: #198754;
-}
+} */
 
 .landing-job-history-modal-title {
   text-align: center;
@@ -1121,7 +1205,7 @@ body,
 }
 
 .application-status-card-btn {
-  background-color: #198754;
+  /* background-color: #198754; */
   display: block;
   margin: 0 auto 20px auto;
 }
@@ -1179,7 +1263,7 @@ body,
 }
 
 .calendar-event-appointment-location {
-  //margin-left: 20px;
+  /* margin-left: 20px; */
   text-align: center;
 }
 

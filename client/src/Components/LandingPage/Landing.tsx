@@ -75,7 +75,7 @@ const Landing: FC<Props> = () => {
 
   //console.log('sitterWorkHistory', sitterWorkHistory);
   //console.log('applications', applications);
-  //console.log('upcoming jobs', upcomingJobs);
+  console.log('upcoming jobs', upcomingJobs);
   useEffect(() => {
     dispatch(fetchUpcomingJobs());
     dispatch(fetchUpcomingEvents());
@@ -88,10 +88,11 @@ const Landing: FC<Props> = () => {
       <h1 className='landing-welcome-header'>
         Welcome {user.name ? ` ${user.name}!` : '!'}
       </h1>
-      <img className='landing-svg' src={require('./Logo.svg')} alt=''
-        style={{
-          filter: theme === 'dark' && 'invert(100%)',
-        }}
+      <img
+        className='landing-svg'
+        src={require('../../../Public/svg/fern-herm-logo-no-lashes.svg')}
+        alt=''
+        style={{ filter: theme === 'dark' && 'invert(100%)' }}
       />
 
       <Card className='landing-welcome-card'>
@@ -129,8 +130,11 @@ const Landing: FC<Props> = () => {
         )
       ) : (
         <p className='no_upcoming_jobs'>
-          You have no upcoming sittings. Click <Link to='/jobs' className='button-as-link'>here</Link> to
-          find the perfect sitter or to connect yourself with a sitting gig!
+          You have no upcoming sittings. Click{' '}
+          <Link to='/jobs' className='button-as-link'>
+            here
+          </Link>{' '}
+          to find the perfect sitter or to connect yourself with a sitting gig!
         </p>
       )}
 
@@ -191,8 +195,11 @@ const Landing: FC<Props> = () => {
           )
         ) : (
           <p className='no-applications'>
-            You have 0 pending sittings. Click <Link to='/jobs' className='button-as-link'>here</Link> to
-            apply!
+            You have 0 pending sittings. Click{' '}
+            <Link to='/jobs' className='button-as-link'>
+              here
+            </Link>{' '}
+            to apply!
           </p>
         )}
       </section>
