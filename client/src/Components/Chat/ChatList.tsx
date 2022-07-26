@@ -18,7 +18,7 @@ interface userOnline {
   socketId: string
 }
 
-const socket = io(`${process.env.CLIENT_URL}:4000`);
+const socket = io(`${process.env.CLIENT_URL}`);
 
 const ChatList = () => {
   const currUser = useAppSelector((state) => state.userProfile.value);
