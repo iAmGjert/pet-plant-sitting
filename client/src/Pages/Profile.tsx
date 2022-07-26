@@ -345,9 +345,9 @@ const Profile = () => {
             <h5>
               {findStars(getRating()).map((e) => {
                 if (e === 1) {
-                  return <AiFillStar color='gold' />;
+                  return <AiFillStar color='gold' size={22} />;
                 } else {
-                  return <AiOutlineStar />;
+                  return <AiOutlineStar color='gold' size={22} />;
                 }
               })}
               ({profileUser?.ratings.length})

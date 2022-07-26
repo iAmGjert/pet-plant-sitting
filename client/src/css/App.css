@@ -607,7 +607,6 @@ body,
 .confirmed-client-sitting-description {
   margin-top: 10px;
   font-weight: bold;
-  
 }
 
 .card-body {
@@ -653,7 +652,6 @@ body,
   background-color: #f2f3f4;
   /* color: #c2f8cb; */
   color: black;
-
 }
 
 .chat-window {
@@ -1314,7 +1312,7 @@ body,
 }
 .nav-tabs .nav-link.active {
   background-color: #558564;
-  color: black;
+  color: white;
 }
 
 .nav-tabs .nav-link {
