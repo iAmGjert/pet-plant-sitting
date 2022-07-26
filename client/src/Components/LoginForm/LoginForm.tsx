@@ -6,7 +6,6 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ThemeContext } from '../../App';
 
-
 const LoginForm = () => {
   const theme = useContext(ThemeContext);
   const [email, setEmail] = useState<string>('');
@@ -19,15 +18,18 @@ const LoginForm = () => {
   const navigate = useNavigate();
   console.log(errorMessage, showError, successMessage);
 
-
   const login = async () => {
     try {
-      const res = await axios.post('/auth/local/login', {
-        username: email,
-        password,
-      }, {
-        withCredentials: true,
-      });
+      const res = await axios.post(
+        '/auth/local/login',
+        {
+          username: email,
+          password,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       console.log(res.data.message);
       setSuccessMessage(res.data.message);
       return res;
@@ -35,13 +37,13 @@ const LoginForm = () => {
       setErrorMessage(error.response.data.message);
       setShowError(true);
       console.error(error);
-    } 
+    }
   };
-  
+
   const navigateRegister = () => {
     navigate('/register');
   };
- 
+
   const removeErrorOverlay = () => {
     setTimeout(() => {
       setShowError(false);
@@ -53,10 +55,9 @@ const LoginForm = () => {
     removeErrorOverlay();
   }, [errorMessage, showError]);
 
-
   return (
     <div ref={target}>
-      <Overlay target={target.current} show={showError} placement="top">
+      <Overlay target={target.current} show={showError} placement='top'>
         {({ placement, arrowProps, show: _show, popper, ...props }) => (
           <div
             {...props}
@@ -74,28 +75,50 @@ const LoginForm = () => {
         )}
       </Overlay>
       <Form className='login-form'>
-        <img className="fern-herm-logo" src={require('../../../Public/svg/fern-herm-logo.svg')} alt="Fern and Herm logo" style={{ filter: theme === 'dark' && 'invert(100%)' }} />
-     
+        <img
+          className='fern-herm-logo'
+          src={require('../../../Public/svg/fern-herm-logo-no-lashes.svg')}
+          alt='Fern and Herm logo'
+          style={{ filter: theme === 'dark' && 'invert(100%)' }}
+        />
+        <p className='returning-user'>Returning User?</p>
+        <p className='please-login'>Please login</p>
         <Form.Group className='mb-3' controlId='formBasicEmail'>
-          <Form.Control className='bootstrap-textbox' type='email' placeholder='Enter email' 
-            onChange={(e) => setEmail(e.target.value)} required/>
+          <Form.Control
+            className='bootstrap-textbox'
+            type='email'
+            placeholder='Enter email'
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </Form.Group>
         <Form.Group className='mb-3' controlId='formBasicPassword'>
-          <Form.Control className='bootstrap-textbox' type='password' placeholder='Password' 
-            onChange={(e) => setPassword(e.target.value)} required/>
+          <Form.Control
+            className='bootstrap-textbox'
+            type='password'
+            placeholder='Password'
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
         </Form.Group>
-        <Form.Group className='mb-3' controlId='formBasicCheckbox'>
-        </Form.Group>
-        <Button className='bootstrap-button login-btn' 
-          href={errorMessage == '' ? '/loading' : null} 
-          onClick={login}>
-        Login
+        <Form.Group className='mb-3' controlId='formBasicCheckbox'></Form.Group>
+        <Button
+          className='bootstrap-button login-btn'
+          href={errorMessage == '' ? '/loading' : null}
+          onClick={login}
+        >
+          Login
         </Button>
-        <div id="login-footer" >
-          <span>new to fern herm? </span>
+        <div id='login-footer'>
+          <span className='new-to-fern-herm'>New to Fern Herm?</span>
           <span>
-            <Button className='button-as-link sign-up-btn' variant='link' 
-              onClick={navigateRegister}>Sign Up</Button>
+            <Button
+              className='button-as-link-sign-up-btn'
+              variant='link'
+              onClick={navigateRegister}
+            >
+              Sign Up
+            </Button>
           </span>
         </div>
       </Form>

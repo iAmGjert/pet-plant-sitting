@@ -565,6 +565,68 @@ body,
 }
 /* Bootstrap modal classes */
 
+/*************************** CHAT ********************/
+
+.pending-employers-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.pending-client-start-date {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.pending-client-description {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.pending-client-name {
+  font-weight: bold;
+}
+
+.confirmed-client-name {
+  font-weight: bold;
+}
+
+.confirmed-employers-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.confirmed-client-start-date {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.confirmed-client-sitting-description {
+  margin-top: 10px;
+  font-weight: bold;
+  
+}
+
+.card-body {
+  margin-bottom: 20px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
+.applicants-sitting-startdate {
+  font-weight: bold;
+}
+
+.chat-applicants-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
 .chat-main {
   width: 100%;
   height: 75%;
@@ -587,8 +649,11 @@ body,
 }
 
 .chat-card {
-  background-color: #558564;
-  color: #c2f8cb;
+  /* background-color: #558564; */
+  background-color: #f2f3f4;
+  /* color: #c2f8cb; */
+  color: black;
+
 }
 
 .chat-window {
@@ -747,7 +812,7 @@ body,
   margin-top: 5px;
 }
 
-/*************HOME PAGE************************************************/
+/************* HOME PAGE ************************************************/
 
 .home-container {
   display: flex;
@@ -825,6 +890,12 @@ body,
 }
 
 .offcanvas-event-date {
+  margin-top: 10px;
+  text-align: center;
+  font-family: monospace, monospace;
+}
+
+.home-offcanvas-event-location {
   margin-top: 10px;
   text-align: center;
   font-family: monospace, monospace;
@@ -995,7 +1066,7 @@ body,
 }
 
 .landing-upcomingjobs-card {
-  background-color: #fef8f3;
+  background-color: white;
   text-align: center;
   margin-bottom: 24px;
   font-family: monospace, monospace;

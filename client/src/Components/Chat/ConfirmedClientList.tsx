@@ -18,7 +18,7 @@ const ConfirmedClientList = () => {
         return true;
       }
     });
-    
+
     setConfirmedJobs(confirmedJobs);
   };
 
@@ -29,11 +29,14 @@ const ConfirmedClientList = () => {
 
   return (
     <Container>
-      <h3>Confirmed Employers</h3>
-      {confirmedJobs.map((job) => <ConfirmedClient key={job.employer_id} job={job} />)}
+      <div>
+        <h3 className='confirmed-employers-header'>Confirmed Employers:</h3>
+      </div>
+      {confirmedJobs.map((job) => (
+        <ConfirmedClient key={job.employer_id} job={job} />
+      ))}
     </Container>
   );
-}
+};
 
 export default ConfirmedClientList;
-

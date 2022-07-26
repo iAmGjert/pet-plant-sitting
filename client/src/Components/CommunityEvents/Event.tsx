@@ -5,19 +5,18 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Container from 'react-bootstrap/Container';
 
-const Event = (props: any) =>{
+const Event = (props: any) => {
   const { name, location, user, eventObj, switchToDetailsView } = props;
 
   return (
     <Container className='comm-card'>
-      <Card style={{ width: '95%',
-        marginBottom: '1em',
-      }} className='bootstrap-card'>
+      <Card
+        style={{ width: '95%', marginBottom: '1em' }}
+        className='bootstrap-card'
+      >
         <Card.Header>
           <Row>
-            <Col>
-            Host: {user?.name}
-            </Col>
+            <Col>Host: {user?.name}</Col>
           </Row>
         </Card.Header>
         <Card.Body>
@@ -27,13 +26,17 @@ const Event = (props: any) =>{
           </Card.Text>
         </Card.Body>
         <Card.Footer>
-          <Button className="button-as-link" 
-            style={{ color: '#ffffff' }}
-            variant="link"
-            onClick={() => switchToDetailsView(eventObj)}>More Info</Button>
+          <Button
+            className='event-more-info-btn'
+            style={{ color: 'black' }}
+            variant='link'
+            onClick={() => switchToDetailsView(eventObj)}
+          >
+            More Info
+          </Button>
         </Card.Footer>
       </Card>
-    </Container> 
+    </Container>
   );
 };
 
