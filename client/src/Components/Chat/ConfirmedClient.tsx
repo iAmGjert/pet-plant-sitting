@@ -68,8 +68,6 @@ const ConfirmedClient = ({ job }: { job: any }) => {
     <Container>
       <Card className='chat-card bootstrap-card'>
         <Card.Body>
-          <h6>{moment(job.startDate).format('dddd, MMMM Do YYYY')}</h6>
-          <h6>Description: {job.description}</h6>
           <div
             onClick={handleClick}
             onKeyPress={() => {
@@ -78,9 +76,17 @@ const ConfirmedClient = ({ job }: { job: any }) => {
             role='button'
             tabIndex={0}
           >
+            <h6 className='confirmed-client-name'>Name:</h6>
             {client.name}
             <span className='circle' style={{ color: colorOfStatus }}></span>
           </div>
+          <h6 className='confirmed-client-start-date'> Sitting Start Date:</h6>
+
+          <h6>{moment(job.startDate).format('dddd, MMMM Do YYYY')}</h6>
+          <h6 className='confirmed-client-sitting-description'>
+            Sitting Description:
+          </h6>
+          <h6>{job.description}</h6>
         </Card.Body>
       </Card>
     </Container>

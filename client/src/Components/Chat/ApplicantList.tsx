@@ -32,18 +32,29 @@ const ApplicantList = () => {
 
   return (
     <Container>
-      <h3>Applicants</h3>
+      <div className='chat-applicants-header'>
+        <h3>Applicants:</h3>
+      </div>
+
       {jobsIPosted.map((job) => {
         return (
           <div key={job.id}>
             <Container>
               <Card className='chat-card bootstrap-card'>
-                <h6>{moment(job.startDate).format('dddd, MMMM Do YYYY')}</h6>
-                <h6>Description: {job.description}</h6>
                 {job.job_applicants.length > 0 ? (
-                  <Applicants job_applicants={job.job_applicants} />
+                  <div>
+                    <Applicants job_applicants={job.job_applicants} />
+                    <h6 className='applicants-sitting-startdate'>
+                      Sitting Start Date:
+                    </h6>
+                    <h6>
+                      {moment(job.startDate).format('dddd, MMMM Do YYYY')}
+                    </h6>
+                    <h6 className='applicants-description'>Description:</h6>
+                    <h6>{job.description}</h6>
+                  </div>
                 ) : (
-                  <p>No Applicants</p>
+                  <p>There are currently no applicants</p>
                 )}
               </Card>
             </Container>

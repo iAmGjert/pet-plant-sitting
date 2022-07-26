@@ -75,13 +75,12 @@ const PendingClient = ({ job }: { job: any }) => {
             role='button'
             tabIndex={0}
           >
-            Name: {client?.name}
+            <h6 className='pending-client-name'>Name:</h6>
+            {client?.name}
             <span className='circle' style={{ color: colorOfStatus }}></span>
           </div>
-          <h6 className='pending-client-start-date'>
-            Sitting Start Date:{' '}
-            {moment(job.startDate).format('dddd, MMMM Do YYYY')}
-          </h6>
+          <h6 className='pending-client-start-date'>Sitting Start Date: </h6>
+          <h6>{moment(job.startDate).format('dddd, MMMM Do YYYY')}</h6>
           <h6 className='pending-client-description'>Sitting Description:</h6>
           <h6>{job.description}</h6>
         </Card.Body>

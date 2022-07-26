@@ -569,7 +569,49 @@ body,
 
 .pending-client-start-date {
   margin-top: 10px;
-  margin-bottom: 15px;
+  font-weight: bold;
+}
+
+.pending-client-description {
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.pending-client-name {
+  font-weight: bold;
+}
+
+.confirmed-client-name {
+  font-weight: bold;
+}
+
+.confirmed-employers-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.confirmed-client-start-date {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+.confirmed-client-sitting-description {
+  margin-top: 10px;
+  font-weight: bold;
+  
+}
+
+.applicants-sitting-startdate {
+  font-weight: bold;
+}
+
+.chat-applicants-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
 }
 
 .chat-main {
