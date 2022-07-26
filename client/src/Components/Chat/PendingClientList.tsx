@@ -13,13 +13,19 @@ const PendingClientList = () => {
     const jobs = await axios.get('/api/jobs/all');
 
     const availableJobs = jobs.data.filter((job: any) => {
-      const aJobIAppliedFor = job.job_applicants.filter((job_applicant: any) => job_applicant['user_id'] === currUser.id);
-      
-      if (job.sitter_id === null && aJobIAppliedFor.length > 0 && job.isCompleted === false) {
+      const aJobIAppliedFor = job.job_applicants.filter(
+        (job_applicant: any) => job_applicant['user_id'] === currUser.id
+      );
+
+      if (
+        job.sitter_id === null &&
+        aJobIAppliedFor.length > 0 &&
+        job.isCompleted === false
+      ) {
         return true;
       }
     });
-    
+
     setAvailableJobs(availableJobs);
   };
 
@@ -29,12 +35,15 @@ const PendingClientList = () => {
 
   return (
     <Container>
-      <h3>Pending Employers</h3>
+      <div className='pending-employers-header'>
+        <h3>Pending Employers:</h3>
+      </div>
+
       {availableJobs.map((job) => {
         return <PendingClient key={'Job: ' + job.id} job={job} />;
       })}
     </Container>
   );
-}
+};
 
 export default PendingClientList;

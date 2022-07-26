@@ -67,8 +67,6 @@ const PendingClient = ({ job }: { job: any }) => {
     <Container>
       <Card className='chat-card bootstrap-card'>
         <Card.Body>
-          <h6>{moment(job.startDate).format('dddd, MMMM Do YYYY')}</h6>
-          <h6>Description: {job.description}</h6>
           <div
             onClick={handleClick}
             onKeyPress={() => {
@@ -77,9 +75,15 @@ const PendingClient = ({ job }: { job: any }) => {
             role='button'
             tabIndex={0}
           >
-            {client?.name}
+            Name: {client?.name}
             <span className='circle' style={{ color: colorOfStatus }}></span>
           </div>
+          <h6 className='pending-client-start-date'>
+            Sitting Start Date:{' '}
+            {moment(job.startDate).format('dddd, MMMM Do YYYY')}
+          </h6>
+          <h6 className='pending-client-description'>Sitting Description:</h6>
+          <h6>{job.description}</h6>
         </Card.Body>
       </Card>
     </Container>

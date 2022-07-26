@@ -561,8 +561,15 @@ body,
 /*************************** CHAT ********************/
 
 .pending-employers-header {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin-top: 20px;
+}
+
+.pending-client-start-date {
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
 
 .chat-main {
@@ -587,8 +594,11 @@ body,
 }
 
 .chat-card {
-  background-color: #558564;
-  color: #c2f8cb;
+  /* background-color: #558564; */
+  background-color: #f2f3f4;
+  /* color: #c2f8cb; */
+  color: black;
+
 }
 
 .chat-window {
