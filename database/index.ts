@@ -439,8 +439,8 @@ db.sync(
                 description:
                   'Leaving town for five days and need someone to sit my babies',
                 sitter_id: 7,
-                startDate: new Date('July 24, 2022 01:15:00'),
-                endDate: new Date('July 25, 2022 01:15:00'),
+                startDate: new Date('July 29, 2022 01:15:00'),
+                endDate: new Date('July 30, 2022 01:15:00'),
                 isCompleted: true,
               },
               {
@@ -569,7 +569,7 @@ db.sync(
                   host: 4,
                   location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
                   description:
-                    'Reptiles are our friends, not overlords! Please join us in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
+                    'Reptiles are our friends, not overlords! Please join us in destigmatizing the taboo surrounding our cold-blooded homies. Free mice available upon request',
                   startDate: new Date('July 29, 2022 01:15:00'),
                   startTime: '12:20 PM',
                 },
@@ -610,7 +610,7 @@ db.sync(
                       // id: 4,
                       event_id: 1,
                       comment:
-                        'I mean, I don\'t think bacon is not a terrible idea.',
+                        'I mean, I don\'t think bacon is a terrible idea.',
                       user_id: 4,
                     },
                     {
