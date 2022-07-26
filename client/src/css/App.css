@@ -22,12 +22,12 @@
   --bs-gray-800: #343a40;
   --bs-gray-900: #212529; 
 
-  --bs-primary: #0d6efd;
+  --bs-primary: #556c85;
   --bs-secondary: #6c757d;
   --bs-success: #198754;
   --bs-info: #0dcaf0;
   --bs-warning: #ffc107;
-  --bs-danger: #dc3545;
+  --bs-danger: #ae2c39;
   --bs-light: #f8f9fa;
   --bs-dark: #212529;
   --bs-primary-rgb: 85, 133, 100;
@@ -639,21 +639,21 @@ body,
 }
 
 #you .message-content {
-  justify-content: flex-start;
+  justify-content: flex-end;
   background-color: #7d6f86;
 }
 
 #you .message-meta {
-  justify-content: flex-start;
+  justify-content: flex-end;
   margin-left: 5px;
 }
 
 #other {
-  justify-content: flex-end;
+  justify-content: flex-start;
 }
 
 #other .message-content {
-  justify-content: flex-end;
+  justify-content: flex-start;
   background-color: #f5c396;
 }
 
@@ -715,6 +715,12 @@ body,
   margin-left: 10px;
   position: absolute;
   margin-top: 5px;
+}
+
+.chat-key {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .job-list-main {
@@ -838,7 +844,7 @@ body,
 }
 
 .home-login-btn {
-  background-color: #198754;
+  /* background-color: #198754; */
   text-align: center;
   padding-bottom: 10px;
   margin-bottom: 20px;
@@ -847,7 +853,7 @@ body,
 }
 
 .home-events-btn {
-  background-color: #198754;
+  /* background-color: #198754; */
   text-align: center;
   padding-bottom: 10px;
   margin-bottom: 20px;
@@ -1036,13 +1042,13 @@ body,
 
 .landing-upcomingjobs-btn {
   text-align: center;
-  background-color: #198754;
+  /* background-color: #198754; */
   font-family: monospace, monospace;
 }
 
-.landing-upcomingjobs-btn:hover {
+/* .landing-upcomingjobs-btn:hover {
   background-color: #198754;
-}
+} */
 
 .upcomingjob-modal {
   font-family: monospace, monospace;
@@ -1054,14 +1060,14 @@ body,
 }
 
 .landing-sitting-history-btn {
-  background-color: #198754;
+  /* background-color: #198754; */
   font-family: monospace, monospace;
   margin-bottom: 20px;
 }
 
-.landing-sitting-history-btn: hover {
+/* .landing-sitting-history-btn: hover {
   background-color: #198754;
-}
+} */
 
 .landing-job-history-modal-title {
   text-align: center;
@@ -1121,7 +1127,7 @@ body,
 }
 
 .application-status-card-btn {
-  background-color: #198754;
+  /* background-color: #198754; */
   display: block;
   margin: 0 auto 20px auto;
 }
@@ -1179,7 +1185,7 @@ body,
 }
 
 .calendar-event-appointment-location {
-  //margin-left: 20px;
+  /* margin-left: 20px; */
   text-align: center;
 }
 

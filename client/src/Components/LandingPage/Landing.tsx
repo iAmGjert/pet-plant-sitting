@@ -88,11 +88,8 @@ const Landing: FC<Props> = () => {
       <h1 className='landing-welcome-header'>
         Welcome {user.name ? ` ${user.name}!` : '!'}
       </h1>
-      <img className='landing-svg' src={require('./Logo.svg')} alt=''
-        style={{
-          filter: theme === 'dark' && 'invert(100%)',
-        }}
-      />
+      <img className='landing-svg' src={require('../../../Public/svg/fern-herm-pets-alt.svg')} alt=''
+        style={{ filter: theme === 'dark' && 'invert(100%)' }} />
 
       <Card className='landing-welcome-card'>
         {/* <Card.Header className='landing-welcome-header'>

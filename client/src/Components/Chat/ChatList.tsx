@@ -44,6 +44,12 @@ const ChatList = () => {
 
   return (
     <Container>
+      <div className="chat-key">
+        <p>Online<span className='circle' style={{ color: 'green' }}></span></p>
+      </div>
+      <div className="chat-key">
+        <p>Offline<span className='circle' style={{ color: 'red' }}></span></p>
+      </div>
       <DropdownButton as={ButtonGroup} title={view}>
         <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="1">All</Dropdown.Item>
         <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="2">Pending Employers</Dropdown.Item>
