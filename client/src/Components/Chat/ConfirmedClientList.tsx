@@ -7,6 +7,7 @@ import { Container } from 'react-bootstrap';
 const ConfirmedClientList = () => {
   const [confirmedJobs, setConfirmedJobs] = useState([]);
   const currUser = useAppSelector((state) => state.userProfile.value);
+  const usersOnline = useAppSelector((state) => state.chat.usersOnline);
   // const jobs = useAppSelector((state) => state.job.jobs);
 
   const getJobs = async () => {
@@ -23,7 +24,8 @@ const ConfirmedClientList = () => {
 
   useEffect(() => {
     getJobs();
-  }, [currUser]);
+
+  }, [usersOnline]);
 
   return (
     <Container>
