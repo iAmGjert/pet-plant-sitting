@@ -20,7 +20,7 @@
   --bs-gray-600: #6c757d;
   --bs-gray-700: #495057;
   --bs-gray-800: #343a40;
-  --bs-gray-900: #212529; 
+  --bs-gray-900: #212529;
 
   --bs-primary: #0d6efd;
   --bs-secondary: #6c757d;
@@ -562,7 +562,7 @@ body,
   width: 100%;
   height: 75%;
   /* display: grid; */
-  background-color: #C2F8CB;
+  background-color: #c2f8cb;
   place-items: center;
   padding-bottom: 15%;
 }
@@ -748,9 +748,9 @@ body,
   /* height: 100px; */
   font-weight: 'bold';
   /* font-variant: 1rem/1.5 var(--bs-font-monospace); */
-  font-family: monospace, monospace ;
+  font-family: monospace, monospace;
   font-size: 40px;
-  margin-top: 60px; 
+  margin-top: 60px;
   margin-left: -124px;
   white-space: nowrap;
 }
@@ -793,11 +793,10 @@ body,
   margin: 20px 20px;
   font-family: monospace, monospace;
   font-size: 20px;
-
 }
 
 .offcanvas {
-  background-color:  #C2F8CB;
+  background-color: #c2f8cb;
 }
 
 .offcanvas-title {
@@ -806,7 +805,7 @@ body,
 }
 .home-offcanvas-event-title {
   margin-top: 20px;
-  background-color:  #C2F8CB;
+  background-color: #c2f8cb;
   text-align: center;
   font-family: monospace, monospace;
 }
@@ -818,7 +817,7 @@ body,
 }
 
 .home-offcanvas-event-description {
-  margin-top:20px;
+  margin-top: 20px;
   font-family: monospace, monospace;
 }
 
@@ -843,7 +842,6 @@ body,
   padding-bottom: 10px;
   margin-bottom: 20px;
   font-family: monospace, monospace;
-
 }
 
 .home-events-btn {
@@ -853,9 +851,6 @@ body,
   margin-bottom: 20px;
   font-family: monospace, monospace;
 }
-
-
-
 
 /****************LANDING PAGE**************************************/
 
@@ -872,10 +867,9 @@ body,
 }
 
 .landingpage-contents .landing-welcome-header {
-   text-align: center; 
-   font-size: 40px;
-   font-family: monospace, monospace;
-
+  text-align: center;
+  font-size: 40px;
+  font-family: monospace, monospace;
 }
 
 .landing-svg {
@@ -892,7 +886,7 @@ body,
   width: 200px;*/
   display: block;
   margin-left: auto;
-  margin-right: auto; 
+  margin-right: auto;
   height: 200px;
   width: 250px;
   object-fit: cover;
@@ -917,14 +911,12 @@ body,
 .next-upcoming-event-header {
   font-family: monospace, monospace;
   padding-top: 40px;
-
 }
 
 .landing-event-card {
   margin-bottom: 24px;
   font-family: monospace, monospace;
   background-color: white;
-  
 }
 .landing-event-card-date {
   text-align: center;
@@ -1027,7 +1019,6 @@ body,
 .landing-application-job-description {
   color: black;
   margin-top: 10px;
-
 }
 
 /* .huh {
@@ -1084,7 +1075,7 @@ body,
   height: 200px;
   width: 250px;
   object-fit: cover;
-  
+
   /* display: block;
   margin: 0 10px 0 10px;
   width: 300px;
@@ -1110,7 +1101,6 @@ body,
   margin: 0 auto;
   justify-content: center;
   font-family: monospace, monospace;
-  
 }
 
 .no-applications {
@@ -1140,7 +1130,6 @@ body,
   overflow: scroll;
 }
 
-
 .pet_container {
   margin-bottom: 16px;
   padding: 16px;
@@ -1150,7 +1139,6 @@ body,
   font-size: 16px;
   margin-bottom: 8px;
 }
-
 
 /***********Calendar**************/
 
@@ -1165,7 +1153,6 @@ body,
 .day-view {
   font-family: monospace, monospace;
 } */
-
 
 .calendar-event-appointment {
   font-family: monospace, monospace;
@@ -1208,12 +1195,11 @@ body,
   margin-left: 40px; */
   display: block;
   margin: 0 auto 20px auto;
-  
 }
 
 .Appointment-appointment {
   /* background-color:  #C2F8CB !important; */
-  background-color: 	#4682B4 !important;
+  background-color: #4682b4 !important;
 }
 
 /* remove edit icon from header in appointment tooltip */
@@ -1222,16 +1208,16 @@ body,
 }
 
 .modal-content {
-  background: #C2F8CB;
- }
+  background: #c2f8cb;
+}
 
 .petButton1 {
   background-color: #556c85 !important;
   border-color: #556c85 !important;
 }
 .petButton2 {
-  background-color:transparent !important;
-  border-color:#556c85 !important;
+  background-color: transparent !important;
+  border-color: #556c85 !important;
   color: #556c85 !important; /* still needs some work. These don't translate right to dark atm because of important, but I haven't found what is overwriting them without it. */
 }
 .testImg {
@@ -1241,4 +1227,12 @@ body,
   min-width: 30px;
   min-height: 30px;
   border-radius: 50%;
+}
+.nav-tabs .nav-link.active {
+  background-color: #558564;
+  color: black;
+}
+
+.nav-tabs .nav-link {
+  color: black;
 }

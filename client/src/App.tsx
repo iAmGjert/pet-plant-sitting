@@ -37,7 +37,6 @@ export const ThemeContext = createContext(null);
 
 const socket = io(`${process.env.CLIENT_URL}:4000`);
 
-
 const App: FC<Props> = () => {
   const currUser = useAppSelector((state) => state.userProfile.value);
   const [theme, setTheme] = useState(
@@ -85,10 +84,11 @@ const App: FC<Props> = () => {
   useEffect(() => {
     setTheme(currUser.theme);
   }, [currUser]);
-  
+
   useEffect(() => {
     const body = document.getElementsByTagName('body');
-    body[0].style.backgroundColor = theme === 'dark' ? '#2c2c2c' : 'rgb(194, 248, 203)';
+    body[0].style.backgroundColor =
+      theme === 'dark' ? '#2c2c2c' : 'rgb(194, 248, 203)';
   }, [theme]);
 
   return (
@@ -107,7 +107,7 @@ const App: FC<Props> = () => {
             <Route path='/calendar' element={<CalendarMain />} />
             <Route path='/jobs' element={<JobsMain />} />
             {/* <Route path='/createjob' element={<JobCreation />} /> */}
-            <Route path='/chat' element={<ChatMain socket={socket}/>} />
+            <Route path='/chat' element={<ChatMain socket={socket} />} />
             <Route path='/info' element={<InfoMain />} />
             <Route path='/register' element={<Register />} />
             <Route path='*' element={<Error />} />
