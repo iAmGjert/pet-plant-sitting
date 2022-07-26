@@ -18,7 +18,9 @@ interface userOnline {
   socketId: string
 }
 
-const ChatList = ({ socket }) => {
+const socket = io(`${process.env.CLIENT_URL}:4000`);
+
+const ChatList = () => {
   const currUser = useAppSelector((state) => state.userProfile.value);
   const usersOnline = useAppSelector((state) => state.chat.usersOnline);
   const dispatch = useAppDispatch();
@@ -38,7 +40,7 @@ const ChatList = ({ socket }) => {
       dispatch(getUsersOnline(onlineUsers));
     });
 
-  }, [socket.id, usersOnline]);
+  }, [socket]);
 
   return (
     <Container>
