@@ -81,8 +81,8 @@ const LoginForm = () => {
           alt='Fern and Herm logo'
           style={{ filter: theme === 'dark' && 'invert(100%)' }}
         />
-        <p>Returning User?</p>
-        <p>Please login</p>
+        <p className='returning-user'>Returning User?</p>
+        <p className='please-login'>Please login</p>
         <Form.Group className='mb-3' controlId='formBasicEmail'>
           <Form.Control
             className='bootstrap-textbox'
@@ -110,10 +110,10 @@ const LoginForm = () => {
           Login
         </Button>
         <div id='login-footer'>
-          <span>New to Fern Herm? </span>
+          <span className='new-to-fern-herm'>New to Fern Herm?</span>
           <span>
             <Button
-              className='button-as-link sign-up-btn'
+              className='button-as-link-sign-up-btn'
               variant='link'
               onClick={navigateRegister}
             >

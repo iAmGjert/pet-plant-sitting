@@ -28,6 +28,21 @@ form {
   padding-bottom: 2em;
 }
 
+.returning-user {
+  font-size: 20px;
+}
+
+.please-login {
+  font-size: 20px;
+}
+
+.new-to-fern-herm {
+  font-size: 20px;
+}
+
+.button-as-link-sign-up-btn {
+  font-size: 20px;
+}
 
 label {
   display: block;
@@ -153,4 +168,17 @@ a[name="google"]:hover {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+
+/*********REGISTER************/
+
+.login-container-register {
+  margin-top: 30px;
+}
+
+.register-submit-btn {
+  background-color: #198754;
+  color: white;
+  margin-bottom: 20px;
 }

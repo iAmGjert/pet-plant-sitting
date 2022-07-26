@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
+
 import {
   changeView,
   getRecipientId,
@@ -66,7 +68,7 @@ const ConfirmedClient = ({ job }: { job: any }) => {
     <Container>
       <Card className='chat-card bootstrap-card'>
         <Card.Body>
-          <h6>{job.startDate}</h6>
+          <h6>{moment(job.startDate).format('dddd, MMMM Do YYYY')}</h6>
           <h6>Description: {job.description}</h6>
           <div
             onClick={handleClick}

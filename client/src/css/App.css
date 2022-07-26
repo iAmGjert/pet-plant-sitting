@@ -558,6 +558,13 @@ body,
 }
 /* Bootstrap modal classes */
 
+/*************************** CHAT ********************/
+
+.pending-employers-header {
+  text-align: center;
+  margin-top: 20px;
+}
+
 .chat-main {
   width: 100%;
   height: 75%;
@@ -734,7 +741,7 @@ body,
   margin-top: 5px;
 }
 
-/*************HOME PAGE************************************************/
+/************* HOME PAGE ************************************************/
 
 .home-container {
   display: flex;
