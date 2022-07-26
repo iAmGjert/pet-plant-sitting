@@ -1,6 +1,8 @@
 .card {
-  background-color: #558564;
-  color: #C2F8CB;
+  /* background-color: #558564;
+  color: #C2F8CB; */
+  background-color: #f8f8ff;
+  color: black;
 }
 
 input {
@@ -8,17 +10,23 @@ input {
   /* color: #C2F8CB; */
 }
 
+.event-more-info-btn {
+  color: black;
+}
+
 /* Add Comment */
 .comment-form {
  width: 100%;
 }
 
+.events-img {
+  margin-top: 70px;
+}
 /* Comments */
 h1 {
   font-weight: 400;
   text-transform: uppercase;
   font-size: 28px;
-  margin-top: 60px;
   margin-bottom: 30px;
 }
 
@@ -29,6 +37,20 @@ h1 {
   text-align: center;
   width: 100%;
   height: 10vh;
+  margin-top: 100px;
+  margin-bottom: 20px;
+}
+
+.events-page-descriptor {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  height: 10vh;
+  margin-top: 30px;
+  margin-bottom: 30px; 
+
 }
 
 .events-create-btn {
@@ -38,8 +60,8 @@ h1 {
   text-align: center;
   width: 100%;
   height: 6vh;
+  margin-top: 40px;
   margin-bottom: 30px;
-  margin-top: 20px;
 }
 
 .comment-img {
