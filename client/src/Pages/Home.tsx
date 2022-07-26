@@ -132,18 +132,18 @@ const Home: FC<Props> = () => {
           Events
         </Button>
 
-        <Offcanvas className='offcanvas' show={show} onHide={handleClose}>
-          <Offcanvas.Header closeButton>
-            <Offcanvas.Title className='offcanvas-title'>
+        <Offcanvas className={theme === 'dark' ? 'modal-content dark offcanvas' : 'offcanvas'} show={show} onHide={handleClose}>
+          <Offcanvas.Header closeButton className={theme === 'dark' && 'btn-close-white'}>
+            <Offcanvas.Title className={theme === 'dark' && 'btn-close-white'}>
               Next Free Community Event:
             </Offcanvas.Title>
           </Offcanvas.Header>
-          <Offcanvas.Body>
-            {mappedEvents.map((element, idx) => {
+          <Offcanvas.Body className={theme === 'dark' && 'modal-content dark'}>
+            {mappedEvents.map((element) => {
               return (
-                <React.Fragment key={idx * 5421}>
-                  <h1 className='home-offcanvas-event-title'>{element.title}</h1>
-                </React.Fragment>
+                <h1 className={theme === 'dark' 
+                  ? 'modal-content dark home-offcanvas-event-title' 
+                  : 'home-offcanvas-event-title'}>{element.title}</h1>
               );
             })}
 
@@ -176,7 +176,9 @@ const Home: FC<Props> = () => {
                 </React.Fragment>
               );
             })}
-            <Button className='offcanvas-more-events-btn' href='/events'>
+            <Button className={theme === 'dark'
+              ? 'bootstrap-modal-button offcanvas-more-events-btn' 
+              : 'offcanvas-more-events-btn'} href='/events'>
               More Free Events
             </Button>
           </Offcanvas.Body>
