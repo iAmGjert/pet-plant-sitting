@@ -7,6 +7,7 @@ import { Container } from 'react-bootstrap';
 const ConfirmedClientList = () => {
   const [confirmedJobs, setConfirmedJobs] = useState([]);
   const currUser = useAppSelector((state) => state.userProfile.value);
+  const usersOnline = useAppSelector((state) => state.chat.usersOnline);
   // const jobs = useAppSelector((state) => state.job.jobs);
 
   const getJobs = async () => {
@@ -17,21 +18,25 @@ const ConfirmedClientList = () => {
         return true;
       }
     });
-    
+
     setConfirmedJobs(confirmedJobs);
   };
 
   useEffect(() => {
     getJobs();
-  }, [currUser]);
+
+  }, [usersOnline]);
 
   return (
     <Container>
-      <h3>Confirmed Employers</h3>
-      {confirmedJobs.map((job) => <ConfirmedClient key={job.employer_id} job={job} />)}
+      <div>
+        <h3 className='confirmed-employers-header'>Confirmed Employers:</h3>
+      </div>
+      {confirmedJobs.map((job) => (
+        <ConfirmedClient key={job.employer_id} job={job} />
+      ))}
     </Container>
   );
-}
+};
 
 export default ConfirmedClientList;
-

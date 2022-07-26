@@ -68,7 +68,6 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
     } else {
       req.logIn(user, (err: any) => {
         if (err) { throw err; }
-        // console.log(info, /*req.session.passport.user*/);
         res.send(info);
       });
     }

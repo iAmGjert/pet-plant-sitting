@@ -331,7 +331,7 @@ db.sync(
             name: 'Rex',
             image:
               'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
-            breed: 'Dalmation',
+            breed: 'Dalmatian',
             age: 2,
             gender: 'Male',
             species: 'Dog',
@@ -354,7 +354,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: 'Ain\'t I cute?!',
+            bio: 'Truly the most photogenic cat ever!',
           },
         ]).then(() => {
           Rating.bulkCreate([
@@ -384,7 +384,7 @@ db.sync(
             {
               user_id: 2,
               value: 4,
-              text: 'This is a test',
+              text: 'An expert in teaching parrots how to curse',
               submitter_id: 4,
             },
             {
@@ -439,8 +439,8 @@ db.sync(
                 description:
                   'Leaving town for five days and need someone to sit my babies',
                 sitter_id: 7,
-                startDate: new Date('July 24, 2022 01:15:00'),
-                endDate: new Date('July 25, 2022 01:15:00'),
+                startDate: new Date('July 29, 2022 01:15:00'),
+                endDate: new Date('July 30, 2022 01:15:00'),
                 isCompleted: true,
               },
               {
@@ -458,7 +458,7 @@ db.sync(
                 location: '1600 Frankel Ave, Metairie, LA 70003',
                 pet_plant: [7],
                 employer_id: 7,
-                description: '',
+                description: 'In desperate need for someone to water my ficus for a day',
                 sitter_id: null,
                 startDate: new Date('June 1, 2022 01:15:00'),
                 endDate: new Date('July 2, 2022 01:15:00'),
@@ -478,7 +478,7 @@ db.sync(
                 location: '1610 Frankel Ave, Metairie, LA 70003',
                 pet_plant: [5],
                 employer_id: 5,
-                description: 'Interested in ',
+                description: 'Interested in hanging with gerbils? Come feed mine!',
                 sitter_id: null,
                 startDate: new Date('June 30, 2022 01:15:00'),
                 endDate: new Date('July 1, 2022 01:15:00'),
@@ -488,7 +488,7 @@ db.sync(
                 location: '1221 S Clearview',
                 pet_plant: [1],
                 employer_id: 1,
-                description: 'Test Job Description 4!',
+                description: 'College student swamped with school work and in need of someone to feed/walk dog',
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
@@ -498,7 +498,7 @@ db.sync(
                 location: '3707 Derbigny St',
                 pet_plant: [6, 4],
                 employer_id: 4,
-                description: 'Test Job Description 5!',
+                description: 'S.O.S All I need is for someone to help me keep my partner\'s plants alive while they\'re out of town!',
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
@@ -508,7 +508,7 @@ db.sync(
                 location: '4245 Connecticut Ave, Kenner, LA 70065',
                 pet_plant: [8, 6],
                 employer_id: 4,
-                description: 'Test Job Description 6!',
+                description: 'Who can walk cats? If this is you, then please feel free to help me walk mine',
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
@@ -518,7 +518,7 @@ db.sync(
                 location: 'Superdome New Orleans',
                 pet_plant: [8, 6],
                 employer_id: 4,
-                description: 'Test Job Description 6!',
+                description: 'I could use some help feeding my goddamn tortoise. Please wear closed-toe shoes or he\'ll eat your toes!',
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
@@ -551,7 +551,7 @@ db.sync(
                   host: 2,
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
                   description:
-                    'A gathering for pet-less humans to find and be rescued by their furrever friends',
+                    'A gathering for pet-less humans to meet and become rescued by their furrever friends',
                   startDate: new Date('July 29, 2022 01:15:00'),
                   startTime: '4:45 PM',
                 },
@@ -569,7 +569,7 @@ db.sync(
                   host: 4,
                   location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
                   description:
-                    'Reptiles are our friends, not overlords! Please join in destigmatizing the taboo surrounding our cold-blooded friends. Free mice available upon request',
+                    'Reptiles are our friends, not overlords! Please join us in destigmatizing the taboo surrounding our cold-blooded homies. Free mice available upon request',
                   startDate: new Date('July 29, 2022 01:15:00'),
                   startTime: '12:20 PM',
                 },
@@ -589,40 +589,40 @@ db.sync(
                       // id: 1,
                       event_id: 1,
                       comment:
-                        'Spicy jalapeno bacon ipsum dolor amet ball tip ham hock burgdoggen, chislic porchetta ribeye cupim boudin drumstick shoulder chuck biltong.',
+                        'Can\'t wait!',
                       user_id: 1,
                     },
                     {
                       // id: 2,
                       event_id: 1,
                       comment:
-                        'Short ribs beef ribs bresaola, ball tip kielbasa cow ribeye chicken turducken ground round short loin meatloaf porchetta venison.',
+                        'This looks fun, but will there be bacon?',
                       user_id: 2,
                     },
                     {
                       // id: 3,
                       event_id: 1,
                       comment:
-                        'erat nulla tempus vivamus in felis eu sapien cursus vestibulum proin',
+                        'I think we should avoid the bacon, dude.',
                       user_id: 3,
                     },
                     {
                       // id: 4,
                       event_id: 1,
                       comment:
-                        'non lectus aliquam sit amet diam in mGround round tongue pancetta frankfurter drumstick, bresaola chicken boudin cupim burgdoggen.',
+                        'I mean, I don\'t think bacon is a terrible idea.',
                       user_id: 4,
                     },
                     {
                       // id: 5,
                       event_id: 1,
-                      comment: 'fusce consequat nulla nisl nunc nisl duis',
+                      comment: 'I\'m bringing hummus!',
                       user_id: 5,
                     },
                     {
                       // id: 6,
                       event_id: 1,
-                      comment: 'Ham hock tenderloin turkey hamburger',
+                      comment: 'Oh great! Who invited the vegetarian?',
                       user_id: 1,
                     },
                   ]);
