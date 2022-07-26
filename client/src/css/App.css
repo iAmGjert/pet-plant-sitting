@@ -603,6 +603,12 @@ body,
   
 }
 
+.card-body {
+  margin-bottom: 20px;
+  padding-bottom: 30px;
+  padding-top: 30px;
+}
+
 .applicants-sitting-startdate {
   font-weight: bold;
 }
