@@ -54,7 +54,7 @@ const AcceptedApplicant = ({
     // console.log(usersOnline);
 
     for (let i = 0; i < usersOnline.length; i++) {
-      if (usersOnline[i].userId === hired.id) {
+      if (usersOnline[i].userId === accepted_applicant[0].user_id) {
         isOnline = true;
       }
     }
@@ -82,7 +82,7 @@ const AcceptedApplicant = ({
   useEffect(() => {
     getProfileOfHired();
     getOnlineStatus();
-  }, [users, usersOnline]);
+  }, [usersOnline]);
 
   return (
     <Container>

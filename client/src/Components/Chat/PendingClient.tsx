@@ -45,7 +45,7 @@ const PendingClient = ({ job }: { job: any }) => {
     // console.log(usersOnline);
 
     for (let i = 0; i < usersOnline.length; i++) {
-      if (usersOnline[i].userId === client?.id) {
+      if (usersOnline[i].userId === job.employer_id) {
         isOnline = true;
       }
     }
@@ -60,7 +60,7 @@ const PendingClient = ({ job }: { job: any }) => {
   useEffect(() => {
     getClient();
     getOnlineStatus();
-  }, [users, usersOnline]);
+  }, [usersOnline]);
 
   return (
     <Container>

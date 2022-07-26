@@ -25,7 +25,7 @@ interface userOnline {
 
 // {transports: ['websocket']}
 
-const ChatMain = ({ socket }) => {   
+const ChatMain = () => {   
   
   const currUser = useAppSelector((state) => state.userProfile.value);
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ const ChatMain = ({ socket }) => {
           </div>
         </div>
       ) : (
-        <ChatList socket={socket}/>
+        <ChatList />
       )}
     </div>
   );

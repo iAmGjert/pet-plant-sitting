@@ -19,6 +19,7 @@ const ConfirmedClient = ({ job }: { job: any }) => {
   const dispatch = useAppDispatch();
   const currUser = useAppSelector((state) => state.userProfile.value);
   const usersOnline = useAppSelector((state) => state.chat.usersOnline);
+  const view = useAppSelector((state) => state.chat.view);
 
   const getClient = () => {
     const client = users.filter((user) => user.id === job.employer_id);
@@ -29,10 +30,8 @@ const ConfirmedClient = ({ job }: { job: any }) => {
   const getOnlineStatus = () => {
     let isOnline = false;
 
-    // console.log(usersOnline);
-
     for (let i = 0; i < usersOnline.length; i++) {
-      if (usersOnline[i].userId === client.id) {
+      if (usersOnline[i].userId === job.employer_id) {
         isOnline = true;
       }
     }
@@ -59,7 +58,9 @@ const ConfirmedClient = ({ job }: { job: any }) => {
 
   useEffect(() => {
     getClient();
+
     getOnlineStatus();
+
   }, [users, usersOnline]);
 
   return (
