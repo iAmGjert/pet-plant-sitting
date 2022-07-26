@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import moment from 'moment';
+
 import {
   changeView,
   getRecipientId,
@@ -19,6 +21,7 @@ const ConfirmedClient = ({ job }: { job: any }) => {
   const dispatch = useAppDispatch();
   const currUser = useAppSelector((state) => state.userProfile.value);
   const usersOnline = useAppSelector((state) => state.chat.usersOnline);
+  const view = useAppSelector((state) => state.chat.view);
 
   const getClient = () => {
     const client = users.filter((user) => user.id === job.employer_id);
@@ -29,10 +32,8 @@ const ConfirmedClient = ({ job }: { job: any }) => {
   const getOnlineStatus = () => {
     let isOnline = false;
 
-    // console.log(usersOnline);
-
     for (let i = 0; i < usersOnline.length; i++) {
-      if (usersOnline[i].userId === client.id) {
+      if (usersOnline[i].userId === job.employer_id) {
         isOnline = true;
       }
     }
@@ -59,15 +60,15 @@ const ConfirmedClient = ({ job }: { job: any }) => {
 
   useEffect(() => {
     getClient();
+
     getOnlineStatus();
+
   }, [users, usersOnline]);
 
   return (
     <Container>
       <Card className='chat-card bootstrap-card'>
         <Card.Body>
-          <h6>{job.startDate}</h6>
-          <h6>Description: {job.description}</h6>
           <div
             onClick={handleClick}
             onKeyPress={() => {
@@ -76,9 +77,17 @@ const ConfirmedClient = ({ job }: { job: any }) => {
             role='button'
             tabIndex={0}
           >
+            <h6 className='confirmed-client-name'>Name:</h6>
             {client.name}
             <span className='circle' style={{ color: colorOfStatus }}></span>
           </div>
+          <h6 className='confirmed-client-start-date'> Sitting Start Date:</h6>
+
+          <h6>{moment(job.startDate).format('dddd, MMMM Do YYYY')}</h6>
+          <h6 className='confirmed-client-sitting-description'>
+            Sitting Description:
+          </h6>
+          <h6>{job.description}</h6>
         </Card.Body>
       </Card>
     </Container>

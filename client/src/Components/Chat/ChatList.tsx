@@ -18,7 +18,9 @@ interface userOnline {
   socketId: string
 }
 
-const ChatList = ({ socket }) => {
+const socket = io(`${process.env.CLIENT_URL}:4000`);
+
+const ChatList = () => {
   const currUser = useAppSelector((state) => state.userProfile.value);
   const usersOnline = useAppSelector((state) => state.chat.usersOnline);
   const dispatch = useAppDispatch();
@@ -38,10 +40,16 @@ const ChatList = ({ socket }) => {
       dispatch(getUsersOnline(onlineUsers));
     });
 
-  }, [socket.id, usersOnline]);
+  }, [socket]);
 
   return (
     <Container>
+      <div className="chat-key">
+        <p>Online<span className='circle' style={{ color: 'green' }}></span></p>
+      </div>
+      <div className="chat-key">
+        <p>Offline<span className='circle' style={{ color: 'red' }}></span></p>
+      </div>
       <DropdownButton as={ButtonGroup} title={view}>
         <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="1">All</Dropdown.Item>
         <Dropdown.Item onClick={(event) => dispatch(changeView(event.target.textContent))} eventKey="2">Pending Employers</Dropdown.Item>

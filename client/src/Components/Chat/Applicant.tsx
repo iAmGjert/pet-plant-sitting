@@ -48,7 +48,7 @@ const Applicant = ({ applicant }: { applicant: any }) => {
     // console.log(usersOnline);
 
     for (let i = 0; i < usersOnline.length; i++) {
-      if (usersOnline[i].userId === applicantUser.id) {
+      if (usersOnline[i].userId === applicant.user_id) {
         isOnline = true;
       }
     }
@@ -63,7 +63,7 @@ const Applicant = ({ applicant }: { applicant: any }) => {
   useEffect(() => {
     getApplicant();
     getOnlineStatus();
-  }, [users, usersOnline]);
+  }, [usersOnline]);
 
   return (
     <Container>
