@@ -183,11 +183,11 @@ db.sync(
         },
         {
           name: 'Royce Reed',
-          // image: 'http://dummyimage.com/138x100.png/dddddd/000000',
+          image: 'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
           location: '6838 Louisville St, New Orleans, LA 70124',
           sitter_rating: 8,
           total_sitter_ratings: 93,
-          bio: 'Fall on same level from slipping, tripping and stumbling without subsequent striking against object',
+          bio: 'Here to find responsible pet sitters for my animals.',
           rating: 7,
           total_ratings: 83,
         },
@@ -260,7 +260,7 @@ db.sync(
             bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
           },
           {
-            owner_id: 3,
+            owner_id: 7,
             name: 'Audrey II',
             image:
               'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
@@ -356,12 +356,34 @@ db.sync(
             is_plant: false,
             bio: 'Truly the most photogenic cat ever!',
           },
+          {
+            owner_id: 3,
+            name: 'Russell',
+            image: 'https://i.ibb.co/Wxg1Pxv/russell.jpg',
+            breed: 'Chihuahua Mix',
+            species: 'Dog',
+            rating: 5,
+            total_ratings: 71,
+            is_plant: false,
+            bio: 'I\'m shy at first but I\'ll soon become your best friend.',
+          },
+          {
+            owner_id: 3,
+            name: 'Callie',
+            image: 'https://i.ibb.co/vw7j17p/callie.jpg',
+            breed: 'American Shorthair',
+            species: 'Cate',
+            rating: 5,
+            total_ratings: 71,
+            is_plant: false,
+            bio: 'Wanna be friends?',
+          },
         ]).then(() => {
           Rating.bulkCreate([
             {
               user_id: 1,
               value: 5,
-              text: 'What a beautiful chocolate man!',
+              text: 'Iben did a great job!',
               submitter_id: 3,
             },
             {
@@ -413,7 +435,7 @@ db.sync(
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
-                pet_plant: [3],
+                pet_plant: [10],
                 employer_id: 3,
                 description: 'Come watch this little devil',
                 sitter_id: null,
@@ -423,11 +445,11 @@ db.sync(
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
-                pet_plant: [3],
+                pet_plant: [10, 11],
                 employer_id: 3,
                 sitter_id: 7,
                 description:
-                  'Need someone to water my plant babies while I leave town for two days',
+                  'Need someone to watch my animals while I leave town for two days',
                 startDate: new Date('July 4, 2022 01:15:00'),
                 endDate: new Date('July 5, 2022 01:15:00'),
                 isCompleted: false,
