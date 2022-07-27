@@ -18,7 +18,7 @@ const Rating = ({ rating, getStars }: Props) => {
   };
   // console.log(rating, 'rating');
   return (
-    <Card className='bootstrap-card'>
+    <Card className='bootstrap-card mb-4'>
       <Card.Body>
         <Card.Title
           onClick={() => {
@@ -35,9 +35,9 @@ const Rating = ({ rating, getStars }: Props) => {
         <Card.Subtitle className='mb-2 text-muted'>
           {getStars(rating.value).map((e) => {
             if (e === 1) {
-              return <AiFillStar color='gold' />;
+              return <AiFillStar color='gold' size={22} />;
             } else {
-              return <AiOutlineStar color=' #8bdaa4' />;
+              return <AiOutlineStar color='gold' size={22} />;
             }
           })}
         </Card.Subtitle>

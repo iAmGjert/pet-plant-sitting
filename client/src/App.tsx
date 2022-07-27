@@ -82,10 +82,11 @@ const App: FC<Props> = () => {
   useEffect(() => {
     setTheme(currUser.theme);
   }, [currUser]);
-  
+
   useEffect(() => {
     const body = document.getElementsByTagName('body');
-    body[0].style.backgroundColor = theme === 'dark' ? '#2c2c2c' : 'rgb(194, 248, 203)';
+    body[0].style.backgroundColor =
+      theme === 'dark' ? '#2c2c2c' : 'rgb(194, 248, 203)';
   }, [theme]);
 
   return (

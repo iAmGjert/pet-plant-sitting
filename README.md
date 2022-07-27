@@ -24,7 +24,9 @@ https://fernherm.com/
 * Sequelize - Object–relational mapping tool
 * Bootstrap - CSS Framework
 * AWS Elastic Compute Cloud (EC2) - Cloud Computing Platform for Hosting Web Server
-* AWS Relational Database Service (RDS) - Relational Database Service 
+* AWS Relational Database Service (RDS) - Relational Database Service  
+* Nginx - Web Server Platform
+* pm2 - Process Management System
 * socket.io - Web Socket Library
 * Passport - Authentication Framework
 * Axios - HTTP Client Library

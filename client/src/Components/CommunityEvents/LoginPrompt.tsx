@@ -35,7 +35,6 @@ const LoginPrompt = () => {
   const handleOtherRoute = () => {
     changeView('list');
     handleClose();
-    navigate('/events');
   };
 
   useEffect(() => {

@@ -79,7 +79,10 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
           alt='pet/plant picture'
           height='300px'
         />
-        <Card.Body className={theme === 'dark' && 'bootstrap-modal-card'}>
+        <Card.Body
+          className={theme === 'dark' && 'bootstrap-modal-card'}
+          style={{ marginBottom: '5px', paddingBottom: '0px' }}
+        >
           <Card.Title>{PetPlant.name}</Card.Title>
           {edit ? (
             <Card.Text>Click to edit</Card.Text>
@@ -92,12 +95,13 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
             <Card.Body>
               {getStars(getRating()).map((e) => {
                 if (e === 1) {
-                  return <AiFillStar color='gold' />;
+                  return <AiFillStar color='gold' size={22} />;
                 } else {
-                  return <AiOutlineStar />;
+                  return <AiOutlineStar color='gold' size={22} />;
                 }
               })}
-              ({PetPlant.ratings.length}){<Card.Text>{PetPlant.bio}</Card.Text>}
+              ({PetPlant.ratings.length})<br></br>
+              {<>{PetPlant.bio}</>}
               {!edit && (
                 <div>
                   {getRating() >= 4 && (
@@ -108,7 +112,7 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
                 </div>
               )}
               {PetPlant.gender && PetPlant.age && (
-                <Card.Text>
+                <div className='p-3'>
                   {PetPlant.gender === 'Male'
                     ? `He is a${PetPlant.age === 'Adult' ? 'n' : ''} ${
                         PetPlant.age
@@ -116,9 +120,24 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
                     : `She is  a${PetPlant.age === 'Adult' ? 'n' : ''} ${
                         PetPlant.age
                       } ${PetPlant.breed}`}
-                </Card.Text>
+                </div>
               )}
-              {PetPlant.species && <Card.Text>{PetPlant.species}</Card.Text>}
+              {PetPlant.species && (
+                <Card.Text className='p-2'>{PetPlant.species}</Card.Text>
+              )}
+              {PetPlant.tags.map((tag, i) => {
+                return (
+                  <Badge
+                    className='bootstrap-badge'
+                    ref={scrollRef}
+                    pill
+                    bg={theme === 'dark' ? '' : 'info'}
+                    key={i + PetPlant.id}
+                  >
+                    {tag.toUpperCase()}
+                  </Badge>
+                );
+              })}
             </Card.Body>
             {/* <ListGroup className='list-group-flush'>
               {!edit && (
@@ -142,17 +161,6 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
                 <ListGroupItem>{PetPlant.breed}</ListGroupItem>
               )}
             </ListGroup> */}
-            <Card.Body>
-              {PetPlant.tags.map((tag, i) => {
-                return (
-                  <Badge
-                    className='bootstrap-badge'
-                    ref={scrollRef} pill bg={theme === 'dark' ? '' : 'info'} key={i + PetPlant.id}>
-                    {tag.toUpperCase()}
-                  </Badge>
-                );
-              })}
-            </Card.Body>
           </>
         )}
       </Card>

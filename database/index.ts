@@ -183,11 +183,11 @@ db.sync(
         },
         {
           name: 'Royce Reed',
-          // image: 'http://dummyimage.com/138x100.png/dddddd/000000',
+          image: 'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
           location: '6838 Louisville St, New Orleans, LA 70124',
           sitter_rating: 8,
           total_sitter_ratings: 93,
-          bio: 'Fall on same level from slipping, tripping and stumbling without subsequent striking against object',
+          bio: 'Here to find responsible pet sitters for my animals.',
           rating: 7,
           total_ratings: 83,
         },
@@ -244,7 +244,7 @@ db.sync(
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
+            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
           },
           {
             owner_id: 2,
@@ -257,10 +257,10 @@ db.sync(
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
+            bio: "I am the world's worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this",
           },
           {
-            owner_id: 3,
+            owner_id: 7,
             name: 'Audrey II',
             image:
               'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
@@ -296,7 +296,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
           {
             owner_id: 4,
@@ -311,7 +311,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
           {
             owner_id: 7,
@@ -324,7 +324,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
+            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
           },
           {
             owner_id: 4,
@@ -339,7 +339,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: 'Ain\'t I cute?!',
+            bio: "Ain't I cute?!",
           },
           {
             owner_id: 6,
@@ -356,12 +356,34 @@ db.sync(
             is_plant: false,
             bio: 'Truly the most photogenic cat ever!',
           },
+          {
+            owner_id: 3,
+            name: 'Russell',
+            image: 'https://i.ibb.co/Wxg1Pxv/russell.jpg',
+            breed: 'Chihuahua Mix',
+            species: 'Dog',
+            rating: 5,
+            total_ratings: 71,
+            is_plant: false,
+            bio: 'I\'m shy at first but I\'ll soon become your best friend.',
+          },
+          {
+            owner_id: 3,
+            name: 'Callie',
+            image: 'https://i.ibb.co/vw7j17p/callie.jpg',
+            breed: 'American Shorthair',
+            species: 'Cate',
+            rating: 5,
+            total_ratings: 71,
+            is_plant: false,
+            bio: 'Wanna be friends?',
+          },
         ]).then(() => {
           Rating.bulkCreate([
             {
               user_id: 1,
               value: 5,
-              text: 'What a beautiful chocolate man!',
+              text: 'Excellent sitter, I have hired him for all my sitting needs and he comes prepared and ready to go!',
               submitter_id: 3,
             },
             {
@@ -371,8 +393,8 @@ db.sync(
             },
             {
               user_id: 1,
-              value: 2,
-              text: 'My dogs said he was too cool 👎🏾',
+              value: 4,
+              text: 'My pet parrot loved him! He just fed him to much millet.',
               submitter_id: 5,
             },
             {
@@ -409,11 +431,11 @@ db.sync(
                 sitter_id: 7,
                 startDate: new Date('June 8, 2022 01:15:00'),
                 endDate: new Date('June 10, 2022 01:15:00'),
-                isCompleted: false, 
+                isCompleted: false,
               },
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
-                pet_plant: [3],
+                pet_plant: [10],
                 employer_id: 3,
                 description: 'Come watch this little devil',
                 sitter_id: null,
@@ -423,11 +445,11 @@ db.sync(
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
-                pet_plant: [3],
+                pet_plant: [10, 11],
                 employer_id: 3,
                 sitter_id: 7,
                 description:
-                  'Need someone to water my plant babies while I leave town for two days',
+                  'Need someone to watch my animals while I leave town for two days',
                 startDate: new Date('July 4, 2022 01:15:00'),
                 endDate: new Date('July 5, 2022 01:15:00'),
                 isCompleted: false,
@@ -458,7 +480,8 @@ db.sync(
                 location: '1600 Frankel Ave, Metairie, LA 70003',
                 pet_plant: [7],
                 employer_id: 7,
-                description: 'In desperate need for someone to water my ficus for a day',
+                description:
+                  'In desperate need for someone to water my ficus for a day',
                 sitter_id: null,
                 startDate: new Date('June 1, 2022 01:15:00'),
                 endDate: new Date('July 2, 2022 01:15:00'),
@@ -468,7 +491,8 @@ db.sync(
                 location: '1605 Frankel Ave, Metairie, LA 70003',
                 pet_plant: [1],
                 employer_id: 1,
-                description: 'Could use an extra hand here while I\'m out of town for two nights',
+                description:
+                  "Could use an extra hand here while I'm out of town for two nights",
                 sitter_id: null,
                 startDate: new Date('July 1, 2022 01:15:00'),
                 endDate: new Date('June 3, 2022 01:15:00'),
@@ -478,7 +502,8 @@ db.sync(
                 location: '1610 Frankel Ave, Metairie, LA 70003',
                 pet_plant: [5],
                 employer_id: 5,
-                description: 'Interested in hanging with gerbils? Come feed mine!',
+                description:
+                  'Interested in hanging with gerbils? Come feed mine!',
                 sitter_id: null,
                 startDate: new Date('June 30, 2022 01:15:00'),
                 endDate: new Date('July 1, 2022 01:15:00'),
@@ -488,7 +513,8 @@ db.sync(
                 location: '1221 S Clearview',
                 pet_plant: [1],
                 employer_id: 1,
-                description: 'College student swamped with school work and in need of someone to feed/walk dog',
+                description:
+                  'College student swamped with school work and in need of someone to feed/walk dog',
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
@@ -498,7 +524,8 @@ db.sync(
                 location: '3707 Derbigny St',
                 pet_plant: [6, 4],
                 employer_id: 4,
-                description: 'S.O.S All I need is for someone to help me keep my partner\'s plants alive while they\'re out of town!',
+                description:
+                  "S.O.S All I need is for someone to help me keep my partner's plants alive while they're out of town!",
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
@@ -508,7 +535,8 @@ db.sync(
                 location: '4245 Connecticut Ave, Kenner, LA 70065',
                 pet_plant: [8, 6],
                 employer_id: 4,
-                description: 'Who can walk cats? If this is you, then please feel free to help me walk mine',
+                description:
+                  'Who can walk cats? If this is you, then please feel free to help me walk mine',
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
@@ -518,7 +546,8 @@ db.sync(
                 location: 'Superdome New Orleans',
                 pet_plant: [8, 6],
                 employer_id: 4,
-                description: 'I could use some help feeding my goddamn tortoise. Please wear closed-toe shoes or he\'ll eat your toes!',
+                description:
+                  "I could use some help feeding my goddamn tortoise. Please wear closed-toe shoes or he'll eat your toes!",
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
                 endDate: new Date('September 4, 2022 01:15:00'),
@@ -588,35 +617,32 @@ db.sync(
                     {
                       // id: 1,
                       event_id: 1,
-                      comment:
-                        'Can\'t wait!',
+                      comment: "Can't wait!",
                       user_id: 1,
                     },
                     {
                       // id: 2,
                       event_id: 1,
-                      comment:
-                        'This looks fun, but will there be bacon?',
+                      comment: 'This looks fun, but will there be bacon?',
                       user_id: 2,
                     },
                     {
                       // id: 3,
                       event_id: 1,
-                      comment:
-                        'I think we should avoid the bacon, dude.',
+                      comment: 'I think we should avoid the bacon, dude.',
                       user_id: 3,
                     },
                     {
                       // id: 4,
                       event_id: 1,
                       comment:
-                        'I mean, I don\'t think bacon is a terrible idea.',
+                        "I mean, I don't think bacon is a terrible idea.",
                       user_id: 4,
                     },
                     {
                       // id: 5,
                       event_id: 1,
-                      comment: 'I\'m bringing hummus!',
+                      comment: "I'm bringing hummus!",
                       user_id: 5,
                     },
                     {

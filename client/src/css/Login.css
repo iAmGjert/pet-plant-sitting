@@ -40,7 +40,7 @@ form {
   font-size: 20px;
 }
 
-.button-as-link-sign-up-btn {
+.sign-up-btn {
   font-size: 20px;
 }
 
@@ -70,8 +70,6 @@ input[type="submit"] {
   margin: 1em auto;
   height: 2em;
   font-size: 1.1rem;
-  /* background-color: #3b3b4f;
-  border-color: white; */
   min-width: 300px;
 }
 
@@ -101,21 +99,6 @@ input[type="submit"] {
   padding-bottom: 1em;
 }
 
-
-#login-footer {
-  /* position: fixed;
-  bottom: 7%;
-  width: 100%;
-  text-align: center;
-  font-size: 16px;
-  border-top: grey solid 1px;
-  padding: 0.3em 0;
-  margin-bottom: -6px;
-  background-color: #8bdaa4; */
-  margin-top: 25px;
-}
-
-
 .sign-up-btn {
   cursor: pointer;
   vertical-align: middle;
@@ -128,7 +111,6 @@ input[type="submit"] {
   padding: 0.5em 1em;
   width: 250px;
   cursor: pointer;
-  /* background-color: #8bdaa4; */
   background-color: #c2f8cb;
   margin: auto;
 }

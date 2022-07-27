@@ -263,7 +263,8 @@ const Profile = () => {
     getLocation(profileUser?.location);
   }, [profileUser]);
   return (
-    <Container style={{ height: '100%', paddingBottom: '18%' }}
+    <Container
+      style={{ height: '100%', paddingBottom: '18%' }}
       className='profile-container'
     >
       {completeProfile !== 6 && editable && (
@@ -320,13 +321,18 @@ const Profile = () => {
         setProfileUser={setProfileUser}
       />
       <Row className='d-flex justify-content-center text-center' xs={1} md={1}>
-        <Row xs={1} md={1} lg={2}>
-          <Col>
+        <Row
+          xs={1}
+          md={1}
+          lg={2}
+          className='d-flex justify-content-center text-center'
+        >
+          <Col className=''>
             <Image
               roundedCircle
               fluid
               thumbnail
-              className='m-4'
+              className='mx-auto my-2'
               style={{ width: 'auto', maxHeight: '300px' }}
               src={profileUser?.image}
             />
@@ -339,9 +345,9 @@ const Profile = () => {
             <h5>
               {findStars(getRating()).map((e) => {
                 if (e === 1) {
-                  return <AiFillStar color='gold' />;
+                  return <AiFillStar color='gold' size={22} />;
                 } else {
-                  return <AiOutlineStar />;
+                  return <AiOutlineStar color='gold' size={22} />;
                 }
               })}
               ({profileUser?.ratings.length})
