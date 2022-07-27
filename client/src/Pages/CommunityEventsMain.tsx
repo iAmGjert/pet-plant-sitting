@@ -1,13 +1,7 @@
 import React, { ReactNode, useEffect } from 'react';
 import { useAppSelector, useAppDispatch } from '../state/hooks';
-import {
-  setView,
-  setEventObj,
-  selectAllEvents,
-  getEventsStatus,
-  fetchEvents,
-  pageView,
-} from '../state/features/events/eventsSlice';
+import { setView, setEventObj, selectAllEvents, getEventsStatus, fetchEvents,
+  pageView, } from '../state/features/events/eventsSlice';
 import Event from '../Components/CommunityEvents/Event';
 import Details from '../Components/CommunityEvents/Details';
 import CreateEvent from '../Components/CommunityEvents/CreateEvent';
@@ -86,18 +80,22 @@ const CommunityEventsMain = () => {
 
   return (
     <Container fluid>
-      <img
-        className='events-img'
-        src={require('../../Public/svg/fern-herm-logo-no-lashes.svg')}
-        alt=''
-      />
-      <div className='main-text'>
-        <h1>Welcome to Community Events</h1>
-      </div>
-      <h3 className='events-page-descriptor'>
-        Events posted here are free and open to the public! You must login to
-        create an event
-      </h3>
+      {
+        view === 'list' ? (
+          <>
+            <div className='events-img'>
+              <img src={require('../../Public/svg/fern-herm-logo-no-lashes.svg')} alt='' style={{ marginTop: '50px' }} />
+            </div>
+            <div className='main-text' style={{ marginTop: '3rem', marginBottom: '1rem' }}>
+              <h1>Welcome to Community Events</h1>
+            </div>
+          </>
+        ) : (
+          <div className='main-text' style={{ marginTop: '1rem' }}>
+            <h1>Community Events</h1>
+          </div>
+        )
+      }
       {view === 'list' ? (
         <div className='events-create-btn'>
           <Button

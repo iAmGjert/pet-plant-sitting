@@ -96,11 +96,6 @@ const Landing: FC<Props> = () => {
       />
 
       <Card className='landing-welcome-card'>
-        {/* <Card.Header className='landing-welcome-header'>
-          Welcome {user.name ? ` ${user.name}!` : '!'}
-        </Card.Header> */}
-        {/* <Card.Title>Fern Herm is happy to have you!</Card.Title> */}
-        {/* <Card.Img variant='top' src={require('./Logo.svg')} /> */}
       </Card>
       <JobHistory sitterWorkHistory={sitterWorkHistory} />
       {sitterUpcomingJobs.length > 0 ? (

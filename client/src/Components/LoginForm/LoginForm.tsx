@@ -20,15 +20,11 @@ const LoginForm = () => {
 
   const login = async () => {
     try {
-      const res = await axios.post(
-        '/auth/local/login',
-        {
-          username: email,
+      const res = await axios.post('/auth/local/login',
+        { username: email,
           password,
         },
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
       console.log(res.data.message);
       setSuccessMessage(res.data.message);
@@ -81,8 +77,6 @@ const LoginForm = () => {
           alt='Fern and Herm logo'
           style={{ filter: theme === 'dark' && 'invert(100%)' }}
         />
-        <p className='returning-user'>Returning User?</p>
-        <p className='please-login'>Please login</p>
         <Form.Group className='mb-3' controlId='formBasicEmail'>
           <Form.Control
             className='bootstrap-textbox'
@@ -110,14 +104,11 @@ const LoginForm = () => {
           Login
         </Button>
         <div id='login-footer'>
-          <span className='new-to-fern-herm'>New to Fern Herm?</span>
+          <span className='new-to-fern-herm'>new to fern herm? </span>
           <span>
-            <Button
-              className='button-as-link-sign-up-btn'
-              variant='link'
-              onClick={navigateRegister}
-            >
-              Sign Up
+            <Button className='button-as-link sign-up-btn'
+              variant='link' onClick={navigateRegister}>
+              sign up
             </Button>
           </span>
         </div>

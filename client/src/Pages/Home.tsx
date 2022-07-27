@@ -26,7 +26,7 @@ const Home: FC<Props> = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  console.log(upcomingEvents);
+  // console.log(upcomingEvents);
 
   const mappedEvents = upcomingEvents
     .map((event: Event) => {

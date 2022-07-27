@@ -277,9 +277,9 @@ body,
   color: lightgrey;
   border-color: lightgrey;
 }
-#dark .card-body {
+/* #dark .card-body {
   background-color: ;
-}
+} */
 #dark .card-text {
   color: lightgrey;
 }

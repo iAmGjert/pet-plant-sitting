@@ -75,8 +75,6 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
 });
 
 auth.get('/login/success', (req: Request | any, res: Response) => {
-
-  // console.log(req.user, 'req.user in auth.get /login/success');
   if (req.user) {
     User.findOne({ where: { id: req.user.id || req.user[0].id }, 
       include: [{ model: PetPlant,
@@ -91,7 +89,6 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
         include: [{ model: GalleryEntry }],
       }],
     }).then((user: object) => {
-
       res.status(200).json({
         message: 'success',
         success: true,
@@ -105,7 +102,6 @@ auth.get('/login/success', (req: Request | any, res: Response) => {
     res.status(401).json({
       message: 'Something went wrong',
     });
-
   }
 });
 
