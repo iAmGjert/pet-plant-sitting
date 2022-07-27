@@ -78,9 +78,6 @@ const Details = () => {
           canSubmit={canSubmit}
         />
       }
-      {/* <Button className='bootstrap-button' variant="primary" onClick={() => dispatch(setView('list'))}>
-        <ArrowLeft /> Back to Events
-      </Button> */}
       <Card className='bootstrap-card'>
         <Card.Header as='h5'>
           <Row>
@@ -89,7 +86,7 @@ const Details = () => {
               <Col>
                 <Button
                   className='button-as-link'
-                  style={{ color: '#ffffff' }}
+                  // style={{ color: '#ffffff' }}
                   variant='link'
                   size='sm'
                   onClick={() => dispatch(setView('edit-event'))}
@@ -104,10 +101,10 @@ const Details = () => {
           <Card.Title>
             Hosted by&nbsp;
             <Button
-              className='button-as-link'
+              // className='button-as-link'
               variant='link'
               size='lg'
-              style={{ color: '#ffffff' }}
+              style={{ padding: '0 0 4px 0' }}
               onClick={() => navigate(`/profile/${user.id}`)}
             >
               {user.name}
@@ -183,17 +180,6 @@ const Details = () => {
       </Card>
       {showComments && <Comments comments={event_comments} />}
       <Card className='bootstrap-card'>
-        {/* <Card.Footer
-          // style={{ marginTop: '10px' }}
-        > */}
-        {/* {currentUser.name.length ?
-            <Button className='bootstrap-button' variant="primary" size="sm" onClick={() => setShowAddModal(true)}>
-                Add Comment
-            </Button> 
-            : <Button className='bootstrap-button' variant="primary" size="sm" href='/login'>
-                  Login to add comment
-            </Button>} */}
-        {/* </Card.Footer> */}
       </Card>
       <div
         style={{
