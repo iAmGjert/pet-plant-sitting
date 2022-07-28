@@ -388,12 +388,6 @@ db.sync(
               submitter_id: 3,
             },
             {
-              user_id: 7,
-              value: 5,
-              text: 'Excellent job Royce! You were great!',
-              submitter_id: 3,
-            },
-            {
               petplant_id: 10,
               value: 5,
               submitter_id: 4,
