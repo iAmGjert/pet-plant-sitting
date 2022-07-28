@@ -36,31 +36,40 @@ const ApplicantList = () => {
         <h3>Applicants:</h3>
       </div>
 
-      {jobsIPosted.map((job) => {
+      {jobsIPosted.length > 0 ? jobsIPosted.map((job) => {
         return (
           <div key={job.id}>
             <Container>
-              <Card className='chat-card bootstrap-card'>
-                {job.job_applicants.length > 0 ? (
+              {job.job_applicants.length > 0 ? (
+                <Card className='chat-card bootstrap-card'>
                   <div>
-                    <Applicants job_applicants={job.job_applicants} />
                     <h6 className='applicants-sitting-startdate'>
                       Sitting Start Date:
                     </h6>
                     <h6>
                       {moment(job.startDate).format('dddd, MMMM Do YYYY')}
                     </h6>
-                    <h6 className='applicants-description'>Description:</h6>
+                    <h6 className='confirmed-client-name'>Sitting Description:</h6>
                     <h6>{job.description}</h6>
+                    <Applicants job_applicants={job.job_applicants} />
                   </div>
-                ) : (
-                  <p>There are currently no applicants</p>
-                )}
-              </Card>
+                </Card>                
+              ) : (
+                <Card>
+                  <Card.Body>
+                    You currently do not have any applicants.
+                  </Card.Body>
+                </Card>
+              )}
             </Container>
           </div>
         );
-      })}
+      }) : 
+        <Card>
+          <Card.Body>
+          You have not posted any open jobs.
+          </Card.Body>
+        </Card>}
     </Container>
   );
 };
