@@ -192,7 +192,7 @@ db.sync(
           total_ratings: 83,
         },
         {
-          name: 'Royce Reed',
+          name: 'Eric Gjertsen',
           image: 'https://yugiohblog.konami.com/wp-content/uploads/2013/03/Eric-Gjertsen-480x360.jpg',
           location: '3703 Derbigny StMetairie, LA 70001',
           sitter_rating: 8,
@@ -220,7 +220,7 @@ db.sync(
           total_ratings: 70,
         },
         {
-          name: 'Eric Gjertsen',
+          name: 'Royce Reed',
           image: 'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: null,
