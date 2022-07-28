@@ -427,7 +427,7 @@ db.sync(
                 pet_plant: [2],
                 employer_id: 2,
                 description: 'Come watch my child!',
-                sitter_id: 7,
+                sitter_id: 1,
                 startDate: new Date('August 8, 2022 01:15:00'),
                 endDate: new Date('August 10, 2022 01:15:00'),
                 isCompleted: false,
