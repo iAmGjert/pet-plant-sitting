@@ -52,9 +52,7 @@ const AppliedJobsBoard = ({
         </p>
         <img
           className='landing-application-status-card-image'
-          src={petPlants.map((pet) => {
-            return pet.pet_plant.image;
-          })}
+          src={petPlants[0].pet_plant.image}
           alt=''
         />
 
