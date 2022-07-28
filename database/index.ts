@@ -629,18 +629,21 @@ db.sync(
                       event_id: 1,
                       comment: 'Can\'t wait!',
                       user_id: 1,
+                      createdAt: new Date('July 27, 2022 01:15:00'),
                     },
                     {
                       // id: 2,
                       event_id: 1,
                       comment: 'This looks fun, but will there be bacon?',
                       user_id: 2,
+                      createdAt: new Date('July 27, 2022 01:16:00'),
                     },
                     {
                       // id: 3,
                       event_id: 1,
                       comment: 'I think we should avoid the bacon, dude.',
                       user_id: 3,
+                      createdAt: new Date('July 27, 2022 01:17:00'),
                     },
                     {
                       // id: 4,
@@ -648,18 +651,21 @@ db.sync(
                       comment:
                         'I mean, I don\'t think bacon is a terrible idea.',
                       user_id: 4,
+                      createdAt: new Date('July 27, 2022 01:18:00'),
                     },
                     {
                       // id: 5,
                       event_id: 1,
                       comment: 'I\'m bringing hummus!',
                       user_id: 5,
+                      createdAt: new Date('July 27, 2022 01:19:00'),
                     },
                     {
                       // id: 6,
                       event_id: 1,
                       comment: 'Oh great! Who invited the vegetarian?',
                       user_id: 1,
+                      createdAt: new Date('July 27, 2022 01:20:00'),
                     },
                   ]);
                 })
