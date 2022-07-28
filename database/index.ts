@@ -598,7 +598,7 @@ db.sync(
                   location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
                   description:
                     'Reptiles are our friends, not overlords! Please join us in destigmatizing the taboo surrounding our cold-blooded homies. Free mice available upon request',
-                  startDate: new Date('July 28, 2022 10:15:00'),
+                  startDate: new Date('July 28, 2022 21:15:00'),
                   startTime: '12:20 PM',
                 },
                 {
