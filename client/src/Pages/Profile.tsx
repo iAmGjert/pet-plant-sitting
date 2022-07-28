@@ -114,7 +114,7 @@ const Profile = () => {
     if (user.data === '') {
       navigate('/');
     }
-    //console.log(user);
+    console.log(user);
     setProfileUser(user.data);
   };
 
@@ -218,11 +218,12 @@ const Profile = () => {
       if (!profileUser.gallery?.id) {
         axios.post(`/api/gallery/${currUser.id}`).then((results: any) => {
           axios
-            .post(`/api/gallery/entry/${results.data[0].id}`, {
+            .post(`/api/gallery/entry/${results.data.id}`, {
               url: newImgCloud,
-              gallery_id: results.data[0].id,
+              gallery_id: results.data.id,
             })
-            .then(() => {
+            .then((resu) => {
+              console.log(resu);
               getProfile();
             });
         });
