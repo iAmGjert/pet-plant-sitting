@@ -275,8 +275,8 @@ db.sync(
             name: 'Cheese',
             image:
               'https://scontent-dfw5-2.xx.fbcdn.net/v/t1.6435-9/51773029_1956029971176361_3676321984800620544_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=973b4a&_nc_ohc=LiqK_hVeOEMAX-gFp-w&_nc_ht=scontent-dfw5-2.xx&oh=00_AT-_0RyeKCRWR78qn3xTKgps1z53kFgY1LFxtMVnR8h4eQ&oe=630857C0',
-            breed: 'Rabbit',
-            species: 'Rodent',
+            breed: 'Bunny',
+            species: 'Rabbit',
             tags: ['Speedy', 'Sly'],
             rating: 4,
             total_ratings: 92,
@@ -302,10 +302,10 @@ db.sync(
             name: 'Smoke',
             image:
               'https://scontent-dfw5-2.xx.fbcdn.net/v/t1.6435-9/52594294_1980026508776707_9193062512776445952_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=973b4a&_nc_ohc=BgxfWGCGM68AX-Qk8tX&_nc_ht=scontent-dfw5-2.xx&oh=00_AT8oeFm016qWlhs0NEOvyVnpq83oRMvsUHd2SJoNPe0MiQ&oe=63063441',
-            breed: 'Rabbit',
+            breed: 'Bunny',
             age: 2,
             gender: 'Female',
-            species: 'Rodent',
+            species: 'Rabbit',
             tags: ['Speed', 'Cute'],
             rating: 4,
             total_ratings: 33,
