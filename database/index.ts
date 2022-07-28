@@ -563,17 +563,6 @@ db.sync(
                 endDate: new Date('August 2, 2022 01:15:00'),
                 isCompleted: false,
               },
-              {
-                location: '6838 Louisville St, New Orleans, LA 70124',
-                pet_plant: [3],
-                employer_id: 3,
-                description:
-                  'Careful, it bites!',
-                sitter_id: 7,
-                startDate: new Date('July 31, 2022 01:15:00'),
-                endDate: new Date('August 1, 2022 01:15:00'),
-                isCompleted: false,
-              },
             ]).then(() => {
               Events.bulkCreate([
                 {
@@ -760,11 +749,6 @@ db.sync(
                       job_id: 11,
                       status: 'pending',
                     },
-                    {
-                      user_id: 7,
-                      job_id: 14,
-                      status: 'accepted',
-                    },
                   ]);
                 })
                 .then(() => {
@@ -832,10 +816,6 @@ db.sync(
                     {
                       job_id: 13,
                       pet_plant_id: 9,
-                    },
-                    {
-                      job_id: 14,
-                      pet_plant_id: 3,
                     },
                   ]);
                 })
