@@ -177,7 +177,7 @@ db.sync(
           location: '1500 Sugar Bowl Dr, New Orleans, LA 70112',
           sitter_rating: 10,
           total_sitter_ratings: 24,
-          bio: 'Other specified injury of unspecified blood vessel at ankle and foot level, right leg',
+          bio: 'I\'m just here for the cute animal pictures.',
           rating: 6,
           total_ratings: 95,
         },
@@ -192,7 +192,7 @@ db.sync(
           total_ratings: 83,
         },
         {
-          name: 'Eric Gjertsen',
+          name: 'Royce Reed',
           image: 'https://yugiohblog.konami.com/wp-content/uploads/2013/03/Eric-Gjertsen-480x360.jpg',
           location: '3703 Derbigny StMetairie, LA 70001',
           sitter_rating: 8,
@@ -206,7 +206,7 @@ db.sync(
           location: '4609 Banks St, New Orleans, LA 70119',
           sitter_rating: 4,
           total_sitter_ratings: 38,
-          bio: 'Nondisplaced bicondylar fracture of left tibia',
+          bio: 'They grow up so fast...',
           rating: 7,
           total_ratings: 93,
         },
@@ -215,12 +215,12 @@ db.sync(
           location: '1213 Gaudet Dr, Marrero, LA 70072',
           sitter_rating: 3,
           total_sitter_ratings: 86,
-          bio: 'Major laceration of right vertebral artery, initial encounter',
+          bio: 'Just a dude looking for a dude to watch a little dude.',
           rating: 4,
           total_ratings: 70,
         },
         {
-          name: 'Royce Reed',
+          name: 'Eric Gjertsen',
           image: 'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: null,
@@ -249,9 +249,9 @@ db.sync(
             name: 'Nova',
             image:
               'https://res.cloudinary.com/bford002/image/upload/v1654528525/8B69B1F7-0B39-4F3F-BF45-D0EB0FA186B2_qjl237.jpg',
-            breed: 'Skink, blue-tongued',
+            breed: 'Beautiful',
             species: 'Dog',
-            tags: [],
+            tags: ['Cute'],
             rating: 8,
             total_ratings: 96,
             is_plant: false,
@@ -268,7 +268,7 @@ db.sync(
             rating: 5,
             total_ratings: 71,
             is_plant: true,
-            bio: 'Forget the water! I feed on human blood.',
+            bio: 'Forget the water, Feed me Seymour!',
           },
           {
             owner_id: 4,
@@ -524,7 +524,7 @@ db.sync(
                 pet_plant: [6, 4],
                 employer_id: 4,
                 description:
-                  'S.O.S All I need is for someone to help me keep my partner\'s plants alive while they\'re out of town!',
+                  'S.O.S All I need is for someone to help me keep my roommate\'s rabbits fed while they\'re out of town!',
                 sitter_id: null,
                 startDate: new Date('August 15, 2022 01:15:00'),
                 endDate: new Date('August 20, 2022 01:15:00'),
@@ -561,6 +561,17 @@ db.sync(
                 sitter_id: null,
                 startDate: new Date('July 29, 2022 01:15:00'),
                 endDate: new Date('August 2, 2022 01:15:00'),
+                isCompleted: false,
+              },
+              {
+                location: '6838 Louisville St, New Orleans, LA 70124',
+                pet_plant: [3],
+                employer_id: 3,
+                description:
+                  'Careful, it bites!',
+                sitter_id: 7,
+                startDate: new Date('July 31, 2022 01:15:00'),
+                endDate: new Date('August 1, 2022 01:15:00'),
                 isCompleted: false,
               },
             ]).then(() => {
@@ -748,6 +759,11 @@ db.sync(
                       job_id: 11,
                       status: 'pending',
                     },
+                    {
+                      user_id: 7,
+                      job_id: 14,
+                      status: 'accepted',
+                    },
                   ]);
                 })
                 .then(() => {
@@ -819,6 +835,10 @@ db.sync(
                     {
                       job_id: 13,
                       pet_plant_id: 9,
+                    },
+                    {
+                      job_id: 14,
+                      pet_plant_id: 3,
                     },
                   ]);
                 })
