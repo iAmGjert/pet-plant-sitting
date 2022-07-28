@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAppSelector } from '../../state/hooks';
 import PendingClient from './PendingClient';
-import { Container, Row } from 'react-bootstrap';
+import { Card, Container, Row } from 'react-bootstrap';
 
 const PendingClientList = () => {
   const [availableJobs, setAvailableJobs] = useState([]);
@@ -39,9 +39,14 @@ const PendingClientList = () => {
         <h3>Pending Employers:</h3>
       </div>
 
-      {availableJobs.map((job) => {
+      {availableJobs.length > 0 ? availableJobs.map((job) => {
         return <PendingClient key={'Job: ' + job.id} job={job} />;
-      })}
+      }) :
+        <Card>
+          <Card.Body>
+            There are currently no pending employers.
+          </Card.Body>
+        </Card>}
     </Container>
   );
 };

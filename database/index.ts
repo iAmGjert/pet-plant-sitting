@@ -183,7 +183,8 @@ db.sync(
         },
         {
           name: 'Royce Reed',
-          image: 'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
+          image:
+            'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
           location: '6838 Louisville St, New Orleans, LA 70124',
           sitter_rating: 8,
           total_sitter_ratings: 93,
@@ -365,14 +366,14 @@ db.sync(
             rating: 5,
             total_ratings: 71,
             is_plant: false,
-            bio: 'I\'m shy at first but I\'ll soon become your best friend.',
+            bio: "I'm shy at first but I'll soon become your best friend.",
           },
           {
             owner_id: 3,
             name: 'Callie',
             image: 'https://i.ibb.co/vw7j17p/callie.jpg',
             breed: 'American Shorthair',
-            species: 'Cate',
+            species: 'Cat',
             rating: 5,
             total_ratings: 71,
             is_plant: false,
@@ -381,26 +382,26 @@ db.sync(
         ]).then(() => {
           Rating.bulkCreate([
             {
-              user_id: 1,
+              user_id: 7,
               value: 5,
               text: 'Excellent sitter, I have hired him for all my sitting needs and he comes prepared and ready to go!',
               submitter_id: 3,
             },
             {
-              petplant_id: 1,
-              value: 2,
+              petplant_id: 10,
+              value: 5,
               submitter_id: 4,
             },
             {
-              user_id: 1,
+              user_id: 7,
               value: 4,
               text: 'My pet parrot loved him! He just fed him to much millet.',
               submitter_id: 5,
             },
             {
-              user_id: 4,
-              value: 4,
-              text: 'Wurd to my momma',
+              user_id: 7,
+              value: 5,
+              text: 'My dog loves him so much!',
               submitter_id: 4,
             },
             {
@@ -410,14 +411,14 @@ db.sync(
               submitter_id: 4,
             },
             {
-              petplant_id: 1,
-              value: 1,
+              petplant_id: 11,
+              value: 4,
               text: 'I love this dog',
               submitter_id: 3,
             },
             {
-              petplant_id: 1,
-              value: 2,
+              petplant_id: 10,
+              value: 5,
               text: 'Best Pupper',
               submitter_id: 2,
             },
