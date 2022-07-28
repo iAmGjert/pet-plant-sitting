@@ -224,7 +224,7 @@ db.sync(
         {
           name: 'Royce Reed',
           // image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
-          image: https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg,
+          image: 'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: null,
           total_sitter_ratings: 86,
