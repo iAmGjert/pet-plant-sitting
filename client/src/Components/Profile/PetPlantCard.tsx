@@ -125,19 +125,20 @@ const PetPlantCard = ({ PetPlant, getStars, edit }: Props) => {
               {PetPlant.species && (
                 <Card.Text className='p-2'>{PetPlant.species}</Card.Text>
               )}
-              {PetPlant.tags.map((tag, i) => {
-                return (
-                  <Badge
-                    className='bootstrap-badge'
-                    ref={scrollRef}
-                    pill
-                    bg={theme === 'dark' ? '' : 'info'}
-                    key={i + PetPlant.id}
-                  >
-                    {tag.toUpperCase()}
-                  </Badge>
-                );
-              })}
+              {PetPlant.tags &&
+                PetPlant.tags.map((tag, i) => {
+                  return (
+                    <Badge
+                      className='bootstrap-badge'
+                      ref={scrollRef}
+                      pill
+                      bg={theme === 'dark' ? '' : 'info'}
+                      key={i + PetPlant.id}
+                    >
+                      {tag.toUpperCase()}
+                    </Badge>
+                  );
+                })}
             </Card.Body>
             {/* <ListGroup className='list-group-flush'>
               {!edit && (

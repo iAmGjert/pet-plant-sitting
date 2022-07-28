@@ -18,13 +18,22 @@ gallery.get('/all', async (req: Request, res: Response) => {
 });
 
 gallery.post('/:user_id', async (req: Request, res: Response) => {
-  const gallery = await Gallery.findOrCreate({
-    where: {
-      user_id: req.params.user_id,
-    },
-  });
-//  console.log(gallery[0].id);
-  return res.status(200).send(gallery);
+  //  console.log(gallery[0].id);
+  // const gallery = await Gallery.findOrCreate({
+  //   where: {
+  //     user_id: req.params.user_id,
+  //   },
+  // });
+  const user = await User.findByPk(req.params.user_id);
+  const gal = await user.getGallery();
+  if (gal === null) {
+    user.createGallery({ user_id: user.id }).then((results: any) => {
+      return res.status(200).send({ id: results.id });
+    });
+  } else {
+    return res.sendStatus(200);
+  }
+  // return res.status(200).send(gallery);
 });
 
 gallery.post('/entry/:gallery_id', async (req: Request, res: Response) => {
