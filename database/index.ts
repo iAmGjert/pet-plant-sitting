@@ -813,10 +813,6 @@ db.sync(
                     },
                     {
                       job_id: 11,
-                      pet_plant_id: 6,
-                    },
-                    {
-                      job_id: 11,
                       pet_plant_id: 8,
                     },
                     {
