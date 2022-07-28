@@ -580,7 +580,7 @@ db.sync(
                   location: '8639 Plum St New Orleans, Louisiana, 70118',
                   description:
                     'A gathering for pet-less humans to meet and become rescued by their furrever friends',
-                  startDate: new Date('July 29, 2022 11:15:00'),
+                  startDate: new Date('July 30, 2022 11:15:00'),
                   startTime: '4:45 PM',
                 },
                 {
@@ -598,7 +598,7 @@ db.sync(
                   location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
                   description:
                     'Reptiles are our friends, not overlords! Please join us in destigmatizing the taboo surrounding our cold-blooded homies. Free mice available upon request',
-                  startDate: new Date('July 28, 2022 21:15:00'),
+                  startDate: new Date('July 29, 2022 11:15:00'),
                   startTime: '12:20 PM',
                 },
                 {
@@ -607,7 +607,7 @@ db.sync(
                   location: '8912 Bunker Hill Rd New Orleans, Louisiana, 70127',
                   description:
                     'A gathering for green-thumbed humans to impart their plant-care wisdom for those high-maintentance plants you just had to buy, Linda',
-                  startDate: new Date('July 30, 2022 9:15:00'),
+                  startDate: new Date('August 8, 2022 9:15:00'),
                   startTime: '4:30 PM',
                 },
               ])
