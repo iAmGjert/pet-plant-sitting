@@ -329,7 +329,7 @@ db.sync(
             owner_id: 4,
             name: 'Rex',
             image:
-              'https://ggsc.s3.amazonaws.com/images/uploads/The_Science-Backed_Benefits_of_Being_a_Dog_Owner.jpg',
+              'https://ae01.alicdn.com/kf/U1591012120494f93a206d6649b837472g.jpg_240x240.jpg_.webp',
             breed: 'Dalmatian',
             age: 2,
             gender: 'Male',
