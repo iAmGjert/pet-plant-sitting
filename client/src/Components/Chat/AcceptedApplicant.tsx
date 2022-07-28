@@ -9,6 +9,7 @@ import {
 } from '../../state/features/chat/chatSlice';
 import { useAppSelector, useAppDispatch } from '../../state/hooks';
 import { Container, Card } from 'react-bootstrap';
+import moment from 'moment';
 
 interface jobApplicant {
   user_id: number;
@@ -53,9 +54,11 @@ const AcceptedApplicant = ({
 
     // console.log(usersOnline);
 
-    for (let i = 0; i < usersOnline.length; i++) {
-      if (usersOnline[i].userId === accepted_applicant[0].user_id) {
-        isOnline = true;
+    if (accepted_applicant.length > 0) {
+      for (let i = 0; i < usersOnline.length; i++) {
+        if (usersOnline[i].userId === accepted_applicant[0].user_id) {
+          isOnline = true;
+        }
       }
     }
 
@@ -88,9 +91,7 @@ const AcceptedApplicant = ({
     <Container>
       <Card className='chat-card bootstrap-card'>
         <Card.Body>
-          <h6>{job.startDate}</h6>
-          <h6>Description: {job.description}</h6>
-          <div
+        <div
             onClick={handleClick}
             onKeyPress={() => {
               return;
@@ -98,9 +99,14 @@ const AcceptedApplicant = ({
             role='button'
             tabIndex={0}
           >
+            <h6 className="confirmed-client-name">Name:</h6>
             {hired.name}
             <span className='circle' style={{ color: colorOfStatus }}></span>
           </div>
+          <h6 className="confirmed-client-start-date">Sitting Start Date:</h6>
+          <h6>{moment(job.startDate).format('dddd, MMMM Do YYYY')}</h6>
+          <h6 className="confirmed-client-sitting-description">Sitting Description:</h6>
+          <h6>{job.description}</h6>
         </Card.Body>
       </Card>
     </Container>

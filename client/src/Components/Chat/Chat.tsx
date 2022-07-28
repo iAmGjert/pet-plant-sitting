@@ -165,7 +165,7 @@ const Chat = ({ socket }) => {
         <button className='bootstrap-button' onClick={sendMessage}>SEND</button>
       </div>
       <div>
-        {isApplicant && <button className='bootstrap-button' onClick={acceptApplicant}>Accept Applicant</button>}
+        {isApplicant && <button className='accept-applicant-button bootstrap-button' onClick={acceptApplicant}>Accept Applicant</button>}
       </div>
     </div>
   );
