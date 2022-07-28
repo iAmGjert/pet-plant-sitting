@@ -344,7 +344,7 @@ db.sync(
             owner_id: 6,
             name: 'Tiger',
             image:
-              'https://i.pinimg.com/564x/f9/cb/ac/f9cbac7622150fa28306a16dde13bb25.jpg',
+              'https://i0.wp.com/katzenworld.co.uk/wp-content/uploads/2019/06/funny-cat.jpeg?resize=1320%2C1320&ssl=1',
             breed: 'Tiger',
             age: 2,
             gender: 'Female',
