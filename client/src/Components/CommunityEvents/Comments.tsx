@@ -33,7 +33,7 @@ const Comments = ({ comments }: any) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [commentObj, setCommentObj] = useState(null);
 
-  const orderedComments = comments.slice().sort((a: Comment, b: Comment) => a.createdAt < b.createdAt ? -1 : 1);
+  const orderedComments = comments.slice().sort((a: Comment, b: Comment) => a.createdAt < b.createdAt ? -1 : 1).reverse();
   const numComments = comments.length;
   
   return (
