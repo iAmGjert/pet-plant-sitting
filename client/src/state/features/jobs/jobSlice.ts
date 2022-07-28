@@ -147,7 +147,7 @@ export const jobsSlice = createSlice({
     });
     builder.addCase(deleteJob.fulfilled, (state, action) => {
       state.jobs = state.jobs.filter((job) => {
-        console.log('what is job id and action id', job.id, action.payload)
+        //console.log('what is job id and action id', job.id, action.payload)
         return job.id !== action.payload;//filtering by the payload, which is whatever is returned from the function
       });
     });

@@ -114,7 +114,6 @@ const Profile = () => {
     if (user.data === '') {
       navigate('/');
     }
-    console.log(user);
     setProfileUser(user.data);
   };
 

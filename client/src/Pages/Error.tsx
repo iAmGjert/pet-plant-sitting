@@ -6,7 +6,6 @@ import { useAppSelector, useAppDispatch } from '../state/hooks';
 const Error = () => {
   const navigate = useNavigate();
   const user = useAppSelector((state) => state.userProfile.value);
-  console.log(user);
   return (
     <Container fluid>
       <Card style={{ width: '95%', margin: 'auto' }} className='bootstrap-card'>

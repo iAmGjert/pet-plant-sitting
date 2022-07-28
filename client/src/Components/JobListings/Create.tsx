@@ -93,8 +93,6 @@ const Create = ({ setShowCreated }): JSX.Element => {
   };
   const handleSubmit = () => {
     setShowCreated(true);
-    console.log(myPets.reverse());
-    console.log(feed);
     const jobPetsPlants = myPets.reduce((acc, pet, i) => {
       if (feed[i] === true) {
         acc.push(pet.id);

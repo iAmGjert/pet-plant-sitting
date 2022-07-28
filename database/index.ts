@@ -194,7 +194,7 @@ db.sync(
         {
           name: 'Eric Gjertsen',
           image: 'https://yugiohblog.konami.com/wp-content/uploads/2013/03/Eric-Gjertsen-480x360.jpg',
-          location: '3703 Derbigny StMetairie, LA 70001',
+          location: '3703 Derbigny St Metairie, LA 70001',
           sitter_rating: 8,
           total_sitter_ratings: 88,
           bio: 'Owner of one dog and two silly rabbits! Will treat your pets and plants as if they were my own, and hope you\'ll do the same!',

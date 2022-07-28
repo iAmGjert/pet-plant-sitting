@@ -21,7 +21,7 @@ const CLIENT_URL: string | undefined =
 
 
 auth.post('/local/register', async (req: any, res: any) => {
-  //console.log(req.body, 'req.body in auth.post /local/register');
+  console.log(req.body, 'req.body in auth.post /local/register');
   const { name, username, password, location } = req?.body;
   try {
     if (!username || !password || typeof username !== 'string' || typeof password !== 'string') {
@@ -55,7 +55,7 @@ auth.post('/local/register', async (req: any, res: any) => {
 });
         
 auth.post('/local/login', (req: any, res: any, next: any) => {
-  //console.log(req.body, 'req.body in auth.post /local/login');
+  console.log(req.body, 'req.body in auth.post /local/login');
   passport.authenticate('local', {
     successRedirect: '/login/success',
     failureRedirect: '/login/fail',
@@ -75,6 +75,7 @@ auth.post('/local/login', (req: any, res: any, next: any) => {
 });
 
 auth.get('/login/success', (req: Request | any, res: Response) => {
+  console.log(req.user, 'req.user /login/success');
   if (req.user) {
     User.findOne({ where: { id: req.user.id || req.user[0].id }, 
       include: [{ model: PetPlant,
