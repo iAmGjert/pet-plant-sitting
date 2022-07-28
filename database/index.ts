@@ -182,7 +182,7 @@ db.sync(
           total_ratings: 95,
         },
         {
-          name: 'Royce Reed',
+          name: 'velouriagreen',
           image: 'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
           location: '6838 Louisville St, New Orleans, LA 70124',
           sitter_rating: 8,
@@ -222,7 +222,7 @@ db.sync(
           total_ratings: 70,
         },
         {
-          name: 'velouriagreen',
+          name: 'Royce Reed',
           // image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: null,
@@ -244,7 +244,7 @@ db.sync(
             rating: 9,
             total_ratings: 33,
             is_plant: false,
-            bio: "I'm very shy, but if you feed me then I instantly become your best friend",
+            bio: 'I\'m very shy, but if you feed me then I instantly become your best friend',
           },
           {
             owner_id: 2,
@@ -257,10 +257,10 @@ db.sync(
             rating: 8,
             total_ratings: 96,
             is_plant: false,
-            bio: "I am the world's worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this",
+            bio: 'I am the world\'s worst demon child. I like sleeping in toilets, so be sure to leave it open for me. And no, the cat did not write this',
           },
           {
-            owner_id: 7,
+            owner_id: 3,
             name: 'Audrey II',
             image:
               'https://dafb3cv85j5xj.cloudfront.net/blog/wp-content/uploads/2016/09/audreyII_feat.jpg',
@@ -296,7 +296,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 4,
@@ -311,7 +311,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 7,
@@ -324,7 +324,7 @@ db.sync(
             rating: 9,
             total_ratings: 60,
             is_plant: false,
-            bio: "I used to belong to the streets. Now I sleep at my human's feets!",
+            bio: 'I used to belong to the streets. Now I sleep at my human\'s feets!',
           },
           {
             owner_id: 4,
@@ -339,7 +339,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: "Ain't I cute?!",
+            bio: 'Ain\'t I cute?!',
           },
           {
             owner_id: 6,
@@ -372,7 +372,7 @@ db.sync(
             name: 'Callie',
             image: 'https://i.ibb.co/vw7j17p/callie.jpg',
             breed: 'American Shorthair',
-            species: 'Cate',
+            species: 'Cat',
             rating: 5,
             total_ratings: 71,
             is_plant: false,
@@ -429,8 +429,8 @@ db.sync(
                 employer_id: 2,
                 description: 'Come watch my child!',
                 sitter_id: 7,
-                startDate: new Date('June 8, 2022 01:15:00'),
-                endDate: new Date('June 10, 2022 01:15:00'),
+                startDate: new Date('August 8, 2022 01:15:00'),
+                endDate: new Date('August 10, 2022 01:15:00'),
                 isCompleted: false,
               },
               {
@@ -439,19 +439,19 @@ db.sync(
                 employer_id: 3,
                 description: 'Come watch this little devil',
                 sitter_id: null,
-                startDate: new Date('June 7, 2022 01:15:00'),
-                endDate: new Date('June 9, 2022 01:15:00'),
+                startDate: new Date('August 7, 2022 01:15:00'),
+                endDate: new Date('August 9, 2022 01:15:00'),
                 isCompleted: true,
               },
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
-                pet_plant: [10, 11],
+                pet_plant: [11],
                 employer_id: 3,
                 sitter_id: 7,
                 description:
                   'Need someone to watch my animals while I leave town for two days',
-                startDate: new Date('July 4, 2022 01:15:00'),
-                endDate: new Date('July 5, 2022 01:15:00'),
+                startDate: new Date('July 28, 2022 01:15:00'),
+                endDate: new Date('July 29, 2022 01:15:00'),
                 isCompleted: false,
               },
               {
@@ -483,8 +483,8 @@ db.sync(
                 description:
                   'In desperate need for someone to water my ficus for a day',
                 sitter_id: null,
-                startDate: new Date('June 1, 2022 01:15:00'),
-                endDate: new Date('July 2, 2022 01:15:00'),
+                startDate: new Date('August 1, 2022 01:15:00'),
+                endDate: new Date('August 2, 2022 01:15:00'),
                 isCompleted: false,
               },
               {
@@ -492,10 +492,10 @@ db.sync(
                 pet_plant: [1],
                 employer_id: 1,
                 description:
-                  "Could use an extra hand here while I'm out of town for two nights",
+                  'Could use an extra hand here while I\'m out of town for two nights',
                 sitter_id: null,
-                startDate: new Date('July 1, 2022 01:15:00'),
-                endDate: new Date('June 3, 2022 01:15:00'),
+                startDate: new Date('July 31, 2022 01:15:00'),
+                endDate: new Date('August 1, 2022 01:15:00'),
                 isCompleted: false,
               },
               {
@@ -505,8 +505,8 @@ db.sync(
                 description:
                   'Interested in hanging with gerbils? Come feed mine!',
                 sitter_id: null,
-                startDate: new Date('June 30, 2022 01:15:00'),
-                endDate: new Date('July 1, 2022 01:15:00'),
+                startDate: new Date('August 29, 2022 01:15:00'),
+                endDate: new Date('August 30, 2022 01:15:00'),
                 isCompleted: false,
               },
               {
@@ -517,7 +517,7 @@ db.sync(
                   'College student swamped with school work and in need of someone to feed/walk dog',
                 sitter_id: null,
                 startDate: new Date('August 30, 2022 01:15:00'),
-                endDate: new Date('September 4, 2022 01:15:00'),
+                endDate: new Date('September 1, 2022 01:15:00'),
                 isCompleted: false,
               },
               {
@@ -525,10 +525,10 @@ db.sync(
                 pet_plant: [6, 4],
                 employer_id: 4,
                 description:
-                  "S.O.S All I need is for someone to help me keep my partner's plants alive while they're out of town!",
+                  'S.O.S All I need is for someone to help me keep my partner\'s plants alive while they\'re out of town!',
                 sitter_id: null,
-                startDate: new Date('August 30, 2022 01:15:00'),
-                endDate: new Date('September 4, 2022 01:15:00'),
+                startDate: new Date('August 15, 2022 01:15:00'),
+                endDate: new Date('August 20, 2022 01:15:00'),
                 isCompleted: false,
               },
               {
@@ -538,8 +538,8 @@ db.sync(
                 description:
                   'Who can walk cats? If this is you, then please feel free to help me walk mine',
                 sitter_id: null,
-                startDate: new Date('August 30, 2022 01:15:00'),
-                endDate: new Date('September 4, 2022 01:15:00'),
+                startDate: new Date('August 14, 2022 01:15:00'),
+                endDate: new Date('August 15, 2022 01:15:00'),
                 isCompleted: false,
               },
               {
@@ -547,10 +547,10 @@ db.sync(
                 pet_plant: [8, 6],
                 employer_id: 4,
                 description:
-                  "I could use some help feeding my goddamn tortoise. Please wear closed-toe shoes or he'll eat your toes!",
+                  'I could use some help feeding my goddamn tortoise. Please wear closed-toe shoes or he\'ll eat your toes!',
                 sitter_id: null,
-                startDate: new Date('August 30, 2022 01:15:00'),
-                endDate: new Date('September 4, 2022 01:15:00'),
+                startDate: new Date('August 19, 2022 01:15:00'),
+                endDate: new Date('August 23, 2022 01:15:00'),
                 isCompleted: false,
               },
               {
@@ -560,8 +560,8 @@ db.sync(
                 description:
                   'Hello, my name is Raymond. Please come watch my babies while I code!!',
                 sitter_id: null,
-                startDate: new Date('June 25, 2022 01:15:00'),
-                endDate: new Date('September 4, 2022 01:15:00'),
+                startDate: new Date('July 29, 2022 01:15:00'),
+                endDate: new Date('August 2, 2022 01:15:00'),
                 isCompleted: false,
               },
             ]).then(() => {
@@ -572,7 +572,7 @@ db.sync(
                   location: '10 Magnolia Dr, New Orleans, LA 70124',
                   description:
                     'Maybe you like to hike or camp with your dog, but are not sure of which are pet safe and dog-friendly trails and sites. Or, maybe you would just like to meet other doggy parents and give yourself and your dog a chance to simply socialize.',
-                  startDate: new Date('July 29, 2022 13:15:00'),
+                  startDate: new Date('August 4, 2022 13:15:00'),
                   startTime: '3:20 PM',
                 },
                 {
@@ -590,7 +590,7 @@ db.sync(
                   location: '6821 Mayo Blvd New Orleans, Louisiana, 70126',
                   description:
                     'The Mystic Krewe of Barkus is a New Orleans Mardi Gras parade where participants are dogs costumed',
-                  startDate: new Date('July 30, 2022 01:15:00'),
+                  startDate: new Date('July 27, 2022 01:15:00'),
                   startTime: '6:00 PM',
                 },
                 {
@@ -599,7 +599,7 @@ db.sync(
                   location: '862 S Clearview Pky New Orleans, Louisiana, 70123',
                   description:
                     'Reptiles are our friends, not overlords! Please join us in destigmatizing the taboo surrounding our cold-blooded homies. Free mice available upon request',
-                  startDate: new Date('July 29, 2022 01:15:00'),
+                  startDate: new Date('July 28, 2022 01:15:00'),
                   startTime: '12:20 PM',
                 },
                 {
@@ -617,7 +617,7 @@ db.sync(
                     {
                       // id: 1,
                       event_id: 1,
-                      comment: "Can't wait!",
+                      comment: 'Can\'t wait!',
                       user_id: 1,
                     },
                     {
@@ -636,13 +636,13 @@ db.sync(
                       // id: 4,
                       event_id: 1,
                       comment:
-                        "I mean, I don't think bacon is a terrible idea.",
+                        'I mean, I don\'t think bacon is a terrible idea.',
                       user_id: 4,
                     },
                     {
                       // id: 5,
                       event_id: 1,
-                      comment: "I'm bringing hummus!",
+                      comment: 'I\'m bringing hummus!',
                       user_id: 5,
                     },
                     {
@@ -759,11 +759,11 @@ db.sync(
                     },
                     {
                       job_id: 2,
-                      pet_plant_id: 3,
+                      pet_plant_id: 10,
                     },
                     {
                       job_id: 3,
-                      pet_plant_id: 3,
+                      pet_plant_id: 11,
                     },
                     {
                       job_id: 4,
