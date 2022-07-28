@@ -701,11 +701,6 @@ db.sync(
                     },
                     {
                       user_id: 7,
-                      job_id: 3,
-                      status: 'accepted',
-                    },
-                    {
-                      user_id: 7,
                       job_id: 4,
                       status: 'accepted',
                     },
