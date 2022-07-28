@@ -338,7 +338,7 @@ db.sync(
             rating: 4,
             total_ratings: 33,
             is_plant: false,
-            bio: 'Ain\'t I cute?!',
+            bio: 'Ain\'t I cute?! Don\'t let the cuddly face fool ya, cuz the second you turn your back I\'m gonna chew your shoe!',
           },
           {
             owner_id: 6,
