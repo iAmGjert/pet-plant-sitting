@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAppSelector } from '../../state/hooks';
 import ConfirmedClient from './ConfirmedClient';
-import { Container } from 'react-bootstrap';
+import { Container, Card } from 'react-bootstrap';
 
 const ConfirmedClientList = () => {
   const [confirmedJobs, setConfirmedJobs] = useState([]);
@@ -32,7 +32,13 @@ const ConfirmedClientList = () => {
       <div>
         <h3 className='confirmed-employers-header'>Confirmed Employers:</h3>
       </div>
-      {confirmedJobs.map((job) => (
+      {confirmedJobs.length === 0 ? (
+        <Card>
+          <Card.Body>
+            There are currently no confirmed employers.
+          </Card.Body>
+        </Card>
+      ) : confirmedJobs.map((job) => (
         <ConfirmedClient key={job.employer_id} job={job} />
       ))}
     </Container>

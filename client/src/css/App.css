@@ -626,6 +626,17 @@ body,
   margin-top: 40px;
 }
 
+.chat-sitters-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.chat-sitters-list {
+  margin-bottom: 40px;
+}
+
 .chat-main {
   width: 100%;
   height: 75%;
@@ -711,6 +722,7 @@ body,
 #you .message-content {
   justify-content: flex-end;
   background-color: #7d6f86;
+  color: white;
 }
 
 #you .message-meta {
@@ -772,6 +784,10 @@ body,
   font-size: 25px;
   color: #ffffff;
 }
+
+.accept-applicant-button {
+  margin-bottom: 100px;
+}
 .chat-window .chat-footer button:hover {
   color: #43a047;
 }
@@ -791,6 +807,7 @@ body,
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 10px;
 }
 
 .job-list-main {
