@@ -224,6 +224,7 @@ db.sync(
         {
           name: 'Royce Reed',
           // image: 'http://dummyimage.com/124x100.png/5fa2dd/ffffff',
+          image: https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg,
           location: '1213 Elysian Fields Ave, New Orleans, LA 70117',
           sitter_rating: null,
           total_sitter_ratings: 86,
@@ -357,7 +358,7 @@ db.sync(
             bio: 'Truly the most photogenic cat ever!',
           },
           {
-            owner_id: 3,
+            owner_id: 7,
             name: 'Russell',
             image: 'https://i.ibb.co/Wxg1Pxv/russell.jpg',
             breed: 'Chihuahua Mix',
@@ -368,7 +369,7 @@ db.sync(
             bio: "I'm shy at first but I'll soon become your best friend.",
           },
           {
-            owner_id: 3,
+            owner_id: 7,
             name: 'Callie',
             image: 'https://i.ibb.co/vw7j17p/callie.jpg',
             breed: 'American Shorthair',
@@ -436,7 +437,7 @@ db.sync(
               {
                 location: '6838 Louisville St, New Orleans, LA 70124',
                 pet_plant: [10],
-                employer_id: 3,
+                employer_id: 7,
                 description: 'Come watch this little devil',
                 sitter_id: null,
                 startDate: new Date('August 7, 2022 01:15:00'),
@@ -446,8 +447,8 @@ db.sync(
               {
                 location: '2705 A P Tureaud Ave, New Orleans, LA 70119',
                 pet_plant: [11],
-                employer_id: 3,
-                sitter_id: 7,
+                employer_id: 7,
+                sitter_id: 3,
                 description:
                   'Need someone to watch my animals while I leave town for two days',
                 startDate: new Date('July 28, 2022 01:15:00'),
