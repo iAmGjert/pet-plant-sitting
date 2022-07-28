@@ -183,7 +183,7 @@ db.sync(
         },
         {
           name: 'velouriagreen',
-          image: 'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
+          image: 'https://ca.slack-edge.com/T02P3HQD6-U01BYVDCZJ9-b9b06931e593-512',
           location: '6838 Louisville St, New Orleans, LA 70124',
           sitter_rating: 8,
           total_sitter_ratings: 93,
