@@ -59,12 +59,12 @@ const AppliedJobsBoard = ({
         <Card.Text className='landing-application-job-description'>
           Species:{' '}
           {petPlants.map((pet) => {
-            return pet.pet_plant.species;
+            return `${pet.pet_plant.species} | `;
           })}
           <p className='huh'>
             About:{' '}
             {petPlants.map((pet) => {
-              return pet.pet_plant.bio;
+              return `${pet.pet_plant.bio} | `;
             })}
           </p>
         </Card.Text>
