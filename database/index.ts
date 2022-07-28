@@ -183,7 +183,8 @@ db.sync(
         },
         {
           name: 'Royce Reed',
-          image: 'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
+          image:
+            'https://i.ibb.co/KzPh6jF/276252615-10106161668080074-4711674266876397466-n-1.jpg',
           location: '6838 Louisville St, New Orleans, LA 70124',
           sitter_rating: 8,
           total_sitter_ratings: 93,
@@ -365,7 +366,7 @@ db.sync(
             rating: 5,
             total_ratings: 71,
             is_plant: false,
-            bio: 'I\'m shy at first but I\'ll soon become your best friend.',
+            bio: "I'm shy at first but I'll soon become your best friend.",
           },
           {
             owner_id: 3,
