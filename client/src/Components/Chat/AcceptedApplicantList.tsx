@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAppSelector } from '../../state/hooks';
 import AcceptedApplicant from './AcceptedApplicant';
 import axios from 'axios';
-import { Container } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 
 interface jobApplicant {
   user_id: number;
@@ -40,21 +40,30 @@ const AcceptedApplicantList = () => {
   }, [currUser]);
 
   return (
-    <Container>
-      <h3>Accepted Applicants</h3>
-      {filledJobs.map((job: any) => {
-        return (
-          <div className='chat-user' key={job.id}>
-            <AcceptedApplicant
-              accepted_applicant={job.job_applicants.filter(
-                (job_applicant: jobApplicant) =>
-                  job_applicant.status === 'accepted'
-              )}
-              job={job}
-            />
-          </div>
-        );
-      })}
+    <Container className="chat-sitters-list">
+      <div className="chat-sitters-header">
+        <h3>Sitters:</h3>
+      </div>
+      {filledJobs.length > 0 ? (
+        filledJobs.map((job: any) => {
+          return (
+            <div className='chat-user' key={job.id}>
+              <AcceptedApplicant
+                accepted_applicant={job.job_applicants.filter(
+                  (job_applicant: jobApplicant) =>
+                    job_applicant.status === 'accepted'
+                )}
+                job={job}
+              />
+            </div>
+          );
+        })) :
+        <Card>
+          <Card.Body>
+            You have not hired any sitters.
+          </Card.Body>
+        </Card>
+      }
     </Container>
   );
 };
