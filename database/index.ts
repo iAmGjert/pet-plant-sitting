@@ -532,7 +532,7 @@ db.sync(
               },
               {
                 location: '4245 Connecticut Ave, Kenner, LA 70065',
-                pet_plant: [6, 8],
+                pet_plant: [8],
                 employer_id: 4,
                 description:
                   'Who can walk cats? If this is you, then please feel free to help me walk mine',
